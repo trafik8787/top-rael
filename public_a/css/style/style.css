@@ -1,0 +1,335 @@
+
+
+
+.dropdown-menu>li>form>button {
+    display: block;
+    border: none;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    text-decoration: none;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.dropdown-menu>li>form>button:hover,
+.dropdown-menu>li>form>button:focus {
+    text-decoration: none;
+    color: #262626;
+    background-color: #f5f5f5;
+    background-image: linear-gradient(to bottom,#f5f5f5 0,#e8e8e8 100%);
+    background-repeat: repeat-x;
+}
+
+.w-buton-form:first-child {
+    margin-left: 0;
+
+}
+
+.w-buton-form {
+    position: relative;
+    display: inline-block;
+    /*margin-left: 2%;*/
+    vertical-align: baseline;
+
+
+}
+
+.w-buton-befor-table {
+    position: relative;
+    display: inline-block;
+}
+
+
+
+/*input_file*/
+.container{
+    margin-top:20px;
+}
+.image-preview-input {
+    position: relative;
+    overflow: hidden;
+    margin: 0px;
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.image-preview-input input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+    margin-left:2px;
+}
+/*input_file end*/
+.w-delete {
+    display: none;
+    float: right;
+}
+
+.w-tr-hover-file-del:hover .w-delete {
+   display: inline;
+}
+
+.w-float-reset {
+    clear: right;
+}
+
+.input-group {
+    margin-bottom: 2px;
+}
+
+.w-cheked-right {
+    display: inline-block;
+    text-align: right;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+}
+
+.main {
+    padding: 20px;
+}
+
+.nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus {
+    color: #fff;
+    background-color: #428bca;
+}
+
+#top {
+    color: #6C7980;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    min-width: 1000px;
+    padding: 0;
+    background: #eff0f1;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#eff0f1), to(#dfe2e6));
+    background: -webkit-linear-gradient(#eff0f1, #dfe2e6);
+    background: -moz-linear-gradient(#eff0f1, #dfe2e6);
+    background: -ms-linear-gradient(#eff0f1, #dfe2e6);
+    background: -o-linear-gradient(#eff0f1, #dfe2e6);
+    background: linear-gradient(#eff0f1, #dfe2e6);
+    -pie-background: linear-gradient(#eff0f1, #dfe2e6);
+    zoom: 1;
+    behavior: url(/css/PIE.htc);
+    border-bottom: 1px solid #aaafb3;
+}
+
+#top:before, #top:after {
+    display: block;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 1px;
+    background: #fff;
+    content: "";
+}
+
+
+
+.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 1px 8px!important;
+}
+
+
+
+
+
+
+
+
+
+/*preloader*/
+
+#circularG{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 44%;
+    z-index: 100;
+}
+
+.circularG{
+    position:absolute;
+    background-color:#609DE8;
+    width:23px;
+    height:23px;
+    -moz-border-radius:15px;
+    -moz-animation-name:bounce_circularG;
+    -moz-animation-duration:1.04s;
+    -moz-animation-iteration-count:infinite;
+    -moz-animation-direction:normal;
+    -webkit-border-radius:15px;
+    -webkit-animation-name:bounce_circularG;
+    -webkit-animation-duration:1.04s;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-direction:normal;
+    -ms-border-radius:15px;
+    -ms-animation-name:bounce_circularG;
+    -ms-animation-duration:1.04s;
+    -ms-animation-iteration-count:infinite;
+    -ms-animation-direction:normal;
+    -o-border-radius:15px;
+    -o-animation-name:bounce_circularG;
+    -o-animation-duration:1.04s;
+    -o-animation-iteration-count:infinite;
+    -o-animation-direction:normal;
+    border-radius:15px;
+    animation-name:bounce_circularG;
+    animation-duration:1.04s;
+    animation-iteration-count:infinite;
+    animation-direction:normal;
+}
+
+#circularG_1{
+    left:0;
+    top:39px;
+    -moz-animation-delay:0.39s;
+    -webkit-animation-delay:0.39s;
+    -ms-animation-delay:0.39s;
+    -o-animation-delay:0.39s;
+    animation-delay:0.39s;
+}
+
+#circularG_2{
+    left:11px;
+    top:11px;
+    -moz-animation-delay:0.52s;
+    -webkit-animation-delay:0.52s;
+    -ms-animation-delay:0.52s;
+    -o-animation-delay:0.52s;
+    animation-delay:0.52s;
+}
+
+#circularG_3{
+    top:0;
+    left:39px;
+    -moz-animation-delay:0.65s;
+    -webkit-animation-delay:0.65s;
+    -ms-animation-delay:0.65s;
+    -o-animation-delay:0.65s;
+    animation-delay:0.65s;
+}
+
+#circularG_4{
+    right:11px;
+    top:11px;
+    -moz-animation-delay:0.78s;
+    -webkit-animation-delay:0.78s;
+    -ms-animation-delay:0.78s;
+    -o-animation-delay:0.78s;
+    animation-delay:0.78s;
+}
+
+#circularG_5{
+    right:0;
+    top:39px;
+    -moz-animation-delay:0.91s;
+    -webkit-animation-delay:0.91s;
+    -ms-animation-delay:0.91s;
+    -o-animation-delay:0.91s;
+    animation-delay:0.91s;
+}
+
+#circularG_6{
+    right:11px;
+    bottom:11px;
+    -moz-animation-delay:1.04s;
+    -webkit-animation-delay:1.04s;
+    -ms-animation-delay:1.04s;
+    -o-animation-delay:1.04s;
+    animation-delay:1.04s;
+}
+
+#circularG_7{
+    left:39px;
+    bottom:0;
+    -moz-animation-delay:1.17s;
+    -webkit-animation-delay:1.17s;
+    -ms-animation-delay:1.17s;
+    -o-animation-delay:1.17s;
+    animation-delay:1.17s;
+}
+
+#circularG_8{
+    left:11px;
+    bottom:11px;
+    -moz-animation-delay:1.3s;
+    -webkit-animation-delay:1.3s;
+    -ms-animation-delay:1.3s;
+    -o-animation-delay:1.3s;
+    animation-delay:1.3s;
+}
+
+@-moz-keyframes bounce_circularG{
+    0%{
+        -moz-transform:scale(1)}
+
+    100%{
+        -moz-transform:scale(.3)}
+
+}
+
+@-webkit-keyframes bounce_circularG{
+    0%{
+        -webkit-transform:scale(1)}
+
+    100%{
+        -webkit-transform:scale(.3)}
+
+}
+
+@-ms-keyframes bounce_circularG{
+    0%{
+        -ms-transform:scale(1)}
+
+    100%{
+        -ms-transform:scale(.3)}
+
+}
+
+@-o-keyframes bounce_circularG{
+    0%{
+        -o-transform:scale(1)}
+
+    100%{
+        -o-transform:scale(.3)}
+
+}
+
+@keyframes bounce_circularG{
+    0%{
+        transform:scale(1)}
+
+    100%{
+        transform:scale(.3)}
+
+}

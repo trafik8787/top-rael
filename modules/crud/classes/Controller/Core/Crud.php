@@ -322,12 +322,15 @@ class Controller_Core_Crud extends Controller_Core_Main {
 
             }
 
+            //скрываем прелоадер и разблокируем кнопку применить нужно переделать
             echo '<script type="text/javascript">';
             echo 'window.parent.document.getElementById("circularG").style.display="none";';
             echo 'window.parent.document.getElementById("loading-example-btn").disabled = false';
             echo '</script>';
 
-            Controller::redirect($_POST['curent_uri']);
+            if (!empty($_POST['edit_save'])) {
+                Controller::redirect($_POST['curent_uri']);
+            }
         }
 
 
