@@ -199,7 +199,7 @@ class Model_All extends Model
                     'SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = :tab AND TABLE_SCHEMA = :bas');
                 $name_colums_table->param(':tab', $row_join[1]);
                 $name_colums_table->param(':bas', Kohana::$config->load('crudconfig.database'));
-                $result = $name_colums_table->cached()->execute()->as_array();
+                $result = $name_colums_table->execute()->as_array();
 
                 foreach ($result as $result_join) {
                     $result_mod[] = array('COLUMN_NAME' => $row_join[1].'@'.$result_join['COLUMN_NAME']);
@@ -449,7 +449,6 @@ class Model_All extends Model
                 'SELECT * FROM '.$table.' '.$sele_where.' '.$likeSql.' '.
                 'ORDER BY '. $order_column.' '.$order_by.'
             LIMIT '.$ofset.','.$limit)
-                ->cached()
                 ->execute()
                 ->as_array();
         }

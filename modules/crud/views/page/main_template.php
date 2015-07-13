@@ -54,7 +54,7 @@
                             <?=$name?>
                             <ul>
                                 <?foreach ($link['category'] as $rews):?>
-                                    <li><a href="<?=$link['url'].$rews['category_id']?>"><?=$rews['name_category']?></a></li>
+                                    <li><a href="<?=$link['url'].$rews['id']?>"><?=$rews['name']?></a></li>
                                 <?endforeach?>
                             </ul>
                         <?else:?>

@@ -120,7 +120,7 @@
 
 #top {
     color: #6C7980;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     z-index: 100;
@@ -158,6 +158,52 @@
     display: block;
     padding: 1px 8px!important;
 }
+
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 0px 10px;
+}
+
+table.dataTable .w-buton-form {
+    height: 34px;
+    margin-top: 4px;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+    padding: 4px 7px;
+    font-size: 15px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+}
+
+tbody {
+    font-size: 12px;
+}
+
+tbody th, table.dataTable tbody td {
+    padding: 3px 5px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 1.5em;
+    padding: 4px 12px;
+    margin-left: 2px;
+    text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
+
+}
+
+table.dataTable thead th, table.dataTable thead td {
+    padding: 6px 4px;
+    border-bottom: 1px solid #111111;
+    font-size: 14px;
+}
+
+
+
+
 
 
 

@@ -7,4 +7,5 @@ class Controller_Home extends Controller {
 		$this->response->body('hello, world!');
 	}
 
+
 }

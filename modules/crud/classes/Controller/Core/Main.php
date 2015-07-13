@@ -23,8 +23,18 @@ abstract class Controller_Core_Main extends Controller_Template {
 
 
     public static function meny_admin () {
+
+        $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+
         return array('Главная' => URL::site('administrator'),
-            'О проекте' => URL::site('administrator/about'));
+            'О проекте' => URL::site('administrator/about'),
+            'Разделы' => URL::site('administrator/sections'),
+            'Категории' => URL::site('administrator/category'),
+            '<b>Бизнесы по разделам</b>' => array('category' => $section, 'url' => '/administrator/bussines/'),
+            '<b>Обзоры по разделам</b>' => array('category' => $section, 'url' => '/administrator/articles/'),
+            'Купоны' => URL::site('administrator/coupons'),
+            'Галереи' => URL::site('administrator/galery'),
+            );
     }
 
 }

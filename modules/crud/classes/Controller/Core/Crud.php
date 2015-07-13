@@ -269,6 +269,8 @@ class Controller_Core_Crud extends Controller_Core_Main {
                 //получаем данные из других таблиц для хука
                 if ($retw->set_one_to_many) {
                     $query_array_edit = Model::factory('All')->get_other_table($retw->set_one_to_many, $query_array_edit[0], $this->id, false);
+                } else {
+                    $query_array_edit = $query_array_edit[0];
                 }
 
                 $callbackStatic = call_user_func_array(array($re['callback_functions_array']['class'],

@@ -8,6 +8,14 @@
 
 $(document).ready(function(){
 
+    jQuery.validator.addMethod(
+        'regexp',
+        function(value, element, regexp) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
+        },
+        "Please check your input."
+    );
 
     tinymce.init({
         selector:'.add-editor',
@@ -129,6 +137,7 @@ $(document).ready(function(){
 
     $(".chosen-select").chosen({
         allow_single_deselect: true
+        //width: "30%"
     });
 
     $('.form_date').datetimepicker({
