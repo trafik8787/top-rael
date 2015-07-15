@@ -244,6 +244,10 @@
                     <?endif?>
                 <?endforeach?>
 
+                <?if (Cruds::$adon_form != null):?>
+                    <?=Cruds::$adon_form?>
+                <?endif?>
+
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <input type="hidden" name="obj" value="<?=$edit_property['obj']?>"/>

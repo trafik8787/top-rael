@@ -105,9 +105,22 @@ class Model_CategoryModel extends Model {
 
 
 
+    public function delfile ()
+    {
 
+//        $query = DB::select()
+//            ->from('files')
+//            ->execute()->as_array();
+//
+//        foreach ($query as $row) {
+//
+//            $query = DB::update('files')
+//                ->set(array('filename' => '/uploads/img_galery/'.$row['filename']
+//
+//                )) ->where('id', '=', $row['id'])->execute();
+//        }
 
-
+    }
 
 
 

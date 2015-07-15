@@ -70,6 +70,10 @@ class Cruds extends Controller_Core_Main {
     public $add_style_edit = null;
     public $add_style_add = null;
 
+    public static $adon_form = null;
+    public static $post = null;
+    public static $files = null;
+
     public function __construct () {
         parent::before();
     }

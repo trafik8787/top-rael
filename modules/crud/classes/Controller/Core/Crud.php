@@ -147,6 +147,9 @@ class Controller_Core_Crud extends Controller_Core_Main {
 
         if (isset($_POST['edit'])) {
 
+            Cruds::$post = $_POST;
+            Cruds::$files = $_FILES;
+
             $this->id = Arr::get($_POST, $key_primary);
             $name_count = Model::factory('All')->name_count($retw->table, $retw->join_table);
             //перебори формирования массива для передачи в модель для обновления записей
@@ -598,6 +601,9 @@ class Controller_Core_Crud extends Controller_Core_Main {
 
 
         if (isset($_POST['add'])) {
+
+            Cruds::$post = $_POST;
+            Cruds::$files = $_FILES;
 
             foreach ($name_count as $name_count_rows) {
 

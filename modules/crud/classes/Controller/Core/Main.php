@@ -34,6 +34,7 @@ abstract class Controller_Core_Main extends Controller_Template {
             '<b>Обзоры по разделам</b>' => array('category' => $section, 'url' => '/administrator/articles/'),
             'Купоны' => URL::site('administrator/coupons'),
             'Галереи' => URL::site('administrator/galery'),
+            'Контакты' => URL::site('administrator/contacts'),
             );
     }
 

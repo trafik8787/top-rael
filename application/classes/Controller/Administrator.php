@@ -49,7 +49,7 @@ class Controller_Administrator extends Controller {
 
     public function action_index() {
         Controller_Core_Main::$title_page = 'Главная';
-        $this->response->body(self::adminHome()->render());
+        $this->response->body(self::adminHome()->edit_render(1));
 
 
     }
@@ -105,9 +105,16 @@ class Controller_Administrator extends Controller {
 
 
     public function action_galery (){
+
         Controller_Core_Main::$title_page = 'Галереи';
         $this->response->body(self::adminGalery()->render());
     }
+
+    public function action_contacts (){
+        Controller_Core_Main::$title_page = 'Контакты';
+        $this->response->body(self::adminContacts()->render());
+    }
+
     
     /**
      * @return Cruds
@@ -124,9 +131,10 @@ class Controller_Administrator extends Controller {
 
     public static function adminHome (){
         $crud = new Cruds();
-        $crud->load_table('city');
+        $crud->load_table('home_seo');
         $crud->set_lang('ru');
-        $crud->disable_search();
+        $crud->disable_editor('description');
+        $crud->disable_editor('keywords');
         //$crud->show_name_column(array('email' => 'Email', 'seo_title' => 'SEO Title', 'seo_description' => 'SEO Desc', 'seo_keywords' => 'SEO keywords'));
         return $crud;
     }
@@ -433,13 +441,59 @@ class Controller_Administrator extends Controller {
         return $crud;
     }
 
-
+    /**
+     * @return Cruds
+     * галерея
+     */
     public static function adminGalery (){
         $crud = new Cruds();
         $crud->load_table('gallery');
         $crud->set_lang('ru');
+        $crud->disable_editor('galery_text');
+        $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
+        $crud->show_columns('id', 'name', 'galery_text');
+
+        $crud->show_name_column(array(
+            'name' => 'Название',
+            'galery_text'=> 'Описание',
+            'business_id' => 'Бизнес'));
+
+        $crud->add_field('name','business_id', 'galery_text');
+        $crud->edit_fields('name','business_id', 'galery_text');
+
+        $crud->callback_befor_show_edit('call_bef_edit_show_galery');
+        $crud->callback_befor_show_add('call_bef_insert_show_galery');
+        $crud->callback_before_edit('call_bef_edit_galery');
+        $crud->callback_after_insert('call_after_insert_galery');
         return $crud;
     }
+
+
+    public static function adminContacts (){
+        $crud = new Cruds();
+        $crud->load_table('contacts');
+        $crud->set_lang('ru');
+        return $crud;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -532,6 +586,130 @@ class Controller_Administrator extends Controller {
 
 
 
+    public static function call_bef_edit_show_galery ($new_array){
+        $data = View::factory('adm/adon_form');
+        $data->list = Model::factory('Adm')->get_table('files', array('gallery', '=', $new_array['id']));
+        Cruds::$adon_form = $data;
+    }
+
+    public static function call_bef_insert_show_galery ($new_array){
+        Cruds::$adon_form = View::factory('adm/adon_form');
+    }
+
+
+
+
+
+
+    //реализация добавления удаления редактирования фото в галереи в форме редактирования
+    public static function call_bef_edit_galery ($new_array = null, $old_array = null){
+        //определяем отностельные и абсолютные пути
+        $thumbs = '/uploads/img_galery/thumbs/';
+        $img_galery = '/uploads/img_galery/';
+        $file_path_thumbs = $_SERVER['DOCUMENT_ROOT'] . $thumbs;
+        $file_path = $_SERVER['DOCUMENT_ROOT'] . $img_galery;
+
+        //получаем первоначальный список картинок
+        $file_start = Model::factory('Adm')->get_table('files', array('gallery', '=', Cruds::$post['id']));
+        //формируем масив для сравнения
+        $file_result_filename = array();
+        $file_result_title = array();
+        foreach ($file_start as $key => $row_value) {
+            $file_result_filename[$row_value['id']] = $row_value['filename'];
+            $file_result_title[$row_value['id']] = $row_value['title'];
+        }
+        //вычисляем расхождение масивов для удаление
+        $diferen = array_diff($file_result_filename, Cruds::$post['filename']);
+
+        //если не пустой значит некоторые картинки были удалены
+        if (!empty($diferen)) {
+            foreach ($diferen as $key =>$dif) {
+                $del[] = $key;
+                self::unlink_file($dif, $thumbs);
+            }
+            //удаляем
+            Model::factory('Adm')->delete_galery($del);
+        }
+
+        //редактирование картинки
+        foreach (Cruds::$post['filename'] as $key => $rows_filename) {
+            //редактирование картинки
+            if (!empty(Cruds::$files['filename']['tmp_name'][$key])) {
+                //формируем имя файла с раширением
+                $type_file = '.'. strtolower(pathinfo(Cruds::$files['filename']['name'][$key], PATHINFO_EXTENSION));
+                $name_file = uniqid().$type_file;
+
+                Model::factory('Adm')->update_galery($img_galery.$name_file, Cruds::$post['title'][$key], $key);
+                self::save_img(Cruds::$files['filename']['tmp_name'][$key], $name_file, $file_path);
+                $img = self::create_images($img_galery.$name_file, $thumbs, 300, 196);
+                //удаление старых катинок
+                self::unlink_file($rows_filename, $thumbs);
+
+            }
+        }
+
+
+        //новые добавления картинок
+        foreach (Cruds::$files['filename']['tmp_name'] as $key => $tmp_name) {
+
+            if (empty(Cruds::$post['filename'][$key])) {
+                $type_file = '.'. strtolower(pathinfo(Cruds::$files['filename']['name'][$key], PATHINFO_EXTENSION));
+                $name_file = uniqid().$type_file;
+
+                Model::factory('Adm')->insert_galery($img_galery.$name_file, Cruds::$post['title'][$key], Cruds::$post['id']);
+                self::save_img($tmp_name, $name_file, $file_path);
+                $img = self::create_images($img_galery.$name_file, $thumbs, 300, 196);
+            }
+
+        }
+
+        //вычисляем расхождение масивов для редактирования существующих title
+        $diferen_title = array_diff(Cruds::$post['title'], $file_result_title);
+
+        foreach ($diferen_title as $key => $edit_title) {
+            if (!empty(Cruds::$post['filename'][$key])) {
+                Model::factory('Adm')->update_galery(null, Cruds::$post['title'][$key], $key);
+            }
+        }
+
+//
+//        HTML::x($diferen_title);
+//        HTML::x(Cruds::$post);
+//        HTML::x(Cruds::$files);
+//        die('sdf');
+
+
+    }
+
+    public static function call_after_insert_galery ($key_array = null){
+
+        //определяем отностельные и абсолютные пути
+        $thumbs = '/uploads/img_galery/thumbs/';
+        $img_galery = '/uploads/img_galery/';
+        $file_path_thumbs = $_SERVER['DOCUMENT_ROOT'] . $thumbs;
+        $file_path = $_SERVER['DOCUMENT_ROOT'] . $img_galery;
+
+
+        //новые добавления картинок
+        foreach (Cruds::$files['filename']['tmp_name'] as $key => $tmp_name) {
+
+            $type_file = '.'. strtolower(pathinfo(Cruds::$files['filename']['name'][$key], PATHINFO_EXTENSION));
+            $name_file = uniqid().$type_file;
+
+            Model::factory('Adm')->insert_galery($img_galery.$name_file, Cruds::$post['title'][$key], $key_array['id']);
+            self::save_img($tmp_name, $name_file, $file_path);
+            $img = self::create_images($img_galery.$name_file, $thumbs, 300, 196);
+
+        }
+//
+//
+//        HTML::x(Cruds::$post);
+//        HTML::x(Cruds::$files);
+//        die('sdf');
+    }
+
+
+
 
     /**
      * medods
@@ -556,7 +734,27 @@ class Controller_Administrator extends Controller {
         }
     }
 
+    //функция загрузки кртинки на сервер
+    private static function save_img ($tmp_file, $name_file, $file_path)
+    {
+        if (is_uploaded_file($tmp_file)) {
+            // проверяется перемещение файла
+            // в файловую систему хостинга
+            if (move_uploaded_file($tmp_file, $file_path.$name_file)) {
+               return true;
+            } else {
+                return false;
+            }
+        }
+    }
 
+
+    private static function unlink_file ($old_array, $path_thumbs){
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $old_array)) {
+            unlink($_SERVER['DOCUMENT_ROOT'] . $old_array);
+            unlink($_SERVER['DOCUMENT_ROOT'] . $path_thumbs . basename($old_array));
+        }
+    }
 
 
 
