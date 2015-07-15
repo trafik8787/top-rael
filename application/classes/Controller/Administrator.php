@@ -13,8 +13,19 @@ class Controller_Administrator extends Controller {
     public static $ter;
 
     public function before (){
+//        $arrar = array('username' => 'admin','email'=>'trafik8787@gmail.com', 'password'=>'admin', 'password_confirm' => 'admin');
+//        $user = ORM::factory('User');
+//
+//        $user->username = 'admin';
+//        $user->password = '123456';
+//        $user->email = 'trafik8787@gmail.com';
+//
+//        $user->save();
+//        $user->add('roles', ORM::factory('Role', array('name' => 'login')));
+            //->create_user($arrar, array('username', 'email', 'password')) // Регистрируем пользователя
+            //->add('roles', ORM::factory('Role', array('name' => 'login')));
 
-        $this->logged_in = Auth::instance()->logged_in();
+        $this->logged_in = Auth::instance()->logged_in('admin');
         $this->adm = View::factory('/adm/auth_admin');
 
     }
@@ -115,6 +126,11 @@ class Controller_Administrator extends Controller {
         $this->response->body(self::adminContacts()->render());
     }
 
+
+    public function action_users (){
+        Controller_Core_Main::$title_page = 'Пользователи';
+        $this->response->body(self::adminUsers()->render());
+    }
     
     /**
      * @return Cruds
@@ -212,9 +228,13 @@ class Controller_Administrator extends Controller {
         $crud->set_field_type('cat_id', 'select', '', 'multiple', '', array('category', 'name','id', array('parent_id','<>','0')));
         $crud->set_one_to_many('businesscategory', 'cat_id','category_id', 'business_id');
 
-
         $crud->set_field_type('home_busines_foto', array('file', 'uploads/img_business', 'bus_', '', 'img'),'', '');
         $crud->set_field_type('logo', array('file', 'uploads/img_business', 'buslogo_', '', 'img'),'', '');
+
+        $crud->set_field_type('file_meny', array('file', 'uploads/img_business/file_meny', 'meny_', '', 'others'),'', '');
+
+        $crud->set_field_type('top_slider', array('file', 'uploads/img_business/top_slider', 'slid_', '', 'img'),'', 'multiple');
+        $crud->set_one_to_many('top_slider_bussines', 'top_slider','img_path', 'bussines_id');
 
         $crud->edit_fields('name', 'title',
             'description',
@@ -224,6 +244,8 @@ class Controller_Administrator extends Controller {
             'website',
             'video',
             'home_busines_foto',
+            'top_slider',
+            'file_meny',
             'info',
             'logo',
             'url', 'cat_id', 'date_create', 'date_end', 'tags', 'status');
@@ -236,6 +258,8 @@ class Controller_Administrator extends Controller {
             'website',
             'video',
             'home_busines_foto',
+            'top_slider',
+            'file_meny',
             'info',
             'logo',
             'url',  'cat_id', 'date_create', 'date_end', 'tags', 'status');
@@ -250,6 +274,8 @@ class Controller_Administrator extends Controller {
             'website' => 'Веб сайт бизнеса',
             'video' => 'Видео',
             'home_busines_foto' => 'Главное фото бизнеса',
+            'top_slider' => 'Верхний слайдер',
+            'file_meny' => 'Файл меню',
             'info' => 'Описание',
             'logo' => 'Логотип',
             'cat_id' => 'Категория',
@@ -473,11 +499,39 @@ class Controller_Administrator extends Controller {
         $crud = new Cruds();
         $crud->load_table('contacts');
         $crud->set_lang('ru');
+        $crud->disable_search();
+        $crud->remove_add();
+        $crud->remove_edit();
+        $crud->icon_delete('glyphicon-remove-sign');
+        $crud->show_views('glyphicon-list-alt');
+        $crud->show_name_column(array(
+            'name' => 'Имя',
+            'city'=> 'Город',
+            'tel' => 'Телефон',
+            'email'=>'Email',
+            'description' => 'Сообщение'));
+
+
         return $crud;
     }
 
 
+    public static function adminUsers (){
+        $crud = new Cruds();
+        $crud->load_table('users');
+        $crud->set_lang('ru');
+        $crud->set_field_type('id_role', 'select', '', 'multiple', '', array('roles', 'description','id'));
 
+        $crud->show_columns('id', 'email', 'username');
+        $crud->select_multiselect('id_role');
+        $crud->set_one_to_many('roles_users', 'id_role','role_id', 'user_id');
+        $crud->show_name_column(array(
+            'email'=> 'Email',
+            'username' => 'Имя',
+            ));
+
+        return $crud;
+    }
 
 
 

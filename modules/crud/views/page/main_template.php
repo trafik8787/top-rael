@@ -22,56 +22,64 @@
 <script type="text/javascript" src="/public_a/js/jquery.validate.min.js"></script>
 
 
-<nav class="navbar navbar-fixed-top" id="top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">TOPISRAEL</a>
 
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/administrator/logout">Выход</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+
 
 <div class="container-fluid">
+    <nav class="navbar navbar-fixed-top" id="top">
+        <div class="container-fluid">
+            <div class="navbar-header">
 
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+                <a class="navbar-brand" href="/">TOPISRAEL</a>
 
-            <ul class="nav nav-sidebar">
-                <?foreach ($meny as $name => $link):?>
-                    <li <? if (URL::site(Request::detect_uri()) == $link) { echo 'class="active"';}?>>
-                        <?if (is_array($link)):?>
-                            <?=$name?>
-                            <ul>
-                                <?foreach ($link['category'] as $rews):?>
-                                    <li><a href="<?=$link['url'].$rews['id']?>"><?=$rews['name']?></a></li>
-                                <?endforeach?>
-                            </ul>
-                        <?else:?>
-                            <a href="<?=$link?>"><?=$name?></a>
-                        <?endif?>
-
-                    </li>
-                <?endforeach?>
-
-            </ul>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/administrator/logout">Выход</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header"><?=$title_page?></h1>
+    </nav>
+    <div class="row">
+
+        <nav class="navbar navbar-default sidebar" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <?foreach ($meny as $name => $link):?>
+
+                            <?if (!empty($link['category'])):?>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?=$name?> <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon <?=$link['icon']?>"></span></a>
+                                    <ul class="dropdown-menu forAnimate" role="menu">
+                                        <?foreach ($link['category'] as $rews):?>
+                                            <li <? if (URL::site(Request::detect_uri()) == $link['url'].'/'.$rews['id']) { echo 'class="active"';}?>><a href="<?=$link['url'].'/'.$rews['id']?>"><?=$rews['name']?></a></li>
+                                        <?endforeach?>
+                                    </ul>
+                                </li>
+                            <?else:?>
+                                <li <? if (URL::site(Request::detect_uri()) == $link['url']) { echo 'class="active"';}?> ><a href="<?=$link['url']?>"><?=$name?><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon <?=$link['icon']?>"></span></a></li>
+                            <?endif?>
+
+                        <?endforeach?>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="col-md-11" style="margin-top: 2%; left: 5%">
+           <h2 class="page-header"><?=$title_page?></h2>
 
             <div class="row placeholders">
-
-                <?=@$render;?>
+                            <?=@$render;?>
 
 
             </div>

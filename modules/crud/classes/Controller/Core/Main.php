@@ -26,15 +26,16 @@ abstract class Controller_Core_Main extends Controller_Template {
 
         $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
 
-        return array('Главная' => URL::site('administrator'),
-            'О проекте' => URL::site('administrator/about'),
-            'Разделы' => URL::site('administrator/sections'),
-            'Категории' => URL::site('administrator/category'),
-            '<b>Бизнесы по разделам</b>' => array('category' => $section, 'url' => '/administrator/bussines/'),
-            '<b>Обзоры по разделам</b>' => array('category' => $section, 'url' => '/administrator/articles/'),
-            'Купоны' => URL::site('administrator/coupons'),
-            'Галереи' => URL::site('administrator/galery'),
-            'Контакты' => URL::site('administrator/contacts'),
+        return array('Главная' => array('url' => URL::site('administrator'), 'icon' => 'glyphicon-home'),
+            'О проекте' => array('url' => URL::site('administrator/about'), 'icon' => 'glyphicon-star'),
+            'Разделы' => array('url' => URL::site('administrator/sections'), 'icon' => 'glyphicon-th-list'),
+            'Категории' => array('url' => URL::site('administrator/category'), 'icon' => 'glyphicon-list-alt'),
+            'Бизнесы по разделам' => array('category' => $section, 'url' => URL::site('administrator/bussines'), 'icon' => 'glyphicon-th'),
+            'Обзоры по разделам' => array('category' => $section, 'url' => URL::site('administrator/articles'), 'icon' => 'glyphicon-th'),
+            'Купоны' => array('url' => URL::site('administrator/coupons'), 'icon' => 'glyphicon-tags'),
+            'Галереи' => array('url'=>URL::site('administrator/galery'), 'icon'=>'glyphicon-picture'),
+            'Контакты' => array('url'=>URL::site('administrator/contacts'), 'icon'=>'glyphicon-envelope'),
+            'Пользователи' => array('url'=>URL::site('administrator/users'), 'icon'=>'glyphicon-user')
             );
     }
 
