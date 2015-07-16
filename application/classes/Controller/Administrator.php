@@ -151,7 +151,11 @@ class Controller_Administrator extends Controller {
         $crud->set_lang('ru');
         $crud->disable_editor('description');
         $crud->disable_editor('keywords');
-        //$crud->show_name_column(array('email' => 'Email', 'seo_title' => 'SEO Title', 'seo_description' => 'SEO Desc', 'seo_keywords' => 'SEO keywords'));
+        $crud->show_name_column(array(
+            'description' => 'SEO Description',
+            'title'=> 'SEO Title',
+            'keywords'=> 'SEO Keywords'));
+
         return $crud;
     }
 
@@ -192,6 +196,7 @@ class Controller_Administrator extends Controller {
         $crud->disable_editor('keywords');
         $crud->show_columns('id', 'name', 'url');
         $crud->edit_fields('name', 'url', 'parent_id', 'title', 'description', 'keywords');
+        $crud->add_field('name', 'url', 'parent_id', 'title', 'description', 'keywords');
         $crud->set_field_type('parent_id', 'select', array('y' => 'Да', 'n' => 'Нет'), '', '', array('category', 'name','id', array('parent_id','=', '0')));
         $crud->set_where('parent_id', '<>', 0);
         $crud->validation('url', array('required' => true, 'minlength' => 4, 'regexp' => '^[a-zA-Z0-9_]+$'),
@@ -521,14 +526,33 @@ class Controller_Administrator extends Controller {
         $crud->load_table('users');
         $crud->set_lang('ru');
         $crud->set_field_type('id_role', 'select', '', 'multiple', '', array('roles', 'description','id'));
+        $crud->set_field_type('password', 'password');
+        $crud->set_field_type('email', 'email');
 
         $crud->show_columns('id', 'email', 'username');
         $crud->select_multiselect('id_role');
         $crud->set_one_to_many('roles_users', 'id_role','role_id', 'user_id');
+
+        $crud->add_field('email', 'username', 'password', 'id_role');
+
+        $crud->edit_fields('email', 'username', 'id_role');
+
         $crud->show_name_column(array(
             'email'=> 'Email',
             'username' => 'Имя',
+            'id_role' => 'Группа'
             ));
+
+        $crud->validation('email', array('required' => true, 'email' => true),
+            array('required' => 'Это поле обязательно для заполнения', 'email' => 'Неверный формат'));
+
+        $crud->validation('username', array('required' => true, 'minlength' => 3),
+            array('required' => 'Это поле обязательно для заполнения', 'minlength' => 'Минимальное количество символов 3'));
+
+        $crud->validation('password', array('required' => true, 'maxlength' => 16, 'minlength' => 6),
+            array('required' => 'Это поле обязательно для заполнения', 'maxlength' => 'Максимальная длина пароля 16 символов', 'minlength' => 'Минимальное количество символов 6'));
+
+        $crud->callback_before_insert('call_bef_insert_user');
 
         return $crud;
     }
@@ -726,13 +750,6 @@ class Controller_Administrator extends Controller {
             }
         }
 
-//
-//        HTML::x($diferen_title);
-//        HTML::x(Cruds::$post);
-//        HTML::x(Cruds::$files);
-//        die('sdf');
-
-
     }
 
     public static function call_after_insert_galery ($key_array = null){
@@ -755,12 +772,42 @@ class Controller_Administrator extends Controller {
             $img = self::create_images($img_galery.$name_file, $thumbs, 300, 196);
 
         }
-//
-//
-//        HTML::x(Cruds::$post);
-//        HTML::x(Cruds::$files);
-//        die('sdf');
+
     }
+
+
+    //добавление пользователя из админки
+    public static function call_bef_insert_user ($new_array = null){
+
+        $user = ORM::factory('User');
+        $user->username = $new_array['username'];
+        $user->password = $new_array['password'];
+        $user->email = $new_array['email'];
+        $user->save();
+
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -51,12 +51,21 @@
                     <?if (empty($add_property['join_key'][$name_fied])):?>
 
                         <div class="form-group has-feedback">
-
-                        <?if (isset($add_property['name_colums_table_show'][$name_fied])):?>
-                                <label for="<?=$name_fied?>" class="col-sm-2 control-label"><?=$add_property['name_colums_table_show'][$name_fied]?></label>
+                            <?if (!empty($add_property['new_type_field'][$name_fied])):?>
+                                <?$flag = true?>
+                                <?if ($add_property['new_type_field'][$name_fied]['type_field'] == 'hidden')://если тип поля hidden то скрываем надпись поля?>
+                                    <?$flag = false?>
+                                <?endif?>
                             <?else:?>
-                                <label for="<?=$name_fied?>" class="col-sm-2 control-label"><?=$name_fied?></label>
-                        <?endif?>
+                                <?$flag = true?>
+                            <?endif?>
+                            <?if($flag !== false ):?>
+                                <?if (isset($add_property['name_colums_table_show'][$name_fied])):?>
+                                        <label for="<?=$name_fied?>" class="col-sm-2 control-label"><?=$add_property['name_colums_table_show'][$name_fied]?></label>
+                                    <?else:?>
+                                        <label for="<?=$name_fied?>" class="col-sm-2 control-label"><?=$name_fied?></label>
+                                <?endif?>
+                            <?endif?>
 
                         <div class="col-sm-10">
 

@@ -180,7 +180,7 @@ class Controller_Core_Crud extends Controller_Core_Main {
                 } else {
 
                     //если поле определено как file
-                    if (!empty($retw->type_field_upload)) {
+                    if (!empty($retw->type_field_upload[$name_count_rows['COLUMN_NAME']])) {
 
                         //получаем масив с типом поля и путь к дирикктории хранения файла
                         $dir_path = $retw->type_field_upload[$name_count_rows['COLUMN_NAME']];
@@ -422,7 +422,7 @@ class Controller_Core_Crud extends Controller_Core_Main {
             $retw->callback_befor_show_edit($retw->callback_befor_show_edit['name_function']);
 
             $callbackStatic_bef_edit = call_user_func_array(array($re['callback_functions_array']['class'],
-                $retw->callback_befor_show_edit['name_function']), array($fields, $field));
+                $retw->callback_befor_show_edit['name_function']), array($field));
 
             if (!empty($callbackStatic_bef_edit)) {
                 $field = $callbackStatic_bef_edit;

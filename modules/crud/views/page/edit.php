@@ -61,14 +61,21 @@
                 <?foreach ($edit_property['field'] as $name_fied => $value_fild):?>
                     <?if ($name_fied != $edit_property['key_primary'] and empty($edit_property['join_key'][$name_fied])):?>
                         <div class="form-group has-feedback">
-                            <?if (isset($edit_property['name_colums_table_show'][$name_fied])):?>
-
-                                <label for="<?=$edit_property['name_colums_table_show'][$name_fied]?>" class="col-sm-2 control-label"><?=$edit_property['name_colums_table_show'][$name_fied]?></label>
-
+                            <?if (!empty($edit_property['new_type_field'][$name_fied])):?>
+                                <?$flag = true?>
+                                <?if ($edit_property['new_type_field'][$name_fied]['type_field'] == 'hidden')://если тип поля hidden то скрываем надпись поля?>
+                                    <?$flag = false?>
+                                <?endif?>
                             <?else:?>
+                                <?$flag = true?>
+                            <?endif?>
 
-                                <label for="<?=$name_fied?>" class="col-sm-2 control-label"><?=$name_fied?></label>
-
+                            <?if($flag !== false ):?>
+                                <?if (isset($edit_property['name_colums_table_show'][$name_fied])):?>
+                                    <label for="<?=$edit_property['name_colums_table_show'][$name_fied]?>" class="col-sm-2 control-label"><?=$edit_property['name_colums_table_show'][$name_fied]?></label>
+                                <?else:?>
+                                    <label for="<?=$name_fied?>" class="col-sm-2 control-label"><?=$name_fied?></label>
+                                <?endif?>
                             <?endif?>
                             <div class="col-sm-10">
 
