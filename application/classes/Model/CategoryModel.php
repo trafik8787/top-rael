@@ -8,6 +8,12 @@
 
 class Model_CategoryModel extends Model {
 
+
+    /**
+     * @param $table
+     * @param array $where
+     * @return mixed
+     */
     public function get_section ($table,  array $where){
         return DB::select()
             ->from($table)
@@ -15,6 +21,29 @@ class Model_CategoryModel extends Model {
             ->cached()
             ->execute()->as_array();
     }
+
+    /**
+     * @param $section_url
+     * @return array
+     * получам все категории раздела по урлу раздела
+     */
+    public function getCategoryInSectionUrl($section_url){
+        $query = DB::select()
+            ->from('category')
+            ->where('url', '=', $section_url)
+            ->cached()
+            ->execute()->as_array();
+
+        return $this->recurs_catalog($query[0]['id']);
+    }
+
+
+
+
+
+
+
+
 
     /**
      * @return array
@@ -63,6 +92,11 @@ class Model_CategoryModel extends Model {
     ////////////////////////////////////////////////////////
 
 
+    /**
+     * @param $arrCatId
+     * @return string
+     * получаем строку id бизнесов найденых по масиву категорий
+     */
     public function businesscategory ($arrCatId){
 
         $query = DB::select()
@@ -83,119 +117,5 @@ class Model_CategoryModel extends Model {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function delfile ()
-    {
-
-//        $query = DB::select()
-//            ->from('files')
-//            ->execute()->as_array();
-//
-//        foreach ($query as $row) {
-//
-//            $query = DB::update('files')
-//                ->set(array('filename' => '/uploads/img_galery/'.$row['filename']
-//
-//                )) ->where('id', '=', $row['id'])->execute();
-//        }
-
-    }
-
-
-
-
-    public function convert (){
-        $query = DB::select()
-            ->from('coupon')
-            ->execute()->as_array();
-
-        //$doc = new DOMDocument();
-
-
-        foreach ($query as $row) {
-
-            try {
-                $name = unserialize($row['name']);
-                $name = $name['ru'];
-            } catch (Exception $e) {
-                $name = $row['name'];
-            }
-           // die(HTML::x($name));
-
-            try {
-                $secondname = unserialize($row['secondname']);
-                $secondname = $secondname['ru'];
-            } catch (Exception $e) {
-                $secondname = $row['secondname'];
-            }
-
-            try {
-                $condition = unserialize($row['condition']);
-                $condition = $condition['ru'];
-            } catch (Exception $e) {
-                $condition = $row['condition'];
-            }
-
-            try {
-                $info = unserialize($row['info']);
-                $info = $info['ru'];
-            } catch (Exception $e) {
-                $info = $row['keywords'];
-            }
-//
-//            try {
-//                $content = unserialize($row['content']);
-//                $content = $content['ru'];
-//            } catch (Exception $e) {
-//                $content = $row['content'];
-//            }
-
-
-
-
-
-
-//
-//            $logo = '';
-//            @$doc->loadHTML($row['logo']);
-//
-//            $tags = $doc->getElementsByTagName('img');
-//
-//            foreach ($tags as $tag) {
-//                $logo = $tag->getAttribute('src');
-//            }
-
-
-
-            $query = DB::update('coupon')
-                ->set(array('name' => $name,
-                    'secondname' => $secondname,
-                    'condition' => $condition,
-                    'info'=> $info,
-                   ))
-                ->where('id', '=', $row['id'])->execute();
-        }
-    }
 
 }

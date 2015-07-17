@@ -148,8 +148,63 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+
+
+
+
+Route::set('Top_meny', 'city(/<url_city>)')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'City',
+        'action'     => 'index',
+    ));
+
+Route::set('Maps', 'maps')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Maps',
+        'action'     => 'index',
+    ));
+
+Route::set('Articles', 'articles(/<url_article>)')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Articles',
+        'action'     => 'index',
+    ));
+
+
+Route::set('Business', 'business(/<url_business>)')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Business',
+        'action'     => 'index',
+    ));
+
+Route::set('Coupons', 'coupons')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Coupons',
+        'action'     => 'index',
+    ));
+
+Route::set('SectionsPage', 'section(/<url_section>(/<page>))', array('page' => '[0-9]+'))
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Sections',
+        'action'     => 'index',
+    ));
+
+Route::set('Sections', 'section(/<url_section>(/<url_category>(/<page>)))', array('page' => '[0-9]+'))
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Sections',
+        'action'     => 'index',
+    ));
+
+
 Route::set('default', '(<controller>(/<action>(/<id>)))')
-	->defaults(array(
-		'controller' => 'Home',
-		'action'     => 'index',
-	));
+    ->defaults(array(
+        'controller' => 'Home',
+        'action'     => 'index',
+    ));
