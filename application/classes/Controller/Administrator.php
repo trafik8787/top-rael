@@ -26,7 +26,13 @@ class Controller_Administrator extends Controller {
             //->add('roles', ORM::factory('Role', array('name' => 'login')));
 
         $this->logged_in = Auth::instance()->logged_in('admin');
+
         $this->adm = View::factory('/adm/auth_admin');
+
+
+        if ($this->logged_in === false) {
+            $this->response->body($this->adm);
+        }
 
     }
 
@@ -41,15 +47,24 @@ class Controller_Administrator extends Controller {
 
     public function action_login () {
 
+
         $post = $this->request->post();
 
         if(!empty($post['login']) && !empty($post['password'])) {
 
-            Auth::instance()->login($post['login'], $post['password']);
-            $this->redirect('/administrator');
+            $status = Auth::instance()->login($post['login'], $post['password']);
 
+            if ($status) {
+
+                $this->redirect('/administrator');
+            } else {
+                $this->response->body($this->adm);
+            }
+
+        } else {
+            $this->response->body($this->adm);
         }
-
+        $this->logged_in = Auth::instance()->logged_in('admin');
 
     }
 
@@ -225,6 +240,10 @@ class Controller_Administrator extends Controller {
         $crud->set_where('id','IN', Session::instance()->get('customer_id'));
         $crud->disable_editor('description');
         $crud->disable_editor('keywords');
+        $crud->disable_editor('address');
+        $crud->disable_editor('services');
+        $crud->toptip_fields(array('address' => 'Если адресов несколько то каждый новы аресс пишется с новой строки. Сначала пишется город потом знак | и адрес'));
+        $crud->toptip_fields(array('services' => 'Каждая услуга пишется с новой строки.'));
         $crud->disable_editor('title');
         $crud->select_multiselect('cat_id');
         $crud->show_columns('id', 'name', 'url');
@@ -246,6 +265,7 @@ class Controller_Administrator extends Controller {
             'keywords',
             'city',
             'address',
+            'services',
             'website',
             'video',
             'home_busines_foto',
@@ -260,6 +280,7 @@ class Controller_Administrator extends Controller {
             'keywords',
             'city',
             'address',
+            'services',
             'website',
             'video',
             'home_busines_foto',
@@ -276,6 +297,7 @@ class Controller_Administrator extends Controller {
             'keywords' => 'SEO Keywords',
             'city' => 'Город',
             'address' => 'Адреса',
+            'services' => 'Приемущества и услуги',
             'website' => 'Веб сайт бизнеса',
             'video' => 'Видео',
             'home_busines_foto' => 'Главное фото бизнеса',
@@ -525,7 +547,7 @@ class Controller_Administrator extends Controller {
         $crud = new Cruds();
         $crud->load_table('users');
         $crud->set_lang('ru');
-        $crud->set_field_type('id_role', 'select', '', 'multiple', '', array('roles', 'description','id'));
+        $crud->set_field_type('id_role', 'select', '', 'multiple', '', array('roles','description','id'));
         $crud->set_field_type('password', 'password');
         $crud->set_field_type('email', 'email');
 
@@ -779,13 +801,13 @@ class Controller_Administrator extends Controller {
     //добавление пользователя из админки
     public static function call_bef_insert_user ($new_array = null){
 
-        $user = ORM::factory('User');
-        $user->username = $new_array['username'];
-        $user->password = $new_array['password'];
-        $user->email = $new_array['email'];
-        $user->save();
-
-        return false;
+//        $user = ORM::factory('User');
+//        $user->username = $new_array['username'];
+//        $user->password = $new_array['password'];
+//        $user->email = $new_array['email'];
+//        $user->save();
+        $new_array['password'] = Auth::instance()->hash($new_array['password']);
+        return $new_array;
     }
 
 

@@ -9,8 +9,10 @@ class Controller_Pages_Business extends Controller_BaseController {
 
 	public function action_index()
 	{
+        $content = View::factory('pages/business_page');
+        $content->data = Model::factory('BussinesModel')->getBusinessUrl($this->request->param('url_business'));
+        $this->template->content = $content;
 
-        $this->template->content = $this->request->param('url_business');
 	}
 
 

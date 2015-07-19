@@ -178,7 +178,11 @@ table.dataTable thead th, table.dataTable thead td {
 
 
 
-
+.page-header {
+    padding-bottom: 9px;
+    margin: 55px 0 13px;
+    border-bottom: 1px solid #eee;
+}
 
 
 nav.sidebar, .main{

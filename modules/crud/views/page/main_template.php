@@ -75,7 +75,7 @@
             </div>
         </nav>
 
-        <div class="col-md-11" style="margin-top: 2%; left: 5%">
+        <div class="col-md-10 col-md-offset-1" style="margin-top: 2%; left: 5%">
            <h2 class="page-header"><?=$title_page?></h2>
 
             <div class="row placeholders">
