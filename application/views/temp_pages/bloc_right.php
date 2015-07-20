@@ -7,34 +7,15 @@
  */
 ?>
 
+<div class="row">
+    <div class="col-md-12">
+        <?if (!empty($data_bloc)):?>
+            <?foreach ($data_bloc as $row_bloc):?>
 
-<div class="col-md-2">
+                <?=$row_bloc?>
 
-    <div class="row">
-        <div class="col-md-12">
-
-            <?=isset($board_search) ? $board_search : ''?>
-
-
-            <?=isset($bloc)? $bloc : ''?>
-
-            <?
-                if (isset($meny_right)) {
-
-                    if (is_array($meny_right)) {
-                        foreach ($meny_right as $row) {
-                            echo $row;
-                        }
-                    } else {
-                        echo $meny_right;
-                    }
-                }
-
-            ?>
-
-            <?=isset($news_top)? $news_top : ''?>
-
-        </div>
+            <?endforeach?>
+        <?endif?>
     </div>
-
 </div>
+

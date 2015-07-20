@@ -11,6 +11,8 @@ abstract class Controller_BaseController extends Controller_Template {
     public $template = 'main';
     public $top_meny;
     public static $detect_uri;
+    public static $general_meny;
+    //public $RightBloc;
     //public $general_meny;
 
 
@@ -30,7 +32,14 @@ abstract class Controller_BaseController extends Controller_Template {
 
         $header = View::factory('/temp_pages/header');
         $header->top_meny = $this->top_meny; //самое верхнее меню
-        $header->general_meny = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', 0)); //меню разделов
+
+        if (Cache::instance()->get('general_meny') == null) {
+            self::$general_meny = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', 0)); //меню разделов
+            Cache::instance()->set('general_meny', self::$general_meny);
+        } else {
+            self::$general_meny = Cache::instance()->get('general_meny');
+        }
+        $header->general_meny = self::$general_meny;
 
         $this->template->header = $header;
         $this->template->footer = View::factory('/temp_pages/footer');
@@ -42,6 +51,16 @@ abstract class Controller_BaseController extends Controller_Template {
     }
 
 
+    /**
+     * @param array $data_arr
+     * @return View
+     * метод рендеринга правого блока
+     */
+    public function RightBloc (array $data_arr){
+        $data = View::factory('/temp_pages/bloc_right');
+        $data->data_bloc = $data_arr;
+        return $data;
+    }
 
 
 

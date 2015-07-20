@@ -36,9 +36,11 @@
                 </div>
             <?endforeach?>
         </div>
+
         <div class="col-md-3">
-            ssdf
+            <?=isset($bloc_right)? $bloc_right : ''?>
         </div>
+
     </div>
     <div class="row">
         <div class="col-md-12">

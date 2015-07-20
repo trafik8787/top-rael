@@ -9,7 +9,7 @@ return array(
 		'items_per_page'    => 10,
 		'view'              => 'pagination/floating',
 		'auto_hide'         => TRUE,
-		'first_page_in_url' => true,
+		'first_page_in_url' => false,
 	),
 
 );

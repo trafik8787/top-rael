@@ -6,7 +6,7 @@
  * Time: 17:48
  */
 
-class Model_BussinesModel extends Model {
+class Model_BussinesModel extends Model_BaseModel {
 
 
     /**
@@ -22,6 +22,8 @@ class Model_BussinesModel extends Model {
         } else {
             $ofset = 0;
         }
+
+
 
         $result1 = DB::select()
             ->from('category')
@@ -100,6 +102,8 @@ class Model_BussinesModel extends Model {
 
         return array('data' => $result, 'count' => count($result1));
     }
+
+
 
 
     /**
@@ -189,7 +193,7 @@ class Model_BussinesModel extends Model {
         } else {
             $end_result = Cache::instance()->get($url_business);
         }
-        Cache::instance()->delete($url_business);
+        //Cache::instance()->delete($url_business);
         return $end_result;
     }
 
@@ -225,7 +229,11 @@ class Model_BussinesModel extends Model {
         return $row[0]['total'];
     }
 
-
+    /**
+     * @param $result
+     * @return array
+     * формирование двумерного масива карточки бизнеса
+     */
     private function CreateArrayBussines ($result){
 
         $FileArr = array();

@@ -166,7 +166,21 @@ Route::set('Maps', 'maps')
         'action'     => 'index',
     ));
 
-Route::set('Articles', 'articles(/<url_article>)')
+Route::set('ArticleNode', 'article(/<url_article>)', array('page' => '[0-9]+'))
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Articles',
+        'action'     => 'article',
+    ));
+
+Route::set('Articles', 'articles(/<page>)', array('page' => '[0-9]+'))
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Articles',
+        'action'     => 'index',
+    ));
+
+Route::set('ArticlesSection', 'articles(/<url_section>(/<page>))', array('page' => '[0-9]+'))
     ->defaults(array(
         'directory' => 'Pages',
         'controller' => 'Articles',

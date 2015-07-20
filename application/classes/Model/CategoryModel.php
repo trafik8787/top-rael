@@ -6,7 +6,7 @@
  * Time: 17:50
  */
 
-class Model_CategoryModel extends Model {
+class Model_CategoryModel extends Model_BaseModel {
 
 
     /**

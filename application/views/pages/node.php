@@ -2,11 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Vitalik
- * Date: 16.07.2015
- * Time: 18:44
+ * Date: 19.07.2015
+ * Time: 21:46
  */
 
-class Model_CouponsModel extends Model_BaseModel {
-
-
-}
+?>

@@ -9,9 +9,29 @@ class Controller_Pages_Articles extends Controller_BaseController {
 
 	public function action_index()
 	{
-		$this->response->body('hello, world!');
-        $this->template->content = 'sdf';
+        $data = array();
+
+        $content = View::factory('pages/articles_all');
+        $content->category =  self::$general_meny;
+
+        if ($this->request->param('url_section') == '') {
+            $data = Model::factory('ArticlesModel')->getArticlesSectionUrl(null, 10, $this->request->param('page'));
+        } else {
+            $data = Model::factory('ArticlesModel')->getArticlesSectionUrl($this->request->param('url_section'), 10, $this->request->param('page'));
+        }
+        //die(HTML::x($data));
+        $content->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
+        $content->data = $data['data'];
+
+        $this->template->content = $content;
 	}
 
+    public function action_article (){
+
+        $data = array();
+        $content = View::factory('pages/node');
+
+
+    }
 
 }
