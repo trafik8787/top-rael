@@ -13,10 +13,10 @@
         <ul class="nav nav-pills">
             <h2>Обзоры</h2>
 <!--            --><?//=HTML::x($data)?>
-            <li class="<? if (Controller_BaseController::$detect_uri == URL::site('articles')) { echo 'active'; }?>"><a href="/articles" >Все</a></li>
+            <li class="<? if (Controller_BaseController::$detect_uri == URL::site('articles').$pagesUrl) { echo 'active'; }?>"><a href="/articles" >Все</a></li>
             <?foreach($category as $row_category):?>
 
-                <li class="<? if (Controller_BaseController::$detect_uri == '/articles/'.$row_category['url']) { echo 'active'; }?>"><a href="/articles/<?=$row_category['url']?>" ><?=$row_category['name']?></a></li>
+                <li class="<? if (Controller_BaseController::$detect_uri == '/articles/'.$row_category['url'].$pagesUrl) { echo 'active'; }?>"><a href="/articles/<?=$row_category['url']?>" ><?=$row_category['name']?></a></li>
 
             <?endforeach?>
         </ul>

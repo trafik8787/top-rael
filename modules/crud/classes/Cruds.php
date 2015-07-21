@@ -74,6 +74,8 @@ class Cruds extends Controller_Core_Main {
     public static $post = null;
     public static $files = null;
 
+    public $show_name_old_table = null;
+
     public function __construct () {
         parent::before();
     }
@@ -337,7 +339,8 @@ class Cruds extends Controller_Core_Main {
             $search_like, //строка поиска
             $column, //поля таблицы
             $this->set_where, //метод условие выборки set_where ()
-            $this->join_table);
+            $this->join_table, //
+            $this->show_name_old_table); //добавляем асоциацию в таблицу
 
         //иницыализация языкового класса
         I18n::lang($this->set_lang);
@@ -481,10 +484,11 @@ class Cruds extends Controller_Core_Main {
                 array_unshift($tmp_array, '<input type="checkbox" class="w-chec-table" name="id_del_array[]" value="'.$rows[$this->key_primary].'">');
             }
 
+            //var_dump($array_intersect_key_rows);
             $tmp_array[] = $htm_show_views.$htm_edit.$htm_action.$htm_delete;
             $dataQuery[] = $tmp_array;
         }
-
+       // die(var_dump($dataQuery));
         //количество записей после поиска
         if ($search_like != '')  {
             $record_count = $query['count'];
@@ -497,6 +501,7 @@ class Cruds extends Controller_Core_Main {
             $record_count = 0;
             $dataQuery = '';
         }
+
 
         $re = array('draw' => $get['draw'],
             'recordsTotal' => $count[0]['COUNT(*)'], //всего записей в таблице
@@ -804,6 +809,14 @@ class Cruds extends Controller_Core_Main {
     public function add_style_add (){
         $this->add_style_add = func_get_args();
     }
+
+    public function show_name_old_table ($page_name, $old_table, $old_name_page, $id_old_table){
+        $this->show_name_old_table = array('page_name' => $page_name,
+            'old_table' => $old_table,
+            'old_name_page' => $old_name_page,
+            'id_old_table' => $id_old_table);
+    }
+
 
 }
 

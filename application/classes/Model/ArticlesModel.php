@@ -82,4 +82,17 @@ class Model_ArticlesModel extends Model_BaseModel {
     }
 
 
+    public function getArticleUrl ($url_article){
+        $query =  DB::select()
+            ->from(array('articles', 'artic'))
+            ->join(array('business', 'bus'), 'LEFT')
+            ->on('artic.bussines_id', '=', 'bus.id')
+            ->join(array('coupon', 'coup'), 'LEFT')
+            ->on('artic.coupon', '=', 'coup.id')
+            ->where('artic.url', '=', $url_article)
+            ->cached()
+            ->execute()->as_array();
+        HTML::x($query);
+    }
+
 }

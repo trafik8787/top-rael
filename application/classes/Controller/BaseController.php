@@ -12,6 +12,7 @@ abstract class Controller_BaseController extends Controller_Template {
     public $top_meny;
     public static $detect_uri;
     public static $general_meny;
+    public static $urlPars;
     //public $RightBloc;
     //public $general_meny;
 
@@ -21,7 +22,10 @@ abstract class Controller_BaseController extends Controller_Template {
 
         parent::before();
 
-        self::$detect_uri = '/'.Request::detect_uri();
+
+        $url = Request::detect_uri();
+        self::$detect_uri = '/'.$url;
+        self::$urlPars = explode('/', $url);
 
         $this->top_meny = array('Купоны' => '/coupons',
             'Обзоры' => '/articles',
@@ -56,7 +60,7 @@ abstract class Controller_BaseController extends Controller_Template {
      * @return View
      * метод рендеринга правого блока
      */
-    public function RightBloc (array $data_arr){
+    public static function RightBloc (array $data_arr){
         $data = View::factory('/temp_pages/bloc_right');
         $data->data_bloc = $data_arr;
         return $data;

@@ -14,6 +14,7 @@
             "pagingType": "full_numbers",
             "processing": true,
             "serverSide": true,
+            "pageLength": 25,
             "sLengthSelect": "form-control",
             "sDom": '<"top"l<?=$table_propery['activ_operation']['search']?><?=$table_propery['activ_operation']['enable_export']?>>rt<"bottom"ip><"clear">',//<"clear">
 

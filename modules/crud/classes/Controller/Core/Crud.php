@@ -167,6 +167,7 @@ class Controller_Core_Crud extends Controller_Core_Main {
                         //если обявлен метод 1-n
                         if ($retw->set_one_to_many) {
                             $update[$name_count_rows['COLUMN_NAME']] = $befor_serialise;
+
                         } else {
                             $update[$name_count_rows['COLUMN_NAME']] = serialize($befor_serialise);
                         }
@@ -189,11 +190,11 @@ class Controller_Core_Crud extends Controller_Core_Main {
                        //проверяем является ли масивом
                        if (is_array($_FILES[$name_count_rows['COLUMN_NAME']]['name'])) {
 
-
                            foreach ($_FILES[$name_count_rows['COLUMN_NAME']]['name'] as $key => $rows_name) {
                                //проверка на наличие отправляемого файла
 
                                if ($rows_name != '') {
+
                                    //расширение файла
                                    $type_file = '.'. strtolower(pathinfo($rows_name, PATHINFO_EXTENSION));
                                    //генерируем имя файла с префиксом
@@ -219,11 +220,12 @@ class Controller_Core_Crud extends Controller_Core_Main {
                                 $file_update = $_POST[$colum_file];
 
                            } elseif (empty($file_update) and empty($_POST[$colum_file])) { //если поле file  и скрытые поля пусты
-                               $file_update = array();
+                               $file_update = '';
                            }
 
                            //если определен метод 1-n
                            if ($retw->set_one_to_many) {
+                               //HTML::x($name_count_rows['COLUMN_NAME']);
                                $update[$name_count_rows['COLUMN_NAME']] = $file_update;
                            } else {
                                $update[$name_count_rows['COLUMN_NAME']] = serialize($file_update);
@@ -257,6 +259,8 @@ class Controller_Core_Crud extends Controller_Core_Main {
                 }
 
             }
+
+            //die('dsf');
 
             if ($retw->callback_after_edit != null) {
                 //получаем масив строку таблицы которая должна быть редактирована
@@ -633,6 +637,7 @@ class Controller_Core_Crud extends Controller_Core_Main {
                 //если поля нету то проверяем масив $_FILES
                 } else {
 
+                    $file_update = '';
                     //если поле определено как file
                     if (!empty($retw->type_field_upload[$name_count_rows['COLUMN_NAME']])) {
                         //die(print_r($name_count_rows['COLUMN_NAME']));

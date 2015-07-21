@@ -85,6 +85,8 @@ class Controller_Administrator extends Controller {
         $this->response->body(self::adminAbout()->edit_render(1));
     }
 
+
+
     public function action_sections (){
         Controller_Core_Main::$title_page = 'Разделы';
         $this->response->body(self::adminSections()->render());
@@ -94,6 +96,12 @@ class Controller_Administrator extends Controller {
         Controller_Core_Main::$title_page = 'Категории';
         $this->response->body(self::adminCategory()->render());
     }
+
+    public function action_tags (){
+        Controller_Core_Main::$title_page = 'Теги Глобальные разделы';
+        $this->response->body(self::adminTags()->render());
+    }
+
 
     public function action_bussines (){
 
@@ -228,6 +236,16 @@ class Controller_Administrator extends Controller {
     }
 
 
+    public static function adminTags (){
+        $crud = new Cruds();
+        $crud->load_table('tags');
+        $crud->set_lang('ru');
+        $crud->disable_search();
+        return $crud;
+    }
+
+
+
     /**
      * @return Cruds
      * Форма бизнесов
@@ -242,8 +260,10 @@ class Controller_Administrator extends Controller {
         $crud->disable_editor('keywords');
         $crud->disable_editor('address');
         $crud->disable_editor('services');
-        $crud->toptip_fields(array('address' => 'Если адресов несколько то каждый новы аресс пишется с новой строки. Сначала пишется город потом знак | и адрес'));
-        $crud->toptip_fields(array('services' => 'Каждая услуга пишется с новой строки.'));
+
+        $crud->toptip_fields(array('address' => 'Если адресов несколько то каждый новы аресс пишется с новой строки. Сначала пишется город потом знак | и адрес',
+                                'services' => 'Каждая услуга пишется с новой строки.'));
+
         $crud->disable_editor('title');
         $crud->select_multiselect('cat_id');
         $crud->show_columns('id', 'name', 'url');
@@ -260,6 +280,9 @@ class Controller_Administrator extends Controller {
         $crud->set_field_type('top_slider', array('file', 'uploads/img_business/top_slider', 'slid_', '', 'img'),'', 'multiple');
         $crud->set_one_to_many('top_slider_bussines', 'top_slider','img_path', 'bussines_id');
 
+
+        $crud->add_action('StatusBusiness', 'OFF', 'ban/actionAdd', '');
+
         $crud->edit_fields('name', 'title',
             'description',
             'keywords',
@@ -273,7 +296,9 @@ class Controller_Administrator extends Controller {
             'file_meny',
             'info',
             'logo',
-            'url', 'cat_id', 'date_create', 'date_end', 'tags', 'status');
+            'url',
+            'cat_id',
+            'date_create', 'date_end', 'tags');
 
         $crud->add_field('name', 'title',
             'description',
@@ -288,7 +313,7 @@ class Controller_Administrator extends Controller {
             'file_meny',
             'info',
             'logo',
-            'url',  'cat_id', 'date_create', 'date_end', 'tags', 'status');
+            'url',  'cat_id', 'date_create', 'date_end', 'tags');
 
         $crud->show_name_column(array('name' => 'Название',
             'url' => 'URL',
@@ -323,6 +348,9 @@ class Controller_Administrator extends Controller {
         $crud->validation('name', array('required' => true),
             array('required' => 'Это поле обязательно для заполнения'));
 
+        $crud->validation('top_slider', array('required' => true),
+            array('required' => 'Это поле обязательно для заполнения'));
+
 
         $crud->callback_before_edit('call_bef_edit_business');
         $crud->callback_after_insert('call_after_insert_business');
@@ -348,8 +376,14 @@ class Controller_Administrator extends Controller {
         $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
         $crud->set_field_type('id_section', 'select', '', '', '', array('category', 'name','id', array('parent_id','=','0')));
         $crud->set_field_type('id_category', 'select', '', '', '', array('category', 'name','id', array('parent_id','<>','0')));
-        $crud->set_field_type('bussines_id', 'select', '', '', '', array('business', 'name','id'));
-        $crud->set_field_type('coupon', 'select', '', '', '', array('coupon', 'name','id'));
+        $crud->set_field_type('bussines_id', 'select', '', 'multiple', '', array('business', 'name','id'));
+        $crud->set_field_type('coupon', 'select', '', 'multiple', '', array('coupon', 'name','id'));
+
+        $crud->select_multiselect('coupon');
+        $crud->set_one_to_many('articles_relation_coupon', 'coupon', 'id_coupon', 'id_articles');
+
+        $crud->select_multiselect('bussines_id');
+        $crud->set_one_to_many('articles_relation_business', 'bussines_id', 'id_business', 'id_articles');
 
         $crud->set_field_type('images_article', array('file', 'uploads/img_articles', 'artic_', '', 'img'),'', '');
 
@@ -431,7 +465,7 @@ class Controller_Administrator extends Controller {
         $crud = new Cruds();
         $crud->load_table('coupon');
         $crud->set_lang('ru');
-        $crud->show_columns('id', 'name');
+        $crud->show_columns('id', 'name', 'business_id');
         $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
         $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
         $crud->set_field_type('id_section', 'select', '', '', '', array('category', 'name','id', array('parent_id','=','0')));
@@ -445,6 +479,15 @@ class Controller_Administrator extends Controller {
 
         $crud->validation('name', array('required' => true),
             array('required' => 'Это поле обязательно для заполнения'));
+
+        //метод подставляет значения в таблицу из другой таблицы по join
+        /**
+         * 'business_id' - поле текущей таблицы
+         * 'business' - другая таблица из которой будем брать данные
+         * 'name' - поле из которого будем брать
+         * 'id' - поле по которому будем джойнить с 'business_id'
+         */
+        $crud->show_name_old_table('business_id', 'business', 'name', 'id');
 
         $crud->edit_fields('name',
             'secondname',
@@ -810,6 +853,11 @@ class Controller_Administrator extends Controller {
         return $new_array;
     }
 
+
+
+    public static function StatusBusiness ($key_array = null) {
+        //die(HTML::x($key_array));
+    }
 
 
 

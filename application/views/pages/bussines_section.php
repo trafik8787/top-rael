@@ -7,47 +7,36 @@
  */
 ?>
 
+
 <div class="row">
     <div class="col-md-12">
         <ul class="nav nav-pills">
             <h2><?=$category[0]['name']?></h2>
+            <span>
 
-            <li class="<? if (Controller_BaseController::$detect_uri == '/section/'.$category[0]['url']) { echo 'active'; }?>"><a href="/section/<?=$category[0]['url']?>" >Все</a></li>
+                <form action="" method="get" id="w-form-city">
+                    <select class="form-control w-select-city" name="city" style="width: 20%">
+                        <option value="">По городам</option>
+                        <?foreach($city as $key_id => $row_city):?>
+                            <option <?if ($city_id == $key_id) { echo 'selected="selected"';}?> value="<?=$key_id?>"><?=$row_city?></option>
+                        <?endforeach?>
+                    </select>
+                </form>
+            </span>
+
+            <li class="<? if (Controller_BaseController::$detect_uri == '/section/'.$category[0]['url'].$pagesUrl) { echo 'active'; }?>"><a href="/section/<?=$category[0]['url']?>" >Все</a></li>
             <?foreach($category[0]['childs'] as $row_category):?>
 
-                <li class="<? if (Controller_BaseController::$detect_uri == '/section/'.$category[0]['url'].'/'.$row_category['url']) { echo 'active'; }?>"><a href="/section/<?=$category[0]['url'].'/'.$row_category['url']?>" ><?=$row_category['name']?></a></li>
+                <li class="<? if (Controller_BaseController::$detect_uri == '/section/'.$category[0]['url'].'/'.$row_category['url'].$pagesUrl) { echo 'active'; }?>"><a href="/section/<?=$category[0]['url'].'/'.$row_category['url']?>" ><?=$row_category['name']?></a></li>
 
             <?endforeach?>
         </ul>
 
     </div>
 
-    <?//HTML::x($data)?>
-
-    <div class="row">
-        <div class="col-md-9">
-
-            <?foreach($data as $rows_data):?>
-                <div style="width: 200px; border: 1px solid #000; display: inline-block">
-                    <img src="" alt="sdf"/>
-                    <h3><a href="/business/<?=$rows_data['url']?>"><?=$rows_data['name']?></a></h3>
-                    <h4><?=$rows_data['address']?></h4>
-                    <p><?=Text::limit_chars(strip_tags($rows_data['info']), 200, null, true)?></p>
-                </div>
-            <?endforeach?>
-        </div>
-
-        <div class="col-md-3">
-            <?=isset($bloc_right)? $bloc_right : ''?>
-        </div>
-
+    <div class="w-business-list">
+        <?=$business_list?>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <?=$pagination?>
-        </div>
-    </div>
-
 
 
 </div>

@@ -149,7 +149,12 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
-
+Route::set('FiltrSectionCity', 'filtr(/<action>)')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'index',
+    ));
 
 
 Route::set('Top_meny', 'city(/<url_city>)')

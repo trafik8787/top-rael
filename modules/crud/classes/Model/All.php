@@ -341,13 +341,11 @@ class Model_All extends Model
 
 
     //пагинация
-    public function paginationAjax ($limit, $ofset = null, $table, $order_column, $order_by, $like = null, $column_like, $set_where = null, $join = null) {
+    public function paginationAjax ($limit, $ofset = null, $table, $order_column, $order_by, $like = null, $column_like, $set_where = null, $join = null, $show_name_old_table = null) {
 
         if ($ofset == '' or $ofset == null) {
             $ofset = 0;
         }
-
-        //die(print_r($order_column));
 
         if ($like != '' and $like !== null) {
 
@@ -358,10 +356,6 @@ class Model_All extends Model
 
             //получаем поля и тыпы к ним
             $name_type_column = $this->information_data_type($table, $join);
-
-            //die(print_r($name_type_column));
-
-
 
 
             foreach ($column_like as $key => $column) {
@@ -439,6 +433,18 @@ class Model_All extends Model
 
         } else {
 
+            if ($show_name_old_table != null) {
+                $join_other = ' JOIN '.$show_name_old_table['old_table'].
+                    ' ON '.$table.'.'.$show_name_old_table['page_name'].'='.$show_name_old_table['old_table'].'.'.$show_name_old_table['id_old_table'].' ';
+                $other_by = $table.'.';
+                $selectet = $table.'.*, '.$show_name_old_table['old_table'].'.'.$show_name_old_table['old_name_page'].' AS '.$show_name_old_table['page_name'];
+            } else {
+                $join_other = '';
+                $other_by = '';
+                $selectet = '*';
+            }
+
+
             //количество найденых в таблице
             $query_count =  DB::query(Database::SELECT,
                 'SELECT COUNT(*) as cou FROM ' .$table.' '.$sele_where.' '.$likeSql)
@@ -446,15 +452,17 @@ class Model_All extends Model
                 ->as_array();
 
             $query = DB::query(Database::SELECT,
-                'SELECT * FROM '.$table.' '.$sele_where.' '.$likeSql.' '.
-                'ORDER BY '. $order_column.' '.$order_by.'
+                'SELECT '.$selectet.' FROM '.$table.' '.$join_other.' '.$sele_where.' '.$likeSql.' '.
+                'ORDER BY '.$other_by.$order_column.' '.$order_by.'
             LIMIT '.$ofset.','.$limit)
                 ->execute()
                 ->as_array();
         }
-
+       // die(var_dump($query));
         return array('query' => $query, 'count' => $query_count[0]['cou']);
     }
+
+
 
     private function get_pars_string ($field) {
 
@@ -569,17 +577,21 @@ class Model_All extends Model
 
     //запись в таблицу
     public function set_other_table ($arr_table_other, $arr_insert, $parent_id) {
-
+        //die(HTML::x($arr_insert));
         foreach ($arr_table_other as $rows_other) {
 
             if (isset($arr_insert[$rows_other['field_old']])) {
 
-                foreach ($arr_insert[$rows_other['field_old']] as $row_insert) {
+                if (is_array($arr_insert[$rows_other['field_old']])) {
 
-                    $query = DB::insert($rows_other['table'], array($rows_other['field_new'], $rows_other['parent_id']))
-                        ->values(array($row_insert, $parent_id))->execute();
+                    foreach ($arr_insert[$rows_other['field_old']] as $row_insert) {
 
+                        $query = DB::insert($rows_other['table'], array($rows_other['field_new'], $rows_other['parent_id']))
+                            ->values(array($row_insert, $parent_id))->execute();
+
+                    }
                 }
+
 
 
             }

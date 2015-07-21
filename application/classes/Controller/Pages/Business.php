@@ -10,7 +10,10 @@ class Controller_Pages_Business extends Controller_BaseController {
 	public function action_index()
 	{
         $content = View::factory('pages/business_page');
+       // $token = Profiler::start('Model', 'BussinesModel');
         $content->data = Model::factory('BussinesModel')->getBusinessUrl($this->request->param('url_business'));
+        //Profiler::stop($token);
+        //echo View::factory('profiler/stats');
         $this->template->content = $content;
 
 	}

@@ -14,7 +14,7 @@ class Model_BussinesModel extends Model_BaseModel {
      * @return mixed
      * получаем бизнеси по URL категории
      */
-    public function getBussinesCategoryUrl($url_category = null, $limit = null, $num_page = null){
+    public function getBussinesCategoryUrl($url_category = null, $limit = null, $num_page = null, $id_city = null){
 
 
         if ($num_page != null) {
@@ -23,32 +23,70 @@ class Model_BussinesModel extends Model_BaseModel {
             $ofset = 0;
         }
 
+        ////получаем количество записей для пагинации сортировка по городу и категории
+        if ($id_city != null) {
+            $result1 = DB::select()
+                ->from('category')
+                ->join('businesscategory')
+                ->on('category.id', '=', 'businesscategory.category_id')
+                ->join('business')
+                ->on('businesscategory.business_id', '=', 'business.id')
+                ->join('city', 'LEFT')
+                ->on('business.city', '=', 'city.id')
+                ->where('category.url', '=', $url_category)
+                ->and_where('city.id', '=', $id_city)
+                ->cached()
+                ->execute()->as_array();
+        } else {
+            //только по категории
+            $result1 = DB::select()
+                ->from('category')
+                ->join('businesscategory')
+                ->on('category.id', '=', 'businesscategory.category_id')
+                ->join('business')
+                ->on('businesscategory.business_id', '=', 'business.id')
+                ->join('city', 'LEFT')
+                ->on('business.city', '=', 'city.id')
+                ->where('category.url', '=', $url_category)
+                ->cached()
+                ->execute()->as_array();
+        }
+
+        if ($id_city != null) {
+            $result = DB::select('business.*', array('city.name', 'CityName'))
+                ->from('category')
+                ->join('businesscategory')
+                ->on('category.id', '=', 'businesscategory.category_id')
+                ->join('business')
+                ->on('businesscategory.business_id', '=', 'business.id')
+                ->join('city', 'LEFT')
+                ->on('business.city', '=', 'city.id')
+                ->where('category.url', '=', $url_category)
+                ->and_where('city.id', '=', $id_city)
+                ->limit($limit)
+                ->offset($ofset)
+                ->cached()
+                ->execute()->as_array();
+        } else {
+            $result = DB::select('business.*', array('city.name', 'CityName'))
+                ->from('category')
+                ->join('businesscategory')
+                ->on('category.id', '=', 'businesscategory.category_id')
+                ->join('business')
+                ->on('businesscategory.business_id', '=', 'business.id')
+                ->join('city', 'LEFT')
+                ->on('business.city', '=', 'city.id')
+                ->where('category.url', '=', $url_category)
+                ->limit($limit)
+                ->offset($ofset)
+                ->cached()
+                ->execute()->as_array();
+        }
+
+        $city_arr = $this->getCityInCategory($url_category);
 
 
-        $result1 = DB::select()
-            ->from('category')
-            ->join('businesscategory')
-            ->on('category.id', '=', 'businesscategory.category_id')
-            ->join('business')
-            ->on('businesscategory.business_id', '=', 'business.id')
-            ->where('category.url', '=', $url_category)
-            ->cached()
-            ->execute()->as_array();
-
-
-        $result = DB::select()
-            ->from('category')
-            ->join('businesscategory')
-            ->on('category.id', '=', 'businesscategory.category_id')
-            ->join('business')
-            ->on('businesscategory.business_id', '=', 'business.id')
-            ->where('category.url', '=', $url_category)
-            ->limit($limit)
-            ->offset($ofset)
-            ->cached()
-            ->execute()->as_array();
-
-         return array('data' => $result, 'count' => count($result1));
+         return array('data' => $result, 'count' => count($result1), 'city' => $city_arr);
     }
 
 
@@ -57,7 +95,7 @@ class Model_BussinesModel extends Model_BaseModel {
      * @return mixed
      * получаем все бизнесы из раздела
      */
-    public function getBussinesSectionUrl($url_section = null, $limit = null, $num_page = null){
+    public function getBussinesSectionUrl($url_section = null, $limit = null, $num_page = null, $id_city = null){
 
         if ($num_page != null) {
             $ofset = $limit * ($num_page - 1);
@@ -72,37 +110,86 @@ class Model_BussinesModel extends Model_BaseModel {
             $arrChild[] = $row_cat['id'];
         }
 
-        $column = 'bus.id';
-        $result1 = DB::select(array('bus.id', 'total'))
-            ->from(array('category', 'cat'))
-            ->join(array('businesscategory', 'buscat'))
-            ->on('cat.id', '=', 'buscat.category_id')
-            ->join(array('business', 'bus'))
-            ->on('buscat.business_id', '=', 'bus.id')
-            ->where('buscat.category_id', 'IN', $arrChild)
-            ->group_by('bus.id')
-            ->order_by('bus.id','DESC')
-            ->cached()
-            ->execute()->as_array();
+        ////получаем количество записей для пагинации сортировка по городу и категориям раздела
+        if ($id_city != null) {
+            $result1 = DB::select('business.*')
+                ->from('category')
+                ->join('businesscategory')
+                ->on('category.id', '=', 'businesscategory.category_id')
+                ->join('business')
+                ->on('businesscategory.business_id', '=', 'business.id')
+                ->join('city', 'LEFT')
+                ->on('business.city', '=', 'city.id')
+                ->where('businesscategory.category_id', 'IN', $arrChild)
+                ->and_where('city.id', '=', $id_city)
+                ->group_by('business.id')
+                ->order_by('business.id', 'DESC')
+                ->cached()
+                ->execute()->as_array();
+        } else {
+            //получаем количество записей для пагинации выборка по всем категориям раздела
+            $result1 = DB::select('business.*', array('city.name', 'CityName'))
+                ->from('category')
+                ->join('businesscategory')
+                ->on('category.id', '=', 'businesscategory.category_id')
+                ->join('business')
+                ->on('businesscategory.business_id', '=', 'business.id')
+                ->join('city', 'LEFT')
+                ->on('business.city', '=', 'city.id')
+                ->where('businesscategory.category_id', 'IN', $arrChild)
+                ->group_by('business.id')
+                ->order_by('business.id', 'DESC')
+                ->cached()
+                ->execute()->as_array();
+        }
+
+        if ($id_city != null) {
+            //выборка с лимитами по городу и всем категориям раздела
+            $result = DB::select('business.*')
+                ->from('category')
+                ->join('businesscategory')
+                ->on('category.id', '=', 'businesscategory.category_id')
+                ->join('business')
+                ->on('businesscategory.business_id', '=', 'business.id')
+                ->join('city', 'LEFT')
+                ->on('business.city', '=', 'city.id')
+                ->where('businesscategory.category_id', 'IN', $arrChild)
+                ->and_where('city.id', '=', $id_city)
+                ->limit($limit)
+                ->offset($ofset)
+                ->group_by('business.id')
+                ->order_by('business.id', 'DESC')
+                ->cached()
+                ->execute()->as_array();
+        } else {
+            //выборка с лимитами тоько по категориям раздела
+            $result = DB::select()
+                ->from('category')
+                ->join('businesscategory')
+                ->on('category.id', '=', 'businesscategory.category_id')
+                ->join('business')
+                ->on('businesscategory.business_id', '=', 'business.id')
+                ->where('businesscategory.category_id', 'IN', $arrChild)
+                ->limit($limit)
+                ->offset($ofset)
+                ->group_by('business.id')
+                ->order_by('business.id', 'DESC')
+                ->cached()
+                ->execute()->as_array();
+        }
+
+        $city_arr = $this->getCityInSection($arrChild);
 
 
-        $result = DB::select()
-            ->from('category')
-            ->join('businesscategory')
-            ->on('category.id', '=', 'businesscategory.category_id')
-            ->join('business')
-            ->on('businesscategory.business_id', '=', 'business.id')
-            ->where('businesscategory.category_id', 'IN', $arrChild)
-            ->limit($limit)
-            ->offset($ofset)
-            ->group_by('business.id')
-            ->order_by('business.id','DESC')
-            ->cached()
-            ->execute()->as_array();
 
-        return array('data' => $result, 'count' => count($result1));
+        return array('data' => $result, 'count' => count($result1), 'city' => $city_arr);
     }
 
+
+    public function getBusinessCityID ($id_city) {
+//        $result = DB::select()
+//            ->from('business')
+    }
 
 
 
@@ -178,9 +265,14 @@ class Model_BussinesModel extends Model_BaseModel {
                 //картинки галерей
                 ->join(array('files', 'file'), 'LEFT')
                 ->on('galry.id', '=', 'file.gallery')
+
+                //связаная таблица обзоров и бизнесов для определения привязаных к бизнесу обзоров
+                ->join(array('articles_relation_business', 'artrelbus'), 'LEFT')
+                ->on('bus.id', '=', 'artrelbus.id_business')
+
                 //обзоры
                 ->join(array('articles', 'artic'), 'LEFT')
-                ->on('bus.id', '=', 'artic.bussines_id')
+                ->on('artrelbus.id_articles', '=', 'artic.id')
 
                 ->where('bus.url', '=', $url_business)
                 ->cached()
@@ -362,6 +454,68 @@ class Model_BussinesModel extends Model_BaseModel {
         }
 
         return $end_result;
+    }
+
+
+    /**
+     * @param $arrChild
+     * @param $id_city
+     * @return array
+     * метод получаем список городов во всех категориях раздела
+     */
+    public function getCityInSection ($arrChild){
+
+        $result1 = DB::select('business.*', array('city.name', 'CityName'))
+            ->from('category')
+            ->join('businesscategory')
+            ->on('category.id', '=', 'businesscategory.category_id')
+            ->join('business')
+            ->on('businesscategory.business_id', '=', 'business.id')
+            ->join('city', 'LEFT')
+            ->on('business.city', '=', 'city.id')
+            ->where('businesscategory.category_id', 'IN', $arrChild)
+            ->group_by('business.id')
+            ->order_by('business.id', 'DESC')
+            ->cached()
+            ->execute()->as_array();
+
+        $city_arr = array();
+        foreach ($result1 as $row_city) {
+            if ($row_city['city'] != '') {
+                $city_arr[$row_city['city']] = $row_city['CityName'];
+            }
+        }
+
+        return $city_arr;
+    }
+
+    /**
+     * @param $url_category
+     * @return array
+     * получаем список городов по урлу категории
+     */
+    public function getCityInCategory ($url_category){
+
+        $result1 = DB::select('business.*', array('city.name', 'CityName'))
+            ->from('category')
+            ->join('businesscategory')
+            ->on('category.id', '=', 'businesscategory.category_id')
+            ->join('business')
+            ->on('businesscategory.business_id', '=', 'business.id')
+            ->join('city', 'LEFT')
+            ->on('business.city', '=', 'city.id')
+            ->where('category.url', '=', $url_category)
+            ->cached()
+            ->execute()->as_array();
+
+        $city_arr = array();
+        foreach ($result1 as $row_city) {
+            if ($row_city['city'] != '') {
+                $city_arr[$row_city['city']] = $row_city['CityName'];
+            }
+        }
+
+        return $city_arr;
     }
 
 

@@ -141,6 +141,7 @@ $(document).ready(function(){
     });
 
     $('.form_date').datetimepicker({
+        language: 'ru',
         weekStart: 1,
         todayBtn:  1,
         autoclose: 1,
@@ -151,7 +152,7 @@ $(document).ready(function(){
     });
 
     $('.form_time').datetimepicker({
-        //language:  'fr',
+        language: 'ru', 
         weekStart: 1,
         todayBtn:  1,
         autoclose: 1,
@@ -163,7 +164,7 @@ $(document).ready(function(){
     });
 
     $('.form_datetime').datetimepicker({
-        //language:  'fr',
+        language: 'ru',
         weekStart: 1,
         todayBtn:  1,
         autoclose: 1,

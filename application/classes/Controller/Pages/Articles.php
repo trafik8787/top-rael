@@ -23,6 +23,13 @@ class Controller_Pages_Articles extends Controller_BaseController {
         $content->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
         $content->data = $data['data'];
 
+        //передаем номер страницы
+        if ($this->request->param('page') != '') {
+            $content->pagesUrl = '/'.$this->request->param('page');
+        } else {
+            $content->pagesUrl = '';
+        }
+
         $this->template->content = $content;
 	}
 
@@ -30,8 +37,8 @@ class Controller_Pages_Articles extends Controller_BaseController {
 
         $data = array();
         $content = View::factory('pages/node');
-
-
+        Model::factory('ArticlesModel')->getArticleUrl($this->request->param('url_article'));
+        $this->template->content = $content;
     }
 
 }
