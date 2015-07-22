@@ -259,7 +259,7 @@
                     <div class="col-sm-offset-2 col-sm-10">
                         <input type="hidden" name="obj" value="<?=$edit_property['obj']?>"/>
                         <input type="hidden" name="edit"/>
-                        <input type="hidden" name="curent_uri" value="<?=$curent_uri?>"/>
+                        <input type="hidden" name="curent_uri" value="<?=Session::instance()->get('curent_uri')?>"/>
                         <?if ($edit_property['remove_save'] !== true):?>
                             <button type="submit" id="loading-save" value="1" name="edit_save" class="btn btn-success btn-lg"><?=__('LANG_SAVE')?> <span class="glyphicon glyphicon-floppy-disk"></span></button>
                         <?endif?>

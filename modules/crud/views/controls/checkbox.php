@@ -13,7 +13,7 @@ $(document).on('click', '.w-cheked-status', function() {
 
 <div class="w-chec has-error">
     <div class="checkbox">
-        <div class="w-cheked-right">
+
 
             <?if(is_array($value_fild)):?>
                 <?
@@ -31,18 +31,27 @@ $(document).on('click', '.w-cheked-status', function() {
                 ?>
 
                 <?if ($type_field == 'checkbox') :?>
-
+                    <?$checked = '';?>
                     <?foreach ($value_fild as $val => $row):?>
+                        <?
+                            if (!empty($arr_value)) {
+                                foreach ($arr_value as $rows_val) {
+                                    if ($rows_val == $val) {
+                                        $checked = 'checked';
+                                    }
+                                }
+                            }
+                        ?>
 
-                        <label><?=$row?> <input <?=$attr?> type="checkbox" name="<?=$name_fied.'['.$val.']'?>" <?if (isset($arr_value[$val])):?> checked <?endif?> value="<?=$val?>"/></label><br/>
-
+                        <label> <input <?=$attr?> type="checkbox" name="<?=$name_fied.'['.$val.']'?>" <?=$checked?> value="<?=$val?>"/> <?=$row?></label><br/>
+                        <?$checked = '';?>
                     <?endforeach?>
 
                 <?elseif ($type_field == 'radio'):?>
 
                     <?foreach ($value_fild as $val => $row):?>
 
-                        <label><?=$row?> <input <?=$attr?> type="radio" name="<?=$name_fied?>" <?if (!empty($arr_value)):?><?if ($arr_value == $val):?> checked <?endif?><?endif?> value="<?=$val?>"/></label><br/>
+                        <label> <input <?=$attr?> type="radio" name="<?=$name_fied?>" <?if (!empty($arr_value)):?><?if ($arr_value == $val):?> checked <?endif?><?endif?> value="<?=$val?>"/><?=$row?></label><br/>
 
                     <?endforeach?>
 
@@ -60,6 +69,6 @@ $(document).on('click', '.w-cheked-status', function() {
                 <input class="w-hide-status" name="<?=$name_fied?>" type="hidden" value="<?if (!empty($origin_value_fild)) { echo $origin_value_fild; } else {?>0<?}?>"/>
 
             <?endif?>
-        </div>
+
     </div>
 </div>

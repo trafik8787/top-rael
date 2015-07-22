@@ -90,7 +90,6 @@ class Model_ArticlesModel extends Model_BaseModel {
             ->join(array('coupon', 'coup'), 'LEFT')
             ->on('artic.coupon', '=', 'coup.id')
             ->where('artic.url', '=', $url_article)
-            ->and_where('bus.status', '=', 1)
             ->cached()
             ->execute()->as_array();
         HTML::x($query);

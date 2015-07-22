@@ -92,6 +92,9 @@ class Cruds extends Controller_Core_Main {
             'callback_function_name' => __FUNCTION__
         );
         //для редиректа
+        if (Request::$initial->referrer() != '') {
+            Session::instance()->set('curent_uri', Request::$initial->referrer());
+        }
         $this->curent_uri = parse_url(Request::$initial->referrer());
         $this->curent_uri = $this->curent_uri['path'];
     }

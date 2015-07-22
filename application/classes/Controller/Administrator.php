@@ -102,6 +102,11 @@ class Controller_Administrator extends Controller {
         $this->response->body(self::adminTags()->render());
     }
 
+    public function action_lotarey (){
+        Controller_Core_Main::$title_page = 'Розыграши';
+        $this->response->body(self::adminLotarey()->render());
+    }
+
 
     public function action_bussines (){
 
@@ -247,6 +252,27 @@ class Controller_Administrator extends Controller {
     }
 
 
+    public static function adminLotarey (){
+
+        $crud = new Cruds();
+        $crud->load_table('lotarey');
+        $crud->set_lang('ru');
+        $crud->set_field_type('status', 'radio', array('1' => 'Ожидает', '2' => 'Идет', '3' => 'Завершен'));
+        $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
+        $crud->set_field_type('img', array('file', 'uploads/img_lotarey', 'lot_', '', 'img'),'', '');
+        $crud->show_columns('id', 'name', 'date_start', 'date_end');
+        $crud->show_name_column(array('name' => 'Название',
+            'secondname' => 'Заголовок',
+            'description' => 'Описание',
+            'img' => 'Картинка',
+            'business_id'=> 'Бизнес',
+            'date_start'=> 'Дата начала',
+            'date_end' => 'Дата конца',
+            'status' => 'Статус'));
+        $crud->disable_search();
+        return $crud;
+    }
+    
 
     /**
      * @return Cruds
@@ -269,7 +295,6 @@ class Controller_Administrator extends Controller {
         $crud->disable_editor('title');
         $crud->select_multiselect('cat_id');
         $crud->show_columns('id', 'name', 'url');
-        $crud->set_field_type('status', 'checkbox', '', '', '','');
         $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
         $crud->set_field_type('cat_id', 'select', '', 'multiple', '', array('category', 'name','id', array('parent_id','<>','0')));
         $crud->set_one_to_many('businesscategory', 'cat_id','category_id', 'business_id');
@@ -281,6 +306,9 @@ class Controller_Administrator extends Controller {
 
         $crud->set_field_type('top_slider', array('file', 'uploads/img_business/top_slider', 'slid_', '', 'img'),'', 'multiple');
         $crud->set_one_to_many('top_slider_bussines', 'top_slider','img_path', 'bussines_id');
+
+        $crud->set_field_type('tags', 'checkbox', '', 'multiple', '', array('tags', 'name_tags','id'));
+        $crud->set_one_to_many('tags_relation_business', 'tags', 'id_tags', 'id_business');
 
         $status['page'] = 'status';
         $status['position'][0] = array('class' =>'btn-warning', 'text' => 'OFF');
@@ -359,6 +387,7 @@ class Controller_Administrator extends Controller {
 
         $crud->callback_before_edit('call_bef_edit_business');
         $crud->callback_after_insert('call_after_insert_business');
+        $crud->callback_befor_show_edit('call_bef_show_edit_bus');
 
         return $crud;
     }
@@ -686,6 +715,17 @@ class Controller_Administrator extends Controller {
     }
 
 
+    public static function call_bef_show_edit_bus ($new_array){
+        //die(HTML::x($new_array));
+        $query = DB::select('id', 'name')
+            ->from('gallery')
+            ->where('business_id', '=', $new_array['id'])
+            ->cached()
+            ->execute()->as_array();
+        $cont = View::factory('adm/adon_links_galery_for_business');
+        $cont->data = $query;
+        Cruds::$adon_form = $cont;
+    }
 
     //articles
 
@@ -733,8 +773,6 @@ class Controller_Administrator extends Controller {
             self::create_images($key_array['img_coupon'], '/uploads/img_coupons/thumbs/', 234, 196);
         }
     }
-
-
 
 
 

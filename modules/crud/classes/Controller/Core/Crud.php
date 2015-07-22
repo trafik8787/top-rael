@@ -860,7 +860,7 @@ class Controller_Core_Crud extends Controller_Core_Main {
     //очистка поля перед записью в основную таблицу
     private function clear_field_insert ($arr_field_new_table, $arr_insert_val) {
         foreach ($arr_field_new_table as $rows) {
-            if ($arr_insert_val[$rows['field_old']]) {
+            if (!empty($arr_insert_val[$rows['field_old']])) {
                 $arr_insert_val[$rows['field_old']] = '';
             }
         }
