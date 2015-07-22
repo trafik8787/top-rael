@@ -33,8 +33,11 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->on('businesscategory.business_id', '=', 'business.id')
                 ->join('city', 'LEFT')
                 ->on('business.city', '=', 'city.id')
-                ->where('category.url', '=', $url_category)
-                ->and_where('city.id', '=', $id_city)
+                ->where_open()
+                    ->where('category.url', '=', $url_category)
+                    ->and_where('city.id', '=', $id_city)
+                    ->and_where('business.status', '=', 1)
+                ->where_close()
                 ->cached()
                 ->execute()->as_array();
         } else {
@@ -48,6 +51,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->join('city', 'LEFT')
                 ->on('business.city', '=', 'city.id')
                 ->where('category.url', '=', $url_category)
+                ->and_where('business.status', '=', 1)
                 ->cached()
                 ->execute()->as_array();
         }
@@ -61,8 +65,11 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->on('businesscategory.business_id', '=', 'business.id')
                 ->join('city', 'LEFT')
                 ->on('business.city', '=', 'city.id')
-                ->where('category.url', '=', $url_category)
-                ->and_where('city.id', '=', $id_city)
+                ->where_open()
+                    ->where('category.url', '=', $url_category)
+                    ->and_where('city.id', '=', $id_city)
+                    ->and_where('business.status', '=', 1)
+                ->where_close()
                 ->limit($limit)
                 ->offset($ofset)
                 ->cached()
@@ -77,6 +84,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->join('city', 'LEFT')
                 ->on('business.city', '=', 'city.id')
                 ->where('category.url', '=', $url_category)
+                ->and_where('business.status', '=', 1)
                 ->limit($limit)
                 ->offset($ofset)
                 ->cached()
@@ -120,8 +128,11 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->on('businesscategory.business_id', '=', 'business.id')
                 ->join('city', 'LEFT')
                 ->on('business.city', '=', 'city.id')
-                ->where('businesscategory.category_id', 'IN', $arrChild)
-                ->and_where('city.id', '=', $id_city)
+                ->where_open()
+                    ->where('businesscategory.category_id', 'IN', $arrChild)
+                    ->and_where('city.id', '=', $id_city)
+                    ->and_where('business.status', '=', 1)
+                ->where_close()
                 ->group_by('business.id')
                 ->order_by('business.id', 'DESC')
                 ->cached()
@@ -137,6 +148,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->join('city', 'LEFT')
                 ->on('business.city', '=', 'city.id')
                 ->where('businesscategory.category_id', 'IN', $arrChild)
+                ->and_where('business.status', '=', 1)
                 ->group_by('business.id')
                 ->order_by('business.id', 'DESC')
                 ->cached()
@@ -153,8 +165,11 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->on('businesscategory.business_id', '=', 'business.id')
                 ->join('city', 'LEFT')
                 ->on('business.city', '=', 'city.id')
-                ->where('businesscategory.category_id', 'IN', $arrChild)
-                ->and_where('city.id', '=', $id_city)
+                ->where_open()
+                    ->where('businesscategory.category_id', 'IN', $arrChild)
+                    ->and_where('city.id', '=', $id_city)
+                    ->and_where('business.status', '=', 1)
+                ->where_close()
                 ->limit($limit)
                 ->offset($ofset)
                 ->group_by('business.id')
@@ -170,6 +185,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->join('business')
                 ->on('businesscategory.business_id', '=', 'business.id')
                 ->where('businesscategory.category_id', 'IN', $arrChild)
+                ->and_where('business.status', '=', 1)
                 ->limit($limit)
                 ->offset($ofset)
                 ->group_by('business.id')
@@ -275,6 +291,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->on('artrelbus.id_articles', '=', 'artic.id')
 
                 ->where('bus.url', '=', $url_business)
+                ->and_where('bus.status', '=', 1)
                 ->cached()
                 ->execute()->as_array();
 
@@ -285,7 +302,7 @@ class Model_BussinesModel extends Model_BaseModel {
         } else {
             $end_result = Cache::instance()->get($url_business);
         }
-        //Cache::instance()->delete($url_business);
+        Cache::instance()->delete($url_business);
         return $end_result;
     }
 
@@ -474,6 +491,7 @@ class Model_BussinesModel extends Model_BaseModel {
             ->join('city', 'LEFT')
             ->on('business.city', '=', 'city.id')
             ->where('businesscategory.category_id', 'IN', $arrChild)
+            ->and_where('business.status', '=', 1)
             ->group_by('business.id')
             ->order_by('business.id', 'DESC')
             ->cached()
@@ -505,6 +523,7 @@ class Model_BussinesModel extends Model_BaseModel {
             ->join('city', 'LEFT')
             ->on('business.city', '=', 'city.id')
             ->where('category.url', '=', $url_category)
+            ->and_where('business.status', '=', 1)
             ->cached()
             ->execute()->as_array();
 

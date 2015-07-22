@@ -5,6 +5,6 @@
         <input type="hidden" name="obj" value="<?=$obj?>"/>
         <input type="hidden" name="func" value="<?=$name_function?>">
         <input type="hidden" name="id" value="<?=$id?>"/>
-        <button type="submit" class="new-action btn btn-primary btn-sm"><span class="<?=$icon?>"></span> <?=$name_action?></button>
+        <button type="submit" class="new-action btn <?=$class?> btn-sm"><span class="<?=$icon?>"></span> <?=$name_action?></button>
     </form>
 </div>

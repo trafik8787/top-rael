@@ -394,6 +394,17 @@ class Cruds extends Controller_Core_Main {
             $htm_action = '';
             if ($this->add_action != '') {
                 foreach ($this->add_action as $rows_action) {
+                    //HTML::x($rows_action);
+                    $class = 'btn-primary';
+                    if ($rows_action['status'] != null) {
+                        foreach ($rows_action['status']['position'] as $keys => $row_class) {
+                            if ($rows[$rows_action['status']['page']] == $keys) {
+                                $class = $row_class['class'];
+                                $rows_action['name_action'] = $row_class['text'];
+                            }
+                        }
+
+                    }
 
                     $data = array(
                         'url' => $rows_action['url'],
@@ -401,6 +412,7 @@ class Cruds extends Controller_Core_Main {
                         'id' => $rows[$this->key_primary],
                         'name_function' => $rows_action['name_function'],
                         'icon' => $rows_action['icon'],
+                        'class' => $class,
                         'name_action' => $rows_action['name_action']
                     );
 
@@ -488,7 +500,7 @@ class Cruds extends Controller_Core_Main {
             $tmp_array[] = $htm_show_views.$htm_edit.$htm_action.$htm_delete;
             $dataQuery[] = $tmp_array;
         }
-       // die(var_dump($dataQuery));
+        //die('fgh');
         //количество записей после поиска
         if ($search_like != '')  {
             $record_count = $query['count'];
@@ -539,7 +551,7 @@ class Cruds extends Controller_Core_Main {
 
 
     //добавить екшен
-    public function add_action ($name_function, $name_action, $url, $icon = null) {
+    public function add_action ($name_function, $name_action, $url, $icon = null, $status = null) {
 
         if ($this->render === true) {
             call_user_func(array($this->class_metod['class'],
@@ -549,7 +561,8 @@ class Cruds extends Controller_Core_Main {
         $this->add_action[] = array('name_function' => $name_function,
             'name_action' => $name_action,
             'url' => $url,
-            'icon' => $icon);
+            'icon' => $icon,
+            'status' => $status);
     }
 
     public function set_lang ($lang) {

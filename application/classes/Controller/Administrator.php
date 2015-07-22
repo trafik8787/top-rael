@@ -241,6 +241,8 @@ class Controller_Administrator extends Controller {
         $crud->load_table('tags');
         $crud->set_lang('ru');
         $crud->disable_search();
+        $crud->show_name_column(array('name_tags' => 'Название',
+            'url_tags' => 'URL'));
         return $crud;
     }
 
@@ -280,8 +282,11 @@ class Controller_Administrator extends Controller {
         $crud->set_field_type('top_slider', array('file', 'uploads/img_business/top_slider', 'slid_', '', 'img'),'', 'multiple');
         $crud->set_one_to_many('top_slider_bussines', 'top_slider','img_path', 'bussines_id');
 
+        $status['page'] = 'status';
+        $status['position'][0] = array('class' =>'btn-warning', 'text' => 'OFF');
+        $status['position'][1] = array('class' =>'btn-success', 'text' => 'ON');;
 
-        $crud->add_action('StatusBusiness', 'OFF', 'ban/actionAdd', '');
+        $crud->add_action('StatusBusiness', 'ON', 'ban/actionAdd', '', $status);
 
         $crud->edit_fields('name', 'title',
             'description',
@@ -545,17 +550,21 @@ class Controller_Administrator extends Controller {
         $crud = new Cruds();
         $crud->load_table('gallery');
         $crud->set_lang('ru');
+        $crud->show_columns('id','name', 'business_id');
         $crud->disable_editor('galery_text');
-        $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
-        $crud->show_columns('id', 'name', 'galery_text');
+
+
+
+        $crud->show_name_old_table('business_id', 'business', 'name', 'id');
 
         $crud->show_name_column(array(
             'name' => 'Название',
             'galery_text'=> 'Описание',
             'business_id' => 'Бизнес'));
-
-        $crud->add_field('name','business_id', 'galery_text');
         $crud->edit_fields('name','business_id', 'galery_text');
+        $crud->add_field('name','business_id', 'galery_text');
+
+        $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
 
         $crud->callback_befor_show_edit('call_bef_edit_show_galery');
         $crud->callback_befor_show_add('call_bef_insert_show_galery');
@@ -856,7 +865,15 @@ class Controller_Administrator extends Controller {
 
 
     public static function StatusBusiness ($key_array = null) {
-        //die(HTML::x($key_array));
+
+        if ($key_array['status'] == 1) {
+            //die(HTML::x($key_array));
+            $status = 0;
+        } else {
+            $status = 1;
+        }
+        $query = DB::update('business')->set(array('status' => $status))->where('id', '=', $key_array['id'])->execute();
+        //die(var_dump($query));
     }
 
 
