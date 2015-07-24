@@ -45,7 +45,9 @@
         <div class="col-md-12">
 
             <form id="w-form-add" class="form-horizontal" role="form" action="" method="POST" enctype="multipart/form-data">
-
+                <?if (Cruds::$adon_top_form != null):?>
+                    <?=Cruds::$adon_top_form?>
+                <?endif?>
                 <?foreach ($add_property['field'] as  $name_fied):?>
 
                     <?if (empty($add_property['join_key'][$name_fied])):?>
@@ -109,7 +111,7 @@
                                         }
 
                                         $data = array(
-                                            'title' => !empty($edit_property['toptip'][$name_fied]) ? $edit_property['toptip'][$name_fied] : '',
+                                            'title' => !empty($add_property['toptip'][$name_fied]) ? $add_property['toptip'][$name_fied] : '',
                                             'name_fied' => $name_fied,
                                             'disable_editor_class' => $editor_class,
                                             'attr' => $attr
@@ -180,7 +182,7 @@
                                     } elseif ($add_property['type_field'][$name_fied] == 'file') {
 
                                         $data = array(
-                                            'title' => !empty($edit_property['toptip'][$name_fied]) ? $edit_property['toptip'][$name_fied] : '',
+                                            'title' => !empty($add_property['toptip'][$name_fied]) ? $add_property['toptip'][$name_fied] : '',
                                             'name_fied' => $name_fied,
                                             'multiple' => $multiple,
                                             'type_field_upload' => $type_field_upload
@@ -191,7 +193,7 @@
                                     } else {
 
                                         $data = array(
-                                            'title' => !empty($edit_property['toptip'][$name_fied]) ? $edit_property['toptip'][$name_fied] : '',
+                                            'title' => !empty($add_property['toptip'][$name_fied]) ? $add_property['toptip'][$name_fied] : '',
                                             'type_field' => $add_property['type_field'][$name_fied],
                                             'multiple' => $multiple,
                                             'name_fied' => $name_fied,

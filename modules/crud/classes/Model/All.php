@@ -415,7 +415,7 @@ class Model_All extends Model
         if ($join != null) {
 
             $joins_string = $this->create_joint_query($table, $join, $column_like);
-
+           // die(var_dump($joins_string));
             //количество найденых в таблице
             $query_count =  DB::query(Database::SELECT,
                 'SELECT COUNT(*) as cou FROM ' .$table.' '.$joins_string['q'].' '.$sele_where.' '.$likeSql)
@@ -433,6 +433,7 @@ class Model_All extends Model
 
         } else {
 
+            //добавлена асоция
             if ($show_name_old_table != null) {
                 $join_other = ' JOIN '.$show_name_old_table['old_table'].
                     ' ON '.$table.'.'.$show_name_old_table['page_name'].'='.$show_name_old_table['old_table'].'.'.$show_name_old_table['id_old_table'].' ';
@@ -490,6 +491,7 @@ class Model_All extends Model
     private function create_joint_query ($table, $join, $column) {
 
         $array_counts = Cruds::parse_name_column(array_flip($column));
+        //die(var_dump($join));
         $str = '';
         $str_as = '';
         foreach ($join as $joins) {

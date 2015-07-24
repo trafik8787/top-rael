@@ -41,4 +41,34 @@ class Model_Adm extends Model {
         $query = DB::delete('files')
             ->where('id', 'IN', $id)->execute();
     }
+
+
+    public function add_busines_user ($name_user = null, $secondname_user = null, $email_user = null, $password = null, $id_business = null){
+
+        $user = ORM::factory('User')->where('business_id', '=', $id_business)->find();
+
+        //die(HTML::x($user->business_id));
+        if (!empty($user->business_id)) {
+            $user->username = $name_user;
+            $user->secondname = $secondname_user;
+            $user->business_id = $id_business;
+            $user->password = $password;
+            $user->email = $email_user;
+            $user->id_role = 5;
+            $user->save();
+        } else {
+            $user_insert = ORM::factory('User');
+            $user_insert->username = $name_user;
+            $user_insert->secondname = $secondname_user;
+            $user_insert->business_id = $id_business;
+            $user_insert->password = $password;
+            $user_insert->email = $email_user;
+            $user_insert->id_role = 5;
+            $user_insert->save();
+            $user_insert->add('roles', ORM::factory('Role', array('name' => 'login')));
+            $user_insert->add('roles', ORM::factory('Role', array('name' => 'business')));
+        }
+    }
+    
+    
 }

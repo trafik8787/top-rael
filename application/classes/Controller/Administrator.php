@@ -114,16 +114,16 @@ class Controller_Administrator extends Controller {
        // die(HTML::x('sdf'));
         $category = Model::factory('CategoryModel')->recurs_catalog($this->request->param('id'));
         $arrChild = array();
+        //die(HTML::x($category));
         foreach ($category[0]['childs'] as $row_cat) {
             $arrChild[] = $row_cat['id'];
         }
 
         $busssines = Model::factory('CategoryModel')->businesscategory($arrChild);
 
-        //die(HTML::x($busssines));
 
         Session::instance()->set('customer_id', $busssines);
-        Controller_Core_Main::$title_page = 'Бизнесы';
+        Controller_Core_Main::$title_page = 'Бизнесы '.$category[0]['name'];
         $this->response->body(self::adminBussines()->render());
 
     }
@@ -154,9 +154,27 @@ class Controller_Administrator extends Controller {
         $this->response->body(self::adminContacts()->render());
     }
 
+    public function action_subscription (){
+        Controller_Core_Main::$title_page = 'Список подписчиков';
+        $this->response->body(self::adminSubscription()->render());
+    }
 
     public function action_users (){
-        Controller_Core_Main::$title_page = 'Пользователи';
+        Session::instance()->set('customer_id', $this->request->param('id'));
+
+        switch ($this->request->param('id')) {
+            case 1:
+                $title_page = 'Зарегестрированные пользователи';
+                break;
+            case 5:
+                $title_page = 'Бизнес пользователи';
+                break;
+            case 2:
+                $title_page = 'Пользователи админки';
+                break;
+        }
+
+        Controller_Core_Main::$title_page = $title_page;
         $this->response->body(self::adminUsers()->render());
     }
     
@@ -280,6 +298,17 @@ class Controller_Administrator extends Controller {
      */
     public static function adminBussines (){
 
+        $query = DB::select('user_id')->from('roles_users')->where('role_id','=', 4)->execute()->as_array();
+        $arr_user = array();
+
+        if (!empty($query)) {
+            foreach ($query as $row_user) {
+                $arr_user[] = $row_user['user_id'];
+            }
+        }
+
+        //die(HTML::x($arr_user));
+
         $crud = new Cruds();
         $crud->load_table('business');
         $crud->set_lang('ru');
@@ -296,6 +325,9 @@ class Controller_Administrator extends Controller {
         $crud->select_multiselect('cat_id');
         $crud->show_columns('id', 'name', 'url');
         $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
+
+        $crud->set_field_type('redactor_user', 'select', '', '', '', array('users', 'username', 'id', array('id', 'IN', $arr_user)));
+
         $crud->set_field_type('cat_id', 'select', '', 'multiple', '', array('category', 'name','id', array('parent_id','<>','0')));
         $crud->set_one_to_many('businesscategory', 'cat_id','category_id', 'business_id');
 
@@ -331,6 +363,7 @@ class Controller_Administrator extends Controller {
             'logo',
             'url',
             'cat_id',
+            'redactor_user',
             'date_create', 'date_end', 'tags');
 
         $crud->add_field('name', 'title',
@@ -346,7 +379,7 @@ class Controller_Administrator extends Controller {
             'file_meny',
             'info',
             'logo',
-            'url',  'cat_id', 'date_create', 'date_end', 'tags');
+            'url',  'cat_id',  'redactor_user', 'date_create', 'date_end', 'tags');
 
         $crud->show_name_column(array('name' => 'Название',
             'url' => 'URL',
@@ -364,6 +397,7 @@ class Controller_Administrator extends Controller {
             'info' => 'Описание',
             'logo' => 'Логотип',
             'cat_id' => 'Категория',
+            'redactor_user' => 'Отвецтвенный',
             'date_create' => 'Дата создания',
             'date_end' => 'Дата окончания',
             'tags' => 'Теги',
@@ -388,6 +422,9 @@ class Controller_Administrator extends Controller {
         $crud->callback_before_edit('call_bef_edit_business');
         $crud->callback_after_insert('call_after_insert_business');
         $crud->callback_befor_show_edit('call_bef_show_edit_bus');
+        $crud->callback_befor_show_add('call_bef_show_insert_bus');
+
+        $crud->callback_before_delete('call_befor_del_business');
 
         return $crud;
     }
@@ -624,26 +661,69 @@ class Controller_Administrator extends Controller {
     }
 
 
+    public static function adminSubscription (){
+        $crud = new Cruds();
+        $crud->load_table('subscription');
+        $crud->set_lang('ru');
+        $crud->remove_edit();
+        $crud->remove_add();
+        return $crud;
+    }
+
+
     public static function adminUsers (){
+
         $crud = new Cruds();
         $crud->load_table('users');
         $crud->set_lang('ru');
-        $crud->set_field_type('id_role', 'select', '', 'multiple', '', array('roles','description','id'));
+
+        if (Session::instance()->get('customer_id') == 1 OR Session::instance()->get('customer_id') == 5) {
+            $crud->set_where('id_role', '=', Session::instance()->get('customer_id'));
+        } else {
+            $crud->set_where('id_role', 'NOT IN', '(1, 5)');
+        }
+
+
         $crud->set_field_type('password', 'password');
         $crud->set_field_type('email', 'email');
 
-        $crud->show_columns('id', 'email', 'username');
-        $crud->select_multiselect('id_role');
-        $crud->set_one_to_many('roles_users', 'id_role','role_id', 'user_id');
+        $crud->show_columns('id', 'email', 'username', 'date_registration');
 
-        $crud->add_field('email', 'username', 'password', 'id_role');
 
-        $crud->edit_fields('email', 'username', 'id_role');
+        if (Session::instance()->get('customer_id') == 1) {
+
+            //если это обычные пользователи
+            $crud->remove_add();
+            $crud->edit_fields('email', 'username', 'secondname', 'sex', 'age', 'ip', 'profil_soc_seti','date_registration');
+            $crud->add_field('email', 'username', 'date_registration');
+
+
+        } elseif (Session::instance()->get('customer_id') == 5) {
+            $crud->remove_add();
+            $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
+            $crud->edit_fields('email', 'username', 'secondname', 'sex', 'age', 'ip', 'profil_soc_seti', 'business_id','date_registration');
+
+        } else {
+            $crud->select_multiselect('id_role');
+            $crud->set_one_to_many('roles_users', 'id_role','role_id', 'user_id');
+            $crud->add_field('email', 'username', 'secondname', 'password', 'id_role');
+            $crud->edit_fields('email', 'username', 'secondname', 'id_role');
+            $crud->set_field_type('id_role', 'select', '', 'multiple', '', array('roles','description','id', array('id', 'NOT IN', array(5, 1))));
+        }
+
+
 
         $crud->show_name_column(array(
             'email'=> 'Email',
             'username' => 'Имя',
-            'id_role' => 'Группа'
+            'secondname' => 'Фамилия',
+            'sex' => 'Пол',
+            'age' => 'Возраст',
+            'ip' => 'IP адрес',
+            'profil_soc_seti' => 'Профиль соц. сети',
+            'password' => 'Пароль',
+            'id_role' => 'Группа',
+            'date_registration' => 'Дата регистрации'
             ));
 
         $crud->validation('email', array('required' => true, 'email' => true),
@@ -656,6 +736,7 @@ class Controller_Administrator extends Controller {
             array('required' => 'Это поле обязательно для заполнения', 'maxlength' => 'Максимальная длина пароля 16 символов', 'minlength' => 'Минимальное количество символов 6'));
 
         $crud->callback_before_insert('call_bef_insert_user');
+        $crud->callback_after_insert('call_after_insert_user');
 
         return $crud;
     }
@@ -703,6 +784,16 @@ class Controller_Administrator extends Controller {
                 unlink($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_business/thumbs/' . basename($old_array['home_busines_foto']));
             }
         }
+
+        if (!empty(Cruds::$post['name_user']) and !empty(Cruds::$post['secondname_user']) and !empty(Cruds::$post['email_user'])
+            and !empty(Cruds::$post['id'])) {
+            Model::factory('Adm')->add_busines_user(Cruds::$post['name_user'],
+                                                    Cruds::$post['secondname_user'],
+                                                    Cruds::$post['email_user'],
+                                                    Cruds::$post['password'],
+                                                    Cruds::$post['id']);
+        }
+       //die(HTML::x(Cruds::$post));
     }
 
 
@@ -712,6 +803,14 @@ class Controller_Administrator extends Controller {
             self::create_images($key_array['home_busines_foto'], '/uploads/img_business/thumbs/', 370, 237);
         }
 
+        if (!empty(Cruds::$post['name_user']) and !empty(Cruds::$post['secondname_user']) and !empty(Cruds::$post['email_user'])
+            and !empty($key_array['id']) and !empty(Cruds::$post['password'])) {
+            Model::factory('Adm')->add_busines_user(Cruds::$post['name_user'],
+                                                    Cruds::$post['secondname_user'],
+                                                    Cruds::$post['email_user'],
+                                                    Cruds::$post['password'],
+                                                    $key_array['id']);
+        }
     }
 
 
@@ -725,7 +824,33 @@ class Controller_Administrator extends Controller {
         $cont = View::factory('adm/adon_links_galery_for_business');
         $cont->data = $query;
         Cruds::$adon_form = $cont;
+
+        $user = View::factory('adm/form_add_user_business');
+        $orm_user = ORM::factory('User')->where('business_id', '=', $new_array['id'])->find()->as_array();
+
+        if (!empty($orm_user)) {
+            $user->name_user = $orm_user['username'];
+            $user->secondname_user = $orm_user['secondname'];
+            $user->email_user = $orm_user['email'];
+        }
+
+        Cruds::$adon_top_form = $user;
     }
+
+    public static function call_bef_show_insert_bus ($new_array){
+
+        $user = View::factory('adm/form_add_user_business');
+        Cruds::$adon_top_form = $user;
+    }
+
+
+    public static function call_befor_del_business ($new_array){
+        $user = DB::delete('users')->where('business_id', '=', $new_array['id'])->execute();
+    }
+
+
+
+
 
     //articles
 
@@ -890,7 +1015,6 @@ class Controller_Administrator extends Controller {
 
     //добавление пользователя из админки
     public static function call_bef_insert_user ($new_array = null){
-
 //        $user = ORM::factory('User');
 //        $user->username = $new_array['username'];
 //        $user->password = $new_array['password'];
@@ -900,6 +1024,10 @@ class Controller_Administrator extends Controller {
         return $new_array;
     }
 
+
+    public static function call_after_insert_user ($new_array){
+        $query = DB::insert('roles_users', array('user_id', 'role_id'))->values(array($new_array['id'], 1));
+    }
 
 
     public static function StatusBusiness ($key_array = null) {

@@ -74,6 +74,8 @@ class Cruds extends Controller_Core_Main {
     public static $post = null;
     public static $files = null;
 
+    public static $adon_top_form = null; //верхняя форма
+
     public $show_name_old_table = null;
 
     public function __construct () {

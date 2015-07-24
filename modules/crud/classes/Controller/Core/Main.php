@@ -26,6 +26,12 @@ abstract class Controller_Core_Main extends Controller_Template {
 
         $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
 
+        $users = array(
+            array('id' => 1, 'name' => 'Пользователи'),
+            array('id' => 5, 'name' => 'Бизнес пользователи'),
+            array('id' => 2, 'name' => 'Внутрениие пользователи')
+        );
+
         return array('Главная' => array('url' => URL::site('administrator'), 'icon' => 'glyphicon-home'),
             'О проекте' => array('url' => URL::site('administrator/about'), 'icon' => 'glyphicon-star'),
             'Разделы' => array('url' => URL::site('administrator/sections'), 'icon' => 'glyphicon-th-list'),
@@ -36,8 +42,9 @@ abstract class Controller_Core_Main extends Controller_Template {
             'Обзоры по разделам' => array('category' => $section, 'url' => URL::site('administrator/articles'), 'icon' => 'glyphicon-th'),
             'Купоны' => array('url' => URL::site('administrator/coupons'), 'icon' => 'glyphicon-tags'),
             'Галереи' => array('url'=>URL::site('administrator/galery'), 'icon'=>'glyphicon-picture'),
-            'Контакты' => array('url'=>URL::site('administrator/contacts'), 'icon'=>'glyphicon-envelope'),
-            'Пользователи' => array('url'=>URL::site('administrator/users'), 'icon'=>'glyphicon-user')
+            'Контакты' => array('url'=>URL::site('administrator/contacts'), 'icon'=>'glyphicon-globe'),
+            'Подписчики' => array('url'=>URL::site('administrator/subscription'), 'icon'=>'glyphicon-envelope'),
+            'Пользователи' => array('category' => $users, 'url'=>URL::site('administrator/users'), 'icon'=>'glyphicon-user')
             );
     }
 
