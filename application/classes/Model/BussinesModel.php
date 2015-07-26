@@ -120,7 +120,7 @@ class Model_BussinesModel extends Model_BaseModel {
 
         ////получаем количество записей для пагинации сортировка по городу и категориям раздела
         if ($id_city != null) {
-            $result1 = DB::select('business.*')
+            $result1 = DB::select('business.*', array('city.name', 'CityName'))
                 ->from('category')
                 ->join('businesscategory')
                 ->on('category.id', '=', 'businesscategory.category_id')
@@ -157,7 +157,7 @@ class Model_BussinesModel extends Model_BaseModel {
 
         if ($id_city != null) {
             //выборка с лимитами по городу и всем категориям раздела
-            $result = DB::select('business.*')
+            $result = DB::select('business.*', array('city.name', 'CityName'))
                 ->from('category')
                 ->join('businesscategory')
                 ->on('category.id', '=', 'businesscategory.category_id')
@@ -178,12 +178,14 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->execute()->as_array();
         } else {
             //выборка с лимитами тоько по категориям раздела
-            $result = DB::select()
+            $result = DB::select('business.*', array('city.name', 'CityName'))
                 ->from('category')
                 ->join('businesscategory')
                 ->on('category.id', '=', 'businesscategory.category_id')
                 ->join('business')
                 ->on('businesscategory.business_id', '=', 'business.id')
+                ->join('city', 'LEFT')
+                ->on('business.city', '=', 'city.id')
                 ->where('businesscategory.category_id', 'IN', $arrChild)
                 ->and_where('business.status', '=', 1)
                 ->limit($limit)
@@ -224,7 +226,9 @@ class Model_BussinesModel extends Model_BaseModel {
                 array('bus.title', 'BusTitle'),
                 array('bus.description', 'BusDescription'),
                 array('bus.keywords', 'BusKeywords'),
+                array('bus.city', 'BusCity'),
                 array('bus.address', 'BusAddress'),
+                array('bus.dop_address', 'BusDopAddress'),
                 array('bus.services', 'BusServices'),
                 array('bus.tags', 'BusTags'),
                 array('bus.logo', 'BusLogo'),
@@ -366,27 +370,17 @@ class Model_BussinesModel extends Model_BaseModel {
         $end_result['BusDescription'] = $result[0]['BusDescription'];
         $end_result['BusKeywords'] = $result[0]['BusKeywords'];
         $end_result['BusFileMeny'] = $result[0]['BusFileMeny'];
+        $end_result['BusAddress'] = $result[0]['BusAddress'];
+        $end_result['BusCity'] = $result[0]['BusCity'];
+
+
 
         //парсим адрес
-        $adress  = explode("\n", $result[0]['BusAddress']);
-
-        if (!empty($adress)) {
-
-            foreach ($adress as $row_adres) {
-                $cityArr[] = explode("|", trim($row_adres));
-            }
-            foreach ($cityArr as $row_city) {
-                if (!empty($row_city[0]) and !empty($row_city[1])) {
-                    $resultAdress[] = array('city' => trim($row_city[0]), 'address' => trim($row_city[1]));
-                }
-            }
-        }
-
-        if (!empty($resultAdress)) {
-            $end_result['BusAddressArr'] = $resultAdress;
-        } else {
-            $end_result['BusAddressArr'] = array();
-        }
+       try {
+           $end_result['BusDopAddress'] =  unserialize($result[0]['BusDopAddress']);
+       } catch (Exception $x) {
+           $end_result['BusDopAddress'] = array();
+       }
 
 
 

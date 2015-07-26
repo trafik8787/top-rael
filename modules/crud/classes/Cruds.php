@@ -75,6 +75,7 @@ class Cruds extends Controller_Core_Main {
     public static $files = null;
 
     public static $adon_top_form = null; //верхняя форма
+    public $opder_by_default = null; //сортировка по дефолту
 
     public $show_name_old_table = null;
 
@@ -82,8 +83,10 @@ class Cruds extends Controller_Core_Main {
         parent::before();
     }
 
-    public function  load_table ($table) {
+    public function  load_table ($table, $opder_by_default = null) {
         $this->table = $table;
+
+        $this->opder_by_default = $opder_by_default;
 
         //установка языка
         //определяем точку вызова
@@ -286,6 +289,7 @@ class Cruds extends Controller_Core_Main {
             'key_primary' => $this->key_primary,
             //'add_insert' => 'asd',
             'add_action_url_icon' => $this->add_action, //добавление екшенов
+            'dafeult_order_by' => $this->opder_by_default,
             'activ_operation' => array(
                 'delete' => $this->remove_delete,
                 'edit' => $this->remove_edit,
@@ -326,11 +330,12 @@ class Cruds extends Controller_Core_Main {
 
 
         //поле для сортировки
-        $order_column = $column[$get['order'][0]['column']];
 
-        //die(print_r($this->name_colums_ajax));
+        $order_column = $column[$get['order'][0]['column']];
         //принимаем тип сортировки asc или DESC
         $order_by = $get['order'][0]['dir'];
+
+
         //строка поиска
         $search_like = $get['search']['value'];
         $obj = base64_encode(serialize($this->object_serial));

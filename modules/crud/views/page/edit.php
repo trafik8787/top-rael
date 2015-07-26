@@ -251,11 +251,20 @@
 
 
                     <?endif?>
+
+
+
+                    <?if (Cruds::$adon_form != null):?>
+                        <?foreach (Cruds::$adon_form as $adon_form):?>
+                            <?if ($adon_form['page'] == $name_fied):?>
+                                <?=$adon_form['view']?>
+                            <?endif?>
+                        <?endforeach?>
+                    <?endif?>
+
                 <?endforeach?>
 
-                <?if (Cruds::$adon_form != null):?>
-                    <?=Cruds::$adon_form?>
-                <?endif?>
+
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">

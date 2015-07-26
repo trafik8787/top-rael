@@ -81,6 +81,21 @@ class Model_ArticlesModel extends Model_BaseModel {
             ->execute()->as_array();
     }
 
+    /**
+     * @param $business_id
+     * @return mixed
+     * получаем все статьи которые относятся к бизнесу по его id
+     */
+    public function getArticlesInBusinessId($business_id){
+        return DB::select('articles.*')
+            ->from('articles')
+            ->join('articles_relation_business')
+            ->on('articles_relation_business.id_articles', '=', 'articles.id')
+            ->where('articles_relation_business.id_business', '=', $business_id)
+            ->cached()
+            ->execute()->as_array();
+    }
+
 
     public function getArticleUrl ($url_article){
         $query =  DB::select()

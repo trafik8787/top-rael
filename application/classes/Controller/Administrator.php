@@ -93,6 +93,17 @@ class Controller_Administrator extends Controller {
     }
 
     public function action_category(){
+
+        if (!empty($_GET['section'])) {
+            Session::instance()->set('customer_id', $_GET['section']);
+        } else {
+            Session::instance()->set('customer_id', null);
+        }
+
+        $filtr = View::factory('adm/filtr_admin_section');
+        $filtr->data = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+        Controller_Core_Main::$filtr = $filtr;
+
         Controller_Core_Main::$title_page = 'Категории';
         $this->response->body(self::adminCategory()->render());
     }
@@ -111,27 +122,45 @@ class Controller_Administrator extends Controller {
     public function action_bussines (){
 
 
-       // die(HTML::x('sdf'));
-        $category = Model::factory('CategoryModel')->recurs_catalog($this->request->param('id'));
-        $arrChild = array();
-        //die(HTML::x($category));
-        foreach ($category[0]['childs'] as $row_cat) {
-            $arrChild[] = $row_cat['id'];
+        if (!empty($_GET['section'])) {
+            $category = Model::factory('CategoryModel')->recurs_catalog($_GET['section']);
+            $arrChild = array();
+
+            foreach ($category[0]['childs'] as $row_cat) {
+                $arrChild[] = $row_cat['id'];
+            }
+
+            $busssines = Model::factory('CategoryModel')->businesscategory($arrChild);
+            $name = $category[0]['name'];
+        } else {
+            $busssines = null;
+            $name = '';
         }
 
-        $busssines = Model::factory('CategoryModel')->businesscategory($arrChild);
+        $filtr = View::factory('adm/filtr_admin_section');
+        $filtr->data = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+        Controller_Core_Main::$filtr = $filtr;
 
+//        die(HTML::x($category));
 
         Session::instance()->set('customer_id', $busssines);
-        Controller_Core_Main::$title_page = 'Бизнесы '.$category[0]['name'];
+        Controller_Core_Main::$title_page = 'Бизнесы '.$name;
         $this->response->body(self::adminBussines()->render());
 
     }
 
 
     public function action_articles (){
+        if (!empty($_GET['section'])) {
+            Session::instance()->set('customer_id', $_GET['section']);
+        } else {
+            Session::instance()->set('customer_id', null);
+        }
 
-        Session::instance()->set('customer_id', $this->request->param('id'));
+        $filtr = View::factory('adm/filtr_admin_section');
+        $filtr->data = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+        Controller_Core_Main::$filtr = $filtr;
+
         Controller_Core_Main::$title_page = 'Обзоры';
         $this->response->body(self::adminArticles()->render());
     }
@@ -160,9 +189,9 @@ class Controller_Administrator extends Controller {
     }
 
     public function action_users (){
-        Session::instance()->set('customer_id', $this->request->param('id'));
+        Session::instance()->set('customer_id', $_GET['section']);
 
-        switch ($this->request->param('id')) {
+        switch ($_GET['section']) {
             case 1:
                 $title_page = 'Зарегестрированные пользователи';
                 break;
@@ -173,6 +202,17 @@ class Controller_Administrator extends Controller {
                 $title_page = 'Пользователи админки';
                 break;
         }
+
+
+        $users = array(
+            array('id' => 1, 'name' => 'Пользователи'),
+            array('id' => 5, 'name' => 'Бизнесы'),
+            array('id' => 2, 'name' => 'Сотрудники')
+        );
+
+        $filtr = View::factory('adm/filtr_admin_section');
+        $filtr->data = $users;
+        Controller_Core_Main::$filtr = $filtr;
 
         Controller_Core_Main::$title_page = $title_page;
         $this->response->body(self::adminUsers()->render());
@@ -238,13 +278,22 @@ class Controller_Administrator extends Controller {
         $crud->load_table('category');
         $crud->set_lang('ru');
         $crud->disable_search();
+
+        if (Session::instance()->get('customer_id') != null) {
+            $crud->set_where('parent_id', '=', Session::instance()->get('customer_id'));
+        } else {
+            $crud->set_where('parent_id', '<>', 0);
+        }
+
         $crud->disable_editor('description');
         $crud->disable_editor('keywords');
         $crud->show_columns('id', 'name', 'url');
         $crud->edit_fields('name', 'url', 'parent_id', 'title', 'description', 'keywords');
         $crud->add_field('name', 'url', 'parent_id', 'title', 'description', 'keywords');
-        $crud->set_field_type('parent_id', 'select', array('y' => 'Да', 'n' => 'Нет'), '', '', array('category', 'name','id', array('parent_id','=', '0')));
-        $crud->set_where('parent_id', '<>', 0);
+        $crud->set_field_type('parent_id', 'select', '', '', '', array('category', 'name','id', array('parent_id','=', '0')));
+
+
+
         $crud->validation('url', array('required' => true, 'minlength' => 4, 'regexp' => '^[a-zA-Z0-9_]+$'),
            array('minlength' => 'URL должен быть минимум 4 символа',
                'required' => 'Это поле обязательно для заполнения',
@@ -307,12 +356,14 @@ class Controller_Administrator extends Controller {
             }
         }
 
-        //die(HTML::x($arr_user));
 
         $crud = new Cruds();
-        $crud->load_table('business');
+        //номер поля по порядку с лева начинается с нуля
+        $crud->load_table('business', array('0', 'DESC'));
         $crud->set_lang('ru');
-        $crud->set_where('id','IN', Session::instance()->get('customer_id'));
+        if (Session::instance()->get('customer_id') != null) {
+            $crud->set_where('id', 'IN', Session::instance()->get('customer_id'));
+        }
         $crud->disable_editor('description');
         $crud->disable_editor('keywords');
         $crud->disable_editor('address');
@@ -324,7 +375,10 @@ class Controller_Administrator extends Controller {
         $crud->disable_editor('title');
         $crud->select_multiselect('cat_id');
         $crud->show_columns('id', 'name', 'url');
+
         $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
+        $crud->set_field_type('dop_address', 'hidden', '', '', '', '');
+
 
         $crud->set_field_type('redactor_user', 'select', '', '', '', array('users', 'username', 'id', array('id', 'IN', $arr_user)));
 
@@ -348,38 +402,53 @@ class Controller_Administrator extends Controller {
 
         $crud->add_action('StatusBusiness', 'ON', 'ban/actionAdd', '', $status);
 
-        $crud->edit_fields('name', 'title',
+        $crud->edit_fields('redactor_user',
+            'date_create',
+            'date_end',
+            'name',
+            'title',
             'description',
             'keywords',
             'city',
             'address',
+            'dop_address',
+            'maps_x',
+            'maps_y',
             'services',
             'website',
             'video',
             'home_busines_foto',
             'top_slider',
-            'file_meny',
             'info',
             'logo',
             'url',
             'cat_id',
-            'redactor_user',
-            'date_create', 'date_end', 'tags');
+            'tags',
+            'file_meny');
 
-        $crud->add_field('name', 'title',
+        $crud->add_field('redactor_user',
+            'date_create',
+            'date_end',
+            'name',
+            'title',
             'description',
             'keywords',
             'city',
             'address',
+            'dop_address',
+            'maps_x',
+            'maps_y',
             'services',
             'website',
             'video',
             'home_busines_foto',
             'top_slider',
-            'file_meny',
             'info',
             'logo',
-            'url',  'cat_id',  'redactor_user', 'date_create', 'date_end', 'tags');
+            'url',
+            'cat_id',
+            'tags',
+            'file_meny');
 
         $crud->show_name_column(array('name' => 'Название',
             'url' => 'URL',
@@ -387,7 +456,9 @@ class Controller_Administrator extends Controller {
             'title' => 'SEO Title',
             'keywords' => 'SEO Keywords',
             'city' => 'Город',
-            'address' => 'Адреса',
+            'address' => 'Адресс',
+            'maps_x' => 'Широта',
+            'maps_y' => 'Долгота',
             'services' => 'Приемущества и услуги',
             'website' => 'Веб сайт бизнеса',
             'video' => 'Видео',
@@ -421,6 +492,8 @@ class Controller_Administrator extends Controller {
 
         $crud->callback_before_edit('call_bef_edit_business');
         $crud->callback_after_insert('call_after_insert_business');
+        $crud->callback_before_insert('call_bef_insert_business');
+
         $crud->callback_befor_show_edit('call_bef_show_edit_bus');
         $crud->callback_befor_show_add('call_bef_show_insert_bus');
 
@@ -437,8 +510,10 @@ class Controller_Administrator extends Controller {
     public static function adminArticles (){
 
         $crud = new Cruds();
-        $crud->load_table('articles');
-        $crud->set_where('id_section','=', Session::instance()->get('customer_id'));
+        $crud->load_table('articles', array('0', 'DESC'));
+        if (Session::instance()->get('customer_id') != null) {
+            $crud->set_where('id_section', '=', Session::instance()->get('customer_id'));
+        }
         $crud->disable_editor('description');
         $crud->disable_editor('keywords');
         $crud->set_lang('ru');
@@ -534,7 +609,7 @@ class Controller_Administrator extends Controller {
     public static function adminCoupons (){
 
         $crud = new Cruds();
-        $crud->load_table('coupon');
+        $crud->load_table('coupon', array('0', 'DESC'));
         $crud->set_lang('ru');
         $crud->show_columns('id', 'name', 'business_id');
         $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
@@ -793,7 +868,32 @@ class Controller_Administrator extends Controller {
                                                     Cruds::$post['password'],
                                                     Cruds::$post['id']);
         }
-       //die(HTML::x(Cruds::$post));
+
+        if (!empty(Cruds::$post['dop_sity']) and !empty(Cruds::$post['dop_address'])) {
+
+            foreach (Cruds::$post['dop_sity'] as $key => $dop_sity) {
+                $arr_add_city[] = array('name' => $dop_sity, 'address' => Cruds::$post['dop_address'][$key]);
+            }
+            //die(HTML::x($arr_add_city));
+            $arr_add_city = serialize($arr_add_city);
+
+            $new_array['dop_address'] = $arr_add_city;
+            return $new_array;
+        }
+
+    }
+
+    public static function call_bef_insert_business ($new_array){
+
+        if (!empty(Cruds::$post['dop_sity']) and !empty(Cruds::$post['dop_address'])) {
+            foreach (Cruds::$post['dop_sity'] as $key => $dop_sity) {
+                $arr_add_city[] = array('name' => $dop_sity, 'address' => Cruds::$post['dop_address'][$key]);
+            }
+            $arr_add_city = serialize($arr_add_city);
+            $new_array['dop_address'] = $arr_add_city;
+            return $new_array;
+        }
+
     }
 
 
@@ -814,6 +914,7 @@ class Controller_Administrator extends Controller {
     }
 
 
+    //хук перед открытием страницы редактирования
     public static function call_bef_show_edit_bus ($new_array){
         //die(HTML::x($new_array));
         $query = DB::select('id', 'name')
@@ -822,8 +923,21 @@ class Controller_Administrator extends Controller {
             ->cached()
             ->execute()->as_array();
         $cont = View::factory('adm/adon_links_galery_for_business');
+
         $cont->data = $query;
-        Cruds::$adon_form = $cont;
+        Cruds::$adon_form[] = array('page' => 'tags', 'view' => $cont);
+
+
+        //дополнительные адреса
+        $city = View::factory('adm/adon_city_business');
+        $city->list_sity = Model::factory('CategoryModel')->get_section('city', array('parent_id','<>','0'));
+        try {
+            $city->data = unserialize($new_array['dop_address']);
+        } catch (Exception $x) {
+            $city->data = null;
+        }
+
+        Cruds::$adon_form[] = array('page' => 'address', 'view' => $city);
 
         $user = View::factory('adm/form_add_user_business');
         $orm_user = ORM::factory('User')->where('business_id', '=', $new_array['id'])->find()->as_array();
@@ -835,12 +949,34 @@ class Controller_Administrator extends Controller {
         }
 
         Cruds::$adon_top_form = $user;
+
+        //вивод связаных купонов с этим бизнесом
+        $cont = View::factory('adm/adon_links_coupon_for_business');
+        $coupons = Model::factory('CouponsModel')->getCouponsInBusinessId($new_array['id']);
+        $cont->data = $coupons;
+
+        Cruds::$adon_form[] = array('page' => 'tags', 'view' => $cont);
+
+        //вывод связаных обзоров с этим бизнесом
+        $cont = View::factory('adm/adon_links_articles_for_business');
+        $articles = Model::factory('ArticlesModel')->getArticlesInBusinessId($new_array['id']);
+        $cont->data = $articles;
+
+        Cruds::$adon_form[] = array('page' => 'tags', 'view' => $cont);
+        //die(HTML::x($articles));
     }
+
+
 
     public static function call_bef_show_insert_bus ($new_array){
 
         $user = View::factory('adm/form_add_user_business');
         Cruds::$adon_top_form = $user;
+
+        $city = View::factory('adm/adon_city_business');
+        $city->list_sity = Model::factory('CategoryModel')->get_section('city', array('parent_id','<>','0'));
+        $city->data = null;
+        Cruds::$adon_form[] = array('page' => 'address', 'view' => $city);
     }
 
 
@@ -904,11 +1040,11 @@ class Controller_Administrator extends Controller {
     public static function call_bef_edit_show_galery ($new_array){
         $data = View::factory('adm/adon_form');
         $data->list = Model::factory('Adm')->get_table('files', array('gallery', '=', $new_array['id']));
-        Cruds::$adon_form = $data;
+        Cruds::$adon_form[] = array('page' => 'galery_text', 'view' => $data);
     }
 
     public static function call_bef_insert_show_galery ($new_array){
-        Cruds::$adon_form = View::factory('adm/adon_form');
+        Cruds::$adon_form[] =  array('page' => 'galery_text', 'view' => View::factory('adm/adon_form'));
     }
 
 

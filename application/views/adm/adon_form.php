@@ -32,8 +32,8 @@
     <div class="row">
         <div class="col-md-12">
             <ul class="media-list">
-                <li></li>
-                <?if (isset($list)):?>
+                    <li></li>
+                    <?if (isset($list)):?>
                     <?foreach($list as $row):?>
                         <li class="media edit">
                             <img class="media-object pull-left" src="/uploads/img_galery/thumbs/<?=basename($row['filename'])?>" alt="" width="15%">

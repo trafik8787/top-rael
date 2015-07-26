@@ -7,14 +7,16 @@
  */
 ?>
 
+<?//HTML::x($data)?>
 <div class="row">
     <div class="col-md-9">
 
         <?foreach($data as $rows_data):?>
+
             <div style="width: 200px; border: 1px solid #000; display: inline-block">
                 <img src="" alt="sdf"/>
                 <h3><a href="/business/<?=$rows_data['url']?>"><?=$rows_data['name']?></a></h3>
-                <h4><?=$rows_data['address']?></h4>
+                <h4><?=$rows_data['CityName'].', '.$rows_data['address']?></h4>
                 <p><?=Text::limit_chars(strip_tags($rows_data['info']), 200, null, true)?></p>
             </div>
         <?endforeach?>

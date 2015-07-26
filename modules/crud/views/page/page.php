@@ -12,6 +12,9 @@
 
         var table = $('#example').dataTable({
             "pagingType": "full_numbers",
+            <?if ($table_propery['dafeult_order_by'] != null):?>
+                "order": [[ <?=$table_propery['dafeult_order_by'][0]?>, "<?=$table_propery['dafeult_order_by'][1]?>" ]],
+            <?endif?>
             "processing": true,
             "serverSide": true,
             "pageLength": 25,
