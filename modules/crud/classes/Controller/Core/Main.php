@@ -28,26 +28,20 @@ abstract class Controller_Core_Main extends Controller_Template {
 
 
         return array(
-            'Бизнесы' => array('url' => URL::site('administrator/bussines'), 'icon' => 'glyphicon-th'),
-            'Купоны' => array('url' => URL::site('administrator/coupons'), 'icon' => 'glyphicon-tags'),
-            'Галереи' => array('url'=>URL::site('administrator/galery'), 'icon'=>'glyphicon-picture'),
-            'Обзоры' => array('url' => URL::site('administrator/articles'), 'icon' => 'glyphicon-th'),
-            'Лотерея' => array('url' => URL::site('administrator/lotarey'), 'icon' => 'glyphicon-bell'),
-            'Письма' => array('url'=>URL::site('administrator/contacts'), 'icon'=>'glyphicon-globe'),
-            'Подписчики' => array('url'=>URL::site('administrator/subscription'), 'icon'=>'glyphicon-envelope'),
-            'Пользователи' => array('url'=>URL::site('administrator/users?section=1'), 'icon'=>'glyphicon-user'),
-            'Разделы' => array('url' => URL::site('administrator/sections'), 'icon' => 'glyphicon-th-list'),
-            'Категории' => array('url' => URL::site('administrator/category'), 'icon' => 'glyphicon-list-alt'),
-            'Теги' => array('url' => URL::site('administrator/tags'), 'icon' => 'glyphicon-tags'),
-            'О проекте' => array('url' => URL::site('administrator/about'), 'icon' => 'glyphicon-star'),
-            'Главная' => array('url' => URL::site('administrator'), 'icon' => 'glyphicon-home')
-
-
-
-
-
-
-
+            'Бизнесы' => array('url' => '/bussines', 'icon' => 'glyphicon-th'),
+            'Купоны' => array('url' => '/coupons', 'icon' => 'glyphicon-tags'),
+            'Галереи' => array('url'=> '/galery', 'icon'=>'glyphicon-picture'),
+            'Обзоры' => array('url' => '/articles', 'icon' => 'glyphicon-th'),
+            'Лотерея' => array('url' => '/lotarey', 'icon' => 'glyphicon-bell'),
+            'Письма' => array('url'=> '/contacts', 'icon'=>'glyphicon-globe'),
+            'Подписчики' => array('url'=> '/subscription', 'icon'=>'glyphicon-envelope'),
+            'Пользователи' => array('url'=>'/users?section=1', 'icon'=>'glyphicon-user'),
+            'Разделы' => array('url' => '/sections', 'icon' => 'glyphicon-th-list'),
+            'Категории' => array('url' => '/category', 'icon' => 'glyphicon-list-alt'),
+            'Теги' => array('url' => '/tags', 'icon' => 'glyphicon-tags'),
+            'Банеры' => array('url' => '/banners', 'icon' => 'glyphicon-cloud-download'),
+            'О проекте' => array('url' => '/about', 'icon' => 'glyphicon-star'),
+            'Главная' => array('url' => '', 'icon' => 'glyphicon-home')
 
             );
     }

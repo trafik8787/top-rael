@@ -61,12 +61,12 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?=$name?> <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon <?=$link['icon']?>"></span></a>
                                     <ul class="dropdown-menu forAnimate" role="menu">
                                         <?foreach ($link['category'] as $rews):?>
-                                            <li <? if (URL::site(Request::detect_uri()) == $link['url'].'/'.$rews['id']) { echo 'class="active"';}?>><a href="<?=$link['url'].'/'.$rews['id']?>"><?=$rews['name']?></a></li>
+                                            <li <? if (URL::site(Request::detect_uri()) == '/administrator'.$link['url'].'/'.$rews['id']) { echo 'class="active"';}?>><a href="<?='/administrator'.$link['url'].'/'.$rews['id']?>"><?=$rews['name']?></a></li>
                                         <?endforeach?>
                                     </ul>
                                 </li>
                             <?else:?>
-                                <li <? if (URL::site(Request::detect_uri()) == $link['url']) { echo 'class="active"';}?> ><a href="<?=$link['url']?>"><?=$name?><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon <?=$link['icon']?>"></span></a></li>
+                                <li <? if (URL::site(Request::detect_uri()) == '/administrator'.$link['url']) { echo 'class="active"';}?> ><a href="<?='/administrator'.$link['url']?>"><?=$name?><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon <?=$link['icon']?>"></span></a></li>
                             <?endif?>
 
                         <?endforeach?>

@@ -43,7 +43,9 @@
     display: inline-block;
 }
 
-
+.form-group {
+    margin-bottom: 5px;
+}
 
 /*input_file*/
 .container{
@@ -253,9 +255,9 @@ nav.sidebar, .main{
     nav.sidebar{
         position: fixed;
         z-index: 100;
-        width: 200px;
+        width: 170px;
         height: 100%;
-        margin-left: -160px;
+        margin-left: -133px;
         float: left;
         margin-bottom: 0px;
     }

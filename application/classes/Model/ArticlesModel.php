@@ -15,7 +15,7 @@ class Model_ArticlesModel extends Model_BaseModel {
      * @return mixed
      * получаем статьи по урлу раздела если раздел не указан выводим все
      */
-    public function getArticlesSectionUrl ($url_section = null, $limit = null, $num_page = null){
+    public function getArticlesSectionUrl ($url_section = null, $limit = null, $num_page = null, $id_city = null){
 
         if ($num_page != null) {
             $ofset = $limit * ($num_page - 1);
@@ -60,7 +60,9 @@ class Model_ArticlesModel extends Model_BaseModel {
             $count = $this->table_count('articles', 'id', null);
         }
 
-        return array('data' => $result, 'count' => $count);
+        $city_arr = '';
+
+        return array('data' => $result, 'count' => $count, 'city' => $city_arr);
 
     }
 
@@ -97,17 +99,128 @@ class Model_ArticlesModel extends Model_BaseModel {
     }
 
 
+    /**
+     * @param $url_article
+     * @return array|mixed
+     * @throws Cache_Exception
+     * получить статью по урлу и привязаные к ней купоны и бизнесы
+     */
     public function getArticleUrl ($url_article){
-        $query =  DB::select()
-            ->from(array('articles', 'artic'))
-            ->join(array('business', 'bus'), 'LEFT')
-            ->on('artic.bussines_id', '=', 'bus.id')
-            ->join(array('coupon', 'coup'), 'LEFT')
-            ->on('artic.coupon', '=', 'coup.id')
-            ->where('artic.url', '=', $url_article)
-            ->cached()
-            ->execute()->as_array();
-        HTML::x($query);
+
+        if (Cache::instance()->get($url_article) == null) {
+
+            $query = DB::select(
+
+                array('artic.id', 'ArticId'),
+                array('artic.name', 'ArticName'),
+                array('artic.secondname', 'ArticSecondname'),
+                array('artic.short_previev', 'ArticShortPreviev'),
+                array('artic.big_previev', 'ArticBigPreviev'),
+
+                array('artic.content', 'ArticContent'),
+                array('artic.title', 'ArticTitle'),
+                array('artic.description', 'ArticDesc'),
+                array('artic.keywords', 'ArticKeywords'),
+                array('artic.images_article', 'ArticImg'),
+
+                array('bus.id', 'BusId'),
+                array('bus.name', 'BusName'),
+                array('bus.city', 'BusCity'),
+                array('bus.address', 'BusAddress'),
+                array('bus.home_busines_foto', 'BusImg'),
+                array('bus.info', 'BusInfo'),
+                array('bus.url', 'BusUrl'),
+
+                array('coup.name', 'CoupName'),
+                array('coup.id', 'CoupId'),
+                array('coup.url', 'CoupUrl'),
+                array('coup.info', 'CoupInfo'),
+                array('coup.img_coupon', 'CoupImg'),
+                array('coup.secondname', 'CoupSecondname')
+            )
+                ->from(array('articles', 'artic'))
+                ->join(array('articles_relation_business', 'art_rel_bus'), 'LEFT')
+                ->on('artic.id', '=', 'art_rel_bus.id_articles')
+                ->join(array('business', 'bus'), 'LEFT')
+                ->on('art_rel_bus.id_business', '=', 'bus.id')
+                ->join(array('articles_relation_coupon', 'art_rel_coup'), 'LEFT')
+                ->on('artic.id', '=', 'art_rel_coup.id_articles')
+                ->join(array('coupon', 'coup'), 'LEFT')
+                ->on('coup.id', '=', 'art_rel_coup.id_coupon')
+                ->where('artic.url', '=', $url_article)
+                ->cached()
+                ->execute()->as_array();
+
+            $end_result = $this->CreateArrayArticle($query);
+            Cache::instance()->set($url_article, $end_result);
+        } else {
+            $end_result = Cache::instance()->get($url_article);
+        }
+        Cache::instance()->delete($url_article);
+        return $end_result;
+    }
+
+    /**
+     * @param $result
+     * @return array
+     * формирование двумерного масива карточки статьи
+     */
+    public function CreateArrayArticle ($result){
+
+        $end_result = array();
+        $BusTmp = array();
+        $CoupTmp = array();
+
+        $end_result['ArticName'] = $result[0]['ArticName'];
+        $end_result['ArticSecondname'] = $result[0]['ArticSecondname'];
+        $end_result['ArticShortPreviev'] = $result[0]['ArticShortPreviev'];
+        $end_result['ArticBigPreviev'] = $result[0]['ArticBigPreviev'];
+        $end_result['ArticContent'] = $result[0]['ArticContent'];
+        $end_result['ArticTitle'] = $result[0]['ArticTitle'];
+        $end_result['ArticDesc'] = $result[0]['ArticDesc'];
+        $end_result['ArticKeywords'] = $result[0]['ArticKeywords'];
+        $end_result['ArticImg'] = $result[0]['ArticImg'];
+
+        foreach($result as $name_key => $row){
+
+            //бизнесы
+            if (!empty($row['BusId'])) {
+                if (!array_key_exists($row['BusId'], $BusTmp)) {
+                    $BusTmp[$row['BusId']] = $row['BusId'];
+                    $end_result['BusArr'][] = array(
+                        'BusId' => $row['BusId'],
+                        'BusName' => $row['BusName'],
+                        'BusCity' => $row['BusCity'],
+                        'BusAddress' => $row['BusAddress'],
+                        'BusImg' => $row['BusImg'],
+                        'BusInfo' => $row['BusInfo'],
+                        'BusUrl' => $row['BusUrl']
+                    );
+                }
+            } else {
+                $end_result['BusArr'] = array();
+            }
+
+            //купоны
+            if (!empty($row['CoupId'])) {
+                if (!array_key_exists($row['CoupId'], $CoupTmp)) {
+                    $CoupTmp[$row['CoupId']] = $row['CoupId'];
+                    $end_result['CoupArr'][] = array(
+                        'CoupId' => $row['CoupId'],
+                        'CoupSecondname' => $row['CoupSecondname'],
+                        'CoupUrl' => $row['CoupUrl'],
+                        'CoupInfo' => $row['CoupInfo'],
+                        'CoupImg' => $row['CoupImg'],
+                    );
+                }
+            } else {
+                $end_result['CoupArr'] = array();
+            }
+
+        }
+
+        return $end_result;
+
     }
 
 }

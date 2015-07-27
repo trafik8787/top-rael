@@ -410,7 +410,7 @@ class Model_BussinesModel extends Model_BaseModel {
                         'CoupUrl' => $row['CoupUrl'],
                         'CoupInfo' => $row['CoupInfo'],
                         'CoupImg' => $row['CoupImg'],
-                        'CoupTags' => $row['CoupTags'],
+                        'CoupTags' => $row['CoupTags']
                     );
                 }
             } else {

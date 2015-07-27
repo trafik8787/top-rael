@@ -12,7 +12,19 @@
     <div class="col-md-12">
         <ul class="nav nav-pills">
             <h2>Обзоры</h2>
-<!--            --><?//=HTML::x($data)?>
+
+<!--             <span>-->
+<!---->
+<!--                <form action="" method="get" id="w-form-city">-->
+<!--                    <select class="form-control w-select-city" name="city" style="width: 20%">-->
+<!--                        <option value="">По городам</option>-->
+<!--                        --><?//foreach($city as $key_id => $row_city):?>
+<!--                            <option --><?//if ($city_id == $key_id) { echo 'selected="selected"';}?><!-- value="--><?//=$key_id?><!--">--><?//=$row_city?><!--</option>-->
+<!--                        --><?//endforeach?>
+<!--                    </select>-->
+<!--                </form>-->
+<!--            </span>-->
+
             <li class="<? if (Controller_BaseController::$detect_uri == URL::site('articles').$pagesUrl) { echo 'active'; }?>"><a href="/articles" >Все</a></li>
             <?foreach($category as $row_category):?>
 
