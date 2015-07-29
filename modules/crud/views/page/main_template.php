@@ -66,7 +66,14 @@
                                     </ul>
                                 </li>
                             <?else:?>
-                                <li <? if (URL::site(Request::detect_uri()) == '/administrator'.$link['url']) { echo 'class="active"';}?> ><a href="<?='/administrator'.$link['url']?>"><?=$name?><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon <?=$link['icon']?>"></span></a></li>
+                                <?
+                                $arr_user_group = $security['Controller_Administrator'][$link['metod']];
+                                $result =  array_intersect($arr_user_group, $role);
+
+                                ?>
+                                <?if (!empty($result)):?>
+                                    <li <? if (URL::site(Request::detect_uri()) == '/administrator/'.$link['url']) { echo 'class="active"';}?> ><a href="<?='/administrator/'.$link['url']?>"><?=$name?><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon <?=$link['icon']?>"></span></a></li>
+                                <?endif?>
                             <?endif?>
 
                         <?endforeach?>

@@ -11,6 +11,11 @@ class Controller_Pages_Articles extends Controller_BaseController {
 	{
         $data = array();
 
+        $city_id = null;
+        if (!empty($_GET)) {
+            $city_id = $_GET['city'];
+        }
+
         $content = View::factory('pages/articles_all');
         $content->category =  self::$general_meny;
 
@@ -22,6 +27,10 @@ class Controller_Pages_Articles extends Controller_BaseController {
         //die(HTML::x($data));
         $content->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
         $content->data = $data['data'];
+        $content->city = $data['city'];
+
+        //передаем параметр значения выбраного города для селекта
+        $content->city_id = $city_id;
 
         //передаем номер страницы
         if ($this->request->param('page') != '') {

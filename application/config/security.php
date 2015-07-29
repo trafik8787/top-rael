@@ -23,7 +23,8 @@ return array(
         'banners'           => array('admin'),
         'about'           => array('admin'),
 
-        'index'           => array('admin', 'redactor', 'manager'),
+        'welcome'           => array('admin', 'redactor', 'manager'),
+        'index'           => array('admin'),
         'login'           => array('admin', 'redactor', 'manager'),
         'logout'           => array('admin', 'redactor', 'manager'),
     )

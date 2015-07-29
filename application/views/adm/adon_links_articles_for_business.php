@@ -9,7 +9,7 @@
 
     <div class="form-group has-feedback">
 
-        <label for="URL" class="col-sm-2 control-label">Купоны</label>
+        <label for="URL" class="col-sm-2 control-label">Обзоры</label>
         <div class="col-sm-10">
 
             <ul class="list-inline">

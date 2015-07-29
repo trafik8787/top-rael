@@ -22,7 +22,7 @@ class Model_ArticlesModel extends Model_BaseModel {
         } else {
             $ofset = 0;
         }
-
+        //HTML::x(Controller_BaseController::$general_meny);
         if ($url_section != null) {
             $id = 0;
             foreach (Controller_BaseController::$general_meny as $rows) {
@@ -30,6 +30,8 @@ class Model_ArticlesModel extends Model_BaseModel {
                     $id = $rows['id'];
                 }
             }
+
+
 
             $result = DB::select()
                 ->from('articles')
@@ -60,11 +62,14 @@ class Model_ArticlesModel extends Model_BaseModel {
             $count = $this->table_count('articles', 'id', null);
         }
 
-        $city_arr = '';
+        $city_arr = $this->getCityArticleInSection($url_section);
 
         return array('data' => $result, 'count' => $count, 'city' => $city_arr);
 
     }
+
+
+
 
     /**
      * @param $url_category
@@ -220,6 +225,37 @@ class Model_ArticlesModel extends Model_BaseModel {
         }
 
         return $end_result;
+
+    }
+
+
+    public function getCityArticleInSection($arrSection){
+
+        if ($arrSection == null) {
+            $result = DB::select('articles.*', array('city.name', 'CityName'))
+                ->from('articles')
+                ->join('city', 'LEFT')
+                ->on('articles.city', '=', 'city.id')
+                ->cached()
+                ->execute()->as_array();
+        } else {
+            $result = DB::select('articles.*', array('city.name', 'CityName'))
+                ->from('articles')
+                ->join('city', 'LEFT')
+                ->on('articles.city', '=', 'city.id')
+                ->where('articles.id_section', '=', $arrSection)
+                ->cached()
+                ->execute()->as_array();
+        }
+
+        $city_arr = array();
+        foreach ($result as $row_city) {
+            if ($row_city['city'] != '') {
+                $city_arr[$row_city['city']] = $row_city['CityName'];
+            }
+        }
+
+        return $city_arr;
 
     }
 

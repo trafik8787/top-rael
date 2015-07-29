@@ -38,7 +38,15 @@
                             <select <?=$attr?> data-placeholder="Выбрать" class="form-control chosen-select" style="width:500px; height: 20px;" <?=$multiselect?> name="<?=$name_fied?>[]" id="">
                                 <option value=""></option>
                                 <?foreach ($value_fild as $val => $row):?>
-                                    <option value="<?=$val?>" <?if (isset($orig_row_val[$val])):?> selected <?endif?>><?=$row?></option>
+                                    <?if (is_array($row)):?>
+                                        <optgroup label="<?=$row['name']?>">
+                                            <?foreach($row['childs'] as $child):?>
+                                                <option  <?if (isset($orig_row_val[$child['id']])):?> selected <?endif?> value="<?=$child['id']?>">- <?=$child['name']?></option>
+                                            <?endforeach?>
+                                        </optgroup>
+                                    <?else:?>
+                                        <option value="<?=$val?>" <?if (isset($orig_row_val[$val])):?> selected <?endif?>><?=$row?></option>
+                                    <?endif?>
                                 <?endforeach?>
                             </select>
                         </div>
@@ -60,7 +68,15 @@
                     <select  <?=$attr?> data-placeholder="Выбрать" class="form-control chosen-select validate[required]" style="height: 20px;" <?=$multiselect?> name="<?=$name_fied?>[]" id="">
                         <option value=""></option>
                         <?foreach ($value_fild as $val => $row):?>
-                            <option value="<?=$val?>"><?=$row?></option>
+                            <?if (is_array($row)):?>
+                                <optgroup label="<?=$row['name']?>">
+                                    <?foreach($row['childs'] as $child):?>
+                                        <option value="<?=$child['id']?>">- <?=$child['name']?></option>
+                                    <?endforeach?>
+                                </optgroup>
+                            <?else:?>
+                                <option value="<?=$val?>"><?=$row?></option>
+                            <?endif?>
                         <?endforeach?>
                     </select>
                 </div>
@@ -115,7 +131,15 @@
             <option value=""></option>
             <?if(is_array($value_fild)):?>
                 <?foreach ($value_fild as $val => $row):?>
-                    <option value="<?=$val?>" <?if (!empty($origin_value_fild)):?><?if ($origin_value_fild == $val):?> selected <?endif?><?endif?>><?=$row?></option>
+                    <?if (is_array($row)):?>
+                        <optgroup label="<?=$row['name']?>">
+                            <?foreach($row['childs'] as $child):?>
+                                <option <?if (!empty($origin_value_fild)):?><?if ($origin_value_fild == $child['id']):?> selected <?endif?><?endif?> value="<?=$child['id']?>">- <?=$child['name']?></option>
+                            <?endforeach?>
+                        </optgroup>
+                    <?else:?>
+                        <option value="<?=$val?>" <?if (!empty($origin_value_fild)):?><?if ($origin_value_fild == $val):?> selected <?endif?><?endif?>><?=$row?></option>
+                    <?endif?>
                 <?endforeach?>
             <?else:?>
                 <option value="<?=$value_fild?>"><?=$value_fild?></option>

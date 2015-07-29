@@ -6,7 +6,7 @@
  * Time: 17:20
  */
 
-class Controller_Administrator extends Controller {
+class Controller_Administrator extends Controller_Core_Main {
 
     public $adm;
     public $logged_in;
@@ -22,6 +22,7 @@ class Controller_Administrator extends Controller {
 
     public function before (){
 
+        parent::before();
         $this->auth     = Auth::instance();
         $this->session  = Session::instance();
         $this->class_id = Get_class($this);
@@ -79,7 +80,7 @@ class Controller_Administrator extends Controller {
 
             if ($status) {
 
-                $this->redirect('/administrator');
+                $this->redirect('/administrator/welcome');
 
             } else {
 
@@ -128,8 +129,14 @@ class Controller_Administrator extends Controller {
     }
 
 
+    public function action_welcome (){
+        $this->template->title_page = 'Приветствуем '. $this->user->secondname;
 
+        $welcome = View::factory('adm/welcome');
+        $this->template->render = $welcome;
 
+        $this->response->body($this->template);
+    }
 
 
     public function action_index() {
@@ -187,6 +194,7 @@ class Controller_Administrator extends Controller {
 
     public function action_bussines (){
 
+        //die(HTML::x(Model::factory('CategoryModel')->recurs_catalog()));
 
         if (!empty($_GET['section'])) {
             $category = Model::factory('CategoryModel')->recurs_catalog($_GET['section']);
@@ -427,6 +435,7 @@ class Controller_Administrator extends Controller {
             }
         }
 
+        $recurs_cat = Model::factory('CategoryModel')->recurs_catalog();
 
         $crud = new Cruds();
         //номер поля по порядку с лева начинается с нуля
@@ -453,7 +462,7 @@ class Controller_Administrator extends Controller {
 
         $crud->set_field_type('redactor_user', 'select', '', '', '', array('users', 'username', 'id', array('id', 'IN', $arr_user)));
 
-        $crud->set_field_type('cat_id', 'select', '', 'multiple', '', array('category', 'name','id', array('parent_id','<>','0')));
+        $crud->set_field_type('cat_id', 'select', $recurs_cat, 'multiple', '', '');
         $crud->set_one_to_many('businesscategory', 'cat_id','category_id', 'business_id');
 
         $crud->set_field_type('home_busines_foto', array('file', 'uploads/img_business', 'bus_', '', 'img'),'', '');
@@ -483,15 +492,13 @@ class Controller_Administrator extends Controller {
             'city',
             'address',
             'dop_address',
-            'maps_x',
-            'maps_y',
-            'services',
             'website',
             'video',
             'home_busines_foto',
+            'logo',
             'top_slider',
             'info',
-            'logo',
+            'services',
             'url',
             'cat_id',
             'tags',
@@ -507,15 +514,13 @@ class Controller_Administrator extends Controller {
             'city',
             'address',
             'dop_address',
-            'maps_x',
-            'maps_y',
-            'services',
             'website',
             'video',
             'home_busines_foto',
+            'logo',
             'top_slider',
             'info',
-            'logo',
+            'services',
             'url',
             'cat_id',
             'tags',
@@ -527,9 +532,7 @@ class Controller_Administrator extends Controller {
             'title' => 'SEO Title',
             'keywords' => 'SEO Keywords',
             'city' => 'Город',
-            'address' => 'Адресс',
-            'maps_x' => 'Широта',
-            'maps_y' => 'Долгота',
+            'address' => 'Адрес',
             'services' => 'Приемущества и услуги',
             'website' => 'Веб сайт бизнеса',
             'video' => 'Видео',
@@ -539,12 +542,11 @@ class Controller_Administrator extends Controller {
             'info' => 'Описание',
             'logo' => 'Логотип',
             'cat_id' => 'Категория',
-            'redactor_user' => 'Отвецтвенный',
+            'redactor_user' => 'Ответственный',
             'date_create' => 'Дата создания',
             'date_end' => 'Дата окончания',
             'tags' => 'Теги',
             'status' => 'Статус'
-
             ));
 
         $crud->validation('url', array('required' => true, 'minlength' => 4, 'regexp' => '^[a-zA-Z0-9_]+$'),
@@ -580,11 +582,15 @@ class Controller_Administrator extends Controller {
      */
     public static function adminArticles (){
 
+        $recurs_cat = Model::factory('CategoryModel')->recurs_catalog();
+
         $crud = new Cruds();
         $crud->load_table('articles', array('0', 'DESC'));
         if (Session::instance()->get('customer_id') != null) {
             $crud->set_where('id_section', '=', Session::instance()->get('customer_id'));
         }
+
+
         $crud->disable_editor('description');
         $crud->disable_editor('keywords');
         $crud->set_lang('ru');
@@ -592,7 +598,7 @@ class Controller_Administrator extends Controller {
         $crud->set_field_type('in_home', 'checkbox', '', '', '','');
         $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
         $crud->set_field_type('id_section', 'select', '', '', '', array('category', 'name','id', array('parent_id','=','0')));
-        $crud->set_field_type('id_category', 'select', '', '', '', array('category', 'name','id', array('parent_id','<>','0')));
+        $crud->set_field_type('id_category', 'select', $recurs_cat, '', '', '');
         $crud->set_field_type('bussines_id', 'select', '', 'multiple', '', array('business', 'name','id'));
         $crud->set_field_type('coupon', 'select', '', 'multiple', '', array('coupon', 'name','id'));
 
@@ -911,11 +917,13 @@ class Controller_Administrator extends Controller {
      */
     public static function adminBanners (){
 
+        $recurs_cat = Model::factory('CategoryModel')->recurs_catalog();
+
         $crud = new Cruds();
         $crud->load_table('banners');
         $crud->set_lang('ru');
         $crud->select_multiselect('category');
-        $crud->set_field_type('category', 'select', '', 'multiple', '', array('category', 'name','id'));
+        $crud->set_field_type('category', 'select', $recurs_cat, 'multiple', '');
         $crud->set_one_to_many('banners_relation', 'category', 'category_id', 'banners_id');
 
 
@@ -997,13 +1005,16 @@ class Controller_Administrator extends Controller {
                                                     Cruds::$post['password'],
                                                     Cruds::$post['id']);
         }
-
-        if (!empty(Cruds::$post['dop_sity']) and !empty(Cruds::$post['dop_address'])) {
+        //die(HTML::x(Cruds::$post));
+        if (!empty(Cruds::$post['dop_sity']) and !empty(Cruds::$post['dop_addres'])) {
 
             foreach (Cruds::$post['dop_sity'] as $key => $dop_sity) {
-                $arr_add_city[] = array('name' => $dop_sity, 'address' => Cruds::$post['dop_address'][$key]);
+                $arr_add_city[] = array('name' => $dop_sity,
+                                        'address' => Cruds::$post['dop_addres'][$key],
+                                        'maps_x' => Cruds::$post['maps_x'][$key],
+                                        'maps_y' => Cruds::$post['maps_y'][$key]);
             }
-            //die(HTML::x($arr_add_city));
+
             $arr_add_city = serialize($arr_add_city);
 
             $new_array['dop_address'] = $arr_add_city;
@@ -1014,9 +1025,12 @@ class Controller_Administrator extends Controller {
 
     public static function call_bef_insert_business ($new_array){
 
-        if (!empty(Cruds::$post['dop_sity']) and !empty(Cruds::$post['dop_address'])) {
+        if (!empty(Cruds::$post['dop_sity']) and !empty(Cruds::$post['dop_addres'])) {
             foreach (Cruds::$post['dop_sity'] as $key => $dop_sity) {
-                $arr_add_city[] = array('name' => $dop_sity, 'address' => Cruds::$post['dop_address'][$key]);
+                $arr_add_city[] = array('name' => $dop_sity,
+                                        'address' => Cruds::$post['dop_addres'][$key],
+                                        'maps_x' => Cruds::$post['maps_x'][$key],
+                                        'maps_y' => Cruds::$post['maps_y'][$key]);
             }
             $arr_add_city = serialize($arr_add_city);
             $new_array['dop_address'] = $arr_add_city;

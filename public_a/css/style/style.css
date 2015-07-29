@@ -223,6 +223,8 @@ nav.sidebar, .main{
 
     nav.sidebar a{
         padding-right: 8px;
+        padding-top: 7px;
+        padding-bottom: 7px;
     }
 
     nav.sidebar .navbar-nav > li:first-child{
@@ -304,7 +306,9 @@ section{
     padding-left: 15px;
 }
 
-
+div#bs-sidebar-navbar-collapse-1 ul.nav.navbar-nav {
+    float: none;
+}
 
 
 
