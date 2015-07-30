@@ -7,22 +7,33 @@
  */
 class Controller_Pages_Articles extends Controller_BaseController {
 
+
 	public function action_index()
 	{
         $data = array();
 
+        $number_page = $this->request->param('page');
+
         $city_id = null;
         if (!empty($_GET)) {
             $city_id = $_GET['city'];
+            //если фильтр по городам обнуляем номер страницы если выбирается новый город
+            if (Session::instance()->get('city_id') != $city_id) {
+                $number_page = '';
+            }
+
+            Session::instance()->set('city_id', $city_id);
+        } else {
+            Session::instance()->set('city_id', '');
         }
 
         $content = View::factory('pages/articles_all');
         $content->category =  self::$general_meny;
 
         if ($this->request->param('url_section') == '') {
-            $data = Model::factory('ArticlesModel')->getArticlesSectionUrl(null, 10, $this->request->param('page'));
+            $data = Model::factory('ArticlesModel')->getArticlesSectionUrl(null, 10, $number_page, $city_id);
         } else {
-            $data = Model::factory('ArticlesModel')->getArticlesSectionUrl($this->request->param('url_section'), 10, $this->request->param('page'));
+            $data = Model::factory('ArticlesModel')->getArticlesSectionUrl($this->request->param('url_section'), 10, $number_page, $city_id);
         }
         //die(HTML::x($data));
         $content->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
@@ -32,7 +43,7 @@ class Controller_Pages_Articles extends Controller_BaseController {
         //передаем параметр значения выбраного города для селекта
         $content->city_id = $city_id;
 
-        //передаем номер страницы
+        //передаем номер страницы для навигации
         if ($this->request->param('page') != '') {
             $content->pagesUrl = '/'.$this->request->param('page');
         } else {

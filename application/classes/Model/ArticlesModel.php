@@ -31,35 +31,70 @@ class Model_ArticlesModel extends Model_BaseModel {
                 }
             }
 
+            if ($id_city != null) {
+                $result = DB::select()
+                    ->from('articles')
+                    ->where('id_section', '=', $id)
+                    ->and_where('city', '=', $id_city)
+                    ->limit($limit)
+                    ->offset($ofset)
+                    ->order_by('id', 'DESC')
+                    ->cached()
+                    ->execute()->as_array();
+
+                $count = $this->table_count('articles', 'id', array('id_section', '=', $id), array('city', '=', $id_city));
+
+            } else {
+
+                $result = DB::select()
+                    ->from('articles')
+                    ->where('id_section', '=', $id)
+                    ->limit($limit)
+                    ->offset($ofset)
+                    ->order_by('id', 'DESC')
+                    ->cached()
+                    ->execute()->as_array();
+
+                $count = $this->table_count('articles', 'id', array('id_section', '=', $id));
+            }
 
 
-            $result = DB::select()
-                ->from('articles')
-                ->where('id_section', '=', $id)
-                ->limit($limit)
-                ->offset($ofset)
-                ->order_by('id', 'DESC')
-                ->cached()
-                ->execute()->as_array();
-
-            $count = $this->table_count('articles', 'id', array('id_section', '=', $id));
 
         } else {
+            if ($id_city != null) {
 
-            $result = DB::select('artic.*',
-                array('cat.id', 'CatId'),
-                array('cat.name', 'CatName'),
-                array('cat.url', 'CatUrl'))
-                ->from(array('articles', 'artic'))
-                ->join(array('category', 'cat'))
-                ->on('artic.id_section', '=', 'cat.id')
-                ->limit($limit)
-                ->offset($ofset)
-                ->order_by('id', 'DESC')
-                ->cached()
-                ->execute()->as_array();
+                $result = DB::select('artic.*',
+                    array('cat.id', 'CatId'),
+                    array('cat.name', 'CatName'),
+                    array('cat.url', 'CatUrl'))
+                    ->from(array('articles', 'artic'))
+                    ->join(array('category', 'cat'))
+                    ->on('artic.id_section', '=', 'cat.id')
+                    ->where('artic.city', '=', $id_city)
+                    ->limit($limit)
+                    ->offset($ofset)
+                    ->order_by('id', 'DESC')
+                    ->cached()
+                    ->execute()->as_array();
 
-            $count = $this->table_count('articles', 'id', null);
+                $count = $this->table_count('articles', 'id', array('city', '=', $id_city));
+            } else {
+                $result = DB::select('artic.*',
+                    array('cat.id', 'CatId'),
+                    array('cat.name', 'CatName'),
+                    array('cat.url', 'CatUrl'))
+                    ->from(array('articles', 'artic'))
+                    ->join(array('category', 'cat'))
+                    ->on('artic.id_section', '=', 'cat.id')
+                    ->limit($limit)
+                    ->offset($ofset)
+                    ->order_by('id', 'DESC')
+                    ->cached()
+                    ->execute()->as_array();
+
+                $count = $this->table_count('articles', 'id', null);
+            }
+
         }
 
         $city_arr = $this->getCityArticleInSection($url_section);
@@ -229,7 +264,7 @@ class Model_ArticlesModel extends Model_BaseModel {
     }
 
 
-    public function getCityArticleInSection($arrSection){
+    public function getCityArticleInSection($arrSection = null){
 
         if ($arrSection == null) {
             $result = DB::select('articles.*', array('city.name', 'CityName'))
@@ -239,11 +274,14 @@ class Model_ArticlesModel extends Model_BaseModel {
                 ->cached()
                 ->execute()->as_array();
         } else {
+           // die(HTML::x($arrSection));
             $result = DB::select('articles.*', array('city.name', 'CityName'))
                 ->from('articles')
+                ->join('category')
+                ->on('category.id', '=', 'articles.id_section')
                 ->join('city', 'LEFT')
                 ->on('articles.city', '=', 'city.id')
-                ->where('articles.id_section', '=', $arrSection)
+                ->where('category.url', '=', $arrSection)
                 ->cached()
                 ->execute()->as_array();
         }

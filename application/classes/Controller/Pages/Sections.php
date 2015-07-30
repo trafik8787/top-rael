@@ -11,23 +11,31 @@ class Controller_Pages_Sections extends Controller_BaseController {
 	public function action_index()
 	{
         $data = array();
+        $number_page = $this->request->param('page');
         $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($this->request->param('url_section'));
 
         $city_id = null;
         if (!empty($_GET)) {
             $city_id = $_GET['city'];
+            //если фильтр по городам обнуляем номер страницы если выбирается новый город
+            if (Session::instance()->get('city_id') != $city_id) {
+                $number_page = '';
+            }
+            Session::instance()->set('city_id', $city_id);
+        } else {
+            Session::instance()->set('city_id', '');
         }
 
 
         if ($this->request->param('url_category') != '') {
             //по урлу категории получаем бизнесы
-            $data = Model::factory('BussinesModel')->getBussinesCategoryUrl($this->request->param('url_category'), 10 ,$this->request->param('page'), $city_id);
+            $data = Model::factory('BussinesModel')->getBussinesCategoryUrl($this->request->param('url_category'), 10 ,$number_page, $city_id);
             //по урлу категории получаем анонсы статей
             $data_articles = Model::factory('ArticlesModel')->getArticlesCategoryUrl($this->request->param('url_category'));
 
         } else {
             //по урлу раздела получаем бизнесы
-            $data = Model::factory('BussinesModel')->getBussinesSectionUrl($this->request->param('url_section'), 10 ,$this->request->param('page'), $city_id);
+            $data = Model::factory('BussinesModel')->getBussinesSectionUrl($this->request->param('url_section'), 10 ,$number_page, $city_id);
             //по урле раздела получаем 6 анонсов статей
             $articles = Model::factory('ArticlesModel')->getArticlesSectionUrl($this->request->param('url_section'), 6);
             $data_articles = $articles['data'];

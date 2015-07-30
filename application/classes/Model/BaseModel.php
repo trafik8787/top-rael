@@ -17,15 +17,21 @@ abstract class Model_BaseModel extends Model {
      * @return mixed
      * метод получения количества записей произвольной таблицы
      */
-    public function table_count ($table, $column, $where = null) {
+    public function table_count ($table, $column, $where = null, $and_where = null) {
 
-        if ($where == null) {
+        if ($where == null and $and_where == null ) {
 
             $row = DB::select(array(DB::expr('COUNT(`'.$column.'`)'), 'total'))->from($table)
                 ->cached()
                 ->execute()->as_array();
 
-        } else {
+        } elseif ($where != null and $and_where != null) {
+            $row = DB::select(array(DB::expr('COUNT(`'.$column.'`)'), 'total'))->from($table)
+                ->where($where[0], $where[1], $where[2])
+                ->and_where($and_where[0], $and_where[1], $and_where[2])
+                ->cached()
+                ->execute()->as_array();
+        } elseif ($where != null and $and_where == null) {
             $row = DB::select(array(DB::expr('COUNT(`'.$column.'`)'), 'total'))->from($table)
                 ->where($where[0], $where[1], $where[2])
                 ->cached()

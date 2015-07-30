@@ -1,0 +1,65 @@
+<?php defined('SYSPATH') or die('No direct script access.');
+/**
+ * Created by PhpStorm.
+ * User: Vitalik
+ * Date: 19.07.2015
+ * Time: 18:09
+ */
+
+?>
+
+<div class="row">
+    <div class="col-md-12">
+        <ul class="nav nav-pills">
+            <h2>Купоны</h2>
+
+             <span>
+
+                <form action="" method="get" id="w-form-city">
+                    <select class="form-control w-select-city" name="city" style="width: 20%">
+                        <option value="">По городам</option>
+                        <?foreach($city as $key_id => $row_city):?>
+                            <option <?if ($city_id == $key_id) { echo 'selected="selected"';}?> value="<?=$key_id?>"><?=$row_city?></option>
+                        <?endforeach?>
+                    </select>
+                </form>
+            </span>
+
+            <li class="<? if (Controller_BaseController::$detect_uri == URL::site('coupons').$pagesUrl) { echo 'active'; }?>"><a href="/coupons" >Все</a></li>
+            <?foreach($category as $row_category):?>
+
+                <li class="<? if (Controller_BaseController::$detect_uri == '/coupons/'.$row_category['url'].$pagesUrl) { echo 'active'; }?>"><a href="/coupons/<?=$row_category['url']?>" ><?=$row_category['name']?></a></li>
+
+            <?endforeach?>
+        </ul>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-9">
+
+            <?foreach($data as $rows_data):?>
+                <div style="border: 1px solid #000;width: 300px; display: inline-block;">
+                    <img src="" alt="sdf"/>
+                    <h4><a href="/coupons/<?=$rows_data['url']?>"><?=$rows_data['name']?></a></h4>
+                    <?if (!empty($rows_data['CatUrl'])):?>
+                        <h5><a href="/coupons/<?=$rows_data['CatUrl']?>"><?=$rows_data['CatName']?></a></h5>
+                    <?endif?>
+                    <p><?=Text::limit_chars(strip_tags($rows_data['info']), 200, null, true)?></p>
+                </div>
+            <?endforeach?>
+        </div>
+        <div class="col-md-3">
+            ssdf
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <?=$pagination?>
+        </div>
+    </div>
+
+
+
+</div>

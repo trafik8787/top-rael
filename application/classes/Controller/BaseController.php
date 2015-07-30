@@ -27,6 +27,7 @@ abstract class Controller_BaseController extends Controller_Template {
         self::$detect_uri = '/'.$url;
         self::$urlPars = explode('/', $url);
 
+
         $this->top_meny = array('Купоны' => '/coupons',
             'Обзоры' => '/articles',
             'Тель-Авив' => '/city/telaviv',

@@ -315,33 +315,6 @@ class Model_BussinesModel extends Model_BaseModel {
 
 
 
-
-
-
-
-
-
-    /**
-     * @param $table
-     * @return mixed
-     * Количество записей
-     */
-    public function table_count ($table, $column, $category_id = null) {
-
-        if ($category_id == null) {
-
-            $row = DB::select(array(DB::expr('COUNT(`'.$column.'`)'), 'total'))->from($table)
-                ->execute()->as_array();
-
-        } else {
-            $row = DB::select(array(DB::expr('COUNT(`'.$column.'`)'), 'total'))->from($table)
-                ->where('news_category', '=', $category_id)
-
-                ->execute()->as_array();
-        }
-        return $row[0]['total'];
-    }
-
     /**
      * @param $result
      * @return array

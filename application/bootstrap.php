@@ -200,12 +200,27 @@ Route::set('Business', 'business(/<url_business>)')
         'action'     => 'index',
     ));
 
-Route::set('Coupons', 'coupons')
+Route::set('CouponNode', 'coupon(/<url_coupon>)', array('page' => '[0-9]+'))
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Coupons',
+        'action'     => 'coupon',
+    ));
+
+Route::set('Coupons', 'coupons(/<page>)', array('page' => '[0-9]+'))
     ->defaults(array(
         'directory' => 'Pages',
         'controller' => 'Coupons',
         'action'     => 'index',
     ));
+
+Route::set('CouponsSection', 'coupons(/<url_section>(/<page>))', array('page' => '[0-9]+'))
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Coupons',
+        'action'     => 'index',
+    ));
+
 
 Route::set('SectionsPage', 'section(/<url_section>(/<page>))', array('page' => '[0-9]+'))
     ->defaults(array(
