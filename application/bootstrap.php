@@ -129,6 +129,7 @@ Kohana::modules(array(
     'crud'    => MODPATH.'crud',
     'pagination' => MODPATH.'pagination',
     'email'	  => MODPATH.'email',
+    'ulogin'	  => MODPATH.'ulogin',
 	// 'minion'     => MODPATH.'minion',     // CLI Tasks
 	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
@@ -148,6 +149,13 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+
+Route::set('Contacts', 'contacts')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Contacts',
+        'action'     => 'index',
+    ));
 
 Route::set('FiltrSectionCity', 'filtr(/<action>)')
     ->defaults(array(

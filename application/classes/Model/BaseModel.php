@@ -8,7 +8,9 @@
 
 
 
-abstract class Model_BaseModel extends Model {
+class Model_BaseModel extends Model {
+
+    public $post;
 
     /**
      * @param $table
@@ -41,4 +43,37 @@ abstract class Model_BaseModel extends Model {
         return $row[0]['total'];
     }
 
+
+    /**
+     * @param $PostArr
+     * @return array|bool
+     * @throws Kohana_Exception
+     * добавляет сообщение пользователя
+     */
+    public function addContacts ($PostArr){
+
+       $this->post = Validation::factory($PostArr);
+
+        $this->post -> rule(true, 'not_empty')
+            -> rule('email', 'email');
+
+        if($this->post->check()) {
+
+            $fullname = Arr::get($PostArr, 'fullname');
+            $city = Arr::get($PostArr, 'city');
+            $tel = Arr::get($PostArr, 'tel');
+            $email = Arr::get($PostArr, 'email');
+            $desc = Arr::get($PostArr, 'desc');
+
+
+            $query = DB::insert('contacts', array('name', 'city', 'tel', 'email', 'description'))
+                ->values(array($fullname, $city, $tel, $email, $desc))->execute();
+
+            return true;
+        } else {
+
+            return $this->post->errors();
+        }
+    }
+    
 }

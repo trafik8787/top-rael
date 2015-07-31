@@ -13,7 +13,9 @@
 
                 <div class="row">
                     <div class="col-md-2">Copyright © 2015</div>
-                    <div class="col-md-7">footer</div>
+                    <div class="col-md-7">
+                        <a href="/contacts">контакты</a>
+                    </div>
                     <div class="col-md-3">dfgdfg</div>
                 </div>
 

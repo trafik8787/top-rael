@@ -14,6 +14,15 @@ class Controller_Pages_Sections extends Controller_BaseController {
         $number_page = $this->request->param('page');
         $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($this->request->param('url_section'));
 
+        //сортировка категорий по количеству бизнесов в них
+        foreach ($category[0]['childs'] as $key => $row) {
+            $count[]  = $row['COUNT'];
+            $rowArr[] = $row;
+        }
+
+        array_multisort($count, SORT_DESC, $rowArr, SORT_ASC, $category[0]['childs']);
+
+        //HTML::x($category);
         $city_id = null;
         if (!empty($_GET)) {
             $city_id = $_GET['city'];

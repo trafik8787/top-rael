@@ -51,15 +51,19 @@ class Model_CategoryModel extends Model_BaseModel {
      */
     public function recurs_catalog ($id = null){
         if ($id == null) {
-            $query = DB::select()
+            $query = DB::select('category.*', array('businesscategory.business_id', 'BusCatId'))
                 ->from('category')
+                ->join('businesscategory', 'LEFT')
+                ->on('businesscategory.category_id', '=', 'category.id')
                 ->cached()
                 ->execute()->as_array();
         } else {
-            $query = DB::select()
+            $query = DB::select('category.*', array('businesscategory.business_id', 'BusCatId'))
                 ->from('category')
-                ->where('id', '=', $id)
-                ->or_where('parent_id', '=', $id)
+                ->join('businesscategory', 'LEFT')
+                ->on('businesscategory.category_id', '=', 'category.id')
+                ->where('category.id', '=', $id)
+                ->or_where('category.parent_id', '=', $id)
                 ->cached()
                 ->execute()->as_array();
         }
@@ -69,22 +73,41 @@ class Model_CategoryModel extends Model_BaseModel {
             $cats[$rows['parent_id']][] =  $rows;
         }
 
+
         return $this->build_tree($cats, 0);
     }
 
 
     public function build_tree(&$rs,$parent){
 
+        $tmpArr = array();
         $out = array();
         if (!isset($rs[$parent])) {
+
             return $out;
         }
-        foreach ($rs[$parent] as $row) {
+        foreach ($rs[$parent] as $key => $row) {
             $chidls = $this->build_tree($rs, $row['id']);
             if ($chidls) {
                 $row['childs'] = $chidls;
             }
-            $out[] = $row;
+            if ($parent != 0) {
+                //считаем количество бизнесов в категории
+                $tmpArr[$row['BusCatId']] = $row['BusCatId'];
+                $row['COUNT'] = count($tmpArr);
+
+                if (!array_key_exists($row['id'], $out)) {
+                    $out[$row['id']] = $row;
+                    $tmpArr = '';
+                } else {
+                    $out[$row['id']] = $row;
+                }
+
+
+            } else {
+                $out[] = $row;
+            }
+
         }
         return $out;
     }
