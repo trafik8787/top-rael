@@ -357,7 +357,7 @@ class Model_All extends Model
             //получаем поля и тыпы к ним
             $name_type_column = $this->information_data_type($table, $join);
 
-
+           // die(HTML::x($column_like));
             foreach ($column_like as $key => $column) {
 
                 $i++;
@@ -386,10 +386,21 @@ class Model_All extends Model
                     if ($join != null) {
                         $column = $this->str_join_replace($column);
                     }
+                    if ($show_name_old_table != null) {
 
-                    $Sql .= $column . ' LIKE ' . "'%" . $like . "%'" . $or;
+                        if ($show_name_old_table['page_name'] == $column) {
+                            $column = $show_name_old_table['old_table'].'.'.$show_name_old_table['old_name_page'];
+                        } else {
+                            $column = $table.'.'.$column;
+                        }
+
+                        $Sql .= $column . ' LIKE ' . "'%" . $like . "%'" . $or;
+                    } else {
+                        $Sql .= $column . ' LIKE ' . "'%" . $like . "%'" . $or;
+                    }
                 }
             }
+            //die(HTML::x($Sql));
 
 
 
@@ -448,7 +459,7 @@ class Model_All extends Model
 
             //количество найденых в таблице
             $query_count =  DB::query(Database::SELECT,
-                'SELECT COUNT(*) as cou FROM ' .$table.' '.$sele_where.' '.$likeSql)
+                'SELECT COUNT(*) as cou FROM ' .$table.' '.$join_other.' '.$sele_where.' '.$likeSql)
                 ->execute()
                 ->as_array();
 
