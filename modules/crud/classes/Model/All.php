@@ -378,7 +378,18 @@ class Model_All extends Model
                             $column = $this->str_join_replace($column);
                         }
 
-                        $Sql .= $column . ' LIKE ' . "'%" . $like . "%'" . $or;
+                        if ($show_name_old_table != null) {
+
+                            if ($show_name_old_table['page_name'] == $column) {
+                                $column = $show_name_old_table['old_table'].'.'.$show_name_old_table['old_name_page'];
+                            } else {
+                                $column = $table.'.'.$column;
+                            }
+
+                            $Sql .= $column . ' LIKE ' . "'%" . $like . "%'" . $or;
+                        } else {
+                            $Sql .= $column . ' LIKE ' . "'%" . $like . "%'" . $or;
+                        }
 
                     }
                 } else {
