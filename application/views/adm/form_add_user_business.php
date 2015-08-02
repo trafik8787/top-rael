@@ -6,7 +6,14 @@
  * Time: 19:57
  */
 ?>
-
+<script type="text/javascript">
+    $(function () {
+        $('.form_date').datetimepicker({
+            locale: 'ru',
+            format: 'YYYY-MM-DD'
+        });
+    });
+</script>
 
 <div class="form-group has-feedback">
 
@@ -32,6 +39,18 @@
 
                         </div>
 
+                        <div class="form-inline" style="margin-top: 10px;">
+                            <select class="form-control" data-toggle="tooltip"  data-original-title="Выбрать пол" name="sex" data-placeholder="Пол">
+                                <option <?if ($sex == 'm'):?> selected <?endif?> value="m">Мужчина</option>
+                                <option <?if ($sex == 'j'):?> selected <?endif?> value="j">Женщина</option>
+                            </select>
+                            <div class="input-group date col-md-5 form_date">
+                                <input class="form-control" type="text" value="<?=isset($age) ? $age: ''?>" data-toggle="tooltip" data-original-title="Возраст" name="age">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="text" data-toggle="tooltip" data-original-title="Телефон" name="tel" class="form-control"  value="<?=isset($tel) ? $tel: ''?>"/>
+
+                        </div>
                         <div class="form-inline" style="margin-top: 10px;">
                             <input type="password" data-toggle="tooltip" data-original-title="Пароль" name="password" class="form-control" placeholder="Пароль" value=""/>
                         </div>

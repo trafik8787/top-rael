@@ -9,6 +9,8 @@
 <link type="text/css" href="/public_a/css/chosen.min.css" rel="stylesheet" media="screen">
 <link type="text/css" href="/public_a/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
+<script type="text/javascript" src="/public_a/js/min/moment.min.js"></script>
+<script type="text/javascript" src="/public_a/js/min/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="/public_a/js/DataTables-1.10.0/media/js/jquery.js"></script>
 <script type="text/javascript" src="/public_a/js/DataTables-1.10.0/media/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="/public_a/js/tinymce/jquery.tinymce.min.js"></script>
@@ -20,6 +22,7 @@
 <script type="text/javascript" src="/public_a/js/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="/public_a/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="/public_a/js/jquery.validate.min.js"></script>
+
 
 
 

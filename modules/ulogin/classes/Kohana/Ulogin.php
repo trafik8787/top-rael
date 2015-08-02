@@ -123,7 +123,8 @@ class Kohana_Ulogin {
                     $data['username'] .= (empty($user[$part_of_name]) ? '' : (' '.$user[$part_of_name]));
                 
                 $data['username'] = trim($data['username']);
-                
+                $data['id_role'] = 1;
+
                 if (!$data['username'])
                     throw new Kohana_Exception('Username fields not set in config/ulogin.php');
                     

@@ -187,7 +187,7 @@ class Controller_Administrator extends Controller_Core_Main {
     }
     
     public function action_lotarey (){
-        Controller_Core_Main::$title_page = 'Розыграши';
+        Controller_Core_Main::$title_page = 'Лотерея';
         $this->response->body(self::adminLotarey()->render());
     }
 
@@ -272,7 +272,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         switch ($_GET['section']) {
             case 1:
-                $title_page = 'Зарегестрированные пользователи';
+                $title_page = 'Зарегистрированные пользователи';
                 break;
             case 5:
                 $title_page = 'Бизнес пользователи';
@@ -392,8 +392,13 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->load_table('tags');
         $crud->set_lang('ru');
         $crud->disable_search();
+        $crud->disable_editor('description');
+        $crud->disable_editor('keywords');
         $crud->show_name_column(array('name_tags' => 'Название',
-            'url_tags' => 'URL'));
+            'url_tags' => 'URL',
+            'description' => 'SEO Description',
+            'title' => 'SEO Title',
+            'keywords' => 'SEO Keywords',));
         return $crud;
     }
 
@@ -593,6 +598,8 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud->disable_editor('description');
         $crud->disable_editor('keywords');
+        $crud->disable_editor('short_previev');
+        $crud->disable_editor('big_previev');
         $crud->set_lang('ru');
         $crud->show_columns('id', 'name', 'url');
         $crud->set_field_type('in_home', 'checkbox', '', '', '','');
@@ -603,7 +610,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('coupon', 'select', '', 'multiple', '', array('coupon', 'name','id'));
 
         $crud->set_field_type('tags', 'checkbox', '', 'multiple', '', array('tags', 'name_tags','id'));
-        $crud->set_one_to_many('tags_relation_business', 'tags', 'id_tags', 'id_business');
+        $crud->set_one_to_many('tags_relation_articles', 'tags', 'id_tags', 'id_articles');
 
         $crud->select_multiselect('coupon');
         $crud->set_one_to_many('articles_relation_coupon', 'coupon', 'id_coupon', 'id_articles');
@@ -622,6 +629,9 @@ class Controller_Administrator extends Controller_Core_Main {
             array('required' => 'Это поле обязательно для заполнения'));
 
         $crud->edit_fields('name',
+            'title',
+            'description',
+            'keywords',
             'secondname',
             'short_previev',
             'big_previev',
@@ -633,15 +643,15 @@ class Controller_Administrator extends Controller_Core_Main {
             'bussines_id',
             'city',
             'coupon',
-            'title',
-            'description',
-            'keywords',
             'tags',
             'datecreate',
             'in_home'
         );
 
         $crud->add_field('name',
+            'title',
+            'description',
+            'keywords',
             'secondname',
             'short_previev',
             'big_previev',
@@ -653,9 +663,6 @@ class Controller_Administrator extends Controller_Core_Main {
             'bussines_id',
             'city',
             'coupon',
-            'title',
-            'description',
-            'keywords',
             'tags',
             'datecreate',
             'in_home'
@@ -713,6 +720,9 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud->validation('name', array('required' => true),
             array('required' => 'Это поле обязательно для заполнения'));
+
+        $crud->set_field_type('tags', 'checkbox', '', 'multiple', '', array('tags', 'name_tags','id'));
+        $crud->set_one_to_many('tags_relation_coupons', 'tags', 'id_tags', 'id_coupons');
 
         //метод подставляет значения в таблицу из другой таблицы по join
         /**
@@ -817,6 +827,7 @@ class Controller_Administrator extends Controller_Core_Main {
             'city'=> 'Город',
             'tel' => 'Телефон',
             'email'=>'Email',
+            'date_create' => 'Дата',
             'description' => 'Сообщение'));
 
 
@@ -830,6 +841,14 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_lang('ru');
         $crud->remove_edit();
         $crud->remove_add();
+        $crud->show_columns('id','email');
+
+        $status['page'] = 'action';
+        $status['position'][0] = array('class' =>'btn-warning', 'text' => 'OFF');
+        $status['position'][1] = array('class' =>'btn-success', 'text' => 'ON');
+
+        $crud->add_action('StatusSubscribers', 'ON', 'ban/actionAdd', '', $status);
+
         return $crud;
     }
 
@@ -864,8 +883,8 @@ class Controller_Administrator extends Controller_Core_Main {
         } elseif (Session::instance()->get('customer_id') == 5) {
 
             $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
-            $crud->edit_fields('email', 'username', 'secondname', 'sex', 'age', 'profil_soc_seti', 'password', 'business_id','date_registration');
-            $crud->add_field('email', 'username', 'secondname', 'sex', 'age', 'profil_soc_seti', 'password', 'business_id','date_registration');
+            $crud->edit_fields('email', 'password', 'username', 'secondname', 'sex', 'age', 'tel', 'profil_soc_seti', 'business_id','date_registration');
+            $crud->add_field('email', 'password', 'username', 'secondname', 'sex', 'age', 'tel', 'profil_soc_seti', 'business_id','date_registration');
             $crud->callback_after_insert('call_after_insert_userBusines');
 
         } else {
@@ -887,6 +906,7 @@ class Controller_Administrator extends Controller_Core_Main {
             'secondname' => 'Фамилия',
             'sex' => 'Пол',
             'age' => 'Возраст',
+            'tel' => 'Телефон',
             'ip' => 'IP адрес',
             'profil_soc_seti' => 'Профиль соц. сети',
             'password' => 'Пароль',
@@ -1002,6 +1022,9 @@ class Controller_Administrator extends Controller_Core_Main {
             Model::factory('Adm')->add_busines_user(Cruds::$post['name_user'],
                                                     Cruds::$post['secondname_user'],
                                                     Cruds::$post['email_user'],
+                                                    Cruds::$post['age'],
+                                                    Cruds::$post['sex'],
+                                                    Cruds::$post['tel'],
                                                     Cruds::$post['password'],
                                                     Cruds::$post['id']);
         }
@@ -1059,6 +1082,9 @@ class Controller_Administrator extends Controller_Core_Main {
 
     //хук перед открытием страницы редактирования
     public static function call_bef_show_edit_bus ($new_array){
+
+        Session::instance()->set('busines_id_adon', $new_array['id']);
+
         //die(HTML::x($new_array));
         $query = DB::select('id', 'name')
             ->from('gallery')
@@ -1086,6 +1112,9 @@ class Controller_Administrator extends Controller_Core_Main {
         $orm_user = ORM::factory('User')->where('business_id', '=', $new_array['id'])->find()->as_array();
 
         if (!empty($orm_user)) {
+            $user->age = $orm_user['age'];
+            $user->sex = $orm_user['sex'];
+            $user->tel = $orm_user['tel'];
             $user->name_user = $orm_user['username'];
             $user->secondname_user = $orm_user['secondname'];
             $user->email_user = $orm_user['email'];
@@ -1327,14 +1356,23 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function StatusBusiness ($key_array = null) {
 
-        if ($key_array['status'] == 1) {
-            //die(HTML::x($key_array));
+        if ($key_array['action'] == 1) {
             $status = 0;
         } else {
             $status = 1;
         }
         $query = DB::update('business')->set(array('status' => $status))->where('id', '=', $key_array['id'])->execute();
-        //die(var_dump($query));
+    }
+
+    public static function StatusSubscribers ($key_array = null) {
+        //die(HTML::x($key_array));
+        if ($key_array[0]['action'] == 1) {
+            //die(HTML::x($key_array));
+            $status = 0;
+        } else {
+            $status = 1;
+        }
+        $query = DB::update('subscription')->set(array('action' => $status))->where('id', '=', $key_array[0]['id'])->execute();
     }
 
 

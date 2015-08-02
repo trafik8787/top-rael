@@ -15,9 +15,9 @@
                 '<input type="file" title="Єто поле обязательно" required name="filename[]"/>'+
             '<div class="media-body text-left">'+
             '<input type="text" name="title[]" class="form-control" value=""  placeholder="Описание"></div>'+
-            '<p> <button type="button" class="btn btn-default btn-lg w-button-delete"><span class="glyphicon glyphicon-remove-sign"></span> Delete</button></p>'+
+            '<p> <button type="button" class="btn btn-default btn-lg w-button-delete"><span class="glyphicon glyphicon-remove-sign"></span> Удалить</button></p>'+
             '</li>';
-            $(".media-list li").last().after(add);
+            $(".media-list li").first().before(add);
             return false;
         });
 
@@ -31,6 +31,7 @@
 <div class="col-sm-offset-2 col-sm-10">
     <div class="row">
         <div class="col-md-12">
+            <p> <button type="button" class="btn btn-default btn-lg w-button-add"><span class="glyphicon glyphicon-plus"></span> Добавить</button></p>
             <ul class="media-list">
                     <li></li>
                     <?if (isset($list)):?>
@@ -42,13 +43,13 @@
                             <div class="media-body text-left">
                                 <input type="text" name="title[<?=$row['id']?>]" class="form-control" value="<?=$row['title']?>"  placeholder="Описание">
                             </div>
-                            <p> <button type="button" class="btn btn-default btn-lg w-button-delete"><span class="glyphicon glyphicon-remove-sign"></span> Delete</button></p>
+                            <p> <button type="button" class="btn btn-default btn-lg w-button-delete"><span class="glyphicon glyphicon-remove-sign"></span> Удалить</button></p>
                         </li>
                     <?endforeach?>
                 <?endif?>
 
             </ul>
-            <p> <button type="button" class="btn btn-default btn-lg w-button-add"><span class="glyphicon glyphicon-plus"></span> Add</button></p>
+
         </div>
     </div>
 </div>

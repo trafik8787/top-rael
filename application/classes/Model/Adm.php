@@ -43,7 +43,7 @@ class Model_Adm extends Model {
     }
 
 
-    public function add_busines_user ($name_user = null, $secondname_user = null, $email_user = null, $password = null, $id_business = null){
+    public function add_busines_user ($name_user = null, $secondname_user = null, $email_user = null, $age = null, $sex = null, $tel = null, $password = null, $id_business = null){
 
         $user = ORM::factory('User')->where('business_id', '=', $id_business)->find();
 
@@ -54,6 +54,9 @@ class Model_Adm extends Model {
             $user->business_id = $id_business;
             $user->password = $password;
             $user->email = $email_user;
+            $user->tel = $tel;
+            $user->age = $age;
+            $user->sex = $sex;
             $user->id_role = 5;
             $user->save();
         } else {
@@ -63,6 +66,9 @@ class Model_Adm extends Model {
             $user_insert->business_id = $id_business;
             $user_insert->password = $password;
             $user_insert->email = $email_user;
+            $user_insert->tel = $tel;
+            $user_insert->age = $age;
+            $user_insert->sex = $sex;
             $user_insert->id_role = 5;
             $user_insert->save();
             $user_insert->add('roles', ORM::factory('Role', array('name' => 'login')));

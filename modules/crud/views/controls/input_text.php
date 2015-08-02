@@ -78,21 +78,50 @@
         switch ($type_field) {
 
             case 'date':
-                $date_types = 'glyphicon-calendar';
                 $data_class = 'form_date';
-                $data_format = 'yyyy-mm-dd';
+              ?>
+                <script type="text/javascript">
+                    $(function () {
+                        $('.form_date').datetimepicker({
+                            locale: 'ru',
+                            format: 'YYYY-MM-DD',
+                            defaultDate: 'moment'
+                        });
+                    });
+                </script>
+                <?
             break;
 
             case 'datetime':
-                $date_types = 'glyphicon-th';
                 $data_class = 'form_datetime';
-                $data_format = 'yyyy-mm-dd hh:ii:ss';
+                ?>
+                <script type="text/javascript">
+                    $(function () {
+                        $('.form_datetime').datetimepicker({
+                            locale: 'ru',
+                            format: 'YYYY-MM-DD HH-mm-ss',
+                            defaultDate: 'moment'
+                        });
+                    });
+                </script>
+
+                <?
             break;
 
             case 'time':
-                $date_types = 'glyphicon-time';
                 $data_class = 'form_time';
-                $data_format = 'hh:ii';
+                ?>
+                <script type="text/javascript">
+                    $(function () {
+                        $('.form_time').datetimepicker({
+                            locale: 'ru',
+                            format: 'HH-mm-ss',
+                            defaultDate: 'moment'
+                        });
+                    });
+                </script>
+
+                <?
             break;
 
         }
@@ -113,20 +142,18 @@
         <span class="glyphicon glyphicon-ok form-control-feedback" style="display: none"></span>
     <?} else {?>
 
-        <div class="input-group date col-md-5 <?=$data_class?>" data-date="" data-date-format="<?=$data_format?>" data-link-field="<?=$name_fied?>" data-link-format="<?=$data_format?>">
+        <div class="input-group date col-md-5 <?=$data_class?>"  data-link-field="<?=$name_fied?>">
             <input <?=$attr?> class="form-control"
                               type="text"
                               data-toggle="tooltip"
                               title='<?=isset($title) ? $title : ''?>'
                               data-placement="bottom"
-                              readonly
                               name="<?=$name_fied?>"
                               value='<?if (!empty($value_fild)) echo $value_fild?>'
                               id="<?=$name_fied?>"/>
             <span class="glyphicon glyphicon-remove form-control-feedback" style="display: none"></span>
             <span class="glyphicon glyphicon-ok form-control-feedback" style="display: none"></span>
-            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-            <span class="input-group-addon"><span class="glyphicon <?=$date_types?>"></span></span>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
         <input type="hidden" id="<?=$name_fied?>" value="" />
 

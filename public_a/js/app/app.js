@@ -19,6 +19,7 @@ $(document).ready(function(){
 
     tinymce.init({
         selector:'.add-editor',
+        language : "ru",
         height: '300',
         plugins: [
             "advlist autolink lists link image charmap print preview anchor",
@@ -140,38 +141,38 @@ $(document).ready(function(){
         //width: "30%"
     });
 
-    $('.form_date').datetimepicker({
-        language: 'ru',
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0
-    });
+    //$('.form_date').datetimepicker({
+    //    language: 'ru',
+    //    weekStart: 1,
+    //    todayBtn:  1,
+    //    autoclose: 1,
+    //    todayHighlight: 1,
+    //    startView: 2,
+    //    minView: 2,
+    //    forceParse: 0
+    //});
 
-    $('.form_time').datetimepicker({
-        language: 'ru', 
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 1,
-        minView: 0,
-        maxView: 1,
-        forceParse: 0
-    });
-
-    $('.form_datetime').datetimepicker({
-        language: 'ru',
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        forceParse: 0,
-        showMeridian: 1
-    });
+    //$('.form_time').datetimepicker({
+    //    language: 'ru',
+    //    weekStart: 1,
+    //    todayBtn:  1,
+    //    autoclose: 1,
+    //    todayHighlight: 1,
+    //    startView: 1,
+    //    minView: 0,
+    //    maxView: 1,
+    //    forceParse: 0
+    //});
+    //
+    //$('.form_datetime').datetimepicker({
+    //    language: 'ru',
+    //    weekStart: 1,
+    //    todayBtn:  1,
+    //    autoclose: 1,
+    //    todayHighlight: 1,
+    //    startView: 2,
+    //    forceParse: 0,
+    //    showMeridian: 1
+    //});
 
 });

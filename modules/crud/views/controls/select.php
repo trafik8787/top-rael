@@ -49,6 +49,8 @@
                                     <?endif?>
                                 <?endforeach?>
                             </select>
+
+
                         </div>
 
                 <?else:?>
@@ -65,6 +67,15 @@
             <?else:?>
 
                 <div class="entry input-group">
+
+                    <?
+                    $bus_id = Session::instance()->get('busines_id_adon');
+
+                    if (!empty($bus_id) and ($name_fied == 'business_id' OR $name_fied == 'bussines_id') ) {
+                        $origin_value_fild_tmp = $bus_id;
+                    }
+                    ?>
+
                     <select  <?=$attr?> data-placeholder="Выбрать" class="form-control chosen-select validate[required]" style="height: 20px;" <?=$multiselect?> name="<?=$name_fied?>[]" id="">
                         <option value=""></option>
                         <?foreach ($value_fild as $val => $row):?>
@@ -75,10 +86,16 @@
                                     <?endforeach?>
                                 </optgroup>
                             <?else:?>
-                                <option value="<?=$val?>"><?=$row?></option>
+                                <option <?if (!empty($origin_value_fild_tmp)):?><?if ($origin_value_fild_tmp == $val):?> selected <?endif?><?endif?> value="<?=$val?>"><?=$row?></option>
                             <?endif?>
                         <?endforeach?>
                     </select>
+
+                    <?
+                    if ($name_fied == 'business_id' OR $name_fied == 'bussines_id') {
+                        Session::instance()->delete('busines_id_adon');
+                    }
+                    ?>
                 </div>
             <?endif?>
 
@@ -126,6 +143,15 @@
 
     <?else:?>
 
+        <?
+        $bus_id = Session::instance()->get('busines_id_adon');
+
+        if (!empty($bus_id) and $name_fied == 'business_id') {
+            $origin_value_fild = $bus_id;
+        }
+
+        ?>
+
         <select <?=$attr?> data-placeholder="Выбрать" class="form-control chosen-select" name="<?=$name_fied?>" id="">
             <?//проверяем вляется ли переменная масивом?>
             <option value=""></option>
@@ -145,6 +171,13 @@
                 <option value="<?=$value_fild?>"><?=$value_fild?></option>
             <?endif?>
         </select>
-        
+
+
+        <?
+        if ($name_fied == 'business_id') {
+            Session::instance()->delete('busines_id_adon');
+        }
+        ?>
+
     <?endif?>
 
