@@ -55,7 +55,8 @@ class Kohana_Ulogin {
     }
     
     public function render()
-    {    
+    {
+
         $params =     
             'display='.$this->config['type'].
             '&fields='.implode(',', array_merge($this->config['username'], $this->config['fields'])).

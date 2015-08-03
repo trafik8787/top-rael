@@ -3,10 +3,10 @@
 return array
 (
 	// Возможные значения: small, panel, window
-	'type' 			=> 'panel',
+	'type' 			=> 'small',
 	
 	// на какой адрес придёт POST-запрос от uLogin
-	'redirect_uri' 	=>	null,
+	'redirect_uri' 	=>	'http://topisrael.webremote.net/account',
 	
 	// Сервисы, выводимые сразу
 	'providers'		=> array(
@@ -18,16 +18,18 @@ return array
 	
 	// Выводимые при наведении
 	'hidden' 		=> array(
-		'odnoklassniki',
-		'mailru',
-		'livejournal',
-		'openid'
+		//'odnoklassniki',
+		//'mailru',
+		//'livejournal',
+		//'openid'
+
 	),
 	
 	// Эти поля используются для поля username в таблице users
 	'username' 		=> array (
 		'first_name',
-		'last_name',
+		'last_name'
+
 	),
 	
 	// Обязательные поля
@@ -37,7 +39,6 @@ return array
 	
 	// Необязательные поля
 	'optional'		=> array(
-
-
+        'photo',
     ),
 );

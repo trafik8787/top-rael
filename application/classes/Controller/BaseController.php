@@ -13,6 +13,7 @@ abstract class Controller_BaseController extends Controller_Template {
     public static $detect_uri;
     public static $general_meny;
     public static $urlPars;
+    public $header;
     //public $RightBloc;
     //public $general_meny;
 
@@ -21,7 +22,6 @@ abstract class Controller_BaseController extends Controller_Template {
     public function before () {
 
         parent::before();
-
 
         $url = Request::detect_uri();
         self::$detect_uri = '/'.$url;
@@ -35,8 +35,15 @@ abstract class Controller_BaseController extends Controller_Template {
             'Эйлат' => '/city/eilat',
             'На карте' => '/maps');
 
-        $header = View::factory('/temp_pages/header');
-        $header->top_meny = $this->top_meny; //самое верхнее меню
+        $this->header = View::factory('/temp_pages/header');
+        $this->header->top_meny = $this->top_meny; //самое верхнее меню
+
+
+        if (Auth::instance()->get_user()) { // смотрим - если пользователь авторизован
+
+            $this->header->user = Auth::instance()->get_user();
+
+        }
 
         if (Cache::instance()->get('general_meny') == null) {
             self::$general_meny = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', 0)); //меню разделов
@@ -44,9 +51,9 @@ abstract class Controller_BaseController extends Controller_Template {
         } else {
             self::$general_meny = Cache::instance()->get('general_meny');
         }
-        $header->general_meny = self::$general_meny;
+        $this->header->general_meny = self::$general_meny;
 
-        $this->template->header = $header;
+        $this->template->header = $this->header;
         $this->template->footer = View::factory('/temp_pages/footer');
 
 

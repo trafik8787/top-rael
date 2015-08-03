@@ -149,6 +149,13 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+// регистрация вход востановление пароля
+Route::set('Account', 'account(/<action>)')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Account',
+        'action'     => 'index',
+    ));
 
 Route::set('Contacts', 'contacts')
     ->defaults(array(

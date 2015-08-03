@@ -51,6 +51,7 @@ class Controller_Administrator extends Controller_Core_Main {
         if ($this->auth->logged_in() === false) {
             $this->response->body($this->adm);
         } else {
+
             $this->user = $this->auth->get_user();
            $this->user_roles = $this->user->roles->find_all()->as_array(NULL,'name');
             $this->_check_permission();
