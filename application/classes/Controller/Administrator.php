@@ -497,6 +497,8 @@ class Controller_Administrator extends Controller_Core_Main {
             'keywords',
             'city',
             'address',
+            'maps_cordinate_x',
+            'maps_cordinate_y',
             'dop_address',
             'website',
             'video',
@@ -519,6 +521,8 @@ class Controller_Administrator extends Controller_Core_Main {
             'keywords',
             'city',
             'address',
+            'maps_cordinate_x',
+            'maps_cordinate_y',
             'dop_address',
             'website',
             'video',
@@ -539,6 +543,8 @@ class Controller_Administrator extends Controller_Core_Main {
             'keywords' => 'SEO Keywords',
             'city' => 'Город',
             'address' => 'Адрес',
+            'maps_cordinate_x' => 'Широта',
+            'maps_cordinate_y' => 'Долгота',
             'services' => 'Приемущества и услуги',
             'website' => 'Веб сайт бизнеса',
             'video' => 'Видео',
@@ -1107,7 +1113,7 @@ class Controller_Administrator extends Controller_Core_Main {
             $city->data = null;
         }
 
-        Cruds::$adon_form[] = array('page' => 'address', 'view' => $city);
+        Cruds::$adon_form[] = array('page' => 'maps_cordinate_y', 'view' => $city);
 
         $user = View::factory('adm/form_add_user_business');
         $orm_user = ORM::factory('User')->where('business_id', '=', $new_array['id'])->find()->as_array();
@@ -1149,16 +1155,13 @@ class Controller_Administrator extends Controller_Core_Main {
         $city = View::factory('adm/adon_city_business');
         $city->list_sity = Model::factory('CategoryModel')->get_section('city', array('parent_id','<>','0'));
         $city->data = null;
-        Cruds::$adon_form[] = array('page' => 'address', 'view' => $city);
+        Cruds::$adon_form[] = array('page' => 'maps_cordinate_y', 'view' => $city);
     }
 
 
     public static function call_befor_del_business ($new_array){
         $user = DB::delete('users')->where('business_id', '=', $new_array['id'])->execute();
     }
-
-
-
 
 
     //articles

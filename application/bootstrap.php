@@ -149,6 +149,15 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+//Ajax запросы с главной страницы
+Route::set('HomeAjax', 'ajaxselect')
+    ->defaults(array(
+        'controller' => 'HomeAjax',
+        'action'     => 'index',
+    ));
+
+
+
 // регистрация вход востановление пароля
 Route::set('Account', 'account(/<action>)')
     ->defaults(array(

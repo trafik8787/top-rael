@@ -22,7 +22,7 @@ class Controller_Pages_Account extends Controller_BaseController {
     public function action_index() {
 
 
-        $data = array(); // в эту переменную я зыписываю все, что нужно передать виду
+        $data = View::factory('auth/account'); // в эту переменную я зыписываю все, что нужно передать виду
         $ulogin = Ulogin::factory(); // создаем экземпляр класса юлогин
 
         if (!$ulogin->mode()) { // если ранее юлогин не вызывался
@@ -48,15 +48,15 @@ class Controller_Pages_Account extends Controller_BaseController {
             }
         }
 
-        if (!$data['user'] = Auth::instance()->get_user()) // если пользователь не авторизован
+        if (!$data->user = Auth::instance()->get_user()) // если пользователь не авторизован
         {
             $this->redirect('/account/registration'); // редиректим на страницу с регистрацией
         }
 
-        $data['ulogin'] = $ulogin->render(); // стартуем сессии
-        $data['photo'] = Auth::instance()->get_user()->photo;
+        $data->ulogin = $ulogin->render(); // стартуем сессии
+        $data->photo = Auth::instance()->get_user()->photo;
 
-        $this->template->content = View::factory('auth/account', $data);
+        $this->template->content = $data;
     }
 
 
@@ -65,7 +65,7 @@ class Controller_Pages_Account extends Controller_BaseController {
      */
     public function action_login(){
 
-        $data = array();
+        $data = View::factory('auth/login');
         if (HTTP_Request::POST == $this->request->method()){ // если переданы POST данные
             // проверяем - стоит ли флаг - запомнить меня
             $remember = array_key_exists('rememberme', $this->request->post()) ? (bool) $this->request->post('rememberme') : FALSE;
@@ -88,17 +88,17 @@ class Controller_Pages_Account extends Controller_BaseController {
 
             } else {
 
-                $data['message'] = Kohana::message('auth','wrongPass'); // если не удалось авторизоваться - выводим соответствующий мессадж
+                $data->message = Kohana::message('auth','wrongPass'); // если не удалось авторизоваться - выводим соответствующий мессадж
             }
-            $data['email'] = $this->request->post('email');
+            $data->email = $this->request->post('email');
         }
 
         if (!Auth::instance()->get_user()) {
             $ulogin = Ulogin::factory();
-            $data['ulogin'] = $ulogin->render(); // рисуем значки соц.сетей
-            $data['email'] = array_key_exists('email', $this->request->post()) ? htmlspecialchars($this->request->post('email')) : '';
-            $data['username'] = array_key_exists('username', $this->request->post()) ? htmlspecialchars($this->request->post('username')) : ''; // вставляем данные в формы, если они были введены
-            $this->template->content = View::factory('auth/login', $data);
+            $data->ulogin = $ulogin->render(); // рисуем значки соц.сетей
+            $data->email = array_key_exists('email', $this->request->post()) ? htmlspecialchars($this->request->post('email')) : '';
+            $data->username = array_key_exists('username', $this->request->post()) ? htmlspecialchars($this->request->post('username')) : ''; // вставляем данные в формы, если они были введены
+            $this->template->content = $data;
         } else {
             $this->redirect('/');
         }
@@ -111,7 +111,7 @@ class Controller_Pages_Account extends Controller_BaseController {
      */
     public function action_registration(){
 
-        $data = array();
+        $data = View::factory('auth/registration');
         $post = $this->request->post();
         if (!empty($post))
         {
@@ -156,17 +156,17 @@ class Controller_Pages_Account extends Controller_BaseController {
             } catch (ORM_Validation_Exception $e) {
 
                 // если во время валидации возникли ошибки
-                $data['messageReg'] = Kohana::message('account', 'errorReg');
-                $data['errors']= $e->errors('model');
+                $data->messageReg = Kohana::message('account', 'errorReg');
+                $data->errors = $e->errors('model');
                 // берем значения ошибок из файла /application/messages/model/user.php
             }
         }
-        $data['email'] = array_key_exists('email', $this->request->post()) ? htmlspecialchars($this->request->post('email')) : '';
-        $data['username'] = array_key_exists('username', $this->request->post()) ? htmlspecialchars($this->request->post('username')) : '';     // вставляем данные в формы, если они были введены
+        $data->email = array_key_exists('email', $this->request->post()) ? htmlspecialchars($this->request->post('email')) : '';
+        $data->username = array_key_exists('username', $this->request->post()) ? htmlspecialchars($this->request->post('username')) : '';     // вставляем данные в формы, если они были введены
 
         $ulogin = Ulogin::factory();
-        $data['ulogin'] = $ulogin->render();  // рисуем значки соц.сетей
-        $this->template->content = View::factory('auth/registration',$data);
+        $data->ulogin = $ulogin->render();  // рисуем значки соц.сетей
+        $this->template->content = $data;
     }
 
 
@@ -206,10 +206,10 @@ class Controller_Pages_Account extends Controller_BaseController {
      */
     public function action_forgot() {
 
-        $data = array();
+        $data = View::factory('auth/forgot');
         if (HTTP_Request::POST == $this->request->method())  // если были какие-то POST данные
         {
-            $data['message'] = Kohana::message('account', 'passwordSended'); // в любом случае выводим сообщение о том, что пароль отправлен. Пусть думают что все почтовые аккаунты имеют своих владельцев
+            $data->message = Kohana::message('account', 'passwordSended'); // в любом случае выводим сообщение о том, что пароль отправлен. Пусть думают что все почтовые аккаунты имеют своих владельцев
             $user = ORM::factory('User', array('email' => $this->request->post('email'))); // а теперь действительно ищем - есть ли пользователь со введенным адресом
             if ($user->loaded()) // если есть
             {
@@ -220,7 +220,7 @@ class Controller_Pages_Account extends Controller_BaseController {
 
 
                 // отправляем ссылку с хэшем для сброса пароля
-                $message = 'Для сброса пароля пройдите по ссылке - <a href="http://ratefilm.ru/account/forgot?change='.$hash.'">СБРОСИТЬ</a>';
+                $message = 'Для сброса пароля пройдите по ссылке - <a href="http://'.$_SERVER['SERVER_NAME'].'/account/forgot?change='.$hash.'">СБРОСИТЬ</a>';
 
                 $m = Email::factory();
                 $m->From("registr@top.com"); // от кого отправляется почта
@@ -256,18 +256,19 @@ class Controller_Pages_Account extends Controller_BaseController {
 
 
                 // отправляем новый пароль пользователю
-                $message = 'Ваш новый пароль - "'.$newpass.'" без кавычек. <a href="http://ratefilm.ru/account/">Войти</a>';
+                $message = 'Ваш новый пароль - "'.$newpass.'" без кавычек. <a href="http://'.$_SERVER['SERVER_NAME'].'/account/">Войти</a>';
 
                 $m->Body($message, "html");
                 $m->Priority(3);
                 $m->Send();
 
                 // сообщаем об успехе процедуры
-                $data['message'] = Kohana::message('account', 'newPassSended');
+                $data->message = Kohana::message('account', 'newPassSended');
             }
         }
-        $data['email'] = array_key_exists('email', $this->request->post()) ? htmlspecialchars($this->request->post('email')) : '';
-        $this->template->content = View::factory('auth/forgot',$data);
+        $data->email = array_key_exists('email', $this->request->post()) ? htmlspecialchars($this->request->post('email')) : '';
+
+        $this->template->content = $data;
     }
 
     /**

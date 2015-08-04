@@ -41,8 +41,8 @@
 
                         <div class="form-inline" style="margin-top: 10px;">
                             <select class="form-control" data-toggle="tooltip"  data-original-title="Выбрать пол" name="sex" data-placeholder="Пол">
-                                <option <?if ($sex == 'm'):?> selected <?endif?> value="m">Мужчина</option>
-                                <option <?if ($sex == 'j'):?> selected <?endif?> value="j">Женщина</option>
+                                <option <?if (!empty($sex) and $sex == 'm'):?> selected <?endif?> value="m">Мужчина</option>
+                                <option <?if (!empty($sex) and $sex == 'j'):?> selected <?endif?> value="j">Женщина</option>
                             </select>
                             <div class="input-group date col-md-5 form_date">
                                 <input class="form-control" type="text" value="<?=isset($age) ? $age: ''?>" data-toggle="tooltip" data-original-title="Возраст" name="age">
