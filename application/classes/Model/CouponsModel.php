@@ -22,6 +22,14 @@ class Model_CouponsModel extends Model_BaseModel {
     }
 
 
+    /**
+     * @param null $url_section
+     * @param null $limit
+     * @param null $num_page
+     * @param null $id_city
+     * @return array
+     * Получить купоны по урлу раздела
+     */
     public function getCouponsSectionUrl ($url_section = null, $limit = null, $num_page = null, $id_city = null){
 
         if ($num_page != null) {
@@ -92,9 +100,11 @@ class Model_CouponsModel extends Model_BaseModel {
     }
 
 
-
-
-
+    /**
+     * @param null $arrSection
+     * @return array
+     * Получить
+     */
     public function getCityCouponInSection($arrSection = null){
 
         if ($arrSection == null) {

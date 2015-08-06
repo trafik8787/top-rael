@@ -104,9 +104,18 @@
 
     });
 </script>
-<?//HTML::x($data)?>
+<?//HTML::x($articles)?>
 <div class="row">
     <div class="col-md-9">
+
+        <div class="row">
+            <div class="col-md-12">
+                <?foreach ($articles as $row_article):?>
+                    <h4><?=$row_article['name']?></h4>
+                <?endforeach?>
+            </div>
+        </div>
+
 
         <?foreach($data as $key => $rowsdata):?>
 
@@ -129,6 +138,7 @@
                             <a href="/section/<?=$rowsdata['category'][0]['url'].'/'.$row_category['url']?>" data-cat="<?=$row_category['url']?>" class="w-home-cat" ><?=$row_category['name']?></a>
 
                         <?endforeach?>
+                        <a href="/section/<?=$rowsdata['category'][0]['url']?>">еще...</a>
                     </div>
                 </div>
 
@@ -152,7 +162,7 @@
 
                                     <em><?=$rows['CityName']?>. <?=$rows['address']?></em>
 
-                                    <?=strip_tags($rows['info'])?>
+                                    <?=Text::limit_chars(strip_tags($rows['info']), 150, null, true)?>
                                 </div>
                             </div>
                         </div>

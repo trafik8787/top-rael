@@ -264,6 +264,11 @@ class Model_ArticlesModel extends Model_BaseModel {
     }
 
 
+    /**
+     * @param null $arrSection
+     * @return array
+     * Получить обзоры по урлу раздела
+     */
     public function getCityArticleInSection($arrSection = null){
 
         if ($arrSection == null) {
@@ -295,6 +300,21 @@ class Model_ArticlesModel extends Model_BaseModel {
 
         return $city_arr;
 
+    }
+
+    /**
+     * @return mixed
+     * Получить обзоры для главной
+     */
+    public function getArticlesInHome(){
+
+        return DB::select()
+            ->from('articles')
+            ->where('in_home','=', 1)
+            ->order_by('id', 'DESC')
+            ->limit(4)
+//            ->cached()
+            ->execute()->as_array();
     }
 
 }

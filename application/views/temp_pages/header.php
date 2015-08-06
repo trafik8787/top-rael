@@ -55,6 +55,7 @@
 
         <div class="col-md-12">
             <ul class="list-inline">
+                <li><a href="/" class="normal8Tahoma ">Главная</a></li>
                 <?foreach($general_meny as $row_meny):?>
 
                         <li><a href="/section/<?=$row_meny['url']?>" class="normal8Tahoma <? if (Controller_BaseController::$detect_uri == '/section/'.$row_meny['url']) { echo 'active'; }?>"><?=$row_meny['name']?></a></li>
