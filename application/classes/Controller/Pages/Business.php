@@ -11,9 +11,13 @@ class Controller_Pages_Business extends Controller_BaseController {
 	{
         $content = View::factory('pages/business_page');
        // $token = Profiler::start('Model', 'BussinesModel');
-        $content->data = Model::factory('BussinesModel')->getBusinessUrl($this->request->param('url_business'));
+        $data = Model::factory('BussinesModel')->getBusinessUrl($this->request->param('url_business'));
         //Profiler::stop($token);
         //echo View::factory('profiler/stats');
+        $content->bloc_right = parent::RightBloc(array(
+            View::factory('blocks_includ/coupon_business_page', array('content' => $data['CoupArr']))
+        ));
+        $content->data = $data;
         $this->template->content = $content;
 
 	}

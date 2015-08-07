@@ -22,10 +22,9 @@ class Controller_HomeAjax extends Controller {
             if ($this->request->post('cat') != 'undefined') {
                 $data = Model::factory('BussinesModel')->getBussinesCategoryUrl($this->request->post('cat'), 3, null, $city_id);
             } else {
+                //die(HTML::x($_POST));
                 $data = Model::factory('BussinesModel')->getBussinesSectionUrl($this->request->post('section'), 3, null, $city_id);
             }
-
-
 
             foreach ($data['data'] as $key => $rows) {
                 $data['data'][$key]['info'] = Text::limit_chars(strip_tags($rows['info']), 150, null, true);

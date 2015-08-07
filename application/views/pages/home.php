@@ -43,7 +43,7 @@
 
                     //console.log(response);
                     $.each(response.data, function(index, value) {
-                        console.log(value);
+                        //console.log(value);
                         sliderTmp.append('<div class="col-md-4">'+
                         '<div class="thumbnail">'+
                         '<a href="#" class="pin"><i class="fa fa-star"></i></a>'+
@@ -75,12 +75,13 @@
 
             var thisSel = $(this);
             var sliderTmp = thisSel.closest('.w-bloc-section').find('.slider');
+            var section = thisSel.closest('.w-bloc-section').find('.w-active-cat').data('section');
             //console.log($(this).val());
             $.ajax({ // описываем наш запрос
                 type: "POST", // будем передавать данные через POST
                 dataType: "JSON", // указываем, что нам вернется JSON
                 url: '/ajaxselect',
-                data: 'city='+$(this).val()+'&section='+$('.w-active-cat').data('section')+'&cat='+$('.w-active-cat').data('cat'), // передаем данные из формы
+                data: 'city='+$(this).val()+'&section='+section+'&cat='+$('.w-active-cat').data('cat'), // передаем данные из формы
                 success: function(response) { // когда получаем ответ
                     //очищаем слайдер
                     sliderTmp.empty();

@@ -11,6 +11,8 @@
     <div class="col-md-12">slider</div>
 </div>
 <div class="row">
-    <div class="col-md-9"><?HTML::x($data)?></div>
+    <div class="col-md-9">
+        <?HTML::x($data)?>
+    </div>
     <div class="col-md-3"><?=isset($bloc_right)? $bloc_right : ''?></div>
 </div>
