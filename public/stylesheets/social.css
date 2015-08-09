@@ -1,0 +1,67 @@
+/* line 9, ../sass/social.scss */
+.tabs-social .nav-tabs {
+  border-bottom: 0;
+}
+/* line 12, ../sass/social.scss */
+.tabs-social .nav-tabs li {
+  margin-right: 5px;
+  margin-bottom: 3px;
+}
+/* line 16, ../sass/social.scss */
+.tabs-social .nav-tabs li a,
+.tabs-social .nav-tabs li a:hover,
+.tabs-social .nav-tabs li a:active,
+.tabs-social .nav-tabs li a:visited,
+.tabs-social .nav-tabs li a:focus {
+  border: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  color: #fff;
+  background: none;
+  font-size: 18px;
+  padding: 5px 0;
+  width: 40px;
+  text-align: center;
+}
+/* line 31, ../sass/social.scss */
+.tabs-social .nav-tabs li.active {
+  margin-bottom: 0;
+  padding-bottom: 3px;
+}
+/* line 36, ../sass/social.scss */
+.tabs-social .nav-tabs li.nav-facebook {
+  background-color: #49659f;
+}
+/* line 40, ../sass/social.scss */
+.tabs-social .nav-tabs li.nav-twitter {
+  background-color: #47afff;
+}
+/* line 44, ../sass/social.scss */
+.tabs-social .nav-tabs li.nav-vk {
+  background-color: #7b97d2;
+}
+/* line 48, ../sass/social.scss */
+.tabs-social .nav-tabs li.nav-odnoklassniki {
+  background-color: #f68735;
+}
+/* line 54, ../sass/social.scss */
+.tabs-social .tab-pane {
+  padding: 15px 0;
+}
+/* line 58, ../sass/social.scss */
+.tabs-social #tab-facebook {
+  border-top: 5px solid #49659f;
+}
+/* line 62, ../sass/social.scss */
+.tabs-social #tab-twitter {
+  border-top: 5px solid #47afff;
+}
+/* line 66, ../sass/social.scss */
+.tabs-social #tab-vk {
+  border-top: 5px solid #7b97d2;
+}
+/* line 70, ../sass/social.scss */
+.tabs-social #tab-odnoklassniki {
+  border-top: 5px solid #f68735;
+}

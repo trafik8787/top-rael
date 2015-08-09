@@ -228,6 +228,8 @@ class Model_BussinesModel extends Model_BaseModel {
                 array('bus.keywords', 'BusKeywords'),
                 array('bus.city', 'BusCity'),
                 array('bus.address', 'BusAddress'),
+                array('bus.maps_cordinate_x', 'BusMapsX'),
+                array('bus.maps_cordinate_y', 'BusMapsY'),
                 array('bus.dop_address', 'BusDopAddress'),
                 array('bus.services', 'BusServices'),
                 array('bus.tags', 'BusTags'),
@@ -344,6 +346,8 @@ class Model_BussinesModel extends Model_BaseModel {
         $end_result['BusKeywords'] = $result[0]['BusKeywords'];
         $end_result['BusFileMeny'] = $result[0]['BusFileMeny'];
         $end_result['BusAddress'] = $result[0]['BusAddress'];
+        $end_result['BusMapsX'] = $result[0]['BusMapsX'];
+        $end_result['BusMapsY'] = $result[0]['BusMapsY'];
         $end_result['BusCity'] = $result[0]['BusCity'];
 
 
@@ -503,6 +507,8 @@ class Model_BussinesModel extends Model_BaseModel {
 
         return $city_arr;
     }
+
+
 
 
 }

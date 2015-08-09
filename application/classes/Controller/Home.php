@@ -10,6 +10,26 @@ class Controller_Home extends Controller_BaseController {
 
 	public function action_index(){
 
+
+//        $er = json_encode(array('qwe' => 'sdfsdfsdfsdfsdf', 'asd'=> 'asdasdasd'));
+//        Cookie::set('__count', $er);
+//        $redis = new Redis();
+//        $redis->connect('127.0.0.1', 6379);
+//       // $redis->flushDB();
+//        $key = 'linus torvalds';
+//        //$redis->hmset($key,'age', 45);
+//        $redis->hmset($key, [
+//            'age' => 87,
+//            'country' => 'finland',
+//            'occupation' => 'software engineer',
+//            'reknown' => 'linux kernel',
+//        ]);
+//        $data_redis = $redis->hgetall($key);
+     //   $redis->save();
+//
+        //$we = json_decode(Cookie::get('__count'));
+       // HTML::x($we->asd);
+       // die(phpinfo());
         $resultArr = array();
         $content = View::factory('pages/home');
         $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));

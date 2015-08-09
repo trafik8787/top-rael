@@ -57,8 +57,26 @@ abstract class Controller_BaseController extends Controller_Template {
         $this->template->footer = View::factory('/temp_pages/footer');
 
 
-        $this->template->style = array('bootstrap.min', 'style', 'jquery.bxslider.min');
-        $this->template->script = array('jquery-1.11.2.min', 'bootstrap.min', 'jquery.validate.min','app', 'jquery.bxslider.min');
+        $this->template->style = array(
+            'public/stylesheets/jquery.ui/all.css',
+            'public/stylesheets/bootstrap.min.css',
+            'public/stylesheets/bootstrap-social.css',
+            'public/stylesheets/font-awesome.min.css',
+            'public/stylesheets/screen.css',
+            'public/stylesheets/print.css',
+            'public/stylesheets/owl.carousel.min.css',
+            'public/stylesheets/common.css',
+            'public/stylesheets/ie.css'
+
+        );
+
+        $this->template->script = array(
+            'public/javascripts/jquery.min.js',
+            'public/javascripts/jquery-ui.min.js',
+            'public/javascripts/bootstrap.min.js',
+            'public/javascripts/owl.carousel.min.js',
+            'public/javascripts/common.js'
+        );
 
     }
 

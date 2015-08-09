@@ -1,0 +1,101 @@
+/* line 5, ../sass/input.scss */
+.checkbox label:after,
+.radio label:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* line 12, ../sass/input.scss */
+.checkbox .cr,
+.radio .cr {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #a9a9a9;
+  border-radius: .25em;
+  width: 1.3em;
+  height: 1.3em;
+  float: left;
+  margin-right: .5em;
+  margin-left: -20px;
+}
+
+/* line 25, ../sass/input.scss */
+.radio .cr {
+  border-radius: 50%;
+}
+
+/* line 29, ../sass/input.scss */
+.checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+  position: absolute;
+  font-size: .8em;
+  line-height: 0;
+  top: 50%;
+  left: 20%;
+}
+
+/* line 38, ../sass/input.scss */
+.radio .cr .cr-icon {
+  margin-left: 0.03em;
+}
+
+/* line 42, ../sass/input.scss */
+.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
+  opacity: 0;
+}
+
+/* line 47, ../sass/input.scss */
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
+  opacity: 1;
+}
+
+/* line 52, ../sass/input.scss */
+.checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+  opacity: .5;
+}
+
+/* line 57, ../sass/input.scss */
+.inner-addon {
+  position: relative;
+}
+/* line 60, ../sass/input.scss */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+  color: #777777;
+  top: -1px;
+}
+/* line 69, ../sass/input.scss */
+.inner-addon.left-addon .glyphicon {
+  left: 0;
+}
+/* line 72, ../sass/input.scss */
+.inner-addon.left-addon input {
+  padding-left: 30px;
+}
+/* line 78, ../sass/input.scss */
+.inner-addon.right-addon .glyphicon {
+  right: 0;
+}
+/* line 79, ../sass/input.scss */
+.inner-addon.right-addon input {
+  padding-right: 30px;
+}
+
+/* line 83, ../sass/input.scss */
+.form-control {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/* line 86, ../sass/input.scss */
+.form-control:focus {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

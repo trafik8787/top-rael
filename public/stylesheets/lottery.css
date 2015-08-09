@@ -1,0 +1,76 @@
+/* line 5, ../sass/lottery.scss */
+.lottery {
+  border: 1px solid #d8d8d8;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+/* line 11, ../sass/lottery-sidebar.scss */
+.lottery a {
+  color: #000;
+}
+/* line 57, ../sass/_common-variables.scss */
+.lottery a {
+  text-decoration: underline;
+}
+/* line 60, ../sass/_common-variables.scss */
+.lottery a:hover {
+  text-decoration: none;
+}
+/* line 17, ../sass/lottery-sidebar.scss */
+.lottery .cr {
+  background: #ececec;
+  color: #d9534f;
+  border-color: transparent !important;
+}
+/* line 25, ../sass/lottery-sidebar.scss */
+.lottery .input-group .form-control {
+  background: #ececec;
+  border-color: transparent;
+}
+/* line 29, ../sass/lottery-sidebar.scss */
+.lottery .input-group .form-control:focus {
+  border-color: transparent;
+}
+/* line 34, ../sass/lottery-sidebar.scss */
+.lottery .input-group .input-group-addon {
+  padding: 0;
+  border-color: transparent;
+}
+/* line 40, ../sass/lottery-sidebar.scss */
+.lottery .input-group .input-group-addon .btn {
+  padding: 3px 12px;
+  margin: 0 3px;
+}
+/* line 47, ../sass/lottery-sidebar.scss */
+.lottery .lottery-title {
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+/* line 52, ../sass/lottery-sidebar.scss */
+.lottery .media-heading {
+  font-size: 24px;
+  line-height: 1.2;
+}
+/* line 57, ../sass/lottery-sidebar.scss */
+.lottery .lottery-section {
+  margin-bottom: 20px;
+}
+/* line 61, ../sass/lottery-sidebar.scss */
+.lottery .lottery-section .lottery-section-title {
+  display: block;
+  font-size: 16px;
+  border-bottom: 1px solid #007898;
+  margin-bottom: 20px;
+}
+/* line 68, ../sass/lottery-sidebar.scss */
+.lottery .lottery-section .img-circle {
+  display: inline-block;
+}
+/* line 73, ../sass/lottery-sidebar.scss */
+.lottery .lottery-section .checkbox {
+  color: #007898;
+}
+/* line 76, ../sass/lottery-sidebar.scss */
+.lottery .lottery-section .checkbox a {
+  color: #007898;
+}

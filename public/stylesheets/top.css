@@ -1,0 +1,81 @@
+/* line 8, ../sass/top.scss */
+.top {
+  position: relative;
+  margin-bottom: 20px;
+  /*h2 {
+    margin: 0 0 5px 0;
+  }*/
+  border: 1px solid #d8d8d8;
+}
+/* line 41, ../sass/_common-variables.scss */
+.top:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+/* line 20, ../sass/top.scss */
+.top a {
+  color: #000;
+}
+/* line 57, ../sass/_common-variables.scss */
+.top a {
+  text-decoration: underline;
+}
+/* line 60, ../sass/_common-variables.scss */
+.top a:hover {
+  text-decoration: none;
+}
+/* line 28, ../sass/top.scss */
+.top .top-image {
+  width: 50%;
+  float: left;
+}
+/* line 33, ../sass/top.scss */
+.top .top-image .top-image-text {
+  width: 50%;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: #fff;
+}
+/* line 47, ../sass/top.scss */
+.top .top-image .top-image-text a {
+  color: #fff;
+}
+@media (max-width: 768px) {
+  /* line 28, ../sass/top.scss */
+  .top .top-image {
+    width: 100%;
+    float: none;
+  }
+  /* line 56, ../sass/top.scss */
+  .top .top-image .top-image-text {
+    position: inherit;
+    width: 100%;
+  }
+}
+@media (max-width: 1024px) {
+  /* line 63, ../sass/top.scss */
+  .top .top-image .top-image-text {
+    background: #666666;
+  }
+}
+/* line 69, ../sass/top.scss */
+.top .top-list {
+  float: left;
+  padding: 15px;
+  width: 50%;
+}
+@media (max-width: 768px) {
+  /* line 69, ../sass/top.scss */
+  .top .top-list {
+    width: 100%;
+    float: none;
+  }
+}
+/* line 81, ../sass/top.scss */
+.top .top-list .media-heading {
+  font-size: 18px;
+}

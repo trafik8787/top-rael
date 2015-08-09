@@ -7,61 +7,81 @@
  */
 ?>
 
-<div class="container">
+<div id="wrapper" class="container">
 
-    <div class="row">
-        <div class="col-md-3">Logo</div>
-        <div class="col-md-6">
-            <ul class="list-inline">
-                <?foreach ($top_meny as $name=>$url):?>
-                    <li><a href="<?=$url?>" class="normal8Tahoma <? if (Controller_BaseController::$detect_uri == $url) { echo 'active'; }?>"><?=$name?></a></li>
+    <header>
+        <div id="header">
 
-                <?endforeach?>
-            </ul>
-        </div>
-        <div class="col-md-3">
+            <a class="menu-toggle" role="button" data-toggle="collapse" href="#nav-header" aria-controls="nav-header">
+                <i class="fa fa-bars"></i>
+            </a>
 
-            <?if (isset($user)):?>
+            <a href="#" class="icons logo">TopIsrael</a>
 
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object img-circle" src="<?=$user->photo?>" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h5 class="media-heading"><a href="/account">Профиль</a></h5>
-                        <h5><a href="/account/logout">выход</a></h5>
+            <div class="collapse" id="nav-header">
+                <?if (isset($user)):?>
+
+                    <div class="header-profile">
+
+                        <div class="header-profile-shape">
+
+                            <a href="#"><i class="fa fa-star"></i>Избранные места <span class="badge">42</span></a>
+                            <a href="#"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge">42</span></a>
+                        </div>
+
+                        <img src="<?=$user->photo?>" width="60" height="60" alt="" class="img-circle"/>
+
+                        <div class="header-profile-info">
+                            <small>Добро пожаловать</small>
+                            <small class="profile-username">Валентина Громова</small>
+                            <a href="/account">Профиль</a> <a href="/account/logout"><i class="fa fa-sign-out"></i></a>
+                        </div>
                     </div>
+
+                <?else:?>
+
+                    <div class="header-profile">
+
+                        <div class="header-profile-shape">
+
+                            <a href="#"><i class="fa fa-star"></i>Избранные места <span class="badge">0</span></a>
+                            <a href="#"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge">0</span></a>
+                        </div>
+
+                        <img src="/public/uploade/user-avatar.jpg" width="60" height="60" alt="" class="img-circle"/>
+
+                        <div class="header-profile-info">
+                            <a href="/account/login">Вход</a>
+                            <br/>
+                            <a href="/account/registration">Регистрация</a>
+                        </div>
+                    </div>
+
+                <?endif?>
+
+
+                <div id="header-top">
+                    <nav>
+                        <ul class="header-nav">
+                            <?foreach ($top_meny as $name=>$url):?>
+                                <li><a href="<?=$url?>"><?=$name?></a></li>
+                            <?endforeach?>
+                        </ul>
+                    </nav>
                 </div>
 
-            <?else:?>
+                <div id="header-bottom">
+                    <nav>
+                        <ul class="header-nav">
+                            <li><a href="/">Главная</a></li>
+                            <?foreach($general_meny as $row_meny):?>
+                                <li><a href="/section/<?=$row_meny['url']?>"><?=$row_meny['name']?></a></li>
+                            <?endforeach?>
+                        </ul>
 
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object img-circle" src="" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h5 class="media-heading"><a href="/account/login">Вход</a></h5>
-                        <h5><a href="/account/registration">Регистрация</a></h5>
-                    </div>
+                        <a href="#" class="button"><span>LUXURY</span></a>
+                    </nav>
                 </div>
-
-            <?endif?>
-
-
+            </div>
         </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-12">
-            <ul class="list-inline">
-                <li><a href="/" class="normal8Tahoma ">Главная</a></li>
-                <?foreach($general_meny as $row_meny):?>
-
-                        <li><a href="/section/<?=$row_meny['url']?>" class="normal8Tahoma <? if (Controller_BaseController::$detect_uri == '/section/'.$row_meny['url']) { echo 'active'; }?>"><?=$row_meny['name']?></a></li>
-
-                <?endforeach?>
-            </ul>
-        </div>
-
-    </div>
+    </header>
