@@ -7,17 +7,13 @@
  */
 
 ?>
-<style>
-    .w-active-cat {
-        background-color: aqua;
-    }
-</style>
-
 <script>
     $(document).ready(function(){
 
 
-
+        /**
+         * выбор категории бизнеса
+         */
         $(document).on('click', '.w-home-cat', function(){
 
             var thises = $(this);
@@ -77,6 +73,9 @@
         });
 
 
+        /**
+         * выбор города бизнеса
+         */
         $(document).on('change', '.w-select-city', function(){
 
             var thisSel = $(this);
@@ -93,7 +92,7 @@
                     //очищаем слайдер
                     sliderTmp.empty();
                     $.each(response.data, function(index, value) {
-                        console.log(value);
+                        //console.log(value);
                         sliderTmp.append('<div class="col-md-4">' +
                         '<div class="thumbnail">' +
                         '<a href="#" class="pin"><i class="fa fa-star"></i></a>' +
@@ -113,7 +112,106 @@
         });
 
 
+        //сортировка купонов по разделам
+        $(document).on('click', '.w-coupon-section', function(){
+
+            var sectcop =  $(this).data('sectcop');
+            var slider_bloc = $(this).closest('.w-bloc-coupons').find('.w-coupon-carusel');
+
+            var addClasLi = $(this).parent();
+            var remClassLi = $(this).parents('.w-bloc-coupons').find('li.active');
+
+            remClassLi.removeClass('active');
+            addClasLi.addClass('active');
+            //деструктор слайдера
+            owl.trigger('destroy.owl.carousel');
+            owl.html(owl.find('.owl-stage-outer').empty()).removeClass('owl-loaded');
+
+            $.ajax({ // описываем наш запрос
+                type: "POST", // будем передавать данные через POST
+                dataType: "JSON", // указываем, что нам вернется JSON
+                url: '/ajaxselect/coupons',
+                data: 'sectcop='+sectcop, // передаем данные из формы
+                success: function(response) { // когда получаем ответ
+                    //очищаем слайдер
+                    //slider_bloc.empty();
+
+                    $.each(response.data, function(index, value) {
+                        //console.log(value);
+
+                        slider_bloc.append('<div class="coupon"> <div class="coupon-container"> ' +
+                        '<a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a> ' +
+                        '<div class="coupon-image">'+
+                        '<div class="overlay">'+
+                        value.secondname+
+                        '</div> <img src="'+value.img_coupon+'" width="155" height="125" alt="" title=""/> </div> ' +
+                        '<div class="coupon-context"> <div> ' +
+                        '<span>Купон</span> ' +
+                        '<span><small>Массаж</small></span> </div> <div> ' +
+                        '<span>20%</span>'+
+                        '<span><small>скидка</small></span></div>'+
+                        '<div><small class="coupon-date">до 1 Апр 2015</small></div></div> </div>'+
+                        '</div>');
+                    });
+
+                    //переинициализация слайдера
+                    owl.owlCarousel({
+                        loop: true,
+
+                        responsive: {
+                            0: {
+                                items: 1
+                            },
+                            768: {
+                                items: 2
+                            },
+                            992: {
+                                items: 3
+                            },
+                            1170: {
+                                items: 4
+                            }
+                        },
+                        nav: true,
+                        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+                        dots: false
+                    });
+
+
+                }
+            });
+
+            return false;
+        });
+
+
+        //слайдер купонов на главной
+        var owl = $('.panel-coupons-carousel .owl-carousel');
+
+        owl.owlCarousel({
+            loop: true,
+
+            responsive: {
+                0: {
+                    items: 1
+                },
+                768: {
+                    items: 2
+                },
+                992: {
+                    items: 3
+                },
+                1170: {
+                    items: 4
+                }
+            },
+            nav: true,
+            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            dots: false
+        });
+
     });
+
 </script>
 <?//HTML::x($coupons)?>
 
@@ -186,7 +284,7 @@
             </div>
         </div>
 
-        <div class="panel panel-coupons-carousel">
+        <div class="panel panel-coupons-carousel w-bloc-coupons">
             <div class="panel-heading">
 
                 <a class="menu-toggle" role="button" data-toggle="collapse" href="#nav-coupons-panel"
@@ -198,19 +296,18 @@
 
                 <div class="collapse" id="nav-coupons-panel">
                     <ul class="nav nav-pills">
-                        <li class="active"><a href="#">Все рестораны</a></li>
-                        <li><a href="#">Европейские</a></li>
-                        <li><a href="#">Итальянские</a></li>
-                        <li><a href="#">Рыбные</a></li>
-                        <li><a href="#">Китайские</a></li>
-                        <li><a href="#">ещё...</a></li>
+                        <li class="active"><a class="w-coupon-section" href="#">Новые</a></li>
+                        <?foreach ($section as $row_section):?>
+                            <li><a href="#" class="w-coupon-section" data-sectcop="<?=$row_section['url']?>"><?=$row_section['name']?></a></li>
+                        <?endforeach?>
+
                     </ul>
                 </div>
             </div>
 
             <div class="panel-body">
 
-                <div class="owl-carousel">
+                <div class="owl-carousel w-coupon-carusel">
 
                     <?foreach ($coupons['data'] as $rows_coupon):?>
 

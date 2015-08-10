@@ -83,6 +83,8 @@ class Controller_Home extends Controller_BaseController {
             View::factory('blocks_includ/baners_right'),
         ));
 
+
+        $content->section = $section;
         $content->coupons = $coupon;
         $content->articles = $articles;
         $content->data = $resultArr;

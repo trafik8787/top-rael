@@ -39,7 +39,10 @@ class Model_CouponsModel extends Model_BaseModel {
         }
         if ($url_section != null) {
             $id = 0;
-            foreach (Controller_BaseController::$general_meny as $rows) {
+
+            $general_meny = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+
+            foreach ($general_meny as $rows) {
                 if ($rows['url'] == $url_section) {
                     $id = $rows['id'];
                 }

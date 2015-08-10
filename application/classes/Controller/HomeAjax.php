@@ -43,5 +43,19 @@ class Controller_HomeAjax extends Controller {
 	}
 
 
+    public function action_coupons (){
+
+
+
+        if ($this->request->post('sectcop') != 'undefined') {
+            $coupon = Model::factory('CouponsModel')->getCouponsSectionUrl($this->request->post('sectcop'), 6, 0, null);
+        } else {
+            $coupon = Model::factory('CouponsModel')->getCouponsSectionUrl(null, 6, 0, null);
+        }
+        //die(HTML::x($coupon));
+        echo json_encode($coupon);
+    }
+
+
 }
 

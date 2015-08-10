@@ -2,7 +2,7 @@
  * Created by Fedor on 8/2/2015.
  */
 $(function () {
-    panelCoupnsCarsousel();
+    //panelCoupnsCarsousel();
     discountCarousel();
 });
 
@@ -32,7 +32,11 @@ function panelCoupnsCarsousel() {
         navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
         dots: false
     });
+
 }
+
+
+
 
 
 function discountCarousel(){

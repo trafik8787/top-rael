@@ -150,7 +150,7 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 //Ajax запросы с главной страницы
-Route::set('HomeAjax', 'ajaxselect')
+Route::set('HomeAjax', 'ajaxselect(/<action>)')
     ->defaults(array(
         'controller' => 'HomeAjax',
         'action'     => 'index',

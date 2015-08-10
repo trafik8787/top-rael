@@ -10375,7 +10375,7 @@ hr {
 .button:before, .button:after,
 .button span,
 .button span:before {
-  background: url('/topisrael/images/button.png?1438803699');
+  background: url('../images/button.png');
   width: 23px;
   height: 19px;
   float: left;
