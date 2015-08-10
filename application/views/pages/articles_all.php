@@ -8,58 +8,129 @@
 
 ?>
 
-<div class="row">
-    <div class="col-md-12">
-        <ul class="nav nav-pills">
-            <h2>Обзоры</h2>
+<content>
+    <div id="content">
 
-             <span>
+        <div class="row">
+            <!-- Context -->
+            <div class="col-md-8">
 
-                <form action="" method="get" id="w-form-city">
-                    <select class="form-control w-select-city" name="city" style="width: 20%">
-                        <option value="">По городам</option>
-                        <?foreach($city as $key_id => $row_city):?>
-                            <option <?if ($city_id == $key_id) { echo 'selected="selected"';}?> value="<?=$key_id?>"><?=$row_city?></option>
-                        <?endforeach?>
-                    </select>
-                </form>
-            </span>
+                <div id="context">
 
-            <li class="<? if (Controller_BaseController::$detect_uri == URL::site('articles').$pagesUrl) { echo 'active'; }?>"><a href="/articles" >Все</a></li>
-            <?foreach($category as $row_category):?>
+                    <div class="row">
+                        <div class="panel panel-media">
 
-                <li class="<? if (Controller_BaseController::$detect_uri == '/articles/'.$row_category['url'].$pagesUrl) { echo 'active'; }?>"><a href="/articles/<?=$row_category['url']?>" ><?=$row_category['name']?></a></li>
+                            <div class="panel-heading">
 
-            <?endforeach?>
-        </ul>
+                                <div class="panel-title">Обзоры</div>
 
-    </div>
+                                <a class="menu-toggle" role="button" data-toggle="collapse" href="#nav-review"
+                                   aria-controls="nav-review">
+                                    <i class="fa fa-bars"></i>
+                                </a>
+
+                                <div class="panel-heading-sub">
+
+                                    <div class="dropdown pull-left">
+
+                                        <form action="" method="get" id="w-form-city">
+                                            <select class="form-control w-select-city" name="city">
+                                                <option value="">По городам</option>
+                                                <?foreach($city as $key_id => $row_city):?>
+                                                    <option <?if ($city_id == $key_id) { echo 'selected="selected"';}?> value="<?=$key_id?>"><?=$row_city?></option>
+                                                <?endforeach?>
+                                            </select>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="collapse" id="nav-review">
+                                    <ul class="nav nav-pills" role="tablist">
+
+                                        <li role="presentation" class="<? if (Controller_BaseController::$detect_uri == URL::site('articles').$pagesUrl) { echo 'active'; }?>"><a href="/articles" >Новые</a></li>
+                                        <?foreach($category as $row_category):?>
+
+                                            <li role="presentation" class="<? if (Controller_BaseController::$detect_uri == '/articles/'.$row_category['url'].$pagesUrl) { echo 'active'; }?>"><a href="/articles/<?=$row_category['url']?>" ><?=$row_category['name']?></a></li>
+
+                                        <?endforeach?>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+
+                                <div class="well">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img src="/public/uploade/review.jpg" width="260" height="190"
+                                                     class="media-object"/>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h2 class="media-heading"><a href="#"><strong>Куда пойти
+                                                        завтра?</strong></a></h2>
+
+                                            <p class="fz medium">
+                                                <strong>Пабы, дискотеки и чудесные пляжи</strong>
+                                                <br/>
+                                                <a href="#">Покупки</a>
+                                            </p>
+
+                                            Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших
+                                            гостей и родных? Хотите вспоминать о ней долгие годы, с радостью и
+                                            гордостью показывая вашим детям и внукам фото и видео со свадьбы?
+                                            Доверьте организацию свадьбы вашей мечты профессионалам! Вы хотите
+                                            сделать вашу свадьбу яркой и запоминающейся? Удивить ваших гостей
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <?foreach($data as $rows_data):?>
+
+                                    <div>
+                                        <?if (!empty($rows_data['CatUrl'])):?>
+                                            <a href="/articles/<?=$rows_data['CatUrl']?>" class="fz medium"><?=$rows_data['CatName']?></a>
+                                        <?endif?>
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <a href="/article/<?=$rows_data['url']?>">
+                                                    <img src="/public/uploade/review.jpg" width="260" height="190"
+                                                         class="media-object"/>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h2 class="media-heading"><a href="/article/<?=$rows_data['url']?>"><strong><?=$rows_data['name']?></strong></a></h2>
+
+                                                <p class="fz medium"><strong><?=$rows_data['secondname']?></strong>
+                                                </p>
+
+                                                <?=Text::limit_chars(strip_tags($rows_data['content']), 200, null, true)?>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr/>
+                                <?endforeach?>
+
+                            </div>
+
+                            <div class="panel-footer text-center">
+                                <nav>
+                                    <?=$pagination?>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
 
 
-    <div class="row">
-        <div class="col-md-9">
-
-            <?foreach($data as $rows_data):?>
-                <div style="border: 1px solid #000;">
-                    <img src="" alt="sdf"/>
-                    <h4><a href="/article/<?=$rows_data['url']?>"><?=$rows_data['name']?></a></h4>
-                    <?if (!empty($rows_data['CatUrl'])):?>
-                        <h5><a href="/articles/<?=$rows_data['CatUrl']?>"><?=$rows_data['CatName']?></a></h5>
-                    <?endif?>
-                    <p><?=Text::limit_chars(strip_tags($rows_data['content']), 200, null, true)?></p>
                 </div>
-            <?endforeach?>
+            </div>
+
+            <!-- Bloc Right -->
+            <?=isset($bloc_right)? $bloc_right : ''?>
         </div>
-        <div class="col-md-3">
-            ssdf
-        </div>
+
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <?=$pagination?>
-        </div>
-    </div>
-
-
-
-</div>
+</content>

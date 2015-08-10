@@ -40,6 +40,12 @@ class Controller_Pages_Articles extends Controller_BaseController {
         $content->data = $data['data'];
         $content->city = $data['city'];
 
+        $content->bloc_right = parent::RightBloc(array(
+            View::factory('blocks_includ/lotareya'),
+            View::factory('blocks_includ/sicseti'),
+            View::factory('blocks_includ/baners_right'),
+        ));
+
         //передаем параметр значения выбраного города для селекта
         $content->city_id = $city_id;
 

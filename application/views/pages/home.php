@@ -221,7 +221,7 @@
         <div class="top">
 
             <div class="top-image">
-                <img src="<?=$articles['top_articles']['images_article']?>" width="600" height="420" class="img-responsive"/>
+                <img src="<?=$articles['top_articles']['images_article']?>" width="600" height="420" class="img-responsive" alt="<?=$articles['top_articles']['secondname']?>"/>
 
                 <div class="top-image-text">
                     <h2><a href="/article/<?=$articles['top_articles']['url']?>"><?=$articles['top_articles']['secondname']?></a></h2>
@@ -236,7 +236,7 @@
                         <div class="media-left">
                             <a href="/article/<?=$rows_articles['url']?>">
                             <?if (file_exists($_SERVER['DOCUMENT_ROOT'].$rows_articles['images_article'])):?>
-                                <img src="/uploads/img_articles/thumbs/<?=basename($rows_articles['images_article'])?>" width="120" height="85" class="media-object"/>
+                                <img src="/uploads/img_articles/thumbs/<?=basename($rows_articles['images_article'])?>" width="120" height="85" class="media-object" alt="<?=$rows_articles['name']?>"/>
                             <?else:?>
                                 <img src="/public/uploade/list.png" width="120" height="85" class="media-object"/>
                             <?endif?>
@@ -273,7 +273,7 @@
                     <ul class="nav nav-pills">
                         <li class="active"><a class="w-coupon-section" href="#">Новые</a></li>
                         <?foreach ($section as $row_section):?>
-                            <li><a href="#" class="w-coupon-section" data-sectcop="<?=$row_section['url']?>"><?=$row_section['name']?></a></li>
+                            <li><a href="/coupons/<?=$row_section['url']?>" class="w-coupon-section" data-sectcop="<?=$row_section['url']?>"><?=$row_section['name']?></a></li>
                         <?endforeach?>
 
                     </ul>

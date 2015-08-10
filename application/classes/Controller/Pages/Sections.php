@@ -35,7 +35,6 @@ class Controller_Pages_Sections extends Controller_BaseController {
             Session::instance()->set('city_id', '');
         }
 
-
         if ($this->request->param('url_category') != '') {
             //по урлу категории получаем бизнесы
             $data = Model::factory('BussinesModel')->getBussinesCategoryUrl($this->request->param('url_category'), 10 ,$number_page, $city_id);
@@ -53,17 +52,15 @@ class Controller_Pages_Sections extends Controller_BaseController {
 
         $bussines_section = View::factory('pages/bussines_section');
 
-        $business_list = View::factory('pages/bussines_section_list');
-        $business_list->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
+        $bussines_section->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
         //подключаем правый блок
-        $business_list->bloc_right = parent::RightBloc(array(
+        $bussines_section->bloc_right = parent::RightBloc(array(
+            View::factory('blocks_includ/lotareya'),
+            View::factory('blocks_includ/sicseti'),
             View::factory('blocks_includ/articles_category_bloc', array('content' => $data_articles))
         ));
 
-
-
-
-        $business_list->data = $data['data'];
+        $bussines_section->data = $data['data'];
         $bussines_section->city = $data['city'];
 
         //передаем параметр значения выбраного города для селекта
@@ -79,8 +76,6 @@ class Controller_Pages_Sections extends Controller_BaseController {
         $bussines_section->page = '/'.$this->request->param('page');
 
         $bussines_section->category = $category;
-        $bussines_section->business_list = $business_list;
-
         $this->template->content = $bussines_section;
 
 	}

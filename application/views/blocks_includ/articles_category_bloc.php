@@ -8,22 +8,37 @@
 ?>
 
 <?if (!empty($content)):?>
-    <div class="panel panel-default">
-        <div class="panel-heading">Обзоры</div>
-        <div class="panel-body">
-            <ul class="media-list">
-                <?foreach ($content as $row):?>
-                    <li class="media">
-                        <a class="pull-left" href="/article/<?=$row['url']?>">
-                            <img class="media-object" src="" alt="фото обзора">
-                        </a>
-                        <div class="media-body">
-                            <h5 class="media-heading"><a href="/article/<?=$row['url']?>"><?=$row['name']?></a></h5>
-                            <?=Text::limit_chars(strip_tags($row['content']), 100, null, true)?>
-                        </div>
-                    </li>
-                <?endforeach?>
-            </ul>
+
+    <div>
+        <h2>Обзоры</h2>
+        <?foreach ($content as $row):?>
+            <div class="media">
+                <div class="media-left">
+                    <a href="/article/<?=$row['url']?>">
+                        <img src="/public/uploade/list.png" width="120" height="85" class="media-object"/>
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h2 class="media-heading fz normal"><a href="/article/<?=$row['url']?>"><strong><?=$row['name']?></strong></a>
+                    </h2>
+
+                    <strong class="fz small"><?=$row['secondname']?></strong>
+
+                    <div class="fz small"><?=Text::limit_chars(strip_tags($row['content']), 100, null, true)?></div>
+                </div>
+            </div>
+
+            <hr/>
+        <?endforeach?>
+
+
+        <div class="text-center">
+            <a href="/articles" class="btn btn-default open-all" role="button">Открыть
+                все</a>
         </div>
+
+        <br/>
     </div>
+
+
 <?endif?>
