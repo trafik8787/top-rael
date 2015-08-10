@@ -86,7 +86,9 @@ class Controller_Home extends Controller_BaseController {
 
         $content->section = $section;
         $content->coupons = $coupon;
-        $content->articles = $articles;
+        //получаем первый элемент масива статей
+        $top_articles = array_shift($articles);
+        $content->articles = array('articles' => $articles, 'top_articles' => $top_articles);
         $content->data = $resultArr;
         $this->template->content = $content;
 

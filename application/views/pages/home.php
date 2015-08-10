@@ -213,7 +213,7 @@
     });
 
 </script>
-<?//HTML::x($coupons)?>
+<?//HTML::x($articles)?>
 
 <content>
     <div id="content">
@@ -221,65 +221,40 @@
         <div class="top">
 
             <div class="top-image">
-                <img src="/public/uploade/image-large.png" width="600" height="420" class="img-responsive"/>
+                <img src="<?=$articles['top_articles']['images_article']?>" width="600" height="420" class="img-responsive"/>
 
                 <div class="top-image-text">
-                    <h2><a href="#">TOP 5 Ресторанов Тель-Авива</a></h2>
-                    Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших гостей и родных? Хотите
-                    вспоминать о ней долгие годы, с радостью и видео со свадьбы? Доверьте организацию свадьбы вашей
-                    мечты профессионалам!
+                    <h2><a href="/article/<?=$articles['top_articles']['url']?>"><?=$articles['top_articles']['secondname']?></a></h2>
+                    <?=$articles['top_articles']['short_previev']?>
                 </div>
             </div>
 
             <div class="top-list">
 
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img src="/public/uploade/list.png" width="120" height="85" class="media-object"/>
-                        </a>
+                <?foreach($articles['articles'] as $rows_articles):?>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="/article/<?=$rows_articles['url']?>">
+                            <?if (file_exists($_SERVER['DOCUMENT_ROOT'].$rows_articles['images_article'])):?>
+                                <img src="/uploads/img_articles/thumbs/<?=basename($rows_articles['images_article'])?>" width="120" height="85" class="media-object"/>
+                            <?else:?>
+                                <img src="/public/uploade/list.png" width="120" height="85" class="media-object"/>
+                            <?endif?>
+
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h2 class="media-heading"><a href="/article/<?=$rows_articles['url']?>"><strong><?=$rows_articles['name']?></strong></a></h2>
+
+                            <strong><?=$rows_articles['secondname']?></strong>
+
+                            <p> <?=Text::limit_chars(strip_tags($rows_articles['content']), 100, null, true)?></p>
+                        </div>
                     </div>
-                    <div class="media-body">
-                        <h2 class="media-heading"><a href="#"><strong>Куда пойти завтра?</strong></a></h2>
-
-                        <strong>Лучшие суши в городе</strong>
-
-                        <p>Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших гостей и родных?</p>
-                    </div>
-                </div>
-
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img src="/public/uploade/list.png" width="120" height="85" class="media-object"/>
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h2 class="media-heading"><a href="#"><strong>Куда пойти завтра?</strong></a></h2>
-
-                        <strong>События стоящие вашего внимания</strong>
-
-                        <p>Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших гостей и родных?</p>
-                    </div>
-                </div>
-
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img src="/public/uploade/list.png" width="120" height="85" class="media-object"/>
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h2 class="media-heading"><a href="#"><strong>Куда пойти завтра?</strong></a></h2>
-
-                        <strong>Любите пиво? Футбол или хоршую музыку? Бары на любой вкус.</strong>
-
-                        <p>Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших гостей и родных?</p>
-                    </div>
-                </div>
+                <?endforeach?>
 
                 <div class="text-center">
-                    <a href="#" class="btn btn-default open-all" role="button">Открыть все</a>
+                    <a href="/articles" class="btn btn-default open-all" role="button">Открыть все</a>
                 </div>
             </div>
         </div>

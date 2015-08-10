@@ -1172,7 +1172,7 @@ class Controller_Administrator extends Controller_Core_Main {
         //die(HTML::x($new_array));
 
         if (!empty($new_array['images_article'])) {
-            $img = self::create_images($new_array['images_article'], '/uploads/img_articles/thumbs/', 260, 186);
+            $img = self::create_images($new_array['images_article'], '/uploads/img_articles/thumbs/', 260, 190);
             //die(HTML::x($old_array[0]['images_article']));
             //удаляем старые картинки
             if ($img === true and file_exists($_SERVER['DOCUMENT_ROOT'] . $old_array['images_article'])) {
@@ -1185,7 +1185,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_after_insert_articles ($key_array = null){
         if (!empty($key_array['images_article'])) {
-            self::create_images($key_array['images_article'], '/uploads/img_articles/thumbs/', 260, 186);
+            self::create_images($key_array['images_article'], '/uploads/img_articles/thumbs/', 260, 190);
         }
     }
 
