@@ -23,12 +23,15 @@
             var thises = $(this);
             var sliderTmp = thises.closest('.w-bloc-section').find('.slider');
             var selectTmp = thises.closest('.w-bloc-section').find('.w-select-city');
-            var remowClas = thises.parents('.w-category-bloc').find('a.active');
-
+            var remowClas = thises.parents('.w-category-bloc').find('a.w-cat-active');
+            var addClasLi = thises.parent();
+            var remClassLi = thises.parents('.w-category-bloc').find('li.active');
             //удаляем клас
-            remowClas.removeClass('active');
+            remowClas.removeClass('w-cat-active');
+            remClassLi.removeClass('active');
             //добавляем класс
-            thises.addClass('active');
+            thises.addClass('w-cat-active');
+            addClasLi.addClass('active');
 
 
             $.ajax({ // описываем наш запрос
@@ -47,8 +50,8 @@
                         sliderTmp.append('<div class="col-md-4">' +
                         '<div class="thumbnail">' +
                         '<a href="#" class="pin"><i class="fa fa-star"></i></a>' +
-                        '<a href="#" class="thumbnail-image"> ' +
-                        '<img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="">' +
+                        '<a href="/business/'+value.url+'" class="thumbnail-image"> ' +
+                        '<img src="'+value.home_busines_foto+'" width="240" height="150" alt="">' +
                         '</a> ' +
                         '<div class="caption"> ' +
                         '<h3><strong><a href="/business/'+value.url+'">'+value.name+'</a></strong></h3> ' +
@@ -78,13 +81,14 @@
 
             var thisSel = $(this);
             var sliderTmp = thisSel.closest('.w-bloc-section').find('.slider');
-            var section = thisSel.closest('.w-bloc-section').find('.active').data('section');
+            var section = thisSel.closest('.w-bloc-section').find('.w-cat-active').data('section');
+            var cat = thisSel.closest('.w-bloc-section').find('.w-cat-active').data('cat');
             //console.log($(this).val());
             $.ajax({ // описываем наш запрос
                 type: "POST", // будем передавать данные через POST
                 dataType: "JSON", // указываем, что нам вернется JSON
                 url: '/ajaxselect',
-                data: 'city='+$(this).val()+'&section='+section+'&cat='+$('.active').data('cat'), // передаем данные из формы
+                data: 'city='+$(this).val()+'&section='+section+'&cat='+cat, // передаем данные из формы
                 success: function(response) { // когда получаем ответ
                     //очищаем слайдер
                     sliderTmp.empty();
@@ -93,8 +97,8 @@
                         sliderTmp.append('<div class="col-md-4">' +
                         '<div class="thumbnail">' +
                         '<a href="#" class="pin"><i class="fa fa-star"></i></a>' +
-                        '<a href="#" class="thumbnail-image"> ' +
-                        '<img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="">' +
+                        '<a href="/business/'+value.url+'" class="thumbnail-image"> ' +
+                        '<img src="'+value.home_busines_foto+'" width="240" height="150" alt="">' +
                         '</a> ' +
                         '<div class="caption"> ' +
                         '<h3><strong><a href="/business/'+value.url+'">'+value.name+'</a></strong></h3> ' +
@@ -104,8 +108,6 @@
 
                     });
 
-
-
                 }
             });
         });
@@ -113,7 +115,7 @@
 
     });
 </script>
-<?HTML::x($data)?>
+<?//HTML::x($coupons)?>
 
 <content>
     <div id="content">
@@ -209,148 +211,39 @@
             <div class="panel-body">
 
                 <div class="owl-carousel">
-                    <div class="coupon">
-                        <div class="coupon-container">
 
-                            <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
+                    <?foreach ($coupons['data'] as $rows_coupon):?>
 
-                            <div class="coupon-image">
-                                <div class="overlay">
-                                    Каббалистические украшения Haari
+                        <div class="coupon">
+                            <div class="coupon-container">
+
+                                <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
+
+                                <div class="coupon-image">
+                                    <div class="overlay">
+                                        <?=$rows_coupon['secondname']?>
+                                    </div>
+
+                                    <img src="<?=$rows_coupon['img_coupon']?>" width="155" height="125" alt="" title=""/>
                                 </div>
 
-                                <img src="/public/uploade/coupon.jpg" width="155" height="125" alt="" title=""/>
-                            </div>
+                                <div class="coupon-context">
+                                    <div>
+                                        <span>Купон</span>
+                                        <span><small>Массаж</small></span>
+                                    </div>
 
-                            <div class="coupon-context">
-                                <div>
-                                    <span>Купон</span>
-                                    <span><small>Массаж</small></span>
+                                    <div>
+                                        <span>20%</span>
+                                        <span><small>скидка</small></span>
+                                    </div>
+
+                                    <div><small class="coupon-date">до 1 Апр 2015</small></div>
                                 </div>
-
-                                <div>
-                                    <span>20%</span>
-                                    <span><small>скидка</small></span>
-                                </div>
-
-                                <div><small class="coupon-date">до 1 Апр 2015</small></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="coupon">
-                        <div class="coupon-container">
-
-                            <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
-
-                            <div class="coupon-image">
-                                <div class="overlay">
-                                    Каббалистические украшения Haari
-                                </div>
-
-                                <img src="/public/uploade/coupon.jpg" width="155" height="125" alt="" title=""/>
-                            </div>
-
-                            <div class="coupon-context">
-                                <div>
-                                    <span>Купон</span>
-                                    <span><small>Массаж</small></span>
-                                </div>
-
-                                <div>
-                                    <span>20%</span>
-                                    <span><small>скидка</small></span>
-                                </div>
-
-                                <div><small class="coupon-date">до 1 Апр 2015</small></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="coupon">
-                        <div class="coupon-container">
 
-                            <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
-
-                            <div class="coupon-image">
-                                <div class="overlay">
-                                    Каббалистические украшения Haari
-                                </div>
-
-                                <img src="/public/uploade/coupon.jpg" width="155" height="125" alt="" title=""/>
-                            </div>
-
-                            <div class="coupon-context">
-                                <div>
-                                    <span>Купон</span>
-                                    <span><small>Массаж</small></span>
-                                </div>
-
-                                <div>
-                                    <span>20%</span>
-                                    <span><small>скидка</small></span>
-                                </div>
-
-                                <div><small class="coupon-date">до 1 Апр 2015</small></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="coupon">
-                        <div class="coupon-container">
-
-                            <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
-
-                            <div class="coupon-image">
-                                <div class="overlay">
-                                    Каббалистические украшения Haari
-                                </div>
-
-                                <img src="/public/uploade/coupon.jpg" width="155" height="125" alt="" title=""/>
-                            </div>
-
-                            <div class="coupon-context">
-                                <div>
-                                    <span>Купон</span>
-                                    <span><small>Массаж</small></span>
-                                </div>
-
-                                <div>
-                                    <span>20%</span>
-                                    <span><small>скидка</small></span>
-                                </div>
-
-                                <div><small class="coupon-date">до 1 Апр 2015</small></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="coupon">
-                        <div class="coupon-container">
-
-                            <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
-
-                            <div class="coupon-image">
-                                <div class="overlay">
-                                    Каббалистические украшения Haari
-                                </div>
-
-                                <img src="/public/uploade/coupon.jpg" width="155" height="125" alt="" title=""/>
-                            </div>
-
-                            <div class="coupon-context">
-                                <div>
-                                    <span>Купон</span>
-                                    <span><small>Массаж</small></span>
-                                </div>
-
-                                <div>
-                                    <span>20%</span>
-                                    <span><small>скидка</small></span>
-                                </div>
-
-                                <div><small class="coupon-date">до 1 Апр 2015</small></div>
-                            </div>
-                        </div>
-                    </div>
-
-
+                    <?endforeach?>
 
                 </div>
             </div>
@@ -396,7 +289,7 @@
 
                                         <ul class="nav nav-pills w-category-bloc" role="tablist">
 
-                                            <li role="presentation"><a href="/section/<?=$rowsdata['category'][0]['url']?>" data-section="<?=$rowsdata['category'][0]['url']?>" class="w-home-cat active">Новые</a></li>
+                                            <li role="presentation" class="active"><a href="/section/<?=$rowsdata['category'][0]['url']?>" data-section="<?=$rowsdata['category'][0]['url']?>" class="w-home-cat w-cat-active">Новые</a></li>
 
                                             <?foreach($rowsdata['category'][0]['childs'] as $row_category):?>
                                                 <li role="presentation"><a href="/section/<?=$rowsdata['category'][0]['url'].'/'.$row_category['url']?>" data-cat="<?=$row_category['url']?>" class="w-home-cat"><?=$row_category['name']?></a></li>
@@ -419,8 +312,13 @@
                                                         <i class="fa fa-star"></i>
                                                     </a>
 
-                                                    <a href="#" class="thumbnail-image">
-                                                        <img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="">
+                                                    <a href="/business/<?=$rows['url']?>" class="thumbnail-image">
+                                                        <?if (file_exists($_SERVER['DOCUMENT_ROOT'].$rows['home_busines_foto'])):?>
+                                                            <img src="/uploads/img_business/thumbs/<?=basename($rows['home_busines_foto'])?>" width="240" height="150" alt="<?=$rows['name']?>">
+                                                        <?else:?>
+
+                                                            <img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="<?=$rows['name']?>">
+                                                        <?endif?>
                                                     </a>
 
                                                     <div class="caption">
@@ -450,171 +348,8 @@
                 </div>
             </div>
 
-            <!-- Side Bar -->
-            <div class="col-md-4">
-                <div id="sidebar">
-
-                    <div class="lottery">
-                        <div class="lottery-title">Еженедельная лотерея</div>
-
-                        <div class="lottery-section">
-                            <div class="lottery-section-title">Приз</div>
-
-                            <div class="media">
-                                <div class="media-left media-middle">
-                                    <a href="#">
-                                        <img src="/public/uploade/prize.jpg" width="88" height="88" class="media-object"/>
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <div class="media-heading">Купон на 500ш в ресторан «Круглый стол».</div>
-                                    <p>до розыгрыша осталось 5 дней </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="lottery-section">
-                            <div class="lottery-section-title">Участвовать</div>
-
-                            <p>Подпишись на нашу почтовую рассылку и станьте участником еженедельной лотереи</p>
-
-                            <form>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">
-
-                                            <span class="cr">
-                                                <i class="cr-icon glyphicon glyphicon-ok"></i>
-                                            </span>
-                                        Принимаю <a href="">правила</a> участия в лотереи
-                                    </label>
-                                </div>
-
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Ваш email:">
-
-                                    <div class="input-group-addon">
-                                        <button type="submit" class="btn btn-danger">Отправить</button>
-                                    </div>
-                                </div>
-
-                            </form>
-
-                        </div>
-
-                        <div class="lottery-section">
-                            <div class="lottery-section-title">Победители</div>
-
-                            <div class="media">
-                                <div class="media-left media-middle">
-                                    <a href="#" class="img-circle">
-                                        <img src="/public/uploade/avata-lottery.jpg" width="43" height="43"
-                                             class="media-object"/>
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <strong>Александр Жуков</strong><br/>
-                                    11.6.15 - 500ш в ресторан<br/>
-                                    <a href="#">"Круглый стол"</a>
-                                </div>
-                            </div>
-
-                            <div class="media">
-                                <div class="media-left media-middle">
-                                    <a href="#" class="img-circle">
-                                        <img src="/public/uploade/avata-lottery.jpg" width="43" height="43"
-                                             class="media-object"/>
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <strong>Александр Жуков</strong><br/>
-                                    11.6.15 - 500ш в ресторан<br/>
-                                    <a href="#">"Круглый стол"</a>
-                                </div>
-                            </div>
-
-                            <div class="media">
-                                <div class="media-left media-middle">
-                                    <a href="#" class="img-circle">
-                                        <img src="/public/uploade/avata-lottery.jpg" width="43" height="43"
-                                             class="media-object"/>
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <strong>Александр Жуков</strong><br/>
-                                    11.6.15 - 500ш в ресторан<br/>
-                                    <a href="#">"Круглый стол"</a>
-                                </div>
-                            </div>
-
-                            <div class="media">
-                                <div class="media-left media-middle">
-                                    <a href="#" class="img-circle">
-                                        <img src="/public/uploade/avata-lottery.jpg" width="43" height="43"
-                                             class="media-object"/>
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <strong>Александр Жуков</strong><br/>
-                                    11.6.15 - 500ш в ресторан<br/>
-                                    <a href="#">"Круглый стол"</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <a href="#">Архив лотереи</a>
-                    </div>
-
-                    <div class="tabs-social">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-
-                            <li role="presentation" class="active nav-facebook">
-                                <a href="#tab-facebook" aria-controls="tab-facebook" role="tab" data-toggle="tab">
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-                            </li>
-
-                            <li role="presentation" class="nav-twitter">
-                                <a href="#tab-twitter" aria-controls="tab-twitter" role="tab" data-toggle="tab">
-                                    <i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li role="presentation" class="nav-vk">
-                                <a href="#tab-vk" aria-controls="tab-vk" role="tab" data-toggle="tab">
-                                    <i class="fa fa-vk"></i>
-                                </a>
-                            </li>
-                            <li role="presentation" class="nav-odnoklassniki">
-                                <a href="#tab-odnoklassniki" aria-controls="tab-odnoklassniki" role="tab"
-                                   data-toggle="tab">
-                                    <i class="fa fa-odnoklassniki"></i>
-                                </a>
-                            </li>
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="tab-facebook">
-                                <div class="fb-page" data-href="https://www.facebook.com/facebook"
-                                     data-small-header="true" data-adapt-container-width="true"
-                                     data-hide-cover="true" data-show-facepile="true" data-show-posts="false"></div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="tab-twitter">Twitter</div>
-                            <div role="tabpanel" class="tab-pane" id="tab-vk">Vk</div>
-                            <div role="tabpanel" class="tab-pane" id="tab-odnoklassniki">Однокласники</div>
-                        </div>
-                    </div>
-
-                    <div class="discount">
-                        <div class="owl-carousel">
-                            <a href="#"><img src="/public/uploade/discount.jpg" width="360" height="300" alt=""
-                                             class="img-responsive"></a>
-                            <a href="#"><img src="/public/uploade/discount.jpg" width="360" height="300" alt=""
-                                             class="img-responsive"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Bloc Right -->
+            <?=isset($bloc_right)? $bloc_right : ''?>
         </div>
 
     </div>

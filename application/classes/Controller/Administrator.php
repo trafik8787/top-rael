@@ -1015,7 +1015,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         //die(HTML::x($old_array));
         if (!empty($new_array['home_busines_foto'])) {
-            $img = self::create_images($new_array['home_busines_foto'], '/uploads/img_business/thumbs/', 370, 237);
+            $img = self::create_images($new_array['home_busines_foto'], '/uploads/img_business/thumbs/', 240, 150);
 
             //удаляем старые картинки
             if ($img === true and file_exists($_SERVER['DOCUMENT_ROOT'] . $old_array['home_busines_foto'])) {
@@ -1073,7 +1073,7 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function call_after_insert_business ($key_array = null) {
 
         if (!empty($key_array['home_busines_foto'])) {
-            self::create_images($key_array['home_busines_foto'], '/uploads/img_business/thumbs/', 370, 237);
+            self::create_images($key_array['home_busines_foto'], '/uploads/img_business/thumbs/', 240, 150);
         }
 
         if (!empty(Cruds::$post['name_user']) and !empty(Cruds::$post['secondname_user']) and !empty(Cruds::$post['email_user'])

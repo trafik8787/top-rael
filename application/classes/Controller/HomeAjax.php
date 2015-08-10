@@ -27,6 +27,13 @@ class Controller_HomeAjax extends Controller {
             }
 
             foreach ($data['data'] as $key => $rows) {
+
+                //заглушка если файл картинки не обнаружен
+                $busines_foto = '/public/uploade/thumbnail.jpg';
+                if (file_exists($_SERVER['DOCUMENT_ROOT'].$rows['home_busines_foto'])) {
+                    $busines_foto = '/uploads/img_business/thumbs/'.basename($rows['home_busines_foto']);
+                }
+                $data['data'][$key]['home_busines_foto'] = $busines_foto;
                 $data['data'][$key]['info'] = Text::limit_chars(strip_tags($rows['info']), 150, null, true);
             }
             //die(HTML::x($data));

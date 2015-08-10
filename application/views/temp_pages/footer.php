@@ -28,12 +28,9 @@
                         <nav>
                             <ul>
                                 <li><a href="#">Главная</a></li>
-                                <li><a href="#">Рестораны</a></li>
-                                <li><a href="#">Покупки</a></li>
-                                <li><a href="#">Ночная жизнь</a></li>
-                                <li><a href="#">Отдых</a></li>
-                                <li><a href="#">Красота</a></li>
-                                <li><a href="#">Отели</a></li>
+                                <?foreach($general_meny as $row_meny):?>
+                                    <li><a href="/section/<?=$row_meny['url']?>"><?=$row_meny['name']?></a></li>
+                                <?endforeach?>
                                 <li><a href="#">LUXURY</a></li>
                             </ul>
                         </nav>
@@ -42,11 +39,9 @@
                     <div class="col-md-2">
                         <nav>
                             <ul>
-                                <li><a href="#">Купоны</a></li>
-                                <li><a href="#">Обзоры</a></li>
-                                <li><a href="#">Тель-Авив</a></li>
-                                <li><a href="#">Иерусалим</a></li>
-                                <li><a href="#">На карте</a></li>
+                                <?foreach ($top_meny as $name=>$url):?>
+                                    <li><a href="<?=$url?>"><?=$name?></a></li>
+                                <?endforeach?>
                             </ul>
                         </nav>
                     </div>

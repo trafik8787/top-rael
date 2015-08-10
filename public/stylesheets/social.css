@@ -8,60 +8,63 @@
   margin-bottom: 3px;
 }
 /* line 16, ../sass/social.scss */
-.tabs-social .nav-tabs li a,
-.tabs-social .nav-tabs li a:hover,
-.tabs-social .nav-tabs li a:active,
-.tabs-social .nav-tabs li a:visited,
-.tabs-social .nav-tabs li a:focus {
-  border: 0;
-  -moz-border-radius: 0;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  color: #fff;
-  background: none;
-  font-size: 18px;
-  padding: 5px 0;
-  width: 40px;
-  text-align: center;
-}
-/* line 31, ../sass/social.scss */
 .tabs-social .nav-tabs li.active {
   margin-bottom: 0;
+}
+/* line 18, ../sass/social.scss */
+.tabs-social .nav-tabs li.active .social {
   padding-bottom: 3px;
 }
-/* line 36, ../sass/social.scss */
-.tabs-social .nav-tabs li.nav-facebook {
-  background-color: #49659f;
+/* line 23, ../sass/social.scss */
+.tabs-social .nav-tabs li .social {
+  display: block;
+  padding: 0;
 }
-/* line 40, ../sass/social.scss */
-.tabs-social .nav-tabs li.nav-twitter {
-  background-color: #47afff;
-}
-/* line 44, ../sass/social.scss */
-.tabs-social .nav-tabs li.nav-vk {
-  background-color: #7b97d2;
-}
-/* line 48, ../sass/social.scss */
-.tabs-social .nav-tabs li.nav-odnoklassniki {
-  background-color: #f68735;
-}
-/* line 54, ../sass/social.scss */
+/* line 30, ../sass/social.scss */
 .tabs-social .tab-pane {
   padding: 15px 0;
 }
-/* line 58, ../sass/social.scss */
+/* line 34, ../sass/social.scss */
 .tabs-social #tab-facebook {
   border-top: 5px solid #49659f;
 }
-/* line 62, ../sass/social.scss */
+/* line 38, ../sass/social.scss */
 .tabs-social #tab-twitter {
   border-top: 5px solid #47afff;
 }
-/* line 66, ../sass/social.scss */
+/* line 42, ../sass/social.scss */
 .tabs-social #tab-vk {
   border-top: 5px solid #7b97d2;
 }
-/* line 70, ../sass/social.scss */
-.tabs-social #tab-odnoklassniki {
-  border-top: 5px solid #f68735;
+
+/* line 47, ../sass/social.scss */
+.social {
+  border: 0 !important;
+  -moz-border-radius: 0 !important;
+  -webkit-border-radius: 0;
+  border-radius: 0 !important;
+  display: inline-block;
+  text-align: center;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  color: #fff !important;
+  font-size: 18px !important;
+  line-height: 40px !important;
+  padding: 0;
+}
+/* line 60, ../sass/social.scss */
+.social.facebook {
+  background-color: #49659f !important;
+}
+/* line 64, ../sass/social.scss */
+.social.twitter {
+  background-color: #47afff !important;
+}
+/* line 68, ../sass/social.scss */
+.social.vk {
+  background-color: #7b97d2 !important;
+}
+/* line 72, ../sass/social.scss */
+.social.email {
+  background-color: #db4c9f !important;
 }

@@ -73,33 +73,41 @@ class Model_CategoryModel extends Model_BaseModel {
             $cats[$rows['parent_id']][] =  $rows;
         }
 
-
+        //die(HTML::x($cats));
         return $this->build_tree($cats, 0);
     }
 
 
     public function build_tree(&$rs,$parent){
-
+       // HTML::x($rs);
         $tmpArr = array();
         $out = array();
         if (!isset($rs[$parent])) {
 
             return $out;
         }
+        //HTML::x($rs[$parent]);
         foreach ($rs[$parent] as $key => $row) {
             $chidls = $this->build_tree($rs, $row['id']);
+
             if ($chidls) {
                 $row['childs'] = $chidls;
             }
             if ($parent != 0) {
                 //считаем количество бизнесов в категории
-                $tmpArr[$row['BusCatId']] = $row['BusCatId'];
+
+                if (!empty($row['BusCatId'])) {
+                    $tmpArr[$row['BusCatId']] = $row['BusCatId'];
+                }
                 $row['COUNT'] = count($tmpArr);
 
                 if (!array_key_exists($row['id'], $out)) {
+                    //HTML::x($row['COUNT']);
+                    //$row['COUNT'] = '';
                     $out[$row['id']] = $row;
                     $tmpArr = '';
                 } else {
+                    $row['COUNT'] = $row['COUNT'] +1;
                     $out[$row['id']] = $row;
                 }
 

@@ -71,7 +71,19 @@ class Controller_Home extends Controller_BaseController {
         }
 
 
+        $coupon = Model::factory('CouponsModel')->getCouponsSectionUrl(null, 6, 0, null);
 
+
+
+        //Cache::instance()->delete('home_busines');
+
+        $content->bloc_right = parent::RightBloc(array(
+            View::factory('blocks_includ/lotareya'),
+            View::factory('blocks_includ/sicseti'),
+            View::factory('blocks_includ/baners_right'),
+        ));
+
+        $content->coupons = $coupon;
         $content->articles = $articles;
         $content->data = $resultArr;
         $this->template->content = $content;

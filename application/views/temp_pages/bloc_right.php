@@ -7,8 +7,8 @@
  */
 ?>
 
-<div class="row">
-    <div class="col-md-12">
+<div class="col-md-4">
+    <div id="sidebar">
         <?if (!empty($data_bloc)):?>
             <?foreach ($data_bloc as $row_bloc):?>
 

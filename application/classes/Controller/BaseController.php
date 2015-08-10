@@ -14,6 +14,7 @@ abstract class Controller_BaseController extends Controller_Template {
     public static $general_meny;
     public static $urlPars;
     public $header;
+    public $footer;
     //public $RightBloc;
     //public $general_meny;
 
@@ -36,10 +37,11 @@ abstract class Controller_BaseController extends Controller_Template {
             'На карте' => '/maps');
 
         $this->header = View::factory('/temp_pages/header');
+        $this->footer = View::factory('/temp_pages/footer');
         $this->header->top_meny = $this->top_meny; //самое верхнее меню
+        $this->footer->top_meny = $this->top_meny;
 
-
-        if (Auth::instance()->get_user()) { // смотрим - если пользователь авторизован
+        if (Auth::instance()->get_user('login')) { // смотрим - если пользователь авторизован
 
             $this->header->user = Auth::instance()->get_user();
 
@@ -52,9 +54,10 @@ abstract class Controller_BaseController extends Controller_Template {
             self::$general_meny = Cache::instance()->get('general_meny');
         }
         $this->header->general_meny = self::$general_meny;
+        $this->footer->general_meny = self::$general_meny;
 
         $this->template->header = $this->header;
-        $this->template->footer = View::factory('/temp_pages/footer');
+        $this->template->footer = $this->footer;
 
 
         $this->template->style = array(
@@ -75,7 +78,8 @@ abstract class Controller_BaseController extends Controller_Template {
             'public/javascripts/jquery-ui.min.js',
             'public/javascripts/bootstrap.min.js',
             'public/javascripts/owl.carousel.min.js',
-            'public/javascripts/common.js'
+            'public/javascripts/common.js',
+            'public/javascripts/app.js'
         );
 
     }

@@ -1,4 +1,4 @@
-/* line 6, ../sass/sidebar.scss */
+/* line 5, ../sass/sidebar.scss */
 #sidebar {
   border: 1px solid #e7e7e7;
   padding-top: 15px;
@@ -81,16 +81,16 @@
 #sidebar .lottery .lottery-section .checkbox a {
   color: #007898;
 }
-/* line 16, ../sass/sidebar.scss */
+/* line 13, ../sass/sidebar.scss */
 #sidebar .media {
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 @media (max-width: 768px) {
-  /* line 21, ../sass/sidebar.scss */
+  /* line 18, ../sass/sidebar.scss */
   #sidebar .media .media-left {
     float: left;
   }
-  /* line 24, ../sass/sidebar.scss */
+  /* line 21, ../sass/sidebar.scss */
   #sidebar .media .media_right {
     float: right;
   }
