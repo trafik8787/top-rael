@@ -49,7 +49,7 @@
                         <nav>
                             <ul>
                                 <li><a href="/contacts">Связь с нами</a></li>
-                                <li><a href="#">О проекте</a></li>
+                                <li><a href="/about">О проекте</a></li>
                                 <li><a href="#">Наши партнеры</a></li>
                                 <li><a href="#">Информеры</a></li>
                                 <li><a href="#">RSS лента</a></li>

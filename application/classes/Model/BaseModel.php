@@ -75,5 +75,18 @@ class Model_BaseModel extends Model {
             return $this->post->errors();
         }
     }
+
+    /**
+     * @return mixed
+     * получаем текст для страницы О проекте
+     */
+    public function getAbout (){
+        $row = DB::select()
+            ->from('about')
+            ->where('id', '=', 1)
+            ->cached()
+            ->execute()->as_array();
+        return $row[0]['text'];
+    }
     
 }
