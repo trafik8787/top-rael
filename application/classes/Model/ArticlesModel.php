@@ -323,7 +323,21 @@ class Model_ArticlesModel extends Model_BaseModel {
             ->where('in_home','=', 1)
             ->order_by('id', 'DESC')
             ->limit(4)
-//            ->cached()
+            ->cached()
+            ->execute()->as_array();
+    }
+
+    /**
+     * @param int $limit
+     * @return mixed
+     * получить последние статьи
+     */
+    public function getArticlesAfter ($limit = 6){
+        return DB::select()
+            ->from('articles')
+            ->order_by('id', 'DESC')
+            ->limit($limit)
+            ->cached()
             ->execute()->as_array();
     }
 

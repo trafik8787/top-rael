@@ -40,6 +40,7 @@ class Controller_Pages_Coupons extends Controller_BaseController {
             View::factory('blocks_includ/lotareya'),
             View::factory('blocks_includ/sicseti'),
             View::factory('blocks_includ/baners_right'),
+            $this->blocArticlesAfter()
         ));
 
         //преобразование масива для правильного вывода

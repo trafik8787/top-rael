@@ -5,6 +5,7 @@
  * Date: 16.07.2015
  * Time: 22:30
  */
+
 ?>
 
 
@@ -97,27 +98,28 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="thumbnail">
+                                        <?if (!empty($rows_data[1])):?>
+                                            <div class="col-md-6">
+                                                <div class="thumbnail">
 
-                                                <a href="#" class="pin">
-                                                    <i class="fa fa-star"></i>
-                                                </a>
+                                                    <a href="#" class="pin">
+                                                        <i class="fa fa-star"></i>
+                                                    </a>
 
-                                                <a href="/business/<?=$rows_data[1]['url']?>" class="thumbnail-image">
-                                                    <img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="">
-                                                </a>
+                                                    <a href="/business/<?=$rows_data[1]['url']?>" class="thumbnail-image">
+                                                        <img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="">
+                                                    </a>
 
-                                                <div class="caption">
-                                                    <h3><strong><a href="/business/<?=$rows_data[1]['url']?>"><?=$rows_data[1]['name']?></a></strong></h3>
+                                                    <div class="caption">
+                                                        <h3><strong><a href="/business/<?=$rows_data[1]['url']?>"><?=$rows_data[1]['name']?></a></strong></h3>
 
-                                                    <p><strong><?=$rows_data[1]['CityName'].', '.$rows_data[1]['address']?></strong></p>
+                                                        <p><strong><?=$rows_data[1]['CityName'].', '.$rows_data[1]['address']?></strong></p>
 
-                                                    <?=Text::limit_chars(strip_tags($rows_data[1]['info']), 200, null, true)?>
+                                                        <?=Text::limit_chars(strip_tags($rows_data[1]['info']), 200, null, true)?>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-
+                                        <?endif?>
                                     </div>
 
                                 <?endforeach?>

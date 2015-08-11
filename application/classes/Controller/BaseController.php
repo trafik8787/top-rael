@@ -146,20 +146,36 @@ abstract class Controller_BaseController extends Controller_Template {
      */
     public function convertArrayVievData($data){
         $resultData = array();
+        $dataTmp = array();
         $i = 0;
         foreach ($data as $key => $data_row) {
 
             $i = $i + 1;
             $dataTmp[] = $data_row;
+
             if ($i>1) {
-                $resultData[] = $dataTmp;
                 $i = 0;
+                $resultData[] = $dataTmp;
                 $dataTmp = array();
             }
-
+            //если последний елемент не парный
+            if (!next($data)) {
+                if (!empty($dataTmp)) {
+                    $resultData[] = $dataTmp;
+                }
+            }
         }
-
         return $resultData;
+    }
+
+    /**
+     * @return View
+     * блок последних обзоров
+     */
+    public function blocArticlesAfter (){
+        $content = View::factory('blocks_includ/articles_after');
+        $content->data = Model::factory('ArticlesModel')->getArticlesAfter();
+        return $content;
     }
 
 }

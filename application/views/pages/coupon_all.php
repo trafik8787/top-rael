@@ -87,32 +87,34 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <?if (!empty($rows_data[1])):?>
+                                            <div class="col-md-6">
 
-                                            <div class="coupon">
-                                                <div class="coupon-container">
+                                                <div class="coupon">
+                                                    <div class="coupon-container">
 
-                                                    <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
+                                                        <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
 
-                                                    <div class="coupon-image">
-                                                        <div class="overlay">
-                                                            <?=$rows_data[1]['secondname']?>
+                                                        <div class="coupon-image">
+                                                            <div class="overlay">
+                                                                <?=$rows_data[1]['secondname']?>
+                                                            </div>
+
+                                                            <img src="/public/uploade/coupon.jpg" width="155" height="125" alt=""
+                                                                 title=""/>
                                                         </div>
 
-                                                        <img src="/public/uploade/coupon.jpg" width="155" height="125" alt=""
-                                                             title=""/>
-                                                    </div>
+                                                        <div class="coupon-context">
 
-                                                    <div class="coupon-context">
+                                                            <div class="fz large"><strong>Десерт в Подарок</strong></div>
+                                                            <small>На все пищевые добавки</small>
 
-                                                        <div class="fz large"><strong>Десерт в Подарок</strong></div>
-                                                        <small>На все пищевые добавки</small>
-
-                                                        <small class="coupon-date">до 1 Апр 2015</small>
+                                                            <small class="coupon-date">до 1 Апр 2015</small>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?endif?>
                                     </div>
 
                                     <br/>

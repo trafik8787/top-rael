@@ -65,12 +65,22 @@ class Controller_Pages_Articles extends Controller_BaseController {
 
         $data = array();
         $content = View::factory('pages/node');
-        $content->data = Model::factory('ArticlesModel')->getArticleUrl($this->request->param('url_article'));
 
+        $data = Model::factory('ArticlesModel')->getArticleUrl($this->request->param('url_article'));
+
+
+        //конвертация масивов бизнесов и купонов
+        $data['BusArr'] = $this->convertArrayVievData($data['BusArr']);
+        $data['CoupArr'] = $this->convertArrayVievData($data['CoupArr']);
+
+        $content->data = $data;
         $content->bloc_right = parent::RightBloc(array(
-            View::factory('blocks_includ/subscribers'),
-            View::factory('blocks_includ/sicseti')
+            View::factory('blocks_includ/lotareya'),
+            View::factory('blocks_includ/sicseti'),
+            View::factory('blocks_includ/baners_right')
+
         ));
+
         $this->template->content = $content;
     }
 
