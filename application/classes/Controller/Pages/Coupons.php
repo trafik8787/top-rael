@@ -35,7 +35,17 @@ class Controller_Pages_Coupons extends Controller_BaseController {
         }
 
         $content->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
-        $content->data = $data['data'];
+
+        $content->bloc_right = parent::RightBloc(array(
+            View::factory('blocks_includ/lotareya'),
+            View::factory('blocks_includ/sicseti'),
+            View::factory('blocks_includ/baners_right'),
+        ));
+
+        //преобразование масива для правильного вывода
+        $result_data = $this->convertArrayVievData($data['data']);
+
+        $content->data = $result_data;
         $content->city = $data['city'];
 
         //передаем параметр значения выбраного города для селекта

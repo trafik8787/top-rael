@@ -32,10 +32,15 @@ class Model_ArticlesModel extends Model_BaseModel {
             }
 
             if ($id_city != null) {
-                $result = DB::select()
-                    ->from('articles')
-                    ->where('id_section', '=', $id)
-                    ->and_where('city', '=', $id_city)
+                $result = DB::select('artic.*',
+                    array('cat.id', 'CatId'),
+                    array('cat.name', 'CatName'),
+                    array('cat.url', 'CatUrl'))
+                    ->from(array('articles', 'artic'))
+                    ->join(array('category', 'cat'))
+                    ->on('artic.id_section', '=', 'cat.id')
+                    ->where('artic.id_section', '=', $id)
+                    ->and_where('artic.city', '=', $id_city)
                     ->limit($limit)
                     ->offset($ofset)
                     ->order_by('id', 'DESC')
@@ -46,9 +51,14 @@ class Model_ArticlesModel extends Model_BaseModel {
 
             } else {
 
-                $result = DB::select()
-                    ->from('articles')
-                    ->where('id_section', '=', $id)
+                $result = DB::select('artic.*',
+                    array('cat.id', 'CatId'),
+                    array('cat.name', 'CatName'),
+                    array('cat.url', 'CatUrl'))
+                    ->from(array('articles', 'artic'))
+                    ->join(array('category', 'cat'))
+                    ->on('artic.id_section', '=', 'cat.id')
+                    ->where('artic.id_section', '=', $id)
                     ->limit($limit)
                     ->offset($ofset)
                     ->order_by('id', 'DESC')

@@ -138,4 +138,28 @@ abstract class Controller_BaseController extends Controller_Template {
         View::set_global('seo_description', strip_tags($description_seo));
     }
 
+
+    /**
+     * @param $data
+     * @return array
+     * преобразование масиива для вывода бизнесов например в две колонки
+     */
+    public function convertArrayVievData($data){
+        $resultData = array();
+        $i = 0;
+        foreach ($data as $key => $data_row) {
+
+            $i = $i + 1;
+            $dataTmp[] = $data_row;
+            if ($i>1) {
+                $resultData[] = $dataTmp;
+                $i = 0;
+                $dataTmp = array();
+            }
+
+        }
+
+        return $resultData;
+    }
+
 }

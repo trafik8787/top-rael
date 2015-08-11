@@ -60,7 +60,10 @@ class Controller_Pages_Sections extends Controller_BaseController {
             View::factory('blocks_includ/articles_category_bloc', array('content' => $data_articles))
         ));
 
-        $bussines_section->data = $data['data'];
+        //преобразование масива бизнесов для вюхи
+        $result_data = $this->convertArrayVievData($data['data']);
+
+        $bussines_section->data = $result_data;
         $bussines_section->city = $data['city'];
 
         //передаем параметр значения выбраного города для селекта

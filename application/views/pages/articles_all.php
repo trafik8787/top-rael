@@ -57,33 +57,29 @@
                             </div>
 
                             <div class="panel-body">
+                                <?if (!empty($data_shift)):?>
 
-                                <div class="well">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img src="/public/uploade/review.jpg" width="260" height="190"
-                                                     class="media-object"/>
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h2 class="media-heading"><a href="#"><strong>Куда пойти
-                                                        завтра?</strong></a></h2>
+                                    <div class="well">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <a href="/article/<?=$data_shift['url']?>">
+                                                    <img src="/public/uploade/review.jpg" width="260" height="190"
+                                                         class="media-object"/>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h2 class="media-heading"><a href="/article/<?=$data_shift['url']?>"><strong><?=$data_shift['name']?></strong></a></h2>
 
-                                            <p class="fz medium">
-                                                <strong>Пабы, дискотеки и чудесные пляжи</strong>
-                                                <br/>
-                                                <a href="#">Покупки</a>
-                                            </p>
-
-                                            Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших
-                                            гостей и родных? Хотите вспоминать о ней долгие годы, с радостью и
-                                            гордостью показывая вашим детям и внукам фото и видео со свадьбы?
-                                            Доверьте организацию свадьбы вашей мечты профессионалам! Вы хотите
-                                            сделать вашу свадьбу яркой и запоминающейся? Удивить ваших гостей
+                                                <p class="fz medium">
+                                                    <strong>Пабы, дискотеки и чудесные пляжи</strong>
+                                                    <br/>
+                                                    <a href="/articles/<?=$data_shift['CatUrl']?>"><?=$data_shift['CatName']?></a>
+                                                </p>
+                                                <?=Text::limit_chars(strip_tags($data_shift['content']), 200, null, true)?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?endif?>
 
                                 <?foreach($data as $rows_data):?>
 
@@ -121,7 +117,6 @@
                             </div>
                         </div>
                     </div>
-
 
                 </div>
             </div>

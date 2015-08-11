@@ -74,15 +74,8 @@
 
                                 <?foreach($data as $key => $rows_data):?>
 
-                                    <?
-                                        //получаем следующий элемент масива
-                                        if (!empty($data[$key+1])) {
-                                            $rows_data_next = $data[$key+1];
-                                        }
-
-                                    ?>
-
                                     <div class="row">
+
                                         <div class="col-md-6">
                                             <div class="thumbnail">
 
@@ -90,43 +83,43 @@
                                                     <i class="fa fa-star"></i>
                                                 </a>
 
-                                                <a href="/business/<?=$rows_data['url']?>" class="thumbnail-image">
+                                                <a href="/business/<?=$rows_data[0]['url']?>" class="thumbnail-image">
                                                     <img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="">
                                                 </a>
 
                                                 <div class="caption">
-                                                    <h3><strong><a href="/business/<?=$rows_data['url']?>"><?=$rows_data['name']?></a></strong></h3>
+                                                    <h3><strong><a href="/business/<?=$rows_data[0]['url']?>"><?=$rows_data[0]['name']?></a></strong></h3>
 
-                                                    <p><strong><?=$rows_data['CityName'].', '.$rows_data['address']?></strong></p>
+                                                    <p><strong><?=$rows_data[0]['CityName'].', '.$rows_data[0]['address']?></strong></p>
 
-                                                    <?=Text::limit_chars(strip_tags($rows_data['info']), 200, null, true)?>
+                                                    <?=Text::limit_chars(strip_tags($rows_data[0]['info']), 200, null, true)?>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <?if (!empty($rows_data_next)):?>
-                                            <div class="col-md-6">
-                                                <div class="thumbnail">
+                                        <div class="col-md-6">
+                                            <div class="thumbnail">
 
-                                                    <a href="#" class="pin">
-                                                        <i class="fa fa-star"></i>
-                                                    </a>
+                                                <a href="#" class="pin">
+                                                    <i class="fa fa-star"></i>
+                                                </a>
 
-                                                    <a href="/business/<?=$rows_data_next['url']?>" class="thumbnail-image">
-                                                        <img src="/public/uploade/thumbnail2.jpg" width="240" height="150" alt="">
-                                                    </a>
+                                                <a href="/business/<?=$rows_data[1]['url']?>" class="thumbnail-image">
+                                                    <img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="">
+                                                </a>
 
-                                                    <div class="caption">
-                                                        <h3><strong><a href="/business/<?=$rows_data_next['url']?>"><?=$rows_data_next['name']?></a></strong></h3>
+                                                <div class="caption">
+                                                    <h3><strong><a href="/business/<?=$rows_data[1]['url']?>"><?=$rows_data[1]['name']?></a></strong></h3>
 
-                                                        <p><strong><?=$rows_data_next['CityName'].', '.$rows_data_next['address']?></strong></p>
+                                                    <p><strong><?=$rows_data[1]['CityName'].', '.$rows_data[1]['address']?></strong></p>
 
-                                                        <?=Text::limit_chars(strip_tags($rows_data_next['info']), 200, null, true)?>
-                                                    </div>
+                                                    <?=Text::limit_chars(strip_tags($rows_data[1]['info']), 200, null, true)?>
                                                 </div>
                                             </div>
-                                        <?endif?>
+                                        </div>
+
                                     </div>
+
                                 <?endforeach?>
 
                             </div>

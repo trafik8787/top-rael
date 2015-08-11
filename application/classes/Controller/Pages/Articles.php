@@ -37,6 +37,8 @@ class Controller_Pages_Articles extends Controller_BaseController {
         }
         //die(HTML::x($data));
         $content->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
+        //забираем первый элемент масива
+        $content->data_shift = array_shift($data['data']);
         $content->data = $data['data'];
         $content->city = $data['city'];
 
