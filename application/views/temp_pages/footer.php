@@ -50,13 +50,13 @@
                             <ul>
                                 <li><a href="/contacts">Связь с нами</a></li>
                                 <li><a href="/about">О проекте</a></li>
-                                <li><a href="#">Наши партнеры</a></li>
-                                <li><a href="#">Информеры</a></li>
-                                <li><a href="#">RSS лента</a></li>
+                                <li><a href="/partners">Наши партнеры</a></li>
+                                <li><a href="/informers">Информеры</a></li>
+                                <li><a href="/rss">RSS лента</a></li>
                             </ul>
                             <br/>
                             <ul>
-                                <li><a href="#">צור קשר</a></li>
+                                <li><a href="/contacts">צור קשר</a></li>
                                 <li><a href="#">כניסה למפרסם</a></li>
                             </ul>
                         </nav>

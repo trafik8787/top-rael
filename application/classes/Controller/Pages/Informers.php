@@ -5,11 +5,11 @@
  * Date: 16.07.2015
  * Time: 18:44
  */
-class Controller_Pages_Rss extends Controller_BaseController {
+class Controller_Pages_Informers extends Controller_BaseController {
 
 	public function action_index()
 	{
-        $content = View::factory('pages/rss');
+        $content = View::factory('pages/informers');
 
         $content->bloc_right = parent::RightBloc(array(
             View::factory('blocks_includ/lotareya'),

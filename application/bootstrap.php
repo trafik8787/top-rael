@@ -150,6 +150,34 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+Route::set('Partners', 'partners')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Partners',
+        'action'     => 'index',
+    ));
+
+Route::set('Informers', 'informers')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Informers',
+        'action'     => 'index',
+    ));
+
+Route::set('Rss', 'rss')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Rss',
+        'action'     => 'index',
+    ));
+
+Route::set('Maps', 'maps')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Maps',
+        'action'     => 'index',
+    ));
+
 Route::set('About', 'about')
     ->defaults(array(
         'directory' => 'Pages',
