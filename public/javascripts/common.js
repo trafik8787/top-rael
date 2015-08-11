@@ -4,6 +4,7 @@
 $(function () {
     //panelCoupnsCarsousel();
     discountCarousel();
+    galleryLarge();
 });
 
 
@@ -13,7 +14,7 @@ function panelCoupnsCarsousel() {
 
     owl.owlCarousel({
         loop: true,
-
+        margin: 10,
         responsive: {
             0: {
                 items: 1
@@ -32,11 +33,7 @@ function panelCoupnsCarsousel() {
         navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
         dots: false
     });
-
 }
-
-
-
 
 
 function discountCarousel(){
@@ -46,7 +43,19 @@ function discountCarousel(){
         loop: true,
         items: 1,
         nav: true,
-        navText: ['<i class="fa fa-chevron-circle-left"></i>', '<i class="fa fa-chevron-circle-right"></i>'],
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
         dots: false
+    });
+}
+
+function galleryLarge(){
+    var owl = $('.primary-gallery .owl-carousel');
+
+    owl.owlCarousel({
+        loop: true,
+        items: 1,
+        nav: true,
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+        dots: true
     });
 }

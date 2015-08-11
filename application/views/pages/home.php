@@ -340,10 +340,7 @@
                                         <i class="fa fa-bars"></i>
                                     </a>
 
-                                    <div class="panel-heading-sub">
-
-                                        <div class="dropdown pull-left">
-
+                                    <div class="panel-heading-sub form-inline">
 
                                             <select class="form-control w-select-city" name="city" >
                                                 <option value="">По городам</option>
@@ -352,9 +349,7 @@
                                                 <?endforeach?>
                                             </select>
 
-                                        </div>
-
-                                        <a href="#" class="btn" role="button">На карте</a>
+                                        <a href="#" class="btn btn-default" role="button">На карте</a>
                                     </div>
 
                                     <div class="collapse" id="nav-restaurant">

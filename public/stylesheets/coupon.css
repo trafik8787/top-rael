@@ -1,4 +1,8 @@
-/* line 27, ../sass/coupon.scss */
+/* line 25, ../sass/coupon.scss */
+.coupon {
+  margin-bottom: 20px;
+}
+/* line 29, ../sass/coupon.scss */
 .coupon .coupon-container {
   position: relative;
   z-index: 1;
@@ -16,12 +20,12 @@
   clear: both;
   display: block;
 }
-/* line 43, ../sass/coupon.scss */
+/* line 45, ../sass/coupon.scss */
 .coupon .coupon-container .pin {
   position: absolute;
   z-index: 3;
 }
-/* line 48, ../sass/coupon.scss */
+/* line 50, ../sass/coupon.scss */
 .coupon .coupon-container .pin .fa,
 .coupon .coupon-container .pin .glyphicon {
   -moz-transform: translate(-50%, -50%) rotate(45deg);
@@ -29,7 +33,7 @@
   -webkit-transform: translate(-50%, -50%) rotate(45deg);
   transform: translate(-50%, -50%) rotate(45deg);
 }
-/* line 54, ../sass/coupon.scss */
+/* line 56, ../sass/coupon.scss */
 .coupon .coupon-container .coupon-image {
   width: 100%;
   position: relative;
@@ -38,7 +42,7 @@
   z-index: 1;
   overflow: hidden;
 }
-/* line 68, ../sass/coupon.scss */
+/* line 70, ../sass/coupon.scss */
 .coupon .coupon-container .coupon-image img {
   display: block;
   min-width: 100%;
@@ -52,7 +56,7 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 83, ../sass/coupon.scss */
+/* line 85, ../sass/coupon.scss */
 .coupon .coupon-container .coupon-image .overlay {
   color: #fff;
   font-size: 14px;
@@ -66,18 +70,18 @@
   padding: 5px 10px;
 }
 @media (min-width: 480px) {
-  /* line 102, ../sass/coupon.scss */
+  /* line 104, ../sass/coupon.scss */
   .coupon .coupon-container .coupon-image .overlay {
     font-size: 21px;
   }
 }
 @media (min-width: 768px) {
-  /* line 108, ../sass/coupon.scss */
+  /* line 110, ../sass/coupon.scss */
   .coupon .coupon-container .coupon-image .overlay {
     font-size: 14px;
   }
 }
-/* line 115, ../sass/coupon.scss */
+/* line 117, ../sass/coupon.scss */
 .coupon .coupon-container .coupon-context {
   display: table-cell;
   vertical-align: middle;
@@ -89,33 +93,33 @@
   position: relative;
   z-index: 1;
 }
-/* line 120, ../sass/coupon.scss */
+/* line 122, ../sass/coupon.scss */
 .coupon .coupon-container .coupon-context:before {
   content: "";
   display: block;
   min-width: 100px;
 }
-/* line 137, ../sass/coupon.scss */
+/* line 139, ../sass/coupon.scss */
 .coupon .coupon-container .coupon-context span {
   display: block;
 }
-/* line 141, ../sass/coupon.scss */
+/* line 143, ../sass/coupon.scss */
 .coupon .coupon-container .coupon-context small {
   display: block;
   font-size: 60%;
 }
-/* line 146, ../sass/coupon.scss */
+/* line 148, ../sass/coupon.scss */
 .coupon .coupon-container .coupon-context div {
   padding: 5px 0;
 }
 @media (min-width: 480px) {
-  /* line 151, ../sass/coupon.scss */
+  /* line 153, ../sass/coupon.scss */
   .coupon .coupon-container .coupon-context {
     font-size: 35px;
   }
 }
 @media (min-width: 768px) {
-  /* line 157, ../sass/coupon.scss */
+  /* line 159, ../sass/coupon.scss */
   .coupon .coupon-container .coupon-context {
     font-size: 21px;
   }

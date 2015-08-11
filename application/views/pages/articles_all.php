@@ -31,8 +31,6 @@
 
                                 <div class="panel-heading-sub">
 
-                                    <div class="dropdown pull-left">
-
                                         <form action="" method="get" id="w-form-city">
                                             <select class="form-control w-select-city" name="city">
                                                 <option value="">По городам</option>
@@ -41,7 +39,7 @@
                                                 <?endforeach?>
                                             </select>
                                         </form>
-                                    </div>
+
                                 </div>
 
                                 <div class="collapse" id="nav-review">

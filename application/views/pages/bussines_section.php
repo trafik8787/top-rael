@@ -41,9 +41,8 @@
 
                                 <div class="panel-heading-sub">
 
-                                    <div class="dropdown pull-left">
 
-                                        <form action="" method="get" id="w-form-city">
+                                        <form action="" method="get" id="w-form-city" style="display: inline-block;">
                                             <select class="form-control w-select-city" name="city">
                                                 <option value="">По городам</option>
                                                 <?foreach($city as $key_id => $row_city):?>
@@ -52,9 +51,8 @@
                                             </select>
                                         </form>
 
-                                    </div>
 
-                                    <a href="#" class="btn" role="button">На карте</a>
+                                    <a href="#" class="btn btn-default" role="button">На карте</a>
                                 </div>
 
 

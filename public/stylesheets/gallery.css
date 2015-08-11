@@ -1,0 +1,187 @@
+/* line 5, ../sass/gallery.scss */
+.primary-gallery {
+  position: relative;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  /* line 5, ../sass/gallery.scss */
+  .primary-gallery {
+    margin-left: -12px;
+    margin-right: -12px;
+  }
+}
+/* line 17, ../sass/gallery.scss */
+.primary-gallery .owl-item:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC42Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.6)));
+  background-image: -moz-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+}
+/* line 31, ../sass/gallery.scss */
+.primary-gallery .owl-nav .owl-prev,
+.primary-gallery .owl-nav .owl-next {
+  position: absolute;
+  width: 40px;
+  top: 0;
+  bottom: 0;
+  color: #fff;
+  font-size: 100px;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 2px 5px;
+}
+/* line 45, ../sass/gallery.scss */
+.primary-gallery .owl-nav .owl-prev .fa,
+.primary-gallery .owl-nav .owl-next .fa {
+  font-weight: bold !important;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+/* line 54, ../sass/gallery.scss */
+.primary-gallery .owl-nav .owl-prev {
+  left: 12px;
+}
+/* line 58, ../sass/gallery.scss */
+.primary-gallery .owl-nav .owl-next {
+  right: 12px;
+}
+/* line 63, ../sass/gallery.scss */
+.primary-gallery .owl-dots {
+  position: relative;
+  text-align: center;
+  -moz-transform: translate(0, -100%);
+  -ms-transform: translate(0, -100%);
+  -webkit-transform: translate(0, -100%);
+  transform: translate(0, -100%);
+  padding-bottom: 15px;
+}
+/* line 72, ../sass/gallery.scss */
+.primary-gallery .owl-dots .owl-dot {
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  display: inline-block;
+  margin: 0 5px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 1px 3px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 1px 3px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 1px 3px;
+}
+
+/* line 86, ../sass/gallery.scss */
+.discount {
+  margin-bottom: 20px;
+}
+/* line 90, ../sass/gallery.scss */
+.discount .owl-carousel {
+  position: relative;
+}
+/* line 95, ../sass/gallery.scss */
+.discount .owl-carousel .owl-nav .owl-prev,
+.discount .owl-carousel .owl-nav .owl-next {
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 34px;
+  line-height: 30px;
+  background: #fff;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+}
+/* line 113, ../sass/gallery.scss */
+.discount .owl-carousel .owl-nav .owl-prev {
+  left: -10px;
+}
+/* line 116, ../sass/gallery.scss */
+.discount .owl-carousel .owl-nav .owl-prev .fa {
+  margin-left: -2px;
+}
+/* line 121, ../sass/gallery.scss */
+.discount .owl-carousel .owl-nav .owl-next {
+  right: -10px;
+}
+/* line 124, ../sass/gallery.scss */
+.discount .owl-carousel .owl-nav .owl-next .fa {
+  margin-left: 2px;
+}
+/* line 129, ../sass/gallery.scss */
+.discount .owl-carousel .owl-nav .fa {
+  color: #007898;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -1px;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+/* line 145, ../sass/gallery.scss */
+.panel-coupons-carousel .owl-carousel {
+  position: relative;
+  padding: 0 23px 0 30px;
+}
+/* line 151, ../sass/gallery.scss */
+.panel-coupons-carousel .owl-carousel .coupon {
+  padding: 15px 13px 15px 3px;
+}
+/* line 155, ../sass/gallery.scss */
+.panel-coupons-carousel .owl-carousel .owl-stage-outer {
+  z-index: 2;
+}
+/* line 159, ../sass/gallery.scss */
+.panel-coupons-carousel .owl-carousel .owl-prev,
+.panel-coupons-carousel .owl-carousel .owl-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  z-index: 3;
+}
+/* line 169, ../sass/gallery.scss */
+.panel-coupons-carousel .owl-carousel .owl-prev .fa,
+.panel-coupons-carousel .owl-carousel .owl-next .fa {
+  color: #007898;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  font-weight: bold;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+/* line 182, ../sass/gallery.scss */
+.panel-coupons-carousel .owl-carousel .owl-prev {
+  left: 0;
+}
+/* line 186, ../sass/gallery.scss */
+.panel-coupons-carousel .owl-carousel .owl-next {
+  right: 0;
+}

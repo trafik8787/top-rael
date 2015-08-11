@@ -116,89 +116,43 @@
 .panel.panel-coupons-carousel .panel-body {
   padding: 0 15px;
 }
-/* line 133, ../sass/panel.scss */
-.panel.panel-coupons-carousel .owl-carousel {
-  padding: 0 15px;
-  margin-bottom: 20px;
-}
-/* line 138, ../sass/panel.scss */
-.panel.panel-coupons-carousel .owl-carousel .coupon {
-  padding: 15px;
-}
-/* line 142, ../sass/panel.scss */
-.panel.panel-coupons-carousel .owl-carousel .owl-stage-outer {
-  z-index: 2;
-}
-/* line 146, ../sass/panel.scss */
-.panel.panel-coupons-carousel .owl-carousel .owl-nav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-}
-/* line 155, ../sass/panel.scss */
-.panel.panel-coupons-carousel .owl-carousel .owl-nav .owl-prev,
-.panel.panel-coupons-carousel .owl-carousel .owl-nav .owl-next {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  height: auto;
-  width: 15px;
-}
-/* line 165, ../sass/panel.scss */
-.panel.panel-coupons-carousel .owl-carousel .owl-nav .owl-prev .fa,
-.panel.panel-coupons-carousel .owl-carousel .owl-nav .owl-next .fa {
-  color: #007898;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  margin-top: -20px;
-  font-size: 40px;
-  font-weight: bold;
-}
-/* line 179, ../sass/panel.scss */
-.panel.panel-coupons-carousel .owl-carousel .owl-nav .owl-next {
-  left: auto;
-  right: 0;
-}
-/* line 188, ../sass/panel.scss */
+/* line 135, ../sass/panel.scss */
 .panel.panel-coupons-thumbnail .coupon {
   margin-bottom: 20px;
 }
-/* line 191, ../sass/panel.scss */
+/* line 138, ../sass/panel.scss */
 .panel.panel-coupons-thumbnail .coupon .coupon-context {
   height: 200px;
 }
-/* line 195, ../sass/panel.scss */
+/* line 142, ../sass/panel.scss */
 .panel.panel-coupons-thumbnail .coupon .coupon-context:before {
   content: "";
   display: block;
   width: 135px;
 }
-/* line 201, ../sass/panel.scss */
+/* line 148, ../sass/panel.scss */
 .panel.panel-coupons-thumbnail .coupon .coupon-context .coupon-date {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 5px;
 }
-/* line 212, ../sass/panel.scss */
+/* line 159, ../sass/panel.scss */
 .panel .panel-title {
   font-size: 30px;
-  line-height: 120%;
+  line-height: 100%;
   display: inline-block;
+  margin-bottom: 10px;
 }
 @media (min-width: 768px) {
-  /* line 212, ../sass/panel.scss */
+  /* line 159, ../sass/panel.scss */
   .panel .panel-title {
     margin-right: 30px;
+    margin-bottom: 0;
     float: left;
   }
 }
-/* line 225, ../sass/panel.scss */
+/* line 175, ../sass/panel.scss */
 .panel .panel-heading {
   padding: 0 15px;
 }
@@ -208,63 +162,55 @@
   clear: both;
   display: block;
 }
-/* line 231, ../sass/panel.scss */
+/* line 181, ../sass/panel.scss */
 .panel .panel-heading .btn {
-  border: 1px solid #e7e7e7;
-  color: #000;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-/* line 239, ../sass/panel.scss */
-.panel .panel-heading .dropdown .btn .caret {
-  border-top: 7px dashed;
-  border-top: 7px solid \9;
-  border-right: 7px solid transparent;
-  border-left: 7px solid transparent;
-}
-/* line 249, ../sass/panel.scss */
-.panel .panel-heading .dropdown.open .btn .caret {
-  border-top: 0;
-  border-bottom: 7px dashed;
-  border-bottom: 7px solid \9;
-}
-/* line 257, ../sass/panel.scss */
-.panel .panel-heading .dropdown .dropdown-menu {
-  max-height: 270px;
-  overflow-y: auto;
+/* line 185, ../sass/panel.scss */
+.panel .panel-heading .form-control {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
-  margin-top: -1px;
+  display: inline-block !important;
+  width: auto !important;
+  vertical-align: middle !important;
 }
-/* line 265, ../sass/panel.scss */
+@media (min-width: 768px) {
+  /* line 185, ../sass/panel.scss */
+  .panel .panel-heading .form-control {
+    margin-right: 10px;
+  }
+}
+/* line 196, ../sass/panel.scss */
 .panel .panel-heading .nav {
-  padding: 5px 0;
   font-size: 16px;
 }
-/* line 270, ../sass/panel.scss */
-.panel .panel-heading .nav > li {
-  float: none;
+@media (max-width: 768px) {
+  /* line 196, ../sass/panel.scss */
+  .panel .panel-heading .nav {
+    margin-top: 10px;
+  }
 }
-/* line 272, ../sass/panel.scss */
+/* line 204, ../sass/panel.scss */
+.panel .panel-heading .nav > li {
+  float: left;
+}
+/* line 206, ../sass/panel.scss */
 .panel .panel-heading .nav > li > a {
   padding: 3px 10px;
   color: #848484;
 }
-/* line 277, ../sass/panel.scss */
+/* line 211, ../sass/panel.scss */
 .panel .panel-heading .nav > li.active > a {
   color: #fff;
 }
-@media (min-width: 768px) {
-  /* line 270, ../sass/panel.scss */
+@media (max-width: 768px) {
+  /* line 204, ../sass/panel.scss */
   .panel .panel-heading .nav > li {
-    float: left;
+    float: none;
   }
-}
-/* line 289, ../sass/panel.scss */
-.panel .panel-heading .panel-heading-sub {
-  padding: 5px 0;
 }
 /* line 41, ../sass/_common-variables.scss */
 .panel .panel-heading .panel-heading-sub:after {
@@ -272,14 +218,10 @@
   clear: both;
   display: block;
 }
-/* line 293, ../sass/panel.scss */
-.panel .panel-heading .panel-heading-sub .btn {
-  margin-right: 15px;
-}
 @media (min-width: 768px) {
-  /* line 289, ../sass/panel.scss */
+  /* line 223, ../sass/panel.scss */
   .panel .panel-heading .panel-heading-sub {
-    padding: 0;
+    margin-bottom: 10px;
   }
 }
 /* line 41, ../sass/_common-variables.scss */
@@ -288,13 +230,13 @@
   clear: both;
   display: block;
 }
-/* line 309, ../sass/panel.scss */
+/* line 237, ../sass/panel.scss */
 .panel .panel-footer {
   background: none;
   border: 0;
   padding: 0 15px;
 }
-/* line 315, ../sass/panel.scss */
+/* line 243, ../sass/panel.scss */
 .panel .well {
   background: #e7effe;
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 4px 4px;
@@ -303,15 +245,15 @@
   border-color: #fff;
   border-width: 5px;
 }
-/* line 321, ../sass/panel.scss */
+/* line 249, ../sass/panel.scss */
 .panel .well .media {
   margin: 0;
 }
-/* line 326, ../sass/panel.scss */
+/* line 254, ../sass/panel.scss */
 .panel .media {
   margin-top: 5px;
 }
-/* line 328, ../sass/panel.scss */
+/* line 256, ../sass/panel.scss */
 .panel .media .media-heading {
   font-size: 22px;
 }
