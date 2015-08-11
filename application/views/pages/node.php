@@ -5,7 +5,7 @@
  * Date: 19.07.2015
  * Time: 21:46
  */
-
+//HTML::x($data);
 ?>
 
 
@@ -39,42 +39,21 @@
 
                     <p><?=$data['ArticContent']?></p>
 
-                    <hr/>
+                    <?if (!empty($data['BusArr'])):?>
+                        <hr/>
+                        <div class="row">
+                            <div class="panel panel-thumbnail">
 
-                    <div class="row">
-                        <div class="panel panel-thumbnail">
+                                <div class="panel-heading">
 
-                            <div class="panel-heading">
+                                    <div class="panel-title">Обзор бизнесов по определеной тематике</div>
 
-                                <div class="panel-title">Обзор бизнесов по определеной тематике</div>
+                                </div>
 
-                            </div>
+                                <div class="panel-body">
+                                    <?foreach ($data['BusArr'] as $rows_busines):?>
+                                    <div class="row">
 
-                            <div class="panel-body">
-                                <?foreach ($data['BusArr'] as $rows_busines):?>
-                                <div class="row">
-
-                                    <div class="col-md-6">
-                                        <div class="thumbnail">
-
-                                            <a href="#" class="pin">
-                                                <i class="fa fa-star"></i>
-                                            </a>
-
-                                            <a href="#" class="thumbnail-image">
-                                                <img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="">
-                                            </a>
-
-                                            <div class="caption">
-                                                <h3><strong><a href="#"><?=$rows_busines[0]['BusName']?></a></strong></h3>
-
-                                                <p><strong>Тель-Авив. <?=$rows_busines[0]['BusAddress']?></strong></p>
-
-                                                <?=Text::limit_chars(strip_tags($rows_busines[0]['BusInfo']), 100, null, true)?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <? if (!empty($rows_busines[1])):?>
                                         <div class="col-md-6">
                                             <div class="thumbnail">
 
@@ -82,27 +61,48 @@
                                                     <i class="fa fa-star"></i>
                                                 </a>
 
-                                                <a href="#" class="thumbnail-image">
-                                                    <img src="/public/uploade/thumbnail2.jpg" width="240" height="150" alt="">
+                                                <a href="/business/<?=$rows_busines[0]['BusUrl']?>" class="thumbnail-image">
+                                                    <img src="<?=$rows_busines[0]['BusImg']?>" width="240" height="150" alt="">
                                                 </a>
 
                                                 <div class="caption">
-                                                    <h3><strong><a href="#"><?=$rows_busines[1]['BusName']?></a></strong></h3>
+                                                    <h3><strong><a href="/business/<?=$rows_busines[0]['BusUrl']?>"><?=$rows_busines[0]['BusName']?></a></strong></h3>
 
-                                                    <p><strong>Тель-Авив. <?=$rows_busines[1]['BusAddress']?></strong></p>
+                                                    <p><strong>Тель-Авив. <?=$rows_busines[0]['BusAddress']?></strong></p>
 
-                                                    <?=Text::limit_chars(strip_tags($rows_busines[1]['BusInfo']), 100, null, true)?>
+                                                    <?=Text::limit_chars(strip_tags($rows_busines[0]['BusInfo']), 100, null, true)?>
                                                 </div>
                                             </div>
                                         </div>
-                                    <?endif?>
-                                </div>
-                                <?endforeach?>
+                                        <? if (!empty($rows_busines[1])):?>
+                                            <div class="col-md-6">
+                                                <div class="thumbnail">
 
+                                                    <a href="#" class="pin">
+                                                        <i class="fa fa-star"></i>
+                                                    </a>
+
+                                                    <a href="/business/<?=$rows_busines[1]['BusUrl']?>" class="thumbnail-image">
+                                                        <img src="<?=$rows_busines[1]['BusImg']?>" width="240" height="150" alt="">
+                                                    </a>
+
+                                                    <div class="caption">
+                                                        <h3><strong><a href="/business/<?=$rows_busines[1]['BusUrl']?>"><?=$rows_busines[1]['BusName']?></a></strong></h3>
+
+                                                        <p><strong>Тель-Авив. <?=$rows_busines[1]['BusAddress']?></strong></p>
+
+                                                        <?=Text::limit_chars(strip_tags($rows_busines[1]['BusInfo']), 100, null, true)?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?endif?>
+                                    </div>
+                                    <?endforeach?>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-
+                    <?endif?>
                     <p><i><strong><?=$data['ArticBigPreviev']?></strong></i></p>
 
 
@@ -142,48 +142,19 @@
                         <hr/>
                     </div>
 
-                    <div class="row">
-                        <div class="panel panel-coupons-thumbnail">
+                    <?if (!empty($data['CoupArr'])):?>
+                        <div class="row">
+                            <div class="panel panel-coupons-thumbnail">
 
-                            <div class="panel-heading">
-                                <div class="panel-title">Обзор новых купонов по определеной тематике</div>
-                            </div>
+                                <div class="panel-heading">
+                                    <div class="panel-title">Обзор новых купонов по определеной тематике</div>
+                                </div>
 
-                            <div class="panel-body">
+                                <div class="panel-body">
 
-                                <?foreach ($data['CoupArr'] as $rows_coupons):?>
+                                    <?foreach ($data['CoupArr'] as $rows_coupons):?>
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-
-                                            <div class="coupon">
-                                                <div class="coupon-container">
-
-                                                    <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
-
-                                                    <div class="coupon-image">
-                                                        <div class="overlay">
-                                                           <?=$rows_coupons[0]['CoupSecondname']?>
-                                                        </div>
-
-                                                        <img src="<?=$rows_coupons[0]['CoupImg']?>" width="155" height="125" alt=""
-                                                             title=""/>
-                                                    </div>
-
-                                                    <div class="coupon-context">
-
-                                                        <div>
-                                                            <span>СКИДКА</span>
-                                                            <span><strong>20%</strong></span>
-                                                            <span><small>На все пищевые добавки</small></span>
-                                                        </div>
-
-                                                        <small class="coupon-date">до 1 Апр 2015</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <?if (!empty($rows_coupons[1])):?>
+                                        <div class="row">
                                             <div class="col-md-6">
 
                                                 <div class="coupon">
@@ -193,31 +164,61 @@
 
                                                         <div class="coupon-image">
                                                             <div class="overlay">
-                                                                <?=$rows_coupons[1]['CoupSecondname']?>
+                                                               <?=$rows_coupons[0]['CoupSecondname']?>
                                                             </div>
 
-                                                            <img src="<?=$rows_coupons[1]['CoupImg']?>" width="155" height="125" alt=""
+                                                            <img src="<?=$rows_coupons[0]['CoupImg']?>" width="155" height="125" alt=""
                                                                  title=""/>
                                                         </div>
 
                                                         <div class="coupon-context">
 
-                                                            <div class="fz large"><strong>Десерт в Подарок</strong></div>
-                                                            <small>На все пищевые добавки</small>
+                                                            <div>
+                                                                <span>СКИДКА</span>
+                                                                <span><strong>20%</strong></span>
+                                                                <span><small>На все пищевые добавки</small></span>
+                                                            </div>
 
                                                             <small class="coupon-date">до 1 Апр 2015</small>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?endif?>
-                                    </div>
+                                            <?if (!empty($rows_coupons[1])):?>
+                                                <div class="col-md-6">
 
-                                <?endforeach?>
+                                                    <div class="coupon">
+                                                        <div class="coupon-container">
+
+                                                            <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
+
+                                                            <div class="coupon-image">
+                                                                <div class="overlay">
+                                                                    <?=$rows_coupons[1]['CoupSecondname']?>
+                                                                </div>
+
+                                                                <img src="<?=$rows_coupons[1]['CoupImg']?>" width="155" height="125" alt=""
+                                                                     title=""/>
+                                                            </div>
+
+                                                            <div class="coupon-context">
+
+                                                                <div class="fz large"><strong>Десерт в Подарок</strong></div>
+                                                                <small>На все пищевые добавки</small>
+
+                                                                <small class="coupon-date">до 1 Апр 2015</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?endif?>
+                                        </div>
+
+                                    <?endforeach?>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
+                    <?endif?>
                     <p><i><strong>Тут будет краткая выдержка основных смысловых блоков для привлечения внимания
                                 посетителей!</strong></i></p>
 

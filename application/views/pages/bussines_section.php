@@ -42,7 +42,6 @@
 
                                 <div class="panel-heading-sub">
 
-
                                         <form action="" method="get" id="w-form-city" style="display: inline-block;">
                                             <select class="form-control w-select-city" name="city">
                                                 <option value="">По городам</option>
@@ -51,7 +50,6 @@
                                                 <?endforeach?>
                                             </select>
                                         </form>
-
 
                                     <a href="#" class="btn btn-default" role="button">На карте</a>
                                 </div>
@@ -85,7 +83,7 @@
                                                 </a>
 
                                                 <a href="/business/<?=$rows_data[0]['url']?>" class="thumbnail-image">
-                                                    <img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="">
+                                                    <img src="<?=$rows_data[0]['home_busines_foto']?>" width="240" height="150" alt="">
                                                 </a>
 
                                                 <div class="caption">
@@ -107,7 +105,7 @@
                                                     </a>
 
                                                     <a href="/business/<?=$rows_data[1]['url']?>" class="thumbnail-image">
-                                                        <img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="">
+                                                        <img src="<?=$rows_data[1]['home_busines_foto']?>" width="240" height="150" alt="">
                                                     </a>
 
                                                     <div class="caption">

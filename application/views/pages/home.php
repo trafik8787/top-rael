@@ -235,12 +235,7 @@
                     <div class="media">
                         <div class="media-left">
                             <a href="/article/<?=$rows_articles['url']?>">
-                            <?if (file_exists($_SERVER['DOCUMENT_ROOT'].$rows_articles['images_article'])):?>
                                 <img src="/uploads/img_articles/thumbs/<?=basename($rows_articles['images_article'])?>" width="120" height="85" class="media-object" alt="<?=$rows_articles['name']?>"/>
-                            <?else:?>
-                                <img src="/public/uploade/list.png" width="120" height="85" class="media-object"/>
-                            <?endif?>
-
                             </a>
                         </div>
                         <div class="media-body">
@@ -380,12 +375,9 @@
                                                     </a>
 
                                                     <a href="/business/<?=$rows['url']?>" class="thumbnail-image">
-                                                        <?if (file_exists($_SERVER['DOCUMENT_ROOT'].$rows['home_busines_foto'])):?>
-                                                            <img src="/uploads/img_business/thumbs/<?=basename($rows['home_busines_foto'])?>" width="240" height="150" alt="<?=$rows['name']?>">
-                                                        <?else:?>
 
-                                                            <img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="<?=$rows['name']?>">
-                                                        <?endif?>
+                                                        <img src="/uploads/img_business/thumbs/<?=basename($rows['home_busines_foto'])?>" width="240" height="150" alt="<?=$rows['name']?>">
+
                                                     </a>
 
                                                     <div class="caption">

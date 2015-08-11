@@ -5,7 +5,7 @@
  * Date: 19.07.2015
  * Time: 18:09
  */
-
+//HTML::x($data);
 ?>
 
 <content>
@@ -63,8 +63,7 @@
                                         <div class="media">
                                             <div class="media-left">
                                                 <a href="/article/<?=$data_shift['url']?>">
-                                                    <img src="/public/uploade/review.jpg" width="260" height="190"
-                                                         class="media-object"/>
+                                                    <img src="/uploads/img_articles/thumbs/<?=basename($data_shift['images_article'])?>" width="260" height="190" class="media-object" alt="<?=$data_shift['name']?>"/>
                                                 </a>
                                             </div>
                                             <div class="media-body">
@@ -90,8 +89,7 @@
                                         <div class="media">
                                             <div class="media-left">
                                                 <a href="/article/<?=$rows_data['url']?>">
-                                                    <img src="/public/uploade/review.jpg" width="260" height="190"
-                                                         class="media-object"/>
+                                                    <img src="/uploads/img_articles/thumbs/<?=basename($rows_data['images_article'])?>" width="260" height="190" class="media-object" alt="<?=$rows_data['name']?>"/>
                                                 </a>
                                             </div>
                                             <div class="media-body">
