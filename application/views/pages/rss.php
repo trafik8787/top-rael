@@ -13,7 +13,7 @@
             <!-- Context -->
             <div class="col-md-8">
                 <div id="context">
-                    rss
+                    <a href="/feed/news">тест</a>
                 </div>
             </div>
 

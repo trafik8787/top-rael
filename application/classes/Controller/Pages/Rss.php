@@ -20,4 +20,5 @@ class Controller_Pages_Rss extends Controller_BaseController {
 	}
 
 
+
 }

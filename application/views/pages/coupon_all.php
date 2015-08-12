@@ -70,7 +70,7 @@
                                                             <?=$rows_data[0]['secondname']?>
                                                         </div>
 
-                                                        <img src="/public/uploade/coupon.jpg" width="155" height="125" alt=""
+                                                        <img src="<?=$rows_data[0]['img_coupon']?>" width="155" height="125" alt=""
                                                              title=""/>
                                                     </div>
 
@@ -100,7 +100,7 @@
                                                                 <?=$rows_data[1]['secondname']?>
                                                             </div>
 
-                                                            <img src="/public/uploade/coupon.jpg" width="155" height="125" alt=""
+                                                            <img src="<?=$rows_data[1]['img_coupon']?>" width="155" height="125" alt=""
                                                                  title=""/>
                                                         </div>
 

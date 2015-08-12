@@ -164,7 +164,13 @@ Route::set('Informers', 'informers')
         'action'     => 'index',
     ));
 
-Route::set('Rss', 'rss')
+Route::set('Feed', 'feed(/<action>)')
+    ->defaults(array(
+        'controller' => 'Feed',
+        'action'     => 'index',
+    ));
+
+Route::set('Rss', 'rss(/<action>)')
     ->defaults(array(
         'directory' => 'Pages',
         'controller' => 'Rss',
