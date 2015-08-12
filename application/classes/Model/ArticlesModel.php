@@ -356,6 +356,7 @@ class Model_ArticlesModel extends Model_BaseModel {
             ->from('articles')
             ->where('id_section','=', $id_section)
             ->and_where('id', '<>', $id_curent_article)
+            ->cached()
             ->execute()->as_array();
 
         $key_rand = array_rand($query, 3);
