@@ -242,76 +242,28 @@
                             </div>
 
                             <div class="panel-body">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img src="/public/uploade/review.jpg" width="260" height="190"
-                                                 class="media-object"/>
-                                        </a>
+
+                                <?foreach ($other_articles as $rows_other_art):?>
+
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img src="/uploads/img_articles/thumbs/<?=basename($rows_other_art['images_article'])?>" width="260" height="190"
+                                                     class="media-object" alt="<?=$rows_other_art['name']?>"/>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h2 class="media-heading"><a href="#"><strong><?=$rows_other_art['name']?></strong></a></h2>
+
+                                            <p class="fz medium"><strong><?=$rows_other_art['secondname']?></strong>
+                                            </p>
+
+                                            <?=Text::limit_chars(strip_tags($rows_other_art['content']), 300, null, true)?>
+                                        </div>
                                     </div>
-                                    <div class="media-body">
-                                        <h2 class="media-heading"><a href="#"><strong>Куда пойти
-                                                    завтра?</strong></a></h2>
 
-                                        <p class="fz medium"><strong>Пабы, дискотеки и чудесные пляжи</strong>
-                                        </p>
-
-                                        Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших
-                                        гостей и родных? Хотите вспоминать о ней долгие годы, с радостью и
-                                        гордостью показывая вашим детям и внукам фото и видео со свадьбы?
-                                        Доверьте организацию свадьбы вашей мечты профессионалам! Вы хотите
-                                        сделать вашу свадьбу яркой и запоминающейся? Удивить ваших гостей
-                                    </div>
-                                </div>
-
-                                <hr/>
-
-
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img src="/public/uploade/review.jpg" width="260" height="190"
-                                                 class="media-object"/>
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h2 class="media-heading"><a href="#"><strong>Куда пойти
-                                                    завтра?</strong></a></h2>
-
-                                        <p class="fz medium"><strong>Пабы, дискотеки и чудесные пляжи</strong>
-                                        </p>
-
-                                        Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших
-                                        гостей и родных? Хотите вспоминать о ней долгие годы, с радостью и
-                                        гордостью показывая вашим детям и внукам фото и видео со свадьбы?
-                                        Доверьте организацию свадьбы вашей мечты профессионалам! Вы хотите
-                                        сделать вашу свадьбу яркой и запоминающейся? Удивить ваших гостей
-                                    </div>
-                                </div>
-
-                                <hr/>
-
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img src="/public/uploade/review.jpg" width="260" height="190"
-                                                 class="media-object"/>
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h2 class="media-heading"><a href="#"><strong>Куда пойти
-                                                    завтра?</strong></a></h2>
-
-                                        <p class="fz medium"><strong>Пабы, дискотеки и чудесные пляжи</strong>
-                                        </p>
-
-                                        Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших
-                                        гостей и родных? Хотите вспоминать о ней долгие годы, с радостью и
-                                        гордостью показывая вашим детям и внукам фото и видео со свадьбы?
-                                        Доверьте организацию свадьбы вашей мечты профессионалам! Вы хотите
-                                        сделать вашу свадьбу яркой и запоминающейся? Удивить ваших гостей
-                                    </div>
-                                </div>
+                                    <hr/>
+                                <?endforeach?>
 
                             </div>
 

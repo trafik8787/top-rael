@@ -67,13 +67,16 @@ class Controller_Pages_Articles extends Controller_BaseController {
         $content = View::factory('pages/node');
 
         $data = Model::factory('ArticlesModel')->getArticleUrl($this->request->param('url_article'));
-
+        $other_articles = Model::factory('ArticlesModel')->getArticlesRandomIdCategory($data['ArticIdSection'], $data['ArticId']);
 
         //конвертация масивов бизнесов и купонов
         $data['BusArr'] = $this->convertArrayVievData($data['BusArr']);
         $data['CoupArr'] = $this->convertArrayVievData($data['CoupArr']);
 
+
         $content->data = $data;
+        //читать еще
+        $content->other_articles = $other_articles;
         $content->bloc_right = parent::RightBloc(array(
             View::factory('blocks_includ/lotareya'),
             View::factory('blocks_includ/sicseti'),

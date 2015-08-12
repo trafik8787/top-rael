@@ -172,6 +172,7 @@ class Model_ArticlesModel extends Model_BaseModel {
                 array('artic.description', 'ArticDesc'),
                 array('artic.keywords', 'ArticKeywords'),
                 array('artic.images_article', 'ArticImg'),
+                array('artic.id_section', 'ArticIdSection'),
 
                 array('bus.id', 'BusId'),
                 array('bus.name', 'BusName'),
@@ -221,6 +222,7 @@ class Model_ArticlesModel extends Model_BaseModel {
         $BusTmp = array();
         $CoupTmp = array();
 
+        $end_result['ArticId'] = $result[0]['ArticId'];
         $end_result['ArticName'] = $result[0]['ArticName'];
         $end_result['ArticSecondname'] = $result[0]['ArticSecondname'];
         $end_result['ArticShortPreviev'] = $result[0]['ArticShortPreviev'];
@@ -230,6 +232,7 @@ class Model_ArticlesModel extends Model_BaseModel {
         $end_result['ArticDesc'] = $result[0]['ArticDesc'];
         $end_result['ArticKeywords'] = $result[0]['ArticKeywords'];
         $end_result['ArticImg'] = $result[0]['ArticImg'];
+        $end_result['ArticIdSection'] = $result[0]['ArticIdSection'];
 
         foreach($result as $name_key => $row){
 
@@ -339,6 +342,30 @@ class Model_ArticlesModel extends Model_BaseModel {
             ->limit($limit)
             ->cached()
             ->execute()->as_array();
+    }
+
+
+    /**
+     * @param $id_section
+     * @param $id_curent_article
+     * @return array
+     * получаем рандомные статьи из раздела
+     */
+    public function getArticlesRandomIdCategory($id_section, $id_curent_article){
+        $query = DB::select('id','name', 'secondname', 'url', 'content', 'images_article')
+            ->from('articles')
+            ->where('id_section','=', $id_section)
+            ->and_where('id', '<>', $id_curent_article)
+            ->execute()->as_array();
+
+        $key_rand = array_rand($query, 3);
+
+        $result = array();
+        foreach ($key_rand as $row) {
+            $result[] = $query[$row];
+        }
+
+        return $result;
     }
 
 }
