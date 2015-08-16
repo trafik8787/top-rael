@@ -21,6 +21,28 @@ class Model_CouponsModel extends Model_BaseModel {
             ->execute()->as_array();
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     * получить купон по его id
+     */
+    public function getCouponsId($id){
+        return DB::select('coup.*',
+            array('bus.name', 'BusName'),
+            array('bus.logo', 'BusLogo'),
+            array('bus.url', 'BusUrl'),
+            array('bus.info', 'BusInfo'),
+            array('bus.tel', 'BusTel'),
+            array('bus.schedule', 'BusSchedule')
+
+        )
+            ->from(array('coupon', 'coup'))
+            ->join(array('business', 'bus'))
+            ->on('coup.business_id', '=', 'bus.id')
+            ->where('coup.id', '=', $id)
+            ->cached()
+            ->execute()->as_array();
+    }
 
     /**
      * @param null $url_section
@@ -49,24 +71,28 @@ class Model_CouponsModel extends Model_BaseModel {
             }
 
             if ($id_city != null) {
-                $result = DB::select()
-                    ->from('coupon')
-                    ->where('id_section', '=', $id)
-                    ->and_where('city', '=', $id_city)
+                $result = DB::select('coup.*', array('bus.name', 'BusName'))
+                    ->from(array('coupon', 'coup'))
+                    ->join(array('business', 'bus'))
+                    ->on('coup.business_id', '=', 'bus.id')
+                    ->where('coup.id_section', '=', $id)
+                    ->and_where('coup.city', '=', $id_city)
                     ->limit($limit)
                     ->offset($ofset)
-                    ->order_by('id', 'DESC')
+                    ->order_by('coup.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
 
                 $count = $this->table_count('coupon', 'id', array('id_section', '=', $id), array('city', '=', $id_city));
             } else {
-                $result = DB::select()
-                    ->from('coupon')
-                    ->where('id_section', '=', $id)
+                $result = DB::select('coup.*', array('bus.name', 'BusName'))
+                    ->from(array('coupon', 'coup'))
+                    ->join(array('business', 'bus'))
+                    ->on('coup.business_id', '=', 'bus.id')
+                    ->where('coup.id_section', '=', $id)
                     ->limit($limit)
                     ->offset($ofset)
-                    ->order_by('id', 'DESC')
+                    ->order_by('coup.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
 
@@ -75,21 +101,25 @@ class Model_CouponsModel extends Model_BaseModel {
 
         } else {
             if ($id_city != null) {
-                $result = DB::select()
-                    ->from('coupon')
-                    ->where('city', '=', $id_city)
+                $result = DB::select('coup.*', array('bus.name', 'BusName'))
+                    ->from(array('coupon', 'coup'))
+                    ->join(array('business', 'bus'))
+                    ->on('coup.business_id', '=', 'bus.id')
+                    ->where('coup.city', '=', $id_city)
                     ->limit($limit)
                     ->offset($ofset)
-                    ->order_by('id', 'DESC')
+                    ->order_by('coup.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
                 $count = $this->table_count('coupon', 'id', array('city', '=', $id_city));
             } else {
-                $result = DB::select()
-                    ->from('coupon')
+                $result = DB::select('coup.*', array('bus.name', 'BusName'))
+                    ->from(array('coupon', 'coup'))
+                    ->join(array('business', 'bus'))
+                    ->on('coup.business_id', '=', 'bus.id')
                     ->limit($limit)
                     ->offset($ofset)
-                    ->order_by('id', 'DESC')
+                    ->order_by('coup.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
                 $count = $this->table_count('coupon', 'id', null);
@@ -140,4 +170,39 @@ class Model_CouponsModel extends Model_BaseModel {
         return $city_arr;
 
     }
+
+    /**
+     * @param $id_user
+     * @param $id_coupons
+     * @return object
+     * @throws Kohana_Exception
+     * сохраняем купон в избранное пользователя
+     */
+    public function saveCouponsFavoritesUser($id_user, $id_coupons){
+        $query = DB::insert('users_relation_favorites_coup', array('user_id', 'coupon_id'))
+            ->values(array($id_user, $id_coupons))->execute();
+        return json_encode($query);
+    }
+
+    public function getCouponsFavoritesUserId ($user_id){
+
+        return DB::select('coup.*',
+            array('bus.name', 'BusName'),
+            array('bus.logo', 'BusLogo'),
+            array('bus.url', 'BusUrl'),
+            array('bus.info', 'BusInfo'),
+            array('bus.tel', 'BusTel'),
+            array('bus.schedule', 'BusSchedule')
+
+        )
+            ->from(array('coupon', 'coup'))
+            ->join(array('business', 'bus'))
+            ->on('coup.business_id', '=', 'bus.id')
+            ->join(array('users_relation_favorites_coup', 'relcoup'))
+            ->on('coup.id','=','relcoup.coupon_id')
+            ->where('relcoup.user_id', '=', $user_id)
+            ->cached()
+            ->execute()->as_array();
+    }
+
 }

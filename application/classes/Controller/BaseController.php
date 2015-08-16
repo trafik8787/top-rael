@@ -79,6 +79,7 @@ abstract class Controller_BaseController extends Controller_Template {
             'public/javascripts/bootstrap.min.js',
             'public/javascripts/owl.carousel.min.js',
             'public/javascripts/common.js',
+            'public/javascripts/jquery.print.js',
             'public/javascripts/app.js'
         );
 

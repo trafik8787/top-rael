@@ -5,9 +5,41 @@
  * Date: 19.07.2015
  * Time: 18:09
  */
-
+HTML::x(json_decode(Cookie::get('coup-41')));
+//HTML::x(Model::factory('CouponsModel')->getCouponsFavoritesUserId(41));
 ?>
+<script>
+    $(document).ready(function(){
 
+        //переиницыализация модельного окна купона
+        $('.bs-coupon-modal-sm').on('hide.bs.modal', function (e) {
+            $('.bs-coupon-modal-sm').removeData('bs.modal')
+        });
+
+        //печать купона
+        $(document).on('click', '.w-button-print', function(){
+            $(".w-print-coupon").print({
+                globalStyles: true
+            });
+        });
+
+        //добавить купон в избранное
+        $(document).on('click', '.w-add-coupon-favor', function(){
+
+            $.ajax({ // описываем наш запрос
+                type: "POST", // будем передавать данные через POST
+                dataType: "JSON", // указываем, что нам вернется JSON
+                url: '/couponsave',
+                data: 'id_coupon='+$(this).data('id'),
+                success: function(response) { // когда получаем ответ
+
+                    console.log(response);
+                }
+            });
+        });
+
+    });
+</script>
 <content>
     <div id="content">
 
@@ -21,6 +53,21 @@
                         <div class="panel panel-coupons-thumbnail">
 
                             <div class="panel-heading">
+
+
+                                <div class="modal fade bs-coupon-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            </div>
+                                            <div class="w-modal-body">
+                                                qwe
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="panel-title">Купоны</div>
 
@@ -63,26 +110,24 @@
                                             <div class="coupon">
                                                 <div class="coupon-container">
 
-                                                    <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
+                                                    <a href="#" data-id="<?=$rows_data[0]['id']?>" class="pin w-add-coupon-favor"><i class="fa fa-thumb-tack"></i></a>
 
                                                     <div class="coupon-image">
                                                         <div class="overlay">
-                                                            <?=$rows_data[0]['secondname']?>
+<!--                                                            --><?//=$rows_data[0]['secondname']?>
+                                                            <?=$rows_data[0]['BusName']?>
                                                         </div>
-
+                                                        <a href="/modalcoupon/<?=$rows_data[0]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
                                                         <img src="<?=$rows_data[0]['img_coupon']?>" width="155" height="125" alt=""
-                                                             title=""/>
+                                                             title=""/></a>
                                                     </div>
 
                                                     <div class="coupon-context">
 
-                                                        <div>
-                                                            <span>СКИДКА</span>
-                                                            <span><strong>20%</strong></span>
-                                                            <span><small>На все пищевые добавки</small></span>
-                                                        </div>
+                                                        <div class="fz large"><strong><?=$rows_data[0]['name']?></strong></div>
+                                                        <small><?=$rows_data[0]['secondname']?></small>
 
-                                                        <small class="coupon-date">до 1 Апр 2015</small>
+                                                        <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_data[0]['dateoff']), 'j %MONTH% Y'); ?></small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -93,23 +138,23 @@
                                                 <div class="coupon">
                                                     <div class="coupon-container">
 
-                                                        <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
+                                                        <a href="#" data-id="<?=$rows_data[1]['id']?>" class="pin w-add-coupon-favor"><i class="fa fa-thumb-tack"></i></a>
 
                                                         <div class="coupon-image">
                                                             <div class="overlay">
-                                                                <?=$rows_data[1]['secondname']?>
+                                                                <?=$rows_data[1]['BusName']?>
                                                             </div>
-
-                                                            <img src="<?=$rows_data[1]['img_coupon']?>" width="155" height="125" alt=""
-                                                                 title=""/>
+                                                            <a href="/modalcoupon/<?=$rows_data[1]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
+                                                            <img src="<?=$rows_data[1]['img_coupon']?>"  width="155" height="125" alt=""
+                                                                 title=""/></a>
                                                         </div>
 
                                                         <div class="coupon-context">
 
-                                                            <div class="fz large"><strong>Десерт в Подарок</strong></div>
-                                                            <small>На все пищевые добавки</small>
+                                                            <div class="fz large"><strong><?=$rows_data[1]['name']?></strong></div>
+                                                            <small><?=$rows_data[1]['secondname']?></small>
 
-                                                            <small class="coupon-date">до 1 Апр 2015</small>
+                                                            <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_data[1]['dateoff']), 'j %MONTH% Y'); ?></small>
                                                         </div>
                                                     </div>
                                                 </div>

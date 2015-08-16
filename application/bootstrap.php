@@ -170,6 +170,20 @@ Route::set('Feed', 'feed(/<action>)')
         'action'     => 'index',
     ));
 
+
+Route::set('ModalCouponSave', 'couponsave')
+    ->defaults(array(
+        'controller' => 'ModalCoupon',
+        'action'     => 'saveFovarites',
+    ));
+
+Route::set('ModalCoupon', 'modalcoupon(/<id_coupon>)')
+    ->defaults(array(
+        'controller' => 'ModalCoupon',
+        'action'     => 'index',
+    ));
+
+
 Route::set('Rss', 'rss(/<action>)')
     ->defaults(array(
         'directory' => 'Pages',

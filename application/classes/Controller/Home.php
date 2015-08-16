@@ -28,7 +28,7 @@ class Controller_Home extends Controller_BaseController {
      //   $redis->save();
 //
         //$we = json_decode(Cookie::get('__count'));
-       // HTML::x($we->asd);
+        //HTML::x(json_decode(Cookie::get('coup-41')));
        // die(phpinfo());
         $resultArr = array();
         $content = View::factory('pages/home');

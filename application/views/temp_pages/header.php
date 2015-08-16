@@ -26,8 +26,8 @@
 
                         <div class="header-profile-shape">
 
-                            <a href="#"><i class="fa fa-star"></i>Избранные места <span class="badge">78</span></a>
-                            <a href="#"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge">42</span></a>
+                            <a href="/account/"><i class="fa fa-star"></i>Избранные места <span class="badge">78</span></a>
+                            <a href="/account/"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge">42</span></a>
                         </div>
 
                         <img src="<?=$user->photo?>" width="60" height="60" alt="" class="img-circle"/>

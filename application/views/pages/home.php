@@ -82,7 +82,8 @@
 
                                 <div class="coupon-image">
                                     <div class="overlay">
-                                        <?=$rows_coupon['secondname']?>
+                                        <?=$rows_coupon['BusName']?>
+<!--                                        --><?//=$rows_coupon['secondname']?>
                                     </div>
 
                                     <img src="<?=$rows_coupon['img_coupon']?>" width="155" height="125" alt="" title=""/>
@@ -91,7 +92,7 @@
                                 <div class="coupon-context">
                                     <div>
                                         <span>Купон</span>
-                                        <span><small>Массаж</small></span>
+                                        <span><small><?=$rows_coupon['name']?></small></span>
                                     </div>
 
                                     <div>
@@ -99,7 +100,7 @@
                                         <span><small>скидка</small></span>
                                     </div>
 
-                                    <div><small class="coupon-date">до 1 Апр 2015</small></div>
+                                    <div><small class="coupon-date">до <?=Date::rusdate(strtotime($rows_coupon['dateoff']), 'j %MONTH% Y'); ?></small></div>
                                 </div>
                             </div>
                         </div>

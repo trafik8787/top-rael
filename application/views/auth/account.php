@@ -29,17 +29,62 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
 
-                                <div class="tab-pane fade in active" id="home">
-                                    Здесь произвольный текст. Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate qui nisi.
+<!--                                купоны-->
+                                <div class="tab-pane fade in active" id="coupons">
+
+
+                                    <div class="coupon" style="width: 300px; display: inline-block">
+                                        <div class="coupon-container">
+
+                                            <a href="#" data-id="68" class="pin w-delete-coupon-favor"><i class="fa fa-thumb-tack"></i></a>
+
+                                            <div class="coupon-image">
+                                                <div class="overlay">
+                                                    <!--                                                            -->                                                            Rolex concept store                                                        </div>
+                                                <a href="/modalcoupon/68" data-toggle="modal" data-target=".bs-coupon-modal-sm">
+                                                    <img src="/uploads/img_coupons/coup_55a7967fe9740.jpg" width="155" height="125" alt="" title=""></a>
+                                            </div>
+
+                                            <div class="coupon-context">
+
+                                                <div class="fz large"><strong>Тест купон</strong></div>
+                                                <small>Тест купон2</small>
+
+                                                <small class="coupon-date">до 27 августа 2015</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="coupon" style="width: 300px; display: inline-block">
+                                        <div class="coupon-container">
+
+                                            <a href="#" data-id="68" class="pin w-delete-coupon-favor"><i class="fa fa-thumb-tack"></i></a>
+
+                                            <div class="coupon-image">
+                                                <div class="overlay">
+                                                    <!--                                                            -->                                                            Rolex concept store                                                        </div>
+                                                <a href="/modalcoupon/68" data-toggle="modal" data-target=".bs-coupon-modal-sm">
+                                                    <img src="/uploads/img_coupons/coup_55a7967fe9740.jpg" width="155" height="125" alt="" title=""></a>
+                                            </div>
+
+                                            <div class="coupon-context">
+
+                                                <div class="fz large"><strong>Тест купон</strong></div>
+                                                <small>Тест купон2</small>
+
+                                                <small class="coupon-date">до 27 августа 2015</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
+
 
                                 <div class="tab-pane fade" id="izbran">
                                     Избранные места
                                 </div>
 
-                                <div class="tab-pane fade" id="coupons">
-                                    купоны
-                                </div>
+
 
                                 <div class="tab-pane fade" id="profile">
                                     <h2><?= $user->username; ?></h2>

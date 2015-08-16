@@ -9,6 +9,25 @@
 ?>
 
 <div class="lottery">
+
+    <!-- Modal -->
+    <div class="modal fade" id="myPravilaLotarey" tabindex="-1" role="dialog" aria-labelledby="myPravilaLotarey" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Правила участия в лотарее</h4>
+                </div>
+                <div class="modal-body">
+                    правила
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="lottery-title">Еженедельная лотерея</div>
 
     <div class="lottery-section">
@@ -40,7 +59,7 @@
                                             <span class="cr">
                                                 <i class="cr-icon glyphicon glyphicon-ok"></i>
                                             </span>
-                    Принимаю <a href="">правила</a> участия в лотереи
+                    Принимаю <a href="#" data-toggle="modal" data-target="#myPravilaLotarey">правила</a> участия в лотереи
                 </label>
             </div>
 
