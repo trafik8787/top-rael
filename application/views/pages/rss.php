@@ -13,7 +13,10 @@
             <!-- Context -->
             <div class="col-md-8">
                 <div id="context">
-                    <a href="/feed/news">тест</a>
+                    <p><a href="/feed/articles">Новые обзоры</a></p>
+                    <p><a href="/feed/business">Новые бизнесы</a></p>
+                    <p><a href="/feed/coupons">Новые купоны</a></p>
+                    <p><a href="/feed/lotarey">Новая лотерея</a></p>
                 </div>
             </div>
 

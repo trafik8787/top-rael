@@ -12,22 +12,71 @@ class Controller_Feed extends Controller {
 
     }
 
-    public function action_news(){
+    public function action_articles(){
 
         $info = array(
-            'title' => 'Комментарии нашего сайта'
+            'title' => 'Обзоры',
+            'link' => 'http://'.$_SERVER['SERVER_NAME'].'/articles',
+            'language' => 'ru'
         );
 
-        $items = array(
-            array('title' => 'Комментарий к статье 2', 'description' => 'А почему здесь так ?',
-                'link'  => URL::site('/articles/article2'), 'pubDate' => date('r', time())),
-            array('title' => 'Комментарий к статье 1', 'description' => 'Ничего не понял',
-                'link'  => URL::site('/articles/article1'), 'pubDate' => date('r', time() - 2500))
-        );
+        $data = Model::factory('ArticlesModel')->getArticlesAfter(10);
+
+        $items = array();
+        foreach ($data as $rows) {
+            $infort = Text::limit_chars(strip_tags($rows['short_previev']), 200, null, true);
+            $items[] = array(
+                'title' => $rows['name'],
+                'link' => 'http://'.$_SERVER['SERVER_NAME'].'/article/'.$rows['url'],
+                'description' => '<img src="http://'.$_SERVER['SERVER_NAME'].'/uploads/img_articles/thumbs/'.basename($rows['images_article']).'"><p>'.$infort.'</p>',
+                'pubDate' => $rows['datecreate'],
+            );
+        }
 
         $this->response->headers("Content-Type", "text/xml");
 
         echo Feed::create($info, $items);
+    }
+
+
+    public function action_business(){
+
+        $info = array(
+            'title' => 'Бизнесы',
+            'link' => 'http://'.$_SERVER['SERVER_NAME'],
+            'language' => 'ru'
+        );
+
+        $data = Model::factory('BussinesModel')->getBusinessAfter(20);
+        //die(HTML::x($data));
+        $items = array();
+
+        foreach ($data as $rows) {
+
+            $infort = Text::limit_chars(strip_tags($rows['info']), 200, null, true);
+            $infort = htmlspecialchars($infort);
+
+            $items[] = array(
+                'title' => htmlspecialchars($rows['name']),
+                'link' => 'http://'.$_SERVER['SERVER_NAME'].'/business/'.$rows['url'],
+                'description' => '<img src="http://'.$_SERVER['SERVER_NAME'].'/uploads/img_business/thumbs/'.basename($rows['home_busines_foto']).'"><p>'.$infort.'</p>',
+                'pubDate' => $rows['date_create']
+            );
+
+
+        }
+
+        $this->response->headers("Content-Type", "text/xml");
+       // die(HTML::x($items));
+        echo Feed::create($info, $items);
+    }
+
+    public function action_coupons(){
+
+    }
+
+    public function action_lotarey(){
+
     }
 
 }

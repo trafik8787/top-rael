@@ -508,7 +508,20 @@ class Model_BussinesModel extends Model_BaseModel {
         return $city_arr;
     }
 
-
+    /**
+     * @param int $limit
+     * @return mixed
+     * Получение последних добавленых бизнесов
+     */
+    public function getBusinessAfter($limit = 10){
+        return DB::select()
+            ->from('business')
+            ->where('status', '=', 1)
+            ->order_by('id', 'DESC')
+            ->limit($limit)
+            ->cached()
+            ->execute()->as_array();
+    }
 
 
 }
