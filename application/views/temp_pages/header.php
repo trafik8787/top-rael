@@ -26,8 +26,8 @@
 
                         <div class="header-profile-shape">
 
-                            <a href="/account/"><i class="fa fa-star"></i>Избранные места <span class="badge">78</span></a>
-                            <a href="/account/"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge">42</span></a>
+                            <a href="/account#izbran"><i class="fa fa-star"></i>Избранные места <span class="badge">72</span></a>
+                            <a href="/account#coupons"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge w-count-coupon"><?=Controller_BaseController::$count_coupon?></span></a>
                         </div>
 
                         <img src="<?=$user->photo?>" width="60" height="60" alt="" class="img-circle"/>
@@ -35,7 +35,7 @@
                         <div class="header-profile-info">
                             <small>Добро пожаловать</small>
                             <small class="profile-username">Валентина Громова</small>
-                            <a href="/account">Профиль</a> <a href="/account/logout"><i class="fa fa-sign-out"></i></a>
+                            <a href="/account#profile">Профиль</a> <a href="/account/logout"><i class="fa fa-sign-out"></i></a>
                         </div>
                     </div>
 
@@ -45,8 +45,8 @@
 
                         <div class="header-profile-shape">
 
-                            <a href="#"><i class="fa fa-star"></i>Избранные места <span class="badge">0</span></a>
-                            <a href="#"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge">0</span></a>
+                            <a href="/account#izbran"><i class="fa fa-star"></i>Избранные места <span class="badge">0</span></a>
+                            <a href="/account#coupons"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge"><?=Controller_BaseController::$count_coupon?></span></a>
                         </div>
 
                         <img src="/public/uploade/user-avatar.jpg" width="60" height="60" alt="" class="img-circle"/>

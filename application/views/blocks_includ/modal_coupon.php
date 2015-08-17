@@ -5,7 +5,7 @@
  * Date: 16.08.2015
  * Time: 16:07
  */
-
+//die(HTML::x($data));
 ?>
 
 <div class="w-print-coupon">
@@ -36,7 +36,9 @@
 </div>
 
 <div class="modal-footer">
-    <button type="button" data-id="<?=$data[0]['id']?>" class="btn btn-primary w-add-coupon-favor">Сохранить</button>
+    <?if (empty($data[0]['coupon_favorit'])):?>
+        <button type="button" data-id="<?=$data[0]['id']?>" class="btn btn-primary w-add-coupon-favor" data-dismiss="modal">Сохранить</button>
+    <?endif?>
     <button type="button" class="btn btn-primary w-button-print">Распечатать</button>
     <button type="button" class="btn btn-primary">Открыть на телефоне</button>
 </div>

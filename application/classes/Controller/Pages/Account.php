@@ -32,6 +32,20 @@ class Controller_Pages_Account extends Controller_BaseController {
             try {
 
                 $user = $ulogin->login(); // залогиниться
+
+                //проверяем нет ли у пользователя сохраненных в базе купонов в избранном
+                //если есть обновляем куки файл если нету создаем
+                $favoritcoup = Model::factory('CouponsModel')->getCouponsFavoritesUserId(Auth::instance()->get_user()->id);
+                if ($favoritcoup !== false) {
+
+                    //пересоздаем купон на основе данных из таблицы
+                    Cookie::update_Arr_set_json('favoritcoup', $favoritcoup);
+                    //получаем избранные купоны
+                    $data->favorit_coupon = Model::factory('CouponsModel')->getCouponsId($favoritcoup);
+                    //передаем количество купонов в шапку
+                    parent::$count_coupon = count($favoritcoup);
+                }
+
                 $session = Session::instance(); // стартуем сессии
                 if ($session->get('redirectAfterLogin')!='') // если пользователь хотел куда-то перейти
                 {
@@ -50,11 +64,19 @@ class Controller_Pages_Account extends Controller_BaseController {
 
         if (!$data->user = Auth::instance()->get_user()) // если пользователь не авторизован
         {
-            $this->redirect('/account/registration'); // редиректим на страницу с регистрацией
+
+           // $this->redirect('/account/registration'); // редиректим на страницу с регистрацией
+        } else {
+            $data->photo = Auth::instance()->get_user()->photo;
         }
 
+        //получаем избранные купоны
+        if (parent::$favorits_coupon != null) {
+            $data->favorit_coupon = Model::factory('CouponsModel')->getCouponsId(parent::$favorits_coupon);
+        }
+
+
         $data->ulogin = $ulogin->render(); // стартуем сессии
-        $data->photo = Auth::instance()->get_user()->photo;
 
         $this->template->content = $data;
     }
@@ -74,6 +96,15 @@ class Controller_Pages_Account extends Controller_BaseController {
 
             if ($user) { // если авторизовали успешно
 
+                //проверяем нет ли у пользователя сохраненных в базе купонов в избранном
+                //если есть обновляем куки файл если нету создаем
+                $favoritcoup = Model::factory('CouponsModel')->getCouponsFavoritesUserId(Auth::instance()->get_user()->id);
+                if ($favoritcoup !== false) {
+
+                    //пересоздаем купон на основе данных из таблицы
+                    Cookie::update_Arr_set_json('favoritcoup', $favoritcoup);
+                }
+
                 $session = Session::instance();
                 if ($session->get('redirectAfterLogin')!='')
                 {
@@ -85,6 +116,7 @@ class Controller_Pages_Account extends Controller_BaseController {
 
                 //когда пользователь залогинился то изменяем форму в шапке
                 $this->header->user = Auth::instance()->get_user();
+
 
             } else {
 

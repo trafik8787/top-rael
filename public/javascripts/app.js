@@ -215,4 +215,61 @@ $(document).ready(function(){
 
 
 
+
+    //переиницыализация модельного окна купона
+    $('.bs-coupon-modal-sm').on('hide.bs.modal', function (e) {
+        $('.bs-coupon-modal-sm').removeData('bs.modal')
+    });
+
+    //печать купона
+    $(document).on('click', '.w-button-print', function(){
+        $(".w-print-coupon").print({
+            globalStyles: true
+        });
+    });
+
+    //добавить купон в избранное
+    $(document).on('click', '.w-add-coupon-favor', function(){
+
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "JSON", // указываем, что нам вернется JSON
+            url: '/couponsave',
+            data: 'id_coupon='+$(this).data('id'),
+            success: function(response) { // когда получаем ответ
+
+                console.log(response);
+            }
+        });
+
+        var count_coupon = $('.w-count-coupon').text();
+        count_coupon = parseInt(count_coupon) + 1;
+        $('.w-count-coupon').text(count_coupon);
+
+        return false;
+    });
+
+    //удалить купоны в избранном
+    $(document).on('click', '.w-delete-coupon-favor', function(){
+
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "JSON", // указываем, что нам вернется JSON
+            url: '/coupondelete',
+            data: 'id_coupon='+$(this).data('id'),
+            success: function(response) { // когда получаем ответ
+
+                console.log(response);
+            }
+        });
+
+        $(this).parents('.coupon').hide();
+        var count_coupon = $('.w-count-coupon').text();
+        count_coupon = count_coupon - 1;
+        $('.w-count-coupon').text(count_coupon);
+
+        return false;
+    });
+
+
 });

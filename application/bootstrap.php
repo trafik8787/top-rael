@@ -177,6 +177,12 @@ Route::set('ModalCouponSave', 'couponsave')
         'action'     => 'saveFovarites',
     ));
 
+Route::set('ModalCouponDel', 'coupondelete')
+    ->defaults(array(
+        'controller' => 'ModalCoupon',
+        'action'     => 'deleteFovarites',
+    ));
+
 Route::set('ModalCoupon', 'modalcoupon(/<id_coupon>)')
     ->defaults(array(
         'controller' => 'ModalCoupon',

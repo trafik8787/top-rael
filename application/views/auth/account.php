@@ -7,13 +7,37 @@
  */
 
 ?>
+<script>
+    //открытие нужной вкладки по якорю
+    $(function () {
+        var hash = window.location.hash;
+        hash && $('ul.nav-tabs a[href="' + hash + '"]').tab('show');
 
+
+
+    });
+</script>
 <content>
     <div id="content">
 
         <div class="row">
             <!-- Context -->
             <div class="col-md-12">
+
+                <div class="modal fade bs-coupon-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="w-modal-body">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
                 <div id="context">
 
                     <div class="row">
@@ -22,7 +46,9 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#coupons" data-toggle="tab">Купоны</a></li>
                                 <li><a href="#izbran" data-toggle="tab">Избранные места</a></li>
-                                <li><a href="#profile" data-toggle="tab">Профиль</a></li>
+                                <?if (!empty($user)):?>
+                                    <li><a href="#profile" data-toggle="tab">Профиль</a></li>
+                                <?endif?>
                                 <li><a href="#subscribers" data-toggle="tab">Рассылка</a></li>
                             </ul>
 
@@ -32,51 +58,38 @@
 <!--                                купоны-->
                                 <div class="tab-pane fade in active" id="coupons">
 
+                                    <?if (!empty($favorit_coupon)):?>
 
-                                    <div class="coupon" style="width: 300px; display: inline-block">
-                                        <div class="coupon-container">
+                                        <?foreach($favorit_coupon as $rows_data_coupon):?>
+                                            <div class="coupon" style="width: 300px; display: inline-block">
+                                                <div class="coupon-container">
 
-                                            <a href="#" data-id="68" class="pin w-delete-coupon-favor"><i class="fa fa-thumb-tack"></i></a>
+                                                    <a href="#" data-id="<?=$rows_data_coupon['id']?>" class="pin w-delete-coupon-favor"><i class="fa fa-thumb-tack"></i></a>
 
-                                            <div class="coupon-image">
-                                                <div class="overlay">
-                                                    <!--                                                            -->                                                            Rolex concept store                                                        </div>
-                                                <a href="/modalcoupon/68" data-toggle="modal" data-target=".bs-coupon-modal-sm">
-                                                    <img src="/uploads/img_coupons/coup_55a7967fe9740.jpg" width="155" height="125" alt="" title=""></a>
+                                                    <div class="coupon-image">
+                                                        <div class="overlay">
+                                                            <!--                                                            --><?//=$rows_data[0]['secondname']?>
+                                                            <?=$rows_data_coupon['BusName']?>
+                                                        </div>
+                                                        <a href="/modalcoupon/<?=$rows_data_coupon['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
+                                                            <img src="<?=$rows_data_coupon['img_coupon']?>" width="155" height="125" alt=""
+                                                                 title=""/></a>
+                                                    </div>
+
+                                                    <div class="coupon-context">
+
+                                                        <div class="fz large"><strong><?=$rows_data_coupon['name']?></strong></div>
+                                                        <small><?=$rows_data_coupon['secondname']?></small>
+
+                                                        <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_data_coupon['dateoff']), 'j %MONTH% Y'); ?></small>
+                                                    </div>
+                                                </div>
                                             </div>
+                                        <?endforeach?>
 
-                                            <div class="coupon-context">
-
-                                                <div class="fz large"><strong>Тест купон</strong></div>
-                                                <small>Тест купон2</small>
-
-                                                <small class="coupon-date">до 27 августа 2015</small>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="coupon" style="width: 300px; display: inline-block">
-                                        <div class="coupon-container">
-
-                                            <a href="#" data-id="68" class="pin w-delete-coupon-favor"><i class="fa fa-thumb-tack"></i></a>
-
-                                            <div class="coupon-image">
-                                                <div class="overlay">
-                                                    <!--                                                            -->                                                            Rolex concept store                                                        </div>
-                                                <a href="/modalcoupon/68" data-toggle="modal" data-target=".bs-coupon-modal-sm">
-                                                    <img src="/uploads/img_coupons/coup_55a7967fe9740.jpg" width="155" height="125" alt="" title=""></a>
-                                            </div>
-
-                                            <div class="coupon-context">
-
-                                                <div class="fz large"><strong>Тест купон</strong></div>
-                                                <small>Тест купон2</small>
-
-                                                <small class="coupon-date">до 27 августа 2015</small>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    <?else:?>
+                                        <span>Тут купоны</span>
+                                    <?endif?>
                                 </div>
 
 
@@ -85,44 +98,45 @@
                                 </div>
 
 
+                                <?if (!empty($user)): //если пользователи ?>
+                                    <div class="tab-pane fade" id="profile">
+                                        <h2><?=isset($user->username) ? $user->username : '' ?></h2>
+                                        <ul>
+                                            <li>Аватарка: <img src="<?= $photo; ?>" class="img-rounded"/></li>
+                                            <li>E-mail: <?= $user->email; ?></li>
+                                            <li>Последнее посещение: <?= Date::fuzzy_span($user->last_login); ?></li>
+                                        </ul>
+                                        <hr/>
+                                        <? if (isset($_GET['changeok'])) {
+                                            echo "Новый пароль был успешно сохранен<hr />";
+                                        } ?>
+                                        <? if (isset($_GET['changefalse'])) {
+                                            echo "Старый пароль введен не верно или новый пароль слишком слабый<hr />";
+                                        } ?>
+                                        <form action="/account/changepass" method="post">
+                                            Смена пароля:
+                                            <input type="password" name="oldpassword" placeholder="Старый пароль"/><br/>
+                                            Новый пароль:
+                                            <input type="password" name="newpassword" placeholder="Новый пароль"/><br/>
+                                            <input type="submit" class="btn" value="Изменить пароль"/>
+                                        </form>
 
-                                <div class="tab-pane fade" id="profile">
-                                    <h2><?= $user->username; ?></h2>
-                                    <ul>
-                                        <li>Аватарка: <img src="<?= $photo; ?>" class="img-rounded"/></li>
-                                        <li>E-mail: <?= $user->email; ?></li>
-                                        <li>Последнее посещение: <?= Date::fuzzy_span($user->last_login); ?></li>
-                                    </ul>
-                                    <hr/>
-                                    <? if (isset($_GET['changeok'])) {
-                                        echo "Новый пароль был успешно сохранен<hr />";
-                                    } ?>
-                                    <? if (isset($_GET['changefalse'])) {
-                                        echo "Старый пароль введен не верно или новый пароль слишком слабый<hr />";
-                                    } ?>
-                                    <form action="/account/changepass" method="post">
-                                        Смена пароля:
-                                        <input type="password" name="oldpassword" placeholder="Старый пароль"/><br/>
-                                        Новый пароль:
-                                        <input type="password" name="newpassword" placeholder="Новый пароль"/><br/>
-                                        <input type="submit" class="btn" value="Изменить пароль"/>
-                                    </form>
+                                        <h3>Аккаунты социальных сетей:</h3>
 
-                                    <h3>Аккаунты социальных сетей:</h3>
+                                        <? if (isset($networks) && count($networks) > 0) {
+                                            foreach ($networks as $n) echo "<a href='{$n['identity']}' target='_blank'>{$n['identity']}</a><br />";
+                                        } else {
+                                            echo 'Аккаунты социальных сетей еще не добавлены :(';
+                                        } ?>
+                                        <hr/>
+                                        Добавить другие аккаунты:
+                                        <br/>
+                                        <?= $ulogin; ?>
+                                        <hr/>
+                                        <a href="/account/logout" class="btn">Выйти</a>
 
-                                    <? if (isset($networks) && count($networks) > 0) {
-                                        foreach ($networks as $n) echo "<a href='{$n['identity']}' target='_blank'>{$n['identity']}</a><br />";
-                                    } else {
-                                        echo 'Аккаунты социальных сетей еще не добавлены :(';
-                                    } ?>
-                                    <hr/>
-                                    Добавить другие аккаунты:
-                                    <br/>
-                                    <?= $ulogin; ?>
-                                    <hr/>
-                                    <a href="/account/logout" class="btn">Выйти</a>
-
-                                </div>
+                                    </div>
+                                <?endif?>
 
                                 <div class="tab-pane fade" id="subscribers">
                                     рассилки

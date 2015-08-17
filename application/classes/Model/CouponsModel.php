@@ -24,24 +24,46 @@ class Model_CouponsModel extends Model_BaseModel {
     /**
      * @param $id
      * @return mixed
-     * получить купон по его id
+     * получить купон по его id или купоны
      */
     public function getCouponsId($id){
-        return DB::select('coup.*',
-            array('bus.name', 'BusName'),
-            array('bus.logo', 'BusLogo'),
-            array('bus.url', 'BusUrl'),
-            array('bus.info', 'BusInfo'),
-            array('bus.tel', 'BusTel'),
-            array('bus.schedule', 'BusSchedule')
 
-        )
-            ->from(array('coupon', 'coup'))
-            ->join(array('business', 'bus'))
-            ->on('coup.business_id', '=', 'bus.id')
-            ->where('coup.id', '=', $id)
-            ->cached()
-            ->execute()->as_array();
+        if (is_array($id)) {
+
+            return DB::select('coup.*',
+                array('bus.name', 'BusName'),
+                array('bus.logo', 'BusLogo'),
+                array('bus.url', 'BusUrl'),
+                array('bus.info', 'BusInfo'),
+                array('bus.tel', 'BusTel'),
+                array('bus.schedule', 'BusSchedule')
+
+            )
+                ->from(array('coupon', 'coup'))
+                ->join(array('business', 'bus'))
+                ->on('coup.business_id', '=', 'bus.id')
+                ->where('coup.id', 'IN', $id)
+                ->cached()
+                ->execute()->as_array();
+
+        } else {
+            return DB::select('coup.*',
+                array('bus.name', 'BusName'),
+                array('bus.logo', 'BusLogo'),
+                array('bus.url', 'BusUrl'),
+                array('bus.info', 'BusInfo'),
+                array('bus.tel', 'BusTel'),
+                array('bus.schedule', 'BusSchedule')
+
+            )
+                ->from(array('coupon', 'coup'))
+                ->join(array('business', 'bus'))
+                ->on('coup.business_id', '=', 'bus.id')
+                ->where('coup.id', '=', $id)
+                ->cached()
+                ->execute()->as_array();
+        }
+
     }
 
     /**
@@ -184,25 +206,41 @@ class Model_CouponsModel extends Model_BaseModel {
         return json_encode($query);
     }
 
+    /**
+     * @param $id_coupons
+     * удалить купон из избранного текущего пользователя
+     */
+    public function deleteCouponsFavoritesUser ($id_coupons){
+
+        $id_user = Auth::instance()->get_user()->id;
+        $query = DB::delete('users_relation_favorites_coup')
+            ->where('user_id', '=', $id_user)
+            ->and_where('coupon_id', '=', $id_coupons)
+            ->execute();
+    }
+
+    /**
+     * @param $user_id
+     * @return mixed
+     * получить избранные купоны по id пользователя
+     */
     public function getCouponsFavoritesUserId ($user_id){
 
-        return DB::select('coup.*',
-            array('bus.name', 'BusName'),
-            array('bus.logo', 'BusLogo'),
-            array('bus.url', 'BusUrl'),
-            array('bus.info', 'BusInfo'),
-            array('bus.tel', 'BusTel'),
-            array('bus.schedule', 'BusSchedule')
-
-        )
-            ->from(array('coupon', 'coup'))
-            ->join(array('business', 'bus'))
-            ->on('coup.business_id', '=', 'bus.id')
-            ->join(array('users_relation_favorites_coup', 'relcoup'))
-            ->on('coup.id','=','relcoup.coupon_id')
-            ->where('relcoup.user_id', '=', $user_id)
-            ->cached()
+        $query = DB::select('coupon_id')
+            ->from('users_relation_favorites_coup')
+            ->where('user_id', '=', $user_id)
             ->execute()->as_array();
+
+        if (!empty($query)) {
+            $result = array();
+            foreach ($query as $row) {
+                $result[] = $row['coupon_id'];
+            }
+
+            return $result;
+        } else {
+            return false;
+        }
     }
 
 }
