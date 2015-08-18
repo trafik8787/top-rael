@@ -149,6 +149,22 @@ class Model_CouponsModel extends Model_BaseModel {
 
         }
 
+        if (!empty(Controller_BaseController::$favorits_coupon)) {
+
+            $new_result = array();
+            foreach ($result as $result_row) {
+
+                if (in_array($result_row['id'], Controller_BaseController::$favorits_coupon)) {
+                    $result_row['coupon_favorit'] = 1;
+                }
+
+                $new_result[] = $result_row;
+            }
+            $result = $new_result;
+        }
+
+        //die(HTML::x($result));
+
         $city_arr = $this->getCityCouponInSection($url_section);
 
         return array('data' => $result, 'count' => $count, 'city' => $city_arr);

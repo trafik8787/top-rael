@@ -22,8 +22,8 @@ class Controller_ModalCoupon extends Controller {
 
             if (!empty($favoritcoup)) {
                 $favoritcoup = json_decode($favoritcoup);
-
-                if (array_search($id_coupon, $favoritcoup) !== false) {
+                //ищем в масиве избранных есть ли этот купон
+                if (in_array($id_coupon, $favoritcoup)) {
                     $data[0]['coupon_favorit'] = 1;
                 }
             }

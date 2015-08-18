@@ -77,16 +77,25 @@
 
                         <div class="coupon">
                             <div class="coupon-container">
+                                <?if (!empty($rows_coupon['coupon_favorit']))://если купон добавлен в избранное?>
+                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                        <i class="fa fa-thumb-tack"></i>
+                                    </a>
+                                <?else:?>
+                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupon['id']?>" class="pin w-add-coupon-favor">
+                                        <i class="fa fa-thumb-tack"></i>
+                                    </a>
+                                <?endif?>
 
-                                <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
 
                                 <div class="coupon-image">
                                     <div class="overlay">
                                         <?=$rows_coupon['BusName']?>
-<!--                                        --><?//=$rows_coupon['secondname']?>
-                                    </div>
 
-                                    <img src="<?=$rows_coupon['img_coupon']?>" width="155" height="125" alt="" title=""/>
+                                    </div>
+                                    <a href="/modalcoupon/<?=$rows_coupon['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
+                                        <img src="<?=$rows_coupon['img_coupon']?>" width="155" height="125" alt="" title=""/>
+                                    </a>
                                 </div>
 
                                 <div class="coupon-context">

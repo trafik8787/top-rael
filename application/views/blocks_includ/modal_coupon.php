@@ -37,7 +37,7 @@
 
 <div class="modal-footer">
     <?if (empty($data[0]['coupon_favorit'])):?>
-        <button type="button" data-id="<?=$data[0]['id']?>" class="btn btn-primary w-add-coupon-favor" data-dismiss="modal">Сохранить</button>
+        <button type="button" data-id="<?=$data[0]['id']?>" class="btn btn-primary w-add-coupon-favor-modal" data-dismiss="modal">Сохранить</button>
     <?endif?>
     <button type="button" class="btn btn-primary w-button-print">Распечатать</button>
     <button type="button" class="btn btn-primary">Открыть на телефоне</button>

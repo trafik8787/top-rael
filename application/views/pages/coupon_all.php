@@ -5,14 +5,11 @@
  * Date: 19.07.2015
  * Time: 18:09
  */
-HTML::x(json_decode(Cookie::get('favoritcoup')));
+//HTML::x(json_decode(Cookie::get('favoritcoup')));
 //HTML::x(Model::factory('CouponsModel')->getCouponsFavoritesUserId(41));
 ?>
 <script>
     $(document).ready(function(){
-
-
-
 
     });
 </script>
@@ -29,21 +26,7 @@ HTML::x(json_decode(Cookie::get('favoritcoup')));
                         <div class="panel panel-coupons-thumbnail">
 
                             <div class="panel-heading">
-
-
-                                <div class="modal fade bs-coupon-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            </div>
-                                            <div class="w-modal-body">
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
+                                
 
                                 <div class="panel-title">Купоны</div>
 
@@ -85,8 +68,16 @@ HTML::x(json_decode(Cookie::get('favoritcoup')));
 
                                             <div class="coupon">
                                                 <div class="coupon-container">
+                                                    <?if (!empty($rows_data[0]['coupon_favorit']))://если купон добавлен в избранное?>
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                            <i class="fa fa-thumb-tack"></i>
+                                                        </a>
+                                                    <?else:?>
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_data[0]['id']?>" class="pin w-add-coupon-favor">
+                                                            <i class="fa fa-thumb-tack"></i>
+                                                        </a>
+                                                    <?endif?>
 
-                                                    <a href="#" data-id="<?=$rows_data[0]['id']?>" class="pin w-add-coupon-favor"><i class="fa fa-thumb-tack"></i></a>
 
                                                     <div class="coupon-image">
                                                         <div class="overlay">
@@ -114,7 +105,15 @@ HTML::x(json_decode(Cookie::get('favoritcoup')));
                                                 <div class="coupon">
                                                     <div class="coupon-container">
 
-                                                        <a href="#" data-id="<?=$rows_data[1]['id']?>" class="pin w-add-coupon-favor"><i class="fa fa-thumb-tack"></i></a>
+                                                        <?if (!empty($rows_data[1]['coupon_favorit']))://если купон добавлен в избранное?>
+                                                            <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                                <i class="fa fa-thumb-tack"></i>
+                                                            </a>
+                                                        <?else:?>
+                                                            <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_data[1]['id']?>" class="pin w-add-coupon-favor">
+                                                                <i class="fa fa-thumb-tack"></i>
+                                                            </a>
+                                                        <?endif?>
 
                                                         <div class="coupon-image">
                                                             <div class="overlay">

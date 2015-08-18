@@ -160,15 +160,23 @@
                                                 <div class="coupon">
                                                     <div class="coupon-container">
 
-                                                        <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
+                                                        <?if (!empty($rows_coupons[0]['coupon_favorit']))://если купон добавлен в избранное?>
+                                                            <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                                <i class="fa fa-thumb-tack"></i>
+                                                            </a>
+                                                        <?else:?>
+                                                            <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons[0]['CoupId']?>" class="pin w-add-coupon-favor">
+                                                                <i class="fa fa-thumb-tack"></i>
+                                                            </a>
+                                                        <?endif?>
 
                                                         <div class="coupon-image">
                                                             <div class="overlay">
                                                                <?=$rows_coupons[0]['CoupSecondname']?>
                                                             </div>
-
+                                                            <a href="/modalcoupon/<?=$rows_coupons[0]['CoupId']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
                                                             <img src="<?=$rows_coupons[0]['CoupImg']?>" width="155" height="125" alt=""
-                                                                 title=""/>
+                                                                 title=""/></a>
                                                         </div>
 
                                                         <div class="coupon-context">
@@ -190,15 +198,23 @@
                                                     <div class="coupon">
                                                         <div class="coupon-container">
 
-                                                            <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
+                                                            <?if (!empty($rows_coupons[1]['coupon_favorit']))://если купон добавлен в избранное?>
+                                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                                    <i class="fa fa-thumb-tack"></i>
+                                                                </a>
+                                                            <?else:?>
+                                                                <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons[1]['CoupId']?>" class="pin w-add-coupon-favor">
+                                                                    <i class="fa fa-thumb-tack"></i>
+                                                                </a>
+                                                            <?endif?>
 
                                                             <div class="coupon-image">
                                                                 <div class="overlay">
                                                                     <?=$rows_coupons[1]['CoupSecondname']?>
                                                                 </div>
-
+                                                                <a href="/modalcoupon/<?=$rows_coupons[1]['CoupId']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
                                                                 <img src="<?=$rows_coupons[1]['CoupImg']?>" width="155" height="125" alt=""
-                                                                     title=""/>
+                                                                     title=""/></a>
                                                             </div>
 
                                                             <div class="coupon-context">

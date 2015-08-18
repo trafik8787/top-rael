@@ -3,6 +3,8 @@
  */
 $(document).ready(function(){
 
+    $('[data-toggle="tooltip"]').tooltip();
+
     $(document).on('change', '.w-select-city', function(){
         $('#w-form-city').submit();
 
@@ -246,8 +248,45 @@ $(document).ready(function(){
         count_coupon = parseInt(count_coupon) + 1;
         $('.w-count-coupon').text(count_coupon);
 
+
+        $(this).removeClass('w-add-coupon-favor');
+        $(this).css('background-color', '#ccc');
+        $(this).attr('data-original-title', 'Купон добавлен в Избранное').tooltip('show');
+        $('[data-toggle="tooltip"]').tooltip();
+
         return false;
     });
+
+
+    //добавить купон в избранное из модального окна купона
+    $(document).on('click', '.w-add-coupon-favor-modal', function(){
+
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "JSON", // указываем, что нам вернется JSON
+            url: '/couponsave',
+            data: 'id_coupon='+$(this).data('id'),
+            success: function(response) { // когда получаем ответ
+
+                console.log(response);
+            }
+        });
+
+        var count_coupon = $('.w-count-coupon').text();
+        count_coupon = parseInt(count_coupon) + 1;
+        $('.w-count-coupon').text(count_coupon);
+
+        var icon_favor =  $('[data-id="'+$(this).data('id')+'"]');
+        icon_favor.removeClass('w-add-coupon-favor');
+        icon_favor.css('background-color', '#ccc');
+        icon_favor.attr('data-original-title', 'Купон добавлен в Избранное').tooltip('show');
+        $('[data-toggle="tooltip"]').tooltip();
+
+        return false;
+    });
+
+
+
 
     //удалить купоны в избранном
     $(document).on('click', '.w-delete-coupon-favor', function(){

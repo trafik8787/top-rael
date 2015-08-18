@@ -10,6 +10,21 @@
 
 <div id="wrapper" class="container">
 
+    <div class="modal fade bs-coupon-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="w-modal-body">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
     <header>
         <div id="header">
 
@@ -46,7 +61,7 @@
                         <div class="header-profile-shape">
 
                             <a href="/account#izbran"><i class="fa fa-star"></i>Избранные места <span class="badge">0</span></a>
-                            <a href="/account#coupons"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge"><?=Controller_BaseController::$count_coupon?></span></a>
+                            <a href="/account#coupons"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge w-count-coupon"><?=Controller_BaseController::$count_coupon?></span></a>
                         </div>
 
                         <img src="/public/uploade/user-avatar.jpg" width="60" height="60" alt="" class="img-circle"/>

@@ -23,21 +23,7 @@
         <div class="row">
             <!-- Context -->
             <div class="col-md-12">
-
-                <div class="modal fade bs-coupon-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="w-modal-body">
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
+                
                 <div id="context">
 
                     <div class="row">
@@ -64,7 +50,7 @@
                                             <div class="coupon" style="width: 300px; display: inline-block">
                                                 <div class="coupon-container">
 
-                                                    <a href="#" data-id="<?=$rows_data_coupon['id']?>" class="pin w-delete-coupon-favor"><i class="fa fa-thumb-tack"></i></a>
+                                                    <a href="#" data-id="<?=$rows_data_coupon['id']?>" class="pin w-delete-coupon-favor"><i class="glyphicon glyphicon-trash"></i></a>
 
                                                     <div class="coupon-image">
                                                         <div class="overlay">

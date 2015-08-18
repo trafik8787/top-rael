@@ -272,6 +272,21 @@ class Model_ArticlesModel extends Model_BaseModel {
 
         }
 
+        //поиск купона который добавлен в избранное
+        if (!empty(Controller_BaseController::$favorits_coupon)) {
+
+            $new_result = array();
+            foreach ($end_result['CoupArr'] as $result_row) {
+
+                if (in_array($result_row['CoupId'], Controller_BaseController::$favorits_coupon)) {
+                    $result_row['coupon_favorit'] = 1;
+                }
+
+                $new_result[] = $result_row;
+            }
+            $end_result['CoupArr'] = $new_result;
+        }
+
         return $end_result;
 
     }
