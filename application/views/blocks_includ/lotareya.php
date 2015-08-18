@@ -5,7 +5,7 @@
  * Date: 09.08.2015
  * Time: 18:02
  */
-
+//HTML::x($data);
 ?>
 
 <div class="lottery">
@@ -32,18 +32,19 @@
 
     <div class="lottery-section">
         <div class="lottery-section-title">Приз</div>
-
-        <div class="media">
-            <div class="media-left media-middle">
-                <a href="#">
-                    <img src="/public/uploade/prize.jpg" width="88" height="88" class="media-object"/>
-                </a>
+        <?if (!empty($data)):?>
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="#">
+                        <img src="<?=$data['img']?>" width="88" height="88" class="media-object"/>
+                    </a>
+                </div>
+                <div class="media-body">
+                    <div class="media-heading"><?=$data['secondname']?></div>
+                    <p><?=$data['description']?></p>
+                </div>
             </div>
-            <div class="media-body">
-                <div class="media-heading">Купон на 500ш в ресторан «Круглый стол».</div>
-                <p>до розыгрыша осталось 5 дней </p>
-            </div>
-        </div>
+        <?endif?>
     </div>
 
     <div class="lottery-section">

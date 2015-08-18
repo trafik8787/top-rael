@@ -59,7 +59,7 @@ class Controller_Pages_City extends Controller_BaseController {
         }
 
         $content->bloc_right = parent::RightBloc(array(
-            View::factory('blocks_includ/lotareya'),
+            $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
         ));
 

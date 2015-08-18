@@ -12,7 +12,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
         $content = View::factory('pages/maps');
 
         $content->bloc_right = parent::RightBloc(array(
-            View::factory('blocks_includ/lotareya'),
+            $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
         ));
 

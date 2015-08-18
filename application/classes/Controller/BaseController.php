@@ -17,6 +17,7 @@ abstract class Controller_BaseController extends Controller_Template {
     public $footer;
     public static $count_coupon = 0;
     public static $favorits_coupon = null;
+
     //public $RightBloc;
     //public $general_meny;
 
@@ -188,6 +189,21 @@ abstract class Controller_BaseController extends Controller_Template {
     public function blocArticlesAfter (){
         $content = View::factory('blocks_includ/articles_after');
         $content->data = Model::factory('ArticlesModel')->getArticlesAfter();
+        return $content;
+    }
+
+    /**
+     * @return mixed
+     *
+     */
+    public function lotarey(){
+        $content = View::factory('blocks_includ/lotareya');
+        $data = Model::factory('LotareyModel')->getLotareya();
+        if (!empty($data)) {
+            $content->data = $data[0];
+        } else {
+            $content->data = array();
+        }
         return $content;
     }
 

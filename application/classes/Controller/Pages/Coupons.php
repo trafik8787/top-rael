@@ -37,7 +37,7 @@ class Controller_Pages_Coupons extends Controller_BaseController {
         $content->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
 
         $content->bloc_right = parent::RightBloc(array(
-            View::factory('blocks_includ/lotareya'),
+            $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
             View::factory('blocks_includ/baners_right'),
             $this->blocArticlesAfter()

@@ -43,7 +43,7 @@ class Controller_Pages_Articles extends Controller_BaseController {
         $content->city = $data['city'];
 
         $content->bloc_right = parent::RightBloc(array(
-            View::factory('blocks_includ/lotareya'),
+            $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
             View::factory('blocks_includ/baners_right'),
         ));
@@ -78,7 +78,7 @@ class Controller_Pages_Articles extends Controller_BaseController {
         //читать еще
         $content->other_articles = $other_articles;
         $content->bloc_right = parent::RightBloc(array(
-            View::factory('blocks_includ/lotareya'),
+            $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
             View::factory('blocks_includ/baners_right')
 

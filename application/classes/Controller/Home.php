@@ -78,7 +78,7 @@ class Controller_Home extends Controller_BaseController {
         //Cache::instance()->delete('home_busines');
 
         $content->bloc_right = parent::RightBloc(array(
-            View::factory('blocks_includ/lotareya'),
+            $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
             View::factory('blocks_includ/baners_right'),
         ));

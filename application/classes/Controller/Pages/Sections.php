@@ -55,7 +55,7 @@ class Controller_Pages_Sections extends Controller_BaseController {
         $bussines_section->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
         //подключаем правый блок
         $bussines_section->bloc_right = parent::RightBloc(array(
-            View::factory('blocks_includ/lotareya'),
+            $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
             View::factory('blocks_includ/articles_category_bloc', array('content' => $data_articles))
         ));
