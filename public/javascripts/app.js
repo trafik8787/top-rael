@@ -311,4 +311,61 @@ $(document).ready(function(){
     });
 
 
+    //подписка блок лотарея
+    $('.w-form-subscribe-lotarey').submit(function(){
+
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "JSON", // указываем, что нам вернется JSON
+            url: '/subscribe',
+            data: $(this).serialize(),
+            success: function(response) { // когда получаем ответ
+
+                console.log(response);
+            }
+        });
+
+        return false;
+    });
+
+    //$(document).on('click', '.w-subskrip-buton', function(){
+    //
+    //    alert($('.w-form-subscribe-lotarey').serialize());
+    //    return false;
+    //
+    //});
+    //$(".w-form-subscribe-lotarey").validate({
+    //
+    //    rules:{
+    //
+    //        cheklicenz:{
+    //            required: true
+    //        },
+    //
+    //        email:{
+    //            required: true,
+    //            email: true
+    //        }
+    //
+    //    },
+    //
+    //    messages:{
+    //
+    //        cheklicenz:{
+    //            required: "Для продолжения поставьте галочку"
+    //        },
+    //
+    //        email:{
+    //            required: "Это поле обязательно для заполнения",
+    //            email: 'Неправельный формат'
+    //        }
+    //    },
+    //    submitHandler: function(form){
+    //        alert('sdf');
+    //    }
+    //});
+
+
+
+
 });

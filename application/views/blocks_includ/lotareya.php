@@ -7,7 +7,15 @@
  */
 //HTML::x($data);
 ?>
-
+<style>
+    /*.error {*/
+        /*color: red;*/
+    /*}*/
+    /*#cheklicenz-error {*/
+        /*color: red;*/
+        /*position: absolute;*/
+    /*}*/
+</style>
 <div class="lottery">
 
     <!-- Modal -->
@@ -52,10 +60,10 @@
 
         <p>Подпишись на нашу почтовую рассылку и станьте участником еженедельной лотереи</p>
 
-        <form>
+        <form class="w-form-subscribe-lotarey">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" value="">
+                    <input type="checkbox" required="required" value="1" name="cheklicenz">
 
                                             <span class="cr">
                                                 <i class="cr-icon glyphicon glyphicon-ok"></i>
@@ -65,10 +73,10 @@
             </div>
 
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Ваш email:">
+                <input type="email" class="form-control" required="required" name="email" placeholder="Ваш email:">
 
                 <div class="input-group-addon">
-                    <button type="submit" class="btn btn-danger">Отправить</button>
+                    <button type="submit" class="btn btn-danger w-subskrip-buton">Отправить</button>
                 </div>
             </div>
 
@@ -136,5 +144,5 @@
         </div>
     </div>
 
-    <a href="#">Архив лотереи</a>
+    <a href="/arhivlotarey">Архив лотереи</a>
 </div>

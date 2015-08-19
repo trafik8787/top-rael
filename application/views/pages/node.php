@@ -263,13 +263,13 @@
 
                                     <div class="media">
                                         <div class="media-left">
-                                            <a href="#">
+                                            <a href="/article/<?=$rows_other_art['url']?>">
                                                 <img src="/uploads/img_articles/thumbs/<?=basename($rows_other_art['images_article'])?>" width="260" height="190"
                                                      class="media-object" alt="<?=$rows_other_art['name']?>"/>
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                            <h2 class="media-heading"><a href="#"><strong><?=$rows_other_art['name']?></strong></a></h2>
+                                            <h2 class="media-heading"><a href="/article/<?=$rows_other_art['url']?>"><strong><?=$rows_other_art['name']?></strong></a></h2>
 
                                             <p class="fz medium"><strong><?=$rows_other_art['secondname']?></strong>
                                             </p>

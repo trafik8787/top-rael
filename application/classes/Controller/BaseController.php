@@ -91,6 +91,7 @@ abstract class Controller_BaseController extends Controller_Template {
             'public/javascripts/jquery-ui.min.js',
             'public/javascripts/bootstrap.min.js',
             'public/javascripts/owl.carousel.min.js',
+            'public/javascripts/jquery.validate.min.js',
             'public/javascripts/common.js',
             'public/javascripts/jquery.print.js',
             'public/javascripts/app.js'

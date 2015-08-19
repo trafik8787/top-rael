@@ -204,6 +204,13 @@ Route::set('Maps', 'maps')
         'action'     => 'index',
     ));
 
+Route::set('ArhivLotarey', 'arhivlotarey')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'ArhivLotarey',
+        'action'     => 'index',
+    ));
+
 Route::set('About', 'about')
     ->defaults(array(
         'directory' => 'Pages',
@@ -234,8 +241,8 @@ Route::set('Contacts', 'contacts')
         'controller' => 'Contacts',
         'action'     => 'index',
     ));
-
-Route::set('FiltrSectionCity', 'filtr(/<action>)')
+//подписка
+Route::set('Subscribe', 'subscribe')
     ->defaults(array(
         'directory' => 'Pages',
         'controller' => 'Ajax',
