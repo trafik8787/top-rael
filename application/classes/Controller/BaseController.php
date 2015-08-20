@@ -16,7 +16,9 @@ abstract class Controller_BaseController extends Controller_Template {
     public $header;
     public $footer;
     public static $count_coupon = 0;
+    public static $count_bussines = 0;
     public static $favorits_coupon = null;
+    public static $favorits_bussines = null;
 
     //public $RightBloc;
     //public $general_meny;
@@ -35,6 +37,15 @@ abstract class Controller_BaseController extends Controller_Template {
             self::$favorits_coupon = self::$count_coupon;
             // количество купонов
             self::$count_coupon = count(self::$count_coupon);
+        }
+
+
+        if (Cookie::get('favoritbus') != '') {
+            self::$count_bussines = json_decode(Cookie::get('favoritbus'));
+            //получаем масив купонов из куки
+            self::$favorits_bussines = self::$count_bussines;
+            // количество купонов
+            self::$count_bussines = count(self::$count_bussines);
         }
 
         $url = Request::detect_uri();

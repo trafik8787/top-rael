@@ -94,6 +94,21 @@ class Model_BussinesModel extends Model_BaseModel {
         $city_arr = $this->getCityInCategory($url_category);
 
 
+        if (!empty(Controller_BaseController::$favorits_bussines)) {
+
+            $new_result = array();
+            foreach ($result as $result_row) {
+
+                if (in_array($result_row['id'], Controller_BaseController::$favorits_bussines)) {
+                    $result_row['bussines_favorit'] = 1;
+                }
+
+                $new_result[] = $result_row;
+            }
+            $result = $new_result;
+        }
+
+
          return array('data' => $result, 'count' => count($result1), 'city' => $city_arr);
     }
 
@@ -198,16 +213,23 @@ class Model_BussinesModel extends Model_BaseModel {
 
         $city_arr = $this->getCityInSection($arrChild);
 
+        if (!empty(Controller_BaseController::$favorits_bussines)) {
 
+            $new_result = array();
+            foreach ($result as $result_row) {
+
+                if (in_array($result_row['id'], Controller_BaseController::$favorits_bussines)) {
+                    $result_row['bussines_favorit'] = 1;
+                }
+
+                $new_result[] = $result_row;
+            }
+            $result = $new_result;
+        }
 
         return array('data' => $result, 'count' => count($result1), 'city' => $city_arr);
     }
 
-
-    public function getBusinessCityID ($id_city) {
-//        $result = DB::select()
-//            ->from('business')
-    }
 
 
 
@@ -523,5 +545,71 @@ class Model_BussinesModel extends Model_BaseModel {
             ->execute()->as_array();
     }
 
+
+
+
+    /**
+     * @param $id_bussines
+     * @return mixed
+     * получить бизнесы
+     */
+    public function getBussinesId($id_bussines){
+
+        return DB::select()
+            ->from('business')
+            ->where('id', 'IN', $id_bussines)
+            ->and_where('status', '=', 1)
+            ->execute()->as_array();
+    }
+
+    /**
+     * @param $id_user
+     * @param $id_bussines
+     * @return string
+     * @throws Kohana_Exception
+     * сохраняем бизнес в избранное пользователя
+     */
+    public function saveBussinesFavoritesUser($id_user, $id_bussines){
+        $query = DB::insert('users_relation_favorites_bus', array('user_id', 'business_id'))
+            ->values(array($id_user, $id_bussines))->execute();
+        return json_encode($query);
+    }
+
+
+    /**
+     * @param $id_bussines
+     */
+    public function deleteBussinesFavoritesUser ($id_bussines){
+        $id_user = Auth::instance()->get_user()->id;
+        $query = DB::delete('users_relation_favorites_bus')
+            ->where('user_id', '=', $id_user)
+            ->and_where('business_id', '=', $id_bussines)
+            ->execute();
+    }
+
+
+    /**
+     * @param $user_id
+     * @return mixed
+     * получить избранные бизнесы по id пользователя
+     */
+    public function getBussinesFavoritesUserId ($user_id){
+
+        $query = DB::select('business_id')
+            ->from('users_relation_favorites_bus')
+            ->where('user_id', '=', $user_id)
+            ->execute()->as_array();
+
+        if (!empty($query)) {
+            $result = array();
+            foreach ($query as $row) {
+                $result[] = $row['business_id'];
+            }
+
+            return $result;
+        } else {
+            return false;
+        }
+    }
 
 }

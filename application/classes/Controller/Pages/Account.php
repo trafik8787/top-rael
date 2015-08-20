@@ -37,7 +37,6 @@ class Controller_Pages_Account extends Controller_BaseController {
                 //если есть обновляем куки файл если нету создаем
                 $favoritcoup = Model::factory('CouponsModel')->getCouponsFavoritesUserId(Auth::instance()->get_user()->id);
                 if ($favoritcoup !== false) {
-
                     //пересоздаем купон на основе данных из таблицы
                     Cookie::update_Arr_set_json('favoritcoup', $favoritcoup);
                     //получаем избранные купоны
@@ -45,6 +44,21 @@ class Controller_Pages_Account extends Controller_BaseController {
                     //передаем количество купонов в шапку
                     parent::$count_coupon = count($favoritcoup);
                 }
+
+
+                //проверяем нет ли у пользователя сохраненных в базе бизнесов в избранном
+                //если есть обновляем куки файл если нету создаем
+                $favoritbus = Model::factory('BussinesModel')->getBussinesFavoritesUserId(Auth::instance()->get_user()->id);
+                if ($favoritbus !== false) {
+                    //пересоздаем купон на основе данных из таблицы
+                    Cookie::update_Arr_set_json('favoritbus', $favoritbus);
+                    //получаем избранные купоны
+                    $data->favorits_bussines = Model::factory('BussinesModel')->getBussinesId($favoritbus);
+                    //передаем количество купонов в шапку
+                    parent::$count_bussines = count($favoritbus);
+                }
+
+
 
                 $session = Session::instance(); // стартуем сессии
                 if ($session->get('redirectAfterLogin')!='') // если пользователь хотел куда-то перейти
@@ -75,6 +89,9 @@ class Controller_Pages_Account extends Controller_BaseController {
             $data->favorit_coupon = Model::factory('CouponsModel')->getCouponsId(parent::$favorits_coupon);
         }
 
+        if (parent::$favorits_bussines != null) {
+            $data->favorits_bussines = Model::factory('BussinesModel')->getBussinesId(self::$favorits_bussines);
+        }
 
         $data->ulogin = $ulogin->render(); // стартуем сессии
 

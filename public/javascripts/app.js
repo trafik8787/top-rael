@@ -230,6 +230,63 @@ $(document).ready(function(){
         });
     });
 
+
+
+
+    //добавить бизнес в избранное
+    $(document).on('click', '.w-add-bussines-favor', function(){
+
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "JSON", // указываем, что нам вернется JSON
+            url: '/bussinessave',
+            data: 'id_bussines='+$(this).data('id'),
+            success: function(response) { // когда получаем ответ
+
+                console.log(response);
+            }
+        });
+
+        var count_bus = $('.w-count-bussines').text();
+        count_bus = parseInt(count_bus) + 1;
+        $('.w-count-bussines').text(count_bus);
+
+        $(this).removeClass('w-add-bussines-favor');
+        $(this).css('background-color', '#ccc');
+        $(this).attr('data-original-title', 'Бизнес добавлен в Избранное').tooltip('show');
+        $('[data-toggle="tooltip"]').tooltip();
+
+        return false;
+    });
+
+
+    //удаляем бизнес из избранного
+    $(document).on('click', '.w-delete-bussines-favor', function(){
+
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "JSON", // указываем, что нам вернется JSON
+            url: '/bussinesdel',
+            data: 'id_bussines='+$(this).data('id'),
+            success: function(response) { // когда получаем ответ
+
+                console.log(response);
+            }
+        });
+
+
+        $(this).parents('.bussines').hide();
+        var count_bus = $('.w-count-bussines').text();
+        count_bus = count_bus - 1;
+        $('.w-count-bussines').text(count_bus);
+
+        return false;
+
+    });
+
+
+
+
     //добавить купон в избранное
     $(document).on('click', '.w-add-coupon-favor', function(){
 

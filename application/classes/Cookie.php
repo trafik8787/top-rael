@@ -42,6 +42,10 @@ class Cookie extends Kohana_Cookie {
 
     }
 
+    /**
+     * @param $key
+     * удалить купон
+     */
     public static function del_coupon ($key){
 
         $data = Cookie::get('favoritcoup');
@@ -58,6 +62,27 @@ class Cookie extends Kohana_Cookie {
         Cookie::delete('favoritcoup');
         Cookie::set('favoritcoup', $data, Date::YEAR);
 
+    }
+
+    /**
+     * @param $key
+     * удалить бизнес
+     */
+    public static function del_bussines ($key){
+
+        $data = Cookie::get('favoritbus');
+        $data = json_decode($data);
+        $key = array_search($key, $data);
+        unset($data[$key]);
+
+        $res = array();
+        foreach ($data as $row) {
+            $res[] = $row;
+        }
+        $data = json_encode($res);
+
+        Cookie::delete('favoritbus');
+        Cookie::set('favoritbus', $data, Date::YEAR);
 
     }
 

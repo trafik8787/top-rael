@@ -80,7 +80,31 @@
 
 
                                 <div class="tab-pane fade" id="izbran">
-                                    Избранные места
+
+                                    <?if (!empty($favorits_bussines)):?>
+                                        <?foreach($favorits_bussines as $rows_data_bus):?>
+                                            <div class="thumbnail bussines" style="width: 20%; display: inline-block;">
+
+                                                <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_data_bus['id']?>" class="pin w-delete-bussines-favor">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </a>
+
+                                                <a href="/business/<?=$rows_data_bus['url']?>" class="thumbnail-image">
+                                                    <img src="<?=$rows_data_bus['home_busines_foto']?>" width="240" height="150" alt="">
+                                                </a>
+
+                                                <div class="caption">
+                                                    <h3><strong><a href="/business/<?=$rows_data_bus['url']?>"><?=$rows_data_bus['name']?></a></strong></h3>
+
+                                                    <p><strong><?=$rows_data_bus['address']?></strong></p>
+
+                                                    <?=Text::limit_chars(strip_tags($rows_data_bus['info']), 200, null, true)?>
+                                                </div>
+                                            </div>
+                                        <?endforeach?>
+                                    <?else:?>
+                                        <span>Тут бизнесы</span>
+                                    <?endif?>
                                 </div>
 
 

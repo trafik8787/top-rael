@@ -41,7 +41,7 @@
 
                         <div class="header-profile-shape">
 
-                            <a href="/account#izbran"><i class="fa fa-star"></i>Избранные места <span class="badge">72</span></a>
+                            <a href="/account#izbran"><i class="fa fa-star"></i>Избранные места <span class="badge w-count-bussines"><?=Controller_BaseController::$count_bussines?></span></a>
                             <a href="/account#coupons"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge w-count-coupon"><?=Controller_BaseController::$count_coupon?></span></a>
                         </div>
 
@@ -60,7 +60,7 @@
 
                         <div class="header-profile-shape">
 
-                            <a href="/account#izbran"><i class="fa fa-star"></i>Избранные места <span class="badge">0</span></a>
+                            <a href="/account#izbran"><i class="fa fa-star"></i>Избранные места <span class="badge w-count-bussines"><?=Controller_BaseController::$count_bussines?></span></a>
                             <a href="/account#coupons"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge w-count-coupon"><?=Controller_BaseController::$count_coupon?></span></a>
                         </div>
 
