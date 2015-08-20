@@ -183,6 +183,19 @@ Route::set('ModalCouponDel', 'coupondelete')
         'action'     => 'deleteFovarites',
     ));
 
+//контроллер для избранного бизнесов
+Route::set('ModalBussinesSave', 'bussinessave')
+    ->defaults(array(
+        'controller' => 'ModalBussines',
+        'action'     => 'saveFovarites',
+    ));
+
+Route::set('ModalBussinesDel', 'bussinesdel')
+    ->defaults(array(
+        'controller' => 'ModalBussines',
+        'action'     => 'deleteFovarites',
+    ));
+
 Route::set('ModalCoupon', 'modalcoupon(/<id_coupon>)')
     ->defaults(array(
         'controller' => 'ModalCoupon',
@@ -254,6 +267,13 @@ Route::set('Top_meny', 'city(/<url_city>)')
     ->defaults(array(
         'directory' => 'Pages',
         'controller' => 'City',
+        'action'     => 'index',
+    ));
+
+Route::set('Tags', 'tags(/<url_tags>)')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Tags',
         'action'     => 'index',
     ));
 

@@ -8,13 +8,13 @@
 //HTML::x($data);
 ?>
 <style>
-    /*.error {*/
-        /*color: red;*/
-    /*}*/
-    /*#cheklicenz-error {*/
-        /*color: red;*/
-        /*position: absolute;*/
-    /*}*/
+    .popover.bottom > .arrow.errors-email:after {
+        border-bottom-color: #FF7272!important;
+    }
+
+    .popover.bottom > .arrow.susses-email:after {
+        border-bottom-color: greenyellow!important;
+    }
 </style>
 <div class="lottery">
 
@@ -73,7 +73,7 @@
             </div>
 
             <div class="input-group">
-                <input type="email" class="form-control" required="required" name="email" placeholder="Ваш email:">
+                <input type="email" class="form-control w-input-lotarey-email" required="required" name="email" placeholder="Ваш email:">
 
                 <div class="input-group-addon">
                     <button type="submit" class="btn btn-danger w-subskrip-buton">Отправить</button>

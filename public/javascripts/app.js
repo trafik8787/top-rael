@@ -314,6 +314,8 @@ $(document).ready(function(){
     //подписка блок лотарея
     $('.w-form-subscribe-lotarey').submit(function(){
 
+        var input_email = $('.w-input-lotarey-email');
+
         $.ajax({ // описываем наш запрос
             type: "POST", // будем передавать данные через POST
             dataType: "JSON", // указываем, что нам вернется JSON
@@ -321,49 +323,40 @@ $(document).ready(function(){
             data: $(this).serialize(),
             success: function(response) { // когда получаем ответ
 
-                console.log(response);
+                if (response.susses != undefined) {
+
+                    input_email.popover({
+                        placement: 'bottom',
+                        content: response.susses,
+                        delay: { show: 100, hide: 500 }
+                    });
+                    input_email.popover('show');
+                    $('.popover.fade.bottom.in').css('background-color','greenyellow');
+                    $('.popover.bottom>.arrow').addClass('susses-email');
+                }
+
+                if (response.dublicate_email != undefined) {
+                    console.log(response.dublicate_email);
+                    input_email.popover({
+                        placement: 'bottom',
+                        content: response.dublicate_email,
+                        delay: { show: 100, hide: 500 }
+                    });
+                    input_email.popover('show');
+
+                    $('.popover.fade.bottom.in').css('background-color','#FF7272');
+                    $('.popover.bottom>.arrow').addClass('errors-email');
+                }
+
+                setTimeout(function () {
+                    input_email.popover('destroy');
+                }, 2000);
+
             }
         });
 
         return false;
     });
-
-    //$(document).on('click', '.w-subskrip-buton', function(){
-    //
-    //    alert($('.w-form-subscribe-lotarey').serialize());
-    //    return false;
-    //
-    //});
-    //$(".w-form-subscribe-lotarey").validate({
-    //
-    //    rules:{
-    //
-    //        cheklicenz:{
-    //            required: true
-    //        },
-    //
-    //        email:{
-    //            required: true,
-    //            email: true
-    //        }
-    //
-    //    },
-    //
-    //    messages:{
-    //
-    //        cheklicenz:{
-    //            required: "Для продолжения поставьте галочку"
-    //        },
-    //
-    //        email:{
-    //            required: "Это поле обязательно для заполнения",
-    //            email: 'Неправельный формат'
-    //        }
-    //    },
-    //    submitHandler: function(form){
-    //        alert('sdf');
-    //    }
-    //});
 
 
 

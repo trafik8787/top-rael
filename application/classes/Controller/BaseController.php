@@ -27,6 +27,8 @@ abstract class Controller_BaseController extends Controller_Template {
 
         parent::before();
 
+
+
         if (Cookie::get('favoritcoup') != '') {
             self::$count_coupon = json_decode(Cookie::get('favoritcoup'));
             //получаем масив купонов из куки
@@ -34,8 +36,6 @@ abstract class Controller_BaseController extends Controller_Template {
             // количество купонов
             self::$count_coupon = count(self::$count_coupon);
         }
-
-
 
         $url = Request::detect_uri();
         self::$detect_uri = '/'.$url;
@@ -51,6 +51,8 @@ abstract class Controller_BaseController extends Controller_Template {
 
         $this->header = View::factory('/temp_pages/header');
         $this->footer = View::factory('/temp_pages/footer');
+        //теги лакшери
+        $this->header->tags = $this->tags();
         $this->header->top_meny = $this->top_meny; //самое верхнее меню
         $this->footer->top_meny = $this->top_meny;
 
@@ -195,7 +197,7 @@ abstract class Controller_BaseController extends Controller_Template {
 
     /**
      * @return mixed
-     *
+     * блок розыграша
      */
     public function lotarey(){
         $content = View::factory('blocks_includ/lotareya');
@@ -206,6 +208,10 @@ abstract class Controller_BaseController extends Controller_Template {
             $content->data = array();
         }
         return $content;
+    }
+
+    private function tags (){
+        return Model::factory('TagsModel')->getAllTags();
     }
 
 }

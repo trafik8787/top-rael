@@ -94,8 +94,11 @@
                                 <li><a href="/section/<?=$row_meny['url']?>"><?=$row_meny['name']?></a></li>
                             <?endforeach?>
                         </ul>
-
-                        <a href="#" class="button"><span>LUXURY</span></a>
+                        <?if (!empty($tags)):?>
+                            <?foreach($tags as $tags_row):?>
+                                <a href="/tags/<?=$tags_row['url_tags']?>" class="button"><span><?=$tags_row['name_tags']?></span></a>
+                            <?endforeach?>
+                        <?endif?>
                     </nav>
                 </div>
             </div>

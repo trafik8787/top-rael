@@ -12,15 +12,9 @@
 <content>
     <div id="content">
 
-        <div class="discount">
-            <div class="owl-carousel">
-                <a href="#"><img src="/public/uploade/banner-top.jpg" width="1200" height="200" alt=""
-                                 class="img-responsive"></a>
 
-                <a href="#"><img src="/public/uploade/banner-top.jpg" width="1200" height="200" alt=""
-                                 class="img-responsive"></a>
-            </div>
-        </div>
+        <?=isset($top_baners) ? $top_baners: ''?>
+
 
         <div class="row">
             <!-- Context -->
@@ -78,7 +72,7 @@
                                         <div class="col-md-6">
                                             <div class="thumbnail">
 
-                                                <a href="#" class="pin">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_data[0]['id']?>" class="pin w-add-bussines-favor">
                                                     <i class="fa fa-star"></i>
                                                 </a>
 
@@ -100,7 +94,7 @@
                                             <div class="col-md-6">
                                                 <div class="thumbnail">
 
-                                                    <a href="#" class="pin">
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_data[1]['id']?>" class="pin w-add-bussines-favor">
                                                         <i class="fa fa-star"></i>
                                                     </a>
 

@@ -52,6 +52,9 @@ class Controller_Pages_Sections extends Controller_BaseController {
 
         $bussines_section = View::factory('pages/bussines_section');
 
+        //верхний банер
+        $bussines_section->top_baners = View::factory('blocks_includ/top_banners');
+
         $bussines_section->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
         //подключаем правый блок
         $bussines_section->bloc_right = parent::RightBloc(array(
