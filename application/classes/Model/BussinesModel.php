@@ -213,6 +213,8 @@ class Model_BussinesModel extends Model_BaseModel {
 
         $city_arr = $this->getCityInSection($arrChild);
 
+
+        //добавляем элемент масива если добавлен в избранное
         if (!empty(Controller_BaseController::$favorits_bussines)) {
 
             $new_result = array();
@@ -225,6 +227,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 $new_result[] = $result_row;
             }
             $result = $new_result;
+
         }
 
         return array('data' => $result, 'count' => count($result1), 'city' => $city_arr);

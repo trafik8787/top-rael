@@ -60,6 +60,7 @@ class Controller_Pages_Sections extends Controller_BaseController {
         $bussines_section->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
+            View::factory('blocks_includ/baners_right'),
             View::factory('blocks_includ/articles_category_bloc', array('content' => $data_articles))
         ));
 

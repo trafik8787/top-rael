@@ -57,9 +57,15 @@
                                         <div class="col-md-6">
                                             <div class="thumbnail">
 
-                                                <a href="#" class="pin">
-                                                    <i class="fa fa-star"></i>
-                                                </a>
+                                                <?if (!empty($rows_busines[0]['bussines_favorit']))://если купон добавлен в избранное?>
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                        <i class="fa fa-star"></i>
+                                                    </a>
+                                                <?else:?>
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_busines[0]['BusId']?>" class="pin w-add-bussines-favor">
+                                                        <i class="fa fa-star"></i>
+                                                    </a>
+                                                <?endif?>
 
                                                 <a href="/business/<?=$rows_busines[0]['BusUrl']?>" class="thumbnail-image">
                                                     <img src="<?=$rows_busines[0]['BusImg']?>" width="240" height="150" alt="">
@@ -78,9 +84,15 @@
                                             <div class="col-md-6">
                                                 <div class="thumbnail">
 
-                                                    <a href="#" class="pin">
-                                                        <i class="fa fa-star"></i>
-                                                    </a>
+                                                    <?if (!empty($rows_busines[1]['bussines_favorit']))://если купон добавлен в избранное?>
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                            <i class="fa fa-star"></i>
+                                                        </a>
+                                                    <?else:?>
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_busines[1]['BusId']?>" class="pin w-add-bussines-favor">
+                                                            <i class="fa fa-star"></i>
+                                                        </a>
+                                                    <?endif?>
 
                                                     <a href="/business/<?=$rows_busines[1]['BusUrl']?>" class="thumbnail-image">
                                                         <img src="<?=$rows_busines[1]['BusImg']?>" width="240" height="150" alt="">

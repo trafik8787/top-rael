@@ -287,6 +287,23 @@ class Model_ArticlesModel extends Model_BaseModel {
             $end_result['CoupArr'] = $new_result;
         }
 
+
+        //добавляем элемент масива если добавлен в избранное
+        if (!empty(Controller_BaseController::$favorits_bussines)) {
+
+            $new_result = array();
+            foreach ($end_result['BusArr'] as $result_row) {
+
+                if (in_array($result_row['BusId'], Controller_BaseController::$favorits_bussines)) {
+                    $result_row['bussines_favorit'] = 1;
+                }
+
+                $new_result[] = $result_row;
+            }
+            $end_result['BusArr'] = $new_result;
+
+        }
+
         return $end_result;
 
     }

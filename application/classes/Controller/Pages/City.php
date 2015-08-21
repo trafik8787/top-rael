@@ -24,7 +24,7 @@ class Controller_Pages_City extends Controller_BaseController {
         $content = View::factory('pages/city');
         $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
 
-        if (Cache::instance()->get($this->request->param('url_city')) == null) {
+//        if (Cache::instance()->get($this->request->param('url_city')) == null) {
 
             foreach ($section as $row_section) {
 
@@ -51,12 +51,14 @@ class Controller_Pages_City extends Controller_BaseController {
                 $resultArr[] = array('category' => $category, 'data' => $data['data']);
             }
 
-            //кешируем
-            Cache::instance()->set($this->request->param('url_city'), $resultArr);
+//            //кешируем
+//            Cache::instance()->set($this->request->param('url_city'), $resultArr);
+//
+//        } else {
+//            $resultArr = Cache::instance()->get($this->request->param('url_city'));
+//        }
 
-        } else {
-            $resultArr = Cache::instance()->get($this->request->param('url_city'));
-        }
+        //Cache::instance()->delete($this->request->param('url_city'));
 
         $content->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
