@@ -43,14 +43,8 @@ abstract class Controller_BaseController extends Controller_Template {
             self::$count_coupon = count(self::$count_coupon);
         }
 
-
-        if (Cookie::get('favoritbus') != '') {
-            self::$count_bussines = json_decode(Cookie::get('favoritbus'));
-            //получаем масив купонов из куки
-            self::$favorits_bussines = self::$count_bussines;
-            // количество купонов
-            self::$count_bussines = count(self::$count_bussines);
-        }
+        //избранные бизнесы в куки
+       self::favorits_bussines();
 
         $url = Request::detect_uri();
         self::$detect_uri = '/'.$url;
@@ -128,7 +122,19 @@ abstract class Controller_BaseController extends Controller_Template {
         return $data;
     }
 
+    /**
+     * избранные бизнесы в куки получаем
+     */
+    public static function favorits_bussines (){
 
+        if (Cookie::get('favoritbus') != '') {
+            self::$count_bussines = json_decode(Cookie::get('favoritbus'));
+            //получаем масив купонов из куки
+            self::$favorits_bussines = self::$count_bussines;
+            // количество купонов
+            self::$count_bussines = count(self::$count_bussines);
+        }
+    }
 
     /**
      * @param null $title

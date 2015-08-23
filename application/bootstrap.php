@@ -262,6 +262,12 @@ Route::set('Subscribe', 'subscribe')
         'action'     => 'index',
     ));
 
+Route::set('TagsCategoryBusiness', 'tagscatselest')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'tagscatselest',
+    ));
 
 Route::set('Top_meny', 'city(/<url_city>)')
     ->defaults(array(

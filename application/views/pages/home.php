@@ -199,7 +199,7 @@
                                 </div>
 
                                 <div class="panel-footer text-center">
-                                    <a href="/section/<?=$rowsdata['category'][0]['url']?>" class="btn btn-default  open-all" role="button">Открытьвсе</a>
+                                    <a href="/section/<?=$rowsdata['category'][0]['url']?>" class="btn btn-default  open-all" role="button">Открыть все</a>
                                 </div>
                             </div>
                         </div>

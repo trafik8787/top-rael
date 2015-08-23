@@ -38,6 +38,7 @@ class Model_BussinesModel extends Model_BaseModel {
                     ->and_where('city.id', '=', $id_city)
                     ->and_where('business.status', '=', 1)
                 ->where_close()
+                ->order_by('business.id', 'DESC')
                 ->cached()
                 ->execute()->as_array();
         } else {
@@ -52,6 +53,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->on('business.city', '=', 'city.id')
                 ->where('category.url', '=', $url_category)
                 ->and_where('business.status', '=', 1)
+                ->order_by('business.id', 'DESC')
                 ->cached()
                 ->execute()->as_array();
         }
@@ -72,6 +74,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->where_close()
                 ->limit($limit)
                 ->offset($ofset)
+                ->order_by('business.id', 'DESC')
                 ->cached()
                 ->execute()->as_array();
         } else {
@@ -87,13 +90,15 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->and_where('business.status', '=', 1)
                 ->limit($limit)
                 ->offset($ofset)
+                ->order_by('business.id', 'DESC')
                 ->cached()
                 ->execute()->as_array();
         }
 
         $city_arr = $this->getCityInCategory($url_category);
 
-
+        //вызываем метод получения данных из куки
+        Controller_BaseController::favorits_bussines();
         if (!empty(Controller_BaseController::$favorits_bussines)) {
 
             $new_result = array();
@@ -213,7 +218,8 @@ class Model_BussinesModel extends Model_BaseModel {
 
         $city_arr = $this->getCityInSection($arrChild);
 
-
+        //вызываем метод получения данных из куки
+        Controller_BaseController::favorits_bussines();
         //добавляем элемент масива если добавлен в избранное
         if (!empty(Controller_BaseController::$favorits_bussines)) {
 
@@ -614,5 +620,145 @@ class Model_BussinesModel extends Model_BaseModel {
             return false;
         }
     }
+
+
+
+    /**
+     * МЕТОДЫ ВЫБОРКИ ПО ТЕГАМ
+     */
+
+
+    /**
+     * @param $url_category
+     * @param null $url_tags
+     * @param null $limit
+     * @param null $num_page
+     * @return array
+     * ПОЛУЧАЕМ БИЗНЕСЫ ГРУППЫ ЛАКШЕРИ (СОРТИРОВКА ПО ТЕГАМ И КАТЕГОРИЯМ)
+     */
+    public function getBussinesCategoryTagsUrl ($url_category, $url_tags = null, $limit = null){
+
+
+        $result = DB::select('bus.*',
+            array('tag.name_tags', 'TagName'),
+            array('city.name', 'CityName')
+        )
+            ->from(array('category', 'cat'))
+
+            ->join(array('businesscategory', 'buscat'))
+            ->on('cat.id', '=', 'buscat.category_id')
+
+            ->join(array('business', 'bus'))
+            ->on('buscat.business_id', '=', 'bus.id')
+
+            ->join(array('tags_relation_business', 'tagrelbus'))
+            ->on('tagrelbus.id_business', '=', 'bus.id')
+
+            ->join(array('tags', 'tag'))
+            ->on('tag.id', '=', 'tagrelbus.id_tags')
+
+            ->join('city', 'LEFT')
+            ->on('bus.city', '=', 'city.id')
+
+            ->where('tag.url_tags', '=', $url_tags)
+            ->and_where('cat.url', '=', $url_category)
+            ->and_where('bus.status', '=', 1)
+            ->limit($limit)
+            //->cached()
+            ->execute()->as_array();
+
+        //вызываем метод получения данных из куки
+        Controller_BaseController::favorits_bussines();
+        if (!empty(Controller_BaseController::$favorits_bussines)) {
+
+            $new_result = array();
+            foreach ($result as $result_row) {
+
+                if (in_array($result_row['id'], Controller_BaseController::$favorits_bussines)) {
+                    $result_row['bussines_favorit'] = 1;
+                }
+                $new_result[] = $result_row;
+            }
+            $result = $new_result;
+        }
+
+        return array('data' => $result);
+    }
+
+
+    /**
+     * @param $url_section
+     * @param $url_tags
+     * @param null $limit
+     * @return array
+     * ПОЛУЧАЕМ БИЗНЕСЫ ГРУППЫ ЛАКШЕРИ (СОРТИРОВКА ПО ТЕГАМ И РАЗДЕЛАМ)
+     */
+    public function getBussinesSectionTagsUrl ($url_section, $url_tags, $limit = null){
+
+        $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($url_section);
+
+        $arrChild = array();
+        foreach ($category[0]['childs'] as $row_cat) {
+            $arrChild[] = $row_cat['id'];
+        }
+
+        $result = DB::select('bus.*', array('city.name', 'CityName'))
+            ->from(array('category', 'cat'))
+
+            ->join(array('businesscategory', 'buscat'))
+            ->on('cat.id', '=', 'buscat.category_id')
+
+            ->join(array('business', 'bus'))
+            ->on('buscat.business_id', '=', 'bus.id')
+
+            ->join(array('tags_relation_business', 'tagrelbus'))
+            ->on('tagrelbus.id_business', '=', 'bus.id')
+
+            ->join(array('tags', 'tag'))
+            ->on('tag.id', '=', 'tagrelbus.id_tags')
+
+            ->join('city', 'LEFT')
+            ->on('bus.city', '=', 'city.id')
+
+            ->where('tag.url_tags', '=', $url_tags)
+            ->and_where('buscat.category_id', 'IN', $arrChild)
+            ->and_where('bus.status', '=', 1)
+            ->group_by('bus.id')
+            ->order_by('bus.id', 'DESC')
+            ->cached()
+            ->execute()->as_array();
+
+        //вызываем метод получения данных из куки
+        Controller_BaseController::favorits_bussines();
+        if (!empty(Controller_BaseController::$favorits_bussines)) {
+
+            $new_result = array();
+            foreach ($result as $result_row) {
+
+                if (in_array($result_row['id'], Controller_BaseController::$favorits_bussines)) {
+                    $result_row['bussines_favorit'] = 1;
+                }
+
+                $new_result[] = $result_row;
+            }
+            $result = $new_result;
+
+        }
+
+        return array('data' => $result);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
