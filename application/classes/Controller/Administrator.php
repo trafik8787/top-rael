@@ -956,10 +956,12 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->load_table('banners');
         $crud->set_lang('ru');
         $crud->select_multiselect('category');
+        $crud->select_multiselect('section');
         $crud->set_field_type('category', 'select', $recurs_cat, 'multiple', '');
         $crud->set_one_to_many('banners_relation', 'category', 'category_id', 'banners_id');
 
-
+        $crud->set_field_type('section', 'select', '', 'multiple', '', array('category', 'name','id', array('parent_id','=','0')));
+        $crud->set_one_to_many('banners_relation_section', 'section', 'section_id', 'banners_id');
 
         $crud->set_field_type('images', array('file', 'uploads/img_banners', 'baner_', '', 'img'),'','');
         $crud->set_field_type('position', 'select', array('1' => 'Верхний', '2' => 'Правый'), '', '', '');
@@ -968,12 +970,13 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->show_columns('id', 'name', 'date_start', 'date_end');
 
 
-        $crud->edit_fields('name', 'category', 'business_id', 'website', 'images', 'position', 'date_start', 'date_end');
-        $crud->add_field('name', 'category', 'business_id', 'website', 'images', 'position', 'date_start', 'date_end');
+        $crud->edit_fields('name', 'section', 'category', 'business_id', 'website', 'images', 'position', 'date_start', 'date_end');
+        $crud->add_field('name','section', 'category', 'business_id', 'website', 'images', 'position', 'date_start', 'date_end');
 
         $crud->show_name_column(array(
             'name'=> 'Название',
             'images' => 'Картинка',
+            'section' => 'Раздел',
             'category' => 'Категории',
             'business_id' => 'Бизнес',
             'website' => 'Внешняя ссылка',

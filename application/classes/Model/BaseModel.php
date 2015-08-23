@@ -111,4 +111,58 @@ class Model_BaseModel extends Model {
     }
 
 
+    public function getBaners($url, $url_section_category){
+
+        //вывод в категориях
+        if ($url_section_category == 'category') {
+            $query = DB::query(Database::SELECT, "SELECT `ban`.*, `bus`.`id` AS
+                                                    `BusId`, `bus`.`url` AS
+                                                    `BusUrl` FROM `banners` AS `ban`
+                                                    JOIN `business` AS `bus` ON (`ban`.`business_id` = `bus`.`id`)
+                                                    JOIN `banners_relation` AS `banrel` ON (`banrel`.`banners_id` = `ban`.`id`)
+                                                    JOIN `category` AS `cat` ON (`banrel`.`category_id` = `cat`.`id`)
+                                                    WHERE `cat`.`url` = '".$url."' AND DATE(NOW()) BETWEEN ban.date_start AND ban.date_end")
+                ->cached()
+                ->execute()
+                ->as_array();
+
+            //вывод в разделах
+        } elseif ($url_section_category == 'section') {
+            $query = DB::query(Database::SELECT, "SELECT `ban`.*, `bus`.`id` AS
+                                                    `BusId`, `bus`.`url` AS
+                                                    `BusUrl` FROM `banners` AS `ban`
+                                                    JOIN `business` AS `bus` ON (`ban`.`business_id` = `bus`.`id`)
+                                                    JOIN `banners_relation_section` AS `banrel` ON (`banrel`.`banners_id` = `ban`.`id`)
+                                                    JOIN `category` AS `cat` ON (`banrel`.`section_id` = `cat`.`id`)
+                                                    WHERE `cat`.`url` = '".$url."' AND DATE(NOW()) BETWEEN ban.date_start AND ban.date_end")
+                ->cached()
+                ->execute()
+                ->as_array();
+        }
+
+
+        $result = array();
+        foreach ($query as $row) {
+
+            if ($row['position'] == 1) {
+                $result['top_baners'][] = $row;
+            } else {
+                $result['right_baners'][] = $row;
+            }
+
+        }
+
+        //перемешиваем масивы случайным образом
+        if (!empty($result['top_baners'])) {
+            shuffle($result['top_baners']);
+        }
+
+        if (!empty($result['right_baners'])) {
+            shuffle($result['right_baners']);
+        }
+        return $result;
+        //Kohana::debug((string) $row);
+        //Kohana_Debug::dump($row);
+    }
+
 }

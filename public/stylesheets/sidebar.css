@@ -1,97 +1,96 @@
-/* line 5, ../sass/sidebar.scss */
-#sidebar {
-  border: 1px solid #e7e7e7;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
 /* line 5, ../sass/lottery-sidebar.scss */
-#sidebar .lottery {
+.lottery {
   border: 1px solid #d8d8d8;
   padding: 15px;
   margin-bottom: 20px;
 }
 /* line 11, ../sass/lottery-sidebar.scss */
-#sidebar .lottery a {
+.lottery a {
   color: #000;
 }
 /* line 57, ../sass/_common-variables.scss */
-#sidebar .lottery a {
+.lottery a {
   text-decoration: underline;
 }
 /* line 60, ../sass/_common-variables.scss */
-#sidebar .lottery a:hover {
+.lottery a:hover {
   text-decoration: none;
 }
 /* line 17, ../sass/lottery-sidebar.scss */
-#sidebar .lottery .cr {
+.lottery .cr {
   background: #ececec;
   color: #d9534f;
   border-color: transparent !important;
 }
 /* line 25, ../sass/lottery-sidebar.scss */
-#sidebar .lottery .input-group .form-control {
+.lottery .input-group .form-control {
   background: #ececec;
   border-color: transparent;
 }
 /* line 29, ../sass/lottery-sidebar.scss */
-#sidebar .lottery .input-group .form-control:focus {
+.lottery .input-group .form-control:focus {
   border-color: transparent;
 }
 /* line 34, ../sass/lottery-sidebar.scss */
-#sidebar .lottery .input-group .input-group-addon {
+.lottery .input-group .input-group-addon {
   padding: 0;
   border-color: transparent;
 }
 /* line 40, ../sass/lottery-sidebar.scss */
-#sidebar .lottery .input-group .input-group-addon .btn {
+.lottery .input-group .input-group-addon .btn {
   padding: 3px 12px;
   margin: 0 3px;
 }
 /* line 47, ../sass/lottery-sidebar.scss */
-#sidebar .lottery .lottery-title {
+.lottery .lottery-title {
   font-size: 26px;
   margin-bottom: 20px;
 }
 /* line 52, ../sass/lottery-sidebar.scss */
-#sidebar .lottery .media-heading {
+.lottery .media-heading {
   font-size: 24px;
   line-height: 1.2;
 }
 /* line 57, ../sass/lottery-sidebar.scss */
-#sidebar .lottery .lottery-section {
+.lottery .lottery-section {
   margin-bottom: 20px;
 }
 /* line 61, ../sass/lottery-sidebar.scss */
-#sidebar .lottery .lottery-section .lottery-section-title {
+.lottery .lottery-section .lottery-section-title {
   display: block;
   font-size: 16px;
   border-bottom: 1px solid #007898;
   margin-bottom: 20px;
 }
 /* line 68, ../sass/lottery-sidebar.scss */
-#sidebar .lottery .lottery-section .img-circle {
+.lottery .lottery-section .img-circle {
   display: inline-block;
 }
 /* line 73, ../sass/lottery-sidebar.scss */
-#sidebar .lottery .lottery-section .checkbox {
+.lottery .lottery-section .checkbox {
   color: #007898;
 }
 /* line 76, ../sass/lottery-sidebar.scss */
-#sidebar .lottery .lottery-section .checkbox a {
+.lottery .lottery-section .checkbox a {
   color: #007898;
 }
-/* line 13, ../sass/sidebar.scss */
+
+/* line 6, ../sass/sidebar.scss */
+#sidebar {
+  border: 1px solid #e7e7e7;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+/* line 12, ../sass/sidebar.scss */
 #sidebar .media {
   margin-bottom: 0;
-}
-@media (max-width: 768px) {
-  /* line 18, ../sass/sidebar.scss */
-  #sidebar .media .media-left {
-    float: left;
-  }
-  /* line 21, ../sass/sidebar.scss */
-  #sidebar .media .media_right {
-    float: right;
-  }
+  /*@media (max-width: 768px) {
+    .media-left {
+      @include pull-left;
+    }
+    .media_right {
+      @include pull-right;
+    }
+  }*/
 }

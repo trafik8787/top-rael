@@ -20,6 +20,10 @@ abstract class Controller_BaseController extends Controller_Template {
     public static $favorits_coupon = null;
     public static $favorits_bussines = null;
 
+    //храним блок верхних банеров
+    public static $top_baners = null;
+    //храним блок правих банеров
+    public static $right_baners = null;
     //public $RightBloc;
     //public $general_meny;
 
@@ -225,4 +229,30 @@ abstract class Controller_BaseController extends Controller_Template {
         return Model::factory('TagsModel')->getAllTags();
     }
 
+    /**
+     * @param $url
+     * Рендеринг банеров
+     */
+    public function getBaners ($url, $url_section_category){
+
+        $top_content = View::factory('blocks_includ/top_banners');
+        $right_content =  View::factory('blocks_includ/baners_right');
+        $data = Model::factory('BaseModel')->getBaners($url, $url_section_category);
+
+        if (!empty($data['top_baners'])) {
+            $top_content->data = $data['top_baners'];
+        } else {
+            $top_content->data = array();
+        }
+
+        if (!empty($data['right_baners'])) {
+            $right_content->data = $data['right_baners'];
+        } else {
+            $right_content->data = array();
+        }
+        //верхний банер
+        self::$top_baners = $top_content;
+        //парвый банер
+        self::$right_baners = $right_content;
+    }
 }

@@ -236,24 +236,3 @@
   border: 0;
   padding: 0 15px;
 }
-/* line 243, ../sass/panel.scss */
-.panel .well {
-  background: #e7effe;
-  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 4px 4px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 4px 4px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 4px 4px;
-  border-color: #fff;
-  border-width: 5px;
-}
-/* line 249, ../sass/panel.scss */
-.panel .well .media {
-  margin: 0;
-}
-/* line 254, ../sass/panel.scss */
-.panel .media {
-  margin-top: 5px;
-}
-/* line 256, ../sass/panel.scss */
-.panel .media .media-heading {
-  font-size: 22px;
-}

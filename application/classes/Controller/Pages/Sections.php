@@ -41,26 +41,31 @@ class Controller_Pages_Sections extends Controller_BaseController {
             //по урлу категории получаем анонсы статей
             $data_articles = Model::factory('ArticlesModel')->getArticlesCategoryUrl($this->request->param('url_category'));
 
+            //вызов метода банеров получаем в параметрах parent::$top_baners и parent::$right_baners
+            $this->getBaners($this->request->param('url_category'), 'category');
+
         } else {
             //по урлу раздела получаем бизнесы
             $data = Model::factory('BussinesModel')->getBussinesSectionUrl($this->request->param('url_section'), 10 ,$number_page, $city_id);
             //по урле раздела получаем 6 анонсов статей
             $articles = Model::factory('ArticlesModel')->getArticlesSectionUrl($this->request->param('url_section'), 6);
             $data_articles = $articles['data'];
+
+            $this->getBaners($this->request->param('url_section'), 'section');
            // HTML::x($data['count']);
         }
 
         $bussines_section = View::factory('pages/bussines_section');
 
         //верхний банер
-        $bussines_section->top_baners = View::factory('blocks_includ/top_banners');
+        $bussines_section->top_baners = parent::$top_baners;
 
         $bussines_section->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
         //подключаем правый блок
         $bussines_section->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
-            View::factory('blocks_includ/baners_right'),
+            parent::$right_baners,
             View::factory('blocks_includ/articles_category_bloc', array('content' => $data_articles))
         ));
 
