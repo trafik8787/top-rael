@@ -174,9 +174,15 @@
                                             <div class="col-md-4">
                                                 <div class="thumbnail">
 
-                                                    <a href="#" class="pin">
-                                                        <i class="fa fa-star"></i>
-                                                    </a>
+                                                    <?if (!empty($rows['bussines_favorit']))://если купон добавлен в избранное?>
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                            <i class="fa fa-star"></i>
+                                                        </a>
+                                                    <?else:?>
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows['id']?>" class="pin w-add-bussines-favor">
+                                                            <i class="fa fa-star"></i>
+                                                        </a>
+                                                    <?endif?>
 
                                                     <a href="/business/<?=$rows['url']?>" class="thumbnail-image">
 

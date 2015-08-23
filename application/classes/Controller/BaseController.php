@@ -33,23 +33,14 @@ abstract class Controller_BaseController extends Controller_Template {
 
         parent::before();
 
-
-
-        if (Cookie::get('favoritcoup') != '') {
-            self::$count_coupon = json_decode(Cookie::get('favoritcoup'));
-            //получаем масив купонов из куки
-            self::$favorits_coupon = self::$count_coupon;
-            // количество купонов
-            self::$count_coupon = count(self::$count_coupon);
-        }
-
+        //избранные купоны в куки
+       self::favorits_coupon();
         //избранные бизнесы в куки
        self::favorits_bussines();
 
         $url = Request::detect_uri();
         self::$detect_uri = '/'.$url;
         self::$urlPars = explode('/', $url);
-
 
         $this->top_meny = array('Купоны' => '/coupons',
             'Обзоры' => '/articles',
@@ -120,6 +111,20 @@ abstract class Controller_BaseController extends Controller_Template {
         $data = View::factory('/temp_pages/bloc_right');
         $data->data_bloc = $data_arr;
         return $data;
+    }
+
+    /**
+     * избранные купоны получаем в куки
+     */
+    public static function favorits_coupon (){
+
+        if (Cookie::get('favoritcoup') != '') {
+            self::$count_coupon = json_decode(Cookie::get('favoritcoup'));
+            //получаем масив купонов из куки
+            self::$favorits_coupon = self::$count_coupon;
+            // количество купонов
+            self::$count_coupon = count(self::$count_coupon);
+        }
     }
 
     /**

@@ -181,11 +181,22 @@ $(document).ready(function(){
             success: function(response) { // когда получаем ответ
                 //очищаем слайдер
                 sliderTmp.empty();
+                var bus_icon;
+
                 $.each(response.data, function(index, value) {
                     //console.log(value);
+
+                    if (value.bussines_favorit != undefined) {
+                        bus_icon = '<a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">'+
+                        '<i class="fa fa-star"></i></a>';
+                    } else {
+                        bus_icon = '<a href="#" data-toggle="tooltip" data-placement="left" data-id="'+value.id+'" class="pin w-add-bussines-favor">'+
+                        '<i class="fa fa-star"></i></a>';
+                    }
+
                     sliderTmp.append('<div class="col-md-4">' +
                     '<div class="thumbnail">' +
-                    '<a href="#" class="pin"><i class="fa fa-star"></i></a>' +
+                    bus_icon +
                     '<a href="/business/'+value.url+'" class="thumbnail-image"> ' +
                     '<img src="'+value.home_busines_foto+'" width="240" height="150" alt="">' +
                     '</a> ' +
@@ -196,7 +207,9 @@ $(document).ready(function(){
                     '</div> </div> </div>');
 
                 });
-
+                
+                //переиницыализируем подсказку
+                $('[data-toggle="tooltip"]').tooltip();
             }
         });
     });
@@ -226,11 +239,21 @@ $(document).ready(function(){
                 //очищаем слайдер
                 //slider_bloc.empty();
 
+                var coup_icon;
+
                 $.each(response.data, function(index, value) {
                     //console.log(value);
 
+                    if (value.coupon_favorit != undefined) {
+                        coup_icon = ' <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">'+
+                                    '<i class="fa fa-thumb-tack"></i> </a>';
+                    } else {
+                        coup_icon = ' <a href="#" data-toggle="tooltip" data-placement="left" data-id="'+value.id+'" class="pin w-add-coupon-favor">'+
+                                    '<i class="fa fa-thumb-tack"></i></a>';
+                    }
+
                     slider_bloc.append('<div class="coupon"> <div class="coupon-container"> ' +
-                    '<a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a> ' +
+                    coup_icon +
                     '<div class="coupon-image">'+
                     '<div class="overlay">'+
                     value.secondname+
@@ -267,7 +290,8 @@ $(document).ready(function(){
                     dots: false
                 });
 
-
+                //переиницыализируем подсказку
+                $('[data-toggle="tooltip"]').tooltip();
             }
         });
 

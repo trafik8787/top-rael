@@ -149,6 +149,9 @@ class Model_CouponsModel extends Model_BaseModel {
 
         }
 
+        //вызываем метод получения данных из куки
+        Controller_BaseController::favorits_coupon();
+        //добавляем элемент масива если добавлен в избранное
         if (!empty(Controller_BaseController::$favorits_coupon)) {
 
             $new_result = array();
