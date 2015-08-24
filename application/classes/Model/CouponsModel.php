@@ -82,43 +82,87 @@ class Model_CouponsModel extends Model_BaseModel {
             $ofset = 0;
         }
         if ($url_section != null) {
-            $id = 0;
 
-            $general_meny = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
-
-            foreach ($general_meny as $rows) {
-                if ($rows['url'] == $url_section) {
-                    $id = $rows['id'];
-                }
-            }
 
             if ($id_city != null) {
                 $result = DB::select('coup.*', array('bus.name', 'BusName'))
                     ->from(array('coupon', 'coup'))
+
                     ->join(array('business', 'bus'))
                     ->on('coup.business_id', '=', 'bus.id')
-                    ->where('coup.id_section', '=', $id)
+
+                    ->join(array('category', 'cat'))
+                    ->on('coup.id_section', '=', 'cat.id')
+
+                    ->where_open()
+                    ->where('cat.url', '=', $url_section)
                     ->and_where('coup.city', '=', $id_city)
+                    ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+                    ->where_close()
+
                     ->limit($limit)
                     ->offset($ofset)
                     ->order_by('coup.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
 
-                $count = $this->table_count('coupon', 'id', array('id_section', '=', $id), array('city', '=', $id_city));
+                //количество
+                $count = DB::select(array(DB::expr('COUNT(coup.id)'), 'total'))
+                    ->from(array('coupon', 'coup'))
+
+                    ->join(array('business', 'bus'))
+                    ->on('coup.business_id', '=', 'bus.id')
+
+                    ->join(array('category', 'cat'))
+                    ->on('coup.id_section', '=', 'cat.id')
+
+                    ->where_open()
+                    ->where('cat.url', '=', $url_section)
+                    ->and_where('coup.city', '=', $id_city)
+                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+                    ->where_close()
+
+                    ->order_by('coup.id', 'DESC')
+                    ->cached()
+                    ->execute()->as_array();
+
+                $count = $count[0]['total'];
+
             } else {
+
                 $result = DB::select('coup.*', array('bus.name', 'BusName'))
                     ->from(array('coupon', 'coup'))
+
                     ->join(array('business', 'bus'))
                     ->on('coup.business_id', '=', 'bus.id')
-                    ->where('coup.id_section', '=', $id)
+
+                    ->join(array('category', 'cat'))
+                    ->on('coup.id_section', '=', 'cat.id')
+
+                    ->where('cat.url', '=', $url_section)
                     ->limit($limit)
                     ->offset($ofset)
+                    ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+                    ->order_by('coup.id', 'DESC')
+                    ->cached()
+                    ->execute()->as_array();
+                //количество
+                $count = DB::select(array(DB::expr('COUNT(coup.id)'), 'total'))
+                    ->from(array('coupon', 'coup'))
+
+                    ->join(array('business', 'bus'))
+                    ->on('coup.business_id', '=', 'bus.id')
+
+                    ->join(array('category', 'cat'))
+                    ->on('coup.id_section', '=', 'cat.id')
+
+                    ->where('cat.url', '=', $url_section)
+                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
                     ->order_by('coup.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
 
-                $count = $this->table_count('coupon', 'id', array('id_section', '=', $id));
+                $count = $count[0]['total'];
             }
 
         } else {
@@ -130,6 +174,7 @@ class Model_CouponsModel extends Model_BaseModel {
                     ->where('coup.city', '=', $id_city)
                     ->limit($limit)
                     ->offset($ofset)
+                    ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
                     ->order_by('coup.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
@@ -141,9 +186,11 @@ class Model_CouponsModel extends Model_BaseModel {
                     ->on('coup.business_id', '=', 'bus.id')
                     ->limit($limit)
                     ->offset($ofset)
+                    ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
                     ->order_by('coup.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
+
                 $count = $this->table_count('coupon', 'id', null);
             }
 
@@ -166,7 +213,6 @@ class Model_CouponsModel extends Model_BaseModel {
             $result = $new_result;
         }
 
-        //die(HTML::x($result));
 
         $city_arr = $this->getCityCouponInSection($url_section);
 
@@ -193,12 +239,13 @@ class Model_CouponsModel extends Model_BaseModel {
             $result = DB::select('coupon.*', array('city.name', 'CityName'))
                 ->from('coupon')
                 ->join('category')
-                ->on('category.id', '=', 'coupon.id_section')
-                ->join('city', 'LEFT')
+                ->on('coupon.id_section', '=', 'category.id')
+                ->join('city')
                 ->on('coupon.city', '=', 'city.id')
                 ->where('category.url', '=', $arrSection)
                 ->cached()
                 ->execute()->as_array();
+
         }
 
         $city_arr = array();
@@ -261,5 +308,76 @@ class Model_CouponsModel extends Model_BaseModel {
             return false;
         }
     }
+
+    /**
+     * @param null $url_section
+     * @param $url_tags
+     * @param null $limit
+     * @return array
+     * КУПОНЫ ГРУППЫ ЛАКШЕРИ (ТЕГИ)
+     */
+    public function getCouponsSectionTagsUrl ($url_section = null, $url_tags, $limit = null){
+
+        if ($url_section != null) {
+
+            $result = DB::select('coup.*', array('bus.name', 'BusName'))
+                ->from(array('coupon', 'coup'))
+                ->join(array('business', 'bus'))
+                ->on('coup.business_id', '=', 'bus.id')
+                ->join(array('category', 'cat'))
+                ->on('coup.id_section', '=', 'cat.id')
+                ->join(array('tags_relation_coupons', 'tagrelcoup'))
+                ->on('tagrelcoup.id_coupons', '=', 'coup.id')
+                ->join(array('tags', 'tag'))
+                ->on('tag.id', '=', 'tagrelcoup.id_tags')
+
+                ->where_open()
+                ->where('tag.url_tags', '=', $url_tags)
+                ->and_where('cat.url', '=', $url_section)
+                ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+                ->where_close()
+
+                ->order_by('coup.id', 'DESC')
+                ->cached()
+                ->execute()->as_array();
+        } else {
+            $result = DB::select('coup.*', array('bus.name', 'BusName'))
+                ->from(array('coupon', 'coup'))
+                ->join(array('business', 'bus'))
+                ->on('coup.business_id', '=', 'bus.id')
+                ->join(array('category', 'cat'))
+                ->on('coup.id_section', '=', 'cat.id')
+                ->join(array('tags_relation_coupons', 'tagrelcoup'))
+                ->on('tagrelcoup.id_coupons', '=', 'coup.id')
+                ->join(array('tags', 'tag'))
+                ->on('tag.id', '=', 'tagrelcoup.id_tags')
+                ->where('tag.url_tags', '=', $url_tags)
+                ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+                ->order_by('coup.id', 'DESC')
+                ->cached()
+                ->execute()->as_array();
+        }
+
+        //вызываем метод получения данных из куки
+        Controller_BaseController::favorits_coupon();
+        //добавляем элемент масива если добавлен в избранное
+        if (!empty(Controller_BaseController::$favorits_coupon)) {
+
+            $new_result = array();
+            foreach ($result as $result_row) {
+
+                if (in_array($result_row['id'], Controller_BaseController::$favorits_coupon)) {
+                    $result_row['coupon_favorit'] = 1;
+                }
+
+                $new_result[] = $result_row;
+            }
+            $result = $new_result;
+        }
+
+        return $result;
+
+    }
+
 
 }

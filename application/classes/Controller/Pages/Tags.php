@@ -41,6 +41,15 @@ class Controller_Pages_Tags extends Controller_BaseController {
             View::factory('blocks_includ/sicseti'),
         ));
 
+        //статьи группы лакшери выборка по тегам
+        $content->data_articles = Model::factory('ArticlesModel')->getArticlesSectionTagsUrl(null, $this->request->param('url_tags'));
+
+        //купоны группы лакшери выборка по тегам
+        $data_coupons = Model::factory('CouponsModel')->getCouponsSectionTagsUrl(null, $this->request->param('url_tags'));
+        $data_coupons = $this->convertArrayVievData($data_coupons);
+        $content->data_coupon =  $data_coupons;
+        $content->section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+
         $content->data = $resultArr;
         $content->tags_url = $this->request->param('url_tags');
         $this->template->content = $content;

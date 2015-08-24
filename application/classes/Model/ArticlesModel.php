@@ -43,7 +43,7 @@ class Model_ArticlesModel extends Model_BaseModel {
                     ->and_where('artic.city', '=', $id_city)
                     ->limit($limit)
                     ->offset($ofset)
-                    ->order_by('id', 'DESC')
+                    ->order_by('artic.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
 
@@ -61,7 +61,7 @@ class Model_ArticlesModel extends Model_BaseModel {
                     ->where('artic.id_section', '=', $id)
                     ->limit($limit)
                     ->offset($ofset)
-                    ->order_by('id', 'DESC')
+                    ->order_by('artic.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
 
@@ -83,7 +83,7 @@ class Model_ArticlesModel extends Model_BaseModel {
                     ->where('artic.city', '=', $id_city)
                     ->limit($limit)
                     ->offset($ofset)
-                    ->order_by('id', 'DESC')
+                    ->order_by('artic.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
 
@@ -98,7 +98,7 @@ class Model_ArticlesModel extends Model_BaseModel {
                     ->on('artic.id_section', '=', 'cat.id')
                     ->limit($limit)
                     ->offset($ofset)
-                    ->order_by('id', 'DESC')
+                    ->order_by('artic.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
 
@@ -190,17 +190,30 @@ class Model_ArticlesModel extends Model_BaseModel {
                 array('coup.secondname', 'CoupSecondname')
             )
                 ->from(array('articles', 'artic'))
+
                 ->join(array('articles_relation_business', 'art_rel_bus'), 'LEFT')
                 ->on('artic.id', '=', 'art_rel_bus.id_articles')
+
                 ->join(array('business', 'bus'), 'LEFT')
                 ->on('art_rel_bus.id_business', '=', 'bus.id')
+
                 ->join(array('articles_relation_coupon', 'art_rel_coup'), 'LEFT')
                 ->on('artic.id', '=', 'art_rel_coup.id_articles')
+
                 ->join(array('coupon', 'coup'), 'LEFT')
                 ->on('coup.id', '=', 'art_rel_coup.id_coupon')
-                ->where('artic.url', '=', $url_article)
+
+
+                ->where_open()
+                    ->where('artic.url', '=', $url_article)
+                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
+                    ->and_where('bus.status', '=', 1)
+                ->where_close()
                 ->cached()
                 ->execute()->as_array();
+
+           // die(HTML::x($query));
 
             $end_result = $this->CreateArrayArticle($query);
             Cache::instance()->set($url_article, $end_result);
@@ -401,4 +414,63 @@ class Model_ArticlesModel extends Model_BaseModel {
         return $result;
     }
 
+    /**
+     * @param null $url_section
+     * @param $url_tags
+     * @param null $limit
+     * @return mixed
+     * ПОЛУЧИТЬ СТАТЬИ ГРУППЫ ЛАКШЕРИ (ТЕГИ)
+     */
+    public function getArticlesSectionTagsUrl($url_section = null, $url_tags, $limit = null){
+
+        if ($url_section != null) {
+
+            $result = DB::select('artic.*',
+                array('cat.id', 'CatId'),
+                array('cat.name', 'CatName'),
+                array('cat.url', 'CatUrl'))
+                ->from(array('articles', 'artic'))
+
+                ->join(array('category', 'cat'))
+                ->on('artic.id_section', '=', 'cat.id')
+
+                ->join(array('tags_relation_articles', 'tagrelatric'))
+                ->on('tagrelatric.id_articles', '=', 'artic.id')
+
+                ->join(array('tags', 'tag'))
+                ->on('tag.id', '=', 'tagrelatric.id_tags')
+
+                ->where('tag.url_tags', '=', $url_tags)
+                ->and_where('cat.url', '=', $url_section)
+                ->order_by('artic.id', 'DESC')
+                ->cached()
+                ->execute()->as_array();
+
+        } else {
+
+            $result = DB::select('artic.*',
+                array('cat.id', 'CatId'),
+                array('cat.name', 'CatName'),
+                array('cat.url', 'CatUrl'))
+                ->from(array('articles', 'artic'))
+
+                ->join(array('category', 'cat'))
+                ->on('artic.id_section', '=', 'cat.id')
+
+                ->join(array('tags_relation_articles', 'tagrelatric'))
+                ->on('tagrelatric.id_articles', '=', 'artic.id')
+
+                ->join(array('tags', 'tag'))
+                ->on('tag.id', '=', 'tagrelatric.id_tags')
+
+                ->where('tag.url_tags', '=', $url_tags)
+
+                ->order_by('artic.id', 'DESC')
+                ->cached()
+                ->execute()->as_array();
+        }
+
+        return $result;
+    }
+    
 }

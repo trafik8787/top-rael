@@ -457,7 +457,7 @@ class Model_All extends Model
 
             //добавлена асоция
             if ($show_name_old_table != null) {
-                $join_other = ' JOIN '.$show_name_old_table['old_table'].
+                $join_other = ' LEFT JOIN '.$show_name_old_table['old_table'].
                     ' ON '.$table.'.'.$show_name_old_table['page_name'].'='.$show_name_old_table['old_table'].'.'.$show_name_old_table['id_old_table'].' ';
                 $other_by = $table.'.';
                 $selectet = $table.'.*, '.$show_name_old_table['old_table'].'.'.$show_name_old_table['old_name_page'].' AS '.$show_name_old_table['page_name'];
