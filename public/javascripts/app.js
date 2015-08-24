@@ -11,8 +11,17 @@ $(document).ready(function(){
     });
 
 
+
+
+
+
+
+
+
+
+
     /*
-    выбор категории группы лакшери (теги)
+    выбор категории БИЗНЕСОВ группы лакшери (теги)
      */
     $(document).on('click', '.w-tags-bus-cat', function(){
 
@@ -68,10 +77,10 @@ $(document).ready(function(){
                     '<h3><strong><a href="/business/'+value.url+'">'+value.name+'</a></strong></h3> ' +
                     '<p><strong>'+value.CityName+' '+ value.address+'</strong></p>' +
                     value.info+
-                    '</div> </div> </div>');
+                    '</div> </div> </div>').hide();
 
                 });
-
+                sliderTmp.fadeIn();
                 $('[data-toggle="tooltip"]').tooltip();
 
             }
@@ -80,6 +89,82 @@ $(document).ready(function(){
 
         return false;
     });
+
+
+    /**
+     *
+     * выбор раздела СТАТЬИ группы лакшери (теги)
+     */
+    $(document).on('click', '.w-tags-artic-cat', function(){
+
+
+        var thises = $(this);
+        var sliderTmp = thises.closest('.w-bloc-section').find('.slider');
+        var remowClas = thises.parents('.w-category-bloc').find('a.w-cat-active');
+        var addClasLi = thises.parent();
+        var remClassLi = thises.parents('.w-category-bloc').find('li.active');
+
+        //удаляем клас
+        remowClas.removeClass('w-cat-active');
+        remClassLi.removeClass('active');
+        //добавляем класс
+        thises.addClass('w-cat-active');
+        addClasLi.addClass('active');
+
+        var tags_url = '';
+        if ($('.w-tags-url').val() != undefined) {
+            tags_url = $('.w-tags-url').val();
+        }
+
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "JSON", // указываем, что нам вернется JSON
+            url: '/tagsecartic',
+            data: 'section='+$(this).data('section')+'&tags_url='+tags_url, // передаем данные из формы
+            success: function(response) { // когда получаем ответ
+
+                sliderTmp.empty();
+                //console.log(response);
+                $.each(response, function(index, value) {
+                    //console.log(value);
+                    sliderTmp.append('<div><a href="/articles/'+value.CatUrl+'" class="fz medium">'+value.CatName+'</a> <div class="media"> <div class="media-left">'+
+                    '<a href="/article/'+value.url+'">'+
+                    '<img src="'+value.images_article+'" width="260" height="190" class="media-object" alt="'+value.name+'"/></a> </div>'+
+                    '<div class="media-body">'+
+                    '<h2 class="media-heading"><a href="/article/'+value.url+'"><strong>'+value.name+'</strong></a></h2>'+
+                    '<p class="fz medium"><strong>'+value.secondname+'</strong></p>'+
+                    value.content+
+                    '</div> </div> </div><hr/>').hide();
+                });
+                sliderTmp.fadeIn();
+            }
+        });
+
+
+        return false;
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -141,9 +226,11 @@ $(document).ready(function(){
                     '<h3><strong><a href="/business/'+value.url+'">'+value.name+'</a></strong></h3> ' +
                     '<p><strong>'+value.CityName+' '+ value.address+'</strong></p>' +
                     value.info+
-                    '</div> </div> </div>');
+                    '</div> </div> </div>').hide();
 
                 });
+
+                sliderTmp.fadeIn();
 
                 var options='<option value="">По городам</option>';
                 $.each(response.city, function(index, value) {
@@ -204,10 +291,10 @@ $(document).ready(function(){
                     '<h3><strong><a href="/business/'+value.url+'">'+value.name+'</a></strong></h3> ' +
                     '<p><strong>'+value.CityName+' '+ value.address+'</strong></p>' +
                     value.info+
-                    '</div> </div> </div>');
+                    '</div> </div> </div>').hide();
 
                 });
-                
+                sliderTmp.fadeIn();
                 //переиницыализируем подсказку
                 $('[data-toggle="tooltip"]').tooltip();
             }
@@ -264,8 +351,10 @@ $(document).ready(function(){
                     '<span>20%</span>'+
                     '<span><small>скидка</small></span></div>'+
                     '<div><small class="coupon-date">до 1 Апр 2015</small></div></div> </div>'+
-                    '</div>');
+                    '</div>').hide();
                 });
+
+                slider_bloc.fadeIn();
 
                 //переинициализация слайдера
                 owl.owlCarousel({

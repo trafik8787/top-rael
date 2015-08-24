@@ -261,12 +261,20 @@ Route::set('Subscribe', 'subscribe')
         'controller' => 'Ajax',
         'action'     => 'index',
     ));
-
+//сортировка по категориям БИЗНЕСОВ группы лакшери (теги)
 Route::set('TagsCategoryBusiness', 'tagscatselest')
     ->defaults(array(
         'directory' => 'Pages',
         'controller' => 'Ajax',
         'action'     => 'tagscatselest',
+    ));
+
+//сортировка по разделам СТАТЬИ группы лакшери (теги)
+Route::set('TagsSectionArticles', 'tagsecartic')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'tagsecartic',
     ));
 
 Route::set('Top_meny', 'city(/<url_city>)')

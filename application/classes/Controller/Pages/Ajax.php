@@ -21,7 +21,7 @@ class Controller_Pages_Ajax extends Controller {
 	}
 
     /**
-     * сортировка по категориям группы лакшери (теги)
+     * сортировка по категориям БИЗНЕСОВ группы лакшери (теги)
      */
     public function action_tagscatselest (){
 
@@ -47,6 +47,29 @@ class Controller_Pages_Ajax extends Controller {
 
             echo json_encode($data);
         }
+    }
+
+    /**
+     * сортировка по разделам СТАТЬИ группы лакшери (теги)
+     */
+    public function action_tagsecartic(){
+
+        if (Request::initial()->is_ajax()) {
+            //die(HTML::x($this->request->post()));
+            if ($this->request->post('section') != 'undefined') {
+                $data = Model::factory('ArticlesModel')->getArticlesSectionTagsUrl($this->request->post('section'), $this->request->post('tags_url'));
+            } else {
+                $data = Model::factory('ArticlesModel')->getArticlesSectionTagsUrl(null, $this->request->post('tags_url'));
+            }
+
+            foreach ($data as $key => $rows) {
+                $data[$key]['images_article'] = '/uploads/img_articles/thumbs/'.basename($rows['images_article']);
+                $data[$key]['content'] = Text::limit_chars(strip_tags($rows['content']), 200, null, true);
+            }
+
+            echo json_encode($data);
+        }
+
     }
 
 }

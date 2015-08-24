@@ -40,7 +40,7 @@
 
                                             <ul class="nav nav-pills w-category-bloc" role="tablist">
 
-                                                <li role="presentation" class="active"><a href="/section/<?=$rowsdata['category'][0]['url']?>" data-section="<?=$rowsdata['category'][0]['url']?>" class="w-tags-bus-cat w-cat-active">Новые</a></li>
+                                                <li role="presentation" class="active"><a href="/section/<?=$rowsdata['category'][0]['url']?>" data-section="<?=$rowsdata['category'][0]['url']?>" class="w-tags-bus-cat w-cat-active">Все</a></li>
 
                                                 <?foreach($rowsdata['category'][0]['childs'] as $row_category):?>
                                                     <li role="presentation"><a href="/section/<?=$rowsdata['category'][0]['url'].'/'.$row_category['url']?>" data-cat="<?=$row_category['url']?>" class="w-tags-bus-cat"><?=$row_category['name']?></a></li>
@@ -224,7 +224,7 @@
 
 
                 <div class="row">
-                    <div class="panel panel-media">
+                    <div class="panel panel-media w-bloc-section">
 
                         <div class="panel-heading">
                             <hr/>
@@ -237,12 +237,12 @@
 
 
                             <div class="collapse" id="nav-review">
-                                <ul class="nav nav-pills" role="tablist">
+                                <ul class="nav nav-pills w-category-bloc" role="tablist">
 
-                                    <li role="presentation" class="active"><a href="/articles" >Новые</a></li>
+                                    <li role="presentation" class="active"><a href="#" class="w-tags-artic-cat w-cat-active" >Все</a></li>
                                     <?foreach($section as $row_category):?>
 
-                                        <li role="presentation" class=""><a href="/articles/<?=$row_category['url']?>" ><?=$row_category['name']?></a></li>
+                                        <li role="presentation" class=""><a href="#" data-section="<?=$row_category['url']?>" class="w-tags-artic-cat" ><?=$row_category['name']?></a></li>
 
                                     <?endforeach?>
 
@@ -250,7 +250,7 @@
                             </div>
                         </div>
 
-                        <div class="panel-body">
+                        <div class="panel-body slider">
 
 
                             <?foreach($data_articles as $rows_data):?>
