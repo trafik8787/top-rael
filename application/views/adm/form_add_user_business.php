@@ -48,7 +48,7 @@
                                 <input class="form-control" type="text" value="<?=isset($age) ? $age: ''?>" data-toggle="tooltip" data-original-title="Возраст" name="age">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
-                            <input type="text" data-toggle="tooltip" data-original-title="Телефон" name="tel" class="form-control"  value="<?=isset($tel) ? $tel: ''?>"/>
+                            <input type="text" data-toggle="tooltip" data-original-title="Телефон" name="telephone" class="form-control"  value="<?=isset($telephone) ? $telephone: ''?>"/>
 
                         </div>
                         <div class="form-inline" style="margin-top: 10px;">

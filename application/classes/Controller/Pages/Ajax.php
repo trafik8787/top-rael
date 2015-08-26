@@ -105,4 +105,36 @@ class Controller_Pages_Ajax extends Controller {
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * екшены запускаемые по крону для отправки емейлов бизнесам
+     */
+
+    /**
+     * запускается по крону и сравнивает даты если до даты окончания бизнеса остается 7 дней
+     * то отправляет письмо пользователю
+     */
+    public function action_BussinesDisableEmailSevenDays() {
+
+        $d = new DateTime("2015-09-2");
+        $ert = $d->modify('-7 days')->format("Y-m-d");
+
+        if (date('Y-m-d') == $ert) {
+            HTML::x($ert);
+        }
+    }
+
+
+
 }

@@ -1040,7 +1040,7 @@ class Controller_Administrator extends Controller_Core_Main {
                                                     Cruds::$post['email_user'],
                                                     Cruds::$post['age'],
                                                     Cruds::$post['sex'],
-                                                    Cruds::$post['tel'],
+                                                    Cruds::$post['telephone'],
                                                     Cruds::$post['password'],
                                                     Cruds::$post['id']);
         }
@@ -1130,7 +1130,7 @@ class Controller_Administrator extends Controller_Core_Main {
         if (!empty($orm_user)) {
             $user->age = $orm_user['age'];
             $user->sex = $orm_user['sex'];
-            $user->tel = $orm_user['tel'];
+            $user->telephone = $orm_user['tel'];
             $user->name_user = $orm_user['username'];
             $user->secondname_user = $orm_user['secondname'];
             $user->email_user = $orm_user['email'];
