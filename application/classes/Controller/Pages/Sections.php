@@ -70,7 +70,7 @@ class Controller_Pages_Sections extends Controller_BaseController {
         ));
 
         //преобразование масива бизнесов для вюхи
-        $result_data = $this->convertArrayVievData($data['data']);
+        $result_data = parent::convertArrayVievData($data['data']);
 
         $bussines_section->data = $result_data;
         $bussines_section->city = $data['city'];

@@ -277,6 +277,14 @@ Route::set('TagsSectionArticles', 'tagsecartic')
         'action'     => 'tagsecartic',
     ));
 
+//сортировка по разделам КУПОНЫ группы лакшери (теги)
+Route::set('TagsSectionCoupns', 'tagseccoupon')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'tagseccoupon',
+    ));
+
 Route::set('Top_meny', 'city(/<url_city>)')
     ->defaults(array(
         'directory' => 'Pages',

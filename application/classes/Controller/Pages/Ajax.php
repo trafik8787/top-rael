@@ -45,7 +45,11 @@ class Controller_Pages_Ajax extends Controller {
                 $data['data'][$key]['info'] = Text::limit_chars(strip_tags($rows['info']), 150, null, true);
             }
 
-            echo json_encode($data);
+            $data = Controller_BaseController::convertArrayTagsBusiness($data['data']);
+            $content = View::factory('ajax_views/business_list_ajax');
+            $content->data = $data;
+            echo $content;
+            //echo json_encode($data);
         }
     }
 
@@ -68,6 +72,35 @@ class Controller_Pages_Ajax extends Controller {
             }
 
             echo json_encode($data);
+        }
+
+    }
+
+    /**
+     * сортировка по разделам КУПОНЫ группы лакшери (теги)
+     */
+    public function action_tagseccoupon (){
+        if (Request::initial()->is_ajax()) {
+
+            if ($this->request->post('section') != 'undefined') {
+                $data = Model::factory('CouponsModel')->getCouponsSectionTagsUrl($this->request->post('section'), $this->request->post('tags_url'));
+            } else {
+                $data = Model::factory('CouponsModel')->getCouponsSectionTagsUrl(null, $this->request->post('tags_url'));
+            }
+
+            foreach ($data as $key => $rows) {
+                //$data[$key]['img_coupon'] = '/uploads/img_coupons/thumbs/'.basename($rows['img_coupon']);
+                $data[$key]['dateoff'] = Date::rusdate(strtotime($rows['dateoff']), 'j %MONTH% Y');
+            }
+
+            $data = Controller_BaseController::convertArrayVievData($data);
+
+           // die(HTML::x($data));
+
+            $content = View::factory('ajax_views/coupons_list_ajax');
+            $content->data_coupon = $data;
+            echo $content;
+            //echo json_encode($data);
         }
 
     }

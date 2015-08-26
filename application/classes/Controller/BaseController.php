@@ -187,28 +187,15 @@ abstract class Controller_BaseController extends Controller_Template {
      * @return array
      * преобразование масиива для вывода бизнесов например в две колонки
      */
-    public function convertArrayVievData($data){
-        $resultData = array();
-        $dataTmp = array();
-        $i = 0;
-        foreach ($data as $key => $data_row) {
+    public static function convertArrayVievData($data){
 
-            $i = $i + 1;
-            $dataTmp[] = $data_row;
+        return array_chunk($data, 2);
+    }
 
-            if ($i>1) {
-                $i = 0;
-                $resultData[] = $dataTmp;
-                $dataTmp = array();
-            }
-            //если последний елемент не парный
-            if (!next($data)) {
-                if (!empty($dataTmp)) {
-                    $resultData[] = $dataTmp;
-                }
-            }
-        }
-        return $resultData;
+
+    public static function convertArrayTagsBusiness ($data){
+
+        return array_chunk($data, 3);
     }
 
     /**

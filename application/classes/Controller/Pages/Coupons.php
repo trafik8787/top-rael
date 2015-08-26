@@ -44,7 +44,7 @@ class Controller_Pages_Coupons extends Controller_BaseController {
         ));
 
         //преобразование масива для правильного вывода
-        $result_data = $this->convertArrayVievData($data['data']);
+        $result_data = parent::convertArrayVievData($data['data']);
 
         $content->data = $result_data;
         $content->city = $data['city'];

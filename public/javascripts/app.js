@@ -46,43 +46,15 @@ $(document).ready(function(){
 
         $.ajax({ // описываем наш запрос
             type: "POST", // будем передавать данные через POST
-            dataType: "JSON", // указываем, что нам вернется JSON
+            dataType: "HTML", // указываем, что нам вернется JSON
             url: '/tagscatselest',
             data: 'section='+$(this).data('section')+'&cat='+$(this).data('cat')+'&tags_url='+tags_url, // передаем данные из формы
             success: function(response) { // когда получаем ответ
-
-
+                
                 sliderTmp.empty();
-                //в переменной будем хранить иконуку в зависимости от того добавлен ли бизнес в избранное
-                var bus_icon;
-                //console.log(response);
-                $.each(response.data, function(index, value) {
-                    //console.log(value);
-
-                    if (value.bussines_favorit != undefined) {
-                        bus_icon = '<a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">'+
-                                    '<i class="fa fa-star"></i></a>';
-                    } else {
-                        bus_icon = '<a href="#" data-toggle="tooltip" data-placement="left" data-id="'+value.id+'" class="pin w-add-bussines-favor">'+
-                                    '<i class="fa fa-star"></i></a>';
-                    }
-
-                    sliderTmp.append('<div class="col-md-4">' +
-                    '<div class="thumbnail">' +
-                    bus_icon +
-                    '<a href="/business/'+value.url+'" class="thumbnail-image"> ' +
-                    '<img src="'+value.home_busines_foto+'" width="240" height="150" alt="">' +
-                    '</a> ' +
-                    '<div class="caption"> ' +
-                    '<h3><strong><a href="/business/'+value.url+'">'+value.name+'</a></strong></h3> ' +
-                    '<p><strong>'+value.CityName+' '+ value.address+'</strong></p>' +
-                    value.info+
-                    '</div> </div> </div>').hide();
-
-                });
+                sliderTmp.html(response).hide();
                 sliderTmp.fadeIn();
                 $('[data-toggle="tooltip"]').tooltip();
-
             }
         });
 
@@ -145,8 +117,49 @@ $(document).ready(function(){
     });
 
 
+    /**
+     *
+     * выбор раздела КУПОНЫ группы лакшери (теги)
+     */
+    $(document).on('click', '.w-tags-coup-cat', function(){
 
 
+        var thises = $(this);
+        var sliderTmp = thises.closest('.w-bloc-section').find('.slider');
+        var remowClas = thises.parents('.w-category-bloc').find('a.w-cat-active');
+        var addClasLi = thises.parent();
+        var remClassLi = thises.parents('.w-category-bloc').find('li.active');
+
+        //удаляем клас
+        remowClas.removeClass('w-cat-active');
+        remClassLi.removeClass('active');
+        //добавляем класс
+        thises.addClass('w-cat-active');
+        addClasLi.addClass('active');
+
+        var tags_url = '';
+        if ($('.w-tags-url').val() != undefined) {
+            tags_url = $('.w-tags-url').val();
+        }
+
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "HTML", // указываем, что нам вернется JSON
+            url: '/tagseccoupon',
+            data: 'section='+$(this).data('section')+'&tags_url='+tags_url, // передаем данные из формы
+            success: function(response) { // когда получаем ответ
+                
+                sliderTmp.empty();
+                //console.log(response);
+                sliderTmp.html(response).hide();
+                sliderTmp.fadeIn();
+                $('[data-toggle="tooltip"]').tooltip();
+            }
+        });
+
+
+        return false;
+    });
 
 
 

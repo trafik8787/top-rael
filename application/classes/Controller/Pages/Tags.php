@@ -31,7 +31,7 @@ class Controller_Pages_Tags extends Controller_BaseController {
             //$category[0]['childs'] = array_slice($category[0]['childs'], 0, 5);
 
             $data = Model::factory('BussinesModel')->getBussinesSectionTagsUrl($row_section['url'], $this->request->param('url_tags'));
-
+            $data['data'] = $this->convertArrayTagsBusiness($data['data']);
             $resultArr[] = array('category' => $category, 'data' => $data['data']);
         }
 
@@ -46,7 +46,7 @@ class Controller_Pages_Tags extends Controller_BaseController {
 
         //купоны группы лакшери выборка по тегам
         $data_coupons = Model::factory('CouponsModel')->getCouponsSectionTagsUrl(null, $this->request->param('url_tags'));
-        $data_coupons = $this->convertArrayVievData($data_coupons);
+        $data_coupons = parent::convertArrayVievData($data_coupons);
         $content->data_coupon =  $data_coupons;
         $content->section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
 
