@@ -778,9 +778,17 @@ class Model_BussinesModel extends Model_BaseModel {
         return array('data' => $result);
     }
 
-
-
-
+    /**
+     * @return mixed
+     * получить всех бизнес пользователей
+     */
+    public function getBusinesUserAll(){
+        return DB::select()
+            ->from('users')
+            ->join('business')
+            ->on('users.business_id','=','business.id')
+            ->execute()->as_array();
+    }
 
 
 

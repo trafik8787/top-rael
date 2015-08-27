@@ -150,6 +150,16 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+
+//запускается по крону и сравнивает даты если до даты окончания бизнеса остается 7 дней
+Route::set('BussinesDisableEmailSevenDays', 'sendbusiness')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'BussinesDisableEmailSevenDays',
+    ));
+
+
 Route::set('Partners', 'partners')
     ->defaults(array(
         'directory' => 'Pages',

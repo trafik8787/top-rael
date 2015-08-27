@@ -1,5 +1,6 @@
-/* line 9, ../sass/pin.scss */
+/* line 5, ../sass/pin.scss */
 .pin {
+  position: relative;
   display: inline-block;
   color: #007898;
   background-color: #fff;
@@ -14,81 +15,79 @@
   width: 26px;
   height: 26px;
   padding: 5px;
-  right: -13px;
-  top: -13px;
- /* @media (max-width: 320px) {
-    &{
-      width: ceil(($pin-size-base + $pin-padding)*1.2);
-      height: ceil(($pin-size-base + $pin-padding)*1.2);
+  /* @media (max-width: 320px) {
+     &{
+       width: ceil(($pin-size-base + $pin-padding)*1.2);
+       height: ceil(($pin-size-base + $pin-padding)*1.2);
 
-      padding: ceil($pin-padding*1.2);
+       padding: ceil($pin-padding*1.2);
 
-      right: - ceil((($pin-size-base + $pin-padding)*1.2)/2);
-      top: - ceil((($pin-size-base + $pin-padding)*1.2)/2);
+       right: - ceil((($pin-size-base + $pin-padding)*1.2)/2);
+       top: - ceil((($pin-size-base + $pin-padding)*1.2)/2);
 
-      .fa,
-      .glyphicon{
+       .fa,
+       .glyphicon{
 
-        font-size: ceil($pin-size-base*1.2);
-        line-height: ceil($pin-size-base*1.2);
-        width: ceil($pin-size-base*1.2);
+         font-size: ceil($pin-size-base*1.2);
+         line-height: ceil($pin-size-base*1.2);
+         width: ceil($pin-size-base*1.2);
 
-        position:absolute;
-        left:50%;
-        top:50%;
-      }
-    }
-  }
+         position:absolute;
+         left:50%;
+         top:50%;
+       }
+     }
+   }
 
-  @media (min-width: 768px) {
-    &{
-      width: ceil(($pin-size-base + $pin-padding));
-      height: ceil(($pin-size-base + $pin-padding));
+   @media (min-width: 768px) {
+     &{
+       width: ceil(($pin-size-base + $pin-padding));
+       height: ceil(($pin-size-base + $pin-padding));
 
-      padding: ceil($pin-padding);
+       padding: ceil($pin-padding);
 
-      right: - ceil((($pin-size-base + $pin-padding))/2);
-      top: - ceil((($pin-size-base + $pin-padding))/2);
+       right: - ceil((($pin-size-base + $pin-padding))/2);
+       top: - ceil((($pin-size-base + $pin-padding))/2);
 
-      .fa,
-      .glyphicon{
+       .fa,
+       .glyphicon{
 
-        font-size: ceil($pin-size-base);
-        line-height: ceil($pin-size-base);
-        width: ceil($pin-size-base);
+         font-size: ceil($pin-size-base);
+         line-height: ceil($pin-size-base);
+         width: ceil($pin-size-base);
 
-        position:absolute;
-        left:50%;
-        top:50%;
-      }
-    }
-  }
+         position:absolute;
+         left:50%;
+         top:50%;
+       }
+     }
+   }
 
-  @media (min-width: 1200px) {
-    &{
-      width: ceil(($pin-size-base + $pin-padding)*1.5);
-      height: ceil(($pin-size-base + $pin-padding)*1.5);
+   @media (min-width: 1200px) {
+     &{
+       width: ceil(($pin-size-base + $pin-padding)*1.5);
+       height: ceil(($pin-size-base + $pin-padding)*1.5);
 
-      padding: ceil($pin-padding*1.5);
+       padding: ceil($pin-padding*1.5);
 
-      right: - ceil((($pin-size-base + $pin-padding)*1.5)/2);
-      top: - ceil((($pin-size-base + $pin-padding)*1.5)/2);
+       right: - ceil((($pin-size-base + $pin-padding)*1.5)/2);
+       top: - ceil((($pin-size-base + $pin-padding)*1.5)/2);
 
-      .fa,
-      .glyphicon{
+       .fa,
+       .glyphicon{
 
-        font-size: ceil($pin-size-base*1.5);
-        line-height: ceil($pin-size-base*1.5);
-        width: ceil($pin-size-base*1.5);
+         font-size: ceil($pin-size-base*1.5);
+         line-height: ceil($pin-size-base*1.5);
+         width: ceil($pin-size-base*1.5);
 
-        position:absolute;
-        left:50%;
-        top:50%;
-      }
-    }
-  }*/
+         position:absolute;
+         left:50%;
+         top:50%;
+       }
+     }
+   }*/
 }
-/* line 32, ../sass/pin.scss */
+/* line 27, ../sass/pin.scss */
 .pin .fa,
 .pin .glyphicon {
   cursor: pointer;
@@ -102,4 +101,9 @@
   -ms-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+/* line 30, ../sass/pin.scss */
+.pin .fa.fa-star,
+.pin .glyphicon.fa-star {
+  font-size: 19px;
 }

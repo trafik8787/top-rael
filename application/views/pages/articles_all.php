@@ -74,7 +74,7 @@
                                                     <br/>
                                                     <a href="/articles/<?=$data_shift['CatUrl']?>"><?=$data_shift['CatName']?></a>
                                                 </p>
-                                                <?=Text::limit_chars(strip_tags($data_shift['content']), 200, null, true)?>
+                                                <?=Text::limit_chars(strip_tags($data_shift['content']), 250, null, true)?>
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +98,7 @@
                                                 <p class="fz medium"><strong><?=$rows_data['secondname']?></strong>
                                                 </p>
 
-                                                <?=Text::limit_chars(strip_tags($rows_data['content']), 200, null, true)?>
+                                                <?=Text::limit_chars(strip_tags($rows_data['content']), 350, null, true)?>
                                             </div>
                                         </div>
                                     </div>

@@ -127,12 +127,44 @@ class Controller_Pages_Ajax extends Controller {
      */
     public function action_BussinesDisableEmailSevenDays() {
 
-        $d = new DateTime("2015-09-2");
-        $ert = $d->modify('-7 days')->format("Y-m-d");
+        $data = Model::factory('BussinesModel')->getBusinesUserAll();
 
-        if (date('Y-m-d') == $ert) {
-            HTML::x($ert);
+        HTML::x($data);
+
+        foreach ($data as $rows) {
+
+            $d = new DateTime($rows['date_end']);
+            $ert = $d->modify('-7 days')->format("Y-m-d");
+
+            //за 7 дней перед отключением
+            if (date('Y-m-d') == $ert) {
+                $message = 'Ваш бизнес будет отключен через 7 дней';
+
+                $m = Email::factory();
+                $m->From("admin@top.com"); // от кого отправляется почта
+                $m->To($rows['email']); // кому адресованно
+                $m->Subject('Отключение бизнеса');
+                $m->Body($message, "html");
+                $m->Priority(3);
+                $m->Send();
+
+            }
+
+            if (date('Y-m-d') == $rows['date_end']) {
+
+                $message = 'Ваш бизнес отключен';
+
+                $m = Email::factory();
+                $m->From("admin@top.com"); // от кого отправляется почта
+                $m->To($rows['email']); // кому адресованно
+                $m->Subject('Отключение бизнеса');
+                $m->Body($message, "html");
+                $m->Priority(3);
+                $m->Send();
+            }
+
         }
+
     }
 
 

@@ -1,43 +1,4 @@
-/* line 9, ../sass/social.scss */
-.tabs-social .nav-tabs {
-  border-bottom: 0;
-}
-/* line 12, ../sass/social.scss */
-.tabs-social .nav-tabs li {
-  margin-right: 5px;
-  margin-bottom: 3px;
-}
-/* line 16, ../sass/social.scss */
-.tabs-social .nav-tabs li.active {
-  margin-bottom: 0;
-}
-/* line 18, ../sass/social.scss */
-.tabs-social .nav-tabs li.active .social {
-  padding-bottom: 3px;
-}
-/* line 23, ../sass/social.scss */
-.tabs-social .nav-tabs li .social {
-  display: block;
-  padding: 0;
-}
-/* line 30, ../sass/social.scss */
-.tabs-social .tab-pane {
-  padding: 15px 0;
-}
-/* line 34, ../sass/social.scss */
-.tabs-social #tab-facebook {
-  border-top: 5px solid #49659f;
-}
-/* line 38, ../sass/social.scss */
-.tabs-social #tab-twitter {
-  border-top: 5px solid #47afff;
-}
-/* line 42, ../sass/social.scss */
-.tabs-social #tab-vk {
-  border-top: 5px solid #7b97d2;
-}
-
-/* line 47, ../sass/social.scss */
+/* line 5, ../sass/social.scss */
 .social {
   border: 0 !important;
   -moz-border-radius: 0 !important;
@@ -52,19 +13,19 @@
   line-height: 40px !important;
   padding: 0;
 }
-/* line 60, ../sass/social.scss */
+/* line 18, ../sass/social.scss */
 .social.facebook {
   background-color: #49659f !important;
 }
-/* line 64, ../sass/social.scss */
+/* line 22, ../sass/social.scss */
 .social.twitter {
   background-color: #47afff !important;
 }
-/* line 68, ../sass/social.scss */
+/* line 26, ../sass/social.scss */
 .social.vk {
   background-color: #7b97d2 !important;
 }
-/* line 72, ../sass/social.scss */
+/* line 30, ../sass/social.scss */
 .social.email {
   background-color: #db4c9f !important;
 }

@@ -47,7 +47,7 @@
 #footer #footer-content {
   padding: 10px 15px;
 }
-/* line 41, ../sass/_common-variables.scss */
+/* line 49, ../sass/_common-variables.scss */
 #footer #footer-content:after {
   content: "";
   clear: both;

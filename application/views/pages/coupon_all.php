@@ -91,7 +91,7 @@
 
                                                     <div class="coupon-context">
 
-                                                        <div class="fz large"><strong><?=$rows_data[0]['name']?></strong></div>
+                                                        <div class="fz big"><strong><?=$rows_data[0]['name']?></strong></div>
                                                         <small><?=$rows_data[0]['secondname']?></small>
 
                                                         <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_data[0]['dateoff']), 'j %MONTH% Y'); ?></small>
@@ -126,7 +126,7 @@
 
                                                         <div class="coupon-context">
 
-                                                            <div class="fz large"><strong><?=$rows_data[1]['name']?></strong></div>
+                                                            <div class="fz big"><strong><?=$rows_data[1]['name']?></strong></div>
                                                             <small><?=$rows_data[1]['secondname']?></small>
 
                                                             <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_data[1]['dateoff']), 'j %MONTH% Y'); ?></small>

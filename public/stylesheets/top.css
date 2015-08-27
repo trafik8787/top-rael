@@ -7,7 +7,7 @@
   }*/
   border: 1px solid #d8d8d8;
 }
-/* line 41, ../sass/_common-variables.scss */
+/* line 49, ../sass/_common-variables.scss */
 .top:after {
   content: "";
   clear: both;
@@ -17,11 +17,11 @@
 .top a {
   color: #000;
 }
-/* line 57, ../sass/_common-variables.scss */
+/* line 65, ../sass/_common-variables.scss */
 .top a {
   text-decoration: underline;
 }
-/* line 60, ../sass/_common-variables.scss */
+/* line 68, ../sass/_common-variables.scss */
 .top a:hover {
   text-decoration: none;
 }

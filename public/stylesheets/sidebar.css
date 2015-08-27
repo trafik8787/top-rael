@@ -1,96 +1,242 @@
-/* line 5, ../sass/lottery-sidebar.scss */
-.lottery {
-  border: 1px solid #d8d8d8;
-  padding: 15px;
+/* line 5, ../sass/sidebar.scss */
+#sidebar {
+  padding-top: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+/* line 13, ../sass/sidebar.scss */
+#sidebar .media {
+  margin-bottom: 0;
+}
+
+/* line 18, ../sass/sidebar.scss */
+.sidebar-images {
+  margin-bottom: 20px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 3px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 3px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 3px;
+}
+
+/* line 23, ../sass/sidebar.scss */
+.sidebar-services {
+  border-top: 1px solid #d2d2d2;
+  border-bottom: 1px solid #d2d2d2;
+  margin: 30px 0;
+}
+/* line 30, ../sass/sidebar.scss */
+.sidebar-services .sidebar-services-heading {
+  margin: 30px 0 0 0;
+}
+/* line 34, ../sass/sidebar.scss */
+.sidebar-services .sidebar-services-heading .sidebar-services-title {
+  font-size: 22px;
+}
+/* line 39, ../sass/sidebar.scss */
+.sidebar-services .sidebar-services-body {
+  margin-bottom: 15px;
+}
+/* line 42, ../sass/sidebar.scss */
+.sidebar-services .sidebar-services-body .sidebar-services-list {
+  margin: 0 0 30px 0;
+  padding: 0;
+  list-style-type: none;
+}
+/* line 47, ../sass/sidebar.scss */
+.sidebar-services .sidebar-services-body .sidebar-services-list li {
+  font-size: 18px;
+  margin: 10px;
+}
+/* line 52, ../sass/sidebar.scss */
+.sidebar-services .sidebar-services-body .sidebar-services-list li .fa {
+  color: #727272;
+}
+
+/* line 60, ../sass/sidebar.scss */
+.sidebar-coupons {
   margin-bottom: 20px;
 }
-/* line 11, ../sass/lottery-sidebar.scss */
-.lottery a {
+/* line 64, ../sass/sidebar.scss */
+.sidebar-coupons .sidebar-coupons-heading {
+  margin-bottom: 15px;
+}
+/* line 68, ../sass/sidebar.scss */
+.sidebar-coupons .sidebar-coupons-heading .sidebar-coupons-title {
+  font-size: 22px;
+}
+/* line 73, ../sass/sidebar.scss */
+.sidebar-coupons .sidebar-coupons-body {
+  margin-bottom: 15px;
+}
+
+/* line 78, ../sass/sidebar.scss */
+.sidebar-tabs {
+  margin-bottom: 20px;
+}
+/* line 82, ../sass/sidebar.scss */
+.sidebar-tabs .sidebar-tabs-heading {
+  margin-bottom: 15px;
+}
+/* line 86, ../sass/sidebar.scss */
+.sidebar-tabs .sidebar-tabs-heading .sidebar-tabs-title {
+  font-size: 18px;
+  border-bottom: 1px solid #007797;
+}
+/* line 92, ../sass/sidebar.scss */
+.sidebar-tabs .sidebar-tabs-body {
+  margin-bottom: 15px;
+}
+
+/* line 97, ../sass/sidebar.scss */
+.sidebar-lottery {
+  margin-bottom: 20px;
+  border: 1px solid #e7e7e7;
+  padding: 15px;
+}
+/* line 105, ../sass/sidebar.scss */
+.sidebar-lottery a {
   color: #000;
 }
-/* line 57, ../sass/_common-variables.scss */
-.lottery a {
+/* line 65, ../sass/_common-variables.scss */
+.sidebar-lottery a {
   text-decoration: underline;
 }
-/* line 60, ../sass/_common-variables.scss */
-.lottery a:hover {
+/* line 68, ../sass/_common-variables.scss */
+.sidebar-lottery a:hover {
   text-decoration: none;
 }
-/* line 17, ../sass/lottery-sidebar.scss */
-.lottery .cr {
+/* line 111, ../sass/sidebar.scss */
+.sidebar-lottery .cr {
   background: #ececec;
   color: #d9534f;
   border-color: transparent !important;
 }
-/* line 25, ../sass/lottery-sidebar.scss */
-.lottery .input-group .form-control {
+/* line 117, ../sass/sidebar.scss */
+.sidebar-lottery .prize-title {
+  font-size: 25px;
+  color: #007797;
+}
+/* line 124, ../sass/sidebar.scss */
+.sidebar-lottery .input-group .form-control {
   background: #ececec;
   border-color: transparent;
 }
-/* line 29, ../sass/lottery-sidebar.scss */
-.lottery .input-group .form-control:focus {
+/* line 128, ../sass/sidebar.scss */
+.sidebar-lottery .input-group .form-control:focus {
   border-color: transparent;
 }
-/* line 34, ../sass/lottery-sidebar.scss */
-.lottery .input-group .input-group-addon {
+/* line 133, ../sass/sidebar.scss */
+.sidebar-lottery .input-group .input-group-addon {
   padding: 0;
   border-color: transparent;
 }
-/* line 40, ../sass/lottery-sidebar.scss */
-.lottery .input-group .input-group-addon .btn {
+/* line 139, ../sass/sidebar.scss */
+.sidebar-lottery .input-group .input-group-addon .btn {
   padding: 3px 12px;
   margin: 0 3px;
 }
-/* line 47, ../sass/lottery-sidebar.scss */
-.lottery .lottery-title {
-  font-size: 26px;
-  margin-bottom: 20px;
+/* line 146, ../sass/sidebar.scss */
+.sidebar-lottery .sidebar-lottery-heading {
+  margin-bottom: 15px;
 }
-/* line 52, ../sass/lottery-sidebar.scss */
-.lottery .media-heading {
-  font-size: 24px;
-  line-height: 1.2;
-}
-/* line 57, ../sass/lottery-sidebar.scss */
-.lottery .lottery-section {
-  margin-bottom: 20px;
-}
-/* line 61, ../sass/lottery-sidebar.scss */
-.lottery .lottery-section .lottery-section-title {
-  display: block;
-  font-size: 16px;
-  border-bottom: 1px solid #007898;
-  margin-bottom: 20px;
-}
-/* line 68, ../sass/lottery-sidebar.scss */
-.lottery .lottery-section .img-circle {
-  display: inline-block;
-}
-/* line 73, ../sass/lottery-sidebar.scss */
-.lottery .lottery-section .checkbox {
-  color: #007898;
-}
-/* line 76, ../sass/lottery-sidebar.scss */
-.lottery .lottery-section .checkbox a {
-  color: #007898;
+/* line 150, ../sass/sidebar.scss */
+.sidebar-lottery .sidebar-lottery-heading .sidebar-lottery-title {
+  font-size: 28px;
 }
 
-/* line 6, ../sass/sidebar.scss */
-#sidebar {
-  border: 1px solid #e7e7e7;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
+/* line 159, ../sass/sidebar.scss */
+.sidebar-socials {
+  margin-bottom: 20px;
 }
-/* line 12, ../sass/sidebar.scss */
-#sidebar .media {
-  margin-bottom: 0;
-  /*@media (max-width: 768px) {
-    .media-left {
-      @include pull-left;
-    }
-    .media_right {
-      @include pull-right;
-    }
-  }*/
+/* line 165, ../sass/sidebar.scss */
+.sidebar-socials .sidebar-socials-heading ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+/* line 49, ../sass/_common-variables.scss */
+.sidebar-socials .sidebar-socials-heading ul:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+/* line 172, ../sass/sidebar.scss */
+.sidebar-socials .sidebar-socials-heading ul li {
+  margin-right: 5px;
+  float: left;
+}
+/* line 177, ../sass/sidebar.scss */
+.sidebar-socials .sidebar-socials-heading ul li.active .social {
+  padding-bottom: 3px;
+}
+/* line 187, ../sass/sidebar.scss */
+.sidebar-socials .sidebar-socials-body .tab-pane {
+  display: none;
+  padding-top: 15px;
+}
+/* line 191, ../sass/sidebar.scss */
+.sidebar-socials .sidebar-socials-body .tab-pane.active {
+  display: block;
+  border-top: 5px solid transparent;
+}
+/* line 197, ../sass/sidebar.scss */
+.sidebar-socials .sidebar-socials-body #tab-facebook {
+  border-color: #49659f;
+}
+/* line 201, ../sass/sidebar.scss */
+.sidebar-socials .sidebar-socials-body #tab-twitter {
+  border-color: #47afff;
+}
+/* line 205, ../sass/sidebar.scss */
+.sidebar-socials .sidebar-socials-body #tab-vk {
+  border-color: #7b97d2;
+}
+
+/* line 211, ../sass/sidebar.scss */
+.sidebar-reviews {
+  margin-bottom: 20px;
+}
+/* line 215, ../sass/sidebar.scss */
+.sidebar-reviews .sidebar-reviews-heading {
+  margin-bottom: 15px;
+}
+/* line 219, ../sass/sidebar.scss */
+.sidebar-reviews .sidebar-reviews-heading .sidebar-reviews-title {
+  font-size: 28px;
+}
+/* line 224, ../sass/sidebar.scss */
+.sidebar-reviews .sidebar-reviews-body {
+  color: #5e5e5e;
+  margin-bottom: 15px;
+}
+/* line 228, ../sass/sidebar.scss */
+.sidebar-reviews .sidebar-reviews-body a {
+  color: #5e5e5e !important;
+}
+/* line 234, ../sass/sidebar.scss */
+.sidebar-reviews .sidebar-reviews-body .media {
+  border-bottom: 1px solid #e7e7e7;
+}
+/* line 238, ../sass/sidebar.scss */
+.sidebar-reviews .sidebar-reviews-body .media:last-child {
+  border-bottom: 0;
+}
+/* line 242, ../sass/sidebar.scss */
+.sidebar-reviews .sidebar-reviews-body .media .media-heading {
+  font-size: 14px;
+  border-bottom: 1px solid #e7e7e7;
+  padding-bottom: 5px;
+  margin: 0;
+}
+/* line 251, ../sass/sidebar.scss */
+.sidebar-reviews .sidebar-reviews-body .media .media-heading a {
+  text-decoration: none !important;
+}
+/* line 255, ../sass/sidebar.scss */
+.sidebar-reviews .sidebar-reviews-body .media .media-body {
+  font-size: 12px;
+}
+/* line 261, ../sass/sidebar.scss */
+.sidebar-reviews .sidebar-reviews-footer {
+  margin-bottom: 15px;
+  text-align: center;
 }

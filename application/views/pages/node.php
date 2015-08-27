@@ -231,7 +231,7 @@
 
                                                             <div class="coupon-context">
 
-                                                                <div class="fz large"><strong>Десерт в Подарок</strong></div>
+                                                                <div class="fz big"><strong>Десерт в Подарок</strong></div>
                                                                 <small>На все пищевые добавки</small>
 
                                                                 <small class="coupon-date">до 1 Апр 2015</small>

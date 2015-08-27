@@ -59,12 +59,11 @@
 }
 /* line 63, ../sass/gallery.scss */
 .primary-gallery .owl-dots {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   text-align: center;
-  -moz-transform: translate(0, -100%);
-  -ms-transform: translate(0, -100%);
-  -webkit-transform: translate(0, -100%);
-  transform: translate(0, -100%);
   padding-bottom: 15px;
 }
 @media (max-width: 768px) {

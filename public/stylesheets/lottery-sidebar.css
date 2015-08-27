@@ -8,11 +8,11 @@
 .lottery a {
   color: #000;
 }
-/* line 57, ../sass/_common-variables.scss */
+/* line 62, ../sass/_common-variables.scss */
 .lottery a {
   text-decoration: underline;
 }
-/* line 60, ../sass/_common-variables.scss */
+/* line 65, ../sass/_common-variables.scss */
 .lottery a:hover {
   text-decoration: none;
 }

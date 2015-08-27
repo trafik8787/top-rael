@@ -156,7 +156,7 @@
 .panel .panel-heading {
   padding: 0 15px;
 }
-/* line 41, ../sass/_common-variables.scss */
+/* line 49, ../sass/_common-variables.scss */
 .panel .panel-heading:after {
   content: "";
   clear: both;
@@ -212,7 +212,7 @@
     float: none;
   }
 }
-/* line 41, ../sass/_common-variables.scss */
+/* line 49, ../sass/_common-variables.scss */
 .panel .panel-heading .panel-heading-sub:after {
   content: "";
   clear: both;
@@ -224,7 +224,7 @@
     margin-bottom: 10px;
   }
 }
-/* line 41, ../sass/_common-variables.scss */
+/* line 49, ../sass/_common-variables.scss */
 .panel .pabel-body:after {
   content: "";
   clear: both;
