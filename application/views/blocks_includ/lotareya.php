@@ -79,7 +79,7 @@
                 <p>Подпишись на нашу почтовую рассылку и станьте участником еженедельной
                     лотереи</p>
 
-                <form>
+                <form class="w-form-subscribe-lotarey">
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" required="required" value="1" name="cheklicenz">

@@ -295,6 +295,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 array('cat.name', 'CatName'),
                 array('cat.id', 'CatId'),
                 array('cat.url', 'CatUrl'),
+                array('cat.parent_id', 'CatParentId'),
 
                 array('coup.name', 'CoupName'),
                 array('coup.id', 'CoupId'),
@@ -398,6 +399,8 @@ class Model_BussinesModel extends Model_BaseModel {
         $end_result['BusCity'] = $result[0]['BusCity'];
 
 
+        $category = Model::factory('CategoryModel')->get_section('category');
+
 
         //парсим адрес
        try {
@@ -423,9 +426,17 @@ class Model_BussinesModel extends Model_BaseModel {
             //категории
             if (!array_key_exists($row['CatId'], $CatTmp)) {
                 $CatTmp[$row['CatId']] = $row['CatId'];
+                //ищем раздел к которому принадлежит категория и формируем ссылку для карточки бизнеса
+                foreach ($category as $row_category) {
+                    if ($row_category['id'] == $row['CatParentId']){
+                        $row['CatUrl'] = $row_category['url'].'/'.$row['CatUrl'];
+                    }
+                }
+
                 $end_result['CatArr'][] = array('CatId' => $row['CatId'], 'CatName' => $row['CatName'], 'CatUrl' => $row['CatUrl']);
 
             }
+
             //купоны
             if (!empty($row['CoupId'])) {
                 if (!array_key_exists($row['CoupId'], $CoupTmp)) {

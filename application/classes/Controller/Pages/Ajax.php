@@ -15,10 +15,37 @@ class Controller_Pages_Ajax extends Controller {
         if (Request::initial()->is_ajax()) {
 
             $query = Model::factory('SubscribeModel')->addSubskribeLodatey($this->request->post('email'));
+            Session::instance()->set('uniqid', uniqid());
+
+            $message = '<a href="http://'.$_SERVER['HTTP_HOST'].'/susses_subscribe?qid='.Session::instance()->get('uniqid').'&email='.$this->request->post('email').'">Подтвердить подписку</a>';
+
+            $m = Email::factory();
+            $m->From("admin@top.com"); // от кого отправляется почта
+            $m->To($this->request->post('email')); // кому адресованно
+            $m->Subject('Подтверждение подписки');
+            $m->Body($message, "html");
+            $m->Priority(3);
+            $m->Send();
+
             echo json_encode($query);
         }
 
 	}
+
+    /**
+     * РАССЫЛКА ДЛЯ ПОДПИЩИКОВ
+     */
+    public function action_SendEmailSubscribe(){
+
+        //каждый четверг
+        if (date('l') == 'Thursday') {
+
+        }
+
+    }
+
+
+
 
     /**
      * сортировка по категориям БИЗНЕСОВ группы лакшери (теги)

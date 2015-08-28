@@ -14,12 +14,19 @@ class Model_CategoryModel extends Model_BaseModel {
      * @param array $where
      * @return mixed
      */
-    public function get_section ($table,  array $where){
-        return DB::select()
-            ->from($table)
-            ->where($where[0], $where[1], $where[2])
-            ->cached()
-            ->execute()->as_array();
+    public function get_section ($table,  array $where = array()){
+        if (!empty($where)) {
+            return DB::select()
+                ->from($table)
+                ->where($where[0], $where[1], $where[2])
+                ->cached()
+                ->execute()->as_array();
+        } else {
+            return DB::select()
+                ->from($table)
+                ->cached()
+                ->execute()->as_array();
+        }
     }
 
     /**

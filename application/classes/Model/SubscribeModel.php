@@ -13,16 +13,20 @@ class Model_SubscribeModel extends Model_BaseModel {
      * @return array
      * добавляем подписчика
      */
-    public function addSubskribeLodatey ($email){
+    public function addSubskribeLodatey ($email, $action = 0){
 
-        try {
-            $query = DB::insert('subscription', array('email', 'action'))
-                ->values(array($email, 1))->execute();
+        if ($action == 0) {
+            try {
+                $query = DB::insert('subscription', array('email', 'action'))
+                    ->values(array($email, $action))->execute();
 
-           return array('susses'=>'На вашу почту '.$email.' было отправлено письмо для подтверждения подписки');
+                return array('susses'=>'На вашу почту '.$email.' было отправлено письмо для подтверждения подписки');
 
-        } catch (Exception $x) {
-            return  array('dublicate_email'=>'Такой Email уже существует');
+            } catch (Exception $x) {
+                return  array('dublicate_email'=>'Такой Email уже существует');
+            }
+        } else {
+            DB::update('subscription')->set(array('action' => 1))->where('email', '=', $email)->execute();
         }
 
     }

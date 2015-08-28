@@ -9,22 +9,48 @@
 ?>
 
 <?if (!empty($content)):?>
-    <div class="panel panel-default">
-        <div class="panel-heading">Купон</div>
-        <div class="panel-body">
-            <ul class="media-list">
-                <?foreach ($content as $row):?>
-                    <li class="media">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="<?=$row['CoupImg']?>" alt="фото обзора">
-                        </a>
-                        <div class="media-body">
-                            <h5 class="media-heading"><a href="#"><?=$row['CoupSecondname']?></a></h5>
-                            <?=Text::limit_chars(strip_tags($row['CoupInfo']), 100, null, true)?>
-                        </div>
-                    </li>
-                <?endforeach?>
-            </ul>
+
+    <div class="sidebar-coupons">
+
+        <div class="sidebar-coupons-heading">
+            <div class="sidebar-coupons-title">Купоны</div>
         </div>
+        <?foreach ($content as $row):?>
+            <div class="sidebar-coupons-body">
+                <div class="coupon">
+                    <div class="coupon-container">
+
+                        <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
+
+                        <div class="coupon-image">
+                            <div class="overlay">
+                                Каббалистические украшения Haari
+                            </div>
+
+                            <img src="<?=$row['CoupImg']?>" width="155" height="125" alt="" title=""/>
+                        </div>
+
+                        <div class="coupon-context">
+                            <div>
+                                <span>Купон</span>
+                                <span><small>Массаж</small></span>
+                            </div>
+
+                            <div>
+                                <span>20%</span>
+                                <span><small>скидка</small></span>
+                            </div>
+
+                            <div>
+                                <small class="coupon-date">до 1 Апр 2015</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        <?endforeach?>
+
     </div>
+
 <?endif?>

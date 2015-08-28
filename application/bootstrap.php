@@ -149,7 +149,13 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-
+//подтверждение подписки
+Route::set('Susses_subscribe', 'susses_subscribe')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Subscribe',
+        'action'     => 'SussesSubscribe',
+    ));
 
 //запускается по крону и сравнивает даты если до даты окончания бизнеса остается 7 дней
 Route::set('BussinesDisableEmailSevenDays', 'sendbusiness')
