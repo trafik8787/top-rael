@@ -1,68 +1,162 @@
 /* line 5, ../sass/input.scss */
+.input-md {
+  height: 40px;
+  padding: 8px 14px;
+  font-size: 16px;
+  line-height: 1.3333333;
+  -moz-border-radius: 5;
+  -webkit-border-radius: 5;
+  border-radius: 5;
+}
+
+/* line 16, ../sass/input.scss */
+.checkbox label,
+.radio label {
+  margin: 0;
+  padding: 0;
+}
+/* line 49, ../sass/_common-variables.scss */
 .checkbox label:after,
 .radio label:after {
-  content: '';
-  display: table;
+  content: "";
   clear: both;
+  display: block;
 }
-
-/* line 12, ../sass/input.scss */
-.checkbox .cr,
-.radio .cr {
+/* line 23, ../sass/input.scss */
+.checkbox .form-control,
+.radio .form-control {
+  display: block;
   position: relative;
-  display: inline-block;
-  border: 1px solid #a9a9a9;
-  border-radius: .25em;
-  width: 1.3em;
-  height: 1.3em;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin-right: 10px;
   float: left;
-  margin-right: .5em;
-  margin-left: -20px;
 }
-
-/* line 25, ../sass/input.scss */
-.radio .cr {
-  border-radius: 50%;
-}
-
-/* line 29, ../sass/input.scss */
-.checkbox .cr .cr-icon,
-.radio .cr .cr-icon {
+/* line 36, ../sass/input.scss */
+.checkbox .form-control .input-icon,
+.radio .form-control .input-icon {
   position: absolute;
-  font-size: .8em;
-  line-height: 0;
+  left: 50%;
   top: 50%;
-  left: 20%;
+  font-size: 12px;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
-
-/* line 38, ../sass/input.scss */
-.radio .cr .cr-icon {
-  margin-left: 0.03em;
-}
-
-/* line 42, ../sass/input.scss */
-.checkbox label input[type="checkbox"] + .cr > .cr-icon,
-.radio label input[type="radio"] + .cr > .cr-icon {
+/* line 46, ../sass/input.scss */
+.checkbox .form-control input,
+.radio .form-control input {
+  position: absolute;
   opacity: 0;
 }
-
-/* line 47, ../sass/input.scss */
-.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
-.radio label input[type="radio"]:checked + .cr > .cr-icon {
+/* line 51, ../sass/input.scss */
+.checkbox .form-control.input-lg,
+.radio .form-control.input-lg {
+  width: 30px;
+  height: 30px;
+}
+/* line 55, ../sass/input.scss */
+.checkbox .form-control.input-lg .input-icon,
+.radio .form-control.input-lg .input-icon {
+  font-size: 18px;
+}
+/* line 60, ../sass/input.scss */
+.checkbox .form-control.input-md,
+.radio .form-control.input-md {
+  width: 25px;
+  height: 25px;
+}
+/* line 64, ../sass/input.scss */
+.checkbox .form-control.input-md .input-icon,
+.radio .form-control.input-md .input-icon {
+  font-size: 16px;
+}
+/* line 69, ../sass/input.scss */
+.checkbox .form-control.input-sm,
+.radio .form-control.input-sm {
+  width: 15px;
+  height: 15px;
+}
+/* line 73, ../sass/input.scss */
+.checkbox .form-control.input-sm .input-icon,
+.radio .form-control.input-sm .input-icon {
+  font-size: 10px;
+}
+/* line 78, ../sass/input.scss */
+.checkbox .form-control input + .input-icon,
+.radio .form-control input + .input-icon {
+  opacity: 0;
+}
+/* line 82, ../sass/input.scss */
+.checkbox .form-control input:checked + .input-icon,
+.radio .form-control input:checked + .input-icon {
   opacity: 1;
 }
-
-/* line 52, ../sass/input.scss */
-.checkbox label input[type="checkbox"]:disabled + .cr,
-.radio label input[type="radio"]:disabled + .cr {
+/* line 86, ../sass/input.scss */
+.checkbox .form-control input:disabled + .input-icon,
+.radio .form-control input:disabled + .input-icon {
   opacity: .5;
 }
 
-/* line 57, ../sass/input.scss */
+/* line 95, ../sass/input.scss */
+.checkbox .form-control .input-icon {
+  font-size: 15px;
+}
+/* line 100, ../sass/input.scss */
+.checkbox .form-control.input-lg .input-icon {
+  font-size: 22px;
+}
+/* line 105, ../sass/input.scss */
+.checkbox .form-control.input-md {
+  width: 25px;
+  height: 25px;
+}
+/* line 109, ../sass/input.scss */
+.checkbox .form-control.input-md .input-icon {
+  font-size: 17px;
+}
+/* line 115, ../sass/input.scss */
+.checkbox .form-control.input-sm .input-icon {
+  font-size: 10px;
+}
+
+/* line 123, ../sass/input.scss */
+.radio .form-control {
+  -moz-border-radius: 50% !important;
+  -webkit-border-radius: 50%;
+  border-radius: 50% !important;
+}
+
+/* line 130, ../sass/input.scss */
+.input-group .input-group-addon {
+  background: #fff;
+  padding: 0;
+  border-color: transparent;
+}
+/* line 136, ../sass/input.scss */
+.input-group .input-group-addon .btn {
+  padding: 3px 12px;
+  margin: 0 3px;
+}
+/* line 143, ../sass/input.scss */
+.input-group .input-lg + .input-group-addon .btn {
+  padding: 8px 16px;
+  margin: 0;
+}
+
+/* line 150, ../sass/input.scss */
+.input-aria {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* line 156, ../sass/input.scss */
 .inner-addon {
   position: relative;
 }
-/* line 60, ../sass/input.scss */
+/* line 159, ../sass/input.scss */
 .inner-addon .glyphicon {
   position: absolute;
   padding: 10px;
@@ -70,30 +164,30 @@
   color: #777777;
   top: -1px;
 }
-/* line 69, ../sass/input.scss */
+/* line 168, ../sass/input.scss */
 .inner-addon.left-addon .glyphicon {
   left: 0;
 }
-/* line 72, ../sass/input.scss */
+/* line 171, ../sass/input.scss */
 .inner-addon.left-addon input {
   padding-left: 30px;
 }
-/* line 78, ../sass/input.scss */
+/* line 177, ../sass/input.scss */
 .inner-addon.right-addon .glyphicon {
   right: 0;
 }
-/* line 79, ../sass/input.scss */
+/* line 180, ../sass/input.scss */
 .inner-addon.right-addon input {
   padding-right: 30px;
 }
 
-/* line 83, ../sass/input.scss */
+/* line 186, ../sass/input.scss */
 .form-control {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* line 86, ../sass/input.scss */
+/* line 189, ../sass/input.scss */
 .form-control:focus {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;

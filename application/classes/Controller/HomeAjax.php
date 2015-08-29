@@ -36,6 +36,7 @@ class Controller_HomeAjax extends Controller {
                 $data['data'][$key]['home_busines_foto'] = $busines_foto;
                 $data['data'][$key]['info'] = Text::limit_chars(strip_tags($rows['info']), 150, null, true);
             }
+
             //die(HTML::x($data));
             echo json_encode($data);
         }
@@ -54,7 +55,10 @@ class Controller_HomeAjax extends Controller {
             }
         }
 
-        echo json_encode($coupon);
+        $content_coupons = View::factory('ajax_views/coupons_home_carusel_ajax');
+        $content_coupons->data = $coupon['data'];
+        echo $content_coupons;
+        //echo json_encode($coupon);
     }
 
 

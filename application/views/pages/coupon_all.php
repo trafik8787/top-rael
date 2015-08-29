@@ -22,137 +22,57 @@
 
                 <div id="context">
 
-                    <div class="row">
-                        <div class="panel panel-coupons-thumbnail">
+                    <div class="panel panel-coupons">
 
-                            <div class="panel-heading">
-                                
+                        <div class="panel-heading">
 
-                                <div class="panel-title">Купоны</div>
+                            <a class="menu-toggle" role="button" data-toggle="collapse" href="#nav-coupons"
+                               aria-controls="nav-coupons">
+                                <i class="fa fa-bars"></i>
+                            </a>
 
-                                <a class="menu-toggle" role="button" data-toggle="collapse" href="#nav-coupons"
-                                   aria-controls="nav-coupons">
-                                    <i class="fa fa-bars"></i>
-                                </a>
+                            <div class="panel-title">Купоны</div>
 
-                                <div class="panel-heading-sub form-inline">
-                                    <form action="" method="get" id="w-form-city">
-                                        <select class="form-control w-select-city" name="city" style="width: 20%">
-                                            <option value="">По городам</option>
-                                            <?foreach($city as $key_id => $row_city):?>
-                                                <option <?if ($city_id == $key_id) { echo 'selected="selected"';}?> value="<?=$key_id?>"><?=$row_city?></option>
-                                            <?endforeach?>
-                                        </select>
-                                    </form>
-                                </div>
-
-                                <div class="collapse" id="nav-coupons">
-                                    <ul class="nav nav-pills" role="tablist">
-
-                                        <li role="presentation" class="<? if (Controller_BaseController::$detect_uri == URL::site('coupons').$pagesUrl) { echo 'active'; }?>"><a href="/coupons" >Все</a></li>
-                                        <?foreach($category as $row_category):?>
-
-                                            <li role="presentation" class="<? if (Controller_BaseController::$detect_uri == '/coupons/'.$row_category['url'].$pagesUrl) { echo 'active'; }?>"><a href="/coupons/<?=$row_category['url']?>" ><?=$row_category['name']?></a></li>
-
+                            <div class="panel-buttons-group">
+                                <form action="" method="get" id="w-form-city">
+                                    <select class="form-control w-select-city" name="city" style="width: 20%">
+                                        <option value="">По городам</option>
+                                        <?foreach($city as $key_id => $row_city):?>
+                                            <option <?if ($city_id == $key_id) { echo 'selected="selected"';}?> value="<?=$key_id?>"><?=$row_city?></option>
                                         <?endforeach?>
-
-                                    </ul>
-                                </div>
+                                    </select>
+                                </form>
                             </div>
 
-                            <div class="panel-body">
+                            <div class="collapse" id="nav-coupons">
+                                <ul class="nav nav-pills panel-navigation">
 
-                                <?foreach($data as $rows_data):?>
-                                    <div class="row">
-                                        <div class="col-md-6">
+                                    <li role="presentation" class="<? if (Controller_BaseController::$detect_uri == URL::site('coupons').$pagesUrl) { echo 'active'; }?>"><a href="/coupons" >Все</a></li>
+                                    <?foreach($category as $row_category):?>
 
-                                            <div class="coupon">
-                                                <div class="coupon-container">
-                                                    <?if (!empty($rows_data[0]['coupon_favorit']))://если купон добавлен в избранное?>
-                                                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                                            <i class="fa fa-thumb-tack"></i>
-                                                        </a>
-                                                    <?else:?>
-                                                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_data[0]['id']?>" class="pin w-add-coupon-favor">
-                                                            <i class="fa fa-thumb-tack"></i>
-                                                        </a>
-                                                    <?endif?>
+                                        <li role="presentation" class="<? if (Controller_BaseController::$detect_uri == '/coupons/'.$row_category['url'].$pagesUrl) { echo 'active'; }?>"><a href="/coupons/<?=$row_category['url']?>" ><?=$row_category['name']?></a></li>
 
+                                    <?endforeach?>
 
-                                                    <div class="coupon-image">
-                                                        <div class="overlay">
-<!--                                                            --><?//=$rows_data[0]['secondname']?>
-                                                            <?=$rows_data[0]['BusName']?>
-                                                        </div>
-                                                        <a href="/modalcoupon/<?=$rows_data[0]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
-                                                        <img src="<?=$rows_data[0]['img_coupon']?>" width="155" height="125" alt=""
-                                                             title=""/></a>
-                                                    </div>
-
-                                                    <div class="coupon-context">
-
-                                                        <div class="fz big"><strong><?=$rows_data[0]['name']?></strong></div>
-                                                        <small><?=$rows_data[0]['secondname']?></small>
-
-                                                        <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_data[0]['dateoff']), 'j %MONTH% Y'); ?></small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <?if (!empty($rows_data[1])):?>
-                                            <div class="col-md-6">
-
-                                                <div class="coupon">
-                                                    <div class="coupon-container">
-
-                                                        <?if (!empty($rows_data[1]['coupon_favorit']))://если купон добавлен в избранное?>
-                                                            <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                                                <i class="fa fa-thumb-tack"></i>
-                                                            </a>
-                                                        <?else:?>
-                                                            <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_data[1]['id']?>" class="pin w-add-coupon-favor">
-                                                                <i class="fa fa-thumb-tack"></i>
-                                                            </a>
-                                                        <?endif?>
-
-                                                        <div class="coupon-image">
-                                                            <div class="overlay">
-                                                                <?=$rows_data[1]['BusName']?>
-                                                            </div>
-                                                            <a href="/modalcoupon/<?=$rows_data[1]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
-                                                            <img src="<?=$rows_data[1]['img_coupon']?>"  width="155" height="125" alt=""
-                                                                 title=""/></a>
-                                                        </div>
-
-                                                        <div class="coupon-context">
-
-                                                            <div class="fz big"><strong><?=$rows_data[1]['name']?></strong></div>
-                                                            <small><?=$rows_data[1]['secondname']?></small>
-
-                                                            <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_data[1]['dateoff']), 'j %MONTH% Y'); ?></small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?endif?>
-                                    </div>
-
-                                    <br/>
-                                <?endforeach?>
-
+                                </ul>
                             </div>
+                        </div>
 
-                            <div class="panel-footer text-center">
-                                <nav>
+                        <div class="panel-body">
+                            <!--Coupons-->
+                            <?=$content_coupons?>
 
-                                    <?=$pagination?>
-                                </nav>
-                            </div>
+                        </div>
+
+                        <div class="panel-footer text-center">
+                            <nav>
+                                <?=$pagination?>
+                            </nav>
                         </div>
                     </div>
 
-
                 </div>
+
             </div>
 
             <!-- Bloc Right -->

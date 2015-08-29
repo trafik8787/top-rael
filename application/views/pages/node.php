@@ -41,212 +41,178 @@
 
                     <?if (!empty($data['BusArr'])):?>
                         <hr/>
-                        <div class="row">
-                            <div class="panel panel-thumbnail">
 
-                                <div class="panel-heading">
 
-                                    <div class="panel-title">Обзор бизнесов по определеной тематике</div>
+                        <div class="panel panel-thumbnails">
 
-                                </div>
+                            <div class="panel-heading">
 
-                                <div class="panel-body">
-                                    <?foreach ($data['BusArr'] as $rows_busines):?>
-                                    <div class="row">
+                                <div class="panel-title">Обзор бизнесов по определеной тематике</div>
 
-                                        <div class="col-md-6">
-                                            <div class="thumbnail">
+                            </div>
 
-                                                <?if (!empty($rows_busines[0]['bussines_favorit']))://если купон добавлен в избранное?>
-                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                                        <i class="fa fa-star"></i>
-                                                    </a>
-                                                <?else:?>
-                                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_busines[0]['BusId']?>" class="pin w-add-bussines-favor">
-                                                        <i class="fa fa-star"></i>
-                                                    </a>
-                                                <?endif?>
+                            <div class="panel-body">
 
-                                                <a href="/business/<?=$rows_busines[0]['BusUrl']?>" class="thumbnail-image">
-                                                    <img src="<?=$rows_busines[0]['BusImg']?>" width="240" height="150" alt="">
+                                <?foreach ($data['BusArr'] as $rows_busines):?>
+
+                                    <div class="col-md-6">
+                                        <div class="thumbnail">
+
+                                            <?if (!empty($rows_busines['bussines_favorit']))://если купон добавлен в избранное?>
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                    <i class="fa fa-star"></i>
                                                 </a>
+                                            <?else:?>
+                                                <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_busines['BusId']?>" class="pin w-add-bussines-favor">
+                                                    <i class="fa fa-star"></i>
+                                                </a>
+                                            <?endif?>
 
-                                                <div class="caption">
-                                                    <h3><strong><a href="/business/<?=$rows_busines[0]['BusUrl']?>"><?=$rows_busines[0]['BusName']?></a></strong></h3>
+                                            <a href="/business/<?=$rows_busines['BusUrl']?>" class="thumbnail-image">
+                                                <img src="<?=$rows_busines['BusImg']?>" width="240" height="150" alt="">
+                                            </a>
 
-                                                    <p><strong>Тель-Авив. <?=$rows_busines[0]['BusAddress']?></strong></p>
+                                            <div class="thumbnail-content">
+                                                <h2 class="thumbnail-title">
+                                                    <a href="/business/<?=$rows_busines['BusUrl']?>"><?=$rows_busines['BusName']?></a>
+                                                    <small>Тель-Авив(not). <?=$rows_busines['BusAddress']?></small>
+                                                </h2>
 
-                                                    <?=Text::limit_chars(strip_tags($rows_busines[0]['BusInfo']), 100, null, true)?>
-                                                </div>
+                                                <?=Text::limit_chars(strip_tags($rows_busines['BusInfo']), 100, null, true)?>
+
                                             </div>
                                         </div>
-                                        <? if (!empty($rows_busines[1])):?>
-                                            <div class="col-md-6">
-                                                <div class="thumbnail">
-
-                                                    <?if (!empty($rows_busines[1]['bussines_favorit']))://если купон добавлен в избранное?>
-                                                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                                            <i class="fa fa-star"></i>
-                                                        </a>
-                                                    <?else:?>
-                                                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_busines[1]['BusId']?>" class="pin w-add-bussines-favor">
-                                                            <i class="fa fa-star"></i>
-                                                        </a>
-                                                    <?endif?>
-
-                                                    <a href="/business/<?=$rows_busines[1]['BusUrl']?>" class="thumbnail-image">
-                                                        <img src="<?=$rows_busines[1]['BusImg']?>" width="240" height="150" alt="">
-                                                    </a>
-
-                                                    <div class="caption">
-                                                        <h3><strong><a href="/business/<?=$rows_busines[1]['BusUrl']?>"><?=$rows_busines[1]['BusName']?></a></strong></h3>
-
-                                                        <p><strong>Тель-Авив. <?=$rows_busines[1]['BusAddress']?></strong></p>
-
-                                                        <?=Text::limit_chars(strip_tags($rows_busines[1]['BusInfo']), 100, null, true)?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?endif?>
                                     </div>
-                                    <?endforeach?>
+                                <?endforeach?>
 
-                                </div>
                             </div>
                         </div>
+
                     <?endif?>
+
                     <p><i><strong><?=$data['ArticBigPreviev']?></strong></i></p>
 
 
 
 
-                    <div>
-                        <hr/>
 
-                        <div class="recomendation">
-                            <strong>Рекомендуйте нас друзьям</strong>
+                    <hr/>
 
-                            <div class="recomendation-icons">
+                    <div class="recomendation">
+                        <strong>Рекомендуйте нас друзьям</strong>
 
-                                <a href="#" class="social vk">
-                                    <i class="fa fa-vk"></i>
-                                </a>
+                        <div class="recomendation-icons">
 
-                                <a href="#" class="social facebook">
-                                    <i class="fa fa-facebook"></i>
-                                </a>
+                            <a href="#" class="social vk">
+                                <i class="fa fa-vk"></i>
+                            </a>
 
-                                <a href="#" class="social twitter">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
+                            <a href="#" class="social facebook">
+                                <i class="fa fa-facebook"></i>
+                            </a>
 
-                                <a href="#" class="social email">
-                                    <i class="fa fa-envelope"></i>
-                                </a>
-                            </div>
-                            <a href="#" class="btn btn-link">
-                                <i class="fa fa-star"></i>
-                                Добавить в Избранные места
+                            <a href="#" class="social twitter">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+
+                            <a href="#" class="social email">
+                                <i class="fa fa-envelope"></i>
                             </a>
                         </div>
-
-
-                        <hr/>
+                        <a href="#" class="btn btn-link">
+                            <i class="fa fa-star"></i>
+                            Добавить в Избранные места
+                        </a>
                     </div>
 
+
+                    <hr/>
+
+
+
+
                     <?if (!empty($data['CoupArr'])):?>
-                        <div class="row">
-                            <div class="panel panel-coupons-thumbnail">
 
-                                <div class="panel-heading">
-                                    <div class="panel-title">Обзор новых купонов по определеной тематике</div>
-                                </div>
 
-                                <div class="panel-body">
+                        <div class="panel panel-poupons">
 
-                                    <?foreach ($data['CoupArr'] as $rows_coupons):?>
+                            <div class="panel-heading">
+                                <div class="panel-title">Обзор новых купонов по определеной тематике</div>
+                            </div>
 
-                                        <div class="row">
-                                            <div class="col-md-6">
+                            <div class="panel-body">
 
-                                                <div class="coupon">
-                                                    <div class="coupon-container">
+                                <?foreach ($data['CoupArr'] as $rows_coupons):?>
+                                    <div class="col-md-6">
+                                        <div class="coupon coupon-big">
 
-                                                        <?if (!empty($rows_coupons[0]['coupon_favorit']))://если купон добавлен в избранное?>
-                                                            <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                                                <i class="fa fa-thumb-tack"></i>
-                                                            </a>
-                                                        <?else:?>
-                                                            <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons[0]['CoupId']?>" class="pin w-add-coupon-favor">
-                                                                <i class="fa fa-thumb-tack"></i>
-                                                            </a>
-                                                        <?endif?>
+                                            <?if (!empty($rows_coupons['coupon_favorit']))://если купон добавлен в избранное?>
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                    <i class="fa fa-thumb-tack"></i>
+                                                </a>
+                                            <?else:?>
+                                                <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons['CoupId']?>" class="pin w-add-coupon-favor">
+                                                    <i class="fa fa-thumb-tack"></i>
+                                                </a>
+                                            <?endif?>
 
-                                                        <div class="coupon-image">
-                                                            <div class="overlay">
-                                                               <?=$rows_coupons[0]['CoupSecondname']?>
+                                            <div class="coupon-body">
+
+                                                <div class="coupon-content">
+
+                                                    <div class="coupon-content-heading">
+                                                        <?=$rows_coupons['CoupSecondname']?>
+                                                    </div>
+
+                                                    <a href="/modalcoupon/<?=$rows_coupons['CoupId']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
+                                                        <img src="<?=$rows_coupons['CoupImg']?>" width="155" height="125" alt="" title="" class="coupon-image"/></a>
+
+                                                </div>
+
+                                                <div class="coupon-sidebar">
+                                                    <div class="coupon-sidebar-content">
+                                                        <div class="coupon-sidebar-heading">
+                                                            <div class="coupon-object-top">
+
+                                                                <div class="coupon-title">
+                                                                    Купон
+                                                                    <small class="block">Массаж</small>
+                                                                </div>
                                                             </div>
-                                                            <a href="/modalcoupon/<?=$rows_coupons[0]['CoupId']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
-                                                            <img src="<?=$rows_coupons[0]['CoupImg']?>" width="155" height="125" alt=""
-                                                                 title=""/></a>
                                                         </div>
+                                                        <div class="coupon-sidebar-body">
+                                                            <div class="coupon-object-middle">
 
-                                                        <div class="coupon-context">
-
-                                                            <div>
-                                                                <span>СКИДКА</span>
-                                                                <span><strong>20%</strong></span>
-                                                                <span><small>На все пищевые добавки</small></span>
+                                                                <div class="coupon-title">
+                                                                    20%
+                                                                    <span class="block">скидка</span>
+                                                                </div>
                                                             </div>
+                                                        </div>
+                                                        <div class="coupon-sidebar-footer">
 
-                                                            <small class="coupon-date">до 1 Апр 2015</small>
+                                                            <div class="coupon-object-bottom">
+
+                                                                <small class="coupon-date">до 1 апреля 2015</small>
+                                                            </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
                                             </div>
-                                            <?if (!empty($rows_coupons[1])):?>
-                                                <div class="col-md-6">
-
-                                                    <div class="coupon">
-                                                        <div class="coupon-container">
-
-                                                            <?if (!empty($rows_coupons[1]['coupon_favorit']))://если купон добавлен в избранное?>
-                                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                                                    <i class="fa fa-thumb-tack"></i>
-                                                                </a>
-                                                            <?else:?>
-                                                                <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons[1]['CoupId']?>" class="pin w-add-coupon-favor">
-                                                                    <i class="fa fa-thumb-tack"></i>
-                                                                </a>
-                                                            <?endif?>
-
-                                                            <div class="coupon-image">
-                                                                <div class="overlay">
-                                                                    <?=$rows_coupons[1]['CoupSecondname']?>
-                                                                </div>
-                                                                <a href="/modalcoupon/<?=$rows_coupons[1]['CoupId']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
-                                                                <img src="<?=$rows_coupons[1]['CoupImg']?>" width="155" height="125" alt=""
-                                                                     title=""/></a>
-                                                            </div>
-
-                                                            <div class="coupon-context">
-
-                                                                <div class="fz big"><strong>Десерт в Подарок</strong></div>
-                                                                <small>На все пищевые добавки</small>
-
-                                                                <small class="coupon-date">до 1 Апр 2015</small>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <?endif?>
                                         </div>
+                                    </div>
+                                <?endforeach?>
 
-                                    <?endforeach?>
-                                </div>
                             </div>
+
                         </div>
+
+
+
                     <?endif?>
+
+
                     <p><i><strong>Тут будет краткая выдержка основных смысловых блоков для привлечения внимания
                                 посетителей!</strong></i></p>
 
@@ -260,43 +226,47 @@
 
                     <hr/>
 
-                    <div class="row">
-                        <div class="panel panel-media">
 
-                            <div class="panel-heading">
+                    <div class="panel panel-list">
 
-                                <div class="panel-title">Читать еще</div>
+                        <div class="panel-heading">
+                            <div class="panel-title">Читать еще</div>
+                        </div>
 
-                            </div>
+                        <div class="panel-body">
 
-                            <div class="panel-body">
-
+                            <div class="list list-media">
                                 <?foreach ($other_articles as $rows_other_art):?>
+                                    <div class="list-item">
+                                        <div class="media">
 
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="/article/<?=$rows_other_art['url']?>">
-                                                <img src="/uploads/img_articles/thumbs/<?=basename($rows_other_art['images_article'])?>" width="260" height="190"
-                                                     class="media-object" alt="<?=$rows_other_art['name']?>"/>
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h2 class="media-heading"><a href="/article/<?=$rows_other_art['url']?>"><strong><?=$rows_other_art['name']?></strong></a></h2>
+                                            <div class="media-left">
+                                                <a href="/article/<?=$rows_other_art['url']?>">
+                                                    <img src="/uploads/img_articles/thumbs/<?=basename($rows_other_art['images_article'])?>" width="260" height="190"
+                                                         class="media-object" alt="<?=$rows_other_art['name']?>"/>
+                                                </a>
+                                            </div>
 
-                                            <p class="fz medium"><strong><?=$rows_other_art['secondname']?></strong>
-                                            </p>
+                                            <div class="media-body">
 
-                                            <?=Text::limit_chars(strip_tags($rows_other_art['content']), 300, null, true)?>
+                                                <h2 class="media-heading">
+                                                    <a href="/article/<?=$rows_other_art['url']?>"><strong><?=$rows_other_art['name']?></strong></a>
+                                                    <small><?=$rows_other_art['secondname']?></small>
+                                                </h2>
+
+                                                <?=Text::limit_chars(strip_tags($rows_other_art['content']), 300, null, true)?>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <hr/>
                                 <?endforeach?>
-
                             </div>
 
                         </div>
                     </div>
+
+
                 </div>
             </div>
 

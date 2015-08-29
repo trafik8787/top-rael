@@ -237,9 +237,11 @@ class Model_BussinesModel extends Model_BaseModel {
         //вызываем метод получения данных из куки
         Controller_BaseController::favorits_bussines();
         //добавляем элемент масива если добавлен в избранное
+       // die(HTML::x(Controller_BaseController::$favorits_bussines));
         if (!empty(Controller_BaseController::$favorits_bussines)) {
 
             $new_result = array();
+
             foreach ($result as $result_row) {
 
                 if (in_array($result_row['id'], Controller_BaseController::$favorits_bussines)) {

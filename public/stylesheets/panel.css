@@ -1,4 +1,22 @@
 /* line 5, ../sass/panel.scss */
+.panel-navigation {
+  margin: 0 -5px;
+  padding: 0;
+  list-style-type: none;
+}
+/* line 11, ../sass/panel.scss */
+.panel-navigation li {
+  margin: 0 5px;
+}
+/* line 14, ../sass/panel.scss */
+.panel-navigation li a {
+  font-size: 16px;
+  line-height: 1.1;
+  padding: 4px 8px;
+  color: #848484;
+}
+
+/* line 25, ../sass/panel.scss */
 .panel {
   border-color: transparent;
   -moz-border-radius: 0;
@@ -7,154 +25,18 @@
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
-  margin-bottom: 0;
-}
-/* line 13, ../sass/panel.scss */
-.panel.panel-top {
-  border-color: #d8d8d8;
-}
-/* line 16, ../sass/panel.scss */
-.panel.panel-top .panel-body {
-  margin-left: -15px;
-  margin-right: -15px;
-  padding: 0;
-}
-/* line 23, ../sass/panel.scss */
-.panel.panel-top .panel-body .panel-top-main-image {
-  position: relative;
-}
-/* line 27, ../sass/panel.scss */
-.panel.panel-top .panel-body .panel-top-main-image .panel-top-main-image-text {
-  padding: 15px;
-  background: rgba(0, 0, 0, 0.5);
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  color: #fff;
-}
-/* line 31, ../sass/panel.scss */
-.panel.panel-top .panel-body .panel-top-main-image .panel-top-main-image-text h2 {
-  margin: 0;
-}
-/* line 44, ../sass/panel.scss */
-.panel.panel-top .panel-body .panel-top-main-image .panel-top-main-image-text a {
-  color: #fff;
-  text-decoration: underline;
-}
-/* line 48, ../sass/panel.scss */
-.panel.panel-top .panel-body .panel-top-main-image .panel-top-main-image-text a:hover {
-  text-decoration: none;
-}
-/* line 55, ../sass/panel.scss */
-.panel.panel-top .panel-body .btn-default.more {
-  margin-bottom: 15px;
-}
-/* line 61, ../sass/panel.scss */
-.panel.panel-top .panel-body .list-group a {
-  color: #000;
-  text-decoration: underline;
-}
-/* line 65, ../sass/panel.scss */
-.panel.panel-top .panel-body .list-group a:hover {
-  text-decoration: none;
-}
-/* line 70, ../sass/panel.scss */
-.panel.panel-top .panel-body .list-group .list-group-image {
-  display: block;
-  width: 100%;
-  margin: 0 0 15px 0;
-}
-/* line 77, ../sass/panel.scss */
-.panel.panel-top .panel-body .list-group .list-group-image img {
-  display: block;
-  width: 100%;
-}
-@media (min-width: 768px) {
-  /* line 84, ../sass/panel.scss */
-  .panel.panel-top .panel-body .list-group .list-group-image {
-    float: left;
-    margin: 0 15px 0 0;
-    max-width: 120px;
-  }
-  /* line 90, ../sass/panel.scss */
-  .panel.panel-top .panel-body .list-group .list-group-image img {
-    width: auto;
-  }
-}
-/* line 98, ../sass/panel.scss */
-.panel.panel-top .panel-body .list-group .list-group-container {
-  position: relative;
-  overflow: hidden;
-}
-/* line 103, ../sass/panel.scss */
-.panel.panel-top .panel-body .list-group .list-group-item {
-  background: none;
-  border-color: transparent;
-}
-/* line 107, ../sass/panel.scss */
-.panel.panel-top .panel-body .list-group .list-group-item-text {
-  color: #000;
-}
-/* line 110, ../sass/panel.scss */
-.panel.panel-top .panel-body .list-group .list-group-item-description {
-  margin: 3px 0;
-  color: #000;
-}
-/* line 118, ../sass/panel.scss */
-.panel.panel-coupons-carousel {
-  margin-bottom: 20px;
-  border-color: #d8d8d8;
-}
-/* line 123, ../sass/panel.scss */
-.panel.panel-coupons-carousel .panel-heading {
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-/* line 129, ../sass/panel.scss */
-.panel.panel-coupons-carousel .panel-body {
-  padding: 0 15px;
-}
-/* line 135, ../sass/panel.scss */
-.panel.panel-coupons-thumbnail .coupon {
   margin-bottom: 20px;
 }
-/* line 138, ../sass/panel.scss */
-.panel.panel-coupons-thumbnail .coupon .coupon-context {
-  height: 200px;
-}
-/* line 142, ../sass/panel.scss */
-.panel.panel-coupons-thumbnail .coupon .coupon-context:before {
+/* line 49, ../sass/_common-variables.scss */
+.panel:after {
   content: "";
+  clear: both;
   display: block;
-  width: 135px;
 }
-/* line 148, ../sass/panel.scss */
-.panel.panel-coupons-thumbnail .coupon .coupon-context .coupon-date {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 5px;
-}
-/* line 159, ../sass/panel.scss */
-.panel .panel-title {
-  font-size: 30px;
-  line-height: 100%;
-  display: inline-block;
-  margin-bottom: 10px;
-}
-@media (min-width: 768px) {
-  /* line 159, ../sass/panel.scss */
-  .panel .panel-title {
-    margin-right: 30px;
-    margin-bottom: 0;
-    float: left;
-  }
-}
-/* line 175, ../sass/panel.scss */
+/* line 34, ../sass/panel.scss */
 .panel .panel-heading {
-  padding: 0 15px;
+  padding: 0;
+  margin-bottom: 20px;
 }
 /* line 49, ../sass/_common-variables.scss */
 .panel .panel-heading:after {
@@ -162,77 +44,372 @@
   clear: both;
   display: block;
 }
-/* line 181, ../sass/panel.scss */
-.panel .panel-heading .btn {
-  -moz-border-radius: 0;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-}
-/* line 185, ../sass/panel.scss */
-.panel .panel-heading .form-control {
-  -moz-border-radius: 0;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  display: inline-block !important;
-  width: auto !important;
-  vertical-align: middle !important;
-}
-@media (min-width: 768px) {
-  /* line 185, ../sass/panel.scss */
-  .panel .panel-heading .form-control {
-    margin-right: 10px;
-  }
-}
-/* line 196, ../sass/panel.scss */
-.panel .panel-heading .nav {
-  font-size: 16px;
-}
-@media (max-width: 768px) {
-  /* line 196, ../sass/panel.scss */
-  .panel .panel-heading .nav {
-    margin-top: 10px;
-  }
-}
-/* line 204, ../sass/panel.scss */
-.panel .panel-heading .nav > li {
+/* line 41, ../sass/panel.scss */
+.panel .panel-heading .panel-title {
+  font-size: 30px;
+  line-height: 1.25;
+  margin-right: 50px;
   float: left;
 }
-/* line 206, ../sass/panel.scss */
-.panel .panel-heading .nav > li > a {
-  padding: 3px 10px;
-  color: #848484;
+@media (max-width: 768px) {
+  /* line 41, ../sass/panel.scss */
+  .panel .panel-heading .panel-title {
+    float: none;
+    margin-right: 0;
+  }
 }
-/* line 211, ../sass/panel.scss */
-.panel .panel-heading .nav > li.active > a {
-  color: #fff;
+/* line 53, ../sass/panel.scss */
+.panel .panel-heading .panel-buttons-group {
+  margin: 0 -5px;
+}
+/* line 49, ../sass/_common-variables.scss */
+.panel .panel-heading .panel-buttons-group:after {
+  content: "";
+  clear: both;
+  display: block;
 }
 @media (max-width: 768px) {
-  /* line 204, ../sass/panel.scss */
-  .panel .panel-heading .nav > li {
+  /* line 53, ../sass/panel.scss */
+  .panel .panel-heading .panel-buttons-group {
+    margin-top: 10px;
+    width: 100%;
+  }
+}
+/* line 64, ../sass/panel.scss */
+.panel .panel-heading .panel-buttons-group .form-control,
+.panel .panel-heading .panel-buttons-group .btn {
+  margin: 2px 5px;
+  width: auto;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  float: left;
+}
+/* line 73, ../sass/panel.scss */
+.panel .panel-heading .panel-navigation {
+  margin-top: 10px;
+}
+/* line 77, ../sass/panel.scss */
+.panel .panel-heading .panel-navigation li {
+  margin: 5px;
+}
+@media (max-width: 768px) {
+  /* line 77, ../sass/panel.scss */
+  .panel .panel-heading .panel-navigation li {
     float: none;
   }
 }
+/* line 87, ../sass/panel.scss */
+.panel .panel-body {
+  margin-bottom: 20px;
+  padding: 0;
+  margin-left: -15px;
+  margin-right: -15px;
+}
 /* line 49, ../sass/_common-variables.scss */
-.panel .panel-heading .panel-heading-sub:after {
+.panel .panel-body:after {
   content: "";
   clear: both;
   display: block;
 }
-@media (min-width: 768px) {
-  /* line 223, ../sass/panel.scss */
-  .panel .panel-heading .panel-heading-sub {
-    margin-bottom: 10px;
-  }
-}
-/* line 49, ../sass/_common-variables.scss */
-.panel .pabel-body:after {
-  content: "";
-  clear: both;
-  display: block;
-}
-/* line 237, ../sass/panel.scss */
+/* line 97, ../sass/panel.scss */
 .panel .panel-footer {
   background: none;
   border: 0;
-  padding: 0 15px;
+  padding: 0;
+}
+/* line 102, ../sass/panel.scss */
+.panel .panel-footer .pagination {
+  margin: 0;
+}
+
+/* line 75, ../sass/_common-variables.scss */
+.panel.panel-thumbnails .panel-heading .collapse,
+.panel.panel-thumbnails .panel-heading .collapsing,
+.panel.panel-thumbnails .panel-heading .collapse.in {
+  width: 100%;
+}
+/* line 57, ../sass/_common-variables.scss */
+.panel.panel-thumbnails .panel-heading .collapse:before,
+.panel.panel-thumbnails .panel-heading .collapsing:before,
+.panel.panel-thumbnails .panel-heading .collapse.in:before {
+  content: "";
+  clear: both;
+  display: block;
+}
+/* line 116, ../sass/panel.scss */
+.panel.panel-thumbnails .panel-body .thumbnail {
+  position: relative;
+  font-size: 14px;
+}
+/* line 120, ../sass/panel.scss */
+.panel.panel-thumbnails .panel-body .thumbnail a {
+  color: #000;
+}
+/* line 65, ../sass/_common-variables.scss */
+.panel.panel-thumbnails .panel-body .thumbnail a {
+  text-decoration: underline;
+}
+/* line 68, ../sass/_common-variables.scss */
+.panel.panel-thumbnails .panel-body .thumbnail a:hover {
+  text-decoration: none;
+}
+/* line 125, ../sass/panel.scss */
+.panel.panel-thumbnails .panel-body .thumbnail .thumbnail-title {
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: bold;
+}
+/* line 130, ../sass/panel.scss */
+.panel.panel-thumbnails .panel-body .thumbnail .thumbnail-title small {
+  display: block;
+  font-size: 14px;
+  color: #000;
+  font-weight: bold;
+  margin-top: 5px;
+}
+/* line 139, ../sass/panel.scss */
+.panel.panel-thumbnails .panel-body .thumbnail .pin {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 1003;
+}
+/* line 146, ../sass/panel.scss */
+.panel.panel-thumbnails .panel-body .thumbnail .thumbnail-image {
+  display: block;
+  position: relative;
+}
+/* line 151, ../sass/panel.scss */
+.panel.panel-thumbnails .panel-body .thumbnail .thumbnail-image img {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+/* line 157, ../sass/panel.scss */
+.panel.panel-thumbnails .panel-body .thumbnail .thumbnail-image:before, .panel.panel-thumbnails .panel-body .thumbnail .thumbnail-image:after {
+  z-index: 1;
+  position: absolute;
+  content: "";
+  bottom: 7px;
+  left: 5%;
+  height: 1px;
+  width: 45%;
+  -moz-transform: rotate(-2deg);
+  -ms-transform: rotate(-2deg);
+  -webkit-transform: rotate(-2deg);
+  transform: rotate(-2deg);
+  -moz-box-shadow: black 0 7px 7px;
+  -webkit-box-shadow: black 0 7px 7px;
+  box-shadow: black 0 7px 7px;
+}
+/* line 171, ../sass/panel.scss */
+.panel.panel-thumbnails .panel-body .thumbnail .thumbnail-image:after {
+  -moz-transform: rotate(2deg);
+  -ms-transform: rotate(2deg);
+  -webkit-transform: rotate(2deg);
+  transform: rotate(2deg);
+  right: 5%;
+  left: auto;
+}
+
+/* line 75, ../sass/_common-variables.scss */
+.panel.panel-coupons .panel-heading .collapse,
+.panel.panel-coupons .panel-heading .collapsing,
+.panel.panel-coupons .panel-heading .collapse.in {
+  width: 100%;
+}
+/* line 57, ../sass/_common-variables.scss */
+.panel.panel-coupons .panel-heading .collapse:before,
+.panel.panel-coupons .panel-heading .collapsing:before,
+.panel.panel-coupons .panel-heading .collapse.in:before {
+  content: "";
+  clear: both;
+  display: block;
+}
+/* line 189, ../sass/panel.scss */
+.panel.panel-coupons .panel-body .coupon {
+  margin-bottom: 20px;
+}
+/* line 194, ../sass/panel.scss */
+.panel.panel-coupons.gallery {
+  padding: 20px;
+  border: 1px solid #d8d8d8;
+}
+/* line 199, ../sass/panel.scss */
+.panel.panel-coupons.gallery .panel-heading {
+  margin-bottom: 10px;
+}
+/* line 206, ../sass/panel.scss */
+.panel.panel-coupons.gallery .panel-heading .collapse:before,
+.panel.panel-coupons.gallery .panel-heading .collapsing:before,
+.panel.panel-coupons.gallery .panel-heading .collapse.in:before {
+  display: none;
+}
+@media (max-width: 768px) {
+  /* line 75, ../sass/_common-variables.scss */
+  .panel.panel-coupons.gallery .panel-heading .collapse,
+  .panel.panel-coupons.gallery .panel-heading .collapsing,
+  .panel.panel-coupons.gallery .panel-heading .collapse.in {
+    width: 100%;
+  }
+  /* line 57, ../sass/_common-variables.scss */
+  .panel.panel-coupons.gallery .panel-heading .collapse:before,
+  .panel.panel-coupons.gallery .panel-heading .collapsing:before,
+  .panel.panel-coupons.gallery .panel-heading .collapse.in:before {
+    content: "";
+    clear: both;
+    display: block;
+  }
+}
+/* line 215, ../sass/panel.scss */
+.panel.panel-coupons.gallery .panel-heading .panel-navigation {
+  margin-top: 0;
+}
+@media (max-width: 768px) {
+  /* line 215, ../sass/panel.scss */
+  .panel.panel-coupons.gallery .panel-heading .panel-navigation {
+    margin-top: 10px;
+  }
+}
+/* line 223, ../sass/panel.scss */
+.panel.panel-coupons.gallery .panel-heading .panel-navigation li {
+  margin: 6px 5px;
+}
+/* line 229, ../sass/panel.scss */
+.panel.panel-coupons.gallery .panel-body {
+  position: relative;
+  padding: 0 40px;
+}
+/* line 235, ../sass/panel.scss */
+.panel.panel-coupons.gallery .panel-body .coupon-layer {
+  padding: 10px;
+}
+/* line 238, ../sass/panel.scss */
+.panel.panel-coupons.gallery .panel-body .coupon-layer .coupon {
+  margin-bottom: 0;
+}
+/* line 245, ../sass/panel.scss */
+.panel.panel-coupons.gallery .panel-body .owl-nav .owl-prev,
+.panel.panel-coupons.gallery .panel-body .owl-nav .owl-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  font-size: 50px;
+  color: #007898;
+}
+/* line 256, ../sass/panel.scss */
+.panel.panel-coupons.gallery .panel-body .owl-nav .owl-prev .fa,
+.panel.panel-coupons.gallery .panel-body .owl-nav .owl-next .fa {
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+}
+/* line 266, ../sass/panel.scss */
+.panel.panel-coupons.gallery .panel-body .owl-nav .owl-prev {
+  right: 100%;
+  margin-left: -10px;
+}
+/* line 271, ../sass/panel.scss */
+.panel.panel-coupons.gallery .panel-body .owl-nav .owl-next {
+  left: 100%;
+  margin-left: 10px;
+}
+
+/* line 75, ../sass/_common-variables.scss */
+.panel.panel-list .panel-heading .collapse,
+.panel.panel-list .panel-heading .collapsing,
+.panel.panel-list .panel-heading .collapse.in {
+  width: 100%;
+}
+/* line 57, ../sass/_common-variables.scss */
+.panel.panel-list .panel-heading .collapse:before,
+.panel.panel-list .panel-heading .collapsing:before,
+.panel.panel-list .panel-heading .collapse.in:before {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+/* line 290, ../sass/panel.scss */
+.panel.panel-subscribe.settings {
+  border: 1px solid #d8d8d8;
+  background: #f1f0f0;
+  padding: 25px 45px;
+}
+/* line 296, ../sass/panel.scss */
+.panel.panel-subscribe.settings .panel-body {
+  margin-bottom: 0;
+}
+/* line 300, ../sass/panel.scss */
+.panel.panel-subscribe.settings .checkbox-container {
+  margin-bottom: 40px;
+}
+@media (max-width: 768px) {
+  /* line 300, ../sass/panel.scss */
+  .panel.panel-subscribe.settings .checkbox-container {
+    margin-bottom: 20px;
+  }
+}
+/* line 308, ../sass/panel.scss */
+.panel.panel-subscribe.settings .checkbox-container,
+.panel.panel-subscribe.settings .radio-container {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+/* line 49, ../sass/_common-variables.scss */
+.panel.panel-subscribe.settings .checkbox-container:after,
+.panel.panel-subscribe.settings .radio-container:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+/* line 316, ../sass/panel.scss */
+.panel.panel-subscribe.settings .checkbox-container label,
+.panel.panel-subscribe.settings .radio-container label {
+  margin: 0 10px;
+}
+@media (max-width: 768px) {
+  /* line 316, ../sass/panel.scss */
+  .panel.panel-subscribe.settings .checkbox-container label,
+  .panel.panel-subscribe.settings .radio-container label {
+    display: block;
+    float: none;
+  }
+}
+/* line 326, ../sass/panel.scss */
+.panel.panel-subscribe.settings .form-control {
+  border-color: transparent;
+}
+/* line 332, ../sass/panel.scss */
+.panel.panel-subscribe.settings .checkbox .form-control,
+.panel.panel-subscribe.settings .radio .form-control {
+  color: #d9534f;
+}
+/* line 337, ../sass/panel.scss */
+.panel.panel-subscribe.settings .input-group-title {
+  float: left;
+  margin: 5.5px 10px 5.5px 0;
+}
+@media (max-width: 768px) {
+  /* line 337, ../sass/panel.scss */
+  .panel.panel-subscribe.settings .input-group-title {
+    float: none;
+  }
+}
+/* line 347, ../sass/panel.scss */
+.panel.panel-subscribe.settings .panel-body {
+  font-size: 25px;
+}
+@media (max-width: 768px) {
+  /* line 290, ../sass/panel.scss */
+  .panel.panel-subscribe.settings {
+    padding: 15px;
+  }
 }

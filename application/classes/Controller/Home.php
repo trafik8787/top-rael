@@ -36,7 +36,7 @@ class Controller_Home extends Controller_BaseController {
         $articles = Model::factory('ArticlesModel')->getArticlesInHome();
 
         //проверяем наличие кеша
-        if (Cache::instance()->get('home_busines') == null) {
+       // if (Cache::instance()->get('home_busines') == null) {
 
             foreach ($section as $row_section) {
 
@@ -63,16 +63,15 @@ class Controller_Home extends Controller_BaseController {
                 $resultArr[] = array('category' => $category, 'data' => $data['data'], 'city' => $data['city']);
             }
 
-            //кешируем
-            Cache::instance()->set('home_busines', $resultArr);
-
-        } else {
-            $resultArr = Cache::instance()->get('home_busines');
-        }
+//            //кешируем
+//            Cache::instance()->set('home_busines', $resultArr);
+//
+//        } else {
+//            $resultArr = Cache::instance()->get('home_busines');
+//        }
 
 
         $coupon = Model::factory('CouponsModel')->getCouponsSectionUrl(null, 6, 0, null);
-
 
 
         //Cache::instance()->delete('home_busines');

@@ -1,0 +1,83 @@
+/* line 5, ../sass/list.scss */
+.list {
+  padding: 0 15px;
+}
+/* line 9, ../sass/list.scss */
+.list .list-item {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+/* line 65, ../sass/_common-variables.scss */
+.list .list-item a {
+  text-decoration: underline;
+}
+/* line 68, ../sass/_common-variables.scss */
+.list .list-item a:hover {
+  text-decoration: none;
+}
+/* line 17, ../sass/list.scss */
+.list .list-item.top {
+  background: #e7effe;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 4px 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 4px 4px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 4px 4px;
+  border-color: #fff;
+  border-width: 5px;
+  padding: 15px;
+}
+/* line 25, ../sass/list.scss */
+.list .list-item.top .media {
+  margin: 0;
+}
+
+/* line 34, ../sass/list.scss */
+.list.list-media .media {
+  margin-top: 5px;
+  font-size: 14px;
+}
+/* line 39, ../sass/list.scss */
+.list.list-media .media .media-link {
+  font-size: 16px;
+  color: #007898 !important;
+}
+/* line 44, ../sass/list.scss */
+.list.list-media .media .media-heading {
+  font-size: 22px;
+  line-height: 1.25;
+  color: #000;
+  margin-bottom: 20px;
+}
+/* line 51, ../sass/list.scss */
+.list.list-media .media .media-heading a {
+  color: #000;
+}
+/* line 55, ../sass/list.scss */
+.list.list-media .media .media-heading small {
+  display: block;
+  font-size: 70%;
+  font-weight: bold;
+  color: #000;
+}
+/* line 63, ../sass/list.scss */
+.list.list-media .media .media-left {
+  padding-right: 40px;
+}
+/* line 67, ../sass/list.scss */
+.list.list-media .media .media-right {
+  padding-left: 40px;
+}
+@media (max-width: 768px) {
+  /* line 72, ../sass/list.scss */
+  .list.list-media .media .media-left,
+  .list.list-media .media .media-right {
+    display: block;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+  /* line 78, ../sass/list.scss */
+  .list.list-media .media .media-left img,
+  .list.list-media .media .media-right img {
+    width: 100%;
+    height: auto;
+  }
+}

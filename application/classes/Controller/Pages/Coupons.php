@@ -46,7 +46,11 @@ class Controller_Pages_Coupons extends Controller_BaseController {
         //преобразование масива для правильного вывода
         $result_data = parent::convertArrayVievData($data['data']);
 
-        $content->data = $result_data;
+        //рисуем купоны
+        $content_coupons = View::factory('ajax_views/coupons_list_ajax');
+        $content_coupons->data_coupon = $result_data;
+        $content->content_coupons = $content_coupons;
+
         $content->city = $data['city'];
 
         //передаем параметр значения выбраного города для селекта

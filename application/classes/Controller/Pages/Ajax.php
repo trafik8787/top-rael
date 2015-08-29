@@ -98,7 +98,11 @@ class Controller_Pages_Ajax extends Controller {
                 $data[$key]['content'] = Text::limit_chars(strip_tags($rows['content']), 200, null, true);
             }
 
-            echo json_encode($data);
+            $content = View::factory('ajax_views/articles_list_ajax');
+            $content->data = $data;
+
+            echo $content;
+
         }
 
     }

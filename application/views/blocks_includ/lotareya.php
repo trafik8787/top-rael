@@ -80,16 +80,23 @@
                     лотереи</p>
 
                 <form class="w-form-subscribe-lotarey">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" required="required" value="1" name="cheklicenz">
 
-                                            <span class="cr">
-                                                <i class="cr-icon glyphicon glyphicon-ok"></i>
-                                            </span>
-                            Принимаю <a  href="#" data-toggle="modal" data-target="#myPravilaLotarey">правила</a> участия в лотереи
+
+                    <div class="checkbox">
+
+                        <label>
+
+                            <div class="form-control">
+                                <input type="checkbox" required="required" value="1" name="cheklicenz">
+                                <i class="input-icon fa fa-check"></i>
+                            </div>
+
+                            Принимаю <a href="#" data-toggle="modal" data-target="#myPravilaLotarey">правила</a> участия в лотереи
+
                         </label>
+
                     </div>
+
 
                     <div class="input-group">
                         <input type="email" class="form-control w-input-lotarey-email" required="required" name="email" placeholder="Ваш email:">

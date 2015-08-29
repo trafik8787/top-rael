@@ -90,24 +90,13 @@ $(document).ready(function(){
 
         $.ajax({ // описываем наш запрос
             type: "POST", // будем передавать данные через POST
-            dataType: "JSON", // указываем, что нам вернется JSON
+            dataType: "HTML", // указываем, что нам вернется JSON
             url: '/tagsecartic',
             data: 'section='+$(this).data('section')+'&tags_url='+tags_url, // передаем данные из формы
             success: function(response) { // когда получаем ответ
 
                 sliderTmp.empty();
-                //console.log(response);
-                $.each(response, function(index, value) {
-                    //console.log(value);
-                    sliderTmp.append('<div><a href="/articles/'+value.CatUrl+'" class="fz medium">'+value.CatName+'</a> <div class="media"> <div class="media-left">'+
-                    '<a href="/article/'+value.url+'">'+
-                    '<img src="'+value.images_article+'" width="260" height="190" class="media-object" alt="'+value.name+'"/></a> </div>'+
-                    '<div class="media-body">'+
-                    '<h2 class="media-heading"><a href="/article/'+value.url+'"><strong>'+value.name+'</strong></a></h2>'+
-                    '<p class="fz medium"><strong>'+value.secondname+'</strong></p>'+
-                    value.content+
-                    '</div> </div> </div><hr/>').hide();
-                });
+                sliderTmp.html(response).hide();
                 sliderTmp.fadeIn();
             }
         });
@@ -332,41 +321,12 @@ $(document).ready(function(){
 
         $.ajax({ // описываем наш запрос
             type: "POST", // будем передавать данные через POST
-            dataType: "JSON", // указываем, что нам вернется JSON
+            dataType: "HTML", // указываем, что нам вернется JSON
             url: '/ajaxselect/coupons',
             data: 'sectcop='+sectcop, // передаем данные из формы
             success: function(response) { // когда получаем ответ
-                //очищаем слайдер
-                //slider_bloc.empty();
 
-                var coup_icon;
-
-                $.each(response.data, function(index, value) {
-                    //console.log(value);
-
-                    if (value.coupon_favorit != undefined) {
-                        coup_icon = ' <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">'+
-                                    '<i class="fa fa-thumb-tack"></i> </a>';
-                    } else {
-                        coup_icon = ' <a href="#" data-toggle="tooltip" data-placement="left" data-id="'+value.id+'" class="pin w-add-coupon-favor">'+
-                                    '<i class="fa fa-thumb-tack"></i></a>';
-                    }
-
-                    slider_bloc.append('<div class="coupon"> <div class="coupon-container"> ' +
-                    coup_icon +
-                    '<div class="coupon-image">'+
-                    '<div class="overlay">'+
-                    value.secondname+
-                    '</div> <img src="'+value.img_coupon+'" width="155" height="125" alt="" title=""/> </div> ' +
-                    '<div class="coupon-context"> <div> ' +
-                    '<span>Купон</span> ' +
-                    '<span><small>Массаж</small></span> </div> <div> ' +
-                    '<span>20%</span>'+
-                    '<span><small>скидка</small></span></div>'+
-                    '<div><small class="coupon-date">до 1 Апр 2015</small></div></div> </div>'+
-                    '</div>').hide();
-                });
-
+                slider_bloc.html(response).hide();
                 slider_bloc.fadeIn();
 
                 //переинициализация слайдера
@@ -402,7 +362,7 @@ $(document).ready(function(){
 
 
     //слайдер купонов на главной
-    var owl = $('.panel-coupons-carousel .owl-carousel');
+    var owl = $('.panel-coupons.gallery .owl-carousel');
 
     owl.owlCarousel({
         loop: true,

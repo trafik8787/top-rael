@@ -70,8 +70,8 @@ class Controller_Pages_Articles extends Controller_BaseController {
         $other_articles = Model::factory('ArticlesModel')->getArticlesRandomIdCategory($data['ArticIdSection'], $data['ArticId']);
 
         //конвертация масивов бизнесов и купонов
-        $data['BusArr'] = parent::convertArrayVievData($data['BusArr']);
-        $data['CoupArr'] = parent::convertArrayVievData($data['CoupArr']);
+        //$data['BusArr'] = parent::convertArrayVievData($data['BusArr']);
+       //$data['CoupArr'] = parent::convertArrayVievData($data['CoupArr']);
 
 
         $content->data = $data;

@@ -9,72 +9,123 @@
 ?>
 
 <?foreach($data_coupon as $rows_data):?>
-    <div class="row">
+    <div class="clearfix">
         <div class="col-md-6">
+            <div class="coupon coupon-big">
 
-            <div class="coupon">
-                <div class="coupon-container">
-                    <?if (!empty($rows_data[0]['coupon_favorit']))://если купон добавлен в избранное?>
-                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                            <i class="fa fa-thumb-tack"></i>
-                        </a>
-                    <?else:?>
-                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_data[0]['id']?>" class="pin w-add-coupon-favor">
-                            <i class="fa fa-thumb-tack"></i>
-                        </a>
-                    <?endif?>
+                <?if (!empty($rows_data[0]['coupon_favorit']))://если купон добавлен в избранное?>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                        <i class="fa fa-thumb-tack"></i>
+                    </a>
+                <?else:?>
+                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_data[0]['id']?>" class="pin w-add-coupon-favor">
+                        <i class="fa fa-thumb-tack"></i>
+                    </a>
+                <?endif?>
 
+                <div class="coupon-body">
 
-                    <div class="coupon-image">
-                        <div class="overlay">
+                    <div class="coupon-content">
+
+                        <div class="coupon-content-heading">
                             <?=$rows_data[0]['BusName']?>
                         </div>
-                        <a href="/modalcoupon/<?=$rows_data[0]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
-                            <img src="<?=$rows_data[0]['img_coupon']?>" width="155" height="125" alt=""
-                                 title=""/></a>
+
+                        <a href="/modalcoupon/<?=$rows_data[0]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm" class="coupon-image">
+                            <img src="<?=$rows_data[0]['img_coupon']?>" width="155" height="125" alt="" title="<?=$rows_data[0]['name']?>"/>
+                        </a>
+
                     </div>
 
-                    <div class="coupon-context">
+                    <div class="coupon-sidebar">
+                        <div class="coupon-sidebar-content">
+                            <div class="coupon-sidebar-heading">
+                                <div class="coupon-object-top">
 
-                        <div class="fz large"><strong><?=$rows_data[0]['name']?></strong></div>
-                        <small><?=$rows_data[0]['secondname']?></small>
+                                    <div class="coupon-title">
+                                        Купон
+                                        <small class="block"><?=$rows_data[0]['name']?></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="coupon-sidebar-body">
+                                <div class="coupon-object-middle">
 
-                        <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_data[0]['dateoff']), 'j %MONTH% Y'); ?></small>
+                                    <div class="coupon-title">
+                                        <?=$rows_data[0]['secondname']?>
+                                        <span class="block">скидка</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="coupon-sidebar-footer">
+
+                                <div class="coupon-object-bottom">
+
+                                    <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_data[0]['dateoff']), 'j %MONTH% Y'); ?></small>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
         <?if (!empty($rows_data[1])):?>
             <div class="col-md-6">
+                <div class="coupon coupon-big">
 
-                <div class="coupon">
-                    <div class="coupon-container">
+                    <?if (!empty($rows_data[1]['coupon_favorit']))://если купон добавлен в избранное?>
+                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                            <i class="fa fa-thumb-tack"></i>
+                        </a>
+                    <?else:?>
+                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_data[1]['id']?>" class="pin w-add-coupon-favor">
+                            <i class="fa fa-thumb-tack"></i>
+                        </a>
+                    <?endif?>
 
-                        <?if (!empty($rows_data[1]['coupon_favorit']))://если купон добавлен в избранное?>
-                            <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                <i class="fa fa-thumb-tack"></i>
-                            </a>
-                        <?else:?>
-                            <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_data[1]['id']?>" class="pin w-add-coupon-favor">
-                                <i class="fa fa-thumb-tack"></i>
-                            </a>
-                        <?endif?>
+                    <div class="coupon-body">
 
-                        <div class="coupon-image">
-                            <div class="overlay">
+                        <div class="coupon-content">
+
+                            <div class="coupon-content-heading">
                                 <?=$rows_data[1]['BusName']?>
                             </div>
-                            <a href="/modalcoupon/<?=$rows_data[1]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
-                                <img src="<?=$rows_data[1]['img_coupon']?>"  width="155" height="125" alt=""
-                                     title=""/></a>
+
+                            <a href="/modalcoupon/<?=$rows_data[1]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm" class="coupon-image">
+                                <img src="<?=$rows_data[1]['img_coupon']?>" width="155" height="125" alt="" title="<?=$rows_data[1]['name']?>"/>
+                            </a>
                         </div>
 
-                        <div class="coupon-context">
+                        <div class="coupon-sidebar">
+                            <div class="coupon-sidebar-content">
+                                <div class="coupon-sidebar-heading">
+                                    <div class="coupon-object-top">
 
-                            <div class="fz large"><strong><?=$rows_data[1]['name']?></strong></div>
-                            <small><?=$rows_data[1]['secondname']?></small>
+                                        <div class="coupon-title">
+                                            Купон
+                                            <small class="block"><?=$rows_data[1]['name']?></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="coupon-sidebar-body">
+                                    <div class="coupon-object-middle">
 
-                            <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_data[1]['dateoff']), 'j %MONTH% Y'); ?></small>
+                                        <div class="coupon-title">
+                                            <?=$rows_data[1]['secondname']?>
+                                            <span class="block">скидка</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="coupon-sidebar-footer">
+
+                                    <div class="coupon-object-bottom">
+
+                                        <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_data[0]['dateoff']), 'j %MONTH% Y'); ?></small>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
