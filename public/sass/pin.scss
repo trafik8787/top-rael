@@ -1,0 +1,204 @@
+@import "compass/css3";
+@import "bootstrap-variables";
+@import "common-variables";
+
+.pin-aria {
+  font-size: 18px;
+
+  .pin {
+    display: block;
+    @include pull-left;
+    margin-right: 10px;
+  }
+}
+
+.pin {
+
+  text-align: center;
+  display: inline-block;
+
+  color: #007898!important;
+  background:#fff;
+
+  width: 27px;
+  height: 27px;
+
+  cursor: pointer;
+
+  @include border-radius(50%);
+  @include box-shadow(rgba(0, 0, 0, 0.4) 0 2px 2px);
+
+  position:relative;
+
+  .fa,
+  .glyphicon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    @include translate(-50%, -50%);
+
+    &.fa-star{
+      font-size:18px;
+      margin-left:-0.5px;
+    }
+
+    &.fa-thumb-tack{
+      font-size:20px;
+      @include transform (translate(-50%, -50%) rotate(45deg));
+    }
+
+    &.fa-map-marker{
+      font-size:22px;
+    }
+
+    &.fa-user{
+      font-size:18px;
+    }
+
+    &.fa-file-text{
+      font-size:16px;
+    }
+
+    &.fa-paper-plane{
+      font-size:16px;
+      margin-left:-1.5px;
+    }
+
+    &.fa-trash{
+      font-size:20px;
+    }
+
+    &.fa-pencil{
+      font-size:18px;
+      margin-left: 0.5px;
+    }
+
+    &.fa-lock{
+      font-size: 19px;
+      margin-left: -0.5px;
+    }
+
+    &.fa-sign-out{
+      font-size:18px;
+      margin-left:1px;
+    }
+  }
+}
+
+/*
+.pin {
+
+  position: relative;
+
+  display: inline-block;
+
+  color: $brand-primary;
+
+  background-color: $color-white;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  @include border-radius(50%);
+  @include box-shadow(rgba(0, 0, 0, 0.4) 0 2px 2px);
+
+  width: ceil(($pin-size-base + $pin-padding)*1.5);
+  height: ceil(($pin-size-base + $pin-padding)*1.5);
+
+  padding: ceil($pin-padding*1.5);
+
+  .fa,
+  .glyphicon {
+
+    &.fa-star{
+      font-size:19px;
+    }
+
+    cursor: pointer;
+
+    font-size: ceil($pin-size-base*1.5);
+    line-height: ceil($pin-size-base*1.5);
+    width: ceil($pin-size-base*1.5);
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    @include translate(-50%, -50%);
+  }
+
+  /* @media (max-width: 320px) {
+     &{
+       width: ceil(($pin-size-base + $pin-padding)*1.2);
+       height: ceil(($pin-size-base + $pin-padding)*1.2);
+
+       padding: ceil($pin-padding*1.2);
+
+       right: - ceil((($pin-size-base + $pin-padding)*1.2)/2);
+       top: - ceil((($pin-size-base + $pin-padding)*1.2)/2);
+
+       .fa,
+       .glyphicon{
+
+         font-size: ceil($pin-size-base*1.2);
+         line-height: ceil($pin-size-base*1.2);
+         width: ceil($pin-size-base*1.2);
+
+         position:absolute;
+         left:50%;
+         top:50%;
+       }
+     }
+   }
+
+   @media (min-width: 768px) {
+     &{
+       width: ceil(($pin-size-base + $pin-padding));
+       height: ceil(($pin-size-base + $pin-padding));
+
+       padding: ceil($pin-padding);
+
+       right: - ceil((($pin-size-base + $pin-padding))/2);
+       top: - ceil((($pin-size-base + $pin-padding))/2);
+
+       .fa,
+       .glyphicon{
+
+         font-size: ceil($pin-size-base);
+         line-height: ceil($pin-size-base);
+         width: ceil($pin-size-base);
+
+         position:absolute;
+         left:50%;
+         top:50%;
+       }
+     }
+   }
+
+   @media (min-width: 1200px) {
+     &{
+       width: ceil(($pin-size-base + $pin-padding)*1.5);
+       height: ceil(($pin-size-base + $pin-padding)*1.5);
+
+       padding: ceil($pin-padding*1.5);
+
+       right: - ceil((($pin-size-base + $pin-padding)*1.5)/2);
+       top: - ceil((($pin-size-base + $pin-padding)*1.5)/2);
+
+       .fa,
+       .glyphicon{
+
+         font-size: ceil($pin-size-base*1.5);
+         line-height: ceil($pin-size-base*1.5);
+         width: ceil($pin-size-base*1.5);
+
+         position:absolute;
+         left:50%;
+         top:50%;
+       }
+     }
+   }
+}
+*/

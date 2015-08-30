@@ -1,0 +1,82 @@
+@import "compass/css3";
+@import "bootstrap-variables";
+@import "common-variables";
+
+$top-main-image-width: 50%;
+$top-list-width: abs(100% - $top-main-image-width);
+
+.top {
+
+  position: relative;
+
+  @include clear-after;
+
+  margin-bottom: $margin-bottom-base;
+
+
+  a {
+    color: $gray-base;
+  }
+
+  @include a-underline;
+
+  border: 1px solid #d8d8d8;
+
+  .top-image {
+
+    width: $top-main-image-width;
+    @include pull-left;
+
+    .top-image-text {
+
+      width: $top-main-image-width;
+
+      padding: $padding-base-normal;
+
+      background: rgba(0, 0, 0, 0.5);
+
+      position: absolute;
+      left: 0;
+      bottom: 0;
+
+      color: $color-white;
+
+      a {
+        color: $color-white;
+      }
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+      @include pull-none;
+
+      .top-image-text {
+          position:inherit;
+          width:100%;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .top-image-text {
+        background: #666666;
+      }
+    }
+  }
+
+  .top-list {
+
+    @include pull-left;
+
+    padding: $padding-base-normal;
+    width: $top-list-width;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      @include pull-none;
+    }
+
+    .media-heading {
+      font-size: 18px;
+    }
+  }
+}

@@ -1,0 +1,102 @@
+@import "compass/css3";
+@import "bootstrap-variables";
+@import "common-variables";
+
+$footer-padding-vertical: 10px;
+$footer-padding-horizontal: 15px;
+
+#footer{
+
+  position:relative;
+  background: $brand-primary;
+  color:$color-white;
+
+  margin-left: ($footer-padding-horizontal*-1);
+  margin-right: ($footer-padding-horizontal*-1);
+
+  @media (min-width: 768px) {
+    margin-left:0;
+    margin-right:0;
+  }
+
+  #footer-header{
+
+    border-bottom:1px solid #57a5ba;
+
+    padding: $footer-padding-vertical $footer-padding-horizontal;
+
+    .search{
+       padding-top: $footer-padding-vertical;
+
+      .form-control{
+        @include border-radius(20px);
+      }
+    }
+
+    @media (min-width: 768px) {
+      & {
+        padding: ceil($footer-padding-vertical*2) ceil($footer-padding-horizontal*2);
+
+        .logo{
+          float:left;
+        }
+
+        .search{
+          float:right;
+          padding-top:4.5px;
+        }
+      }
+    }
+  }
+
+  #footer-content{
+
+    @include clear-after;
+
+    padding: $footer-padding-vertical $footer-padding-horizontal;
+
+    @media (min-width: 768px) {
+      & {
+        padding: ceil($footer-padding-vertical*2) ceil($footer-padding-horizontal*2);
+      }
+    }
+  }
+
+  #footer-bottom{
+    font-size:16px;
+    border-top:1px solid #57a5ba;
+    padding: $footer-padding-vertical $footer-padding-horizontal;
+
+    @media (min-width: 768px) {
+      & {
+        padding: $footer-padding-vertical ceil($footer-padding-horizontal*2);
+      }
+    }
+  }
+
+  nav {
+    ul{
+      display:block;
+
+      list-style-type: none;
+      margin:0;
+      padding:0;
+
+      @media (max-width: 768px) {
+        margin-bottom: $margin-bottom-base;
+      }
+
+      > li{
+
+        > a{
+
+          font-size:16px;
+          line-height:30px;
+
+          color:$color-white;
+
+        }
+      }
+    }
+  }
+}

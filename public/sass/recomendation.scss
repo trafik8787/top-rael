@@ -1,0 +1,29 @@
+@import "compass/css3";
+@import "bootstrap-variables";
+@import "common-variables";
+
+.recomendation {
+
+  font-size: 20px;
+
+  padding: $padding-base-vertical 0;
+
+  @media (max-width: 768px) {
+    text-align: center;
+  }
+
+  .recomendation-icons {
+    display: inline-block;
+    margin: 0 30px;
+
+    @media (max-width: 768px) {
+      display: block;
+      margin: 10px 0;
+    }
+  }
+
+  .btn-link {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

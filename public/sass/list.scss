@@ -1,0 +1,86 @@
+@import "compass/css3";
+@import "bootstrap-variables";
+@import "common-variables";
+
+.list {
+
+  padding: 0 $padding-base-normal;
+
+  .list-item {
+
+    font-size:16px;
+
+    margin-bottom: $margin-bottom-base;
+
+    @include a-underline;
+
+    &.top{
+      background: #e7effe;
+      @include box-shadow(rgba(0, 0, 0, 0.2) 0 4px 4px);
+      border-color: #fff;
+      border-width: 5px;
+
+      padding:15px;
+
+      .media {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.list.list-media {
+
+  .media {
+
+    margin-top: 5px;
+    font-size:14px;
+
+    .media-link{
+      font-size:16px;
+      color:#007898!important;
+    }
+
+    .media-heading {
+      font-size: 22px;
+      line-height: 1.25;
+      color: #000;
+
+      margin-bottom: $margin-bottom-base;
+
+      a {
+        color: #000;
+      }
+
+      small {
+        display: block;
+        font-size: 70%;
+        font-weight: bold;
+        color: #000;
+      }
+    }
+
+    .media-left {
+      padding-right: 40px;
+    }
+
+    .media-right {
+      padding-left: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .media-left,
+      .media-right{
+        display:block;
+        padding:0;
+        margin-bottom: ($margin-bottom-base/2);
+
+        img {
+          width: 100%;
+          height:auto;
+        }
+      }
+
+    }
+  }
+}

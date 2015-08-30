@@ -193,9 +193,9 @@ abstract class Controller_BaseController extends Controller_Template {
     }
 
 
-    public static function convertArrayTagsBusiness ($data){
+    public static function convertArrayTagsBusiness ($data, $count = 3){
 
-        return array_chunk($data, 3);
+        return array_chunk($data, $count);
     }
 
     /**

@@ -69,6 +69,9 @@ class Controller_Pages_Account extends Controller_BaseController {
                 }
                 $this->header->user = Auth::instance()->get_user();
 
+                //блок управления подпиской в кабинете пользователя
+                $bloc_sndmail = View::factory('blocks_includ/bloc_sendmail_profile');
+                $data->panel_subscribe = $bloc_sndmail;
 
             } catch (ORM_Validation_Exception $e) {
 
@@ -88,9 +91,10 @@ class Controller_Pages_Account extends Controller_BaseController {
         if (parent::$favorits_coupon != null) {
             $data->favorit_coupon = Model::factory('CouponsModel')->getCouponsId(parent::$favorits_coupon);
         }
-
+        //получаем избранные бизнесы
         if (parent::$favorits_bussines != null) {
             $data->favorits_bussines = Model::factory('BussinesModel')->getBussinesId(self::$favorits_bussines);
+            $data->favorits_bussines = parent::convertArrayTagsBusiness($data->favorits_bussines, 4);
         }
 
         $data->ulogin = $ulogin->render(); // стартуем сессии

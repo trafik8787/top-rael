@@ -367,8 +367,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url(/topisrael/fonts/../fonts/glyphicons-halflings-regular.eot?1437850734);
-  src: url(/topisrael/fonts/../fonts/glyphicons-halflings-regular.eot?&1437850734#iefix) format("embedded-opentype"), url(/topisrael/fonts/../fonts/glyphicons-halflings-regular.woff2?1437850734) format("woff2"), url(/topisrael/fonts/../fonts/glyphicons-halflings-regular.woff?1437850734) format("woff"), url(/topisrael/fonts/../fonts/glyphicons-halflings-regular.ttf?1437850734) format("truetype"), url(/topisrael/fonts/../fonts/glyphicons-halflings-regular.svg?1437850734#glyphicons_halflingsregular) format("svg");
+  src: url(../fonts/glyphicons-halflings-regular.eot?1437850734);
+  src: url(../fonts/glyphicons-halflings-regular.eot?&1437850734#iefix) format("embedded-opentype"), url(../fonts/glyphicons-halflings-regular.woff) format("woff2"), url(../fonts/glyphicons-halflings-regular.woff?1437850734) format("woff"), url(../fonts/glyphicons-halflings-regular.ttf?1437850734) format("truetype"), url(../fonts/glyphicons-halflings-regular.svg?1437850734#glyphicons_halflingsregular) format("svg");
 }
 /* line 24, c:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_glyphicons.scss */
 .glyphicon {
@@ -8772,7 +8772,7 @@ button.close {
 /* line 4, ../sass/icons.scss */
 .icons {
   display: inline-block;
-  background-image: url('/topisrael/images/icons.png?1438290259');
+  background-image: url('../images/icons.png?1438290259');
   background-repeat: repeat;
   background-position: top left;
   text-indent: -9999px;
@@ -9687,7 +9687,7 @@ button.close {
   #header .header-profile .header-profile-shape {
     margin-top: 5px;
     float: left;
-    background: url('/topisrael/images/head-profile.png?1438897495');
+    background: url('../images/head-profile.png?1438897495');
     background-repeat: no-repeat;
     background-position: 0 0;
     height: 44px;
@@ -11333,7 +11333,7 @@ i {
 .button:before, .button:after,
 .button span,
 .button span:before {
-  background: url('/topisrael/images/button.png?1438803699');
+  background: url('../images/button.png?1438803699');
   width: 23px;
   height: 19px;
   float: left;

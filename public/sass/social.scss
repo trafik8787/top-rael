@@ -1,0 +1,33 @@
+@import "compass/css3";
+@import "bootstrap-variables";
+@import "common-variables";
+
+.social {
+  border: 0 !important;
+  @include border-radius(0 !important);
+  display: inline-block;
+  text-align: center;
+  min-width: 40px !important;
+  min-height: 40px !important;
+
+  color: $color-white !important;
+  font-size: 18px !important;
+  line-height: 40px !important;
+  padding: 0;
+
+  &.facebook {
+    background-color: $color-facebook !important;
+  }
+
+  &.twitter {
+    background-color: $color-twitter !important;
+  }
+
+  &.vk {
+    background-color: $color-vk !important;
+  }
+
+  &.email{
+    background-color:#db4c9f!important;
+  }
+}

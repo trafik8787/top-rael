@@ -1,0 +1,157 @@
+@import "compass/css3";
+@import "bootstrap-variables";
+@import "common-variables";
+
+.user-container {
+
+  background: #f1f0f0;
+
+  margin-bottom: $margin-bottom-base;
+
+  margin-top: ($margin-bottom-base*-1);
+
+  @media (max-width: 768px) {
+    margin-top: 0;
+    margin-left: ($margin-horizontal-base*-1);
+    margin-right: ($margin-horizontal-base*-1);
+  }
+
+  .user-profile {
+
+    display: table;
+    width: 100%;
+    padding: 35px 25px;
+
+    .user-object {
+
+      display: table-cell;
+      vertical-align: middle;
+      padding: 0 30px;
+
+      font-size: 18px;
+
+      small {
+        display: block;
+        color: #717171;
+        font-size: 70%;
+      }
+
+      @media (max-width: 768px) {
+        display: block;
+        margin-bottom: 10px;
+      }
+    }
+
+    .user-avatar {
+      text-align: center;
+
+      img {
+        border: 3px solid #fff;
+        @include box-shadow(rgba(0, 0, 0, 0.75) 0 2px 3px);
+      }
+
+      @media (max-width: 768px) {
+        text-align: left;
+        margin: 0 0 15px 0;
+      }
+    }
+
+    .user-name {
+      font-size: 20px;
+    }
+
+    .user-logout {
+      padding-right: 0;
+      text-align: right;
+    }
+
+    @media (max-width: 768px) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+  .btn {
+    &.pin-aria {
+      border: 0;
+      line-height: 27px;
+      padding: 6px 12px
+    }
+  }
+
+  .user-navigation {
+
+    padding: 0 20px;
+    border-bottom: 5px solid #007797;
+
+    @include clear-after;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+
+      li {
+        display: block;
+        margin: 0 5px;
+
+        @include clear-after;
+        @include pull-left;
+
+        a, .pin-aria {
+          display: block;
+          background: #c9c9c9;
+          color: #fff;
+          font-size: 24px;
+          padding: 6px 12px;
+          text-decoration: none !important;
+
+          @include border-top-radius(4px);
+
+          &:hover {
+            background: #B9B9B9;
+          }
+        }
+
+        .pin-aria {
+          .pin {
+            margin: 2px 15px 2px 0;
+            color: #c9c9c9 !important;
+          }
+
+          &:hover {
+            .pin {
+              color: #B9B9B9 !important;
+            }
+          }
+        }
+
+        &.active {
+          a, .pin-aria {
+            background: #007797 !important;
+          }
+
+          .pin-aria {
+            .pin {
+              color: #007797 !important;
+            }
+          }
+        }
+
+        @media (max-width: 768px) {
+          @include pull-none;
+          margin: 0;
+        }
+      }
+    }
+
+  }
+}

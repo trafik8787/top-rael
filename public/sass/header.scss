@@ -1,0 +1,310 @@
+@import "compass/css3";
+@import "bootstrap-variables";
+@import "common-variables";
+
+$header-padding-vertical: 20px;
+$header-padding-horizontal: 0;
+$header-logo-margin-right: 30px;
+
+#header {
+
+  @include clear-after;
+
+  padding: $header-padding-vertical $header-padding-horizontal;
+
+  .logo {
+
+    display: block;
+
+    @media (min-width: 768px) {
+      @include pull-left;
+    }
+  }
+
+  nav {
+    display: block;
+    @include clear-after;
+  }
+
+  .collapse {
+
+    margin-left: ($margin-horizontal-base*-1);
+    margin-right: ($margin-horizontal-base*-1);
+
+    /* @media (min-width: 768px) and (max-width: 1169px) {
+       @include clear-before;
+     }*/
+
+    @media (min-width: 768px) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  .collapsing {
+    overflow-x: visible;
+
+    margin-left: ($margin-horizontal-base*-1);
+    margin-right: ($margin-horizontal-base*-1);
+
+    @media (min-width: 768px) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  .header-profile {
+
+    position: relative;
+
+    @media (max-width: 768px) {
+      margin-top: $margin-bottom-base;
+      padding: $padding-base-horizontal;
+      background: $gray-lighter;
+      border: 1px solid #ccc;
+    }
+
+    @media (min-width: 768px) {
+      @include pull-right;
+    }
+
+    .img-circle {
+
+      border: 3px solid $color-white;
+
+      @include box-shadow(rgba(0, 0, 0, 0.5) 0 3px 3px);
+
+      @include pull-right;
+
+      @media (max-width: 768px) {
+        position: absolute;
+        right: $padding-base-horizontal;
+        top: $padding-base-horizontal;
+      }
+
+      @media (min-width: 768px) {
+        position: relative;
+        @include pull-left;
+        margin: -6px 15px 0 -30px;
+      }
+    }
+
+    .header-profile-shape {
+
+      position: relative;
+
+      display: block;
+
+      @media (max-width: 768px) {
+        margin-bottom: 5px;
+      }
+
+      @media (min-width: 768px) {
+
+        margin-top: 5px;
+
+        @include pull-left;
+
+        background: image_url('head-profile.png');
+        background-repeat: no-repeat;
+        background-position: 0 0;
+
+        height: 44px;
+
+        padding: 3px 35px 0 20px;
+      }
+
+      a {
+        display: block;
+
+        @media (min-width: 768px) {
+          font-size: 12px;
+          line-height: 18px;
+        }
+
+        vertical-align: top;
+
+        .badge {
+
+          background: #e8e8e8;
+          color: $color-red;
+
+          @media (min-width: 768px) {
+            padding: 3px;
+            font-size: 10px;
+            line-height: 1;
+          }
+        }
+      }
+
+      .fa {
+        margin-right: 5px;
+        position: relative;
+      }
+
+      .fa-thumb-tack {
+        @include transform (translateY(1px) rotate(45deg));
+      }
+    }
+
+    .header-profile-info {
+
+      @media (min-width: 768px) {
+        @include pull-left;
+      }
+
+      small {
+        color: $gray-light;
+
+        display: block;
+
+        line-height: 1.25;
+
+        &.profile-username {
+          color: $gray-base;
+        }
+      }
+    }
+
+  }
+
+  .header-nav {
+    display: block;
+
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    > li {
+
+      display: block;
+
+      padding: 5px 0;
+
+      > a {
+        display: block;
+        font-size: 16px;
+        line-height: 1.1;
+        border-right: 1px solid transparent;
+
+        padding: 0 $margin-horizontal-base;
+      }
+
+      &:last-child {
+        a {
+          border-right: 0;
+        }
+      }
+
+      @media (min-width: 768px) {
+        & {
+          float: left;
+
+          > a {
+            border-right: 1px solid transparent;
+          }
+        }
+      }
+    }
+  }
+
+  #header-top {
+
+    @include clear-after;
+
+    display: block;
+
+    padding: ceil($header-padding-vertical/2) 0;
+
+    @media (min-width: 768px) and (max-width: 1169px) {
+      @include clear-before;
+      padding: 0;
+    }
+
+    @media (min-width: 768px) {
+      margin-left: ($margin-horizontal-base*-1);
+      margin-right: ($margin-horizontal-base*-1);
+    }
+
+    @media (min-width: 1170px) {
+      text-align: center;
+      padding: 0;
+      margin-bottom: $margin-bottom-base;
+    }
+
+    .header-nav {
+
+      @include clear-after;
+
+      @media (min-width: 1170px) {
+        display: inline-block;
+        margin: 0 auto;
+      }
+
+      > li {
+
+        > a {
+          line-height: 18px;
+        }
+
+        @media (min-width: 768px) {
+          & {
+
+            padding: 18px 0;
+
+            a {
+              border-color: #d3d3d3;
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  #header-bottom {
+
+    @include clear-after;
+
+    @include background(linear-gradient(to right, #036c92, #03aacf));
+    padding: ceil($header-padding-vertical/2) 0;
+
+    @media (max-width: 768px) {
+      .button {
+        @include pull-none;
+        display: block;
+        margin: 0 $margin-horizontal-base;
+      }
+    }
+
+    @media (min-width: 1170px) {
+      .button {
+        margin: 0 $margin-horizontal-base;
+      }
+    }
+
+    @media (min-width: 768px) {
+      padding: 0;
+
+      .button {
+        margin-top: 7px !important;
+      }
+    }
+
+    .header-nav {
+      > li {
+        > a {
+
+          color: $color-white;
+
+          @media (min-width: 768px) {
+            & {
+              border-color: #44b2cd;
+              line-height: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

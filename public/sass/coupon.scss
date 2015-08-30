@@ -1,0 +1,160 @@
+@import "compass/css3";
+@import "bootstrap-variables";
+@import "common-variables";
+
+.coupon {
+
+  position: relative;
+
+  color: #e02929;
+  background-color: #fff;
+  border: 1px solid #d8d8d8;
+
+  @include box-shadow(rgba(0, 0, 0, 0.3) 0 2px 3px);
+
+  &.coupon-small {
+    height: 130px;
+    font-size: 19px;
+    line-height: 1.1;
+  }
+
+  &.coupon-medium {
+    height: 150px;
+    font-size: 22px;
+    line-height: 1.1;
+  }
+
+  &.coupon-big {
+    height: 170px;
+    font-size: 25px;
+    line-height: 1.1;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .coupon-body {
+    display: table;
+    width: 100%;
+    height: 100%;
+
+    .coupon-content {
+
+      position: relative;
+      width: 62%;
+      height: 100%;
+      overflow: hidden;
+
+      @include pull-left;
+
+      .coupon-content-heading {
+
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+
+        z-index: 1001;
+
+        color: #fff;
+        font-size: 80%;
+
+        background: rgba(0, 0, 0, 0.5);
+
+        padding: 5px 10px;
+      }
+
+      .coupon-image {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1000;
+      }
+    }
+
+    .coupon-sidebar {
+      width: 38%;
+      height: 100%;
+      @include pull-right;
+    }
+  }
+
+  .coupon-sidebar-content {
+    display: table;
+    height: 100%;
+    width: 100%;
+
+    .coupon-sidebar-heading {
+      display: table-row;
+
+      .coupon-title {
+        margin-top: 10px;
+      }
+    }
+
+    .coupon-sidebar-body {
+      display: table-row;
+    }
+
+    .coupon-sidebar-footer {
+      display: table-row;
+    }
+  }
+
+  .coupon-object-top {
+    display: table-cell;
+    vertical-align: top;
+  }
+
+  .coupon-object-middle {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .coupon-object-bottom {
+    display: table-cell;
+    vertical-align: bottom;
+  }
+
+  .coupon-image,
+  .coupon-image img {
+    display: block;
+
+    min-width: 100%;
+    min-height: 100%;
+
+    height: auto;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    @include translate(-50%, -50%);
+  }
+
+  .coupon-title {
+    text-align: center;
+
+    span {
+      font-size: 70%;
+    }
+  }
+
+  small {
+    font-size: 55%;
+  }
+
+  .coupon-date {
+    display: block;
+    text-align: center;
+    padding: 5px 0;
+  }
+
+  .pin {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 1003;
+  }
+}

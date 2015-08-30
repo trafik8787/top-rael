@@ -1,0 +1,268 @@
+@import "compass/css3";
+@import "bootstrap-variables";
+@import "common-variables";
+
+#sidebar {
+
+  @extend .border !optional;
+
+  padding-top: $padding-base-big;
+  padding-left: $padding-base-normal;
+  padding-right: $padding-base-normal;
+
+  margin-bottom:100px;
+}
+
+.sidebar-images{
+  margin-bottom: $margin-bottom-base;
+  @include box-shadow(rgba(0,0,0,0.2) 0 2px 3px);
+}
+
+.sidebar-services {
+
+  border-top:1px solid #d2d2d2;
+  border-bottom:1px solid #d2d2d2;
+
+  margin: 30px 0;
+
+  .sidebar-services-heading {
+
+     margin:30px 0 0 0;
+
+    .sidebar-services-title {
+      font-size: 22px;
+    }
+  }
+
+  .sidebar-services-body {
+     margin-bottom: $margin-base-normal;
+
+    .sidebar-services-list{
+      margin:0 0 30px 0;
+      padding:0;
+      list-style-type:none;
+
+      li{
+        font-size:18px;
+
+        margin: 10px;
+
+        .fa {
+          color: #727272;
+        }
+      }
+    }
+  }
+}
+
+.sidebar-coupons {
+
+  margin-bottom: $margin-bottom-base;
+
+  .sidebar-coupons-heading {
+
+    margin-bottom: $margin-base-normal;
+
+    .sidebar-coupons-title {
+      font-size: 22px;
+    }
+  }
+
+  .sidebar-coupons-body {
+    margin-bottom: $margin-base-normal;
+  }
+}
+
+.sidebar-tabs {
+
+  margin-bottom: $margin-bottom-base;
+
+  .sidebar-tabs-heading {
+
+    margin-bottom: $margin-base-normal;
+
+    .sidebar-tabs-title {
+      font-size: 18px;
+      border-bottom: 1px solid #007797;
+    }
+  }
+
+  .sidebar-tabs-body {
+    margin-bottom: $margin-base-normal;
+  }
+}
+
+.sidebar-lottery {
+
+  margin-bottom: $margin-bottom-base;
+
+  border: 1px solid $border-block-color;
+
+  padding: $padding-base-normal;
+
+  a {
+    color: #000;
+  }
+
+  @include a-underline;
+
+  .form-control{
+    border-color: transparent;
+    background: #ececec;
+  }
+
+  .checkbox{
+    .form-control{
+      color: $brand-danger;
+    }
+  }
+
+  .prize-title {
+    font-size: 25px;
+    color: #007797;
+  }
+
+  .input-group {
+
+    .form-control {
+      background: #ececec;
+      border-color: transparent;
+
+      &:focus {
+        border-color: transparent;
+      }
+    }
+
+    .input-group-addon {
+
+      padding: 0;
+
+      border-color: transparent;
+
+      .btn {
+        padding: ($padding-base-vertical/2) $padding-base-horizontal;
+        margin: 0 ($padding-base-vertical/2);
+      }
+    }
+  }
+
+  .sidebar-lottery-heading {
+
+    margin-bottom: $margin-base-normal;
+
+    .sidebar-lottery-title {
+      font-size: 28px;
+    }
+  }
+
+  .sidebar-lottery-body {
+  }
+}
+
+.sidebar-socials {
+
+  margin-bottom: $margin-bottom-base;
+
+  .sidebar-socials-heading {
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+
+      @include clear-after;
+
+      li {
+        margin-right: 5px;
+        @include pull-left;
+
+        &.active {
+          .social {
+            padding-bottom: 3px;
+          }
+        }
+      }
+    }
+  }
+
+  .sidebar-socials-body {
+
+    .tab-pane {
+      display: none;
+      padding-top: $padding-base-normal;
+
+      &.active {
+        display: block;
+        border-top: 5px solid transparent;
+      }
+    }
+
+    #tab-facebook {
+      border-color: $color-facebook;
+    }
+
+    #tab-twitter {
+      border-color: $color-twitter;
+    }
+
+    #tab-vk {
+      border-color: $color-vk;
+    }
+  }
+}
+
+.sidebar-reviews {
+
+  margin-bottom: $margin-bottom-base;
+
+  .sidebar-reviews-heading {
+
+    margin-bottom: $margin-base-normal;
+
+    .sidebar-reviews-title {
+      font-size: 28px;
+    }
+  }
+
+  .sidebar-reviews-body {
+
+    color: #5e5e5e;
+
+    a {
+      color: #5e5e5e !important;
+    }
+
+    margin-bottom: $margin-base-normal;
+
+    .media {
+
+      border-bottom: 1px solid #e7e7e7;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      .media-heading {
+        font-size: 14px;
+
+        border-bottom: 1px solid #e7e7e7;
+
+        padding-bottom: $padding-base-small;
+
+        margin: 0;
+
+        a {
+          text-decoration: none !important;
+        }
+      }
+      .media-body {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .sidebar-reviews-footer {
+    margin-bottom: $margin-base-normal;
+    text-align: center;
+  }
+}

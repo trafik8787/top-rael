@@ -1,0 +1,149 @@
+@import "compass/css3";
+@import "bootstrap-variables";
+@import "common-variables";
+
+.page-profile {
+
+  position: relative;
+
+  z-index: 1001;
+
+  margin-top: ($margin-bottom-base*-1);
+  margin-bottom: $margin-bottom-base;
+
+  background: #f0f0f0;
+
+  padding: $padding-base-big $padding-base-horizontal;
+
+  @include clear-after;
+
+  @media (max-width: 768px) {
+    margin-left: ($margin-horizontal-base*-1);
+    margin-right: ($margin-horizontal-base*-1);
+  }
+
+  .page-profile-avarat {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background: $color-white;
+    overflow: hidden;
+
+    margin-top: ((40+$margin-bottom-base)*-1);
+    margin-left: $margin-horizontal-base;
+    margin-right: $margin-horizontal-base;
+
+    @include box-shadow(rgba(0, 0, 0, 0.75) 0 2px 3px);
+    @include pull-left;
+
+    @media (max-width: 768px) {
+      margin: 0 0 $margin-bottom-base 0;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .nav-pills {
+
+    margin-left: -5px;
+    margin-right: -5px;
+    margin-bottom: 10px;
+
+    li {
+      margin: 0 5px;
+    }
+
+    a {
+      color: #767676;
+      background: #d6d6d6;
+
+      font-size: 14px;
+      line-height: 1.25;
+
+      padding: 1.5px 10px;
+
+      &:hover {
+        color: $color-white;
+        background: $link-color;
+      }
+    }
+  }
+
+  .page-profile-link {
+    font-size: 18px;
+    line-height: 1.1;
+    margin-bottom: $margin-bottom-base;
+  }
+
+  .page-profile-content {
+    width: 60%;
+    padding: 0 ($padding-base-horizontal*3) 0 $padding-base-horizontal;
+  }
+
+  .page-profile-sidebar {
+    width: 40%;
+    position: relative;
+    left: -1px;
+    padding: 0 $padding-base-horizontal 0 ($padding-base-horizontal*3);
+  }
+
+
+  .page-profile-body {
+
+    @include clear-after;
+
+    .page-profile-content {
+      padding-top: 5px;
+      border-right: 1px solid #a6a6a6;
+    }
+
+    .page-profile-sidebar {
+      padding-top: 5px;
+      border-left: 1px solid #a6a6a6;
+    }
+
+    .page-profile-title {
+      font-size: 32px;
+      line-height: 1.1;
+    }
+  }
+
+
+  .page-profile-footer {
+  }
+
+  .page-profile-body,
+  .page-profile-footer {
+
+    padding-bottom: 5px;
+
+    position: relative;
+    overflow: hidden;
+
+    @include clear-after;
+
+    @media (max-width: 768px) {
+      width:100%;
+      overflow: visible;
+      padding:0;
+    }
+  }
+
+  .page-profile-content,
+  .page-profile-sidebar {
+
+    @include pull-left;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      padding:0!important;
+      border:0!important;
+      position: static;
+      margin-bottom: ($margin-bottom-base / 2);
+    }
+  }
+}

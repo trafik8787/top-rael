@@ -1,0 +1,81 @@
+$margin-horizontal-base: 15px;
+$margin-bottom-base: 20px;
+$margin-base-normal: 15px;
+
+$text-indent: -9999px;
+
+$icons-url: 'icons.png';
+
+$common-logo-width:264px;
+$common-logo-height:57px;
+
+$common-logo-position-left:0;
+$common-logo-position-top:0;
+
+$common-logo-white-position-left: 0;
+$common-logo-white-position-top: $common-logo-height;
+
+$color-red: #e02929;
+$color-white: #fff;
+
+$color-facebook: #49659f;
+$color-twitter: #47afff;
+$color-vk: #7b97d2;
+$color-odnoklassniki: #f68735;
+
+$border-block-color: #e7e7e7;
+
+$padding-base-small:5px;
+$padding-base-medium:10px;
+$padding-base-normal:15px;
+$padding-base-big:20px;
+
+$pin-size-base: 14px;
+$pin-padding: ceil($pin-size-base * 0.2);
+
+@mixin pull-none{
+  float:none;
+}
+
+@mixin pull-left{
+  float:left;
+}
+
+@mixin pull-right{
+  float:right;
+}
+
+@mixin clear-after{
+  &:after {
+    content: "";
+    clear: both;
+    display: block;
+  }
+}
+
+@mixin clear-before{
+  &:before{
+    content: "";
+    clear: both;
+    display: block;
+  }
+}
+
+@mixin a-underline{
+  a{
+    text-decoration: underline;
+
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}
+
+@mixin clear-collapse{
+  .collapse,
+  .collapsing,
+  .collapse.in {
+    width: 100%;
+    @include clear-before;
+  }
+}
