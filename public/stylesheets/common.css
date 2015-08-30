@@ -367,8 +367,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url(../fonts/glyphicons-halflings-regular.eot?1437850734);
-  src: url(../fonts/glyphicons-halflings-regular.eot?&1437850734#iefix) format("embedded-opentype"), url(../fonts/glyphicons-halflings-regular.woff2?1437850734) format("woff2"), url(../fonts/glyphicons-halflings-regular.woff?1437850734) format("woff"), url(../fonts/glyphicons-halflings-regular.ttf?1437850734) format("truetype"), url(../fonts/glyphicons-halflings-regular.svg?1437850734#glyphicons_halflingsregular) format("svg");
+  src: url(/topisrael/fonts/../fonts/glyphicons-halflings-regular.eot?1437850734);
+  src: url(/topisrael/fonts/../fonts/glyphicons-halflings-regular.eot?&1437850734#iefix) format("embedded-opentype"), url(/topisrael/fonts/../fonts/glyphicons-halflings-regular.woff2?1437850734) format("woff2"), url(/topisrael/fonts/../fonts/glyphicons-halflings-regular.woff?1437850734) format("woff"), url(/topisrael/fonts/../fonts/glyphicons-halflings-regular.ttf?1437850734) format("truetype"), url(/topisrael/fonts/../fonts/glyphicons-halflings-regular.svg?1437850734#glyphicons_halflingsregular) format("svg");
 }
 /* line 24, c:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_glyphicons.scss */
 .glyphicon {
@@ -8772,7 +8772,7 @@ button.close {
 /* line 4, ../sass/icons.scss */
 .icons {
   display: inline-block;
-  background-image: url('../images/icons.png?1438290259');
+  background-image: url('/topisrael/images/icons.png?1438290259');
   background-repeat: repeat;
   background-position: top left;
   text-indent: -9999px;
@@ -9687,7 +9687,7 @@ button.close {
   #header .header-profile .header-profile-shape {
     margin-top: 5px;
     float: left;
-    background: url('../images/head-profile.png?1438897495');
+    background: url('/topisrael/images/head-profile.png?1438897495');
     background-repeat: no-repeat;
     background-position: 0 0;
     height: 44px;
@@ -11172,107 +11172,152 @@ button.close {
   }
 }
 
-/* line 24, ../sass/common.scss */
+/* line 23, ../sass/common.scss */
+.marker {
+  width: auto !important;
+  max-width: 560px;
+  /*margin-top: -50px;
+  margin-left: -50px;
+
+  @include transform (translate(0, -100%) !important);*/
+}
+/* line 33, ../sass/common.scss */
+.marker .marker-container {
+  display: table;
+  background: #fff;
+  padding: 15px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 5px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 5px 5px;
+}
+/* line 49, ../sass/_common-variables.scss */
+.marker .marker-container:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+/* line 41, ../sass/common.scss */
+.marker .marker-container .marker-logo {
+  width: 90px;
+  height: 90px;
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 49, ../sass/common.scss */
+.marker .marker-container .marker-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+/* line 49, ../sass/_common-variables.scss */
+.marker:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+/* line 63, ../sass/common.scss */
 .fz.large-xx {
   font-size: 30px;
 }
-/* line 28, ../sass/common.scss */
+/* line 67, ../sass/common.scss */
 .fz.large-x {
   font-size: 22px;
 }
-/* line 32, ../sass/common.scss */
+/* line 71, ../sass/common.scss */
 .fz.large {
   font-size: 20px;
 }
-/* line 36, ../sass/common.scss */
+/* line 75, ../sass/common.scss */
 .fz.big {
   font-size: 18px;
 }
-/* line 40, ../sass/common.scss */
+/* line 79, ../sass/common.scss */
 .fz.medium {
   font-size: 16px;
 }
-/* line 44, ../sass/common.scss */
+/* line 83, ../sass/common.scss */
 .fz.normal {
   font-size: 14px;
 }
 
-/* line 49, ../sass/common.scss */
+/* line 88, ../sass/common.scss */
 i {
   font-style: italic;
 }
 
-/* line 53, ../sass/common.scss */
+/* line 92, ../sass/common.scss */
 .btn {
   text-decoration: none !important;
 }
 
-/* line 57, ../sass/common.scss */
+/* line 96, ../sass/common.scss */
 .open-all {
   padding: 2px 10px;
   border-color: #007898 !important;
   color: #007898 !important;
   text-decoration: none !important;
 }
-/* line 63, ../sass/common.scss */
+/* line 102, ../sass/common.scss */
 .open-all:hover {
   background: #F7F7F7;
 }
 
-/* line 71, ../sass/common.scss */
+/* line 110, ../sass/common.scss */
 #content {
   /*margin-bottom: 50px;*/
 }
 
-/* line 75, ../sass/common.scss */
+/* line 114, ../sass/common.scss */
 .border, #sidebar {
   border: 1px solid #e7e7e7;
 }
 
-/* line 80, ../sass/common.scss */
+/* line 119, ../sass/common.scss */
 #context.full-text {
   font-size: 20px;
 }
 
-/* line 85, ../sass/common.scss */
+/* line 124, ../sass/common.scss */
 .menu-toggle {
   float: right;
   display: inline-block;
   margin-top: 10px;
 }
 @media (min-width: 768px) {
-  /* line 85, ../sass/common.scss */
+  /* line 124, ../sass/common.scss */
   .menu-toggle {
     display: none;
   }
 }
 
-/* line 97, ../sass/common.scss */
+/* line 136, ../sass/common.scss */
 .fa-bars {
   font-size: 22px;
 }
 
-/* line 101, ../sass/common.scss */
+/* line 140, ../sass/common.scss */
 .collapse {
   display: none;
 }
-/* line 105, ../sass/common.scss */
+/* line 144, ../sass/common.scss */
 .collapse.in {
   display: block;
 }
 @media (min-width: 768px) {
-  /* line 110, ../sass/common.scss */
+  /* line 149, ../sass/common.scss */
   .collapse {
     display: block;
   }
 }
 
-/* line 116, ../sass/common.scss */
+/* line 155, ../sass/common.scss */
 .nav-pills > li + li {
   margin-left: 0;
 }
 
-/* line 120, ../sass/common.scss */
+/* line 159, ../sass/common.scss */
 .button {
   position: relative;
   display: inline-block;
@@ -11280,20 +11325,20 @@ i {
   padding: 0 !important;
   background: none !important;
 }
-/* line 131, ../sass/common.scss */
+/* line 170, ../sass/common.scss */
 .button:hover {
   text-decoration: none !important;
 }
-/* line 135, ../sass/common.scss */
+/* line 174, ../sass/common.scss */
 .button:before, .button:after,
 .button span,
 .button span:before {
-  background: url('../images/button.png?1438803699');
+  background: url('/topisrael/images/button.png?1438803699');
   width: 23px;
   height: 19px;
   float: left;
 }
-/* line 145, ../sass/common.scss */
+/* line 184, ../sass/common.scss */
 .button span {
   float: none;
   display: block;
@@ -11314,7 +11359,7 @@ i {
   clear: both;
   display: block;
 }
-/* line 168, ../sass/common.scss */
+/* line 207, ../sass/common.scss */
 .button span:before {
   content: "";
   display: inline-block;
@@ -11324,7 +11369,7 @@ i {
   background-position: 0 -58px;
   float: none;
 }
-/* line 179, ../sass/common.scss */
+/* line 218, ../sass/common.scss */
 .button:before, .button:after {
   content: "";
   display: block;
@@ -11336,7 +11381,7 @@ i {
   background-repeat: no-repeat;
   background-position: 0 0;
 }
-/* line 195, ../sass/common.scss */
+/* line 234, ../sass/common.scss */
 .button:after {
   left: auto;
   right: 0;
@@ -11344,7 +11389,7 @@ i {
   float: left;
 }
 
-/* line 206, ../sass/common.scss */
+/* line 245, ../sass/common.scss */
 .pagination > li > a,
 .pagination > li > span {
   -moz-border-radius: 50% !important;
@@ -11353,16 +11398,16 @@ i {
   padding: 3px 10px;
   margin: 3px 2px;
 }
-/* line 214, ../sass/common.scss */
+/* line 253, ../sass/common.scss */
 .pagination span {
   color: #939393 !important;
   background: none !important;
 }
-/* line 218, ../sass/common.scss */
+/* line 257, ../sass/common.scss */
 .pagination span:hover {
   background: none !important;
 }
-/* line 223, ../sass/common.scss */
+/* line 262, ../sass/common.scss */
 .pagination .pagination-previous,
 .pagination .pagination-next {
   font-size: 30px;
@@ -11370,12 +11415,12 @@ i {
   padding: 0 12px 2px 9px;
   margin-top: 0;
 }
-/* line 233, ../sass/common.scss */
+/* line 272, ../sass/common.scss */
 .pagination .pagination-next {
   padding: 0 9px 2px 12px;
 }
 
-/* line 238, ../sass/common.scss */
+/* line 277, ../sass/common.scss */
 .short-description {
   margin-bottom: 20px;
   font-size: 34px;
@@ -11388,12 +11433,12 @@ i {
   clear: both;
   display: block;
 }
-/* line 249, ../sass/common.scss */
+/* line 288, ../sass/common.scss */
 .short-description .short-description-body {
   position: relative;
   overflow: hidden;
 }
-/* line 254, ../sass/common.scss */
+/* line 293, ../sass/common.scss */
 .short-description .fa-quote-left {
   color: #e6e6e6;
   font-size: 57px;
