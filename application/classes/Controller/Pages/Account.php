@@ -41,6 +41,7 @@ class Controller_Pages_Account extends Controller_BaseController {
                     Cookie::update_Arr_set_json('favoritcoup', $favoritcoup);
                     //получаем избранные купоны
                     $data->favorit_coupon = Model::factory('CouponsModel')->getCouponsId($favoritcoup);
+                    $data->favorit_coupon = parent::convertArrayTagsBusiness($data->favorit_coupon, 3);
                     //передаем количество купонов в шапку
                     parent::$count_coupon = count($favoritcoup);
                 }
@@ -54,6 +55,7 @@ class Controller_Pages_Account extends Controller_BaseController {
                     Cookie::update_Arr_set_json('favoritbus', $favoritbus);
                     //получаем избранные купоны
                     $data->favorits_bussines = Model::factory('BussinesModel')->getBussinesId($favoritbus);
+                    $data->favorits_bussines = parent::convertArrayTagsBusiness($data->favorits_bussines, 4);
                     //передаем количество купонов в шапку
                     parent::$count_bussines = count($favoritbus);
                 }
@@ -90,6 +92,7 @@ class Controller_Pages_Account extends Controller_BaseController {
         //получаем избранные купоны
         if (parent::$favorits_coupon != null) {
             $data->favorit_coupon = Model::factory('CouponsModel')->getCouponsId(parent::$favorits_coupon);
+            $data->favorit_coupon = parent::convertArrayTagsBusiness($data->favorit_coupon, 3);
         }
         //получаем избранные бизнесы
         if (parent::$favorits_bussines != null) {
@@ -119,12 +122,11 @@ class Controller_Pages_Account extends Controller_BaseController {
 
                 //проверяем нет ли у пользователя сохраненных в базе купонов в избранном
                 //если есть обновляем куки файл если нету создаем
-                $favoritcoup = Model::factory('CouponsModel')->getCouponsFavoritesUserId(Auth::instance()->get_user()->id);
-                if ($favoritcoup !== false) {
-
-                    //пересоздаем купон на основе данных из таблицы
-                    Cookie::update_Arr_set_json('favoritcoup', $favoritcoup);
-                }
+//                $favoritcoup = Model::factory('CouponsModel')->getCouponsFavoritesUserId(Auth::instance()->get_user()->id);
+//                if ($favoritcoup !== false) {
+//                    //пересоздаем купон на основе данных из таблицы
+//                    Cookie::update_Arr_set_json('favoritcoup', $favoritcoup);
+//                }
 
                 $session = Session::instance();
                 if ($session->get('redirectAfterLogin')!='')

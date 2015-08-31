@@ -43,8 +43,11 @@ class Controller_Pages_Coupons extends Controller_BaseController {
             $this->blocArticlesAfter()
         ));
 
+
         //преобразование масива для правильного вывода
         $result_data = parent::convertArrayVievData($data['data']);
+
+
 
         //рисуем купоны
         $content_coupons = View::factory('ajax_views/coupons_list_ajax');

@@ -29,6 +29,10 @@
     <?foreach ($script as $row_script):?>
         <script src="<?=URL::base();?><?=$row_script?>"></script>
     <?endforeach?>
+
+    <?if (!empty($scripts_map)): //скрипт для карты?>
+        <script src="<?=URL::base();?><?=$scripts_map?>"></script>
+    <?endif?>
 <!--    <link rel="shortcut icon" href="../../public/img/favicon.ico" type="image/x-icon">-->
 </head>
 <body>

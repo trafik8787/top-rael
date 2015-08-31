@@ -1,4 +1,4 @@
-/* line 5, ../sass/social.scss */
+/* line 5, ../.sass/social.scss */
 .social {
   border: 0 !important;
   -moz-border-radius: 0 !important;
@@ -13,19 +13,19 @@
   line-height: 40px !important;
   padding: 0;
 }
-/* line 18, ../sass/social.scss */
+/* line 18, ../.sass/social.scss */
 .social.facebook {
   background-color: #49659f !important;
 }
-/* line 22, ../sass/social.scss */
+/* line 22, ../.sass/social.scss */
 .social.twitter {
   background-color: #47afff !important;
 }
-/* line 26, ../sass/social.scss */
+/* line 26, ../.sass/social.scss */
 .social.vk {
   background-color: #7b97d2 !important;
 }
-/* line 30, ../sass/social.scss */
+/* line 30, ../.sass/social.scss */
 .social.email {
   background-color: #db4c9f !important;
 }

@@ -1,27 +1,27 @@
-/* line 5, ../sass/recomendation.scss */
+/* line 5, ../.sass/recomendation.scss */
 .recomendation {
   font-size: 20px;
   padding: 6px 0;
 }
 @media (max-width: 768px) {
-  /* line 5, ../sass/recomendation.scss */
+  /* line 5, ../.sass/recomendation.scss */
   .recomendation {
     text-align: center;
   }
 }
-/* line 15, ../sass/recomendation.scss */
+/* line 15, ../.sass/recomendation.scss */
 .recomendation .recomendation-icons {
   display: inline-block;
   margin: 0 30px;
 }
 @media (max-width: 768px) {
-  /* line 15, ../sass/recomendation.scss */
+  /* line 15, ../.sass/recomendation.scss */
   .recomendation .recomendation-icons {
     display: block;
     margin: 10px 0;
   }
 }
-/* line 25, ../sass/recomendation.scss */
+/* line 25, ../.sass/recomendation.scss */
 .recomendation .btn-link {
   padding-left: 0;
   padding-right: 0;

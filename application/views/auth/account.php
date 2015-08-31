@@ -167,75 +167,77 @@
 
                     <div class="panel-body">
 
-                        <div class="clearfix">
-
-                            <?if (!empty($favorit_coupon)):?>
-
-                                <?foreach($favorit_coupon as $rows_data_coupon):?>
 
 
-                                    <div class="col-md-4">
-                                        <div class="coupon coupon-big">
+                        <?if (!empty($favorit_coupon)):?>
 
-                                            <a href="#" data-id="<?=$rows_data_coupon['id']?>" class="pin w-delete-coupon-favor"><i class="fa fa-trash"></i></a>
+                            <?foreach($favorit_coupon as $rows_data_coupon):?>
 
-                                            <div class="coupon-body">
+                                <div class="clearfix">
 
-                                                <div class="coupon-content">
+                                    <?foreach ($rows_data_coupon as $rows_data_coupon_favor):?>
 
-                                                    <div class="coupon-content-heading">
-                                                        <?=$rows_data_coupon['BusName']?>
+                                        <div class="col-md-4">
+                                            <div class="coupon coupon-big">
+
+                                                <a href="#" data-id="<?=$rows_data_coupon_favor['id']?>" class="pin w-delete-coupon-favor"><i class="fa fa-trash"></i></a>
+
+                                                <div class="coupon-body">
+
+                                                    <div class="coupon-content">
+
+                                                        <div class="coupon-content-heading">
+                                                            <?=$rows_data_coupon_favor['BusName']?>
+                                                        </div>
+                                                        <a class="coupon-image" href="/modalcoupon/<?=$rows_data_coupon_favor['id']?>" data-toggle="modal" data-target=".bs-coupon-modal-sm">
+                                                            <img src="<?=$rows_data_coupon_favor['img_coupon']?>" width="155" height="125" alt="" title=""/>
+                                                        </a>
                                                     </div>
-                                                    <a class="coupon-image" href="/modalcoupon/<?=$rows_data_coupon['id']?>" data-toggle="modal" data-target=".bs-coupon-modal-sm">
-                                                        <img src="<?=$rows_data_coupon['img_coupon']?>" width="155" height="125" alt="" title=""/>
-                                                    </a>
-                                                </div>
 
-                                                <div class="coupon-sidebar">
-                                                    <div class="coupon-sidebar-content">
-                                                        <div class="coupon-sidebar-heading">
-                                                            <div class="coupon-object-top">
+                                                    <div class="coupon-sidebar">
+                                                        <div class="coupon-sidebar-content">
+                                                            <div class="coupon-sidebar-heading">
+                                                                <div class="coupon-object-top">
 
-                                                                <div class="coupon-title">
-                                                                    Купон
-                                                                    <small class="block"><?=$rows_data_coupon['name']?></small>
+                                                                    <div class="coupon-title">
+                                                                        Купон
+                                                                        <small class="block"><?=$rows_data_coupon_favor['name']?></small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="coupon-sidebar-body">
+                                                                <div class="coupon-object-middle">
+
+                                                                    <div class="coupon-title">
+                                                                        <?=$rows_data_coupon_favor['secondname']?>
+                                                                        <span class="block">скидка</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="coupon-sidebar-footer">
+
+                                                                <div class="coupon-object-bottom">
+
+                                                                    <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_data_coupon_favor['dateoff']), 'j %MONTH% Y'); ?></small>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="coupon-sidebar-body">
-                                                            <div class="coupon-object-middle">
 
-                                                                <div class="coupon-title">
-                                                                    <?=$rows_data_coupon['secondname']?>
-                                                                    <span class="block">скидка</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="coupon-sidebar-footer">
-
-                                                            <div class="coupon-object-bottom">
-
-                                                                <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_data_coupon['dateoff']), 'j %MONTH% Y'); ?></small>
-                                                            </div>
-                                                        </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <?endforeach?>
 
-                                <?endforeach?>
+                                </div>
 
-                            <?else:?>
-                            <div class="col-md-12">
-                                <span>Тут купоны</span>
-                            </div>
-                            <?endif?>
+                            <?endforeach?>
 
-
-
+                        <?else:?>
+                        <div class="col-md-12">
+                            <span>Тут купоны</span>
                         </div>
+                        <?endif?>
 
                         <br/>
 

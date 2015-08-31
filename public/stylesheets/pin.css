@@ -1,15 +1,15 @@
-/* line 5, ../sass/pin.scss */
+/* line 5, ../.sass/pin.scss */
 .pin-aria {
   font-size: 18px;
 }
-/* line 8, ../sass/pin.scss */
+/* line 8, ../.sass/pin.scss */
 .pin-aria .pin {
   display: block;
   float: left;
   margin-right: 10px;
 }
 
-/* line 15, ../sass/pin.scss */
+/* line 15, ../.sass/pin.scss */
 .pin {
   text-align: center;
   display: inline-block;
@@ -26,7 +26,7 @@
   box-shadow: rgba(0, 0, 0, 0.4) 0 2px 2px;
   position: relative;
 }
-/* line 33, ../sass/pin.scss */
+/* line 33, ../.sass/pin.scss */
 .pin .fa,
 .pin .glyphicon {
   position: absolute;
@@ -37,13 +37,13 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 41, ../sass/pin.scss */
+/* line 41, ../.sass/pin.scss */
 .pin .fa.fa-star,
 .pin .glyphicon.fa-star {
   font-size: 18px;
   margin-left: -0.5px;
 }
-/* line 46, ../sass/pin.scss */
+/* line 46, ../.sass/pin.scss */
 .pin .fa.fa-thumb-tack,
 .pin .glyphicon.fa-thumb-tack {
   font-size: 20px;
@@ -52,164 +52,47 @@
   -webkit-transform: translate(-50%, -50%) rotate(45deg);
   transform: translate(-50%, -50%) rotate(45deg);
 }
-/* line 51, ../sass/pin.scss */
+/* line 51, ../.sass/pin.scss */
 .pin .fa.fa-map-marker,
 .pin .glyphicon.fa-map-marker {
   font-size: 22px;
 }
-/* line 55, ../sass/pin.scss */
+/* line 55, ../.sass/pin.scss */
 .pin .fa.fa-user,
 .pin .glyphicon.fa-user {
   font-size: 18px;
 }
-/* line 59, ../sass/pin.scss */
+/* line 59, ../.sass/pin.scss */
 .pin .fa.fa-file-text,
 .pin .glyphicon.fa-file-text {
   font-size: 16px;
 }
-/* line 63, ../sass/pin.scss */
+/* line 63, ../.sass/pin.scss */
 .pin .fa.fa-paper-plane,
 .pin .glyphicon.fa-paper-plane {
   font-size: 16px;
   margin-left: -1.5px;
 }
-/* line 68, ../sass/pin.scss */
+/* line 68, ../.sass/pin.scss */
 .pin .fa.fa-trash,
 .pin .glyphicon.fa-trash {
   font-size: 20px;
 }
-/* line 72, ../sass/pin.scss */
+/* line 72, ../.sass/pin.scss */
 .pin .fa.fa-pencil,
 .pin .glyphicon.fa-pencil {
   font-size: 18px;
   margin-left: 0.5px;
 }
-/* line 77, ../sass/pin.scss */
+/* line 77, ../.sass/pin.scss */
 .pin .fa.fa-lock,
 .pin .glyphicon.fa-lock {
   font-size: 19px;
   margin-left: -0.5px;
 }
-/* line 82, ../sass/pin.scss */
+/* line 82, ../.sass/pin.scss */
 .pin .fa.fa-sign-out,
 .pin .glyphicon.fa-sign-out {
   font-size: 18px;
   margin-left: 1px;
 }
-
-/*
-.pin {
-
-  position: relative;
-
-  display: inline-block;
-
-  color: $brand-primary;
-
-  background-color: $color-white;
-
-  text-align: center;
-
-  cursor: pointer;
-
-  @include border-radius(50%);
-  @include box-shadow(rgba(0, 0, 0, 0.4) 0 2px 2px);
-
-  width: ceil(($pin-size-base + $pin-padding)*1.5);
-  height: ceil(($pin-size-base + $pin-padding)*1.5);
-
-  padding: ceil($pin-padding*1.5);
-
-  .fa,
-  .glyphicon {
-
-    &.fa-star{
-      font-size:19px;
-    }
-
-    cursor: pointer;
-
-    font-size: ceil($pin-size-base*1.5);
-    line-height: ceil($pin-size-base*1.5);
-    width: ceil($pin-size-base*1.5);
-
-    position: absolute;
-    left: 50%;
-    top: 50%;
-
-    @include translate(-50%, -50%);
-  }
-
-  /* @media (max-width: 320px) {
-     &{
-       width: ceil(($pin-size-base + $pin-padding)*1.2);
-       height: ceil(($pin-size-base + $pin-padding)*1.2);
-
-       padding: ceil($pin-padding*1.2);
-
-       right: - ceil((($pin-size-base + $pin-padding)*1.2)/2);
-       top: - ceil((($pin-size-base + $pin-padding)*1.2)/2);
-
-       .fa,
-       .glyphicon{
-
-         font-size: ceil($pin-size-base*1.2);
-         line-height: ceil($pin-size-base*1.2);
-         width: ceil($pin-size-base*1.2);
-
-         position:absolute;
-         left:50%;
-         top:50%;
-       }
-     }
-   }
-
-   @media (min-width: 768px) {
-     &{
-       width: ceil(($pin-size-base + $pin-padding));
-       height: ceil(($pin-size-base + $pin-padding));
-
-       padding: ceil($pin-padding);
-
-       right: - ceil((($pin-size-base + $pin-padding))/2);
-       top: - ceil((($pin-size-base + $pin-padding))/2);
-
-       .fa,
-       .glyphicon{
-
-         font-size: ceil($pin-size-base);
-         line-height: ceil($pin-size-base);
-         width: ceil($pin-size-base);
-
-         position:absolute;
-         left:50%;
-         top:50%;
-       }
-     }
-   }
-
-   @media (min-width: 1200px) {
-     &{
-       width: ceil(($pin-size-base + $pin-padding)*1.5);
-       height: ceil(($pin-size-base + $pin-padding)*1.5);
-
-       padding: ceil($pin-padding*1.5);
-
-       right: - ceil((($pin-size-base + $pin-padding)*1.5)/2);
-       top: - ceil((($pin-size-base + $pin-padding)*1.5)/2);
-
-       .fa,
-       .glyphicon{
-
-         font-size: ceil($pin-size-base*1.5);
-         line-height: ceil($pin-size-base*1.5);
-         width: ceil($pin-size-base*1.5);
-
-         position:absolute;
-         left:50%;
-         top:50%;
-       }
-     }
-   }
-}
-*/

@@ -7,20 +7,26 @@
  */
 ?>
 <content>
+
+
     <div id="content">
 
-        <div class="row">
-            <!-- Context -->
-            <div class="col-md-8">
-                <div id="context">
-                    карта
-                </div>
-            </div>
+        <div id="map" style="height:550px;"></div>
 
-            <!-- Bloc Right -->
-            <?=isset($bloc_right)? $bloc_right : ''?>
+
+        <div id="google-map-search">
+            <input type="text" class="form-control" id="pac-input" placeholder="Введите адресс или название места"/>
         </div>
+
+        <a href="javascript:;" data-markers="1">Remove</a>
 
     </div>
 
+
 </content>
+
+
+
+
+
+

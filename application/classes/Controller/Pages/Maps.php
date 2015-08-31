@@ -10,7 +10,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
 	public function action_index()
 	{
         $content = View::factory('pages/maps');
-
+        $this->template->scripts_map = 'public/javascripts/google.js';
         $content->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
             View::factory('blocks_includ/sicseti'),

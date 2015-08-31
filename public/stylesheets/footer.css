@@ -1,4 +1,4 @@
-/* line 8, ../sass/footer.scss */
+/* line 8, ../.sass/footer.scss */
 #footer {
   position: relative;
   background: #007898;
@@ -7,71 +7,71 @@
   margin-right: -15px;
 }
 @media (min-width: 768px) {
-  /* line 8, ../sass/footer.scss */
+  /* line 8, ../.sass/footer.scss */
   #footer {
     margin-left: 0;
     margin-right: 0;
   }
 }
-/* line 22, ../sass/footer.scss */
+/* line 22, ../.sass/footer.scss */
 #footer #footer-header {
   border-bottom: 1px solid #57a5ba;
   padding: 10px 15px;
 }
-/* line 28, ../sass/footer.scss */
+/* line 28, ../.sass/footer.scss */
 #footer #footer-header .search {
   padding-top: 10px;
 }
-/* line 31, ../sass/footer.scss */
+/* line 31, ../.sass/footer.scss */
 #footer #footer-header .search .form-control {
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
   border-radius: 20px;
 }
 @media (min-width: 768px) {
-  /* line 37, ../sass/footer.scss */
+  /* line 37, ../.sass/footer.scss */
   #footer #footer-header {
     padding: 20px 30px;
   }
-  /* line 40, ../sass/footer.scss */
+  /* line 40, ../.sass/footer.scss */
   #footer #footer-header .logo {
     float: left;
   }
-  /* line 44, ../sass/footer.scss */
+  /* line 44, ../.sass/footer.scss */
   #footer #footer-header .search {
     float: right;
     padding-top: 4.5px;
   }
 }
-/* line 52, ../sass/footer.scss */
+/* line 52, ../.sass/footer.scss */
 #footer #footer-content {
   padding: 10px 15px;
 }
-/* line 49, ../sass/_common-variables.scss */
+/* line 49, ../.sass/_common-variables.scss */
 #footer #footer-content:after {
   content: "";
   clear: both;
   display: block;
 }
 @media (min-width: 768px) {
-  /* line 59, ../sass/footer.scss */
+  /* line 59, ../.sass/footer.scss */
   #footer #footer-content {
     padding: 20px 30px;
   }
 }
-/* line 65, ../sass/footer.scss */
+/* line 65, ../.sass/footer.scss */
 #footer #footer-bottom {
   font-size: 16px;
   border-top: 1px solid #57a5ba;
   padding: 10px 15px;
 }
 @media (min-width: 768px) {
-  /* line 71, ../sass/footer.scss */
+  /* line 71, ../.sass/footer.scss */
   #footer #footer-bottom {
     padding: 10px 30px;
   }
 }
-/* line 78, ../sass/footer.scss */
+/* line 78, ../.sass/footer.scss */
 #footer nav ul {
   display: block;
   list-style-type: none;
@@ -79,12 +79,12 @@
   padding: 0;
 }
 @media (max-width: 768px) {
-  /* line 78, ../sass/footer.scss */
+  /* line 78, ../.sass/footer.scss */
   #footer nav ul {
     margin-bottom: 20px;
   }
 }
-/* line 91, ../sass/footer.scss */
+/* line 91, ../.sass/footer.scss */
 #footer nav ul > li > a {
   font-size: 16px;
   line-height: 30px;
