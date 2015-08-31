@@ -29,70 +29,71 @@
 /* line 33, ../.sass/pin.scss */
 .pin .fa,
 .pin .glyphicon {
+  display: table;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  left: 0;
+  top: 0;
 }
-/* line 41, ../.sass/pin.scss */
+/* line 44, ../.sass/pin.scss */
+.pin .fa:before,
+.pin .glyphicon:before {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+/* line 50, ../.sass/pin.scss */
 .pin .fa.fa-star,
 .pin .glyphicon.fa-star {
   font-size: 18px;
-  margin-left: -0.5px;
 }
-/* line 46, ../.sass/pin.scss */
+/* line 54, ../.sass/pin.scss */
 .pin .fa.fa-thumb-tack,
 .pin .glyphicon.fa-thumb-tack {
   font-size: 20px;
-  -moz-transform: translate(-50%, -50%) rotate(45deg);
-  -ms-transform: translate(-50%, -50%) rotate(45deg);
-  -webkit-transform: translate(-50%, -50%) rotate(45deg);
-  transform: translate(-50%, -50%) rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
-/* line 51, ../.sass/pin.scss */
+/* line 59, ../.sass/pin.scss */
 .pin .fa.fa-map-marker,
 .pin .glyphicon.fa-map-marker {
   font-size: 22px;
 }
-/* line 55, ../.sass/pin.scss */
+/* line 63, ../.sass/pin.scss */
 .pin .fa.fa-user,
 .pin .glyphicon.fa-user {
   font-size: 18px;
 }
-/* line 59, ../.sass/pin.scss */
+/* line 67, ../.sass/pin.scss */
 .pin .fa.fa-file-text,
 .pin .glyphicon.fa-file-text {
   font-size: 16px;
 }
-/* line 63, ../.sass/pin.scss */
+/* line 71, ../.sass/pin.scss */
 .pin .fa.fa-paper-plane,
 .pin .glyphicon.fa-paper-plane {
   font-size: 16px;
-  margin-left: -1.5px;
 }
-/* line 68, ../.sass/pin.scss */
+/* line 75, ../.sass/pin.scss */
 .pin .fa.fa-trash,
 .pin .glyphicon.fa-trash {
   font-size: 20px;
 }
-/* line 72, ../.sass/pin.scss */
+/* line 79, ../.sass/pin.scss */
 .pin .fa.fa-pencil,
 .pin .glyphicon.fa-pencil {
   font-size: 18px;
-  margin-left: 0.5px;
 }
-/* line 77, ../.sass/pin.scss */
+/* line 83, ../.sass/pin.scss */
 .pin .fa.fa-lock,
 .pin .glyphicon.fa-lock {
   font-size: 19px;
-  margin-left: -0.5px;
 }
-/* line 82, ../.sass/pin.scss */
+/* line 87, ../.sass/pin.scss */
 .pin .fa.fa-sign-out,
 .pin .glyphicon.fa-sign-out {
   font-size: 18px;
-  margin-left: 1px;
 }

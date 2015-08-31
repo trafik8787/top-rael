@@ -291,7 +291,9 @@ class Model_BussinesModel extends Model_BaseModel {
 
                 array('artic.id', 'ArticId'),
                 array('artic.name', 'ArticName'),
+                array('artic.secondname', 'ArticSecondName'),
                 array('artic.url', 'ArticUrl'),
+                array('artic.images_article', 'ArticImage'),
                 array('artic.content', 'ArticContent'),
 
                 array('cat.name', 'CatName'),
@@ -489,8 +491,11 @@ class Model_BussinesModel extends Model_BaseModel {
             if (!empty($row['ArticId'])) {
                 if (!array_key_exists($row['ArticId'], $ArticTmp)) {
                     $ArticTmp[$row['ArticId']] = $row['ArticId'];
-                    $end_result['ArticArr'][] = array('ArticId' => $row['ArticId'], 'ArticName' => $row['ArticName'],
+                    $end_result['ArticArr'][] = array('ArticId' => $row['ArticId'],
+                        'ArticName' => $row['ArticName'],
+                        'ArticSecondName' => $row['ArticSecondName'],
                         'ArticUrl' => $row['ArticUrl'],
+                        'ArticImage' => $row['ArticImage'],
                         'ArticContent' => $row['ArticContent']);
 
                 }
@@ -500,6 +505,25 @@ class Model_BussinesModel extends Model_BaseModel {
 
 
         }
+
+
+        //вызываем метод получения данных из куки
+        Controller_BaseController::favorits_coupon();
+        //добавляем элемент масива если добавлен в избранное
+        if (!empty(Controller_BaseController::$favorits_coupon)) {
+           // die(HTML::x(Controller_BaseController::$favorits_bussines));
+            $new_result = array();
+            foreach ($end_result['CoupArr'] as $result_row) {
+
+                if (in_array($result_row['CoupId'], Controller_BaseController::$favorits_coupon)) {
+                    $result_row['coupon_favorit'] = 1;
+                }
+                $new_result[] = $result_row;
+            }
+            $end_result['CoupArr'] = $new_result;
+        }
+
+
 
         return $end_result;
     }

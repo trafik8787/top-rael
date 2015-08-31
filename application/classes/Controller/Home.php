@@ -10,7 +10,7 @@ class Controller_Home extends Controller_BaseController {
 
 	public function action_index(){
 
-           // Model::factory('BaseModel')->updateBus();
+           // Model::factory('BaseModel')->logo();
 //        $er = json_encode(array('qwe' => 'sdfsdfsdfsdfsdf', 'asd'=> 'asdasdasd'));
 //        Cookie::set('__count', $er);
 //        $redis = new Redis();
