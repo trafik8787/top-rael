@@ -18,6 +18,9 @@
                 '</select>' +
                 '<div class="form-inline">' +
                 '<input class="form-control" placeholder="Адрес" type="text" name="dop_addres[]" value="" style="width: 46%;"/>' +
+                '<input class="form-control" placeholder="Телефон" type="text" name="tel_dop_adress[]" value=""/>'+
+                '<input class="form-control" placeholder="Расписание" type="text" name="dop_sheduler[]" value=""/>'+
+                '<br/>'+
                 '<input class="form-control" placeholder="Широта" type="text" name="maps_x[]" value=""/>' +
                 '<input class="form-control" placeholder="Долгота" type="text" name="maps_y[]" value=""/>' +
                 '</div>'+
@@ -52,6 +55,9 @@
                         </select>
                         <div class="form-inline">
                             <input class="form-control" placeholder="Адрес" name="dop_addres[<?=$key?>]" type="text" value="<?=$row_data['address']?>" style="width: 46%;"/>
+                            <input class="form-control" placeholder="Телефон" type="text" name="tel_dop_adress[<?=$key?>]" value="<?=isset($row_data['tel_dop_adress']) ? $row_data['tel_dop_adress'] : ''?>"/>
+                            <input class="form-control" placeholder="Расписание" type="text" name="dop_sheduler[<?=$key?>]" value="<?=isset($row_data['dop_sheduler']) ? $row_data['dop_sheduler'] : ''?>"/>
+                            <br/>
                             <input class="form-control" placeholder="Широта" type="text" name="maps_x[<?=$key?>]" value="<?=$row_data['maps_x']?>"/>
                             <input class="form-control" placeholder="Долгота" type="text" name="maps_y[<?=$key?>]" value="<?=$row_data['maps_y']?>"/>
                         </div>
@@ -69,6 +75,9 @@
                     </select>
                     <div class="form-inline">
                         <input class="form-control" placeholder="Адрес" name="dop_addres[]" type="text" value="" style="width: 46%;"/>
+                        <input class="form-control" placeholder="Телефон" type="text" name="tel_dop_adress[]" value=""/>
+                        <input class="form-control" placeholder="Расписание" type="text" name="dop_sheduler[]" value=""/>
+                        <br/>
                         <input class="form-control" placeholder="Широта" type="text" name="maps_x[]" value=""/>
                         <input class="form-control" placeholder="Долгота" type="text" name="maps_y[]" value=""/>
                     </div>

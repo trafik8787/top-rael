@@ -9,6 +9,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
 
 	public function action_index()
 	{
+        $data = array();
         $content = View::factory('pages/maps');
         $this->template->scripts_map = 'public/javascripts/google.js';
         $content->bloc_right = parent::RightBloc(array(
@@ -16,6 +17,94 @@ class Controller_Pages_Maps extends Controller_BaseController {
             View::factory('blocks_includ/sicseti'),
         ));
 
+        $result = Model::factory('BussinesModel')->getBusinessAll_Maps();
+
+        $content->section = parent::$general_meny;
+
+        HTML::x($result);
+
+        foreach ($result as $row) {
+
+
+            $data[] = array(
+                'id' => $row['BusId'],
+                'title' => $row['BusName'],
+                'logo' => $row['BusLogo'],
+                'section' => array(
+                    'id' => $row['CatArr'][0]['CatId'],
+                    'name' => $row['CatArr'][0]['CatName'],
+                    'icon' => $row['CatArr'][0]['CatIcon'],
+                    'visible' => true
+                ),
+                'list' => array(
+                    array(
+                        'key' => "",
+                        'value' => $row['BusSchedule']
+                    ),
+                    array(
+                        'key' => "Адрес",
+                        'value' => $row['BusAddress']
+                    ),
+                    array(
+                        'key' => "Тел",
+                        'value' => $row['BusTel']
+                    )
+                ),
+                'link' => "/business/".$row['BusUrl'],
+                'linkCoupons' => "http://google.com",
+                'linkLuxury' => "http://google.com",
+                'location' => array(
+                    'lat' => $row['BusMapsX'],
+                    'lng' => $row['BusMapsY']
+                )
+            );
+
+            if (!empty($row['BusDopAddress'])) {
+
+                foreach ($row['BusDopAddress'] as $rows_dop) {
+
+                    $data[] = array(
+                        'id' => $row['BusId'],
+                        'title' => $row['BusName'],
+                        'logo' => $row['BusLogo'],
+                        'section' => array(
+                            'id' => $row['CatArr'][0]['CatId'],
+                            'name' => $row['CatArr'][0]['CatName'],
+                            'icon' => $row['CatArr'][0]['CatIcon'],
+                            'visible' => true
+                        ),
+                        'list' => array(
+                            array(
+                                'key' => "",
+                                'value' => isset($rows_dop['dop_sheduler']) ? $rows_dop['dop_sheduler'] : ''
+                            ),
+                            array(
+                                'key' => "Адрес",
+                                'value' => isset($rows_dop['address']) ? $rows_dop['address'] : ''
+                            ),
+                            array(
+                                'key' => "Тел",
+                                'value' => isset($rows_dop['tel_dop_adress']) ? $rows_dop['tel_dop_adress'] : ''
+                            )
+                        ),
+                        'link' => "/business/".$row['BusUrl'],
+                        'linkCoupons' => "http://google.com",
+                        'linkLuxury' => "http://google.com",
+                        'location' => array(
+                            'lat' => $rows_dop['maps_x'],
+                            'lng' => $rows_dop['maps_y']
+                        )
+                    );
+
+                }
+
+            }
+
+
+        }
+
+
+        $content->json = json_encode($data);
         $this->template->content = $content;
 	}
 

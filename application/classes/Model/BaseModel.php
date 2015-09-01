@@ -90,27 +90,6 @@ class Model_BaseModel extends Model {
     }
 
 
-    public function updateBus(){
-        $row = DB::select()
-            ->from('business')
-            ->execute()->as_array();
-
-        foreach ($row as $rows) {
-
-            if ($rows['home_busines_foto'] != '') {
-
-                $img = basename($rows['home_busines_foto']);
-
-                $path_img = '/uploads/img_business/thumbs/' . $img;
-
-                $query = DB::update('business')
-                    ->set(array('home_busines_foto' => $path_img))
-                    ->where('id', '=', $rows['id'])->execute();
-            }
-        }
-    }
-
-
     public function getBaners($url, $url_section_category){
 
         //вывод в категориях

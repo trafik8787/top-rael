@@ -6,11 +6,18 @@
  * Time: 16:55
  */
 ?>
+<script>
+     window.dataMapsBus = <?=$json?>;
+
+</script>
 <content>
 
 
     <div id="content">
 
+        <div id="json" style="display: none">
+            <?=isset($json) ? $json : ''?>
+        </div>
         <div id="map" style="height:550px;"></div>
 
         <div class="google-map-filter">
@@ -37,9 +44,10 @@
 
                 <div class="checkbox">
 
+
                     <label class="restaurants" data-map-filter="1">
                         <div class="form-control input-md">
-                            <input type="checkbox" value="1" checked="checked">
+                            <input type="checkbox" value="24" checked="checked">
                             <i class="input-icon fa fa-check"></i>
                         </div>
 
@@ -48,25 +56,25 @@
 
                     <label class="purchases" data-map-filter="2">
                         <div class="form-control input-md">
-                            <input type="checkbox" value="2" checked="checked">
+                            <input type="checkbox" value="25" checked="checked">
                             <i class="input-icon fa fa-check"></i>
                         </div>
 
-                        Покупки
+                        Шоппинг
                     </label>
 
                     <label class="night-life" data-map-filter="3">
                         <div class="form-control input-md">
-                            <input type="checkbox" value="3" checked="checked">
+                            <input type="checkbox" value="26" checked="checked">
                             <i class="input-icon fa fa-check"></i>
                         </div>
 
-                        Ночная жизнь
+                        Бары
                     </label>
 
                     <label class="relax" data-map-filter="4">
                         <div class="form-control input-md">
-                            <input type="checkbox" value="4" checked="checked">
+                            <input type="checkbox" value="32" checked="checked">
                             <i class="input-icon fa fa-check"></i>
                         </div>
 
@@ -75,7 +83,7 @@
 
                     <label class="beauty" data-map-filter="5">
                         <div class="form-control input-md">
-                            <input type="checkbox" value="5" checked="checked">
+                            <input type="checkbox" value="42" checked="checked">
                             <i class="input-icon fa fa-check"></i>
                         </div>
 
@@ -85,7 +93,7 @@
 
                     <label class="hotels" data-map-filter="6">
                         <div class="form-control input-md">
-                            <input type="checkbox" value="6" checked="checked">
+                            <input type="checkbox" value="43" checked="checked">
                             <i class="input-icon fa fa-check"></i>
                         </div>
 

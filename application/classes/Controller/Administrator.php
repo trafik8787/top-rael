@@ -1050,6 +1050,8 @@ class Controller_Administrator extends Controller_Core_Main {
             foreach (Cruds::$post['dop_sity'] as $key => $dop_sity) {
                 $arr_add_city[] = array('name' => $dop_sity,
                                         'address' => Cruds::$post['dop_addres'][$key],
+                                        'tel_dop_adress' => Cruds::$post['tel_dop_adress'][$key],
+                                        'dop_sheduler' => Cruds::$post['dop_sheduler'][$key],
                                         'maps_x' => Cruds::$post['maps_x'][$key],
                                         'maps_y' => Cruds::$post['maps_y'][$key]);
             }
@@ -1068,6 +1070,8 @@ class Controller_Administrator extends Controller_Core_Main {
             foreach (Cruds::$post['dop_sity'] as $key => $dop_sity) {
                 $arr_add_city[] = array('name' => $dop_sity,
                                         'address' => Cruds::$post['dop_addres'][$key],
+                                        'tel_dop_adress' => Cruds::$post['tel_dop_adress'][$key],
+                                        'dop_sheduler' => Cruds::$post['dop_sheduler'][$key],
                                         'maps_x' => Cruds::$post['maps_x'][$key],
                                         'maps_y' => Cruds::$post['maps_y'][$key]);
             }
