@@ -8,44 +8,47 @@ $(function () {
 function initMap() {
 
     var EventListener = new Orb.EventListener();
+    var geocoder = new google.maps.Geocoder();
     var markers = [];
     var map;
+
+    function favoritesClick() {
+        console.log(arguments);
+    }
 
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
         center: {lat: 32.0650, lng: 34.7700}
     });
 
-    //showAdressbyHash(map, function () {});
-
     var cluster = new MarkerClusterer(map, [], {ignoreHidden: true});
     var tmpl = template();
-
-    search();
 
     markers = setMarkes(getData());
 
     cluster.addMarkers(markers);
 
-    for(var i = 0; i < markers.length; i++){
+    for (var i = 0; i < markers.length; i++) {
         google.maps.event.addListener(markers[i], 'click', function () {
             tmpl.open(map, this);
         });
     }
 
     showMarkerByHash(map, markers);
+    search(tmpl.ib);
 
     EventListener.add(window, 'hashchange', function (response) {
         showMarkerByHash(map, markers)
     });
 
-    $('[data-markers]').off('click').on('click', function () {
+    $('[data-map-filter] input').off('click').on('click', function () {
 
-        var type = $(this).data('markers');
+        var checked = this.checked;
+        var section = this.value;
 
         tmpl.ib.close();
 
-        var $markers = getMarkersBySection(type, markers);
+        var $markers = getMarkersBySection(section, markers);
 
         for (var i = 0; i < $markers.length; i++) {
             var value = !$markers[i].visible;
@@ -53,13 +56,32 @@ function initMap() {
         }
     });
 
-    function search() {
+    $('[data-map-shortkey]').off('click').on('click', function () {
+
+        var $this = $(this);
+        var term = $this.data('map-shortkey');
+
+        if (!term) {
+            return false;
+        }
+
+        tmpl.ib.close();
+
+        workerSearchAdress(term, geocoder, function (results) {
+            map.setZoom(14);
+            map.setCenter(results[0].geometry.location);
+        });
+    });
+
+    function search(infobox) {
 
         var searchBox = new google.maps.places.SearchBox(document.getElementById('pac-input'));
 
         searchBox.addListener('places_changed', function () {
 
             var places = searchBox.getPlaces();
+
+            infobox.close();
 
             if (places.length == 0) {
                 return;
@@ -107,9 +129,9 @@ function initMap() {
                         value: "09-9514000"
                     }
                 ],
-                link: "",
-                linkCoupons: "",
-                linkLuxury: "",
+                link: "http://google.com",
+                linkCoupons: "http://google.com",
+                linkLuxury: "http://google.com",
                 location: {
                     lat: 32.063319,
                     lng: 34.771535
@@ -602,7 +624,7 @@ function initMap() {
         return $markers;
     }
 
-    function getMarkersBySection(sectionId, markers){
+    function getMarkersBySection(sectionId, markers) {
 
         var $markers = [];
 
@@ -638,12 +660,12 @@ function initMap() {
 
             var marker = getMarkerById($hash.marker, markers);
 
-            if(!marker){
+            if (!marker) {
                 tmpl.ib.close();
                 return;
             }
 
-            if (!marker.visible){
+            if (!marker.visible) {
                 return;
             }
 
@@ -653,32 +675,17 @@ function initMap() {
         }
     }
 
-    function showAdressbyHash(map, callback){
+    function workerSearchAdress(term, geocoder, callback) {
 
-        var $hash = Orb.Location.hash(window.location.href);
-        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': term}, function (results, status) {
 
-        if ($hash.hasOwnProperty('address')) {
-
-            geocoder.geocode({'address': $hash.address}, function(results, status) {
-
-                if (status === google.maps.GeocoderStatus.OK) {
-                    map.setZoom(14);
-                    map.setCenter(results[0].geometry.location);
+            if (status === google.maps.GeocoderStatus.OK) {
+                try {
+                    callback(results);
+                } catch (er) {
                 }
-
-                try{
-                    callback();
-                }catch(er){}
-
-            });
-
-            return;
-        }
-
-        try{
-            callback();
-        }catch(er){}
+            }
+        });
     }
 
     function template() {
@@ -692,7 +699,7 @@ function initMap() {
             boxClass: "marker",
             disableAutoPan: false,
             pixelOffset: new google.maps.Size(-50, -50),
-            closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+            //closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
             enableEventPropagation: true
         };
 
@@ -709,6 +716,9 @@ function initMap() {
             var title = titleContainer(link, marker.data.title);
             var type = typeContainer(marker.data.section);
             var list = listContainer(marker.data.list);
+            var favorite = favoritBtn(marker, favoritesClick);
+            var luxury = luxuryBtn(marker.data.linkLuxury);
+            var coupon = couponBtn(marker.data.linkCoupons);
 
             var context = document.createElement('div');
             context.setAttribute('class', 'marker-context');
@@ -719,6 +729,15 @@ function initMap() {
 
             var sidebar = document.createElement('div');
             sidebar.setAttribute('class', 'marker-sidebar');
+            sidebar.appendChild(favorite);
+
+            if (luxury) {
+                sidebar.appendChild(luxury);
+            }
+
+            if (coupon) {
+                sidebar.appendChild(coupon);
+            }
 
             container.appendChild(logo);
             container.appendChild(context);
@@ -753,6 +772,7 @@ function initMap() {
             $container.setAttribute('class', 'marker-title');
 
             $link.innerText = title;
+            $link.setAttribute('target', '_blank');
 
             $container.appendChild($link);
 
@@ -767,6 +787,7 @@ function initMap() {
             if (section.icon) {
                 var $image = document.createElement('img');
                 $image.setAttribute('src', section.icon);
+                $image.setAttribute('class', 'marker-type-icon');
 
                 $container.appendChild($image);
             }
@@ -800,6 +821,45 @@ function initMap() {
             }
 
             return $container;
+        };
+
+        var favoritBtn = function (marker, callback) {
+
+            var $container = document.createElement('div');
+            $container.setAttribute('class', 'marker-favorites');
+
+            var $href = document.createElement('a');
+
+            $href.innerHTML = '<i class="fa fa-star"></i> Сохранить в Избранное';
+
+            EventListener.add($href, 'click', function () {
+                try {
+                    callback(marker);
+                } catch (er) {
+                }
+            });
+
+            $container.appendChild($href);
+
+            return $container;
+        };
+
+        var luxuryBtn = function (link) {
+
+            var $container = document.createElement('div');
+            $container.setAttribute('class', 'marker-luxury');
+            $container.innerHTML = '<a href="' + (link || '#') + '" class="button" target="_blank"><span>LUXURY</span></a>';
+
+            return link ? $container : false;
+        };
+
+        var couponBtn = function (link) {
+
+            var $container = document.createElement('div');
+            $container.setAttribute('class', 'marker-coupon');
+            $container.innerHTML = '<a href="' + (link || '#') + '" target="_blank"><i class="fa fa-scissors"></i> Есть купон</a>';
+
+            return link ? $container : false;
         };
 
         return {
