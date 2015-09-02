@@ -6,7 +6,7 @@
  * Time: 17:55
  */
 
-//HTML::x($data);
+//HTML::x($related);
 ?>
 
 <script>
@@ -108,9 +108,21 @@
 
             <div class="page-profile-footer">
                 <div class="page-profile-content">
-                    <a href="#" class="pin-aria">
-                        <span class="pin"><i class="fa fa-star"></i></span>Добавить в избраные места
-                    </a>
+
+                    <?if (!empty($data['bussines_favorit']))://если купон добавлен в избранное?>
+                        <a href="#" class="pin-aria">
+                            <span class="pin" data-toggle="tooltip" data-placement="right" title="Этот бизнес уже добавлен в Избранное" style="background-color: #ccc">
+                                <i class="fa fa-star"></i>
+                            </span>В избранном
+                        </a>
+                    <?else:?>
+                        <a href="#" class="pin-aria w-add-bussines-favor" data-id="<?=$data['BusId']?>">
+                            <span class="pin" data-toggle="tooltip" data-placement="right">
+                                <i class="fa fa-star"></i>
+                            </span>Добавить в избраные места
+                        </a>
+                    <?endif?>
+
                 </div>
 
                 <div class="page-profile-sidebar">
@@ -347,97 +359,38 @@
 
             <div class="panel-body">
 
-                <div class="col-md-3">
-                    <div class="thumbnail">
+                <?foreach ($related as $rows_related):?>
+                    <div class="col-md-3">
 
-                        <a href="#" class="pin">
-                            <i class="fa fa-star"></i>
-                        </a>
+                        <div class="thumbnail">
 
-                        <a href="#" class="thumbnail-image">
-                            <img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="">
-                        </a>
+                            <?if (!empty($rows_related['bussines_favorit']))://если купон добавлен в избранное?>
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                    <i class="fa fa-star"></i>
+                                </a>
+                            <?else:?>
+                                <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_related['id']?>" class="pin w-add-bussines-favor">
+                                    <i class="fa fa-star"></i>
+                                </a>
+                            <?endif?>
 
-                        <div class="thumbnail-content">
-                            <h2 class="thumbnail-title">
-                                <a href="#">Ресторан "Круглый стол"</a>
-                                <small>Тель-Авив. Арлозоров 5</small>
-                            </h2>
+                            <a href="/business/<?=$rows_related['url']?>" class="thumbnail-image">
+                                <img src="<?=$rows_related['home_busines_foto']?>" width="240" height="150" alt="">
+                            </a>
 
-                            Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших
-                            гостей и родных? Хотите вспоминать о ней долгие годы, с радостью и
+                            <div class="thumbnail-content">
+                                <h2 class="thumbnail-title">
+                                    <a href="/business/<?=$rows_related['url']?>"><?=$rows_related['name']?></a>
+                                    <small><?=$rows_related['CityName'].', '.$rows_related['address']?></small>
+                                </h2>
+                                <?=Text::limit_chars(strip_tags($rows_related['info']), 200, null, true)?>
+
+                            </div>
                         </div>
+
                     </div>
-                </div>
+                <?endforeach?>
 
-                <div class="col-md-3">
-                    <div class="thumbnail">
-
-                        <a href="#" class="pin">
-                            <i class="fa fa-star"></i>
-                        </a>
-
-                        <a href="#" class="thumbnail-image">
-                            <img src="/public/uploade/thumbnail2.jpg" width="240" height="150" alt="">
-                        </a>
-
-                        <div class="thumbnail-content">
-                            <h2 class="thumbnail-title">
-                                <a href="#">Магазин "Алмаз"</a>
-                                <small>Тель-Авив. Арлозоров 5</small>
-                            </h2>
-
-                            Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших
-                            гостей и родных? Хотите вспоминать о ней долгие годы, с радостью и
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="thumbnail">
-
-                        <a href="#" class="pin">
-                            <i class="fa fa-star"></i>
-                        </a>
-
-                        <a href="#" class="thumbnail-image">
-                            <img src="/public/uploade/thumbnail.jpg" width="240" height="150" alt="">
-                        </a>
-
-                        <div class="thumbnail-content">
-                            <h2 class="thumbnail-title">
-                                <a href="#">Ресторан "Круглый стол"</a>
-                                <small>Тель-Авив. Арлозоров 5</small>
-                            </h2>
-
-                            Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших
-                            гостей и родных? Хотите вспоминать о ней долгие годы, с радостью и
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="thumbnail">
-
-                        <a href="#" class="pin">
-                            <i class="fa fa-star"></i>
-                        </a>
-
-                        <a href="#" class="thumbnail-image">
-                            <img src="/public/uploade/thumbnail2.jpg" width="240" height="150" alt="">
-                        </a>
-
-                        <div class="thumbnail-content">
-                            <h2 class="thumbnail-title">
-                                <a href="#">Ресторан "Круглый стол"</a>
-                                <small>Тель-Авив. Арлозоров 5</small>
-                            </h2>
-
-                            Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших
-                            гостей и родных? Хотите вспоминать о ней долгие годы, с радостью и
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 

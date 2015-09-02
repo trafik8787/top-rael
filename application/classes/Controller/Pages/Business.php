@@ -20,7 +20,13 @@ class Controller_Pages_Business extends Controller_BaseController {
             View::factory('blocks_includ/business_uslugi', array('data' => $data['BusServicesArr'])),
             View::factory('blocks_includ/business_meny', array('data' => $data['BusFileMeny']))
         ));
+
+        $related = Model::factory('BussinesModel')->getBusinessRelated($data['CatArr'][0]['CatUrl2'], $data['BusId']);
+
+        $content->related = $related;
         $content->data = $data;
+
+
         $this->template->content = $content;
 	}
 

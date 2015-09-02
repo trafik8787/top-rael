@@ -359,6 +359,17 @@ class Model_BussinesModel extends Model_BaseModel {
         } else {
             $end_result = Cache::instance()->get($url_business);
         }
+
+        //вызываем метод получения данных из куки
+        Controller_BaseController::favorits_bussines();
+        if (!empty(Controller_BaseController::$favorits_bussines)) {
+
+            if (in_array($end_result['BusId'], Controller_BaseController::$favorits_bussines)) {
+                $end_result['bussines_favorit'] = 1;
+            }
+
+        }
+
         Cache::instance()->delete($url_business);
         return $end_result;
     }
@@ -432,11 +443,12 @@ class Model_BussinesModel extends Model_BaseModel {
                 //ищем раздел к которому принадлежит категория и формируем ссылку для карточки бизнеса
                 foreach ($category as $row_category) {
                     if ($row_category['id'] == $row['CatParentId']){
+                        $row['CatUrl2'] = $row['CatUrl'];
                         $row['CatUrl'] = $row_category['url'].'/'.$row['CatUrl'];
                     }
                 }
 
-                $end_result['CatArr'][] = array('CatId' => $row['CatId'], 'CatName' => $row['CatName'], 'CatUrl' => $row['CatUrl']);
+                $end_result['CatArr'][] = array('CatId' => $row['CatId'], 'CatName' => $row['CatName'], 'CatUrl' => $row['CatUrl'], 'CatUrl2' => $row['CatUrl2']);
 
             }
 
@@ -882,9 +894,12 @@ class Model_BussinesModel extends Model_BaseModel {
 
             ->join(array('tags', 'tag'))
             ->on('tag.id', '=', 'tagrelbus.id_tags')
-
-            ->where('bus.maps_cordinate_x', '<>', '')
-            ->and_where('bus.maps_cordinate_y', '<>', '')
+            ->where_open()
+                ->where('bus.maps_cordinate_x', '<>', '')
+                ->and_where('bus.maps_cordinate_y', '<>', '')
+                ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
+                ->and_where('bus.status', '=', 1)
+            ->where_close()
             ->cached()
             ->execute()->as_array();
 
@@ -980,6 +995,58 @@ class Model_BussinesModel extends Model_BaseModel {
         }
 
         return $end_result_new;
+    }
+
+
+    /**
+     * @param $url_category
+     * @return array
+     * получаем похожие бизнесы для карточки бизнеса
+     */
+    public function getBusinessRelated($url_category, $bus_not_id) {
+
+        $result = DB::select('business.*', array('city.name', 'CityName'))
+            ->from('category')
+            ->join('businesscategory')
+            ->on('category.id', '=', 'businesscategory.category_id')
+            ->join('business')
+            ->on('businesscategory.business_id', '=', 'business.id')
+            ->join('city', 'LEFT')
+            ->on('business.city', '=', 'city.id')
+            ->where_open()
+                ->where('category.url', '=', $url_category)
+                ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
+                ->and_where('business.id', '<>', $bus_not_id)
+                ->and_where('business.status', '=', 1)
+            ->where_close()
+            ->cached()
+            ->execute()->as_array();
+
+        //вызываем метод получения данных из куки
+        Controller_BaseController::favorits_bussines();
+        if (!empty(Controller_BaseController::$favorits_bussines)) {
+
+            $new_result = array();
+            foreach ($result as $result_row) {
+
+                if (in_array($result_row['id'], Controller_BaseController::$favorits_bussines)) {
+                    $result_row['bussines_favorit'] = 1;
+                }
+
+                $new_result[] = $result_row;
+            }
+            $result = $new_result;
+        }
+
+        $key_rand = array_rand($result, 4);
+
+        $resultNew = array();
+        foreach ($key_rand as $row) {
+            $resultNew[] = $result[$row];
+        }
+
+        return $resultNew;
+
     }
 
 
