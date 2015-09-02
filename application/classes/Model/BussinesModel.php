@@ -275,13 +275,16 @@ class Model_BussinesModel extends Model_BaseModel {
                 array('bus.title', 'BusTitle'),
                 array('bus.description', 'BusDescription'),
                 array('bus.keywords', 'BusKeywords'),
-                array('bus.city', 'BusCity'),
+
+                array('cit.name', 'BusCity'),
+
                 array('bus.address', 'BusAddress'),
+                array('bus.tel', 'BusTel'),
+                array('bus.schedule', 'BusSchedule'),
                 array('bus.maps_cordinate_x', 'BusMapsX'),
                 array('bus.maps_cordinate_y', 'BusMapsY'),
                 array('bus.dop_address', 'BusDopAddress'),
                 array('bus.services', 'BusServices'),
-                array('bus.tags', 'BusTags'),
                 array('bus.logo', 'BusLogo'),
                 array('bus.website', 'BusWebsite'),
                 array('bus.video', 'BusVideo'),
@@ -317,7 +320,13 @@ class Model_BussinesModel extends Model_BaseModel {
                 array('file.id', 'FileId'),
                 array('file.filename', 'FileFilename'),
                 array('file.title', 'FileTitle'),
-                array('file.gallery', 'FileGaleryId'))
+                array('file.gallery', 'FileGaleryId'),
+
+                array('tag.id', 'TagId'),
+                array('tag.name_tags', 'TagName'),
+                array('tag.url_tags', 'TagUrl')
+
+            )
 
                 ->from(array('business', 'bus'))
                 //купоны
@@ -338,6 +347,15 @@ class Model_BussinesModel extends Model_BaseModel {
                 //картинки галерей
                 ->join(array('files', 'file'), 'LEFT')
                 ->on('galry.id', '=', 'file.gallery')
+                //город
+                ->join(array('city', 'cit'), 'LEFT')
+                ->on('bus.city', '=', 'cit.id')
+
+                //теги
+                ->join(array('tags_relation_business', 'tagrelbus'), 'RIGHT')
+                ->on('tagrelbus.id_business', '=', 'bus.id')
+                ->join(array('tags', 'tag'))
+                ->on('tag.id', '=', 'tagrelbus.id_tags')
 
                 //связаная таблица обзоров и бизнесов для определения привязаных к бизнесу обзоров
                 ->join(array('articles_relation_business', 'artrelbus'), 'LEFT')
@@ -371,6 +389,7 @@ class Model_BussinesModel extends Model_BaseModel {
         }
 
         Cache::instance()->delete($url_business);
+
         return $end_result;
     }
 
@@ -394,11 +413,11 @@ class Model_BussinesModel extends Model_BaseModel {
         $GalryTmp = array();
         $FileTmp = array();
         $ArticTmp = array();
+        $TagsTmp = array();
 
 
         $end_result['BusId'] = $result[0]['BusId'];
         $end_result['BusName'] = $result[0]['BusName'];
-        $end_result['BusTags'] = $result[0]['BusTags'];
         $end_result['BusLogo'] = $result[0]['BusLogo'];
         $end_result['BusWebsite'] = $result[0]['BusWebsite'];
         $end_result['BusVideo'] = $result[0]['BusVideo'];
@@ -408,6 +427,8 @@ class Model_BussinesModel extends Model_BaseModel {
         $end_result['BusKeywords'] = $result[0]['BusKeywords'];
         $end_result['BusFileMeny'] = $result[0]['BusFileMeny'];
         $end_result['BusAddress'] = $result[0]['BusAddress'];
+        $end_result['BusTel'] = $result[0]['BusTel'];
+        $end_result['BusSchedule'] = $result[0]['BusSchedule'];
         $end_result['BusMapsX'] = $result[0]['BusMapsX'];
         $end_result['BusMapsY'] = $result[0]['BusMapsY'];
         $end_result['BusCity'] = $result[0]['BusCity'];
@@ -450,6 +471,16 @@ class Model_BussinesModel extends Model_BaseModel {
 
                 $end_result['CatArr'][] = array('CatId' => $row['CatId'], 'CatName' => $row['CatName'], 'CatUrl' => $row['CatUrl'], 'CatUrl2' => $row['CatUrl2']);
 
+            }
+
+            //теги
+            if (!empty($row['TagId'])) {
+                if (!array_key_exists($row['TagId'], $TagsTmp)) {
+                    $TagsTmp[$row['TagId']] = $row['TagId'];
+                    $end_result['TagArr'][] = array('TagId' => $row['TagId'], 'TagName' => $row['TagName'], 'TagUrl' => $row['TagUrl']);
+                }
+            } else {
+                $end_result['TagArr'] = array();
             }
 
             //купоны

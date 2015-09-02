@@ -2,7 +2,6 @@
  * Created by Fedor on 8/2/2015.
  */
 $(function () {
-    //couponsGallery();
     discountCarousel();
     galleryLarge();
     verticalGallery();
@@ -13,8 +12,10 @@ function verticalGallery() {
     $('.bx-gallery').each(function () {
 
         var minSlides = 4;
-        var bxImageBlock = $('.bx-image .layer', this);
-        var bxImage = $('img', bxImageBlock);
+        var bxImageBlock = $('.bx-image', this);
+        var bxImage = $('.layer img', bxImageBlock);
+        var bxCaption = $('.bx-caption', bxImageBlock);
+
         var gallery = $('.bx-slider .layers', this).bxSlider({
             mode: 'vertical',
             responsive: true,
@@ -26,15 +27,17 @@ function verticalGallery() {
 
         $('[data-bx-image]', this).off('click').on('click', function () {
 
-            var data = $(this).data('bx-image');
+            var $image = $(this).data('bx-image');
 
-            if (!data)
+            bxCaption.text($(this).data('bx-caption'));
+
+            if (!$image)
                 return;
 
             var zIndex = 1000;
 
             var image = $('<img>');
-            image.attr({src: data});
+            image.attr({src: $image});
 
             bxImage.replaceWith(image);
 
@@ -42,18 +45,10 @@ function verticalGallery() {
         });
 
         if (gallery.getSlideCount() <= minSlides) {
-
-            bxImageBlock.css({
-                top: 0,
-                bottom: 0
-            });
-
             $([
                 $('.btn-prev', this).get(0),
                 $('.btn-next', this).get(0)
-            ]).hide();
-
-            return;
+            ]).addClass('disabled');
         }
 
         $('.btn-prev', this).off('click').on('click', function () {
@@ -65,32 +60,6 @@ function verticalGallery() {
     });
 }
 
-function couponsGallery() {
-
-    var owl = $('.panel-coupons.gallery .owl-carousel');
-
-    owl.owlCarousel({
-        loop: true,
-        margin: 0,
-        responsive: {
-            0: {
-                items: 1
-            },
-            768: {
-                items: 2
-            },
-            992: {
-                items: 3
-            },
-            1170: {
-                items: 4
-            }
-        },
-        nav: true,
-        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-        dots: false
-    });
-}
 
 
 function discountCarousel() {

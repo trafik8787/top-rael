@@ -6,7 +6,7 @@
  * Time: 17:55
  */
 
-//HTML::x($related);
+//HTML::x($data);
 ?>
 
 <script>
@@ -73,7 +73,12 @@
                         <?foreach ($data['CatArr'] as $row_cat_arr):?>
                             <li><a href="/section/<?=$row_cat_arr['CatUrl']?>"><?=$row_cat_arr['CatName']?></a></li>
                         <?endforeach?>
-                        <li><a href="#" class="button"><span>LUXURY</span></a></li>
+
+                        <?if (!empty($data['TagArr'])):?>
+                            <?foreach ($data['TagArr'] as $tags):?>
+                                <li><a href="/tags/<?=$tags['TagUrl']?>" class="button"><span><?=$tags['TagName']?></span></a></li>
+                            <?endforeach?>
+                        <?endif?>
                     </ul>
 
                 </div>
@@ -83,17 +88,26 @@
                     <?if (!empty($data['BusDopAddress'])):?>
                         <span class="tabs">
                             <p class="tabs__caption">
+                                <a href="#" class="active"><?=$data['BusCity']?></a>
+
                                 <?foreach ($data['BusDopAddress'] as $key => $dop_adress_city):?>
-                                    <a href="#" <?if ($key == 0) {?>class="active" <?}?>><?=$dop_adress_city['name']?></a>
                                     &nbsp; &nbsp; | &nbsp; &nbsp;
+                                    <a href="#"><?=$dop_adress_city['name']?></a>
+
                                 <?endforeach?>
                             </p>
                             <span>
+                                 <p class="tabs__content active">
+                                     Адрес: <?=$data['BusAddress']?><br/>
+                                     Тел: <?=$data['BusTel']?><br/>
+                                     <?=$data['BusSchedule']?>
+                                 </p>
                                 <?foreach ($data['BusDopAddress'] as $key => $dop_adress_address):?>
-                                     <p class="tabs__content <?if ($key == 0) {?>active<?}?>">
+
+                                     <p class="tabs__content">
                                          Адрес: <?=$dop_adress_address['address']?><br/>
-                                         Тел: 09-9514000<br/>
-                                         Открыты ежедневно с 12:00-24:00
+                                         Тел: <?=$dop_adress_address['tel_dop_adress']?><br/>
+                                         <?=$dop_adress_address['dop_sheduler']?>
                                      </p>
                                 <?endforeach?>
                             </span>
@@ -168,6 +182,7 @@
                                         <div class="layer">
                                             <img src="/public/uploade/review.jpg" style="width:100%; height: auto;"/>
                                         </div>
+                                        <div class="bx-caption">sdfgsd</div>
                                     </div>
 
                                     <div class="bx-slider">
@@ -175,57 +190,59 @@
                                         <span class="btn-prev"><i class="fa fa-angle-up"></i></span>
 
                                         <div class="layers">
+
+
                                             <div class="layer">
                                                 <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg"><img
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg" data-bx-caption="test1"><img
                                                             src="/public/uploade/review.jpg"/></a>
                                                 </div>
                                                 <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg"><img
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg" data-bx-caption="test2"><img
                                                             src="/public/uploade/review.jpg"/></a>
                                                 </div>
                                             </div>
 
                                             <div class="layer">
                                                 <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg"><img
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg" data-bx-caption="test1"><img
                                                             src="/public/uploade/review.jpg"/></a>
                                                 </div>
                                                 <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg"><img
-                                                            src="/public/uploade/review.jpg"/></a>
-                                                </div>
-                                            </div>
-
-                                            <div class="layer">
-                                                <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg"><img
-                                                            src="/public/uploade/review.jpg"/></a>
-                                                </div>
-                                                <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg"><img
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg" data-bx-caption="test2"><img
                                                             src="/public/uploade/review.jpg"/></a>
                                                 </div>
                                             </div>
 
                                             <div class="layer">
                                                 <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg"><img
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg" data-bx-caption="test3"><img
                                                             src="/public/uploade/review.jpg"/></a>
                                                 </div>
                                                 <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg"><img
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg" data-bx-caption="test4"><img
                                                             src="/public/uploade/review.jpg"/></a>
                                                 </div>
                                             </div>
 
                                             <div class="layer">
                                                 <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg"><img
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg" data-bx-caption="test5"><img
                                                             src="/public/uploade/review.jpg"/></a>
                                                 </div>
                                                 <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg"><img
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg" data-bx-caption="test6"><img
+                                                            src="/public/uploade/review.jpg"/></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="layer">
+                                                <div>
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg" data-bx-caption="test7"><img
+                                                            src="/public/uploade/review.jpg"/></a>
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg" data-bx-caption="test8"><img
                                                             src="/public/uploade/review.jpg"/></a>
                                                 </div>
                                             </div>
@@ -241,7 +258,7 @@
                         </div>
 
 
-                        <!-- Photo Gallery -->
+                        <hr/>
 
                         <?if (!empty($data['BusVideo'])):?>
                             <div class="panel">
