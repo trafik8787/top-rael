@@ -133,6 +133,102 @@
 
                         <hr/>
 
+
+                        <div class="panel panel-vertical-gallery">
+
+                            <div class="panel-heading">
+                                <div class="panel-title">Фотогалерея</div>
+
+                                <div class="panel-links">
+                                    <a href="#">Галлерея "Наши друзья"</a>
+                                    &nbsp;|&nbsp;
+                                    <a href="#">Галлерея "Блюда"</a>
+                                    &nbsp;|&nbsp;
+                                    <a href="#">Галлерея "Пейзажи"</a>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+
+                                <div class="bx-gallery">
+
+                                    <div class="bx-image">
+                                        <div class="layer">
+                                            <img src="/public/uploade/review.jpg" style="width:100%; height: auto;"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="bx-slider">
+
+                                        <span class="btn-prev"><i class="fa fa-angle-up"></i></span>
+
+                                        <div class="layers">
+                                            <div class="layer">
+                                                <div>
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg"><img
+                                                            src="/public/uploade/review.jpg"/></a>
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg"><img
+                                                            src="/public/uploade/review.jpg"/></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="layer">
+                                                <div>
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg"><img
+                                                            src="/public/uploade/review.jpg"/></a>
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg"><img
+                                                            src="/public/uploade/review.jpg"/></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="layer">
+                                                <div>
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg"><img
+                                                            src="/public/uploade/review.jpg"/></a>
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg"><img
+                                                            src="/public/uploade/review.jpg"/></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="layer">
+                                                <div>
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg"><img
+                                                            src="/public/uploade/review.jpg"/></a>
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg"><img
+                                                            src="/public/uploade/review.jpg"/></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="layer">
+                                                <div>
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg"><img
+                                                            src="/public/uploade/review.jpg"/></a>
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg"><img
+                                                            src="/public/uploade/review.jpg"/></a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <span class="btn-next"><i class="fa fa-angle-down"></i></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
                         <!-- Photo Gallery -->
 
                         <?if (!empty($data['BusVideo'])):?>

@@ -83,6 +83,7 @@ abstract class Controller_BaseController extends Controller_Template {
             'public/stylesheets/screen.css',
             'public/stylesheets/print.css',
             'public/stylesheets/owl.carousel.min.css',
+            'public/stylesheets/jquery.bxslider.min.css',
             'public/stylesheets/common.css',
             'public/stylesheets/ie.css',
             '/fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin,cyrillic'
@@ -93,6 +94,7 @@ abstract class Controller_BaseController extends Controller_Template {
             'public/javascripts/jquery-ui.min.js',
             'public/javascripts/bootstrap.min.js',
             'public/javascripts/owl.carousel.min.js',
+            'public/javascripts/jquery.bxslider.min.js',
             'public/javascripts/orb.min.js',
             'public/javascripts/jquery.validate.min.js',
             'public/javascripts/common.js',
@@ -101,13 +103,10 @@ abstract class Controller_BaseController extends Controller_Template {
             '/maps.googleapis.com/maps/api/js?v=3&libraries=places',
             'public/javascripts/markerclusterer_compiled.js',
             'public/javascripts/infobox.js',
-            //'public/javascripts/google.js',
 
             'public/javascripts/app.js'
         );
-
     }
-
 
     /**
      * @param array $data_arr

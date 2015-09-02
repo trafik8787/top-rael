@@ -15,9 +15,6 @@
 
     <div id="content">
 
-        <div id="json" style="display: none">
-            <?=isset($json) ? $json : ''?>
-        </div>
         <div id="map" style="height:550px;"></div>
 
         <div class="google-map-filter">

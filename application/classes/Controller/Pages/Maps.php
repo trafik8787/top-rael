@@ -21,7 +21,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
 
         $content->section = parent::$general_meny;
 
-        HTML::x($result);
+       // HTML::x($result);
 
         foreach ($result as $row) {
 
@@ -102,7 +102,6 @@ class Controller_Pages_Maps extends Controller_BaseController {
 
 
         }
-
 
         $content->json = json_encode($data);
         $this->template->content = $content;

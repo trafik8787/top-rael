@@ -827,7 +827,10 @@ class Model_BussinesModel extends Model_BaseModel {
             ->execute()->as_array();
     }
 
-
+    /**
+     * @return array
+     * выборка всех бизнесов для карты
+     */
     public function getBusinessAll_Maps(){
 
         $query =  DB::select(
@@ -845,6 +848,9 @@ class Model_BussinesModel extends Model_BaseModel {
             array('bus.logo', 'BusLogo'),
             array('bus.website', 'BusWebsite'),
             array('bus.tags', 'BusTags'),
+
+            array('tag.name_tags','TagsName'),
+            array('tag.url_tags','TagsUrl'),
 
             array('cat.name', 'CatName'),
             array('cat.id', 'CatId'),
@@ -870,16 +876,27 @@ class Model_BussinesModel extends Model_BaseModel {
             //категории
             ->join(array('category', 'cat'), 'LEFT')
             ->on('buscat.category_id','=', 'cat.id')
+
+            ->join(array('tags_relation_business', 'tagrelbus'), 'RIGHT')
+            ->on('tagrelbus.id_business', '=', 'bus.id')
+
+            ->join(array('tags', 'tag'))
+            ->on('tag.id', '=', 'tagrelbus.id_tags')
+
             ->where('bus.maps_cordinate_x', '<>', '')
             ->and_where('bus.maps_cordinate_y', '<>', '')
+            ->cached()
             ->execute()->as_array();
 
         return $this->CreareArrayBusinessMaps($query);
     }
 
-
+    /**
+     * @param $result
+     * @return array
+     * формирование масива для вывода на карте бизнесов
+     */
     public function CreareArrayBusinessMaps ($result){
-
 
         $end_result = array();
         $CatTmp = array();
@@ -887,78 +904,80 @@ class Model_BussinesModel extends Model_BaseModel {
         $end_result_new = array();
         $BusTmp = array();
 
-
-        $category = Model::factory('CategoryModel')->get_section('category');
-
-
-        //die(HTML::x($result));
+        //если обьект в кеше то берем оттуда
+        if (Cache::instance()->get('BusinesMaps') == null) {
 
 
-        foreach($result as $name_key => $row) {
+            $category = Model::factory('CategoryModel')->get_section('category');
 
-            if (!array_key_exists($row['BusId'], $BusTmp)) {
+            foreach ($result as $name_key => $row) {
 
-                $BusTmp[$row['BusId']] = $row['BusId'];
+                if (!array_key_exists($row['BusId'], $BusTmp)) {
 
-                $end_result['BusId'] = $row['BusId'];
-                $end_result['BusName'] = $row['BusName'];
-                $end_result['BusUrl'] = $row['BusUrl'];
-                $end_result['BusSchedule'] = $row['BusSchedule'];
-                $end_result['BusTel'] = $row['BusTel'];
-                $end_result['BusTags'] = $row['BusTags'];
-                $end_result['BusLogo'] = $row['BusLogo'];
-                $end_result['BusWebsite'] = $row['BusWebsite'];
-                $end_result['BusAddress'] = $row['BusAddress'];
-                $end_result['BusMapsX'] = $row['BusMapsX'];
-                $end_result['BusMapsY'] = $row['BusMapsY'];
-                $end_result['BusCity'] = $row['BusCity'];
+                    $BusTmp[$row['BusId']] = $row['BusId'];
 
+                    $end_result['BusId'] = $row['BusId'];
+                    $end_result['BusName'] = $row['BusName'];
+                    $end_result['BusUrl'] = $row['BusUrl'];
+                    $end_result['BusSchedule'] = $row['BusSchedule'];
+                    $end_result['BusTel'] = $row['BusTel'];
+                    $end_result['BusTags'] = $row['BusTags'];
+                    $end_result['BusLogo'] = $row['BusLogo'];
+                    $end_result['BusWebsite'] = $row['BusWebsite'];
+                    $end_result['BusAddress'] = $row['BusAddress'];
+                    $end_result['BusMapsX'] = $row['BusMapsX'];
+                    $end_result['BusMapsY'] = $row['BusMapsY'];
+                    $end_result['BusCity'] = $row['BusCity'];
 
-                //парсим адрес
-                try {
-                    $end_result['BusDopAddress'] = unserialize($row['BusDopAddress']);
-                } catch (Exception $x) {
-                    $end_result['BusDopAddress'] = array();
-                }
+                    $end_result['TagsName'] = $row['TagsName'];
+                    $end_result['TagsUrl'] = $row['TagsUrl'];
 
+                    //парсим адрес
+                    try {
+                        $end_result['BusDopAddress'] = unserialize($row['BusDopAddress']);
+                    } catch (Exception $x) {
+                        $end_result['BusDopAddress'] = array();
+                    }
 
-                //категории
-                if (!array_key_exists($row['CatParentId'], $CatTmp)) {
-
-                    $CatTmp[$row['CatParentId']] = $row['CatParentId'];
-                    //ищем раздел к которому принадлежит бизнес
-                    foreach ($category as $row_category) {
-                        if ($row_category['id'] == $row['CatParentId']) {
-                            $row['CatUrl'] = $row_category['url'];
-                            $row['CatName'] = $row_category['name'];
-                            $row['CatIcon'] = $row_category['icons_maps'];
+                    //категории
+                    if (!array_key_exists($row['CatParentId'], $CatTmp)) {
+                        $end_result['CatArr'] = array();
+                        $CatTmp[$row['CatParentId']] = $row['CatParentId'];
+                        //ищем раздел к которому принадлежит бизнес
+                        foreach ($category as $row_category) {
+                            if ($row_category['id'] == $row['CatParentId']) {
+                                $row['CatUrl'] = $row_category['url'];
+                                $row['CatName'] = $row_category['name'];
+                                $row['CatIcon'] = $row_category['icons_maps'];
+                            }
                         }
+
+                        $end_result['CatArr'][] = array('CatId' => $row['CatParentId'], 'CatName' => $row['CatName'], 'CatUrl' => $row['CatUrl'], 'CatIcon' => $row['CatIcon']);
                     }
 
-                    $end_result['CatArr'][] = array('CatId' => $row['CatParentId'], 'CatName' => $row['CatName'], 'CatUrl' => $row['CatUrl'], 'CatIcon' => $row['CatIcon']);
-
-                }
-
-
-                //купоны
-                if (!empty($row['CoupId'])) {
-                    if (!array_key_exists($row['CoupId'], $CoupTmp)) {
-                        $CoupTmp[$row['CoupId']] = $row['CoupId'];
-                        $end_result['CoupArr'][] = array('CoupId' => $row['CoupId'], 'CoupSecondname' => $row['CoupSecondname'],
-                            'CoupUrl' => $row['CoupUrl'],
-                            'CoupInfo' => $row['CoupInfo'],
-                            'CoupImg' => $row['CoupImg']
-                        );
+                    //купоны
+                    if (!empty($row['CoupId'])) {
+                        if (!array_key_exists($row['CoupId'], $CoupTmp)) {
+                            $CoupTmp[$row['CoupId']] = $row['CoupId'];
+                            $end_result['CoupArr'][] = array('CoupId' => $row['CoupId'], 'CoupSecondname' => $row['CoupSecondname'],
+                                'CoupUrl' => $row['CoupUrl'],
+                                'CoupInfo' => $row['CoupInfo'],
+                                'CoupImg' => $row['CoupImg']
+                            );
+                        }
+                    } else {
+                        $end_result['CoupArr'] = array();
                     }
-                } else {
-                    $end_result['CoupArr'] = array();
+
+                    $end_result_new[] = $end_result;
                 }
 
-                $end_result_new[] = $end_result;
             }
+            Cache::instance()->set('BusinesMaps', $end_result_new);
 
+        } else {
+            $end_result_new = Cache::instance()->get('BusinesMaps');
         }
-
 
         return $end_result_new;
     }
