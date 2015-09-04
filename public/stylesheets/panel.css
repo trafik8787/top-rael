@@ -570,7 +570,7 @@
   position: relative;
   overflow: hidden;
   width: 50%;
-  height: 80px;
+  min-height: 80px;
   background: #f2f2f2;
   border-right: 10px solid #fff;
   border-left: 10px solid #fff;
@@ -579,10 +579,36 @@
 .panel.panel-vertical-gallery .panel-body .bx-slider .layers .layer > div a {
   display: block;
   position: relative;
+  max-height: 80px;
 }
-/* line 505, ../.sass/panel.scss */
+/* line 506, ../.sass/panel.scss */
 .panel.panel-vertical-gallery .panel-body .bx-slider .layers .layer > div a img {
   display: block;
   max-width: 100%;
   max-height: 100%;
+}
+
+/* line 519, ../.sass/panel.scss */
+.panel.panel-page-profile {
+  background: none;
+}
+/* line 524, ../.sass/panel.scss */
+.panel.panel-page-profile .profile-title {
+  font-size: 24px;
+}
+/* line 528, ../.sass/panel.scss */
+.panel.panel-page-profile .profile-link {
+  font-size: 18px;
+}
+/* line 532, ../.sass/panel.scss */
+.panel.panel-page-profile .profile-avarat {
+  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0 2px 2px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0 2px 2px;
+  box-shadow: rgba(0, 0, 0, 0.75) 0 2px 2px;
+}
+@media (max-width: 768px) {
+  /* line 519, ../.sass/panel.scss */
+  .panel.panel-page-profile {
+    padding: 0 !important;
+  }
 }

@@ -352,9 +352,9 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->on('bus.city', '=', 'cit.id')
 
                 //теги
-                ->join(array('tags_relation_business', 'tagrelbus'), 'RIGHT')
-                ->on('tagrelbus.id_business', '=', 'bus.id')
-                ->join(array('tags', 'tag'))
+                ->join(array('tags_relation_business', 'tagrelbus'), 'LEFT')
+                ->on('bus.id', '=', 'tagrelbus.id_business' )
+                ->join(array('tags', 'tag'), 'LEFT')
                 ->on('tag.id', '=', 'tagrelbus.id_tags')
 
                 //связаная таблица обзоров и бизнесов для определения привязаных к бизнесу обзоров
@@ -414,7 +414,6 @@ class Model_BussinesModel extends Model_BaseModel {
         $FileTmp = array();
         $ArticTmp = array();
         $TagsTmp = array();
-
 
         $end_result['BusId'] = $result[0]['BusId'];
         $end_result['BusName'] = $result[0]['BusName'];
@@ -1053,27 +1052,33 @@ class Model_BussinesModel extends Model_BaseModel {
             ->cached()
             ->execute()->as_array();
 
-        //вызываем метод получения данных из куки
-        Controller_BaseController::favorits_bussines();
-        if (!empty(Controller_BaseController::$favorits_bussines)) {
+        if (!empty($result)) {
+            //вызываем метод получения данных из куки
+            Controller_BaseController::favorits_bussines();
+            if (!empty(Controller_BaseController::$favorits_bussines)) {
 
-            $new_result = array();
-            foreach ($result as $result_row) {
+                $new_result = array();
+                foreach ($result as $result_row) {
 
-                if (in_array($result_row['id'], Controller_BaseController::$favorits_bussines)) {
-                    $result_row['bussines_favorit'] = 1;
+                    if (in_array($result_row['id'], Controller_BaseController::$favorits_bussines)) {
+                        $result_row['bussines_favorit'] = 1;
+                    }
+
+                    $new_result[] = $result_row;
                 }
-
-                $new_result[] = $result_row;
+                $result = $new_result;
             }
-            $result = $new_result;
-        }
 
-        $key_rand = array_rand($result, 4);
 
-        $resultNew = array();
-        foreach ($key_rand as $row) {
-            $resultNew[] = $result[$row];
+            $key_rand = array_rand($result, 4);
+
+            $resultNew = array();
+            foreach ($key_rand as $row) {
+                $resultNew[] = $result[$row];
+            }
+
+        } else {
+            $resultNew = array();
         }
 
         return $resultNew;

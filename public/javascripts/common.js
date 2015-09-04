@@ -4,7 +4,7 @@
 $(function () {
     discountCarousel();
     galleryLarge();
-    verticalGallery();
+   // verticalGallery();
 });
 
 function verticalGallery() {
@@ -57,6 +57,7 @@ function verticalGallery() {
         $('.btn-next', this).off('click').on('click', function () {
             gallery.goToNextSlide();
         });
+
     });
 }
 

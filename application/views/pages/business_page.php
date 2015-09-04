@@ -10,12 +10,83 @@
 ?>
 
 <script>
+
+
+
+
     $(document).ready(function(){
+         verticalGallery();
+
+        function verticalGallery() {
+
+            $('.bx-gallery').each(function () {
+
+                var minSlides = 4;
+                var bxImageBlock = $('.bx-image', this);
+                var bxImage = $('.layer img', bxImageBlock);
+                var bxCaption = $('.bx-caption', bxImageBlock);
+
+                var gallery = $('.bx-slider .layers', this).bxSlider({
+                    mode: 'vertical',
+                    responsive: true,
+                    minSlides: minSlides,
+                    pager: false,
+                    controls: false,
+                    slideMargin: 20
+                });
+
+                $('[data-bx-image]', this).off('click').on('click', function () {
+
+                    var $image = $(this).data('bx-image');
+
+                    bxCaption.text($(this).data('bx-caption'));
+
+                    if (!$image)
+                        return;
+
+                    var zIndex = 1000;
+
+                    var image = $('<img>');
+                    image.attr({src: $image});
+
+                    bxImage.replaceWith(image);
+
+                    bxImage = image;
+                });
+
+                if (gallery.getSlideCount() <= minSlides) {
+                    $([
+                        $('.btn-prev', this).get(0),
+                        $('.btn-next', this).get(0)
+                    ]).addClass('disabled');
+                }
+
+                $('.btn-prev', this).off('click').on('click', function () {
+                    gallery.goToPrevSlide();
+                });
+                $('.btn-next', this).off('click').on('click', function () {
+                    gallery.goToNextSlide();
+                });
+
+            });
+
+        }
+
 
         $('.tabs__caption').on('click', 'a:not(.active)', function() {
             $(this)
                 .addClass('active').siblings().removeClass('active')
                 .closest('.tabs').find('.tabs__content').removeClass('active').eq($(this).index()).addClass('active');
+            return false;
+        });
+
+        $('.tabs__caption_galery').on('click', 'a:not(.active)', function() {
+
+            $(this).addClass('active').siblings().removeClass('active')
+                .closest('.tabs_galery').find('.tabs__content_galery')
+                .removeClass('active').eq($(this).index()).addClass('active');
+
+
             return false;
         });
 
@@ -33,6 +104,20 @@
     .tabs a.active {
         font-weight: bold;
     }
+
+
+
+    .tabs__content_galery {
+        display: none; /* по умолчанию прячем все блоки */
+    }
+    .tabs__content_galery.active {
+        display: block; /* по умолчанию показываем нужный блок */
+    }
+
+    .tabs_galery a.active {
+        font-weight: bold;
+    }
+
 </style>
 
 <content>
@@ -105,9 +190,9 @@
                                 <?foreach ($data['BusDopAddress'] as $key => $dop_adress_address):?>
 
                                      <p class="tabs__content">
-                                         Адрес: <?=$dop_adress_address['address']?><br/>
-                                         Тел: <?=$dop_adress_address['tel_dop_adress']?><br/>
-                                         <?=$dop_adress_address['dop_sheduler']?>
+                                         Адрес: <?=isset($dop_adress_address['address']) ? $dop_adress_address['address'] : ''?><br/>
+                                         Тел: <?=isset($dop_adress_address['tel_dop_adress']) ? $dop_adress_address['tel_dop_adress'] : ''?><br/>
+                                         <?=isset($dop_adress_address['dop_sheduler']) ? $dop_adress_address['dop_sheduler'] : ''?>
                                      </p>
                                 <?endforeach?>
                             </span>
@@ -159,104 +244,81 @@
 
                         <hr/>
 
+                        <?if (!empty($data['GalryArr'])):?>
+                            <div class="panel panel-vertical-gallery">
+                                <div class="tabs_galery">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">Фотогалерея</div>
 
-                        <div class="panel panel-vertical-gallery">
-
-                            <div class="panel-heading">
-                                <div class="panel-title">Фотогалерея</div>
-
-                                <div class="panel-links">
-                                    <a href="#">Галлерея "Наши друзья"</a>
-                                    &nbsp;|&nbsp;
-                                    <a href="#">Галлерея "Блюда"</a>
-                                    &nbsp;|&nbsp;
-                                    <a href="#">Галлерея "Пейзажи"</a>
-                                </div>
-                            </div>
-
-                            <div class="panel-body">
-
-                                <div class="bx-gallery">
-
-                                    <div class="bx-image">
-                                        <div class="layer">
-                                            <img src="/public/uploade/review.jpg" style="width:100%; height: auto;"/>
+                                        <div class="panel-links">
+                                            <span class="tabs__caption_galery">
+                                                <?foreach ($data['GalryArr'] as $key => $rows_galery_name):?>
+                                                    <a href="#" <?if ($key == 0){?>class="active"<?}?>><?=$rows_galery_name['GalryName']?></a>
+                                                    &nbsp;|&nbsp;
+                                                <?endforeach?>
+                                            </span>
                                         </div>
-                                        <div class="bx-caption">sdfgsd</div>
                                     </div>
 
-                                    <div class="bx-slider">
 
-                                        <span class="btn-prev"><i class="fa fa-angle-up"></i></span>
-
-                                        <div class="layers">
+                                    <div class="panel-body">
 
 
-                                            <div class="layer">
-                                                <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg" data-bx-caption="test1"><img
-                                                            src="/public/uploade/review.jpg"/></a>
-                                                </div>
-                                                <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg" data-bx-caption="test2"><img
-                                                            src="/public/uploade/review.jpg"/></a>
-                                                </div>
-                                            </div>
+                                        <?foreach ($data['GalryArr'] as $key => $galery_arr):?>
+                                            <div class="tabs__content_galery <?if ($key == 0){?>active<?}?>">
 
-                                            <div class="layer">
-                                                <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg" data-bx-caption="test1"><img
-                                                            src="/public/uploade/review.jpg"/></a>
-                                                </div>
-                                                <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg" data-bx-caption="test2"><img
-                                                            src="/public/uploade/review.jpg"/></a>
-                                                </div>
-                                            </div>
+                                                <div class="bx-gallery">
+                                                    <? $shift_image = array_shift($galery_arr['FileArr']);?>
+                                                    <div class="bx-image">
+                                                        <div class="layer">
+                                                            <img src="<?=$shift_image['FileFilename']?>" style="width:100%; height: auto;"/>
+                                                        </div>
+                                                        <div class="bx-caption"><?=$shift_image['FileTitle']?></div>
+                                                    </div>
 
-                                            <div class="layer">
-                                                <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg" data-bx-caption="test3"><img
-                                                            src="/public/uploade/review.jpg"/></a>
-                                                </div>
-                                                <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg" data-bx-caption="test4"><img
-                                                            src="/public/uploade/review.jpg"/></a>
-                                                </div>
-                                            </div>
+                                                    <div class="bx-slider">
 
-                                            <div class="layer">
-                                                <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg" data-bx-caption="test5"><img
-                                                            src="/public/uploade/review.jpg"/></a>
-                                                </div>
-                                                <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg" data-bx-caption="test6"><img
-                                                            src="/public/uploade/review.jpg"/></a>
-                                                </div>
-                                            </div>
+                                                        <span class="btn-prev"><i class="fa fa-angle-up"></i></span>
 
-                                            <div class="layer">
-                                                <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/coupon.jpg" data-bx-caption="test7"><img
-                                                            src="/public/uploade/review.jpg"/></a>
-                                                </div>
-                                                <div>
-                                                    <a href="javascript:;" data-bx-image="/public/uploade/review.jpg" data-bx-caption="test8"><img
-                                                            src="/public/uploade/review.jpg"/></a>
+                                                        <div class="layers">
+                                                            <?
+                                                            $galery_arr['FileArr'] = Controller_BaseController::convertArrayVievData($galery_arr['FileArr']);
+
+                                                            ?>
+                                                            <?foreach ($galery_arr['FileArr'] as $galery_file):?>
+                                                                <div class="layer">
+                                                                    <div>
+                                                                        <a href="javascript:;" data-bx-image="<?=$galery_file[0]['FileFilename']?>" data-bx-caption="<?=$galery_file[0]['FileTitle']?>"><img
+                                                                                src="/uploads/img_galery/thumbs/<?=basename($galery_file[0]['FileFilename'])?>" width="100" hidden="72"/></a>
+                                                                    </div>
+                                                                    <?if (!empty($galery_file[1])):?>
+                                                                        <div>
+                                                                            <a href="javascript:;" data-bx-image="<?=$galery_file[1]['FileFilename']?>"  data-bx-caption="<?=$galery_file[1]['FileTitle']?>"><img
+                                                                                    src="/uploads/img_galery/thumbs/<?=basename($galery_file[1]['FileFilename'])?>" width="100" hidden="72"/></a>
+                                                                        </div>
+                                                                    <?endif?>
+                                                                </div>
+
+
+                                                            <?endforeach?>
+
+
+                                                        </div>
+
+
+                                                        <span class="btn-next"><i class="fa fa-angle-down"></i></span>
+                                                    </div>
+
                                                 </div>
                                             </div>
+                                        <?endforeach?>
 
-                                        </div>
 
-
-                                        <span class="btn-next"><i class="fa fa-angle-down"></i></span>
                                     </div>
 
                                 </div>
                             </div>
-                        </div>
-
+                        <?endif?>
 
                         <hr/>
 

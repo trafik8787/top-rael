@@ -148,3 +148,18 @@
     margin-bottom: 10px;
   }
 }
+
+/* line 152, ../.sass/page.scss */
+.page-contacts {
+  border: 1px solid #e7e7e7;
+  width: 65%;
+  margin: 0 auto;
+  background: url("../images/sky.jpg") no-repeat;
+}
+@media (max-width: 768px) {
+  /* line 152, ../.sass/page.scss */
+  .page-contacts {
+    padding: 15px !important;
+    width: auto;
+  }
+}

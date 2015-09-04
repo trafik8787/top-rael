@@ -220,7 +220,7 @@ function initMap() {
 
             var logo = logoContainer(link, marker.data.logo);
             var title = titleContainer(link, marker.data.title);
-            var type = typeContainer(marker.data.section);
+            var type = typeContainer(link, marker.data.section);
             var list = listContainer(marker.data.list);
             var favorite = favoritBtn('', 'Сохранить в Избранное', '<i class="fa fa-star"></i>', marker, favoritesClick);
             var luxury = luxuryBtn(marker.data.linkLuxury);
@@ -285,7 +285,7 @@ function initMap() {
             return $container;
         };
 
-        var typeContainer = function (section) {
+        var typeContainer = function (link, section) {
 
             var $container = document.createElement('div');
             $container.setAttribute('class', 'marker-type');
@@ -303,6 +303,15 @@ function initMap() {
                 $name.innerText = section.name;
 
                 $container.appendChild($name);
+            }
+
+            if(link){
+                var href = document.createElement('img');
+                href.appendChild($image);
+                href.appendChild($name);
+
+                $container.innerHtml = "";
+                $container.appendChild(href);
             }
 
             return $container;
