@@ -43,7 +43,10 @@
                                     </select>
                                 </form>
 
-                                <a href="#" class="btn btn-default" role="button">На карте</a>
+                                <a <?if (!empty($curent_category)) { ?>href="/maps?cat=<?=$curent_category?>" <?} else {?>
+                                    href="/maps?section=<?=$curent_section?>"
+                                    <?}?>
+                                   class="btn btn-default" role="button">На карте</a>
                             </div>
 
 

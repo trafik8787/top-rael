@@ -11,6 +11,7 @@ class Controller_Pages_Sections extends Controller_BaseController {
 	public function action_index()
 	{
         $data = array();
+        $bussines_section = View::factory('pages/bussines_section');
         $number_page = $this->request->param('page');
         $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($this->request->param('url_section'));
 
@@ -44,6 +45,9 @@ class Controller_Pages_Sections extends Controller_BaseController {
             //вызов метода банеров получаем в параметрах parent::$top_baners и parent::$right_baners
             $this->getBaners($this->request->param('url_category'), 'category');
 
+            //передаем URL текущей категории для кнопки на карте
+            $bussines_section->curent_category = $this->request->param('url_category');
+
         } else {
             //по урлу раздела получаем бизнесы
             $data = Model::factory('BussinesModel')->getBussinesSectionUrl($this->request->param('url_section'), 10 ,$number_page, $city_id);
@@ -52,10 +56,11 @@ class Controller_Pages_Sections extends Controller_BaseController {
             $data_articles = $articles['data'];
 
             $this->getBaners($this->request->param('url_section'), 'section');
-           // HTML::x($data['count']);
+
+            //передаем URL текущей категории для кнопки на карте
+            $bussines_section->curent_section = $this->request->param('url_section');
         }
 
-        $bussines_section = View::factory('pages/bussines_section');
 
         //верхний банер
         $bussines_section->top_baners = parent::$top_baners;
@@ -86,6 +91,7 @@ class Controller_Pages_Sections extends Controller_BaseController {
         }
 
         $bussines_section->page = '/'.$this->request->param('page');
+
 
         $bussines_section->category = $category;
         $this->template->content = $bussines_section;

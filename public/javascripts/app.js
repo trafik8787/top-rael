@@ -13,7 +13,62 @@ $(document).ready(function(){
 
 
 
+    $("#w-form-contact").validate({
 
+        rules:{
+
+            fullname:{
+                required: true,
+                minlength: 4
+            },
+
+            city:{
+                required: true
+            },
+
+            email:{
+                required: true,
+                email: true
+            },
+
+            tel:{
+                required: true,
+                number: true
+            },
+
+            desc:{
+                required: true
+            }
+        },
+
+        messages:{
+
+            fullname:{
+                required: "Это поле обязательно для заполнения",
+                minlength: "Имя должно быть минимум 4 символа"
+            },
+
+            city:{
+                required: "Это поле обязательно для заполнения"
+            },
+
+            email:{
+                required: "Это поле обязательно для заполнения",
+                email: "Неправильный формат email"
+            },
+
+            tel:{
+                required: "Это поле обязательно для заполнения",
+                number: 'Поле должно содержать только цыфры'
+            },
+
+            desc:{
+                required: "Это поле обязательно для заполнения"
+            }
+
+        }
+
+    });
 
 
 

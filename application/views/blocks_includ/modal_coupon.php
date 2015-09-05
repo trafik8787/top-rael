@@ -72,7 +72,7 @@
                         </div>
                         <div class="media-body">
                             <div class="media-heading">
-                                <a href="#"><?=$data[0]['BusName']?></a>
+                                <a href="/business/<?=$data[0]['BusUrl']?>"><?=$data[0]['BusName']?></a>
                             </div>
                             Стильный, итальянский ресторан, асположенный прямо под зданием
                             остиницы Rich

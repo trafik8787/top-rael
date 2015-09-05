@@ -873,7 +873,17 @@ class Model_BussinesModel extends Model_BaseModel {
      * @return array
      * выборка всех бизнесов для карты
      */
-    public function getBusinessAll_Maps(){
+    public function getBusinessAll_Maps($id = null, $url_category = null, $url_section = null){
+
+
+        if ($url_section != null) {
+            $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($url_section);
+
+            $arrChild = array();
+            foreach ($category[0]['childs'] as $row_cat) {
+                $arrChild[] = $row_cat['id'];
+            }
+        }
 
         $query =  DB::select(
             array('bus.id', 'BusId'),
@@ -907,33 +917,46 @@ class Model_BussinesModel extends Model_BaseModel {
             array('coup.img_coupon', 'CoupImg'),
             array('coup.secondname', 'CoupSecondname')
 
-        )
-            ->from(array('business', 'bus'))
+        );
 
-            ->join(array('coupon', 'coup') , 'LEFT')
-            ->on('bus.id', '=', 'coup.business_id')
-            //связаная таблица категорий
-            ->join(array('businesscategory', 'buscat'), 'LEFT')
-            ->on('bus.id', '=', 'buscat.business_id')
-            //категории
-            ->join(array('category', 'cat'), 'LEFT')
-            ->on('buscat.category_id','=', 'cat.id')
+        $query->from(array('business', 'bus'));
 
-            ->join(array('tags_relation_business', 'tagrelbus'), 'RIGHT')
-            ->on('tagrelbus.id_business', '=', 'bus.id')
+        $query->join(array('coupon', 'coup') , 'LEFT');
+        $query->on('bus.id', '=', 'coup.business_id');
+        //связаная таблица категорий
+        $query->join(array('businesscategory', 'buscat'), 'LEFT');
+        $query->on('bus.id', '=', 'buscat.business_id');
+        //категории
+        $query->join(array('category', 'cat'), 'LEFT');
+        $query->on('buscat.category_id','=', 'cat.id');
 
-            ->join(array('tags', 'tag'))
-            ->on('tag.id', '=', 'tagrelbus.id_tags')
-            ->where_open()
-                ->where('bus.maps_cordinate_x', '<>', '')
-                ->and_where('bus.maps_cordinate_y', '<>', '')
-                ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
-                ->and_where('bus.status', '=', 1)
-            ->where_close()
-            ->cached()
-            ->execute()->as_array();
+        $query->join(array('tags_relation_business', 'tagrelbus'), 'RIGHT');
+        $query->on('tagrelbus.id_business', '=', 'bus.id');
 
-        return $this->CreareArrayBusinessMaps($query);
+        $query->join(array('tags', 'tag'));
+        $query->on('tag.id', '=', 'tagrelbus.id_tags');
+        $query->where_open();
+            $query->where('bus.maps_cordinate_x', '<>', '');
+            if ($id != null) {
+                $query->and_where('bus.id', '=', $id);
+            }
+
+            if ($url_category != null) {
+                $query->and_where('cat.url', '=', $url_category);
+            }
+
+            if ($url_section != null) {
+                $query->and_where('buscat.category_id', 'IN', $arrChild);
+            }
+            $query->and_where('bus.maps_cordinate_y', '<>', '');
+            $query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'));
+            $query->and_where('bus.status', '=', 1);
+        $query->where_close();
+        $result_query = $query->cached()->execute()->as_array();
+
+
+
+        return $this->CreareArrayBusinessMaps($result_query);
     }
 
     /**
@@ -1023,7 +1046,7 @@ class Model_BussinesModel extends Model_BaseModel {
         } else {
             $end_result_new = Cache::instance()->get('BusinesMaps');
         }
-
+        Cache::instance()->delete('BusinesMaps');
         return $end_result_new;
     }
 

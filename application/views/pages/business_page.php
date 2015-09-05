@@ -229,7 +229,7 @@
                 </div>
 
                 <div class="page-profile-sidebar">
-                    <a href="#" class="pin-aria">
+                    <a href="/maps?id=<?=$data['BusId']?>" class="pin-aria">
                         <span class="pin"><i class="fa fa-map-marker"></i></span>Посмотреть на карте
                     </a>
                 </div>

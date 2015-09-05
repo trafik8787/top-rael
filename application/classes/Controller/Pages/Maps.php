@@ -10,6 +10,9 @@ class Controller_Pages_Maps extends Controller_BaseController {
 	public function action_index()
 	{
         $data = array();
+        $id = null;
+        $url_category = null;
+        $url_section = null;
         $content = View::factory('pages/maps');
         $this->template->scripts_map = 'public/javascripts/google.js';
         $content->bloc_right = parent::RightBloc(array(
@@ -17,7 +20,19 @@ class Controller_Pages_Maps extends Controller_BaseController {
             View::factory('blocks_includ/sicseti'),
         ));
 
-        $result = Model::factory('BussinesModel')->getBusinessAll_Maps();
+        if (!empty($_GET['id'])) {
+            $id = $_GET['id'];
+        }
+
+        if (!empty($_GET['cat'])) {
+            $url_category = $_GET['cat'];
+        }
+
+        if (!empty($_GET['section'])) {
+            $url_section = $_GET['section'];
+        }
+
+        $result = Model::factory('BussinesModel')->getBusinessAll_Maps($id, $url_category, $url_section);
 
         $content->section = parent::$general_meny;
 

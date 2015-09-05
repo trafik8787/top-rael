@@ -8,6 +8,11 @@
 
 ?>
 
+<style>
+    .error{
+        color: red;
+    }
+</style>
 
 <content>
     <div id="content">
@@ -33,63 +38,68 @@
 
             </div>
 
-            <form class="row" method="post">
+            <?if (empty($_GET['susses'])):?>
+                <form class="row" method="post" id="w-form-contact">
 
-                <div class="col-md-12">
-                    <div class="form-title">Форма связи</div>
-                </div>
+                    <div class="col-md-12">
+                        <div class="form-title">Форма связи</div>
+                    </div>
 
-                <div class="form-group clearfix">
-                    <div class="col-md-5">
-                        <label>Ваше полное имя:</label>
+                    <div class="form-group clearfix">
+                        <div class="col-md-5">
+                            <label>Ваше полное имя:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" name="fullname" class="form-control input-lg">
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        <input type="text" name="fullname" class="form-control input-lg">
-                    </div>
-                </div>
 
-                <div class="form-group clearfix">
-                    <div class="col-md-5">
-                        <label>Страна проживания:</label>
+                    <div class="form-group clearfix">
+                        <div class="col-md-5">
+                            <label>Страна проживания:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" name="city" class="form-control input-lg">
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        <input type="text" name="city" class="form-control input-lg">
-                    </div>
-                </div>
 
-                <div class="form-group  clearfix">
-                    <div class="col-md-5">
-                        <label>Email:</label>
+                    <div class="form-group  clearfix">
+                        <div class="col-md-5">
+                            <label>Email:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" name="email" class="form-control input-lg">
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        <input type="text" name="email" class="form-control input-lg">
-                    </div>
-                </div>
 
-                <div class="form-group  clearfix">
-                    <div class="col-md-5">
-                        <label>Телефон:</label>
+                    <div class="form-group  clearfix">
+                        <div class="col-md-5">
+                            <label>Телефон:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" name="tel" class="form-control input-lg">
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        <input type="text" name="tel" class="form-control input-lg">
+
+                    <div class="form-group  clearfix">
+                        <div class="col-md-5">
+                            <label>Ваше сообщение:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <textarea class="form-control input-lg" name="desc" cols="3" rows="4"></textarea>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group  clearfix">
-                    <div class="col-md-5">
-                        <label>Ваше сообщение:</label>
+
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-danger btn-lg pull-right">Отправить</button>
                     </div>
-                    <div class="col-md-7">
-                        <textarea class="form-control input-lg" name="desc" cols="3" rows="4"></textarea>
-                    </div>
-                </div>
 
+                </form>
+            <?else:?>
 
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-danger btn-lg pull-right">Отправить</button>
-                </div>
-
-            </form>
+                <h2 style="color: #009900"><i>Ваше сообщение отправлено!</i></h2>
+            <?endif?>
         </div>
 
     </div>

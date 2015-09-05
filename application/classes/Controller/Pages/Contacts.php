@@ -16,7 +16,7 @@ class Controller_Pages_Contacts extends Controller_BaseController {
             $result = Model::factory('BaseModel')->addContacts($_POST);
 
             if ($result === true) {
-                echo 'Ок';
+                $this->redirect('/contacts?susses=true');
             } else {
                 HTML::x($result);
             }
