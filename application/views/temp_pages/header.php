@@ -10,23 +10,6 @@
 
 <div id="wrapper" class="container">
 
-<!--    <div class="modal fade bs-coupon-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
-<!--        <div class="modal-dialog">-->
-<!--            <div class="modal-content">-->
-<!--                <div class="modal-header">-->
-<!--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-<!--                </div>-->
-<!--                <div class="w-modal-body">-->
-<!---->
-<!--                </div>-->
-<!---->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-
-
-
     <div class="modal fade in modal-coupon bs-coupon-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
 
@@ -38,8 +21,6 @@
     </div>
 
 
-
-
     <header>
         <div id="header">
 
@@ -47,7 +28,7 @@
                 <i class="fa fa-bars"></i>
             </a>
 
-            <a href="#" class="icons logo">TopIsrael</a>
+            <a href="/" class="icons logo">TopIsrael</a>
 
             <div class="collapse" id="nav-header">
                 <?if (isset($user)):?>

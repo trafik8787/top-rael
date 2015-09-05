@@ -6,7 +6,7 @@ return array
 	'type' 			=> 'small',
 	
 	// на какой адрес придёт POST-запрос от uLogin
-	'redirect_uri' 	=>	'http://topisrael.webremote.net/account',
+	'redirect_uri' 	=>	'http://'.$_SERVER['SERVER_NAME'].'/account',
 	
 	// Сервисы, выводимые сразу
 	'providers'		=> array(

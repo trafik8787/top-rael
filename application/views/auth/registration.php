@@ -8,40 +8,81 @@
 
 ?>
 
-<div class="row">
-    <div class="col-md-6 col-md-offset-2">
-        <h4>Зарегистрироваться</h4>
-        <? if (isset($messageReg))
-        {
-            echo '<span class="label label-important">'.$messageReg."</span><br />";
-            if (isset($errors)) foreach ($errors as $error) echo $error."<br />";
-            echo "<hr />";
-        } ?>
-        <form method="post" action="/account/registration" role="form" class="form-horizontal" >
-            <div class="form-group">
-                <label for="pageUsername" class="col-sm-4 control-label">Отображаемое имя</label>
-                <div class="col-sm-8">
-                    <input type="text" name="username" value="<?=$username;?>" id="pageUsername" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="pageEmail" class="col-sm-4 control-label">E-Mail адрес</label>
-                <div class="col-sm-8">
-                    <input type="email" name="email" value="<?=$email;?>" id="pageEmail" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="pagePass" class="col-sm-4 control-label">Пароль</label>
-                <div class="col-sm-8">
-                    <input type="password" name="password" id="pagePass" class="form-control">
-                </div>
-            </div>
-            <div class="form-group text-right">
 
-                    <input type="submit" value="Зарегистрироваться" class="btn btn-primary">
+<content>
+    <div id="content">
 
+        <div class="col-md-6 col-md-offset-3 page">
+
+            <div class="page-title">Регистрация через социальные сети</div>
+
+            <span style="display: none"><?=$ulogin;?></span>
+            <div class="page-context" id="uLogin" data-ulogin="display=buttons;redirect_uri=<?=Kohana::$config->load('ulogin')->redirect_uri?>;">
+
+                <a href="#" class="social twitter" data-uloginbutton="twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+
+                <a href="#" class="social vk" data-uloginbutton="vkontakte">
+                    <i class="fa fa-vk"></i>
+                </a>
+
+                <a href="#" class="social facebook" data-uloginbutton="facebook">
+                    <i class="fa fa-facebook"></i>
+                </a>
+
+                <a href="#" class="social google" data-uloginbutton="google">
+                    <i class="fa fa-google"></i>
+                </a>
             </div>
 
-        </form>
+            <hr/>
+
+            <form class="row" method="post" action="/account/registration">
+
+                <div class="col-md-12">
+                    <div class="form-title">Зарегистрироваться</div>
+                </div>
+                <? if (isset($messageReg))
+                {
+                    echo '<span class="label label-important">'.$messageReg."</span><br />";
+                    if (isset($errors)) foreach ($errors as $error) echo $error."<br />";
+                    echo "<hr />";
+                } ?>
+                <div class="form-group clearfix">
+                    <div class="col-md-4">
+                        <label>Отображаемое имя</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" name="username" value="<?=$username;?>" class="form-control input-lg">
+                    </div>
+                </div>
+
+                <div class="form-group clearfix">
+                    <div class="col-md-4">
+                        <label>E-Mail адрес</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" name="email" value="<?=$email;?>" class="form-control input-lg">
+                    </div>
+                </div>
+
+                <div class="form-group clearfix">
+                    <div class="col-md-4">
+                        <label>Пароль</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="password" name="password" class="form-control input-lg">
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary btn-lg pull-right">Зарегистрироваться</button>
+                </div>
+
+            </form>
+        </div>
+
+
     </div>
-</div>
+</content>
