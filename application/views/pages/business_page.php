@@ -15,18 +15,18 @@
 
 
     $(document).ready(function(){
-         verticalGallery();
+        var gallery = verticalGallery();
 
         function verticalGallery() {
-
-            $('.bx-gallery').each(function () {
+            var gallery = [];
+            $('.bx-gallery').each(function (i) {
 
                 var minSlides = 4;
                 var bxImageBlock = $('.bx-image', this);
                 var bxImage = $('.layer img', bxImageBlock);
                 var bxCaption = $('.bx-caption', bxImageBlock);
 
-                var gallery = $('.bx-slider .layers', this).bxSlider({
+                gallery[i] = $('.bx-slider .layers', this).bxSlider({
                     mode: 'vertical',
                     responsive: true,
                     minSlides: minSlides,
@@ -54,7 +54,7 @@
                     bxImage = image;
                 });
 
-                if (gallery.getSlideCount() <= minSlides) {
+                if (gallery[i].getSlideCount() <= minSlides) {
                     $([
                         $('.btn-prev', this).get(0),
                         $('.btn-next', this).get(0)
@@ -62,14 +62,15 @@
                 }
 
                 $('.btn-prev', this).off('click').on('click', function () {
-                    gallery.goToPrevSlide();
+                    gallery[i].goToPrevSlide();
                 });
                 $('.btn-next', this).off('click').on('click', function () {
-                    gallery.goToNextSlide();
+                    gallery[i].goToNextSlide();
                 });
 
             });
 
+            return gallery;
         }
 
 
@@ -86,6 +87,9 @@
                 .closest('.tabs_galery').find('.tabs__content_galery')
                 .removeClass('active').eq($(this).index()).addClass('active');
 
+            for(var i=0; i<gallery.length; i++) {
+                gallery[i].reloadSlider();
+            }
 
             return false;
         });
@@ -135,7 +139,7 @@
         <?endif?>
 
 
-        </div>
+
 
         <div class="page-profile">
 

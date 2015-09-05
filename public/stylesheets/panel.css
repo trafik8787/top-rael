@@ -597,10 +597,6 @@
   font-size: 24px;
 }
 /* line 528, ../.sass/panel.scss */
-.panel.panel-page-profile .profile-link {
-  font-size: 18px;
-}
-/* line 532, ../.sass/panel.scss */
 .panel.panel-page-profile .profile-avarat {
   -moz-box-shadow: rgba(0, 0, 0, 0.75) 0 2px 2px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0 2px 2px;
@@ -611,4 +607,43 @@
   .panel.panel-page-profile {
     padding: 0 !important;
   }
+}
+/* line 536, ../.sass/panel.scss */
+.panel.panel-page-profile .panel-body {
+  margin-bottom: 0;
+}
+/* line 540, ../.sass/panel.scss */
+.panel.panel-page-profile .panel-body .panel-heading {
+  margin-bottom: 0;
+}
+/* line 546, ../.sass/panel.scss */
+.panel.panel-page-profile .panel-body > .col-md-12 > .div-table {
+  width: 100%;
+}
+@media (max-width: 768px) {
+  /* line 546, ../.sass/panel.scss */
+  .panel.panel-page-profile .panel-body > .col-md-12 > .div-table {
+    display: block;
+    width: auto;
+  }
+  /* line 557, ../.sass/panel.scss */
+  .panel.panel-page-profile .panel-body > .col-md-12 > .div-table > .div-row > .div-cell {
+    display: block;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+/* line 567, ../.sass/panel.scss */
+.panel.panel-page-profile .panel-body .counters {
+  font-size: 24px;
+}
+/* line 570, ../.sass/panel.scss */
+.panel.panel-page-profile .panel-body .counters .div-cell {
+  vertical-align: middle;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* line 575, ../.sass/panel.scss */
+.panel.panel-page-profile .panel-body .counters .div-cell strong {
+  color: #036c92;
 }

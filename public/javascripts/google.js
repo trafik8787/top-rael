@@ -24,7 +24,7 @@ function initMap() {
     var cluster = new MarkerClusterer(map, [], {ignoreHidden: true});
     var tmpl = template();
 
-    markers = setMarkes(getData());
+    markers = setMarkes(getData(), cluster);
 
     cluster.addMarkers(markers);
 
@@ -50,10 +50,16 @@ function initMap() {
 
         var $markers = getMarkersBySection(section, markers);
 
+        if(!$markers.length)
+            return;
+
         for (var i = 0; i < $markers.length; i++) {
+
             var value = !$markers[i].visible;
             $markers[i].setVisible(value);
         }
+
+        resetMarkers(markers, cluster);
     });
 
     $('[data-map-shortkey]').off('click').on('click', function () {
@@ -128,6 +134,20 @@ function initMap() {
         }
 
         return $markers;
+    }
+
+    function resetMarkers(markers, cluster){
+
+        cluster.removeMarkers(markers);
+
+        for(var i = 0; i < markers.length; i++){
+
+            if(!markers[i].visible){
+                continue;
+            }
+
+            cluster.addMarker(markers[i]);
+        }
     }
 
     function getMarkersBySection(sectionId, markers) {
@@ -220,7 +240,9 @@ function initMap() {
 
             var logo = logoContainer(link, marker.data.logo);
             var title = titleContainer(link, marker.data.title);
-            var type = typeContainer(link, marker.data.section);
+            var type = typeContainer(marker.data.section);
+
+
             var list = listContainer(marker.data.list);
             var favorite = favoritBtn('', 'Сохранить в Избранное', '<i class="fa fa-star"></i>', marker, favoritesClick);
             var luxury = luxuryBtn(marker.data.linkLuxury);
@@ -285,7 +307,7 @@ function initMap() {
             return $container;
         };
 
-        var typeContainer = function (link, section) {
+        var typeContainer = function (section) {
 
             var $container = document.createElement('div');
             $container.setAttribute('class', 'marker-type');
@@ -305,8 +327,8 @@ function initMap() {
                 $container.appendChild($name);
             }
 
-            if(link){
-                var href = document.createElement('img');
+            if(section.link){
+                var href = document.createElement('a');
                 href.appendChild($image);
                 href.appendChild($name);
 

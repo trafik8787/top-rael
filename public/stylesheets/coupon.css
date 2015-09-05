@@ -1,42 +1,48 @@
 /* line 5, ../.sass/coupon.scss */
 .coupon {
   position: relative;
-  color: #e02929;
   background-color: #fff;
   border: 1px solid #d8d8d8;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;
 }
-/* line 15, ../.sass/coupon.scss */
-.coupon.coupon-small {
+/* line 16, ../.sass/coupon.scss */
+.coupon.coupon-small .coupon-body {
   height: 130px;
   font-size: 19px;
   line-height: 1.1;
 }
-/* line 21, ../.sass/coupon.scss */
-.coupon.coupon-medium {
+/* line 24, ../.sass/coupon.scss */
+.coupon.coupon-medium .coupon-body {
   height: 150px;
   font-size: 22px;
   line-height: 1.1;
 }
-/* line 27, ../.sass/coupon.scss */
-.coupon.coupon-big {
+/* line 32, ../.sass/coupon.scss */
+.coupon.coupon-big .coupon-body {
   height: 170px;
   font-size: 25px;
   line-height: 1.1;
 }
-/* line 33, ../.sass/coupon.scss */
+/* line 40, ../.sass/coupon.scss */
+.coupon.coupon-modal .coupon-body {
+  height: 360px;
+  font-size: 48px;
+  line-height: 1.1;
+}
+/* line 47, ../.sass/coupon.scss */
 .coupon .block {
   display: block;
 }
-/* line 37, ../.sass/coupon.scss */
+/* line 51, ../.sass/coupon.scss */
 .coupon .coupon-body {
   display: table;
   width: 100%;
   height: 100%;
+  color: #e02929;
 }
-/* line 42, ../.sass/coupon.scss */
+/* line 57, ../.sass/coupon.scss */
 .coupon .coupon-body .coupon-content {
   position: relative;
   width: 62%;
@@ -44,7 +50,7 @@
   overflow: hidden;
   float: left;
 }
-/* line 51, ../.sass/coupon.scss */
+/* line 66, ../.sass/coupon.scss */
 .coupon .coupon-body .coupon-content .coupon-content-heading {
   position: absolute;
   left: 0;
@@ -56,57 +62,57 @@
   background: rgba(0, 0, 0, 0.5);
   padding: 5px 10px;
 }
-/* line 68, ../.sass/coupon.scss */
+/* line 83, ../.sass/coupon.scss */
 .coupon .coupon-body .coupon-content .coupon-image {
   position: absolute;
   left: 50%;
   top: 50%;
   z-index: 1000;
 }
-/* line 76, ../.sass/coupon.scss */
+/* line 91, ../.sass/coupon.scss */
 .coupon .coupon-body .coupon-sidebar {
   width: 38%;
   height: 100%;
   float: right;
 }
-/* line 83, ../.sass/coupon.scss */
+/* line 98, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content {
   display: table;
   height: 100%;
   width: 100%;
 }
-/* line 88, ../.sass/coupon.scss */
+/* line 103, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content .coupon-sidebar-heading {
   display: table-row;
 }
-/* line 91, ../.sass/coupon.scss */
+/* line 106, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content .coupon-sidebar-heading .coupon-title {
   margin-top: 10px;
 }
-/* line 96, ../.sass/coupon.scss */
+/* line 111, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content .coupon-sidebar-body {
   display: table-row;
 }
-/* line 100, ../.sass/coupon.scss */
+/* line 115, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content .coupon-sidebar-footer {
   display: table-row;
 }
-/* line 105, ../.sass/coupon.scss */
+/* line 120, ../.sass/coupon.scss */
 .coupon .coupon-object-top {
   display: table-cell;
   vertical-align: top;
 }
-/* line 110, ../.sass/coupon.scss */
+/* line 125, ../.sass/coupon.scss */
 .coupon .coupon-object-middle {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 115, ../.sass/coupon.scss */
+/* line 130, ../.sass/coupon.scss */
 .coupon .coupon-object-bottom {
   display: table-cell;
   vertical-align: bottom;
 }
-/* line 120, ../.sass/coupon.scss */
+/* line 135, ../.sass/coupon.scss */
 .coupon .coupon-image,
 .coupon .coupon-image img {
   display: block;
@@ -121,25 +127,25 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 136, ../.sass/coupon.scss */
+/* line 151, ../.sass/coupon.scss */
 .coupon .coupon-title {
   text-align: center;
 }
-/* line 139, ../.sass/coupon.scss */
+/* line 154, ../.sass/coupon.scss */
 .coupon .coupon-title span {
   font-size: 70%;
 }
-/* line 144, ../.sass/coupon.scss */
+/* line 159, ../.sass/coupon.scss */
 .coupon small {
   font-size: 55%;
 }
-/* line 148, ../.sass/coupon.scss */
+/* line 163, ../.sass/coupon.scss */
 .coupon .coupon-date {
   display: block;
   text-align: center;
   padding: 5px 0;
 }
-/* line 154, ../.sass/coupon.scss */
+/* line 169, ../.sass/coupon.scss */
 .coupon .pin {
   position: absolute;
   top: -10px;

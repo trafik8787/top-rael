@@ -1,31 +1,29 @@
 /* line 4, ../.sass/icons.scss */
 .icons {
   display: inline-block;
-  background-image: url('/topisrael/images/icons.png?1441322724');
-  background-repeat: repeat;
-  background-position: top left;
+  background: url("../images/icons.png") no-repeat;
   text-indent: -9999px;
 }
-/* line 16, ../.sass/icons.scss */
+/* line 12, ../.sass/icons.scss */
 .icons.plane {
   width: 146px;
   height: 144px;
   background-position: 100% 0;
 }
-/* line 23, ../.sass/icons.scss */
+/* line 19, ../.sass/icons.scss */
 .icons.logo {
   background-position: 0 0;
   width: 250px;
   height: 54px;
 }
-/* line 30, ../.sass/icons.scss */
+/* line 26, ../.sass/icons.scss */
 .icons.logo.white {
   width: 200px;
   height: 43px;
   background-position: 0 -54px;
 }
-/* line 36, ../.sass/icons.scss */
-.icons.logo .md {
+/* line 32, ../.sass/icons.scss */
+.icons.logo.md {
   width: 200px;
   height: 43px;
   background-position: 0 -97px;
