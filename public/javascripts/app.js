@@ -459,6 +459,42 @@ $(document).ready(function(){
 
 
 
+    //добавить статью в избранное
+    $(document).on('click', '.w-add-article-favor', function(){
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "JSON", // указываем, что нам вернется JSON
+            url: '/articlesave',
+            data: 'id_articles='+$(this).data('id'),
+            success: function(response) { // когда получаем ответ
+
+            }
+        });
+
+        return false;
+
+    });
+
+    //удалить статью из избранного
+    $(document).on('click', '.w-delete-article-favor', function(){
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "JSON", // указываем, что нам вернется JSON
+            url: '/articledel',
+            data: 'id_articles='+$(this).data('id'),
+            success: function(response) { // когда получаем ответ
+
+
+            }
+        });
+
+        $(this).parents('.list-item').hide();
+
+        return false;
+    });
+
+
+
     //добавить бизнес в избранное
     $(document).on('click', '.w-add-bussines-favor', function(){
 
@@ -469,7 +505,7 @@ $(document).ready(function(){
             data: 'id_bussines='+$(this).data('id'),
             success: function(response) { // когда получаем ответ
 
-                console.log(response);
+
             }
         });
 
@@ -496,7 +532,7 @@ $(document).ready(function(){
             data: 'id_bussines='+$(this).data('id'),
             success: function(response) { // когда получаем ответ
 
-                console.log(response);
+
             }
         });
 
@@ -523,7 +559,7 @@ $(document).ready(function(){
             data: 'id_coupon='+$(this).data('id'),
             success: function(response) { // когда получаем ответ
 
-                console.log(response);
+
             }
         });
 
@@ -551,7 +587,7 @@ $(document).ready(function(){
             data: 'id_coupon='+$(this).data('id'),
             success: function(response) { // когда получаем ответ
 
-                console.log(response);
+
             }
         });
 

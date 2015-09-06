@@ -691,7 +691,7 @@ class Model_BussinesModel extends Model_BaseModel {
 
     /**
      * @param $id_bussines
-     * удалить бизнесы из базы
+     * удалить бизнесы из избранного пользователя
      */
     public function deleteBussinesFavoritesUser ($id_bussines){
         $id_user = Auth::instance()->get_user()->id;

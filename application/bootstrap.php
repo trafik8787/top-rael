@@ -186,7 +186,7 @@ Route::set('Feed', 'feed(/<action>)')
         'action'     => 'index',
     ));
 
-
+//добавить купон в избранное
 Route::set('ModalCouponSave', 'couponsave')
     ->defaults(array(
         'controller' => 'ModalCoupon',
@@ -205,11 +205,25 @@ Route::set('ModalBussinesSave', 'bussinessave')
         'controller' => 'ModalBussines',
         'action'     => 'saveFovarites',
     ));
-
+//удалить бизнес из избранного
 Route::set('ModalBussinesDel', 'bussinesdel')
     ->defaults(array(
         'controller' => 'ModalBussines',
         'action'     => 'deleteFovarites',
+    ));
+
+//сохранить в избранное статью
+Route::set('ArticleFavoritAdd', 'articlesave')
+    ->defaults(array(
+        'controller' => 'ArticleFavorit',
+        'action'     => 'saveArticleFavorit',
+    ));
+
+//удалить статью из избранного
+Route::set('ArticleFavoritDel', 'articledel')
+    ->defaults(array(
+        'controller' => 'ArticleFavorit',
+        'action'     => 'deleteArticleFavorit',
     ));
 
 Route::set('ModalCoupon', 'modalcoupon(/<id_coupon>)')

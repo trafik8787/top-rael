@@ -60,6 +60,16 @@ class Controller_Pages_Account extends Controller_BaseController {
                     parent::$count_bussines = count($favoritbus);
                 }
 
+                //проверяем нет ли у пользователя сохраненных в базе статей в избранном
+                //если есть обновляем куки файл если нету создаем
+                $favoritartic = Model::factory('ArticlesModel')->getArticlesFavoritesUserId(Auth::instance()->get_user()->id);
+                if ($favoritartic !== false) {
+                    //пересоздаем статью на основе данных из таблицы
+                    Cookie::update_Arr_set_json('favoritartic', $favoritartic);
+                    //получаем избранные статьи
+                    $data->favorits_articles = Model::factory('ArticlesModel')->getArticlesId($favoritartic);
+                }
+
 
 
                 $session = Session::instance(); // стартуем сессии
@@ -98,6 +108,11 @@ class Controller_Pages_Account extends Controller_BaseController {
         if (parent::$favorits_bussines != null) {
             $data->favorits_bussines = Model::factory('BussinesModel')->getBussinesId(self::$favorits_bussines);
             $data->favorits_bussines = parent::convertArrayTagsBusiness($data->favorits_bussines, 4);
+        }
+
+        //получаем избранные статьи
+        if (parent::$favorits_articles != null) {
+            $data->favorits_articles = Model::factory('ArticlesModel')->getArticlesId(parent::$favorits_articles);
         }
 
         $data->ulogin = $ulogin->render(); // стартуем сессии

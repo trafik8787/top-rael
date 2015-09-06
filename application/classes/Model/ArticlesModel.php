@@ -115,6 +115,68 @@ class Model_ArticlesModel extends Model_BaseModel {
 
 
 
+    public function getArticlesId($id_articles){
+
+        return DB::select()
+            ->from('articles')
+            ->where('id', 'IN', $id_articles)
+            ->execute()->as_array();
+    }
+
+    /**
+     * @param $id_user
+     * @param $id_article
+     * @return string
+     * @throws Kohana_Exception
+     * сохранить статью в избранном
+     */
+    public function saveArticlesFavoritesUser($id_user, $id_article){
+        $query = DB::insert('users_relation_favorites_article', array('user_id', 'article_id'))
+            ->values(array($id_user, $id_article))->execute();
+        return json_encode($query);
+    }
+
+
+    /**
+     * @param $id_article
+     * удалить статью из избранного
+     */
+    public function deleteArticlesFavoritesUser ($id_article){
+        $id_user = Auth::instance()->get_user()->id;
+        $query = DB::delete('users_relation_favorites_article')
+            ->where('user_id', '=', $id_user)
+            ->and_where('article_id', '=', $id_article)
+            ->execute();
+    }
+
+
+    /**
+     * @param $user_id
+     * @return array|bool
+     * получить избранные статьи по id пользователя
+     */
+    public function getArticlesFavoritesUserId ($user_id){
+
+        $query = DB::select('article_id')
+            ->from('users_relation_favorites_article')
+            ->where('user_id', '=', $user_id)
+            ->execute()->as_array();
+
+        if (!empty($query)) {
+            $result = array();
+            foreach ($query as $row) {
+                $result[] = $row['article_id'];
+            }
+
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
 
     /**
      * @param $url_category
@@ -206,8 +268,8 @@ class Model_ArticlesModel extends Model_BaseModel {
 
                 ->where_open()
                     ->where('artic.url', '=', $url_article)
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
+                    //->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+                    //->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
                     ->and_where('bus.status', '=', 1)
                 ->where_close()
                 ->cached()
@@ -221,6 +283,19 @@ class Model_ArticlesModel extends Model_BaseModel {
             $end_result = Cache::instance()->get($url_article);
         }
         Cache::instance()->delete($url_article);
+
+
+        //вызываем метод получения данных из куки
+        Controller_BaseController::favorits_articles();
+        if (!empty(Controller_BaseController::$favorits_articles)) {
+
+            if (in_array($end_result['ArticId'], Controller_BaseController::$favorits_articles)) {
+                $end_result['articles_favorit'] = 1;
+            }
+
+        }
+
+
         return $end_result;
     }
 
@@ -230,7 +305,7 @@ class Model_ArticlesModel extends Model_BaseModel {
      * формирование двумерного масива карточки статьи
      */
     public function CreateArrayArticle ($result){
-
+       // die(HTML::x($result));
         $end_result = array();
         $BusTmp = array();
         $CoupTmp = array();
@@ -397,6 +472,7 @@ class Model_ArticlesModel extends Model_BaseModel {
      * получаем рандомные статьи из раздела
      */
     public function getArticlesRandomIdCategory($id_section, $id_curent_article){
+
         $query = DB::select('id','name', 'secondname', 'url', 'content', 'images_article')
             ->from('articles')
             ->where('id_section','=', $id_section)
@@ -404,11 +480,15 @@ class Model_ArticlesModel extends Model_BaseModel {
             ->cached()
             ->execute()->as_array();
 
-        $key_rand = array_rand($query, 3);
+        if (!empty($query)) {
+            $key_rand = array_rand($query, 3);
 
-        $result = array();
-        foreach ($key_rand as $row) {
-            $result[] = $query[$row];
+            $result = array();
+            foreach ($key_rand as $row) {
+                $result[] = $query[$row];
+            }
+        } else {
+            $result = array();
         }
 
         return $result;

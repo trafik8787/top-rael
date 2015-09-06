@@ -86,4 +86,28 @@ class Cookie extends Kohana_Cookie {
 
     }
 
+    /**
+     * @param $key
+     * удалить обзор из кабинета
+     */
+    public static function del_articles ($key){
+
+        $data = Cookie::get('favoritartic');
+        $data = json_decode($data);
+        $key = array_search($key, $data);
+
+        unset($data[$key]);
+
+        $res = array();
+        foreach ($data as $row) {
+            $res[] = $row;
+        }
+        $data = json_encode($res);
+
+        Cookie::delete('favoritartic');
+        Cookie::set('favoritartic', $data, Date::YEAR);
+        //die(HTML::x($data));
+
+    }
+
 }

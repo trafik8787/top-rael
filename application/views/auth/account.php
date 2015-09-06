@@ -66,8 +66,13 @@
 
 
                     <div class="user-object  user-avatar">
-                        <img src="<?=$user->photo?>" width="90" height="90" alt=""
+                        <?if (!empty($user->photo)):?>
+                            <img src="<?=$user->photo?>" width="90" height="90" alt=""
                              class="img-circle">
+                        <?else:?>
+                            <img src="/public/uploade/no_avatar.jpg" width="90" height="90" alt=""
+                                 class="img-circle">
+                        <?endif?>
                     </div>
 
                     <div class="user-object">
@@ -297,7 +302,38 @@
                 <div class="panel panel-thumbnails tab-pane fade" id="articles">
                     <div class="panel-body">
                         <div class="col-md-12">
-                            Статьи какие то
+                            <?if (!empty($favorits_articles)):?>
+                                <?foreach($favorits_articles as $rows_data_artic):?>
+                                    <div class="list-item">
+                                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_data_artic['id']?>" class="pin w-delete-article-favor">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                        <div class="media">
+
+                                            <div class="media-left">
+
+                                                <a href="/article/<?=$rows_data_artic['url']?>">
+                                                    <img src="/uploads/img_articles/thumbs/<?=basename($rows_data_artic['images_article'])?>" width="260" height="190" class="media-object" alt="<?=$rows_data_artic['name']?>"/>
+                                                </a>
+
+                                            </div>
+
+                                            <div class="media-body">
+
+                                                <h2 class="media-heading">
+                                                    <a href="/article/<?=$rows_data_artic['url']?>"><strong><?=$rows_data_artic['name']?></strong></a>
+                                                    <small><?=$rows_data_artic['secondname']?></small>
+                                                </h2>
+
+                                                <?=Text::limit_chars(strip_tags($rows_data_artic['content']), 350, null, true)?>
+
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                    </div>
+
+                                <?endforeach?>
+                            <?endif?>
                         </div>
                     </div>
                 </div>

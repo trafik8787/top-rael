@@ -32,7 +32,7 @@
 
                                 <div class="panel-buttons-group">
 
-                                    <a href="#" class="btn btn-default" role="button">На карте</a>
+                                    <a href="/maps?section=<?=$rowsdata['category'][0]['url']?>" class="btn btn-default" role="button">На карте</a>
                                 </div>
 
                                 <div class="collapse" id="restaurants-thumbnails-navigation">
@@ -85,12 +85,12 @@
                                         </div>
                                     </div>
                                 <?endforeach?>
-
-
-                                <div class="panel-footer text-center">
-                                    <a href="/section/<?=$rowsdata['category'][0]['url']?>" class="btn open-all" role="button">Открыть все</a>
-                                </div>
                             </div>
+
+                            <div class="panel-footer text-center">
+                                <a href="/section/<?=$rowsdata['category'][0]['url']?>" class="btn open-all" role="button">Открыть все</a>
+                            </div>
+
 
                         </div>
                         <hr/>

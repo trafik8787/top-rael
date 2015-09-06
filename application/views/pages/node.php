@@ -119,10 +119,17 @@
                                 <i class="fa fa-envelope"></i>
                             </a>
                         </div>
-                        <a href="#" class="btn btn-link">
-                            <i class="fa fa-star"></i>
-                            Добавить в Избранные места
-                        </a>
+                        <?if (!empty($data['articles_favorit'])):?>
+                            <a href="#" class="btn btn-link" style="color: #003c4c;">
+                                <i class="fa fa-star"></i>
+                                В избранном
+                            </a>
+                        <?else:?>
+                            <a href="#" data-id="<?=$data['ArticId']?>"  class="btn btn-link w-add-article-favor">
+                                <i class="fa fa-star"></i>
+                                Добавить в Избранные места
+                            </a>
+                        <?endif?>
                     </div>
 
 

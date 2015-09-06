@@ -40,9 +40,11 @@
                             <a href="/account#izbran"><i class="fa fa-star"></i>Избранные места <span class="badge w-count-bussines"><?=Controller_BaseController::$count_bussines?></span></a>
                             <a href="/account#coupons"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge w-count-coupon"><?=Controller_BaseController::$count_coupon?></span></a>
                         </div>
-
-                        <img src="<?=$user->photo?>" width="60" height="60" alt="" class="img-circle"/>
-
+                        <?if (!empty($user->photo)):?>
+                            <img src="<?=$user->photo?>" width="60" height="60" alt="" class="img-circle"/>
+                        <?else:?>
+                            <img src="/public/uploade/no_avatar.jpg" width="60" height="60" alt="" class="img-circle"/>
+                        <?endif?>
                         <div class="header-profile-info">
                             <small>Добро пожаловать</small>
                             <small class="profile-username"><?=$user->username?> <?=$user->secondname?></small>
@@ -60,7 +62,7 @@
                             <a href="/account#coupons"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge w-count-coupon"><?=Controller_BaseController::$count_coupon?></span></a>
                         </div>
 
-                        <img src="/public/uploade/user-avatar.jpg" width="60" height="60" alt="" class="img-circle"/>
+                        <img src="/public/uploade/no_avatar.jpg" width="60" height="60" alt="" class="img-circle"/>
 
                         <div class="header-profile-info">
                             <a href="/account/login">Вход</a>

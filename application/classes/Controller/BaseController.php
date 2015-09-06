@@ -19,6 +19,7 @@ abstract class Controller_BaseController extends Controller_Template {
     public static $count_bussines = 0;
     public static $favorits_coupon = null;
     public static $favorits_bussines = null;
+    public static $favorits_articles = null;
 
     //храним блок верхних банеров
     public static $top_baners = null;
@@ -37,6 +38,8 @@ abstract class Controller_BaseController extends Controller_Template {
        self::favorits_coupon();
         //избранные бизнесы в куки
        self::favorits_bussines();
+        //избранные статьи
+        self::favorits_articles();
 
         $url = Request::detect_uri();
         self::$detect_uri = '/'.$url;
@@ -146,6 +149,17 @@ abstract class Controller_BaseController extends Controller_Template {
             self::$count_bussines = count(self::$count_bussines);
         }
     }
+
+    /**
+     * избранные статьи в куки получаем
+     */
+    public static function favorits_articles (){
+
+        if (Cookie::get('favoritartic') != '') {
+            self::$favorits_articles = json_decode(Cookie::get('favoritartic'));
+        }
+    }
+
 
     /**
      * @param null $title
