@@ -31,7 +31,7 @@
                                 <?foreach($general_meny as $row_meny):?>
                                     <li><a href="/section/<?=$row_meny['url']?>"><?=$row_meny['name']?></a></li>
                                 <?endforeach?>
-                                <li><a href="#">LUXURY</a></li>
+<!--                                <li><a href="#">LUXURY</a></li>-->
                             </ul>
                         </nav>
                     </div>
@@ -57,7 +57,7 @@
                             <br/>
                             <ul>
                                 <li><a href="/contacts">צור קשר</a></li>
-                                <li><a href="#">כניסה למפרסם</a></li>
+                                <li><a href="/account_business">כניסה למפרסם</a></li>
                             </ul>
                         </nav>
                     </div>

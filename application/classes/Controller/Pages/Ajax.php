@@ -32,17 +32,7 @@ class Controller_Pages_Ajax extends Controller {
 
 	}
 
-    /**
-     * РАССЫЛКА ДЛЯ ПОДПИЩИКОВ
-     */
-    public function action_SendEmailSubscribe(){
 
-        //каждый четверг
-        if (date('l') == 'Thursday') {
-
-        }
-
-    }
 
 
 
@@ -151,6 +141,21 @@ class Controller_Pages_Ajax extends Controller {
     /**
      * екшены запускаемые по крону для отправки емейлов бизнесам
      */
+
+
+    /**
+     * РАССЫЛКА ДЛЯ ПОДПИЩИКОВ
+     */
+    public function action_SendEmailSubscribe(){
+
+        //каждый четверг
+        if (date('l') == 'Thursday') {
+
+        }
+
+    }
+
+
 
     /**
      * запускается по крону и сравнивает даты если до даты окончания бизнеса остается 7 дней

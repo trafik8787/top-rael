@@ -18,7 +18,7 @@
 
                 <div id="context" class="full-text">
 
-                    <img src="<?=$data['ArticImg']?>" width="800" height="600" class="img-responsive"/>
+                    <img src="<?=$data['ArticImg']?>" width="800" height="600" class="img-responsive" alt="<?=$data['ArticName']?>"/>
 
                     <h1><?=$data['ArticName']?></h1>
 
@@ -100,25 +100,38 @@
 
                     <div class="recomendation">
                         <strong>Рекомендуйте нас друзьям</strong>
+                        <br/>
 
-                        <div class="recomendation-icons">
+                        <script type="text/javascript">(function() {
+                                if (window.pluso)if (typeof window.pluso.start == "function") return;
+                                if (window.ifpluso==undefined) { window.ifpluso = 1;
+                                    var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+                                    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+                                    s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
+                                    var h=d[g]('body')[0];
+                                    h.appendChild(s);
+                                }})();</script>
+                        <div class="pluso" data-background="transparent" data-options="big,square,line,horizontal,nocounter,theme=08" data-services="vkontakte,odnoklassniki,facebook,twitter,google,moimir,email,print"></div>
 
-                            <a href="#" class="social vk">
-                                <i class="fa fa-vk"></i>
-                            </a>
-
-                            <a href="#" class="social facebook">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-
-                            <a href="#" class="social twitter">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-
-                            <a href="#" class="social email">
-                                <i class="fa fa-envelope"></i>
-                            </a>
-                        </div>
+<!--                        <div class="recomendation-icons">-->
+<!--                            -->
+<!---->
+<!--                            <a href="#" class="social vk">-->
+<!--                                <i class="fa fa-vk"></i>-->
+<!--                            </a>-->
+<!---->
+<!--                            <a href="#" class="social facebook">-->
+<!--                                <i class="fa fa-facebook"></i>-->
+<!--                            </a>-->
+<!---->
+<!--                            <a href="#" class="social twitter">-->
+<!--                                <i class="fa fa-twitter"></i>-->
+<!--                            </a>-->
+<!---->
+<!--                            <a href="#" class="social email">-->
+<!--                                <i class="fa fa-envelope"></i>-->
+<!--                            </a>-->
+<!--                        </div>-->
                         <?if (!empty($data['articles_favorit'])):?>
                             <a href="#" class="btn btn-link" style="color: #003c4c;">
                                 <i class="fa fa-star"></i>

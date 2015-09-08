@@ -70,7 +70,7 @@
                                     <div class="col-md-6">
                                         <div class="thumbnail">
 
-                                            <?if (!empty($rows_data[0]['bussines_favorit']))://если купон добавлен в избранное?>
+                                            <?if (!empty($rows_data[0]['bussines_favorit']))://если бизнес добавлен в избранное?>
                                                 <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
                                                     <i class="fa fa-star"></i>
                                                 </a>
@@ -81,7 +81,7 @@
                                             <?endif?>
 
                                             <a href="/business/<?=$rows_data[0]['url']?>" class="thumbnail-image">
-                                                <img src="<?=$rows_data[0]['home_busines_foto']?>" width="240" height="150" alt="">
+                                                <img src="<?=$rows_data[0]['home_busines_foto']?>" width="240" height="150" alt="<?=$rows_data[0]['name']?>">
                                             </a>
 
                                             <div class="thumbnail-content">
@@ -109,7 +109,7 @@
                                                 <?endif?>
 
                                                 <a href="/business/<?=$rows_data[1]['url']?>" class="thumbnail-image">
-                                                    <img src="<?=$rows_data[1]['home_busines_foto']?>" width="240" height="150" alt="">
+                                                    <img src="<?=$rows_data[1]['home_busines_foto']?>" width="240" height="150" alt="<?=$rows_data[1]['name']?>">
                                                 </a>
 
                                                 <div class="thumbnail-content">

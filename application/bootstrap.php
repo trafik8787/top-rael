@@ -149,6 +149,14 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+//профиль владельца бизнеса
+Route::set('AccountBusiness', 'account_business')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'AccountBusiness',
+        'action'     => 'index',
+    ));
+
 //подтверждение подписки
 Route::set('Susses_subscribe', 'susses_subscribe')
     ->defaults(array(

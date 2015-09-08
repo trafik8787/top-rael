@@ -84,7 +84,7 @@ abstract class Controller_BaseController extends Controller_Template {
             'public/stylesheets/bootstrap-social.css',
             'public/stylesheets/font-awesome.min.css',
             'public/stylesheets/screen.css',
-            'public/stylesheets/print.css',
+            //'public/stylesheets/print.css',
             'public/stylesheets/owl.carousel.min.css',
             'public/stylesheets/jquery.bxslider.min.css',
             'public/stylesheets/common.css',

@@ -23,6 +23,8 @@ class Controller_Pages_Account extends Controller_BaseController {
 
 
         $data = View::factory('auth/account'); // в эту переменную я зыписываю все, что нужно передать виду
+        //блок управления подпиской в кабинете пользователя
+        $bloc_sndmail = View::factory('blocks_includ/bloc_sendmail_profile');
         $ulogin = Ulogin::factory(); // создаем экземпляр класса юлогин
 
         if (!$ulogin->mode()) { // если ранее юлогин не вызывался
@@ -81,15 +83,14 @@ class Controller_Pages_Account extends Controller_BaseController {
                 }
                 $this->header->user = Auth::instance()->get_user();
 
-                //блок управления подпиской в кабинете пользователя
-                $bloc_sndmail = View::factory('blocks_includ/bloc_sendmail_profile');
-                $data->panel_subscribe = $bloc_sndmail;
 
             } catch (ORM_Validation_Exception $e) {
 
                 $this->template->login = $e->errors(''); // если возникли ошибки - выводим в переменную login
             }
         }
+
+
 
         if (!$data->user = Auth::instance()->get_user()) // если пользователь не авторизован
         {
@@ -98,6 +99,8 @@ class Controller_Pages_Account extends Controller_BaseController {
         } else {
             $data->photo = Auth::instance()->get_user()->photo;
         }
+
+        $data->panel_subscribe = $bloc_sndmail;
 
         //получаем избранные купоны
         if (parent::$favorits_coupon != null) {

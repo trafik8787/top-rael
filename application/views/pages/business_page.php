@@ -132,7 +132,7 @@
             <div class="primary-gallery">
                 <div class="owl-carousel">
                     <?foreach($data['TopsArr'] as $rows):?>
-                        <a href="#"><img src="<?=$rows['TopsliderImg']?>" width="1200" height="400" alt="" class="img-responsive"></a>
+                        <a href="#"><img src="<?=$rows['TopsliderImg']?>" width="1200" height="400" alt="<?=$data['BusName']?>" class="img-responsive"></a>
                     <?endforeach?>
                 </div>
             </div>
@@ -144,7 +144,7 @@
         <div class="page-profile">
 
             <?if (!empty($data['BusLogo'])):?>
-                <div class="page-profile-avarat"><img src="<?=$data['BusLogo']?>" width="88" height="88"/></div>
+                <div class="page-profile-avarat"><img src="<?=$data['BusLogo']?>" width="88" height="88" alt="<?=$data['BusName']?>"/></div>
             <?endif?>
             <div class="page-profile-body">
 

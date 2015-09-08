@@ -452,7 +452,8 @@ $(document).ready(function(){
     //печать купона
     $(document).on('click', '.w-button-print', function(){
         $(".w-print-coupon").print({
-            globalStyles: true
+            globalStyles: true,
+            stylesheet: '/public/stylesheets/coupon_print.css'
         });
     });
 
@@ -461,6 +462,7 @@ $(document).ready(function(){
 
     //добавить статью в избранное
     $(document).on('click', '.w-add-article-favor', function(){
+
         $.ajax({ // описываем наш запрос
             type: "POST", // будем передавать данные через POST
             dataType: "JSON", // указываем, что нам вернется JSON
@@ -470,6 +472,10 @@ $(document).ready(function(){
 
             }
         });
+
+        $(this).css('color', '#003c4c');
+        $(this).html('<i class="fa fa-star"></i> В избранном');
+        $(this).removeClass('w-add-article-favor');
 
         return false;
 
