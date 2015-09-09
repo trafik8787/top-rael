@@ -20,6 +20,7 @@
         </div>
     </div>
 
+    <?=isset($modal_subskribe) ? $modal_subskribe : ''?>
 
     <header>
         <div id="header">

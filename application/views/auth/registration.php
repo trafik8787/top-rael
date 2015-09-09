@@ -17,7 +17,7 @@
             <div class="page-title">Регистрация через социальные сети</div>
 
             <span style="display: none"><?=$ulogin;?></span>
-            <div class="page-context" id="uLogin" data-ulogin="display=buttons;redirect_uri=<?=Kohana::$config->load('ulogin')->redirect_uri?>;">
+            <div class="page-context" id="uLogin" data-ulogin="display=buttons;fields=first_name,last_name,email,photo,city,sex,bdate;redirect_uri=<?=Kohana::$config->load('ulogin')->redirect_uri?>;">
 
                 <a href="#" class="social twitter" data-uloginbutton="twitter">
                     <i class="fa fa-twitter"></i>

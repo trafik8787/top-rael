@@ -684,6 +684,47 @@ $(document).ready(function(){
     });
 
 
+    $('.w-modal-subscribe').submit(function(){
 
+        var input_email = $('.w-email-modal-subcribe');
+
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "JSON", // указываем, что нам вернется JSON
+            url: '/subscribe',
+            data: $(this).serialize(),
+            success: function(response) { // когда получаем ответ
+
+                if (response.susses != undefined) {
+                    $('.modal-subscribe .modal-body').html('<h3 style="color: #009900">'+response.susses+'</h3>');
+                    setTimeout(function () {
+                        $('.modal-subscribe').modal('hide');
+                    }, 3000);
+                }
+
+                if (response.dublicate_email != undefined) {
+                    console.log(response.dublicate_email);
+                    input_email.popover({
+                        placement: 'bottom',
+                        content: response.dublicate_email,
+                        delay: { show: 100, hide: 500 }
+                    });
+                    input_email.popover('show');
+
+                    $('.popover.fade.bottom.in').css('background-color','#FF7272');
+                    $('.popover.bottom>.arrow').addClass('errors-email');
+
+                    setTimeout(function () {
+                        input_email.popover('destroy');
+                    }, 2000);
+                }
+
+
+
+            }
+        });
+
+        return false;
+    });
 
 });

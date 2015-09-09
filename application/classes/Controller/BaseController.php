@@ -109,7 +109,14 @@ abstract class Controller_BaseController extends Controller_Template {
 
             'public/javascripts/app.js'
         );
+
+        //выводим модальное окно подписки везде кроме главной
+        if (!Cookie::get('topsubscrib') and Request::detect_uri() != '') {
+            $this->header->modal_subskribe = View::factory('blocks_includ/modal_subscribe');
+            Cookie::set('topsubscrib', '1', Date::YEAR);
+        }
     }
+
 
     /**
      * @param array $data_arr

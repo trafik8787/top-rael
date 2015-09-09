@@ -39,8 +39,9 @@ return array
 	
 	// Необязательные поля
 	'optional'		=> array(
-        'photo_big',
+        'photo',
         'city',
+        'sex',
         'bdate'
     ),
 );
