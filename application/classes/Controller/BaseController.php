@@ -273,4 +273,30 @@ abstract class Controller_BaseController extends Controller_Template {
         //парвый банер
         self::$right_baners = $right_content;
     }
+
+
+    public function SeoShowPage(array $title_seo, array $keywords_seo, array $description_seo){
+
+        if ($title_seo[0] == '') {
+            View::set_global('seo_title', $title_seo[1]);
+        } else {
+            View::set_global('seo_title', $title_seo[0]);
+        }
+
+
+        if ($keywords_seo[0] == '') {
+            View::set_global('seo_keywords', $keywords_seo[1]);
+        } else {
+            View::set_global('seo_keywords', $keywords_seo[0]);
+        }
+
+        if ($description_seo[0] == '') {
+            View::set_global('seo_description', strip_tags($description_seo[1]));
+        } else {
+            View::set_global('seo_description', $description_seo[0]);
+        }
+
+    }
+
+
 }

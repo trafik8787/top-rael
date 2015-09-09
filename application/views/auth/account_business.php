@@ -8,7 +8,7 @@
 
 ?>
 
-<content>
+<content dir="rtl">
     <div id="content" class="rtl">
 
 
@@ -542,5 +542,5 @@
             </div>
         </div>
 
-
+    </div>
 </content>

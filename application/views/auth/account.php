@@ -138,15 +138,16 @@
 
 
                 </ul>
-                <?if (!empty($user)): //если пользователи ?>
+
                     <ul class="pull-right">
+                        <?if (!empty($user)): //если пользователи ?>
                             <li>
                                 <a href="#profile" class="pin-aria" data-toggle="tab">
                                     <span class="pin"><i class="fa fa-user"></i></span>
                                     Профиль
                                 </a>
                             </li>
-
+                        <?endif?>
                         <li>
                             <a href="#subscribers" class="pin-aria" data-toggle="tab">
                                 <span class="pin"><i class="fa fa-paper-plane"></i></span>
@@ -154,7 +155,7 @@
                             </a>
                         </li>
                     </ul>
-                <?endif?>
+
             </div>
 
         </div>
@@ -388,17 +389,14 @@
                 <div class="panel panel-thumbnails tab-pane fade" id="subscribers">
                     <div class="panel-body">
                         <div class="col-md-12">
-                            рассылка
+                            <?=isset($panel_subscribe)? $panel_subscribe: ''?>
                         </div>
                     </div>
                 </div>
 
-
             </div>
 
 
-
-            <?=isset($panel_subscribe)? $panel_subscribe: ''?>
         </div>
 
     </div>

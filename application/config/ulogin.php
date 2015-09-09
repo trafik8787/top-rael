@@ -39,7 +39,7 @@ return array
 	
 	// Необязательные поля
 	'optional'		=> array(
-        'photo',
+        'photo_big',
         'city',
         'bdate'
     ),

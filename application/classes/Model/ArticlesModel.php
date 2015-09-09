@@ -270,7 +270,7 @@ class Model_ArticlesModel extends Model_BaseModel {
                     ->where('artic.url', '=', $url_article)
                     //->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
                     //->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
-                    ->and_where('bus.status', '=', 1)
+                   // ->and_where('bus.status', '=', 1)
                 ->where_close()
                 ->cached()
                 ->execute()->as_array();
