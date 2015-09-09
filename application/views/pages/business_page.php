@@ -322,9 +322,10 @@
 
                                 </div>
                             </div>
+                            <hr/>
                         <?endif?>
 
-                        <hr/>
+
 
                         <?if (!empty($data['BusVideo'])):?>
                             <div class="panel">
@@ -343,9 +344,9 @@
                                     </div>
                                 </div>
                             </div>
-                        <?endif?>
 
-                        <hr/>
+                            <hr/>
+                        <?endif?>
 
                         <?if (!empty($data['ArticArr'])):?>
                             <div class="panel panel-list">

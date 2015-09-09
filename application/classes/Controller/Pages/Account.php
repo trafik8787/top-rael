@@ -9,11 +9,7 @@
 class Controller_Pages_Account extends Controller_BaseController {
 
 
-    public function before (){
-        parent::before();
 
-        //die(HTML::x(Auth::instance()->get_user()));
-    }
 
     /**
      * @throws Kohana_Exception
@@ -35,43 +31,16 @@ class Controller_Pages_Account extends Controller_BaseController {
 
                 $user = $ulogin->login(); // залогиниться
 
-                //проверяем нет ли у пользователя сохраненных в базе купонов в избранном
-                //если есть обновляем куки файл если нету создаем
-                $favoritcoup = Model::factory('CouponsModel')->getCouponsFavoritesUserId(Auth::instance()->get_user()->id);
-                if ($favoritcoup !== false) {
-                    //пересоздаем купон на основе данных из таблицы
-                    Cookie::update_Arr_set_json('favoritcoup', $favoritcoup);
-                    //получаем избранные купоны
-                    $data->favorit_coupon = Model::factory('CouponsModel')->getCouponsId($favoritcoup);
-                    $data->favorit_coupon = parent::convertArrayTagsBusiness($data->favorit_coupon, 3);
-                    //передаем количество купонов в шапку
-                    parent::$count_coupon = count($favoritcoup);
-                }
+                //синхронизируем купоны добвленные в избранное анонима и авторизированого пользователя
+                $data = self::FavoritsCouponMetod('users_relation_favorites_coup', 'coupon_id', 'coupon', 'favoritcoup', $data);
 
 
-                //проверяем нет ли у пользователя сохраненных в базе бизнесов в избранном
-                //если есть обновляем куки файл если нету создаем
-                $favoritbus = Model::factory('BussinesModel')->getBussinesFavoritesUserId(Auth::instance()->get_user()->id);
-                if ($favoritbus !== false) {
-                    //пересоздаем купон на основе данных из таблицы
-                    Cookie::update_Arr_set_json('favoritbus', $favoritbus);
-                    //получаем избранные купоны
-                    $data->favorits_bussines = Model::factory('BussinesModel')->getBussinesId($favoritbus);
-                    $data->favorits_bussines = parent::convertArrayTagsBusiness($data->favorits_bussines, 4);
-                    //передаем количество купонов в шапку
-                    parent::$count_bussines = count($favoritbus);
-                }
+                //синхронизируем бизнесы добвленные в избранное анонима и авторизированого пользователя
+                $data = self::FavoritsCouponMetod('users_relation_favorites_bus', 'business_id', 'business', 'favoritbus', $data);
 
-                //проверяем нет ли у пользователя сохраненных в базе статей в избранном
-                //если есть обновляем куки файл если нету создаем
-                $favoritartic = Model::factory('ArticlesModel')->getArticlesFavoritesUserId(Auth::instance()->get_user()->id);
-                if ($favoritartic !== false) {
-                    //пересоздаем статью на основе данных из таблицы
-                    Cookie::update_Arr_set_json('favoritartic', $favoritartic);
-                    //получаем избранные статьи
-                    $data->favorits_articles = Model::factory('ArticlesModel')->getArticlesId($favoritartic);
-                }
 
+                //синхронизируем статьи добвленные в избранное анонима и авторизированого пользователя
+                $data = self::FavoritsArticlesMetod('users_relation_favorites_article', 'article_id', 'articles', 'favoritartic', $data);
 
 
                 $session = Session::instance(); // стартуем сессии
@@ -138,13 +107,18 @@ class Controller_Pages_Account extends Controller_BaseController {
 
             if ($user) { // если авторизовали успешно
 
-                //проверяем нет ли у пользователя сохраненных в базе купонов в избранном
-                //если есть обновляем куки файл если нету создаем
-//                $favoritcoup = Model::factory('CouponsModel')->getCouponsFavoritesUserId(Auth::instance()->get_user()->id);
-//                if ($favoritcoup !== false) {
-//                    //пересоздаем купон на основе данных из таблицы
-//                    Cookie::update_Arr_set_json('favoritcoup', $favoritcoup);
-//                }
+                //синхронизируем купоны добвленные в избранное анонима и авторизированого пользователя
+                $data = self::FavoritsCouponMetod('users_relation_favorites_coup', 'coupon_id', 'coupon', 'favoritcoup', $data);
+
+
+                //синхронизируем бизнесы добвленные в избранное анонима и авторизированого пользователя
+                $data = self::FavoritsCouponMetod('users_relation_favorites_bus', 'business_id', 'business', 'favoritbus', $data);
+
+
+                //синхронизируем статьи добвленные в избранное анонима и авторизированого пользователя
+                $data = self::FavoritsArticlesMetod('users_relation_favorites_article', 'article_id', 'articles', 'favoritartic', $data);
+
+
 
                 $session = Session::instance();
                 if ($session->get('redirectAfterLogin')!='')
@@ -353,4 +327,72 @@ class Controller_Pages_Account extends Controller_BaseController {
         Auth::instance()->logout();
         $this->redirect('/');
     }
+
+
+
+
+    public static function FavoritsCouponMetod($table, $field, $table_object, $cooki_name, $data_vievs){
+
+        if (parent::$favorits_coupon === null) {
+
+            $favoritcoup = Model::factory('CouponsModel')->getCouponsFavoritesUserId(Auth::instance()->get_user()->id);
+            if ($favoritcoup !== false) {
+                //пересоздаем купон на основе данных из таблицы
+                Cookie::update_Arr_set_json('favoritcoup', $favoritcoup);
+                //получаем избранные купоны
+                $data_vievs->favorit_coupon = Model::factory('CouponsModel')->getCouponsId($favoritcoup);
+                $data_vievs->favorit_coupon = parent::convertArrayTagsBusiness($data_vievs->favorit_coupon, 3);
+                //передаем количество купонов в шапку
+                parent::$count_coupon = count($favoritcoup);
+            }
+
+        } else {
+
+            Model::factory('BaseModel')->UpdateFavoritCookie($table, Auth::instance()->get_user()->id, $field, parent::$favorits_coupon, $table_object, $cooki_name);
+        }
+
+        return $data_vievs;
+    }
+
+
+    public static function FavoritsBusinessMetod($table, $field, $table_object, $cooki_name, $data_vievs){
+
+        if (parent::$favorits_bussines === null) {
+            $favoritbus = Model::factory('BussinesModel')->getBussinesFavoritesUserId(Auth::instance()->get_user()->id);
+            if ($favoritbus !== false) {
+                //пересоздаем купон на основе данных из таблицы
+                Cookie::update_Arr_set_json('favoritbus', $favoritbus);
+                //получаем избранные купоны
+                $data_vievs->favorits_bussines = Model::factory('BussinesModel')->getBussinesId($favoritbus);
+                $data_vievs->favorits_bussines = parent::convertArrayTagsBusiness($data_vievs->favorits_bussines, 4);
+                //передаем количество купонов в шапку
+                parent::$count_bussines = count($favoritbus);
+            }
+        } else {
+            Model::factory('BaseModel')->UpdateFavoritCookie($table, Auth::instance()->get_user()->id, $field, parent::$favorits_bussines, $table_object, $cooki_name);
+        }
+        return $data_vievs;
+    }
+
+
+    public static function FavoritsArticlesMetod($table, $field, $table_object, $cooki_name, $data_vievs){
+
+        if (parent::$favorits_articles === null) {
+            $favoritartic = Model::factory('ArticlesModel')->getArticlesFavoritesUserId(Auth::instance()->get_user()->id);
+            if ($favoritartic !== false) {
+                //пересоздаем статью на основе данных из таблицы
+                Cookie::update_Arr_set_json('favoritartic', $favoritartic);
+                //получаем избранные статьи
+                $data_vievs->favorits_articles = Model::factory('ArticlesModel')->getArticlesId($favoritartic);
+            }
+        } else {
+            Model::factory('BaseModel')->UpdateFavoritCookie($table, Auth::instance()->get_user()->id, $field, parent::$favorits_articles, $table_object, $cooki_name);
+        }
+
+        return $data_vievs;
+    }
+
+
+
+
 }

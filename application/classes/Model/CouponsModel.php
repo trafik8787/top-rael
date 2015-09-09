@@ -379,5 +379,4 @@ class Model_CouponsModel extends Model_BaseModel {
 
     }
 
-
 }

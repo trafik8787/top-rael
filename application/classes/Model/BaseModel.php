@@ -144,4 +144,47 @@ class Model_BaseModel extends Model {
         //Kohana_Debug::dump($row);
     }
 
+
+
+
+
+
+
+    //удаляем все добавленые в избранное элементы а потом добавляем основываясь на содержимом куки
+    public function UpdateFavoritCookie ($table, $user_id, $field, $arr_favorits, $table_object, $cooki_name){
+
+        $query1 = DB::select()
+            ->from($table_object)->execute()->as_array();
+
+        $arra_id = array();
+        foreach ($query1 as $rows) {
+            $arra_id[] = $rows['id'];
+        }
+
+        $arr_favorits = array_intersect($arra_id, $arr_favorits);
+        $arr_favorits = array_values($arr_favorits);
+        $query2 = DB::delete($table)
+            ->where('user_id', '=', $user_id)->execute();
+
+        if (!empty($arr_favorits)) {
+
+            Cookie::update_Arr_set_json($cooki_name, $arr_favorits);
+            $val = '';
+            $coma = '';
+            foreach ($arr_favorits as $key=>$row_id) {
+
+                if ($key !== 0) {
+                    $coma = ',';
+                }
+
+                $val .= ' '.$coma.'('.$user_id.', '.$row_id.')';
+            }
+
+            $query3 = DB::query(Database::INSERT, 'INSERT INTO '.$table.' (user_id, '.$field.') VALUES '.$val.' ')->execute();
+        }
+
+    }
+
+
+
 }
