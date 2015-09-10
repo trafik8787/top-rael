@@ -20,6 +20,11 @@ class Controller_Pages_Business extends Controller_BaseController {
             View::factory('blocks_includ/business_uslugi', array('data' => $data['BusServicesArr'])),
             View::factory('blocks_includ/business_meny', array('data' => $data['BusFileMeny']))
         ));
+        //HTML::x($data);
+        //SEO
+        $this->SeoShowPage(array($data['BusTitle'], $data['BusName']),
+            array($data['BusKeywords'], $data['BusInfo']),
+            array($data['BusDescription'], $data['BusInfo']));
 
         $related = Model::factory('BussinesModel')->getBusinessRelated($data['CatArr'][0]['CatUrl2'], $data['BusId']);
 

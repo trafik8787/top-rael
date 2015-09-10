@@ -168,45 +168,6 @@ abstract class Controller_BaseController extends Controller_Template {
     }
 
 
-    /**
-     * @param null $title
-     * @param null $description
-     * @param null $keywords
-     * @param null $arrQuery
-     * Сео
-     */
-    public function SeoViewsGlobal($title=null, $description =null, $keywords =null, $arrQuery = null){
-
-        if ($arrQuery != null) {
-
-            if (!empty($arrQuery[0]['seo_title'])) {
-                $title_seo = $arrQuery[0]['seo_title'];
-            } else {
-                $title_seo = $title;
-            }
-
-            if (!empty($arrQuery[0]['seo_description'])) {
-                $description_seo = $arrQuery[0]['seo_description'];
-            } else {
-                $description_seo = strip_tags($description);
-            }
-
-            if (!empty($arrQuery[0]['seo_keywords'])) {
-                $keywords_seo = $arrQuery[0]['seo_keywords'];
-            } else {
-                $keywords_seo = strip_tags($keywords);
-            }
-
-        } else {
-            $title_seo = $title;
-            $description_seo = strip_tags($description);
-            $keywords_seo = strip_tags($keywords);
-        }
-
-        View::set_global('seo_keywords', $keywords_seo);
-        View::set_global('seo_title', $title_seo);
-        View::set_global('seo_description', strip_tags($description_seo));
-    }
 
 
     /**
@@ -292,13 +253,13 @@ abstract class Controller_BaseController extends Controller_Template {
 
 
         if ($keywords_seo[0] == '') {
-            View::set_global('seo_keywords', $keywords_seo[1]);
+            View::set_global('seo_keywords', Text::limit_chars(strip_tags($keywords_seo[1]), 300, null, true));
         } else {
             View::set_global('seo_keywords', $keywords_seo[0]);
         }
 
         if ($description_seo[0] == '') {
-            View::set_global('seo_description', strip_tags($description_seo[1]));
+            View::set_global('seo_description', Text::limit_chars(strip_tags($description_seo[1]), 300, null, true));
         } else {
             View::set_global('seo_description', $description_seo[0]);
         }

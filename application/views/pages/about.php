@@ -13,7 +13,7 @@
             <!-- Context -->
             <div class="col-md-8">
                 <div id="context">
-                    <?=isset($data)? $data : ''?>
+                    <?=isset($data[0]['text'])? $data[0]['text'] : ''?>
                 </div>
             </div>
 

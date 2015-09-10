@@ -330,8 +330,9 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->load_table('about');
         $crud->set_lang('ru');
         $crud->disable_search();
-        $crud->edit_fields('text');
-        $crud->show_name_column(array('text' => 'Описание'));
+        $crud->show_name_column(array('text' => 'Описание','description' => 'SEO Description',
+            'title'=> 'SEO Title',
+            'keywords'=> 'SEO Keywords'));
         return $crud;
     }
 

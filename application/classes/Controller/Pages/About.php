@@ -16,7 +16,13 @@ class Controller_Pages_About extends Controller_BaseController {
             View::factory('blocks_includ/sicseti'),
         ));
 
-        $content->data = Model::factory('BaseModel')->getAbout();
+        $data = Model::factory('BaseModel')->getAbout();
+
+        $this->SeoShowPage(array($data[0]['title'], ''),
+            array($data[0]['keywords'],''),
+            array($data[0]['description'],''));
+
+        $content->data = $data;
         $this->template->content = $content;
 	}
 

@@ -20,4 +20,17 @@ class Model_TagsModel extends Model_BaseModel {
     }
 
 
+    /**
+     * @param $url
+     * @return mixed
+     * получить теги по урлу
+     */
+    public function getTagsUrl ($url){
+        return DB::select()
+            ->from('tags')
+            ->where('url_tags','=',$url)
+            ->cached()
+            ->execute()->as_array();
+    }
+
 }

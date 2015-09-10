@@ -15,6 +15,8 @@ class Controller_Pages_Sections extends Controller_BaseController {
         $number_page = $this->request->param('page');
         $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($this->request->param('url_section'));
 
+        //HTML::x($category);
+
         //сортировка категорий по количеству бизнесов в них
         foreach ($category[0]['childs'] as $key => $row) {
             $count[]  = $row['COUNT'];
@@ -39,6 +41,10 @@ class Controller_Pages_Sections extends Controller_BaseController {
         if ($this->request->param('url_category') != '') {
             //по урлу категории получаем бизнесы
             $data = Model::factory('BussinesModel')->getBussinesCategoryUrl($this->request->param('url_category'), 10 ,$number_page, $city_id);
+
+            $this->SeoShowPage(array($data['data'][0]['CatTitle'], ''),
+                array($data['data'][0]['CatKeywords'],''),
+                array($data['data'][0]['CatDesc'], ''));
             //по урлу категории получаем анонсы статей
             $data_articles = Model::factory('ArticlesModel')->getArticlesCategoryUrl($this->request->param('url_category'));
 
@@ -54,6 +60,10 @@ class Controller_Pages_Sections extends Controller_BaseController {
             //по урле раздела получаем 6 анонсов статей
             $articles = Model::factory('ArticlesModel')->getArticlesSectionUrl($this->request->param('url_section'), 6);
             $data_articles = $articles['data'];
+
+            $this->SeoShowPage(array($category[0]['title'], $category[0]['name']),
+                array($category[0]['keywords'],$category[0]['name']),
+                array($category[0]['description'], $category[0]['name']));
 
             $this->getBaners($this->request->param('url_section'), 'section');
 

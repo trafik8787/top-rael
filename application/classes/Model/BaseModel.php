@@ -81,12 +81,11 @@ class Model_BaseModel extends Model {
      * получаем текст для страницы О проекте
      */
     public function getAbout (){
-        $row = DB::select()
+        return DB::select()
             ->from('about')
             ->where('id', '=', 1)
             ->cached()
             ->execute()->as_array();
-        return $row[0]['text'];
     }
 
 

@@ -25,7 +25,12 @@ class Model_BussinesModel extends Model_BaseModel {
 
         ////получаем количество записей для пагинации сортировка по городу и категории
         if ($id_city != null) {
-            $result1 = DB::select()
+            $result1 = DB::select('business.*',
+                array('category.title', 'CatTitle'),
+                array('category.keywords', 'CatKeywords'),
+                array('category.description', 'CatDesc')
+
+            )
                 ->from('category')
                 ->join('businesscategory')
                 ->on('category.id', '=', 'businesscategory.category_id')
@@ -44,7 +49,11 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->execute()->as_array();
         } else {
             //только по категории
-            $result1 = DB::select()
+            $result1 = DB::select('business.*',
+                array('category.title', 'CatTitle'),
+                array('category.keywords', 'CatKeywords'),
+                array('category.description', 'CatDesc')
+            )
                 ->from('category')
                 ->join('businesscategory')
                 ->on('category.id', '=', 'businesscategory.category_id')
@@ -63,7 +72,12 @@ class Model_BussinesModel extends Model_BaseModel {
         }
 
         if ($id_city != null) {
-            $result = DB::select('business.*', array('city.name', 'CityName'))
+            $result = DB::select('business.*',
+                array('city.name', 'CityName'),
+                array('category.title', 'CatTitle'),
+                array('category.keywords', 'CatKeywords'),
+                array('category.description', 'CatDesc')
+            )
                 ->from('category')
                 ->join('businesscategory')
                 ->on('category.id', '=', 'businesscategory.category_id')
@@ -83,7 +97,12 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->cached()
                 ->execute()->as_array();
         } else {
-            $result = DB::select('business.*', array('city.name', 'CityName'))
+            $result = DB::select('business.*',
+                array('city.name', 'CityName'),
+                array('category.title', 'CatTitle'),
+                array('category.keywords', 'CatKeywords'),
+                array('category.description', 'CatDesc')
+            )
                 ->from('category')
                 ->join('businesscategory')
                 ->on('category.id', '=', 'businesscategory.category_id')

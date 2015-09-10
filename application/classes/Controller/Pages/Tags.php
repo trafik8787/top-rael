@@ -12,6 +12,8 @@ class Controller_Pages_Tags extends Controller_BaseController {
     {
         $content = View::factory('pages/tags');
         $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+        $tags = Model::factory('TagsModel')->getTagsUrl($this->request->param('url_tags'));
+
 
         foreach ($section as $row_section) {
 
@@ -28,7 +30,6 @@ class Controller_Pages_Tags extends Controller_BaseController {
 
             array_multisort($count, SORT_DESC, $rowArr, SORT_ASC, $category[0]['childs']);
             //получаем первые 5 категорий раздела дальше "еще..."
-            //$category[0]['childs'] = array_slice($category[0]['childs'], 0, 5);
 
             $data = Model::factory('BussinesModel')->getBussinesSectionTagsUrl($row_section['url'], $this->request->param('url_tags'));
             $data['data'] = $this->convertArrayTagsBusiness($data['data']);
@@ -40,6 +41,11 @@ class Controller_Pages_Tags extends Controller_BaseController {
             $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
         ));
+
+        //SEO
+        $this->SeoShowPage(array($tags[0]['title'], $tags[0]['name_tags']),
+            array($tags[0]['keywords'], $tags[0]['name_tags']),
+            array($tags[0]['description'], $tags[0]['name_tags']));
 
         //статьи группы лакшери выборка по тегам
         $content->data_articles = Model::factory('ArticlesModel')->getArticlesSectionTagsUrl(null, $this->request->param('url_tags'));
