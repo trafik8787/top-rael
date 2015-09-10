@@ -36,7 +36,7 @@ class Controller_Pages_Account extends Controller_BaseController {
 
 
                 //синхронизируем бизнесы добвленные в избранное анонима и авторизированого пользователя
-                $data = self::FavoritsCouponMetod('users_relation_favorites_bus', 'business_id', 'business', 'favoritbus', $data);
+                $data = self::FavoritsBusinessMetod('users_relation_favorites_bus', 'business_id', 'business', 'favoritbus', $data);
 
 
                 //синхронизируем статьи добвленные в избранное анонима и авторизированого пользователя
@@ -112,7 +112,7 @@ class Controller_Pages_Account extends Controller_BaseController {
 
 
                 //синхронизируем бизнесы добвленные в избранное анонима и авторизированого пользователя
-                $data = self::FavoritsCouponMetod('users_relation_favorites_bus', 'business_id', 'business', 'favoritbus', $data);
+                $data = self::FavoritsBusinessMetod('users_relation_favorites_bus', 'business_id', 'business', 'favoritbus', $data);
 
 
                 //синхронизируем статьи добвленные в избранное анонима и авторизированого пользователя
