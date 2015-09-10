@@ -72,7 +72,7 @@ class Controller_Home extends Controller_BaseController {
 
 
         $coupon = Model::factory('CouponsModel')->getCouponsSectionUrl(null, 6, 0, null);
-
+        $seo_home = Model::factory('BaseModel')->getHome();
 
         //Cache::instance()->delete('home_busines');
 
@@ -82,6 +82,8 @@ class Controller_Home extends Controller_BaseController {
             //View::factory('blocks_includ/baners_right'),
         ));
 
+        $this->SeoShowPage(array($seo_home[0]['title'],''),
+            array($seo_home[0]['keywords'],''),array($seo_home[0]['description'],''));
 
         $content->section = $section;
         $content->coupons = $coupon;

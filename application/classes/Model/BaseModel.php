@@ -88,6 +88,17 @@ class Model_BaseModel extends Model {
             ->execute()->as_array();
     }
 
+    /**
+     * @return mixed
+     * получаем SEO для главной
+     */
+    public function getHome(){
+        return DB::select()
+            ->from('home_seo')
+            ->where('id', '=', 1)
+            ->cached(10000)
+            ->execute()->as_array();
+    }
 
     public function getBaners($url, $url_section_category){
 
