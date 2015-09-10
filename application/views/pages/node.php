@@ -154,7 +154,7 @@
                     <?if (!empty($data['CoupArr'])):?>
 
 
-                        <div class="panel panel-poupons">
+                        <div class="panel panel-coupons">
 
                             <div class="panel-heading">
                                 <div class="panel-title">Обзор новых купонов по определеной тематике</div>
@@ -163,64 +163,128 @@
                             <div class="panel-body">
 
                                 <?foreach ($data['CoupArr'] as $rows_coupons):?>
-                                    <div class="col-md-6">
-                                        <div class="coupon coupon-big">
 
-                                            <?if (!empty($rows_coupons['coupon_favorit']))://если купон добавлен в избранное?>
-                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                                    <i class="fa fa-thumb-tack"></i>
-                                                </a>
-                                            <?else:?>
-                                                <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons['CoupId']?>" class="pin w-add-coupon-favor">
-                                                    <i class="fa fa-thumb-tack"></i>
-                                                </a>
-                                            <?endif?>
+                                    <div class="clearfix">
+                                        <div class="col-md-6">
+                                            <div class="coupon coupon-big">
 
-                                            <div class="coupon-body">
+                                                <?if (!empty($rows_coupons[0]['coupon_favorit']))://если купон добавлен в избранное?>
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                        <i class="fa fa-thumb-tack"></i>
+                                                    </a>
+                                                <?else:?>
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons[0]['id']?>" class="pin w-add-coupon-favor">
+                                                        <i class="fa fa-thumb-tack"></i>
+                                                    </a>
+                                                <?endif?>
 
-                                                <div class="coupon-content">
+                                                <div class="coupon-body">
 
-                                                    <div class="coupon-content-heading">
-                                                        <?=$rows_coupons['CoupSecondname']?>
+                                                    <div class="coupon-content">
+
+                                                        <div class="coupon-content-heading">
+                                                            <?=$rows_coupons[0]['BusName']?>
+                                                        </div>
+
+                                                        <a href="/modalcoupon/<?=$rows_coupons[0]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
+                                                            <img src="<?=$rows_coupons[0]['img_coupon']?>" width="155" height="125" alt="" title="" class="coupon-image"/></a>
+
                                                     </div>
 
-                                                    <a href="/modalcoupon/<?=$rows_coupons['CoupId']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
-                                                        <img src="<?=$rows_coupons['CoupImg']?>" width="155" height="125" alt="" title="" class="coupon-image"/></a>
+                                                    <div class="coupon-sidebar">
+                                                        <div class="coupon-sidebar-content">
+                                                            <div class="coupon-sidebar-heading">
+                                                                <div class="coupon-object-top">
 
-                                                </div>
+                                                                    <div class="coupon-title">
+                                                                        Купон
+                                                                        <small class="block"><?=$rows_coupons[0]['name']?></small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="coupon-sidebar-body">
+                                                                <div class="coupon-object-middle">
 
-                                                <div class="coupon-sidebar">
-                                                    <div class="coupon-sidebar-content">
-                                                        <div class="coupon-sidebar-heading">
-                                                            <div class="coupon-object-top">
+                                                                    <div class="coupon-title">
+                                                                        <?=$rows_coupons[0]['secondname']?>
+                                                                        <span class="block">скидка</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="coupon-sidebar-footer">
 
-                                                                <div class="coupon-title">
-                                                                    Купон
-                                                                    <small class="block">Массаж</small>
+                                                                <div class="coupon-object-bottom">
+
+                                                                    <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_coupons[0]['dateoff']), 'j %MONTH% Y'); ?></small>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="coupon-sidebar-body">
-                                                            <div class="coupon-object-middle">
 
-                                                                <div class="coupon-title">
-                                                                    20%
-                                                                    <span class="block">скидка</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="coupon-sidebar-footer">
-
-                                                            <div class="coupon-object-bottom">
-
-                                                                <small class="coupon-date">до 1 апреля 2015</small>
-                                                            </div>
-                                                        </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
+                                        <?if (!empty($rows_coupons[1])):?>
+                                            <div class="col-md-6">
+                                                <div class="coupon coupon-big">
+
+                                                    <?if (!empty($rows_coupons[1]['coupon_favorit']))://если купон добавлен в избранное?>
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                            <i class="fa fa-thumb-tack"></i>
+                                                        </a>
+                                                    <?else:?>
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons[1]['id']?>" class="pin w-add-coupon-favor">
+                                                            <i class="fa fa-thumb-tack"></i>
+                                                        </a>
+                                                    <?endif?>
+
+                                                    <div class="coupon-body">
+
+                                                        <div class="coupon-content">
+
+                                                            <div class="coupon-content-heading">
+                                                                <?=$rows_coupons[1]['BusName']?>
+                                                            </div>
+
+                                                            <a href="/modalcoupon/<?=$rows_coupons[1]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
+                                                                <img src="<?=$rows_coupons[1]['img_coupon']?>" width="155" height="125" alt="" title="" class="coupon-image"/></a>
+
+                                                        </div>
+
+                                                        <div class="coupon-sidebar">
+                                                            <div class="coupon-sidebar-content">
+                                                                <div class="coupon-sidebar-heading">
+                                                                    <div class="coupon-object-top">
+
+                                                                        <div class="coupon-title">
+                                                                            Купон
+                                                                            <small class="block"><?=$rows_coupons[1]['name']?></small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="coupon-sidebar-body">
+                                                                    <div class="coupon-object-middle">
+
+                                                                        <div class="coupon-title">
+                                                                            <?=$rows_coupons[1]['secondname']?>
+                                                                            <span class="block">скидка</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="coupon-sidebar-footer">
+
+                                                                    <div class="coupon-object-bottom">
+
+                                                                        <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_coupons[1]['dateoff']), 'j %MONTH% Y'); ?></small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?endif?>
                                     </div>
                                 <?endforeach?>
 

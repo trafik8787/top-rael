@@ -69,11 +69,13 @@ class Controller_Pages_Articles extends Controller_BaseController {
         $data = Model::factory('ArticlesModel')->getArticleUrl($this->request->param('url_article'));
         $other_articles = Model::factory('ArticlesModel')->getArticlesRandomIdCategory($data['ArticIdSection'], $data['ArticId']);
 
-        //HTML::x($data);
+        //HTML::x($data['CoupArr']);
 
         $this->SeoShowPage(array($data['ArticTitle'], $data['ArticName']),
             array($data['ArticKeywords'], $data['ArticContent']),
             array($data['ArticDesc'], $data['ArticContent']));
+
+        $data['CoupArr'] = parent::convertArrayVievData($data['CoupArr']);
 
         $content->data = $data;
         //читать еще

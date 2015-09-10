@@ -5,11 +5,10 @@
  * Date: 07.08.2015
  * Time: 14:32
  */
-
+//HTML::x($BusName);
 ?>
 
 <?if (!empty($content)):?>
-
 
 
     <div class="sidebar-coupons">
@@ -40,7 +39,7 @@
                         <div class="coupon-content">
 
                             <div class="coupon-content-heading">
-                                Каббалистические украшения Haari
+                                <?=$BusName?>
                             </div>
                             <a href="/modalcoupon/<?=$row['CoupId']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm" class="coupon-image">
                                 <img src="<?=$row['CoupImg']?>" width="155" height="125" alt="" title=""/>

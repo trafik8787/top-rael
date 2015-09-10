@@ -81,6 +81,8 @@
             return false;
         });
 
+
+
         $('.tabs__caption_galery').on('click', 'a:not(.active)', function() {
 
             $(this).addClass('active').siblings().removeClass('active')
@@ -107,6 +109,8 @@
 
     .tabs a.active {
         font-weight: bold;
+        color: #000000;
+        text-decoration: none;
     }
 
 
@@ -120,6 +124,8 @@
 
     .tabs_galery a.active {
         font-weight: bold;
+        color: #000000;
+        text-decoration: none;
     }
 
 </style>
@@ -154,7 +160,8 @@
 
                     <div class="page-profile-link">
                         <?if(!empty($data['BusWebsite'])):?>
-                            <a href="<?=$data['BusWebsite']?>"><?=$data['BusWebsite']?></a>
+                            <?$web_url = parse_url($data['BusWebsite'])?>
+                            <a target="_blank" href="<?=$data['BusWebsite']?>">http://<?=$web_url['host']?></a>
                         <?endif?>
                     </div>
 
@@ -174,16 +181,17 @@
 
                 <div class="page-profile-sidebar">
 
-                    <?if (!empty($data['BusDopAddress'])):?>
                         <span class="tabs">
                             <p class="tabs__caption">
                                 <a href="#" class="active"><?=$data['BusCity']?></a>
-
-                                <?foreach ($data['BusDopAddress'] as $key => $dop_adress_city):?>
-                                    &nbsp; &nbsp; | &nbsp; &nbsp;
-                                    <a href="#"><?=$dop_adress_city['name']?></a>
-
-                                <?endforeach?>
+                                <?if (!empty($data['BusDopAddress'])):?>
+                                    <?foreach ($data['BusDopAddress'] as $key => $dop_adress_city):?>
+                                        <?if ($dop_adress_city['name'] != ''):?>
+                                            &nbsp; &nbsp; | &nbsp; &nbsp;
+                                            <a href="#"><?=$dop_adress_city['name']?></a>
+                                        <?endif?>
+                                    <?endforeach?>
+                                <?endif?>
                             </p>
                             <span>
                                  <p class="tabs__content active">
@@ -191,18 +199,20 @@
                                      Тел: <?=$data['BusTel']?><br/>
                                      <?=$data['BusSchedule']?>
                                  </p>
-                                <?foreach ($data['BusDopAddress'] as $key => $dop_adress_address):?>
+                                <?if (!empty($data['BusDopAddress'])):?>
+                                    <?foreach ($data['BusDopAddress'] as $key => $dop_adress_address):?>
 
-                                     <p class="tabs__content">
-                                         Адрес: <?=isset($dop_adress_address['address']) ? $dop_adress_address['address'] : ''?><br/>
-                                         Тел: <?=isset($dop_adress_address['tel_dop_adress']) ? $dop_adress_address['tel_dop_adress'] : ''?><br/>
-                                         <?=isset($dop_adress_address['dop_sheduler']) ? $dop_adress_address['dop_sheduler'] : ''?>
-                                     </p>
-                                <?endforeach?>
+                                         <p class="tabs__content">
+                                             Адрес: <?=isset($dop_adress_address['address']) ? $dop_adress_address['address'] : ''?><br/>
+                                             Тел: <?=isset($dop_adress_address['tel_dop_adress']) ? $dop_adress_address['tel_dop_adress'] : ''?><br/>
+                                             <?=isset($dop_adress_address['dop_sheduler']) ? $dop_adress_address['dop_sheduler'] : ''?>
+                                         </p>
+                                    <?endforeach?>
+                                <?endif?>
                             </span>
 
                         </span>
-                    <?endif?>
+
 
                 </div>
 
@@ -258,7 +268,9 @@
                                             <span class="tabs__caption_galery">
                                                 <?foreach ($data['GalryArr'] as $key => $rows_galery_name):?>
                                                     <a href="#" <?if ($key == 0){?>class="active"<?}?>><?=$rows_galery_name['GalryName']?></a>
+                                                    <?if (next($data['GalryArr'])):?>
                                                     &nbsp;|&nbsp;
+                                                    <?endif?>
                                                 <?endforeach?>
                                             </span>
                                         </div>

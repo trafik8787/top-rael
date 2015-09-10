@@ -118,6 +118,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
 
         }
 
+
         $content->json = json_encode($data);
         $this->template->content = $content;
 	}

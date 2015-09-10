@@ -114,7 +114,11 @@ class Model_ArticlesModel extends Model_BaseModel {
     }
 
 
-
+    /**
+     * @param $id_articles
+     * @return mixed
+     * статьи по списку ID
+     */
     public function getArticlesId($id_articles){
 
         return DB::select()
@@ -244,12 +248,7 @@ class Model_ArticlesModel extends Model_BaseModel {
                 array('bus.info', 'BusInfo'),
                 array('bus.url', 'BusUrl'),
 
-                array('coup.name', 'CoupName'),
-                array('coup.id', 'CoupId'),
-                array('coup.url', 'CoupUrl'),
-                array('coup.info', 'CoupInfo'),
-                array('coup.img_coupon', 'CoupImg'),
-                array('coup.secondname', 'CoupSecondname')
+                array('art_rel_coup.id_coupon', 'CoupId')
             )
                 ->from(array('articles', 'artic'))
 
@@ -261,9 +260,6 @@ class Model_ArticlesModel extends Model_BaseModel {
 
                 ->join(array('articles_relation_coupon', 'art_rel_coup'), 'LEFT')
                 ->on('artic.id', '=', 'art_rel_coup.id_articles')
-
-                ->join(array('coupon', 'coup'), 'LEFT')
-                ->on('coup.id', '=', 'art_rel_coup.id_coupon')
 
 
                 ->where_open()
@@ -346,13 +342,7 @@ class Model_ArticlesModel extends Model_BaseModel {
             if (!empty($row['CoupId'])) {
                 if (!array_key_exists($row['CoupId'], $CoupTmp)) {
                     $CoupTmp[$row['CoupId']] = $row['CoupId'];
-                    $end_result['CoupArr'][] = array(
-                        'CoupId' => $row['CoupId'],
-                        'CoupSecondname' => $row['CoupSecondname'],
-                        'CoupUrl' => $row['CoupUrl'],
-                        'CoupInfo' => $row['CoupInfo'],
-                        'CoupImg' => $row['CoupImg'],
-                    );
+                    $end_result['CoupArr'][] = $row['CoupId'];
                 }
             } else {
                 $end_result['CoupArr'] = array();
@@ -360,13 +350,17 @@ class Model_ArticlesModel extends Model_BaseModel {
 
         }
 
+
+        $end_result['CoupArr'] = Model::factory('CouponsModel')->getCouponsId($end_result['CoupArr']);
+
+
         //поиск купона который добавлен в избранное
         if (!empty(Controller_BaseController::$favorits_coupon)) {
 
             $new_result = array();
             foreach ($end_result['CoupArr'] as $result_row) {
 
-                if (in_array($result_row['CoupId'], Controller_BaseController::$favorits_coupon)) {
+                if (in_array($result_row['id'], Controller_BaseController::$favorits_coupon)) {
                     $result_row['coupon_favorit'] = 1;
                 }
 

@@ -949,10 +949,10 @@ class Model_BussinesModel extends Model_BaseModel {
         $query->join(array('category', 'cat'), 'LEFT');
         $query->on('buscat.category_id','=', 'cat.id');
 
-        $query->join(array('tags_relation_business', 'tagrelbus'), 'RIGHT');
-        $query->on('tagrelbus.id_business', '=', 'bus.id');
+        $query->join(array('tags_relation_business', 'tagrelbus'), 'LEFT');
+        $query->on('bus.id', '=', 'tagrelbus.id_business');
 
-        $query->join(array('tags', 'tag'));
+        $query->join(array('tags', 'tag'), 'LEFT');
         $query->on('tag.id', '=', 'tagrelbus.id_tags');
         $query->where_open();
             $query->where('bus.maps_cordinate_x', '<>', '');
@@ -971,8 +971,7 @@ class Model_BussinesModel extends Model_BaseModel {
             $query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'));
             $query->and_where('bus.status', '=', 1);
         $query->where_close();
-        $result_query = $query->cached()->execute()->as_array();
-
+        $result_query = $query->execute()->as_array();
 
 
         return $this->CreareArrayBusinessMaps($result_query);
