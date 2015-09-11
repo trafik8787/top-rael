@@ -87,7 +87,7 @@
                         <label>
 
                             <div class="form-control">
-                                <input type="checkbox" required="required" value="1" name="cheklicenz">
+                                <input type="checkbox" value="1" class="w-cheklicenz" name="cheklicenz">
                                 <i class="input-icon fa fa-check"></i>
                             </div>
 
@@ -99,10 +99,10 @@
 
 
                     <div class="input-group">
-                        <input type="email" class="form-control w-input-lotarey-email" required="required" name="email" placeholder="Ваш email:">
+                        <input type="email" class="form-control w-input-lotarey-email" name="email" placeholder="Ваш email:">
 
                         <div class="input-group-addon">
-                            <button type="submit" class="btn btn-danger w-subskrip-buton">Отправить</button>
+                            <button value="1" type="submit" class="btn btn-danger w-subskrip-buton">Отправить</button>
                         </div>
                     </div>
 

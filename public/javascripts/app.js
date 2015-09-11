@@ -273,17 +273,22 @@ $(document).ready(function(){
                         '<i class="fa fa-star"></i></a>';
                     }
 
-                    sliderTmp.append('<div class="col-md-4">' +
-                    '<div class="thumbnail">' +
-                    bus_icon +
-                    '<a href="/business/'+value.url+'" class="thumbnail-image"> ' +
-                    '<img src="'+value.home_busines_foto+'" width="240" height="150" alt="">' +
-                    '</a> ' +
-                    '<div class="caption"> ' +
-                    '<h3><strong><a href="/business/'+value.url+'">'+value.name+'</a></strong></h3> ' +
-                    '<p><strong>'+value.CityName+' '+ value.address+'</strong></p>' +
-                    value.info+
-                    '</div> </div> </div>').hide();
+
+                    sliderTmp.append('<div class="col-md-4">'+
+                        '<div class="thumbnail">'+
+                        bus_icon +
+
+                        '<a href="/business/'+value.url+'" class="thumbnail-image">'+
+                        '<img src="'+value.home_busines_foto+'" width="240" height="150" alt="'+value.name+'">'+
+                        '</a>'+
+                        '<div class="thumbnail-content">'+
+                        '<h2 class="thumbnail-title">'+
+                        '<a href="/business/'+value.url+'">'+value.name+'</a>'+
+                        '<small>'+value.CityName+' '+ value.address+'</small>'+
+                        '</h2>'+
+                        value.info+
+                        '</div></div> </div>').hide();
+
 
                 });
 
@@ -338,17 +343,20 @@ $(document).ready(function(){
                         '<i class="fa fa-star"></i></a>';
                     }
 
-                    sliderTmp.append('<div class="col-md-4">' +
-                    '<div class="thumbnail">' +
+                    sliderTmp.append('<div class="col-md-4">'+
+                    '<div class="thumbnail">'+
                     bus_icon +
-                    '<a href="/business/'+value.url+'" class="thumbnail-image"> ' +
-                    '<img src="'+value.home_busines_foto+'" width="240" height="150" alt="">' +
-                    '</a> ' +
-                    '<div class="caption"> ' +
-                    '<h3><strong><a href="/business/'+value.url+'">'+value.name+'</a></strong></h3> ' +
-                    '<p><strong>'+value.CityName+' '+ value.address+'</strong></p>' +
+
+                    '<a href="/business/'+value.url+'" class="thumbnail-image">'+
+                    '<img src="'+value.home_busines_foto+'" width="240" height="150" alt="'+value.name+'">'+
+                    '</a>'+
+                    '<div class="thumbnail-content">'+
+                    '<h2 class="thumbnail-title">'+
+                    '<a href="/business/'+value.url+'">'+value.name+'</a>'+
+                    '<small>'+value.CityName+' '+ value.address+'</small>'+
+                    '</h2>'+
                     value.info+
-                    '</div> </div> </div>').hide();
+                    '</div></div> </div>').hide();
 
                 });
                 sliderTmp.fadeIn();
@@ -636,52 +644,119 @@ $(document).ready(function(){
     });
 
 
-    //подписка блок лотарея
-    $('.w-form-subscribe-lotarey').submit(function(){
 
-        var input_email = $('.w-input-lotarey-email');
+   $(".w-form-subscribe-lotarey").validate({
 
-        $.ajax({ // описываем наш запрос
-            type: "POST", // будем передавать данные через POST
-            dataType: "JSON", // указываем, что нам вернется JSON
-            url: '/subscribe',
-            data: $(this).serialize(),
-            success: function(response) { // когда получаем ответ
+        rules:{
 
-                if (response.susses != undefined) {
+            cheklicenz: {
+                required: true
+            },
 
-                    input_email.popover({
+            email:{
+                required: true,
+                email: true
+            }
+
+        },
+
+        messages:{
+            cheklicenz: {
+                required: 'Установите галочку'
+            },
+            email:{
+                required: "Это поле обязательно для заполнения",
+                email: "Неправильный формат email"
+            }
+
+        },
+
+        showErrors: function(errorMap, errorList) {
+            if (errorList[0] != undefined) {
+                if (errorList[0].element.className == 'w-cheklicenz') {
+
+                    // var fa_check =  $('.w-cheklicenz').parent().find('fa-check');
+                    var fa_check = $('.w-cheklicenz').parent();
+                    fa_check.popover({
                         placement: 'bottom',
-                        content: response.susses,
-                        delay: { show: 100, hide: 500 }
+                        content: errorList[0].message,
+                        delay: {show: 100, hide: 100}
                     });
-                    input_email.popover('show');
-                    $('.popover.fade.bottom.in').css('background-color','greenyellow');
-                    $('.popover.bottom>.arrow').addClass('susses-email');
-                }
-
-                if (response.dublicate_email != undefined) {
-                    console.log(response.dublicate_email);
-                    input_email.popover({
-                        placement: 'bottom',
-                        content: response.dublicate_email,
-                        delay: { show: 100, hide: 500 }
-                    });
-                    input_email.popover('show');
-
-                    $('.popover.fade.bottom.in').css('background-color','#FF7272');
+                    fa_check.popover('show');
+                    $('.popover.fade.bottom.in').css('background-color', '#FF7272');
                     $('.popover.bottom>.arrow').addClass('errors-email');
                 }
 
-                setTimeout(function () {
-                    input_email.popover('destroy');
-                }, 2000);
-
+                if (errorList[0].element.className == 'form-control w-input-lotarey-email') {
+                    var lotarey_email = $('.form-control.w-input-lotarey-email');
+                    lotarey_email.popover({
+                        placement: 'bottom',
+                        content: errorList[0].message,
+                        delay: {show: 100, hide: 100}
+                    });
+                    lotarey_email.popover('show');
+                    $('.popover.fade.bottom.in').css('background-color', '#FF7272');
+                    $('.popover.bottom>.arrow').addClass('errors-email');
+                }
             }
-        });
 
-        return false;
+
+        },
+       submitHandler: function(form){
+           $('.popover').popover('destroy');
+           var input_email = $('.w-input-lotarey-email');
+
+           $.ajax({ // описываем наш запрос
+               type: "POST", // будем передавать данные через POST
+               dataType: "JSON", // указываем, что нам вернется JSON
+               url: '/subscribe',
+               data: $(form).serialize(),
+               success: function(response) { // когда получаем ответ
+
+                   if (response.susses != undefined) {
+
+                       input_email.popover({
+                           placement: 'bottom',
+                           content: response.susses,
+                           delay: { show: 100, hide: 500 }
+                       });
+                       input_email.popover('show');
+                       $('.popover.fade.bottom.in').css('background-color','greenyellow');
+                       $('.popover.bottom>.arrow').addClass('susses-email');
+                   }
+
+                   if (response.dublicate_email != undefined) {
+                       console.log(response.dublicate_email);
+                       input_email.popover({
+                           placement: 'bottom',
+                           content: response.dublicate_email,
+                           delay: { show: 100, hide: 500 }
+                       });
+                       input_email.popover('show');
+
+                       $('.popover.fade.bottom.in').css('background-color','#FF7272');
+                       $('.popover.bottom>.arrow').addClass('errors-email');
+                   }
+
+                   setTimeout(function () {
+                       input_email.popover('destroy');
+                   }, 2000);
+
+               }
+           });
+
+           return false;
+       }
+
     });
+
+
+
+    //подписка блок лотарея
+    //$('.w-form-subscribe-lotarey').submit(function(){
+    //
+    //    return false;
+    //});
 
 
     $('.w-modal-subscribe').submit(function(){
