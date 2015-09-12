@@ -28,6 +28,7 @@ class Model_CouponsModel extends Model_BaseModel {
      */
     public function getCouponsId($id){
 
+
         if (is_array($id)) {
 
             return DB::select('coup.*',

@@ -350,9 +350,9 @@ class Model_ArticlesModel extends Model_BaseModel {
 
         }
 
-
-        $end_result['CoupArr'] = Model::factory('CouponsModel')->getCouponsId($end_result['CoupArr']);
-
+        if (!empty($end_result['CoupArr'])) {
+            $end_result['CoupArr'] = Model::factory('CouponsModel')->getCouponsId($end_result['CoupArr']);
+        }
 
         //поиск купона который добавлен в избранное
         if (!empty(Controller_BaseController::$favorits_coupon)) {
@@ -475,7 +475,14 @@ class Model_ArticlesModel extends Model_BaseModel {
             ->execute()->as_array();
 
         if (!empty($query)) {
-            $key_rand = array_rand($query, 3);
+
+
+            if (count($query) >= 3) {
+                $key_rand = array_rand($query, 3);
+            } else {
+                $key_rand = array_keys($query);
+            }
+            //die(HTML::x($key_rand));
 
             $result = array();
             foreach ($key_rand as $row) {
