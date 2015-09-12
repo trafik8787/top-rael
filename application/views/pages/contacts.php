@@ -89,7 +89,14 @@
                             <textarea class="form-control input-lg" name="desc" cols="3" rows="4"></textarea>
                         </div>
                     </div>
-
+                    <div class="form-group  clearfix">
+                        <div class="col-md-5">
+                            <label>Код</label>
+                        </div>
+                        <div class="col-md-7">
+                            <span style="display: inline-block;"><?=$captcha; ?></span> <input type="text" name="captcha" class="form-control input-lg" style="width: 49%;display: inline-block;"/>
+                        </div>
+                    </div>
 
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-danger btn-lg pull-right">Отправить</button>

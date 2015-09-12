@@ -179,7 +179,7 @@
     </div>
 
     <div class="sidebar-lottery-footer">
-        <a href="#">Архив лотереи</a>
+        <a href="/arhiv_lotery">Архив лотереи</a>
     </div>
 </div>
 

@@ -125,8 +125,9 @@ Kohana::modules(array(
 	 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	 'database'   => MODPATH.'database',   // Database access
-	 'image'      => MODPATH.'image',      // Image manipulation
+	'image'      => MODPATH.'image',      // Image manipulation
     'crud'    => MODPATH.'crud',
+    'captcha'  => MODPATH.'captcha',
     'pagination' => MODPATH.'pagination',
     'email'	  => MODPATH.'email',
     'ulogin'	  => MODPATH.'ulogin',
@@ -149,6 +150,14 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+
+Route::set('ArhivLotery', 'arhiv_lotery')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'ArhivLotery',
+        'action'     => 'index',
+    ));
+
 //профиль владельца бизнеса
 Route::set('AccountBusiness', 'account_business')
     ->defaults(array(

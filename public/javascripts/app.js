@@ -38,6 +38,10 @@ $(document).ready(function(){
 
             desc:{
                 required: true
+            },
+
+            captcha: {
+                required: true
             }
         },
 
@@ -63,6 +67,10 @@ $(document).ready(function(){
             },
 
             desc:{
+                required: "Это поле обязательно для заполнения"
+            },
+
+            captcha: {
                 required: "Это поле обязательно для заполнения"
             }
 
