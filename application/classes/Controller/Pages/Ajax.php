@@ -164,7 +164,11 @@ class Controller_Pages_Ajax extends Controller {
      */
     public function action_BussinesDisableEmailSevenDays() {
 
-        $data = Model::factory('BussinesModel')->getBusinesUserAll();
+        $obj = new Model_BussinesModel();
+
+        //пользователи и бизнесы
+        $data = $obj->getBusinesUserAll();
+
 
         //HTML::x($data);
         $this->LotareyCron();
@@ -190,6 +194,9 @@ class Controller_Pages_Ajax extends Controller {
 
             if (date('Y-m-d') == $rows['date_end']) {
 
+                //меняем статус бизнеса в базе
+                $obj->disableBusines($rows['id']);
+
                 $message = 'Ваш бизнес отключен';
 
                 $m = Email::factory();
@@ -212,7 +219,7 @@ class Controller_Pages_Ajax extends Controller {
      */
     public function LotareyCron(){
 
-        $lotery = Model::factory('BaseModel')->getLoteryActual();
+        $lotery = Model::factory('LotareyModel')->getLoteryActual();
 
         if ($lotery !== false) {
 
@@ -229,5 +236,6 @@ class Controller_Pages_Ajax extends Controller {
 
         //HTML::x($lotery);
     }
+
 
 }

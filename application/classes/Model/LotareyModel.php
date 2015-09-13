@@ -15,4 +15,46 @@ class Model_LotareyModel extends Model_BaseModel {
 
     }
 
+
+    /**
+     * @return bool
+     * метод выбирает случайного подпищика и присваевает ему поле победителя
+     */
+    public function getLoteryActual (){
+
+        $lotery = DB::select()
+            ->from('lotarey')
+            ->where('date_end','=', DB::expr('curdate()'))
+            ->and_where('status','=',2)
+            ->limit(1)
+            ->execute()->as_array();
+
+        if (!empty($lotery)) {
+
+            $subscription = DB::select()
+                ->from('subscription')
+                ->where('action','=', 1)
+                ->and_where('lotery','=', 0)
+                ->execute()->as_array();
+
+            if (!empty($subscription)) {
+
+                $number = array_rand($subscription, 1);
+
+                $sub_update = DB::update('subscription')
+                    ->set(array('lotery' => $lotery[0]['id']))
+                    ->where('id', '=', $subscription[$number]['id'])
+                    ->execute();
+
+                return $subscription[$number];
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+    }
+
+
 }

@@ -1134,7 +1134,15 @@ class Model_BussinesModel extends Model_BaseModel {
 
     }
 
-
-
+    /**
+     * @param $id_business
+     * отключить бизнес по id
+     */
+    public function disableBusines($id_business){
+        $sub_update = DB::update('business')
+            ->set(array('status' => 0))
+            ->where('id', '=', $id_business)
+            ->execute();
+    }
 
 }
