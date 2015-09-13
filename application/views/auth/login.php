@@ -17,7 +17,7 @@
             <div class="page-title">Вход через социальные сети</div>
             <span style="display: none"><?=$ulogin;?></span>
 
-            <div class="page-context" id="uLogin" data-ulogin="display=buttons;fields=first_name,last_name,email,photo,city,sex,bdate;redirect_uri=<?=Kohana::$config->load('ulogin')->redirect_uri?>;">
+            <div class="page-context" id="uLogin" data-ulogin="display=buttons;fields=first_name,last_name,email;providers=vkontakte,facebook,twitter,google;redirect_uri=<?=Kohana::$config->load('ulogin')->redirect_uri?>;optional=photo,city,sex,bdate;">
 
                 <a href="#" class="social twitter" data-uloginbutton="twitter">
                     <i class="fa fa-twitter"></i>

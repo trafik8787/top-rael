@@ -62,6 +62,7 @@
                         <div class="media-body">
                             <div class="media-heading prize-title"><?=$data['secondname']?></div>
                             <p><?=$data['description']?></p>
+                            <p>до розыгрыша осталось <?=Date::diffDay('', $data['date_end'])?> дней</p>
                         </div>
                     </div>
                 <?endif?>
@@ -119,9 +120,9 @@
             <div class="sidebar-tabs-body">
                 <div class="media">
                     <div class="media-left media-middle">
-                        <a href="#" class="img-circle">
-                            <img src="/public/uploade/avata-lottery.jpg" width="43" height="43"
-                                 class="media-object"/>
+                        <a href="#" >
+                            <img src="/public/uploade/no_avatar.jpg" width="43" height="43"
+                                 class="media-object img-circle"/>
                         </a>
                     </div>
                     <div class="media-body">
@@ -133,9 +134,9 @@
 
                 <div class="media">
                     <div class="media-left media-middle">
-                        <a href="#" class="img-circle">
-                            <img src="/public/uploade/avata-lottery.jpg" width="43" height="43"
-                                 class="media-object"/>
+                        <a href="#" >
+                            <img src="/public/uploade/no_avatar.jpg" width="43" height="43"
+                                 class="media-object img-circle"/>
                         </a>
                     </div>
                     <div class="media-body">
@@ -148,9 +149,9 @@
                 <div class="media">
 
                     <div class="media-left media-middle">
-                        <a href="#" class="img-circle">
-                            <img src="/public/uploade/avata-lottery.jpg" width="43" height="43"
-                                 class="media-object"/>
+                        <a href="#" >
+                            <img src="/public/uploade/no_avatar.jpg" width="43" height="43"
+                                 class="media-object img-circle"/>
                         </a>
                     </div>
 
@@ -163,9 +164,9 @@
 
                 <div class="media">
                     <div class="media-left media-middle">
-                        <a href="#" class="img-circle">
-                            <img src="/public/uploade/avata-lottery.jpg" width="43" height="43"
-                                 class="media-object"/>
+                        <a href="#" >
+                            <img src="/public/uploade/no_avatar.jpg" width="43" height="43"
+                                 class="media-object img-circle"/>
                         </a>
                     </div>
                     <div class="media-body">

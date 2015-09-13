@@ -100,6 +100,11 @@ class Model_BaseModel extends Model {
             ->execute()->as_array();
     }
 
+    /**
+     * @param $url
+     * @param $url_section_category
+     * @return array
+     */
     public function getBaners($url, $url_section_category){
 
         //вывод в категориях
@@ -160,7 +165,16 @@ class Model_BaseModel extends Model {
 
 
 
-    //удаляем все добавленые в избранное элементы а потом добавляем основываясь на содержимом куки
+
+    /**
+     * @param $table
+     * @param $user_id
+     * @param $field
+     * @param $arr_favorits
+     * @param $table_object
+     * @param $cooki_name
+     * удаляем все добавленые в избранное элементы а потом добавляем основываясь на содержимом куки
+     */
     public function UpdateFavoritCookie ($table, $user_id, $field, $arr_favorits, $table_object, $cooki_name){
 
         $query1 = DB::select()
@@ -195,6 +209,58 @@ class Model_BaseModel extends Model {
 
     }
 
+    /**
+     * @param $id_business
+     * @return mixed
+     * получить банеры по id бизнеса
+     */
+    public function getBanersBusinessId ($id_business){
+        return DB::select()
+            ->from('banners')
+            ->where('business_id', '=', $id_business)
+            ->cached()->execute()->as_array();
+    }
+
+
+    /**
+     * @return bool
+     * метод выбирает случайного подпищика и присваевает ему поле победителя
+     */
+    public function getLoteryActual (){
+
+        $lotery = DB::select()
+            ->from('lotarey')
+            ->where('date_end','=', DB::expr('curdate()'))
+            ->and_where('status','=',2)
+            ->limit(1)
+            ->execute()->as_array();
+
+        if (!empty($lotery)) {
+
+            $subscription = DB::select()
+                ->from('subscription')
+                ->where('action','=', 1)
+                ->and_where('lotery','=', 0)
+                ->execute()->as_array();
+
+            if (!empty($subscription)) {
+
+                $number = array_rand($subscription, 1);
+
+                $sub_update = DB::update('subscription')
+                    ->set(array('lotery' => $lotery[0]['id']))
+                    ->where('id', '=', $subscription[$number]['id'])
+                    ->execute();
+
+                return $subscription[$number];
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+    }
 
 
 }

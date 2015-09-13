@@ -226,13 +226,13 @@
                         <a href="#" class="pin-aria">
                             <span class="pin" data-toggle="tooltip" data-placement="right" title="Этот бизнес уже добавлен в Избранное" style="background-color: #ccc">
                                 <i class="fa fa-star"></i>
-                            </span>В избранном
+                            </span><span class="w-text-bus-page">В избранном</span>
                         </a>
                     <?else:?>
-                        <a href="#" class="pin-aria w-add-bussines-favor" data-id="<?=$data['BusId']?>">
+                        <a href="#" class="pin-aria w-add-bussines-page-favor" data-id="<?=$data['BusId']?>">
                             <span class="pin" data-toggle="tooltip" data-placement="right">
                                 <i class="fa fa-star"></i>
-                            </span>Добавить в избраные места
+                            </span><span class="w-text-bus-page">Добавить в избраные места</span>
                         </a>
                     <?endif?>
 
@@ -432,10 +432,18 @@
                             <i class="fa fa-envelope"></i>
                         </a>
                     </div>
-                    <a href="#" class="btn btn-link">
-                        <i class="fa fa-star"></i>
-                        Добавить в Избранные места
-                    </a>
+                    <?if (!empty($data['bussines_favorit']))://если купон добавлен в избранное?>
+                        <a href="#" class="btn btn-link">
+                            <i class="fa fa-star"></i>
+                            <span class="w-text-bus-page">В избранном</span>
+                        </a>
+                    <?else:?>
+                        <a href="#" class="btn btn-link w-add-bussines-page-favor" data-id="<?=$data['BusId']?>">
+                            <i class="fa fa-star"></i>
+                            <span class="w-text-bus-page">Добавить в Избранные места</span>
+                        </a>
+                    <?endif?>
+
                 </div>
             </div>
 

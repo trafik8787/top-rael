@@ -116,4 +116,21 @@ class Date extends Kohana_Date {
         $format = preg_replace($sarr, $rarr, $format);
         return date($format, $d);
     }
+
+    /**
+     * @param null $data1
+     * @param $data2
+     * @return string
+     * вычисляем разницу в днях между датами
+     */
+    public static function diffDay($data1 = null, $data2){
+        if ($data1 === null) {
+            $data1 = date('Y-m-d');
+        }
+
+        $datetime1 = new DateTime($data1);
+        $datetime2 = new DateTime($data2);
+        $interval = $datetime1->diff($datetime2);
+        return $interval->format('%d%');
+    }
 }

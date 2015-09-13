@@ -543,6 +543,34 @@ $(document).ready(function(){
         return false;
     });
 
+    //добавить бизнес в избранное с страницы бизнеса
+    $(document).on('click', '.w-add-bussines-page-favor', function(){
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "JSON", // указываем, что нам вернется JSON
+            url: '/bussinessave',
+            data: 'id_bussines='+$(this).data('id'),
+            success: function(response) { // когда получаем ответ
+
+
+            }
+        });
+
+        var count_bus = $('.w-count-bussines').text();
+        count_bus = parseInt(count_bus) + 1;
+        $('.w-count-bussines').text(count_bus);
+
+        var pin =  $(this).find('.pin');
+        $(this).removeClass('w-add-bussines-page-favor');
+        $(this).find('.w-text-bus-page').text('В избранном');
+        pin.attr('data-original-title', 'Бизнес добавлен в Избранное').tooltip('show');
+        pin.css('background-color', '#ccc');
+        $('[data-toggle="tooltip"]').tooltip();
+
+        return false;
+    });
+
+
 
     //удаляем бизнес из избранного
     $(document).on('click', '.w-delete-bussines-favor', function(){

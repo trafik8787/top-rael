@@ -1373,8 +1373,8 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
     public static function StatusBusiness ($key_array = null) {
-
-        if ($key_array['action'] == 1) {
+        //die(HTML::x($key_array));
+        if ($key_array['status'] == 1) {
             $status = 0;
         } else {
             $status = 1;

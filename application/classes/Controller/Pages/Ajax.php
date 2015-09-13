@@ -160,12 +160,14 @@ class Controller_Pages_Ajax extends Controller {
     /**
      * запускается по крону и сравнивает даты если до даты окончания бизнеса остается 7 дней
      * то отправляет письмо пользователю
+     * sendbusiness
      */
     public function action_BussinesDisableEmailSevenDays() {
 
         $data = Model::factory('BussinesModel')->getBusinesUserAll();
 
-        HTML::x($data);
+        //HTML::x($data);
+        $this->LotareyCron();
 
         foreach ($data as $rows) {
 
@@ -204,5 +206,28 @@ class Controller_Pages_Ajax extends Controller {
     }
 
 
+    /*
+     * запускается по крону каждый день поиск лотареи по конечной дате находим победителя и отправляем ему письмо
+     * с уведомлением
+     */
+    public function LotareyCron(){
+
+        $lotery = Model::factory('BaseModel')->getLoteryActual();
+
+        if ($lotery !== false) {
+
+            $message = 'Победитель лотареи';
+
+            $m = Email::factory();
+            $m->From("admin@top.com"); // от кого отправляется почта
+            $m->To($lotery['email']); // кому адресованно
+            $m->Subject('Победитель лотареи');
+            $m->Body($message, "html");
+            $m->Priority(3);
+            $m->Send();
+        }
+
+        //HTML::x($lotery);
+    }
 
 }

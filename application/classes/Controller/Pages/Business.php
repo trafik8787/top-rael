@@ -14,6 +14,12 @@ class Controller_Pages_Business extends Controller_BaseController {
        // $token = Profiler::start('Model', 'BussinesModel');
         $data = Model::factory('BussinesModel')->getBusinessUrl($this->request->param('url_business'));
         //Profiler::stop($token);
+
+        //если бизнес отключен редиректим на главную
+        if ($data === false) {
+            $this->redirect('/');
+        }
+
         //echo View::factory('profiler/stats');
         $content->bloc_right = parent::RightBloc(array(
             View::factory('blocks_includ/coupon_business_page', array('content' => $data['CoupArr'], 'BusName' => $data['BusName'])),

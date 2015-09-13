@@ -294,6 +294,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 array('bus.title', 'BusTitle'),
                 array('bus.description', 'BusDescription'),
                 array('bus.keywords', 'BusKeywords'),
+                array('bus.url', 'BusUrl'),
 
                 array('cit.name', 'BusCity'),
 
@@ -329,6 +330,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 array('coup.img_coupon', 'CoupImg'),
                 array('coup.tags', 'CoupTags'),
                 array('coup.secondname', 'CoupSecondname'),
+                array('coup.dateoff', 'DateOff'),
 
                 array('topslider.id', 'TopsliderId'),
                 array('topslider.img_path', 'TopsliderImg'),
@@ -424,165 +426,171 @@ class Model_BussinesModel extends Model_BaseModel {
      */
     private function CreateArrayBussines ($result){
 
-        $FileArr = array();
-        $end_result = array();
-        $CatTmp = array();
-        $CoupTmp = array();
-        $TopsTmp = array();
-        $GalryTmp = array();
-        $FileTmp = array();
-        $ArticTmp = array();
-        $TagsTmp = array();
+        if (!empty($result)) {
 
-        $end_result['BusId'] = $result[0]['BusId'];
-        $end_result['BusName'] = $result[0]['BusName'];
-        $end_result['BusLogo'] = $result[0]['BusLogo'];
-        $end_result['BusWebsite'] = $result[0]['BusWebsite'];
-        $end_result['BusVideo'] = $result[0]['BusVideo'];
-        $end_result['BusInfo'] = $result[0]['BusInfo'];
-        $end_result['BusTitle'] = $result[0]['BusTitle'];
-        $end_result['BusDescription'] = $result[0]['BusDescription'];
-        $end_result['BusKeywords'] = $result[0]['BusKeywords'];
-        $end_result['BusFileMeny'] = $result[0]['BusFileMeny'];
-        $end_result['BusAddress'] = $result[0]['BusAddress'];
-        $end_result['BusTel'] = $result[0]['BusTel'];
-        $end_result['BusSchedule'] = $result[0]['BusSchedule'];
-        $end_result['BusMapsX'] = $result[0]['BusMapsX'];
-        $end_result['BusMapsY'] = $result[0]['BusMapsY'];
-        $end_result['BusCity'] = $result[0]['BusCity'];
+            $FileArr = array();
+            $end_result = array();
+            $CatTmp = array();
+            $CoupTmp = array();
+            $TopsTmp = array();
+            $GalryTmp = array();
+            $FileTmp = array();
+            $ArticTmp = array();
+            $TagsTmp = array();
 
-
-        $category = Model::factory('CategoryModel')->get_section('category');
-
-
-        //парсим адрес
-       try {
-           $end_result['BusDopAddress'] =  unserialize($result[0]['BusDopAddress']);
-       } catch (Exception $x) {
-           $end_result['BusDopAddress'] = array();
-       }
+            $end_result['BusId'] = $result[0]['BusId'];
+            $end_result['BusName'] = $result[0]['BusName'];
+            $end_result['BusUrl'] = $result[0]['BusUrl'];
+            $end_result['BusLogo'] = $result[0]['BusLogo'];
+            $end_result['BusWebsite'] = $result[0]['BusWebsite'];
+            $end_result['BusVideo'] = $result[0]['BusVideo'];
+            $end_result['BusInfo'] = $result[0]['BusInfo'];
+            $end_result['BusTitle'] = $result[0]['BusTitle'];
+            $end_result['BusDescription'] = $result[0]['BusDescription'];
+            $end_result['BusKeywords'] = $result[0]['BusKeywords'];
+            $end_result['BusFileMeny'] = $result[0]['BusFileMeny'];
+            $end_result['BusAddress'] = $result[0]['BusAddress'];
+            $end_result['BusTel'] = $result[0]['BusTel'];
+            $end_result['BusSchedule'] = $result[0]['BusSchedule'];
+            $end_result['BusMapsX'] = $result[0]['BusMapsX'];
+            $end_result['BusMapsY'] = $result[0]['BusMapsY'];
+            $end_result['BusCity'] = $result[0]['BusCity'];
 
 
-
-        if (!empty($result[0]['BusServices'])) {
-            $services = explode("\n", $result[0]['BusServices']);
-            $end_result['BusServicesArr'] =  $services;
-        } else {
-            $end_result['BusServicesArr'] = array();
-        }
+            $category = Model::factory('CategoryModel')->get_section('category');
 
 
-        foreach($result as $name_key => $row){
-
-
-
-            //категории
-            if (!array_key_exists($row['CatId'], $CatTmp)) {
-                $CatTmp[$row['CatId']] = $row['CatId'];
-                //ищем раздел к которому принадлежит категория и формируем ссылку для карточки бизнеса
-                foreach ($category as $row_category) {
-                    if ($row_category['id'] == $row['CatParentId']){
-                        $row['CatUrl2'] = $row['CatUrl'];
-                        $row['CatUrl'] = $row_category['url'].'/'.$row['CatUrl'];
-                    }
-                }
-
-                $end_result['CatArr'][] = array('CatId' => $row['CatId'], 'CatName' => $row['CatName'], 'CatUrl' => $row['CatUrl'], 'CatUrl2' => $row['CatUrl2']);
-
+            //парсим адрес
+            try {
+                $end_result['BusDopAddress'] = unserialize($result[0]['BusDopAddress']);
+            } catch (Exception $x) {
+                $end_result['BusDopAddress'] = array();
             }
 
-            //теги
-            if (!empty($row['TagId'])) {
-                if (!array_key_exists($row['TagId'], $TagsTmp)) {
-                    $TagsTmp[$row['TagId']] = $row['TagId'];
-                    $end_result['TagArr'][] = array('TagId' => $row['TagId'], 'TagName' => $row['TagName'], 'TagUrl' => $row['TagUrl']);
-                }
+
+            if (!empty($result[0]['BusServices'])) {
+                $services = explode("\n", $result[0]['BusServices']);
+                $end_result['BusServicesArr'] = $services;
             } else {
-                $end_result['TagArr'] = array();
+                $end_result['BusServicesArr'] = array();
             }
 
-            //купоны
-            if (!empty($row['CoupId'])) {
-                if (!array_key_exists($row['CoupId'], $CoupTmp)) {
-                    $CoupTmp[$row['CoupId']] = $row['CoupId'];
-                    $end_result['CoupArr'][] = array('CoupId' => $row['CoupId'], 'CoupSecondname' => $row['CoupSecondname'],
-                        'CoupUrl' => $row['CoupUrl'],
-                        'CoupInfo' => $row['CoupInfo'],
-                        'CoupImg' => $row['CoupImg'],
-                        'CoupTags' => $row['CoupTags']
-                    );
-                }
-            } else {
-                $end_result['CoupArr'] = array();
-            }
 
-            //верхний слайдер бизнеса
-            if (!empty($row['TopsliderId'])) {
-                if (!array_key_exists($row['TopsliderId'], $TopsTmp)) {
-                    $TopsTmp[$row['TopsliderId']] = $row['TopsliderId'];
-                    $end_result['TopsArr'][] = array('TopsliderId' => $row['TopsliderId'], 'TopsliderImg' => $row['TopsliderImg']);
-                }
-            } else {
-                $end_result['TopsArr'] = array();
-            }
+            foreach ($result as $name_key => $row) {
 
-            //галереи
-            if (!empty($row['GalryId'])) {
-                if (!array_key_exists($row['GalryId'], $GalryTmp)) {
 
-                    foreach ($result as $row_file) {
-                        if (!array_key_exists($row_file['FileId'], $FileTmp) and ($row['GalryId'] == $row_file['FileGaleryId'])) {
-                            $FileTmp[$row_file['FileId']] = $row_file['FileId'];
-                            $FileArr[] = array('FileFilename' => $row_file['FileFilename'], 'FileTitle' => $row_file['FileTitle'], 'FileId' => $row_file['FileId']);
-
+                //категории
+                if (!array_key_exists($row['CatId'], $CatTmp)) {
+                    $CatTmp[$row['CatId']] = $row['CatId'];
+                    //ищем раздел к которому принадлежит категория и формируем ссылку для карточки бизнеса
+                    foreach ($category as $row_category) {
+                        if ($row_category['id'] == $row['CatParentId']) {
+                            $row['CatUrl2'] = $row['CatUrl'];
+                            $row['CatUrl'] = $row_category['url'] . '/' . $row['CatUrl'];
                         }
                     }
 
-                    $GalryTmp[$row['GalryId']] = $row['GalryId'];
-                    $end_result['GalryArr'][] = array('GalryId' => $row['GalryId'], 'GalryName' => $row['GalryName'],
-                        'FileArr' => $FileArr);
-                    $FileArr = array();
-                }
-            } else {
-                $end_result['GalryArr'] = array();
-            }
-
-            //обзоры
-            if (!empty($row['ArticId'])) {
-                if (!array_key_exists($row['ArticId'], $ArticTmp)) {
-                    $ArticTmp[$row['ArticId']] = $row['ArticId'];
-                    $end_result['ArticArr'][] = array('ArticId' => $row['ArticId'],
-                        'ArticName' => $row['ArticName'],
-                        'ArticSecondName' => $row['ArticSecondName'],
-                        'ArticUrl' => $row['ArticUrl'],
-                        'ArticImage' => $row['ArticImage'],
-                        'ArticContent' => $row['ArticContent']);
+                    $end_result['CatArr'][] = array('CatId' => $row['CatId'], 'CatName' => $row['CatName'], 'CatUrl' => $row['CatUrl'], 'CatUrl2' => $row['CatUrl2']);
 
                 }
-            } else {
-                $end_result['ArticArr'] = array();
+
+                //теги
+                if (!empty($row['TagId'])) {
+                    if (!array_key_exists($row['TagId'], $TagsTmp)) {
+                        $TagsTmp[$row['TagId']] = $row['TagId'];
+                        $end_result['TagArr'][] = array('TagId' => $row['TagId'], 'TagName' => $row['TagName'], 'TagUrl' => $row['TagUrl']);
+                    }
+                } else {
+                    $end_result['TagArr'] = array();
+                }
+
+                //купоны
+                if (!empty($row['CoupId'])) {
+                    if (!array_key_exists($row['CoupId'], $CoupTmp)) {
+                        $CoupTmp[$row['CoupId']] = $row['CoupId'];
+                        $end_result['CoupArr'][] = array('CoupId' => $row['CoupId'],
+                            'CoupName' => $row['CoupName'],
+                            'CoupSecondname' => $row['CoupSecondname'],
+                            'CoupUrl' => $row['CoupUrl'],
+                            'CoupInfo' => $row['CoupInfo'],
+                            'CoupImg' => $row['CoupImg'],
+                            'DateOff' => $row['DateOff'],
+                            'CoupTags' => $row['CoupTags']
+                        );
+                    }
+                } else {
+                    $end_result['CoupArr'] = array();
+                }
+
+                //верхний слайдер бизнеса
+                if (!empty($row['TopsliderId'])) {
+                    if (!array_key_exists($row['TopsliderId'], $TopsTmp)) {
+                        $TopsTmp[$row['TopsliderId']] = $row['TopsliderId'];
+                        $end_result['TopsArr'][] = array('TopsliderId' => $row['TopsliderId'], 'TopsliderImg' => $row['TopsliderImg']);
+                    }
+                } else {
+                    $end_result['TopsArr'] = array();
+                }
+
+                //галереи
+                if (!empty($row['GalryId'])) {
+                    if (!array_key_exists($row['GalryId'], $GalryTmp)) {
+
+                        foreach ($result as $row_file) {
+                            if (!array_key_exists($row_file['FileId'], $FileTmp) and ($row['GalryId'] == $row_file['FileGaleryId'])) {
+                                $FileTmp[$row_file['FileId']] = $row_file['FileId'];
+                                $FileArr[] = array('FileFilename' => $row_file['FileFilename'], 'FileTitle' => $row_file['FileTitle'], 'FileId' => $row_file['FileId']);
+
+                            }
+                        }
+
+                        $GalryTmp[$row['GalryId']] = $row['GalryId'];
+                        $end_result['GalryArr'][] = array('GalryId' => $row['GalryId'], 'GalryName' => $row['GalryName'],
+                            'FileArr' => $FileArr);
+                        $FileArr = array();
+                    }
+                } else {
+                    $end_result['GalryArr'] = array();
+                }
+
+                //обзоры
+                if (!empty($row['ArticId'])) {
+                    if (!array_key_exists($row['ArticId'], $ArticTmp)) {
+                        $ArticTmp[$row['ArticId']] = $row['ArticId'];
+                        $end_result['ArticArr'][] = array('ArticId' => $row['ArticId'],
+                            'ArticName' => $row['ArticName'],
+                            'ArticSecondName' => $row['ArticSecondName'],
+                            'ArticUrl' => $row['ArticUrl'],
+                            'ArticImage' => $row['ArticImage'],
+                            'ArticContent' => $row['ArticContent']);
+
+                    }
+                } else {
+                    $end_result['ArticArr'] = array();
+                }
+
+
             }
 
+            //вызываем метод получения данных из куки
+            Controller_BaseController::favorits_coupon();
+            //добавляем элемент масива если добавлен в избранное
+            if (!empty(Controller_BaseController::$favorits_coupon)) {
+                // die(HTML::x(Controller_BaseController::$favorits_bussines));
+                $new_result = array();
+                foreach ($end_result['CoupArr'] as $result_row) {
 
+                    if (in_array($result_row['CoupId'], Controller_BaseController::$favorits_coupon)) {
+                        $result_row['coupon_favorit'] = 1;
+                    }
+                    $new_result[] = $result_row;
+                }
+                $end_result['CoupArr'] = $new_result;
+            }
+
+        } else {
+            return false;
         }
-
-
-        //вызываем метод получения данных из куки
-        Controller_BaseController::favorits_coupon();
-        //добавляем элемент масива если добавлен в избранное
-        if (!empty(Controller_BaseController::$favorits_coupon)) {
-           // die(HTML::x(Controller_BaseController::$favorits_bussines));
-            $new_result = array();
-            foreach ($end_result['CoupArr'] as $result_row) {
-
-                if (in_array($result_row['CoupId'], Controller_BaseController::$favorits_coupon)) {
-                    $result_row['coupon_favorit'] = 1;
-                }
-                $new_result[] = $result_row;
-            }
-            $end_result['CoupArr'] = $new_result;
-        }
-
 
 
         return $end_result;
