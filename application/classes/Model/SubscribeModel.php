@@ -11,7 +11,7 @@ class Model_SubscribeModel extends Model_BaseModel {
     /**
      * @param $email
      * @return array
-     * добавляем подписчика
+     * todo добавляем подписчика
      */
     public function addSubskribeLodatey ($email, $action = 0){
 

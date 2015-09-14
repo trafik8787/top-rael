@@ -32,7 +32,7 @@ class Model_CategoryModel extends Model_BaseModel {
     /**
      * @param $section_url
      * @return array
-     * получам все категории раздела по урлу раздела
+     * todo получам все категории раздела по урлу раздела
      */
     public function getCategoryInSectionUrl($section_url){
         $query = DB::select()
@@ -41,7 +41,11 @@ class Model_CategoryModel extends Model_BaseModel {
             ->cached()
             ->execute()->as_array();
 
-        return $this->recurs_catalog($query[0]['id']);
+        if (!empty($query)) {
+            return $this->recurs_catalog($query[0]['id']);
+        } else {
+            return false;
+        }
     }
 
 

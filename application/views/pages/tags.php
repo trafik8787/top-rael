@@ -220,8 +220,8 @@
                                                         <?=$rows_data[0]['BusName']?>
                                                     </div>
 
-                                                    <a href="/modalcoupon/<?=$rows_data[0]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
-                                                        <img src="<?=$rows_data[0]['img_coupon']?>" width="155" height="125" alt="" title="" class=""/>
+                                                    <a href="/modalcoupon/<?=$rows_data[0]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm" class="coupon-image">
+                                                        <img src="<?=$rows_data[0]['img_coupon']?>" width="155" height="125" alt="<?=$rows_data[0]['BusName']?>" />
                                                     </a>
 
                                                 </div>
@@ -281,8 +281,8 @@
                                                             <?=$rows_data[1]['BusName']?>
                                                         </div>
 
-                                                        <a href="/modalcoupon/<?=$rows_data[1]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm">
-                                                            <img src="<?=$rows_data[1]['img_coupon']?>" width="155" height="125" alt="" title="" class=""/>
+                                                        <a href="/modalcoupon/<?=$rows_data[1]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm" class="coupon-image">
+                                                            <img src="<?=$rows_data[1]['img_coupon']?>" width="155" height="125" alt="<?=$rows_data[1]['BusName']?>" />
                                                         </a>
                                                     </div>
 

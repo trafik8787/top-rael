@@ -8,6 +8,9 @@
 
 class Controller_ModalCoupon extends Controller {
 
+    /**
+     * todo action_index загрузка модального окна купона
+     */
     public function action_index(){
 
         if (Request::initial()->is_ajax()) {
@@ -35,6 +38,9 @@ class Controller_ModalCoupon extends Controller {
         }
     }
 
+    /**
+     * todo action добавить купон в избранное
+     */
     public function action_saveFovarites (){
 
         if (Request::initial()->is_ajax()) {
@@ -51,6 +57,9 @@ class Controller_ModalCoupon extends Controller {
         }
     }
 
+    /**
+     * todo action удалить купон из избранного
+     */
     public function action_deleteFovarites (){
 
         if (Request::initial()->is_ajax()) {
@@ -63,4 +72,27 @@ class Controller_ModalCoupon extends Controller {
         }
     }
 
+    /**
+     *
+     * todo action вывод купона на отдельной странице
+     */
+    public function action_coupon(){
+
+        $content = View::factory('pages/node_coupon');
+        $favoritcoup = Cookie::get('favoritcoup');
+
+        $data = Model::factory('CouponsModel')->getCouponsId(null, $this->request->param('url_coupon'));
+
+
+        if (!empty($favoritcoup)) {
+            $favoritcoup = json_decode($favoritcoup);
+            //ищем в масиве избранных есть ли этот купон
+            if (in_array($data[0]['id'], $favoritcoup)) {
+                $data[0]['coupon_favorit'] = 1;
+            }
+        }
+
+        $content->data = $data;
+        $this->response->body($content);
+    }
 }

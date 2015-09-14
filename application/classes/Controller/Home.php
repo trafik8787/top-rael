@@ -9,6 +9,7 @@
 class Controller_Home extends Controller_BaseController {
 
 	public function action_index(){
+
        // Model::factory('CouponsModel')->UpdateFavoritCookie('users_relation_favorites_coup', 1, 'coupon_id');
            // Model::factory('BaseModel')->logo();
 //        $er = json_encode(array('qwe' => 'sdfsdfsdfsdfsdf', 'asd'=> 'asdasdasd'));

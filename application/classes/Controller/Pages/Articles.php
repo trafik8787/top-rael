@@ -34,6 +34,11 @@ class Controller_Pages_Articles extends Controller_BaseController {
             $data = Model::factory('ArticlesModel')->getArticlesSectionUrl(null, 10, $number_page, $city_id);
         } else {
             $data = Model::factory('ArticlesModel')->getArticlesSectionUrl($this->request->param('url_section'), 10, $number_page, $city_id);
+
+            //смотрим есть ли такая категория если нет то 404
+            if ($data === false) {
+                throw new HTTP_Exception_404;
+            }
         }
         //die(HTML::x($data));
         $content->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
@@ -63,10 +68,21 @@ class Controller_Pages_Articles extends Controller_BaseController {
 
     public function action_article (){
 
+        //проверяем есть ли урл
+        if ($this->request->param('url_article') == null) {
+            throw new HTTP_Exception_404;
+        }
+
         $data = array();
         $content = View::factory('pages/node');
 
         $data = Model::factory('ArticlesModel')->getArticleUrl($this->request->param('url_article'));
+
+        //смотрим есть ли такая статья если нет то 404
+        if ($data === false) {
+            throw new HTTP_Exception_404;
+        }
+
         $other_articles = Model::factory('ArticlesModel')->getArticlesRandomIdCategory($data['ArticIdSection'], $data['ArticId']);
 
         //HTML::x($data['CoupArr']);

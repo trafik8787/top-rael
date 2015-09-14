@@ -10,7 +10,7 @@ class Model_TagsModel extends Model_BaseModel {
 
     /**
      * @return mixed
-     * получить весь список тегов
+     * todo получить весь список тегов
      */
     public function getAllTags(){
         return DB::select()
@@ -23,14 +23,19 @@ class Model_TagsModel extends Model_BaseModel {
     /**
      * @param $url
      * @return mixed
-     * получить теги по урлу
+     * todo получить теги по урлу
      */
     public function getTagsUrl ($url){
-        return DB::select()
+        $query =  DB::select()
             ->from('tags')
             ->where('url_tags','=',$url)
             ->cached()
             ->execute()->as_array();
+
+        if (empty($query)){
+            $query = false;
+        }
+        return $query;
     }
 
 }

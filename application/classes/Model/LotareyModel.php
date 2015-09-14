@@ -37,6 +37,11 @@ class Model_LotareyModel extends Model_BaseModel {
                 ->and_where('lotery','=', 0)
                 ->execute()->as_array();
 
+            $lot = DB::update('lotarey')
+                ->set(array('status' => 3))
+                ->where('id', '=', $lotery[0]['id'])
+                ->execute();
+
             if (!empty($subscription)) {
 
                 $number = array_rand($subscription, 1);

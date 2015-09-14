@@ -74,19 +74,17 @@
                                 <div class="media-heading">
                                     <a href="/business/<?=$data[0]['BusUrl']?>"><?=$data[0]['BusName']?></a>
                                 </div>
-                                Стильный, итальянский ресторан, асположенный прямо под зданием
-                                остиницы Rich
-                                Carlton в марине Герцлии
+                                <?=Text::limit_chars(strip_tags($data[0]['BusInfo']), 150, null, true)?>
                             </div>
                         </div>
 
                     </div>
 
                     <div class="div-cell">
-                        <div> Открыты ежедневно с 12:00-24:00</div>
-                        <div>Адрес: Ha-Shunit St 2</div>
-                        <div>Герцлия</div>
-                        <div>Тел: 09-9514000</div>
+                        <div> <?=$data[0]['BusSchedule']?></div>
+                        <div>Адрес: <?=$data[0]['BusAddress']?></div>
+                        <div><?=$data[0]['CityName']?></div>
+                        <div>Тел: <?=$data[0]['BusTel']?></div>
                     </div>
                 </div>
             </div>
@@ -109,9 +107,16 @@
         <div class="div-row">
             <?if (empty($data[0]['coupon_favorit'])):?>
                 <div class="div-cell">
-                    <a href="#" class="btn btn-primary btn-lg btn-block pin-aria w-add-coupon-favor-modal" data-id="<?=$data[0]['id']?>" data-dismiss="modal">
+                    <a href="#" class="btn btn-primary btn-lg btn-block pin-aria w-add-coupon-favor-modal" data-id="<?=$data[0]['id']?>">
                         <span class="pin"><i class="fa fa-thumb-tack"></i></span>
-                        <strong><i>Сохранить</i></strong>
+                        <strong><i class="w-text-button-coupon-modal-save">Сохранить</i></strong>
+                    </a>
+                </div>
+            <?else:?>
+                <div class="div-cell">
+                    <a href="#" class="btn btn-primary btn-lg btn-block pin-aria" disabled>
+                        <span class="pin"><i class="fa fa-thumb-tack"></i></span>
+                        <strong><i class="w-text-button-coupon-modal-save">В избранном</i></strong>
                     </a>
                 </div>
             <?endif?>
@@ -126,7 +131,7 @@
 
 
             <div class="div-cell">
-                <a href="#" class="btn btn-primary btn-lg btn-block pin-aria">
+                <a href="/coupon/<?=$data[0]['url']?>" class="btn btn-primary btn-lg btn-block pin-aria">
                     <span class="pin"><i class="fa fa-mobile"></i></span>
                     <strong><i>Открыть на телефоне</i></strong>
                 </a>

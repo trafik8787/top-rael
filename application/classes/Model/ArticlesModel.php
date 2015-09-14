@@ -13,7 +13,7 @@ class Model_ArticlesModel extends Model_BaseModel {
      * @param null $limit
      * @param null $num_page
      * @return mixed
-     * получаем статьи по урлу раздела если раздел не указан выводим все
+     * todo получаем статьи по урлу раздела если раздел не указан выводим все
      */
     public function getArticlesSectionUrl ($url_section = null, $limit = null, $num_page = null, $id_city = null){
 
@@ -107,9 +107,13 @@ class Model_ArticlesModel extends Model_BaseModel {
 
         }
 
-        $city_arr = $this->getCityArticleInSection($url_section);
+        if (!empty($result)) {
+            $city_arr = $this->getCityArticleInSection($url_section);
 
-        return array('data' => $result, 'count' => $count, 'city' => $city_arr);
+            return array('data' => $result, 'count' => $count, 'city' => $city_arr);
+        } else {
+            return false;
+        }
 
     }
 
@@ -117,7 +121,7 @@ class Model_ArticlesModel extends Model_BaseModel {
     /**
      * @param $id_articles
      * @return mixed
-     * статьи по списку ID
+     * todo статьи по списку ID
      */
     public function getArticlesId($id_articles){
 
@@ -132,7 +136,7 @@ class Model_ArticlesModel extends Model_BaseModel {
      * @param $id_article
      * @return string
      * @throws Kohana_Exception
-     * сохранить статью в избранном
+     * todo сохранить статью в избранном
      */
     public function saveArticlesFavoritesUser($id_user, $id_article){
         $query = DB::insert('users_relation_favorites_article', array('user_id', 'article_id'))
@@ -143,7 +147,7 @@ class Model_ArticlesModel extends Model_BaseModel {
 
     /**
      * @param $id_article
-     * удалить статью из избранного
+     * todo удалить статью из избранного
      */
     public function deleteArticlesFavoritesUser ($id_article){
         $id_user = Auth::instance()->get_user()->id;
@@ -157,7 +161,7 @@ class Model_ArticlesModel extends Model_BaseModel {
     /**
      * @param $user_id
      * @return array|bool
-     * получить избранные статьи по id пользователя
+     * todo получить избранные статьи по id пользователя
      */
     public function getArticlesFavoritesUserId ($user_id){
 
@@ -185,7 +189,7 @@ class Model_ArticlesModel extends Model_BaseModel {
     /**
      * @param $url_category
      * @return mixed
-     * метод получения статей по урлу категории
+     * todo метод получения статей по урлу категории
      */
     public function getArticlesCategoryUrl ($url_category){
         return DB::select('articles.*')
@@ -202,7 +206,7 @@ class Model_ArticlesModel extends Model_BaseModel {
     /**
      * @param $business_id
      * @return mixed
-     * получаем все статьи которые относятся к бизнесу по его id
+     * todo получаем все статьи которые относятся к бизнесу по его id
      */
     public function getArticlesInBusinessId($business_id){
         return DB::select('articles.*')
@@ -219,7 +223,7 @@ class Model_ArticlesModel extends Model_BaseModel {
      * @param $url_article
      * @return array|mixed
      * @throws Cache_Exception
-     * получить статью по урлу и привязаные к ней купоны и бизнесы
+     * todo получить статью по урлу и привязаные к ней купоны и бизнесы
      */
     public function getArticleUrl ($url_article){
 
@@ -273,32 +277,44 @@ class Model_ArticlesModel extends Model_BaseModel {
 
            // die(HTML::x($query));
 
-            $end_result = $this->CreateArrayArticle($query);
+            if (!empty($query)) {
+                $end_result = $this->CreateArrayArticle($query);
+
+            } else {
+                $end_result = false;
+            }
+
             Cache::instance()->set($url_article, $end_result);
+
         } else {
             $end_result = Cache::instance()->get($url_article);
         }
+
         Cache::instance()->delete($url_article);
 
+        if ($end_result !== false) {
 
-        //вызываем метод получения данных из куки
-        Controller_BaseController::favorits_articles();
-        if (!empty(Controller_BaseController::$favorits_articles)) {
+            //вызываем метод получения данных из куки
+            Controller_BaseController::favorits_articles();
+            if (!empty(Controller_BaseController::$favorits_articles)) {
 
-            if (in_array($end_result['ArticId'], Controller_BaseController::$favorits_articles)) {
-                $end_result['articles_favorit'] = 1;
+                if (in_array($end_result['ArticId'], Controller_BaseController::$favorits_articles)) {
+                    $end_result['articles_favorit'] = 1;
+                }
             }
 
+            return $end_result;
+
+        } else {
+
+            return false;
         }
-
-
-        return $end_result;
     }
 
     /**
      * @param $result
      * @return array
-     * формирование двумерного масива карточки статьи
+     * todo формирование двумерного масива карточки статьи
      */
     public function CreateArrayArticle ($result){
        // die(HTML::x($result));
@@ -394,7 +410,7 @@ class Model_ArticlesModel extends Model_BaseModel {
     /**
      * @param null $arrSection
      * @return array
-     * Получить обзоры по урлу раздела
+     * todo Получить обзоры по урлу раздела
      */
     public function getCityArticleInSection($arrSection = null){
 
@@ -431,7 +447,7 @@ class Model_ArticlesModel extends Model_BaseModel {
 
     /**
      * @return mixed
-     * Получить обзоры для главной
+     * todo Получить обзоры для главной
      */
     public function getArticlesInHome(){
 
@@ -447,7 +463,7 @@ class Model_ArticlesModel extends Model_BaseModel {
     /**
      * @param int $limit
      * @return mixed
-     * получить последние статьи
+     * todo получить последние статьи
      */
     public function getArticlesAfter ($limit = 6){
         return DB::select()
@@ -463,7 +479,7 @@ class Model_ArticlesModel extends Model_BaseModel {
      * @param $id_section
      * @param $id_curent_article
      * @return array
-     * получаем рандомные статьи из раздела
+     * todo получаем рандомные статьи из раздела
      */
     public function getArticlesRandomIdCategory($id_section, $id_curent_article){
 
@@ -500,7 +516,7 @@ class Model_ArticlesModel extends Model_BaseModel {
      * @param $url_tags
      * @param null $limit
      * @return mixed
-     * ПОЛУЧИТЬ СТАТЬИ ГРУППЫ ЛАКШЕРИ (ТЕГИ)
+     * todo ПОЛУЧИТЬ СТАТЬИ ГРУППЫ ЛАКШЕРИ (ТЕГИ)
      */
     public function getArticlesSectionTagsUrl($url_section = null, $url_tags, $limit = null){
 

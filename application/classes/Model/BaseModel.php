@@ -17,7 +17,7 @@ class Model_BaseModel extends Model {
      * @param $column
      * @param null $where
      * @return mixed
-     * метод получения количества записей произвольной таблицы
+     * todo метод получения количества записей произвольной таблицы
      */
     public function table_count ($table, $column, $where = null, $and_where = null) {
 
@@ -48,7 +48,7 @@ class Model_BaseModel extends Model {
      * @param $PostArr
      * @return array|bool
      * @throws Kohana_Exception
-     * добавляет сообщение пользователя
+     * todo добавляет сообщение пользователя
      */
     public function addContacts ($PostArr){
 
@@ -78,7 +78,7 @@ class Model_BaseModel extends Model {
 
     /**
      * @return mixed
-     * получаем текст для страницы О проекте
+     * todo получаем текст для страницы О проекте
      */
     public function getAbout (){
         return DB::select()
@@ -90,7 +90,7 @@ class Model_BaseModel extends Model {
 
     /**
      * @return mixed
-     * получаем SEO для главной
+     * todo получаем SEO для главной
      */
     public function getHome(){
         return DB::select()
@@ -104,6 +104,7 @@ class Model_BaseModel extends Model {
      * @param $url
      * @param $url_section_category
      * @return array
+     *  todo вывод банеров в разделах и категориях
      */
     public function getBaners($url, $url_section_category){
 
@@ -173,7 +174,7 @@ class Model_BaseModel extends Model {
      * @param $arr_favorits
      * @param $table_object
      * @param $cooki_name
-     * удаляем все добавленые в избранное элементы а потом добавляем основываясь на содержимом куки
+     * todo удаляем все добавленые в избранное элементы а потом добавляем основываясь на содержимом куки
      */
     public function UpdateFavoritCookie ($table, $user_id, $field, $arr_favorits, $table_object, $cooki_name){
 
@@ -212,7 +213,7 @@ class Model_BaseModel extends Model {
     /**
      * @param $id_business
      * @return mixed
-     * получить банеры по id бизнеса
+     * todo получить банеры по id бизнеса
      */
     public function getBanersBusinessId ($id_business){
         return DB::select()

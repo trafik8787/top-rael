@@ -10,9 +10,22 @@ class Controller_Pages_Tags extends Controller_BaseController {
 
     public function action_index()
     {
+
+        //проверяем есть ли урл
+        if ($this->request->param('url_tags') == null) {
+            throw new HTTP_Exception_404;
+        }
+
         $content = View::factory('pages/tags');
-        $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+
         $tags = Model::factory('TagsModel')->getTagsUrl($this->request->param('url_tags'));
+
+        //выброс ошибки
+        if ($tags === false) {
+            throw new HTTP_Exception_404;
+        }
+
+        $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
 
 
         foreach ($section as $row_section) {

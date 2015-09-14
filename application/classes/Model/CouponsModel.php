@@ -11,7 +11,7 @@ class Model_CouponsModel extends Model_BaseModel {
     /**
      * @param $business_id
      * @return mixed
-     * метод получаем купоны по id бизнеса
+     * todo метод получаем купоны по id бизнеса
      */
     public function getCouponsInBusinessId($business_id){
         return DB::select('id', 'name')
@@ -22,50 +22,50 @@ class Model_CouponsModel extends Model_BaseModel {
     }
 
     /**
-     * @param $id
+     * @param null $id
+     * @param null $coupon_url
      * @return mixed
-     * получить купон по его id или купоны
+     * todo получить купон по его id или url купона
      */
-    public function getCouponsId($id){
+    public function getCouponsId($id = null, $coupon_url = null){
 
+        $query = DB::select('coup.*',
+            array('bus.name', 'BusName'),
+            array('bus.logo', 'BusLogo'),
+            array('bus.url', 'BusUrl'),
+            array('bus.info', 'BusInfo'),
+            array('bus.tel', 'BusTel'),
+            array('bus.schedule', 'BusSchedule'),
+            array('cit.name', 'CityName'),
+            array('bus.address', 'BusAddress')
 
-        if (is_array($id)) {
+            );
 
-            return DB::select('coup.*',
-                array('bus.name', 'BusName'),
-                array('bus.logo', 'BusLogo'),
-                array('bus.url', 'BusUrl'),
-                array('bus.info', 'BusInfo'),
-                array('bus.tel', 'BusTel'),
-                array('bus.schedule', 'BusSchedule')
+            $query->from(array('coupon', 'coup'));
+            $query->join(array('business', 'bus'));
+            $query->on('coup.business_id', '=', 'bus.id');
 
-            )
-                ->from(array('coupon', 'coup'))
-                ->join(array('business', 'bus'))
-                ->on('coup.business_id', '=', 'bus.id')
-                ->where('coup.id', 'IN', $id)
-                ->cached()
-                ->execute()->as_array();
+            $query->join(array('city', 'cit'), 'LEFT');
+            $query->on('coup.city', '=', 'cit.id');
 
-        } else {
-            return DB::select('coup.*',
-                array('bus.name', 'BusName'),
-                array('bus.logo', 'BusLogo'),
-                array('bus.url', 'BusUrl'),
-                array('bus.info', 'BusInfo'),
-                array('bus.tel', 'BusTel'),
-                array('bus.schedule', 'BusSchedule')
+            if ($id != null) {
+                if (is_array($id)) {
+                    $query->where('coup.id', 'IN', $id);
+                } else {
+                    $query->where('coup.id', '=', $id);
+                }
+            }
 
-            )
-                ->from(array('coupon', 'coup'))
-                ->join(array('business', 'bus'))
-                ->on('coup.business_id', '=', 'bus.id')
-                ->where('coup.id', '=', $id)
-                ->cached()
-                ->execute()->as_array();
-        }
+            if ($coupon_url != null) {
+                $query->where('coup.url', '=', $coupon_url);
+            }
+
+            $result = $query->cached()->execute()->as_array();
+            return $result;
 
     }
+
+
 
     /**
      * @param null $url_section
@@ -73,7 +73,7 @@ class Model_CouponsModel extends Model_BaseModel {
      * @param null $num_page
      * @param null $id_city
      * @return array
-     * Получить купоны по урлу раздела
+     * todo Получить купоны по урлу раздела
      */
     public function getCouponsSectionUrl ($url_section = null, $limit = null, $num_page = null, $id_city = null){
 
@@ -224,7 +224,7 @@ class Model_CouponsModel extends Model_BaseModel {
     /**
      * @param null $arrSection
      * @return array
-     * Получить
+     * todo Получить города раздела бизнесов
      */
     public function getCityCouponInSection($arrSection = null){
 
@@ -265,7 +265,7 @@ class Model_CouponsModel extends Model_BaseModel {
      * @param $id_coupons
      * @return object
      * @throws Kohana_Exception
-     * сохраняем купон в избранное пользователя
+     * todo сохраняем купон в избранное пользователя
      */
     public function saveCouponsFavoritesUser($id_user, $id_coupons){
         $query = DB::insert('users_relation_favorites_coup', array('user_id', 'coupon_id'))
@@ -275,7 +275,7 @@ class Model_CouponsModel extends Model_BaseModel {
 
     /**
      * @param $id_coupons
-     * удалить купон из избранного текущего пользователя
+     * todo удалить купон из избранного текущего пользователя
      */
     public function deleteCouponsFavoritesUser ($id_coupons){
 
@@ -289,7 +289,7 @@ class Model_CouponsModel extends Model_BaseModel {
     /**
      * @param $user_id
      * @return mixed
-     * получить избранные купоны по id пользователя
+     * todo получить избранные купоны по id пользователя
      */
     public function getCouponsFavoritesUserId ($user_id){
 
@@ -315,7 +315,7 @@ class Model_CouponsModel extends Model_BaseModel {
      * @param $url_tags
      * @param null $limit
      * @return array
-     * КУПОНЫ ГРУППЫ ЛАКШЕРИ (ТЕГИ)
+     * todo КУПОНЫ ГРУППЫ ЛАКШЕРИ (ТЕГИ)
      */
     public function getCouponsSectionTagsUrl ($url_section = null, $url_tags, $limit = null){
 

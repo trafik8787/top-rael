@@ -85,6 +85,7 @@ if (isset($_SERVER['SERVER_PROTOCOL']))
 if (isset($_SERVER['KOHANA_ENV']))
 {
 	Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
+
 }
 
 /**
@@ -382,10 +383,10 @@ Route::set('Business', 'business(/<url_business>)')
         'action'     => 'index',
     ));
 
+//открыть страницу купона
 Route::set('CouponNode', 'coupon(/<url_coupon>)', array('page' => '[0-9]+'))
     ->defaults(array(
-        'directory' => 'Pages',
-        'controller' => 'Coupons',
+        'controller' => 'ModalCoupon',
         'action'     => 'coupon',
     ));
 

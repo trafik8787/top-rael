@@ -8,6 +8,12 @@
 
 class Model_Adm extends Model {
 
+    /**
+     * @param $table
+     * @param $where
+     * @return mixed
+     * todo получить данные произвольной таблицы по условию
+     */
     public function get_table ($table, $where){
         return DB::select()
             ->from($table)
@@ -15,7 +21,12 @@ class Model_Adm extends Model {
             ->execute()->as_array();
     }
 
-
+    /**
+     * @param null $filename
+     * @param $title
+     * @param $id
+     *  todo обновление галереи из админки
+     */
     public function update_galery ($filename = null, $title, $id) {
         if ($filename == null) {
             $query = DB::update('files')
@@ -31,18 +42,39 @@ class Model_Adm extends Model {
 
     }
 
+    /**
+     * @param $filename
+     * @param $title
+     * @param $gallery_id
+     * @throws Kohana_Exception
+     * todo Добавление в галерею из админки
+     */
     public function insert_galery ($filename, $title, $gallery_id){
         $query = DB::insert('files', array('filename', 'title', 'gallery'))
             ->values(array($filename, $title, $gallery_id))->execute();
     }
 
-
+    /**
+     * @param $id
+     * todo удаление из галереи
+     */
     public function delete_galery ($id){
         $query = DB::delete('files')
             ->where('id', 'IN', $id)->execute();
     }
 
-
+    /**
+     * @param null $name_user
+     * @param null $secondname_user
+     * @param null $email_user
+     * @param null $age
+     * @param null $sex
+     * @param null $telephone
+     * @param null $password
+     * @param null $id_business
+     * @throws Kohana_Exception
+     * todo добавление собственника бизнеса в админке
+     */
     public function add_busines_user ($name_user = null, $secondname_user = null, $email_user = null, $age = null, $sex = null, $telephone = null, $password = null, $id_business = null){
 
         $user = ORM::factory('User')->where('business_id', '=', $id_business)->find();

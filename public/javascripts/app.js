@@ -469,7 +469,7 @@ $(document).ready(function(){
     $(document).on('click', '.w-button-print', function(){
         $(".w-print-coupon").print({
             globalStyles: true,
-            stylesheet: '/public/stylesheets/coupon_print.css'
+            stylesheet: '/public/stylesheets/print.css'
         });
     });
 
@@ -645,11 +645,11 @@ $(document).ready(function(){
         count_coupon = parseInt(count_coupon) + 1;
         $('.w-count-coupon').text(count_coupon);
 
-        var icon_favor =  $('[data-id="'+$(this).data('id')+'"]');
-        icon_favor.removeClass('w-add-coupon-favor');
-        icon_favor.css('background-color', '#ccc');
-        icon_favor.attr('data-original-title', 'Купон добавлен в Избранное').tooltip('show');
-        $('[data-toggle="tooltip"]').tooltip();
+
+        $(this).removeClass('w-add-coupon-favor-modal');
+        $(this).attr('disabled','disabled');
+        $(this).find('.w-text-button-coupon-modal-save').text('В избранном');
+
 
         return false;
     });

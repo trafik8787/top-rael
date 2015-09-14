@@ -7,8 +7,8 @@
  */
 class Controller_Pages_City extends Controller_BaseController {
 
-	public function action_index()
-	{
+	public function action_index(){
+
         switch ($this->request->param('url_city')) {
             case 'telaviv':
                 $city_id = 59;
@@ -19,6 +19,8 @@ class Controller_Pages_City extends Controller_BaseController {
             case 'eilat':
                 $city_id = 2;
                 break;
+            default:
+                throw new HTTP_Exception_404;
         }
 
         $content = View::factory('pages/city');

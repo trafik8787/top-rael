@@ -11,11 +11,20 @@ class Controller_Pages_Sections extends Controller_BaseController {
 	public function action_index()
 	{
         $data = array();
+
+        //проверяем есть ли урл
+        if ($this->request->param('url_section') == null) {
+            throw new HTTP_Exception_404;
+        }
+
         $bussines_section = View::factory('pages/bussines_section');
         $number_page = $this->request->param('page');
         $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($this->request->param('url_section'));
 
-        //HTML::x($category);
+        //смотрим есть ли такой раздел если нет то 404
+        if ($category === false) {
+            throw new HTTP_Exception_404;
+        }
 
         //сортировка категорий по количеству бизнесов в них
         foreach ($category[0]['childs'] as $key => $row) {
@@ -39,8 +48,15 @@ class Controller_Pages_Sections extends Controller_BaseController {
         }
 
         if ($this->request->param('url_category') != '') {
+
+
             //по урлу категории получаем бизнесы
             $data = Model::factory('BussinesModel')->getBussinesCategoryUrl($this->request->param('url_category'), 10 ,$number_page, $city_id);
+
+            //смотрим есть ли такая категория если нет то 404
+            if ($data === false) {
+                throw new HTTP_Exception_404;
+            }
 
             $this->SeoShowPage(array($data['data'][0]['CatTitle'], ''),
                 array($data['data'][0]['CatKeywords'],''),
@@ -55,6 +71,7 @@ class Controller_Pages_Sections extends Controller_BaseController {
             $bussines_section->curent_category = $this->request->param('url_category');
 
         } else {
+
             //по урлу раздела получаем бизнесы
             $data = Model::factory('BussinesModel')->getBussinesSectionUrl($this->request->param('url_section'), 10 ,$number_page, $city_id);
             //по урле раздела получаем 6 анонсов статей

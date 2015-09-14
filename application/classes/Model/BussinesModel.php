@@ -12,7 +12,7 @@ class Model_BussinesModel extends Model_BaseModel {
     /**
      * @param null $url_category
      * @return mixed
-     * получаем бизнеси по URL категории
+     * todo получаем бизнеси по URL категории
      */
     public function getBussinesCategoryUrl($url_category = null, $limit = null, $num_page = null, $id_city = null){
 
@@ -122,33 +122,38 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->execute()->as_array();
         }
 
-        $city_arr = $this->getCityInCategory($url_category);
+        if (!empty($result)) {
 
-        //вызываем метод получения данных из куки
-        Controller_BaseController::favorits_bussines();
-        if (!empty(Controller_BaseController::$favorits_bussines)) {
+            $city_arr = $this->getCityInCategory($url_category);
 
-            $new_result = array();
-            foreach ($result as $result_row) {
+            //вызываем метод получения данных из куки
+            Controller_BaseController::favorits_bussines();
+            if (!empty(Controller_BaseController::$favorits_bussines)) {
 
-                if (in_array($result_row['id'], Controller_BaseController::$favorits_bussines)) {
-                    $result_row['bussines_favorit'] = 1;
+                $new_result = array();
+                foreach ($result as $result_row) {
+
+                    if (in_array($result_row['id'], Controller_BaseController::$favorits_bussines)) {
+                        $result_row['bussines_favorit'] = 1;
+                    }
+
+                    $new_result[] = $result_row;
                 }
-
-                $new_result[] = $result_row;
+                $result = $new_result;
             }
-            $result = $new_result;
+
+            return array('data' => $result, 'count' => count($result1), 'city' => $city_arr);
+
+        } else {
+            return false;
         }
-
-
-         return array('data' => $result, 'count' => count($result1), 'city' => $city_arr);
     }
 
 
     /**
      * @param null $url_section
      * @return mixed
-     * получаем все бизнесы из раздела
+     * todo получаем все бизнесы из раздела
      */
     public function getBussinesSectionUrl($url_section = null, $limit = null, $num_page = null, $id_city = null){
 
@@ -282,7 +287,7 @@ class Model_BussinesModel extends Model_BaseModel {
     /**
      * @param $url_business
      * @return mixed
-     * получить бизнес по URL
+     * todo получить бизнес по URL
      */
     public function getBusinessUrl ($url_business){
 
@@ -422,7 +427,7 @@ class Model_BussinesModel extends Model_BaseModel {
     /**
      * @param $result
      * @return array
-     * формирование двумерного масива карточки бизнеса
+     * todo формирование двумерного масива карточки бизнеса
      */
     private function CreateArrayBussines ($result){
 
@@ -601,7 +606,7 @@ class Model_BussinesModel extends Model_BaseModel {
      * @param $arrChild
      * @param $id_city
      * @return array
-     * метод получаем список городов во всех категориях раздела
+     * todo метод получаем список городов во всех категориях раздела
      */
     public function getCityInSection ($arrChild){
 
@@ -636,7 +641,7 @@ class Model_BussinesModel extends Model_BaseModel {
     /**
      * @param $url_category
      * @return array
-     * получаем список городов по урлу категории
+     * todo получаем список городов по урлу категории
      */
     public function getCityInCategory ($url_category){
 
@@ -669,7 +674,7 @@ class Model_BussinesModel extends Model_BaseModel {
     /**
      * @param int $limit
      * @return mixed
-     * Получение последних добавленых бизнесов
+     * todo Получение последних добавленых бизнесов
      */
     public function getBusinessAfter($limit = 10){
         return DB::select()
@@ -688,7 +693,7 @@ class Model_BussinesModel extends Model_BaseModel {
     /**
      * @param $id_bussines
      * @return mixed
-     * получить бизнесы
+     * todo получить бизнесы IN по id
      */
     public function getBussinesId($id_bussines){
 
@@ -707,7 +712,7 @@ class Model_BussinesModel extends Model_BaseModel {
      * @param $id_bussines
      * @return string
      * @throws Kohana_Exception
-     * сохраняем бизнес в избранное пользователя
+     * todo сохраняем бизнес в избранное пользователя
      */
     public function saveBussinesFavoritesUser($id_user, $id_bussines){
         $query = DB::insert('users_relation_favorites_bus', array('user_id', 'business_id'))
@@ -718,7 +723,7 @@ class Model_BussinesModel extends Model_BaseModel {
 
     /**
      * @param $id_bussines
-     * удалить бизнесы из избранного пользователя
+     * todo удалить бизнесы из избранного пользователя
      */
     public function deleteBussinesFavoritesUser ($id_bussines){
         $id_user = Auth::instance()->get_user()->id;
@@ -732,7 +737,7 @@ class Model_BussinesModel extends Model_BaseModel {
     /**
      * @param $user_id
      * @return mixed
-     * получить избранные бизнесы по id пользователя
+     * todo получить избранные бизнесы по id пользователя
      */
     public function getBussinesFavoritesUserId ($user_id){
 
@@ -766,7 +771,7 @@ class Model_BussinesModel extends Model_BaseModel {
      * @param null $limit
      * @param null $num_page
      * @return array
-     * ПОЛУЧАЕМ БИЗНЕСЫ ГРУППЫ ЛАКШЕРИ (СОРТИРОВКА ПО ТЕГАМ И КАТЕГОРИЯМ)
+     * todo ПОЛУЧАЕМ БИЗНЕСЫ ГРУППЫ ЛАКШЕРИ (СОРТИРОВКА ПО ТЕГАМ И КАТЕГОРИЯМ)
      */
     public function getBussinesCategoryTagsUrl ($url_category, $url_tags = null, $limit = null){
 
@@ -825,7 +830,7 @@ class Model_BussinesModel extends Model_BaseModel {
      * @param $url_tags
      * @param null $limit
      * @return array
-     * ПОЛУЧАЕМ БИЗНЕСЫ ГРУППЫ ЛАКШЕРИ (СОРТИРОВКА ПО ТЕГАМ И РАЗДЕЛАМ)
+     * todo ПОЛУЧАЕМ БИЗНЕСЫ ГРУППЫ ЛАКШЕРИ (СОРТИРОВКА ПО ТЕГАМ И РАЗДЕЛАМ)
      */
     public function getBussinesSectionTagsUrl ($url_section, $url_tags, $limit = null){
 
@@ -886,7 +891,7 @@ class Model_BussinesModel extends Model_BaseModel {
 
     /**
      * @return mixed
-     * получить всех бизнес пользователей
+     * todo получить всех бизнес пользователей
      */
     public function getBusinesUserAll(){
         return DB::select()
@@ -898,13 +903,17 @@ class Model_BussinesModel extends Model_BaseModel {
 
     /**
      * @return array
-     * выборка всех бизнесов для карты
+     * todo выборка всех бизнесов для карты по id бизнеса по url категории, url раздела
      */
     public function getBusinessAll_Maps($id = null, $url_category = null, $url_section = null){
 
 
         if ($url_section != null) {
             $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($url_section);
+
+            if ($category === false) {
+                throw new HTTP_Exception_404;
+            }
 
             $arrChild = array();
             foreach ($category[0]['childs'] as $row_cat) {
@@ -981,14 +990,17 @@ class Model_BussinesModel extends Model_BaseModel {
         $query->where_close();
         $result_query = $query->execute()->as_array();
 
-
-        return $this->CreareArrayBusinessMaps($result_query);
+        if (!empty($result_query)) {
+            return $this->CreareArrayBusinessMaps($result_query);
+        } else {
+            return array();
+        }
     }
 
     /**
      * @param $result
      * @return array
-     * формирование масива для вывода на карте бизнесов
+     * todo формирование масива для вывода на карте бизнесов
      */
     public function CreareArrayBusinessMaps ($result){
 
@@ -1080,7 +1092,7 @@ class Model_BussinesModel extends Model_BaseModel {
     /**
      * @param $url_category
      * @return array
-     * получаем похожие бизнесы для карточки бизнеса
+     * todo получаем похожие бизнесы для карточки бизнеса
      */
     public function getBusinessRelated($url_category, $bus_not_id) {
 
@@ -1136,7 +1148,7 @@ class Model_BussinesModel extends Model_BaseModel {
 
     /**
      * @param $id_business
-     * отключить бизнес по id
+     * todo отключить бизнес по id
      */
     public function disableBusines($id_business){
         $sub_update = DB::update('business')

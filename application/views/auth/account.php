@@ -241,7 +241,7 @@
 
                         <?else:?>
                         <div class="col-md-12">
-                            <span>Тут купоны</span>
+                            <span class="text-center"><h2 style="color: #ccc">Здесь размещаются купоны которые вы добавите в избранное</h2></span>
                         </div>
                         <?endif?>
 
@@ -291,7 +291,9 @@
                                 </div>
                             <?endforeach?>
                         <?else:?>
-                            <span>Тут бизнесы</span>
+                            <div class="col-md-12">
+                                <span class="text-center"><h2 style="color: #ccc">Здесь размещаются бизнесы которые вы добавите в избранное</h2></span>
+                            </div>
                         <?endif?>
 
 
@@ -334,6 +336,10 @@
                                     </div>
 
                                 <?endforeach?>
+                            <?else:?>
+                                <div class="col-md-12">
+                                    <span class="text-center"><h2 style="color: #ccc">Здесь размещаются статьи которые вы добавите в избранное</h2></span>
+                                </div>
                             <?endif?>
                         </div>
                     </div>
