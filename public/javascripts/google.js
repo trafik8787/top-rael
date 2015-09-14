@@ -12,13 +12,28 @@ function initMap() {
     var markers = [];
     var map;
 
+    var lat;
+    var lng;
+
     function favoritesClick() {
         console.log(arguments);
     }
 
+    var get_data = getData();
+
+
+    if (window.busLng != undefined || window.busLat != undefined) {
+        lat = window.busLat;
+        lng = window.busLng;
+    } else {
+        lat = 32.0650;
+        lng = 34.7700;
+    }
+
+
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
-        center: {lat: 32.0650, lng: 34.7700}
+        center: {lat: lat, lng: lng}
     });
 
     var cluster = new MarkerClusterer(map, [], {ignoreHidden: true});
@@ -110,6 +125,7 @@ function initMap() {
     }
 
     function getData() {
+
         return window.dataMapsBus;
 
     }

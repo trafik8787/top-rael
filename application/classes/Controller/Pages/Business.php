@@ -38,7 +38,6 @@ class Controller_Pages_Business extends Controller_BaseController {
         $content->data = $data;
 
         Rediset::getInstance()->set_business($data['BusId']);
-        HTML::x(Rediset::getInstance()->get_business_date($data['BusId']));
 
         $this->template->content = $content;
 	}

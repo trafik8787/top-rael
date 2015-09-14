@@ -37,6 +37,12 @@ class Controller_Pages_Maps extends Controller_BaseController {
 
         $content->section = parent::$general_meny;
 
+        if ($id != null) {
+            $content->lat = $result[0]['BusMapsX'];
+            $content->lng = $result[0]['BusMapsY'];
+        }
+
+
        // HTML::x($result);
 
         foreach ($result as $row) {

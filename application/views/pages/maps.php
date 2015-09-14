@@ -8,7 +8,8 @@
 ?>
 <script>
      window.dataMapsBus = <?=$json?>;
-
+     window.busLng = <?=$lng?>;
+     window.busLat = <?=$lat?>;
 </script>
 <content>
 
