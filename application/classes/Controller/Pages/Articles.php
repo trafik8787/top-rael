@@ -73,6 +73,7 @@ class Controller_Pages_Articles extends Controller_BaseController {
             throw new HTTP_Exception_404;
         }
 
+
         $data = array();
         $content = View::factory('pages/node');
 
@@ -82,6 +83,8 @@ class Controller_Pages_Articles extends Controller_BaseController {
         if ($data === false) {
             throw new HTTP_Exception_404;
         }
+
+        Rediset::getInstance()->set_articles($data['ArticId']);
 
         $other_articles = Model::factory('ArticlesModel')->getArticlesRandomIdCategory($data['ArticIdSection'], $data['ArticId']);
 

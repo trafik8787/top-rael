@@ -11,6 +11,9 @@ class Controller_ModalBussines extends Controller {
     public function action_saveFovarites (){
 
         if (Request::initial()->is_ajax()) {
+
+            Rediset::getInstance()->set_business_favor($this->request->post('id_bussines'));
+
             //если пользователь авторизован
             if (Auth::instance()->get_user()) {
                 $data = Model::factory('BussinesModel')->saveBussinesFavoritesUser(Auth::instance()->get_user()->id, $this->request->post('id_bussines'));

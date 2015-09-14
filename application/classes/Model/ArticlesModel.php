@@ -317,7 +317,7 @@ class Model_ArticlesModel extends Model_BaseModel {
      * todo формирование двумерного масива карточки статьи
      */
     public function CreateArrayArticle ($result){
-       // die(HTML::x($result));
+
         $end_result = array();
         $BusTmp = array();
         $CoupTmp = array();

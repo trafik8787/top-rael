@@ -26,7 +26,7 @@ class Controller_Pages_Business extends Controller_BaseController {
             View::factory('blocks_includ/business_uslugi', array('data' => $data['BusServicesArr'])),
             View::factory('blocks_includ/business_meny', array('data' => $data['BusFileMeny']))
         ));
-        //HTML::x($data);
+
         //SEO
         $this->SeoShowPage(array($data['BusTitle'], $data['BusName']),
             array($data['BusKeywords'], $data['BusInfo']),
@@ -37,6 +37,8 @@ class Controller_Pages_Business extends Controller_BaseController {
         $content->related = $related;
         $content->data = $data;
 
+        Rediset::getInstance()->set_business($data['BusId']);
+        HTML::x(Rediset::getInstance()->get_business_date($data['BusId']));
 
         $this->template->content = $content;
 	}

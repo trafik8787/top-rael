@@ -44,6 +44,10 @@ class Controller_ModalCoupon extends Controller {
     public function action_saveFovarites (){
 
         if (Request::initial()->is_ajax()) {
+
+            //считаем количество добавлений в избранное
+            Rediset::getInstance()->set_coupon($this->request->post('id_coupon'));
+
             //если пользователь авторизован
             if (Auth::instance()->get_user()) {
                 $data = Model::factory('CouponsModel')->saveCouponsFavoritesUser(Auth::instance()->get_user()->id, $this->request->post('id_coupon'));
