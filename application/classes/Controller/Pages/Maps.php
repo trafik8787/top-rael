@@ -43,7 +43,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
         }
 
 
-       // HTML::x($result);
+//        HTML::x($result);
 
         foreach ($result as $row) {
 

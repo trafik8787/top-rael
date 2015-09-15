@@ -12,22 +12,17 @@ function initMap() {
     var markers = [];
     var map;
 
-    var lat;
-    var lng;
+    var lat = 32.0650;
+    var lng = 34.7700;
 
     function favoritesClick() {
         console.log(arguments);
     }
 
-    var get_data = getData();
 
-
-    if (window.busLng != undefined || window.busLat != undefined) {
+    if (window.busLng != 0 || window.busLat != 0) {
         lat = window.busLat;
         lng = window.busLng;
-    } else {
-        lat = 32.0650;
-        lng = 34.7700;
     }
 
 
@@ -125,7 +120,7 @@ function initMap() {
     }
 
     function getData() {
-
+       console.log( window.dataMapsBus);
         return window.dataMapsBus;
 
     }

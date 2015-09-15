@@ -1046,7 +1046,7 @@ class Model_BussinesModel extends Model_BaseModel {
                     }
 
                     //категории
-                    if (!array_key_exists($row['CatParentId'], $CatTmp)) {
+                    if (!array_key_exists($row['CatId'], $CatTmp)) {
                         $end_result['CatArr'] = array();
                         $CatTmp[$row['CatParentId']] = $row['CatParentId'];
                         //ищем раздел к которому принадлежит бизнес
