@@ -38,12 +38,16 @@ class Controller_Pages_Maps extends Controller_BaseController {
         $content->section = parent::$general_meny;
 
         if ($id != null) {
-            $content->lat = $result[0]['BusMapsX'];
-            $content->lng = $result[0]['BusMapsY'];
+
+            if (!empty($result[0]['BusMapsX']) and !empty($result[0]['BusMapsX'])) {
+                $content->lat = $result[0]['BusMapsX'];
+                $content->lng = $result[0]['BusMapsY'];
+            }
+
         }
 
 
-//        HTML::x($result);
+        //HTML::x($result);
 
         foreach ($result as $row) {
 
@@ -74,7 +78,10 @@ class Controller_Pages_Maps extends Controller_BaseController {
                 ),
                 'link' => "/business/".$row['BusUrl'],
                 'linkCoupons' => "http://google.com",
-                'linkLuxury' => "http://google.com",
+                'linkLuxury' => array(
+                    'name' => $row['TagsName'],
+                    'link' => $row['TagsUrl']
+                ),
                 'location' => array(
                     'lat' => $row['BusMapsX'],
                     'lng' => $row['BusMapsY']
@@ -111,7 +118,10 @@ class Controller_Pages_Maps extends Controller_BaseController {
                         ),
                         'link' => "/business/".$row['BusUrl'],
                         'linkCoupons' => "http://google.com",
-                        'linkLuxury' => "http://google.com",
+                        'linkLuxury' => array(
+                            'name' => $row['TagsName'],
+                            'link' => $row['TagsUrl']
+                        ),
                         'location' => array(
                             'lat' => $rows_dop['maps_x'],
                             'lng' => $rows_dop['maps_y']

@@ -17,14 +17,21 @@ class Controller_Pages_Ajax extends Controller {
             $query = Model::factory('SubscribeModel')->addSubskribeLodatey($this->request->post('email'));
             Session::instance()->set('uniqid', uniqid());
 
-            $message = '<a href="http://'.$_SERVER['HTTP_HOST'].'/susses_subscribe?qid='.Session::instance()->get('uniqid').'&email='.$this->request->post('email').'">Подтвердить подписку</a>';
+
+
+            $html_mail = View::factory('email/mail_subskribe_enable');
+
+            $html_mail->message = '<a href="http://'.$_SERVER['HTTP_HOST'].'/susses_subscribe?qid='.Session::instance()->get('uniqid').'&email='.$this->request->post('email').'">Подтвердить подписку</a>';
 
             $m = Email::factory();
-            $m->From("admin@top.com"); // от кого отправляется почта
+            $m->From("TopIsraelSubscribe@top.com"); // от кого отправляется почта
             $m->To($this->request->post('email')); // кому адресованно
             $m->Subject('Подтверждение подписки');
-            $m->Body($message, "html");
+            $m->Body($html_mail, "html");
             $m->Priority(3);
+            $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/1.png", "", "image/png");
+            $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
+            //$m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/3.jpg", "", "image/jpeg");
             $m->Send();
 
             echo json_encode($query);

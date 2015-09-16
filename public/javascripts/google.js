@@ -120,7 +120,7 @@ function initMap() {
     }
 
     function getData() {
-       console.log( window.dataMapsBus);
+
         return window.dataMapsBus;
 
     }
@@ -270,7 +270,8 @@ function initMap() {
             sidebar.setAttribute('class', 'marker-sidebar');
             sidebar.appendChild(favorite);
 
-            if (luxury) {
+            if (luxury && marker.data.linkLuxury.name != null && marker.data.linkLuxury.link != null) {
+                console.log(luxury);
                 sidebar.appendChild(luxury);
             }
 
@@ -397,7 +398,7 @@ function initMap() {
 
             var $container = document.createElement('div');
             $container.setAttribute('class', 'marker-luxury');
-            $container.innerHTML = '<a href="' + (link || '#') + '" class="button" target="_blank"><span>LUXURY</span></a>';
+            $container.innerHTML = '<a href="/tags/' + (link.link || '#') + '" class="button" target="_blank"><span>'+link.name+'</span></a>';
 
             return link ? $container : false;
         };

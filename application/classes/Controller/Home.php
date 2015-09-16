@@ -15,7 +15,7 @@ class Controller_Home extends Controller_BaseController {
         //Rediset::getInstance()->flushDB();
 //        Rediset::getInstance()->set_coupon(62);
         //$data_redis = Rediset::getInstance()->get_coupon(69);
-//            HTML::x(date('Y-m-d', 1442206800));
+           // HTML::x($_SERVER);
        // Model::factory('CouponsModel')->UpdateFavoritCookie('users_relation_favorites_coup', 1, 'coupon_id');
            // Model::factory('BaseModel')->logo();
 //        $er = json_encode(array('qwe' => 'sdfsdfsdfsdfsdf', 'asd'=> 'asdasdasd'));

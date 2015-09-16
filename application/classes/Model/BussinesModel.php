@@ -1007,6 +1007,7 @@ class Model_BussinesModel extends Model_BaseModel {
         $end_result = array();
         $CatTmp = array();
         $CoupTmp = array();
+        $TagsTmp = array();
         $end_result_new = array();
         $BusTmp = array();
 
@@ -1060,6 +1061,7 @@ class Model_BussinesModel extends Model_BaseModel {
 
                         $end_result['CatArr'][] = array('CatId' => $row['CatParentId'], 'CatName' => $row['CatName'], 'CatUrl' => $row['CatUrl'], 'CatIcon' => $row['CatIcon']);
                     }
+
 
                     //купоны
                     if (!empty($row['CoupId'])) {
