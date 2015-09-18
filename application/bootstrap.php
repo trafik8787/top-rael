@@ -152,6 +152,15 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+//включение и отключение подписки и параметров
+Route::set('subscribeEnable', 'subscribe_enable')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'subscribeEnable',
+    ));
+
+//архив лотареи
 Route::set('ArhivLotery', 'arhiv_lotery')
     ->defaults(array(
         'directory' => 'Pages',

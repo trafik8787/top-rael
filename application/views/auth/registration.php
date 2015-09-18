@@ -7,7 +7,11 @@
  */
 
 ?>
-
+<style>
+    .error{
+        color: red;
+    }
+</style>
 
 <content>
     <div id="content">
@@ -38,7 +42,7 @@
 
             <hr/>
 
-            <form class="row" method="post" action="/account/registration">
+            <form class="row w-form-registration" method="post" action="/account/registration">
 
                 <div class="col-md-12">
                     <div class="form-title">Зарегистрироваться</div>
@@ -73,6 +77,19 @@
                     </div>
                     <div class="col-md-8">
                         <input type="password" name="password" class="form-control input-lg">
+                    </div>
+                </div>
+
+
+                <div class="form-group  clearfix">
+                    <div class="col-md-4">
+                        <label>Код</label>
+                    </div>
+                    <div class="col-md-8">
+                        <span style="display: inline-block;"><?=$captcha; ?></span> <input type="text" name="captcha" class="form-control input-lg" style="width: 56%;display: inline-block;"/>
+                        <?if (!empty($_GET['err_cap'])):?>
+                            <label id="captcha-error" class="error" for="captcha"><?=base64_decode($_GET['err_cap'])?></label>
+                        <?endif?>
                     </div>
                 </div>
 

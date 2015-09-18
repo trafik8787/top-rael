@@ -47,9 +47,11 @@
                             <img src="/public/uploade/no_avatar.jpg" width="60" height="60" alt="" class="img-circle"/>
                         <?endif?>
                         <div class="header-profile-info">
-                            <small>Добро пожаловать</small>
-                            <small class="profile-username"><?=$user->username?> <?=$user->secondname?></small>
-                            <a href="/account#profile">Профиль</a> <a href="/account/logout"><i class="fa fa-sign-out"></i></a>
+                            <div>
+                                <small>Добро пожаловать</small>
+                                <small class="profile-username"><?=$user->username?> <?=$user->secondname?></small>
+                                <a href="/account#profile">Профиль</a> <a href="/account/logout"><i class="fa fa-sign-out"></i></a>
+                            </div>
                         </div>
                     </div>
 
@@ -66,9 +68,10 @@
                         <img src="/public/uploade/no_avatar.jpg" width="60" height="60" alt="" class="img-circle"/>
 
                         <div class="header-profile-info">
-                            <a href="/account/login">Вход</a>
-                            <br/>
-                            <a href="/account/registration">Регистрация</a>
+                            <div>
+                                <div><a href="/account/login">Вход</a></div>
+                                <div><a href="/account/registration">Регистрация</a></div>
+                            </div>
                         </div>
                     </div>
 

@@ -79,6 +79,98 @@ $(document).ready(function(){
     });
 
 
+    $(".w-form-registration").validate({
+
+        rules:{
+
+            username:{
+                required: true,
+                minlength: 4
+            },
+
+            email:{
+                required: true,
+                email: true
+            },
+
+            password:{
+                required: true,
+                minlength: 5
+            },
+
+
+            captcha: {
+                required: true
+            }
+        },
+
+        messages:{
+
+            username:{
+                required: "Это поле обязательно для заполнения",
+                minlength: "Имя должно быть минимум 4 символа"
+            },
+
+            email:{
+                required: "Это поле обязательно для заполнения",
+                email: "Неправильный формат email"
+            },
+
+            password:{
+                required: "Это поле обязательно для заполнения",
+                minlength: "Пароль должен быть минимум 5 символов"
+            },
+
+            captcha: {
+                required: "Это поле обязательно для заполнения"
+            }
+
+        }
+
+    });
+
+
+
+    $(".w-subscribe-profile").validate({
+
+        rules:{
+
+            email:{
+                required: true,
+                email: true
+            }
+
+        },
+
+        messages:{
+
+            email:{
+                required: "Это поле обязательно для заполнения",
+                email: "Неправильный формат email"
+            }
+
+        },
+
+        submitHandler: function(form){
+
+            $.ajax({ // описываем наш запрос
+                type: "POST", // будем передавать данные через POST
+                dataType: "JSON", // указываем, что нам вернется JSON
+                url: '/subscribe_enable',
+                data: $(form).serialize(), // передаем данные из формы
+                success: function(response) { // когда получаем ответ
+                    console.log(response);
+                }
+            });
+
+            return false;
+        }
+
+    });
+
+
+
+
 
 
 

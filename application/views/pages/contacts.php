@@ -95,6 +95,9 @@
                         </div>
                         <div class="col-md-7">
                             <span style="display: inline-block;"><?=$captcha; ?></span> <input type="text" name="captcha" class="form-control input-lg" style="width: 49%;display: inline-block;"/>
+                            <?if (!empty($_GET['err_cap'])):?>
+                                <label id="captcha-error" class="error" for="captcha"><?=base64_decode($_GET['err_cap'])?></label>
+                            <?endif?>
                         </div>
                     </div>
 

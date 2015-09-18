@@ -1,44 +1,44 @@
 /* line 7, ../.sass/page.scss */
-.page .page-heading, .page-contacts .page-heading {
+.page .page-heading {
   margin-bottom: 20px;
 }
 /* line 49, ../.sass/_common-variables.scss */
-.page .page-heading:after, .page-contacts .page-heading:after {
+.page .page-heading:after {
   content: "";
   clear: both;
   display: block;
 }
 /* line 12, ../.sass/page.scss */
-.page .page-title, .page-contacts .page-title {
+.page .page-title {
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 20px;
 }
 /* line 18, ../.sass/page.scss */
-.page .page-context, .page-contacts .page-context {
+.page .page-context {
   font-size: 18px;
   margin-bottom: 20px;
 }
 /* line 23, ../.sass/page.scss */
-.page .form-title, .page-contacts .form-title {
+.page .form-title {
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 20px;
 }
 /* line 31, ../.sass/page.scss */
-.page .form-group label, .page-contacts .form-group label {
+.page .form-group label {
   padding: 10px 0;
   font-size: 18px;
   font-weight: normal;
 }
 @media (max-width: 768px) {
   /* line 31, ../.sass/page.scss */
-  .page .form-group label, .page-contacts .form-group label {
+  .page .form-group label {
     padding: 0;
   }
 }
 /* line 42, ../.sass/page.scss */
-.page .form-control, .page-contacts .form-control {
+.page .form-control {
   border: 0;
   background: #ebebeb;
   resize: none;
@@ -47,189 +47,334 @@
 /* line 49, ../.sass/page.scss */
 .page-profile {
   position: relative;
-  z-index: 1001;
-  margin-top: -20px;
-  margin-bottom: 20px;
+  z-index: 999;
+  display: table;
+  min-width: 100%;
   background: #f0f0f0;
-  padding: 20px 12px;
-}
-/* line 49, ../.sass/_common-variables.scss */
-.page-profile:after {
-  content: "";
-  clear: both;
-  display: block;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 @media (max-width: 768px) {
   /* line 49, ../.sass/page.scss */
   .page-profile {
+    display: block;
     margin-left: -15px;
     margin-right: -15px;
   }
 }
-/* line 69, ../.sass/page.scss */
-.page-profile .page-profile-avarat {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  background: #fff;
-  overflow: hidden;
-  margin-top: -60px;
-  margin-left: 15px;
-  margin-right: 15px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0 2px 3px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0 2px 3px;
-  box-shadow: rgba(0, 0, 0, 0.75) 0 2px 3px;
-  float: left;
+/* line 67, ../.sass/page.scss */
+.page-profile .profile-title {
+  font-size: 32px;
+  line-height: 1.25;
 }
-@media (max-width: 768px) {
-  /* line 69, ../.sass/page.scss */
-  .page-profile .page-profile-avarat {
-    margin: 0 0 20px 0;
-  }
+/* line 72, ../.sass/page.scss */
+.page-profile .profile-link {
+  font-size: 18px;
+  line-height: 1.25;
 }
-/* line 87, ../.sass/page.scss */
-.page-profile .page-profile-avarat img {
-  display: block;
-  width: 100%;
-  height: auto;
+/* line 77, ../.sass/page.scss */
+.page-profile .profile-tags {
+  margin: 5px -5px;
 }
-/* line 94, ../.sass/page.scss */
-.page-profile .nav-pills {
-  margin-left: -5px;
-  margin-right: -5px;
-  margin-bottom: 10px;
+/* line 81, ../.sass/page.scss */
+.page-profile .profile-tags li {
+  margin: 5px;
 }
-/* line 100, ../.sass/page.scss */
-.page-profile .nav-pills li {
-  margin: 0 5px;
-}
-/* line 104, ../.sass/page.scss */
-.page-profile .nav-pills a {
+/* line 85, ../.sass/page.scss */
+.page-profile .profile-tags a {
   color: #767676;
   background: #d6d6d6;
   font-size: 14px;
   line-height: 1.25;
   padding: 1.5px 10px;
 }
-/* line 113, ../.sass/page.scss */
-.page-profile .nav-pills a:hover {
+/* line 94, ../.sass/page.scss */
+.page-profile .profile-tags a:hover {
   color: #fff;
   background: #007898;
 }
-/* line 120, ../.sass/page.scss */
-.page-profile .page-profile-link {
-  font-size: 18px;
-  line-height: 1.1;
-  margin-bottom: 20px;
-}
-/* line 126, ../.sass/page.scss */
-.page-profile .page-profile-content {
-  width: 60%;
-  padding: 0 36px 0 12px;
-}
-/* line 131, ../.sass/page.scss */
-.page-profile .page-profile-sidebar {
-  width: 40%;
-  position: relative;
-  left: -1px;
-  padding: 0 12px 0 36px;
-}
-/* line 49, ../.sass/_common-variables.scss */
-.page-profile .page-profile-body:after {
-  content: "";
-  clear: both;
-  display: block;
-}
-/* line 142, ../.sass/page.scss */
-.page-profile .page-profile-body .page-profile-content {
-  padding-top: 5px;
-  border-right: 1px solid #a6a6a6;
-}
-/* line 147, ../.sass/page.scss */
-.page-profile .page-profile-body .page-profile-sidebar {
-  padding-top: 5px;
-  border-left: 1px solid #a6a6a6;
-}
-/* line 152, ../.sass/page.scss */
-.page-profile .page-profile-body .page-profile-title {
-  font-size: 32px;
-  line-height: 1.1;
-}
-/* line 161, ../.sass/page.scss */
-.page-profile .page-profile-body,
-.page-profile .page-profile-footer {
-  padding-bottom: 5px;
-  position: relative;
-  overflow: hidden;
-}
-/* line 49, ../.sass/_common-variables.scss */
-.page-profile .page-profile-body:after,
-.page-profile .page-profile-footer:after {
-  content: "";
-  clear: both;
-  display: block;
+/* line 101, ../.sass/page.scss */
+.page-profile .profile-media {
+  display: table-cell;
+  vertical-align: top;
+  padding-right: 20px;
+  width: 200px;
 }
 @media (max-width: 768px) {
-  /* line 161, ../.sass/page.scss */
-  .page-profile .page-profile-body,
-  .page-profile .page-profile-footer {
-    width: 100%;
-    overflow: visible;
+  /* line 101, ../.sass/page.scss */
+  .page-profile .profile-media {
+    display: block;
     padding: 0;
-  }
-}
-/* line 178, ../.sass/page.scss */
-.page-profile .page-profile-content,
-.page-profile .page-profile-sidebar {
-  float: left;
-}
-@media (max-width: 768px) {
-  /* line 178, ../.sass/page.scss */
-  .page-profile .page-profile-content,
-  .page-profile .page-profile-sidebar {
-    width: 100%;
-    padding: 0 !important;
-    border: 0 !important;
-    position: static;
     margin-bottom: 10px;
   }
 }
+/* line 114, ../.sass/page.scss */
+.page-profile .profile-media .profile-avatar {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  overflow: hidden;
+  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0 2px 3px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0 2px 3px;
+  box-shadow: rgba(0, 0, 0, 0.75) 0 2px 3px;
+}
+/* line 124, ../.sass/page.scss */
+.page-profile .profile-media .profile-avatar img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: auto;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+/* line 137, ../.sass/page.scss */
+.page-profile .profile-body {
+  display: table-cell;
+  vertical-align: top;
+}
+/* line 141, ../.sass/page.scss */
+.page-profile .profile-body .profile-content,
+.page-profile .profile-body .profile-footer {
+  display: table;
+  width: 100%;
+}
+/* line 146, ../.sass/page.scss */
+.page-profile .profile-body .profile-content .profile-context,
+.page-profile .profile-body .profile-content .profile-sidebar,
+.page-profile .profile-body .profile-footer .profile-context,
+.page-profile .profile-body .profile-footer .profile-sidebar {
+  display: table-cell;
+  vertical-align: top;
+  padding: 5px 0;
+}
+/* line 153, ../.sass/page.scss */
+.page-profile .profile-body .profile-content .profile-context,
+.page-profile .profile-body .profile-footer .profile-context {
+  width: 60%;
+  padding-right: 30px;
+}
+/* line 158, ../.sass/page.scss */
+.page-profile .profile-body .profile-content .profile-sidebar,
+.page-profile .profile-body .profile-footer .profile-sidebar {
+  width: 40%;
+  padding-left: 30px;
+}
+/* line 165, ../.sass/page.scss */
+.page-profile .profile-body .profile-content .profile-context {
+  border-right: 1px solid #a6a6a6;
+}
+@media (max-width: 768px) {
+  /* line 137, ../.sass/page.scss */
+  .page-profile .profile-body {
+    display: block;
+  }
+  /* line 177, ../.sass/page.scss */
+  .page-profile .profile-body .profile-content .profile-context,
+  .page-profile .profile-body .profile-content .profile-sidebar,
+  .page-profile .profile-body .profile-footer .profile-context,
+  .page-profile .profile-body .profile-footer .profile-sidebar {
+    display: block;
+    width: auto;
+    padding-left: 0;
+    padding-right: 0;
+    border: 0;
+  }
+}
+/* line 189, ../.sass/page.scss */
+.primary-gallery + .page-profile {
+  margin-top: -20px;
+}
+@media (min-width: 768px) {
+  /* line 193, ../.sass/page.scss */
+  .primary-gallery + .page-profile .profile-media .profile-avatar {
+    margin-top: -60px;
+  }
+}
 
-/* line 193, ../.sass/page.scss */
+/*
+.page-profile {
+
+  position: relative;
+
+  z-index: 1001;
+
+  margin-top: ($margin-bottom-base*-1);
+  margin-bottom: $margin-bottom-base;
+
+  background: #f0f0f0;
+
+  padding: $padding-base-big $padding-base-horizontal;
+
+  @include clear-after;
+
+  @media (max-width: 768px) {
+    margin-left: ($margin-horizontal-base*-1);
+    margin-right: ($margin-horizontal-base*-1);
+  }
+
+  .page-profile-avarat {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background: $color-white;
+    overflow: hidden;
+
+    margin-top: ((40+$margin-bottom-base)*-1);
+    margin-left: $margin-horizontal-base;
+    margin-right: $margin-horizontal-base;
+
+    @include box-shadow(rgba(0, 0, 0, 0.75) 0 2px 3px);
+    @include pull-left;
+
+    @media (max-width: 768px) {
+      margin: 0 0 $margin-bottom-base 0;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .nav-pills {
+
+    margin-left: -5px;
+    margin-right: -5px;
+    margin-bottom: 10px;
+
+    li {
+      margin: 0 5px;
+    }
+
+    a {
+      color: #767676;
+      background: #d6d6d6;
+
+      font-size: 14px;
+      line-height: 1.25;
+
+      padding: 1.5px 10px;
+
+      &:hover {
+        color: $color-white;
+        background: $link-color;
+      }
+    }
+  }
+
+  .page-profile-link {
+    font-size: 18px;
+    line-height: 1.1;
+    margin-bottom: $margin-bottom-base;
+  }
+
+  .page-profile-content {
+    width: 60%;
+    padding: 0 ($padding-base-horizontal*3) 0 $padding-base-horizontal;
+  }
+
+  .page-profile-sidebar {
+    width: 40%;
+    position: relative;
+    left: -1px;
+    padding: 0 $padding-base-horizontal 0 ($padding-base-horizontal*3);
+  }
+
+  .page-profile-body {
+
+    @include clear-after;
+
+    .page-profile-content {
+      padding-top: 5px;
+      border-right: 1px solid #a6a6a6;
+    }
+
+    .page-profile-sidebar {
+      padding-top: 5px;
+      border-left: 1px solid #a6a6a6;
+    }
+
+    .page-profile-title {
+      font-size: 32px;
+      line-height: 1.1;
+    }
+  }
+
+  .page-profile-footer {
+  }
+
+  .page-profile-body,
+  .page-profile-footer {
+
+    padding-bottom: 5px;
+
+    position: relative;
+    overflow: hidden;
+
+    @include clear-after;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      overflow: visible;
+      padding: 0;
+    }
+  }
+
+  .page-profile-content,
+  .page-profile-sidebar {
+
+    @include pull-left;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 0 !important;
+      border: 0 !important;
+      position: static;
+      margin-bottom: ($margin-bottom-base / 2);
+    }
+  }
+}
+
 .page-contacts {
+
+  @extend .page !optional;
+  @extend .inner-100 !optional;
+
   border: 1px solid #e7e7e7;
   width: 65%;
   margin: 0 auto;
-  background: url("../images/sky.jpg") no-repeat;
-}
-@media (max-width: 768px) {
-  /* line 193, ../.sass/page.scss */
-  .page-contacts {
+  background: url('../images/sky.jpg') no-repeat;
+
+  @media (max-width: 768px) {
     padding: 15px !important;
-    margin-left: -15px;
-    margin-right: -15px;
-    border: 0;
+    margin-left:-15px;
+    margin-right:-15px;
+    border:0;
     width: auto;
   }
-}
-/* line 211, ../.sass/page.scss */
-.page-contacts .icons.plane {
-  margin-bottom: -20px;
-  position: relative;
-  bottom: -20px;
-  float: right;
-}
-/* line 218, ../.sass/page.scss */
-.page-contacts .page-title {
-  font-size: 35px;
-}
-/* line 222, ../.sass/page.scss */
-.page-contacts .form-title {
-  margin-bottom: 40px;
-}
-@media (max-width: 768px) {
-  /* line 222, ../.sass/page.scss */
-  .page-contacts .form-title {
-    margin-bottom: 20px;
+
+  .icons.plane {
+    margin-bottom: ($margin-bottom-base*-1);
+    position: relative;
+    bottom: ($margin-bottom-base*-1);
+    @include pull-right;
+  }
+
+  .page-title {
+    font-size: 35px;
+  }
+
+  .form-title {
+    margin-bottom: ($margin-bottom-base*2);
+
+    @media (max-width: 768px) {
+      margin-bottom: $margin-bottom-base;
+    }
   }
 }
+*/

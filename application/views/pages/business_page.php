@@ -150,36 +150,41 @@
         <div class="page-profile">
 
             <?if (!empty($data['BusLogo'])):?>
-                <div class="page-profile-avarat"><img src="<?=$data['BusLogo']?>" width="88" height="88" alt="<?=$data['BusName']?>"/></div>
-            <?endif?>
-            <div class="page-profile-body">
-
-                <div class="page-profile-content">
-
-                    <div class="page-profile-title"><?=$data['BusName']?></div>
-
-                    <div class="page-profile-link">
-                        <?if(!empty($data['BusWebsite'])):?>
-                            <?$web_url = parse_url($data['BusWebsite'])?>
-                            <a target="_blank" href="<?=$data['BusWebsite']?>">http://<?=$web_url['host']?></a>
-                        <?endif?>
-                    </div>
-
-                    <ul class="nav nav-pills">
-                        <?foreach ($data['CatArr'] as $row_cat_arr):?>
-                            <li><a href="/section/<?=$row_cat_arr['CatUrl']?>"><?=$row_cat_arr['CatName']?></a></li>
-                        <?endforeach?>
-
-                        <?if (!empty($data['TagArr'])):?>
-                            <?foreach ($data['TagArr'] as $tags):?>
-                                <li><a href="/tags/<?=$tags['TagUrl']?>" class="button"><span><?=$tags['TagName']?></span></a></li>
-                            <?endforeach?>
-                        <?endif?>
-                    </ul>
-
+                <div class="profile-media">
+                    <div class="profile-avatar"><img src="<?=$data['BusLogo']?>" width="235" height="128" alt="<?=$data['BusName']?>"/></div>
                 </div>
 
-                <div class="page-profile-sidebar">
+            <?endif?>
+            <div class="profile-body">
+
+                <div class="profile-content">
+
+                    <div class="profile-context">
+
+                        <div class="profile-title"><?=$data['BusName']?></div>
+
+                        <div class="profile-link">
+                            <?if(!empty($data['BusWebsite'])):?>
+                                <?$web_url = parse_url($data['BusWebsite'])?>
+                                <a target="_blank" href="<?=$data['BusWebsite']?>">http://<?=$web_url['host']?></a>
+                            <?endif?>
+                        </div>
+
+                        <ul class="nav nav-pills profile-tags">
+                            <?foreach ($data['CatArr'] as $row_cat_arr):?>
+                                <li><a href="/section/<?=$row_cat_arr['CatUrl']?>"><?=$row_cat_arr['CatName']?></a></li>
+                            <?endforeach?>
+
+                            <?if (!empty($data['TagArr'])):?>
+                                <?foreach ($data['TagArr'] as $tags):?>
+                                    <li><a href="/tags/<?=$tags['TagUrl']?>" class="button"><span><?=$tags['TagName']?></span></a></li>
+                                <?endforeach?>
+                            <?endif?>
+                        </ul>
+                    </div>
+
+
+                    <div class="profile-sidebar">
 
                         <span class="tabs">
                             <p class="tabs__caption">
@@ -202,48 +207,50 @@
                                 <?if (!empty($data['BusDopAddress'])):?>
                                     <?foreach ($data['BusDopAddress'] as $key => $dop_adress_address):?>
 
-                                         <p class="tabs__content">
+                                         <span class="tabs__content">
                                              Адрес: <?=isset($dop_adress_address['address']) ? $dop_adress_address['address'] : ''?><br/>
                                              Тел: <?=isset($dop_adress_address['tel_dop_adress']) ? $dop_adress_address['tel_dop_adress'] : ''?><br/>
                                              <?=isset($dop_adress_address['dop_sheduler']) ? $dop_adress_address['dop_sheduler'] : ''?>
-                                         </p>
+                                         </span>
                                     <?endforeach?>
                                 <?endif?>
                             </span>
 
                         </span>
-
+                    </div>
 
                 </div>
 
 
-            </div>
+                <div class="profile-footer">
 
-            <div class="page-profile-footer">
-                <div class="page-profile-content">
+                    <div class="profile-context">
 
-                    <?if (!empty($data['bussines_favorit']))://если купон добавлен в избранное?>
-                        <a href="#" class="pin-aria">
+                        <?if (!empty($data['bussines_favorit']))://если купон добавлен в избранное?>
+                            <a href="#" class="pin-aria">
                             <span class="pin" data-toggle="tooltip" data-placement="right" title="Этот бизнес уже добавлен в Избранное" style="background-color: #ccc">
                                 <i class="fa fa-star"></i>
                             </span><span class="w-text-bus-page">В избранном</span>
-                        </a>
-                    <?else:?>
-                        <a href="#" class="pin-aria w-add-bussines-page-favor" data-id="<?=$data['BusId']?>">
+                            </a>
+                        <?else:?>
+                            <a href="#" class="pin-aria w-add-bussines-page-favor" data-id="<?=$data['BusId']?>">
                             <span class="pin" data-toggle="tooltip" data-placement="right">
                                 <i class="fa fa-star"></i>
                             </span><span class="w-text-bus-page">Добавить в избраные места</span>
+                            </a>
+                        <?endif?>
+                    </div>
+
+                    <div class="profile-sidebar">
+
+                        <a href="/maps?id=<?=$data['BusId']?>" class="pin-aria">
+                            <span class="pin"><i class="fa fa-map-marker"></i></span>Посмотреть на карте
                         </a>
-                    <?endif?>
-
+                    </div>
                 </div>
 
-                <div class="page-profile-sidebar">
-                    <a href="/maps?id=<?=$data['BusId']?>" class="pin-aria">
-                        <span class="pin"><i class="fa fa-map-marker"></i></span>Посмотреть на карте
-                    </a>
-                </div>
             </div>
+
 
         </div>
 

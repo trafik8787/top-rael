@@ -61,12 +61,11 @@ class Controller_Pages_Account extends Controller_BaseController {
 
 
 
-        if (!$data->user = Auth::instance()->get_user()) // если пользователь не авторизован
+        if ($data->user = Auth::instance()->get_user()) // если пользователь не авторизован
         {
 
-           // $this->redirect('/account/registration'); // редиректим на страницу с регистрацией
-        } else {
             $data->photo = Auth::instance()->get_user()->photo;
+            $bloc_sndmail->user = Auth::instance()->get_user();
         }
 
         $data->panel_subscribe = $bloc_sndmail;
@@ -164,41 +163,47 @@ class Controller_Pages_Account extends Controller_BaseController {
         {
             try {
 
-                // производим проверку всех полей
-                $object = Validation::factory($this->request->post());
-                $object
-                    ->rule('username', 'not_empty')
-                    ->rule('username', 'min_length', array(':value', '4'))
-                    ->rule('password', 'not_empty')
-                    ->rule('password', 'min_length', array(':value', '5'))
-                    ->rule('email', 'email');
+                if (Captcha::valid($this->request->post('captcha'))) {
 
-                $user = ORM::factory('User') // если проверка пройдена - регистрируем
-                ->set('email', $this->request->post('email'))
-                    ->set('username', $this->request->post('username'))
-                    ->set('password', $this->request->post('password'))
-                    ->set('id_role', 1)
-                    ->save();
+                    // производим проверку всех полей
+                    $object = Validation::factory($this->request->post());
+                    $object
+                        ->rule('username', 'not_empty')
+                        ->rule('username', 'min_length', array(':value', '4'))
+                        ->rule('password', 'not_empty')
+                        ->rule('password', 'min_length', array(':value', '5'))
+                        ->rule('email', 'email');
 
-                // даем новому пользователю роль для логина
-                $user->add('roles', ORM::factory('Role', array('name' => 'login')));
+                    $user = ORM::factory('User')// если проверка пройдена - регистрируем
+                    ->set('email', $this->request->post('email'))
+                        ->set('username', $this->request->post('username'))
+                        ->set('password', $this->request->post('password'))
+                        ->set('id_role', 1)
+                        ->save();
 
-                // очищаем массив с POST
-                $_POST = array();
+                    // даем новому пользователю роль для логина
+                    $user->add('roles', ORM::factory('Role', array('name' => 'login')));
+
+                    // очищаем массив с POST
+                    $_POST = array();
 
 
-                $message = 'Вы успешно зарегистрировались с паролем - '.$this->request->post('password');
+                    $message = 'Вы успешно зарегистрировались с паролем - ' . $this->request->post('password');
 
-                $m = Email::factory();
-                $m->From("registr@top.com"); // от кого отправляется почта
-                $m->To($this->request->post('email')); // кому адресованно
-                $m->Subject(Kohana::message('account', 'email.themes.registration'));
-                $m->Body($message, "html");
-                $m->Priority(3);
-                $m->Send();
+                    $m = Email::factory();
+                    $m->From("registr@top.com"); // от кого отправляется почта
+                    $m->To($this->request->post('email')); // кому адресованно
+                    $m->Subject(Kohana::message('account', 'email.themes.registration'));
+                    $m->Body($message, "html");
+                    $m->Priority(3);
+                    $m->Send();
 
-                Auth::instance()->force_login($user); // сразу же авторизуем его, без ввода логина и пароля
-                HTTP::redirect('/account/');
+                    Auth::instance()->force_login($user); // сразу же авторизуем его, без ввода логина и пароля
+                    HTTP::redirect('/account/');
+
+                } else {
+                    $this->redirect('/account/registration?err_cap='.base64_encode('Неверно введен код'));
+                }
 
             } catch (ORM_Validation_Exception $e) {
 
@@ -210,6 +215,8 @@ class Controller_Pages_Account extends Controller_BaseController {
         }
         $data->email = array_key_exists('email', $this->request->post()) ? htmlspecialchars($this->request->post('email')) : '';
         $data->username = array_key_exists('username', $this->request->post()) ? htmlspecialchars($this->request->post('username')) : '';     // вставляем данные в формы, если они были введены
+
+        $data->captcha = Captcha::instance();
 
         $ulogin = Ulogin::factory();
         $data->ulogin = $ulogin->render();  // рисуем значки соц.сетей

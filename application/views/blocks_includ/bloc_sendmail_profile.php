@@ -7,7 +7,12 @@
  */
 
 ?>
-
+<style>
+    .error{
+        color: red;
+        font-size: 18px;
+    }
+</style>
 <div class="panel panel-subscribe settings">
 
 
@@ -15,7 +20,9 @@
 
         <div class="panel-title">
             <strong>Настройки почтовой рассылки</strong><br/>
+            <?if (!empty($user)):?>
             <small><i>Выберите подходящие вам параметры</i></small>
+            <?endif?>
         </div>
 
     </div>
@@ -23,80 +30,83 @@
 
     <div class="panel-body">
         <div class="col-md-12">
-            <form method="">
+            <form class="w-subscribe-profile" method="post">
 
-                <strong>Что вам инетересно?</strong>
+                <?if (!empty($user)):?>
+                    <strong>Что вам инетересно?</strong>
 
-                <div class="checkbox-container">
+                    <div class="checkbox-container">
 
-                    <div class="checkbox">
+                        <div class="checkbox">
 
-                        <label>
-                            <div class="form-control input-lg">
-                                <input type="checkbox" value="" checked="checked">
-                                <i class="input-icon fa fa-check"></i>
-                            </div>
+                            <label>
+                                <div class="form-control input-lg">
+                                    <input type="checkbox" value="" checked="checked">
+                                    <i class="input-icon fa fa-check"></i>
+                                </div>
 
-                            Купоны
-                        </label>
+                                Купоны
+                            </label>
 
-                        <label>
-                            <div class="form-control input-lg">
-                                <input type="checkbox" value="" checked="checked">
-                                <i class="input-icon fa fa-check"></i>
-                            </div>
+                            <label>
+                                <div class="form-control input-lg">
+                                    <input type="checkbox" value="" checked="checked">
+                                    <i class="input-icon fa fa-check"></i>
+                                </div>
 
-                            Обзоры
-                        </label>
+                                Обзоры
+                            </label>
 
 
-                        <label>
-                            <div class="form-control input-lg">
-                                <input type="checkbox" value="">
-                                <i class="input-icon fa fa-check"></i>
-                            </div>
+                            <label>
+                                <div class="form-control input-lg">
+                                    <input type="checkbox" value="">
+                                    <i class="input-icon fa fa-check"></i>
+                                </div>
 
-                            Рестораны
-                        </label>
+                                Рестораны
+                            </label>
 
-                        <label>
-                            <div class="form-control input-lg">
-                                <input type="checkbox" value="">
-                                <i class="input-icon fa fa-check"></i>
-                            </div>
+                            <label>
+                                <div class="form-control input-lg">
+                                    <input type="checkbox" value="">
+                                    <i class="input-icon fa fa-check"></i>
+                                </div>
 
-                            Покупки
-                        </label>
+                                Покупки
+                            </label>
 
-                        <label>
-                            <div class="form-control input-lg">
-                                <input type="checkbox" value="">
-                                <i class="input-icon fa fa-check"></i>
-                            </div>
+                            <label>
+                                <div class="form-control input-lg">
+                                    <input type="checkbox" value="">
+                                    <i class="input-icon fa fa-check"></i>
+                                </div>
 
-                            Красота
-                        </label>
+                                Красота
+                            </label>
 
-                        <label>
-                            <div class="form-control input-lg">
-                                <input type="checkbox" value="" checked="checked">
-                                <i class="input-icon fa fa-check"></i>
-                            </div>
+                            <label>
+                                <div class="form-control input-lg">
+                                    <input type="checkbox" value="" checked="checked">
+                                    <i class="input-icon fa fa-check"></i>
+                                </div>
 
-                            Отдых
-                        </label>
+                                Отдых
+                            </label>
 
-                        <label>
-                            <div class="form-control input-lg">
-                                <input type="checkbox" value="">
-                                <i class="input-icon fa fa-check"></i>
-                            </div>
+                            <label>
+                                <div class="form-control input-lg">
+                                    <input type="checkbox" value="">
+                                    <i class="input-icon fa fa-check"></i>
+                                </div>
 
-                            Отели
-                        </label>
+                                Отели
+                            </label>
+                        </div>
+
                     </div>
 
-                </div>
+                <?endif?>
 
                 <div class="row">
 
@@ -106,7 +116,7 @@
 
                             <label>
                                 <div class="form-control input-lg">
-                                    <input type="radio" value="" name="test" checked="checked">
+                                    <input type="radio" value="1" name="subscrib_disable" checked="checked">
                                     <i class="input-icon fa fa-circle"></i>
                                 </div>
 
@@ -119,7 +129,7 @@
 
                             <label>
                                 <div class="form-control input-lg">
-                                    <input type="radio" value="" name="test">
+                                    <input type="radio" value="0" name="subscrib_disable">
                                     <i class="input-icon fa fa-circle"></i>
                                 </div>
 
@@ -136,7 +146,7 @@
 
                         <div class="input-group">
 
-                            <input type="text" class="form-control input-lg"/>
+                            <input type="email" name="email" class="form-control input-lg"/>
 
                             <div class="input-group-addon">
                                 <button type="submit" class="btn btn-lg btn-danger">Отправить</button>

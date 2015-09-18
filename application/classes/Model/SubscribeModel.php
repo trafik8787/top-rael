@@ -31,4 +31,14 @@ class Model_SubscribeModel extends Model_BaseModel {
 
     }
 
+
+    public function updateSubskribEmail($post){
+
+        DB::update('subscription')
+            ->set(array('enable_all' => $post['subscrib_disable']))
+            ->where('action', '=', 1)
+            ->and_where('email','=', $post['email'])
+            ->execute();
+    }
+
 }
