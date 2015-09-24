@@ -708,7 +708,7 @@ class Cruds extends Controller_Core_Main {
 
             if ($field_rows['template_relation'] != null) {
 
-                if (isset($field_rows['template_relation'][3])){
+                if (!empty($field_rows['template_relation'][3])){
                     $where_relation = $field_rows['template_relation'][3];
                 } else {
                     $where_relation = null;
@@ -761,6 +761,7 @@ class Cruds extends Controller_Core_Main {
 
     //выборка из таблицы набора значений
     public function relation_one ($Table, $field2, $field_value, $where_field) {
+
         $this->relation_one = Model::factory('All')->get_table_relativ($Table, $field2, $field_value, $where_field);
         return $this->relation_one;
     }

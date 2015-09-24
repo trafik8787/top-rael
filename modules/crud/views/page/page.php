@@ -102,6 +102,8 @@
 
                 }
             },
+
+            "bStateSave": true,
             //после выполнения ajax запроса
             "fnInitComplete" : function () {
 

@@ -435,7 +435,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $query = DB::select('user_id')->from('roles_users')->where('role_id','=', 4)->execute()->as_array();
         $arr_user = array();
-
+       // die(HTML::x($query));
         if (!empty($query)) {
             foreach ($query as $row_user) {
                 $arr_user[] = $row_user['user_id'];

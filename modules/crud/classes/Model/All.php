@@ -538,7 +538,7 @@ class Model_All extends Model
 
         $this->get_pars_string($field);
 
-        if ($wheres_arr == null) {
+        if ($wheres_arr === null) {
 
             $query = DB::select()
                 ->from($Table)
@@ -551,12 +551,16 @@ class Model_All extends Model
                 $wheres_arr[2] = Cruds::$id;
             }
 
-            $query = DB::select()
-                ->from($Table)
-                ->cached()
-                ->where($wheres_arr[0], $wheres_arr[1], $wheres_arr[2])
-                ->execute()
-                ->as_array();
+            if (!empty($wheres_arr[2])) {
+                $query = DB::select()
+                    ->from($Table)
+                    ->cached()
+                    ->where($wheres_arr[0], $wheres_arr[1], $wheres_arr[2])
+                    ->execute()
+                    ->as_array();
+            } else {
+                $query = array();
+            }
 
         }
 

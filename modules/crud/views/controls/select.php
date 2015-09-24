@@ -168,7 +168,9 @@
                     <?endif?>
                 <?endforeach?>
             <?else:?>
-                <option value="<?=$value_fild?>"><?=$value_fild?></option>
+                <?if (!empty($value_fild)):?>
+                     <option value="<?=$value_fild?>"><?=$value_fild?></option>
+                <?endif?>
             <?endif?>
         </select>
 
