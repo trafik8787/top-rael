@@ -137,9 +137,9 @@ class Controller_Pages_Ajax extends Controller {
     //включение и отключение рассылки из профиля
     public function action_subscribeEnable(){
 
-        Model::factory('SubscribeModel')->updateSubskribEmail($this->request->post());
+        $query = Model::factory('SubscribeModel')->updateSubskribEmail($this->request->post());
 
-        echo json_encode($this->request->post());
+        echo json_encode($query);
 
     }
 
@@ -167,6 +167,8 @@ class Controller_Pages_Ajax extends Controller {
 
         //каждый четверг
         if (date('l') == 'Thursday') {
+
+            $data = View::factory('email/mail');
 
         }
 

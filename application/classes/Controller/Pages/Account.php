@@ -61,11 +61,12 @@ class Controller_Pages_Account extends Controller_BaseController {
 
 
 
-        if ($data->user = Auth::instance()->get_user()) // если пользователь не авторизован
+        if ($data->user = Auth::instance()->get_user()) // если пользователь авторизован
         {
 
             $data->photo = Auth::instance()->get_user()->photo;
             $bloc_sndmail->user = Auth::instance()->get_user();
+            $bloc_sndmail->generall_menu = parent::$general_meny;
         }
 
         $data->panel_subscribe = $bloc_sndmail;
@@ -187,16 +188,8 @@ class Controller_Pages_Account extends Controller_BaseController {
                     // очищаем массив с POST
                     $_POST = array();
 
-
-                    $message = 'Вы успешно зарегистрировались с паролем - ' . $this->request->post('password');
-
-                    $m = Email::factory();
-                    $m->From("registr@top.com"); // от кого отправляется почта
-                    $m->To($this->request->post('email')); // кому адресованно
-                    $m->Subject(Kohana::message('account', 'email.themes.registration'));
-                    $m->Body($message, "html");
-                    $m->Priority(3);
-                    $m->Send();
+                    //отправляем письмо про регистрацию
+                    $this->SendMailRegistration($this->request->post('email'));
 
                     Auth::instance()->force_login($user); // сразу же авторизуем его, без ввода логина и пароля
                     HTTP::redirect('/account/');
@@ -400,6 +393,25 @@ class Controller_Pages_Account extends Controller_BaseController {
     }
 
 
+    /**
+     * @param $email
+     * отправка письма при успешной регистрации
+     */
+    private function SendMailRegistration($email){
 
+        $html_mail = View::factory('email/mail_registration');
+
+        $m = Email::factory();
+        $m->From("TopIsraelSubscribe@top.com"); // от кого отправляется почта
+        $m->To($email); // кому адресованно
+        $m->Subject('Подтверждение подписки');
+        $m->Body($html_mail, "html");
+        $m->Priority(3);
+        $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/1.png", "", "image/png");
+        $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
+        //$m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/3.jpg", "", "image/jpeg");
+        $m->Send();
+    }
+    
 
 }

@@ -41,7 +41,7 @@
 
                             <label>
                                 <div class="form-control input-lg">
-                                    <input type="checkbox" value="" checked="checked">
+                                    <input type="checkbox" name="coupons" value="1" checked="checked">
                                     <i class="input-icon fa fa-check"></i>
                                 </div>
 
@@ -50,58 +50,25 @@
 
                             <label>
                                 <div class="form-control input-lg">
-                                    <input type="checkbox" value="" checked="checked">
+                                    <input type="checkbox" name="articles" value="1" >
                                     <i class="input-icon fa fa-check"></i>
                                 </div>
 
                                 Обзоры
                             </label>
 
+                            <?if (!empty($generall_menu)):?>
+                                <?foreach ($generall_menu as $rows_meny):?>
+                                    <label>
+                                        <div class="form-control input-lg">
+                                            <input type="checkbox" name="<?=$rows_meny['url']?>" value="<?=$rows_meny['id']?>">
+                                            <i class="input-icon fa fa-check"></i>
+                                        </div>
+                                        <?=$rows_meny['name']?>
+                                    </label>
+                                <?endforeach?>
+                            <?endif?>
 
-                            <label>
-                                <div class="form-control input-lg">
-                                    <input type="checkbox" value="">
-                                    <i class="input-icon fa fa-check"></i>
-                                </div>
-
-                                Рестораны
-                            </label>
-
-                            <label>
-                                <div class="form-control input-lg">
-                                    <input type="checkbox" value="">
-                                    <i class="input-icon fa fa-check"></i>
-                                </div>
-
-                                Покупки
-                            </label>
-
-                            <label>
-                                <div class="form-control input-lg">
-                                    <input type="checkbox" value="">
-                                    <i class="input-icon fa fa-check"></i>
-                                </div>
-
-                                Красота
-                            </label>
-
-                            <label>
-                                <div class="form-control input-lg">
-                                    <input type="checkbox" value="" checked="checked">
-                                    <i class="input-icon fa fa-check"></i>
-                                </div>
-
-                                Отдых
-                            </label>
-
-                            <label>
-                                <div class="form-control input-lg">
-                                    <input type="checkbox" value="">
-                                    <i class="input-icon fa fa-check"></i>
-                                </div>
-
-                                Отели
-                            </label>
                         </div>
 
                     </div>

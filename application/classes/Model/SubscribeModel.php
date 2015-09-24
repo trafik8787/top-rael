@@ -32,13 +32,18 @@ class Model_SubscribeModel extends Model_BaseModel {
     }
 
 
+    //управление подпиской из профиля
     public function updateSubskribEmail($post){
 
-        DB::update('subscription')
+        return DB::update('subscription')
             ->set(array('enable_all' => $post['subscrib_disable']))
             ->where('action', '=', 1)
             ->and_where('email','=', $post['email'])
             ->execute();
     }
 
+
+    public function getSubskribe(){
+        
+    }
 }

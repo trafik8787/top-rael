@@ -82,7 +82,7 @@
 
                     <?if (!empty($user->bdate)):?>
                         <div class="user-object">
-                            <small>Добро пожаловать</small>
+                            <small>Год рождения</small>
                             <strong>
                                 <?=$user->bdate?>
                             </strong>
@@ -96,10 +96,10 @@
                         </div>
                     <?endif?>
 
-                    <div class="user-object">
-                        <small>Семейное положение</small>
-                        <strong>Замужем</strong>
-                    </div>
+<!--                    <div class="user-object">-->
+<!--                        <small>Семейное положение</small>-->
+<!--                        <strong>Замужем</strong>-->
+<!--                    </div>-->
 
                     <div class="user-object user-logout">
                         <a href="/account/logout" class="btn btn-primary btn-lg pin-aria">
