@@ -1132,13 +1132,16 @@ class Model_BussinesModel extends Model_BaseModel {
                 $result = $new_result;
             }
 
-
-            $key_rand = array_rand($result, 4);
-
             $resultNew = array();
-            foreach ($key_rand as $row) {
-                $resultNew[] = $result[$row];
+            if (count($result) <= 4) {
+                $resultNew = $result;
+            } else {
+                $key_rand = array_rand($result, 4);
+                foreach ($key_rand as $row) {
+                    $resultNew[] = $result[$row];
+                }
             }
+
 
         } else {
             $resultNew = array();

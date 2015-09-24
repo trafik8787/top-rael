@@ -12,6 +12,7 @@
     $(function () {
         var hash = window.location.hash;
         hash && $('ul.pull-left a[href="' + hash + '"]').tab('show');
+        hash && $('ul.pull-right a[href="' + hash + '"]').tab('show');
 
 
 

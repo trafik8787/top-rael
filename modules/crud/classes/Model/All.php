@@ -551,7 +551,7 @@ class Model_All extends Model
                 $wheres_arr[2] = Cruds::$id;
             }
 
-            if (!empty($wheres_arr[2])) {
+            if (!empty($wheres_arr[2]) OR $wheres_arr[2] == '0') {
                 $query = DB::select()
                     ->from($Table)
                     ->cached()

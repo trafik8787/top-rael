@@ -883,7 +883,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('password', 'password');
         $crud->set_field_type('email', 'email');
 
-        $crud->show_columns('id', 'email', 'username', 'date_registration');
+        $crud->show_columns('id', 'email', 'username','id_role', 'date_registration');
         $crud->set_field_type('sex', 'select', array('m' => 'Мужчина', 'j' => 'Женщина'), '', '', '');
 
         if (Session::instance()->get('customer_id') == 1) {
@@ -902,6 +902,7 @@ class Controller_Administrator extends Controller_Core_Main {
             $crud->callback_after_insert('call_after_insert_userBusines');
 
         } else {
+
             $crud->select_multiselect('id_role');
             $crud->set_one_to_many('roles_users', 'id_role','role_id', 'user_id');
             $crud->add_field('email', 'username', 'secondname', 'password', 'id_role');
@@ -911,6 +912,17 @@ class Controller_Administrator extends Controller_Core_Main {
             $crud->callback_before_edit('call_befor_edit_userAdmin');
             $crud->callback_after_edit('call_after_edit_userAdmin');
         }
+
+
+
+        //метод подставляет значения в таблицу из другой таблицы по join
+        /**
+         * 'business_id' - поле текущей таблицы
+         * 'business' - другая таблица из которой будем брать данные
+         * 'name' - поле из которого будем брать
+         * 'id' - поле по которому будем джойнить с 'business_id'
+         */
+        $crud->show_name_old_table('id_role', 'roles', 'description', 'id');
 
 
 

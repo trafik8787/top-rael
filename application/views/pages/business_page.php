@@ -201,7 +201,9 @@
                             <span>
                                  <p class="tabs__content active">
                                      Адрес: <?=$data['BusAddress']?><br/>
-                                     Тел: <?=$data['BusTel']?><br/>
+                                     <?if ($data['BusTel'] != ''):?>
+                                        Тел: <?=$data['BusTel']?><br/>
+                                     <?endif?>
                                      <?=$data['BusSchedule']?>
                                  </p>
                                 <?if (!empty($data['BusDopAddress'])):?>
