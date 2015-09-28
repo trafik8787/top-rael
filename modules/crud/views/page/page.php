@@ -1,7 +1,15 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?>
 
 
+
 <script>
+
+    //делаем сброс локального хранилища где содержится номер страницы в админке
+    if (localStorage.getItem('url_position') != '<?=$_SERVER['REQUEST_URI']?>') {
+        localStorage.clear();
+        localStorage.setItem('url_position', '<?=$_SERVER['REQUEST_URI']?>');
+    }
+
 
 
     $(document).ready( function () {

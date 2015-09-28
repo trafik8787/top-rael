@@ -41,9 +41,11 @@
                 <?endif?>
 
            <? } catch (Exception $e) { ?>
-
-                <img width="200" src="<?=$value_fild?>" alt="">
-
+                <div class="w-tr-hover-file-del">
+                    <img width="200" src="<?=$value_fild?>" alt="">
+                    <input type="hidden" name="editfile-<?=$name_fied?>" value="<?=$value_fild?>">
+                    <a class="w-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                </div>
            <? } ?>
 
         <?
@@ -58,14 +60,17 @@
             </tr>
             </thead>
                 <tbody>
-                     <tr>
+                <?if (!empty($value_fild)):?>
+                     <tr class="w-tr-hover-file-del">
                          <td>
 
                              <a class="w-download" href="<?=URL::site(substr($value_fild, 1), 'http')?>"><?=basename($value_fild)?></a>
+                             <input type="hidden" name="editfile-<?=$name_fied?>" value="<?=$value_fild?>">
                          </td>
 
-                         <td><a class="w-delete" href="#">del</a></td>
+                         <td><a class="w-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
                      </tr>
+                <?endif?>
                 </tbody>
         </table>
 

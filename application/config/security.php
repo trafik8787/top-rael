@@ -12,7 +12,7 @@ return array(
         'bussines'           => array('admin', 'manager'),
         'coupons'           => array('admin', 'manager'),
         'galery'           => array('admin', 'manager'),
-        'articles'           => array('admin', 'redactor'),
+        'articles'           => array('admin', 'redactor', 'manager'),
         'lotarey'           => array('admin', 'manager'),
         'contacts'           => array('admin', 'manager'),
         'subscription'           => array('admin'),

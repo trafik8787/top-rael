@@ -235,6 +235,10 @@ class Controller_Core_Crud extends Controller_Core_Main {
                        } else {
                             //если не multiple
 
+                           $colum_file = 'editfile-'.$name_count_rows['COLUMN_NAME'];
+                           if (empty($_POST[$colum_file])) {
+                               $update[$name_count_rows['COLUMN_NAME']] = '';
+                           }
                             //расширение файла
                             $type_file = '.'. strtolower(pathinfo($_FILES[$name_count_rows['COLUMN_NAME']]['name'], PATHINFO_EXTENSION));
 
@@ -251,6 +255,7 @@ class Controller_Core_Crud extends Controller_Core_Main {
                                 $update[$name_count_rows['COLUMN_NAME']] = $file_path['relative'].$name_file;
 
                             }
+
                        }
 
 
@@ -260,7 +265,7 @@ class Controller_Core_Crud extends Controller_Core_Main {
 
             }
 
-            //die('dsf');
+           // die('dsf');
 
             if ($retw->callback_after_edit != null) {
                 //получаем масив строку таблицы которая должна быть редактирована

@@ -12,6 +12,7 @@ class Controller_Home extends Controller_BaseController {
 	public function action_index(){
 
 
+      // phpinfo();
         //Rediset::getInstance()->flushDB();
 //        Rediset::getInstance()->set_coupon(62);
         //$data_redis = Rediset::getInstance()->get_coupon(69);

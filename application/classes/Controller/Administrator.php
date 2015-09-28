@@ -433,7 +433,7 @@ class Controller_Administrator extends Controller_Core_Main {
      */
     public static function adminBussines (){
 
-        $query = DB::select('user_id')->from('roles_users')->where('role_id','=', 4)->execute()->as_array();
+        $query = DB::select('user_id')->from('roles_users')->where('role_id','IN', array(4,3,2))->execute()->as_array();
         $arr_user = array();
        // die(HTML::x($query));
         if (!empty($query)) {
@@ -1073,6 +1073,9 @@ class Controller_Administrator extends Controller_Core_Main {
 
             $new_array['dop_address'] = $arr_add_city;
             return $new_array;
+        } else {
+            $new_array['dop_address'] = '';
+            return $new_array;
         }
 
     }
@@ -1080,6 +1083,7 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function call_bef_insert_business ($new_array){
 
         if (!empty(Cruds::$post['dop_sity']) and !empty(Cruds::$post['dop_addres'])) {
+
             foreach (Cruds::$post['dop_sity'] as $key => $dop_sity) {
                 $arr_add_city[] = array('name' => $dop_sity,
                                         'address' => Cruds::$post['dop_addres'][$key],
