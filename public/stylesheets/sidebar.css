@@ -90,11 +90,11 @@
 .sidebar-lottery a {
   color: #000;
 }
-/* line 65, ../.sass/_common-variables.scss */
+/* line 66, ../.sass/_common-variables.scss */
 .sidebar-lottery a {
   text-decoration: underline;
 }
-/* line 68, ../.sass/_common-variables.scss */
+/* line 69, ../.sass/_common-variables.scss */
 .sidebar-lottery a:hover {
   text-decoration: none;
 }
@@ -151,7 +151,7 @@
   padding: 0;
   list-style-type: none;
 }
-/* line 49, ../.sass/_common-variables.scss */
+/* line 50, ../.sass/_common-variables.scss */
 .sidebar-socials .sidebar-socials-heading ul:after {
   content: "";
   clear: both;

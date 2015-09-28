@@ -296,7 +296,7 @@
                                                     <? $shift_image = array_shift($galery_arr['FileArr']);?>
                                                     <div class="bx-image">
                                                         <div class="layer">
-                                                            <img src="<?=$shift_image['FileFilename']?>" style="width:100%; height: auto;"/>
+                                                            <img src="<?=$shift_image['FileFilename']?>"/>
                                                         </div>
                                                         <div class="bx-caption"><?=$shift_image['FileTitle']?></div>
                                                     </div>
@@ -473,7 +473,7 @@
             <div class="panel-body">
 
                 <?foreach ($related as $rows_related):?>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-6">
 
                         <div class="thumbnail">
 
@@ -488,7 +488,7 @@
                             <?endif?>
 
                             <a href="/business/<?=$rows_related['url']?>" class="thumbnail-image">
-                                <img src="<?=$rows_related['home_busines_foto']?>" width="240" height="150" alt="">
+                                <img src="<?=$rows_related['home_busines_foto']?>" width="240" height="150" alt="<?=$rows_related['name']?>">
                             </a>
 
                             <div class="thumbnail-content">

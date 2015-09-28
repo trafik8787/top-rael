@@ -199,7 +199,7 @@
 
                                 <?//die(HTML::x($rowsdata['data']))?>
                                 <?foreach ($rowsdata['data'] as $rows):?>
-                                    <div class="col-md-4">
+                                    <div class="col-sm-4">
                                         <div class="thumbnail">
 
                                             <?if (!empty($rows['bussines_favorit']))://если бизнес добавлен в избранное?>

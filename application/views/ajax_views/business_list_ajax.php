@@ -10,7 +10,7 @@
 
 <?foreach ($data as $rows):?>
     <div class="clearfix">
-        <div class="col-md-4">
+        <div class="col-sm-4">
             <div class="thumbnail">
 
                 <?if (!empty($rows[0]['bussines_favorit']))://если бизнес добавлен в избранное?>
@@ -43,7 +43,7 @@
         </div>
 
         <?if (!empty($rows[1])):?>
-            <div class="col-md-4">
+            <div class="col-sm-4">
                 <div class="thumbnail">
 
                     <?if (!empty($rows[1]['bussines_favorit']))://если бизнес добавлен в избранное?>
@@ -77,7 +77,7 @@
         <?endif?>
 
         <?if (!empty($rows[2])):?>
-            <div class="col-md-4">
+            <div class="col-sm-4">
                 <div class="thumbnail">
 
                     <?if (!empty($rows[2]['bussines_favorit']))://если бизнес добавлен в избранное?>

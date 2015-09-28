@@ -25,7 +25,7 @@
   box-shadow: rgba(0, 0, 0, 0.2) 0 5px 5px;
   position: relative;
 }
-/* line 49, ../.sass/_common-variables.scss */
+/* line 50, ../.sass/_common-variables.scss */
 .marker .marker-container:after {
   content: "";
   clear: both;
@@ -85,7 +85,7 @@
   white-space: nowrap;
   margin-bottom: 15px;
 }
-/* line 49, ../.sass/_common-variables.scss */
+/* line 50, ../.sass/_common-variables.scss */
 .marker .marker-container .marker-sidebar .marker-luxury:after {
   content: "";
   clear: both;
@@ -96,13 +96,13 @@
   display: block;
   float: left;
 }
-/* line 49, ../.sass/_common-variables.scss */
+/* line 50, ../.sass/_common-variables.scss */
 .marker .marker-container .marker-sidebar .marker-coupon:after {
   content: "";
   clear: both;
   display: block;
 }
-/* line 49, ../.sass/_common-variables.scss */
+/* line 50, ../.sass/_common-variables.scss */
 .marker .marker-container .marker-sidebar .marker-coupon a:after {
   content: "";
   clear: both;
@@ -155,11 +155,11 @@
 .marker .marker-container .marker-title a {
   color: #000;
 }
-/* line 65, ../.sass/_common-variables.scss */
+/* line 66, ../.sass/_common-variables.scss */
 .marker .marker-container .marker-title a {
   text-decoration: underline;
 }
-/* line 68, ../.sass/_common-variables.scss */
+/* line 69, ../.sass/_common-variables.scss */
 .marker .marker-container .marker-title a:hover {
   text-decoration: none;
 }
@@ -185,7 +185,7 @@
   font-size: 12px;
   white-space: nowrap;
 }
-/* line 49, ../.sass/_common-variables.scss */
+/* line 50, ../.sass/_common-variables.scss */
 .marker:after {
   content: "";
   clear: both;
@@ -247,7 +247,7 @@
   margin-bottom: 20px;
   float: left;
 }
-/* line 49, ../.sass/_common-variables.scss */
+/* line 50, ../.sass/_common-variables.scss */
 .google-map-filter .google-map-shorkeys:after {
   content: "";
   clear: both;
@@ -277,7 +277,7 @@
 .google-map-filter .checkbox-container {
   font-size: 16px;
 }
-/* line 57, ../.sass/_common-variables.scss */
+/* line 58, ../.sass/_common-variables.scss */
 .google-map-filter .checkbox-container:before {
   content: "";
   clear: both;
@@ -287,7 +287,7 @@
 .google-map-filter .checkbox-container .checkbox {
   margin: 0;
 }
-/* line 49, ../.sass/_common-variables.scss */
+/* line 50, ../.sass/_common-variables.scss */
 .google-map-filter .checkbox-container .checkbox:after {
   content: "";
   clear: both;
@@ -312,7 +312,13 @@
     float: left;
   }
 }
-/* line 273, ../.sass/google.scss */
+@media (min-width: 768px) and (max-width: 979px) {
+  /* line 254, ../.sass/google.scss */
+  .google-map-filter .checkbox-container .checkbox label {
+    width: 33.33333333%;
+  }
+}
+/* line 277, ../.sass/google.scss */
 .google-map-filter .restaurants .form-control,
 .google-map-filter .purchases .form-control,
 .google-map-filter .night-life .form-control,
@@ -321,7 +327,7 @@
 .google-map-filter .relax .form-control {
   border: 0;
 }
-/* line 275, ../.sass/google.scss */
+/* line 279, ../.sass/google.scss */
 .google-map-filter .restaurants .form-control .input-icon,
 .google-map-filter .purchases .form-control .input-icon,
 .google-map-filter .night-life .form-control .input-icon,
@@ -330,27 +336,27 @@
 .google-map-filter .relax .form-control .input-icon {
   color: #fff;
 }
-/* line 282, ../.sass/google.scss */
+/* line 286, ../.sass/google.scss */
 .google-map-filter .restaurants .form-control {
   background: #d22a2a;
 }
-/* line 288, ../.sass/google.scss */
+/* line 292, ../.sass/google.scss */
 .google-map-filter .purchases .form-control {
   background: #ae29b6;
 }
-/* line 294, ../.sass/google.scss */
+/* line 298, ../.sass/google.scss */
 .google-map-filter .night-life .form-control {
   background: #3f4fb0;
 }
-/* line 300, ../.sass/google.scss */
+/* line 304, ../.sass/google.scss */
 .google-map-filter .beauty .form-control {
   background: #fc50b5;
 }
-/* line 306, ../.sass/google.scss */
+/* line 310, ../.sass/google.scss */
 .google-map-filter .hotels .form-control {
   background: #e6ad40;
 }
-/* line 312, ../.sass/google.scss */
+/* line 316, ../.sass/google.scss */
 .google-map-filter .relax .form-control {
   background: #29b64d;
 }

@@ -22,7 +22,7 @@
                 <div class="media">
                     <div class="media-left">
                         <a href="/article/<?=$row['url']?>">
-                            <img src="/uploads/img_articles/thumbs/<?=basename($row['images_article'])?>" width="120" height="85" class="media-object"/>
+                            <img src="/uploads/img_articles/thumbs/<?=basename($row['images_article'])?>" width="120" height="85" alt="<?=$row['name']?>" class="media-object"/>
                         </a>
                     </div>
                     <div class="media-body">

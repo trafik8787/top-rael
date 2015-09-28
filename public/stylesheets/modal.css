@@ -59,7 +59,7 @@
 .modal.modal-subscribe .modal-header {
   border: 0;
 }
-/* line 49, ../.sass/_common-variables.scss */
+/* line 50, ../.sass/_common-variables.scss */
 .modal.modal-subscribe .modal-header:after {
   content: "";
   clear: both;
@@ -117,7 +117,7 @@
   line-height: 1.25;
   margin-bottom: 20px;
 }
-/* line 49, ../.sass/_common-variables.scss */
+/* line 50, ../.sass/_common-variables.scss */
 .modal.modal-subscribe .gift-container:after {
   content: "";
   clear: both;
@@ -178,7 +178,7 @@
 .modal.modal-coupon .modal-header {
   border: 0;
 }
-/* line 49, ../.sass/_common-variables.scss */
+/* line 50, ../.sass/_common-variables.scss */
 .modal.modal-coupon .modal-header:after {
   content: "";
   clear: both;
@@ -363,11 +363,11 @@
 .modal.modal-coupon .coupon .div-table > .div-row > .div-cell .media-heading a {
   color: #000;
 }
-/* line 65, ../.sass/_common-variables.scss */
+/* line 66, ../.sass/_common-variables.scss */
 .modal.modal-coupon .coupon .div-table > .div-row > .div-cell .media-heading a {
   text-decoration: underline;
 }
-/* line 68, ../.sass/_common-variables.scss */
+/* line 69, ../.sass/_common-variables.scss */
 .modal.modal-coupon .coupon .div-table > .div-row > .div-cell .media-heading a:hover {
   text-decoration: none;
 }

@@ -184,7 +184,7 @@
 
                                     <?foreach ($rows_data_coupon as $rows_data_coupon_favor):?>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 col-sm-6">
                                             <div class="coupon coupon-big">
 
                                                 <a href="#" data-id="<?=$rows_data_coupon_favor['id']?>" class="pin w-delete-coupon-favor"><i class="fa fa-trash"></i></a>

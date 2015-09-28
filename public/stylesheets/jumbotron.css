@@ -6,7 +6,7 @@
   -webkit-border-radius: 0;
   border-radius: 0 !important;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   /* line 7, ../.sass/jumbotron.scss */
   .jumbotron.jumbotron-profile {
     margin-left: -15px;

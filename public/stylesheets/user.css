@@ -4,7 +4,7 @@
   margin-bottom: 20px;
   margin-top: -20px;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   /* line 5, ../.sass/user.scss */
   .user-container {
     margin-top: 0;
@@ -15,14 +15,14 @@
 /* line 19, ../.sass/user.scss */
 .user-container .user-profile {
   display: table;
-  width: 100%;
-  padding: 35px 25px;
+  min-width: 100%;
+  padding: 35px 0;
 }
 /* line 25, ../.sass/user.scss */
 .user-container .user-profile .user-object {
   display: table-cell;
   vertical-align: middle;
-  padding: 0 30px;
+  padding: 0 15px;
   font-size: 18px;
 }
 /* line 33, ../.sass/user.scss */
@@ -38,82 +38,113 @@
     margin-bottom: 10px;
   }
 }
-/* line 45, ../.sass/user.scss */
+@media (min-width: 768px) and (max-width: 979px) {
+  /* line 25, ../.sass/user.scss */
+  .user-container .user-profile .user-object {
+    float: left;
+    width: 25%;
+  }
+  /* line 48, ../.sass/user.scss */
+  .user-container .user-profile .user-object.user-avatar, .user-container .user-profile .user-object.user-logout {
+    width: auto;
+    text-align: center;
+    float: none;
+  }
+  /* line 58, ../.sass/_common-variables.scss */
+  .user-container .user-profile .user-object.user-avatar:before, .user-container .user-profile .user-object.user-logout:before {
+    content: "";
+    clear: both;
+    display: block;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 25, ../.sass/user.scss */
+  .user-container .user-profile .user-object {
+    padding: 0 30px;
+  }
+}
+/* line 61, ../.sass/user.scss */
 .user-container .user-profile .user-avatar {
   text-align: center;
 }
-/* line 48, ../.sass/user.scss */
+/* line 64, ../.sass/user.scss */
 .user-container .user-profile .user-avatar img {
   border: 3px solid #fff;
   -moz-box-shadow: rgba(0, 0, 0, 0.75) 0 2px 3px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0 2px 3px;
   box-shadow: rgba(0, 0, 0, 0.75) 0 2px 3px;
 }
-@media (max-width: 768px) {
-  /* line 45, ../.sass/user.scss */
+@media (max-width: 767px) {
+  /* line 61, ../.sass/user.scss */
   .user-container .user-profile .user-avatar {
     text-align: left;
     margin: 0 0 15px 0;
   }
 }
-/* line 59, ../.sass/user.scss */
+/* line 75, ../.sass/user.scss */
 .user-container .user-profile .user-name {
   font-size: 20px;
 }
-/* line 63, ../.sass/user.scss */
+/* line 79, ../.sass/user.scss */
 .user-container .user-profile .user-logout {
-  padding-right: 0;
   text-align: right;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   /* line 19, ../.sass/user.scss */
   .user-container .user-profile {
     padding-left: 15px;
     padding-right: 15px;
   }
 }
-/* line 74, ../.sass/user.scss */
+@media (min-width: 1200px) {
+  /* line 19, ../.sass/user.scss */
+  .user-container .user-profile {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+/* line 95, ../.sass/user.scss */
 .user-container .user-navigation {
-  padding: 0 20px;
+  padding: 0 15px;
   border-bottom: 5px solid #007797;
 }
-/* line 49, ../.sass/_common-variables.scss */
+/* line 50, ../.sass/_common-variables.scss */
 .user-container .user-navigation:after {
   content: "";
   clear: both;
   display: block;
 }
-@media (max-width: 768px) {
-  /* line 74, ../.sass/user.scss */
+@media (max-width: 767px) {
+  /* line 95, ../.sass/user.scss */
   .user-container .user-navigation {
     padding: 0;
   }
 }
-/* line 85, ../.sass/user.scss */
+/* line 106, ../.sass/user.scss */
 .user-container .user-navigation ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 @media (max-width: 768px) {
-  /* line 85, ../.sass/user.scss */
+  /* line 106, ../.sass/user.scss */
   .user-container .user-navigation ul {
     width: 100%;
   }
 }
-/* line 94, ../.sass/user.scss */
+/* line 115, ../.sass/user.scss */
 .user-container .user-navigation ul li {
   display: block;
   margin: 0 5px;
   float: left;
 }
-/* line 49, ../.sass/_common-variables.scss */
+/* line 50, ../.sass/_common-variables.scss */
 .user-container .user-navigation ul li:after {
   content: "";
   clear: both;
   display: block;
 }
-/* line 101, ../.sass/user.scss */
+/* line 122, ../.sass/user.scss */
 .user-container .user-navigation ul li a, .user-container .user-navigation ul li .pin-aria {
   display: block;
   background: #c9c9c9;
@@ -128,29 +159,29 @@
   -webkit-border-top-right-radius: 4px;
   border-top-right-radius: 4px;
 }
-/* line 111, ../.sass/user.scss */
+/* line 132, ../.sass/user.scss */
 .user-container .user-navigation ul li a:hover, .user-container .user-navigation ul li .pin-aria:hover {
   background: #B9B9B9;
 }
-/* line 117, ../.sass/user.scss */
+/* line 138, ../.sass/user.scss */
 .user-container .user-navigation ul li .pin-aria .pin {
   margin: 2px 15px 2px 0;
   color: #c9c9c9 !important;
 }
-/* line 123, ../.sass/user.scss */
+/* line 144, ../.sass/user.scss */
 .user-container .user-navigation ul li .pin-aria:hover .pin {
   color: #B9B9B9 !important;
 }
-/* line 130, ../.sass/user.scss */
+/* line 151, ../.sass/user.scss */
 .user-container .user-navigation ul li.active a, .user-container .user-navigation ul li.active .pin-aria {
   background: #007797 !important;
 }
-/* line 135, ../.sass/user.scss */
+/* line 156, ../.sass/user.scss */
 .user-container .user-navigation ul li.active .pin-aria .pin {
   color: #007797 !important;
 }
 @media (max-width: 768px) {
-  /* line 94, ../.sass/user.scss */
+  /* line 115, ../.sass/user.scss */
   .user-container .user-navigation ul li {
     float: none;
     margin: 0;

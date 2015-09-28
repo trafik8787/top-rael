@@ -55,7 +55,7 @@
 
                                 <?foreach ($data['BusArr'] as $rows_busines):?>
 
-                                    <div class="col-md-6">
+                                    <div class="col-sm-6">
                                         <div class="thumbnail">
 
                                             <?if (!empty($rows_busines['bussines_favorit']))://если купон добавлен в избранное?>
@@ -165,7 +165,7 @@
                                 <?foreach ($data['CoupArr'] as $rows_coupons):?>
 
                                     <div class="clearfix">
-                                        <div class="col-md-6">
+                                        <div class="col-sm-6">
                                             <div class="coupon coupon-big">
 
                                                 <?if (!empty($rows_coupons[0]['coupon_favorit']))://если купон добавлен в избранное?>
@@ -225,7 +225,7 @@
                                             </div>
                                         </div>
                                         <?if (!empty($rows_coupons[1])):?>
-                                            <div class="col-md-6">
+                                            <div class="col-sm-6">
                                                 <div class="coupon coupon-big">
 
                                                     <?if (!empty($rows_coupons[1]['coupon_favorit']))://если купон добавлен в избранное?>

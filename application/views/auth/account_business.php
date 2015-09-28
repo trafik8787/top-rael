@@ -106,7 +106,7 @@ HTML::x(Date::diffDay('', '2015-09-20'));
 
                         <div class="div-row">
 
-                            <div class="col-md-4 div-cell">
+                            <div class="col-md-4 col-sm-12 div-cell">
                                 <div class="panel-heading">
                                     <div class="panel-title rtl pull-left">
 
@@ -127,7 +127,7 @@ HTML::x(Date::diffDay('', '2015-09-20'));
                                 </div>
                             </div>
 
-                            <div class="col-md-4 div-cell">
+                            <div class="col-md-4 col-sm-12 div-cell">
                                 <div class="div-table counters">
 
                                     <div class="div-row">
@@ -142,7 +142,7 @@ HTML::x(Date::diffDay('', '2015-09-20'));
                                 </div>
                             </div>
 
-                            <div class="col-md-4 div-cell">
+                            <div class="col-md-4 col-sm-12 div-cell">
                                 <div class="div-table counters">
 
                                     <div class="div-row">
@@ -194,7 +194,7 @@ HTML::x(Date::diffDay('', '2015-09-20'));
 
 
                     <?foreach ($data['CoupArr'] as $rows_coup):?>
-                        <div class="col-md-4 col-xs-12 rtl pull-left">
+                        <div class="col-md-4 col-sm-6 col-xs-12 rtl pull-left">
                             <div class="coupon coupon-big">
 
 <!--                                <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>-->
@@ -256,7 +256,7 @@ HTML::x(Date::diffDay('', '2015-09-20'));
             <div class="panel panel-page-profile">
 
                 <div class="panel-body">
-                    <div class="col-md-4 rtl pull-left">
+                    <div class="col-md-4 col-xs-12 rtl pull-left">
 
                         <div class="panel-heading">
                             <div class="panel-title rtl pull-left">
@@ -299,7 +299,7 @@ HTML::x(Date::diffDay('', '2015-09-20'));
 
                 <div class="panel-body">
 
-                    <div class="col-md-4 col-md-4 col-xs-12 rtl pull-left">
+                    <div class="col-md-4 col-xs-12 rtl pull-left">
 
                         <div class="panel-heading">
                             <div class="panel-title rtl pull-left">
@@ -322,7 +322,7 @@ HTML::x(Date::diffDay('', '2015-09-20'));
 
                     </div>
 
-                    <div class="col-md-8 col-md-4 col-xs-12 rtl pull-left">
+                    <div class="col-md-8 col-xs-12 rtl pull-left">
 
                         <div class="row ltr">
                             <div class="list list-media">
@@ -367,7 +367,7 @@ HTML::x(Date::diffDay('', '2015-09-20'));
 
             <div class="panel-body">
 
-                <div class="col-md-4 col-md-4 col-xs-12 rtl pull-left">
+                <div class="col-md-4 col-xs-12 rtl pull-left">
                     <div class="panel-heading">
                         <div class="panel-title rtl pull-left">
 
@@ -388,11 +388,11 @@ HTML::x(Date::diffDay('', '2015-09-20'));
                     </div>
                 </div>
 
-                <div class="col-md-8 col-md-4 col-xs-12 rtl  pull-left">
+                <div class="col-md-8 col-xs-12 rtl  pull-left">
 
                     <div class="row">
 
-                        <div class="col-md-4 col-xs-12 rtl pull-left">
+                        <div class="col-md-4 col-sm-6 col-xs-12 rtl pull-left">
                             <div class="flag">
 
                                 <div class="flag-sidebar">
@@ -423,7 +423,7 @@ HTML::x(Date::diffDay('', '2015-09-20'));
                             </div>
                         </div>
 
-                        <div class="col-md-4 col-xs-12 rtl pull-left">
+                        <div class="col-md-4 col-sm-6 col-xs-12 rtl pull-left">
                             <div class="flag">
 
                                 <div class="flag-sidebar">
@@ -454,7 +454,7 @@ HTML::x(Date::diffDay('', '2015-09-20'));
                             </div>
                         </div>
 
-                        <div class="col-md-4 col-xs-12 pull-left">
+                        <div class="col-md-4 col-sm-6 col-xs-12 pull-left">
                             <div class="flag">
 
                                 <div class="flag-sidebar">

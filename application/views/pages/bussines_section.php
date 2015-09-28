@@ -67,7 +67,7 @@
 
                                 <div class="clearfix">
 
-                                    <div class="col-md-6">
+                                    <div class="col-sm-6">
                                         <div class="thumbnail">
 
                                             <?if (!empty($rows_data[0]['bussines_favorit']))://если бизнес добавлен в избранное?>
@@ -95,7 +95,7 @@
                                         </div>
                                     </div>
                                     <?if (!empty($rows_data[1])):?>
-                                        <div class="col-md-6">
+                                        <div class="col-sm-6">
                                             <div class="thumbnail">
 
                                                 <?if (!empty($rows_data[1]['bussines_favorit']))://если купон добавлен в избранное?>

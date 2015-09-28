@@ -10,7 +10,7 @@
 
 <?foreach($data_coupon as $rows_data):?>
     <div class="clearfix">
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="coupon coupon-big">
 
                 <?if (!empty($rows_data[0]['coupon_favorit']))://если купон добавлен в избранное?>
@@ -71,7 +71,7 @@
             </div>
         </div>
         <?if (!empty($rows_data[1])):?>
-            <div class="col-md-6">
+            <div class="col-sm-6">
                 <div class="coupon coupon-big">
 
                     <?if (!empty($rows_data[1]['coupon_favorit']))://если купон добавлен в избранное?>
