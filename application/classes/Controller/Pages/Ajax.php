@@ -188,8 +188,7 @@ class Controller_Pages_Ajax extends Controller {
         //пользователи и бизнесы
         $data = $obj->getBusinesUserAll();
 
-
-        //HTML::x($data);
+        $html_mail = View::factory('email/mail_business');
         $this->LotareyCron();
 
         foreach ($data as $rows) {
@@ -199,31 +198,41 @@ class Controller_Pages_Ajax extends Controller {
 
             //за 7 дней перед отключением
             if (date('Y-m-d') == $ert) {
-                $message = 'Ваш бизнес будет отключен через 7 дней';
+                $message = 'Ваш бизнес <a href="http://topisrael.webremote.net/business/'.$rows['url'].'">'.$rows['name'].'</a> будет отключен через 7 дней';
+                $html_mail->content = $message;
 
                 $m = Email::factory();
-                $m->From("admin@top.com"); // от кого отправляется почта
+                $m->From("TopIsrael;admin@top.com"); // от кого отправляется почта
                 $m->To($rows['email']); // кому адресованно
-                $m->Subject('Отключение бизнеса');
-                $m->Body($message, "html");
+                $m->Cc($rows['EmailRedactor']);
+                $m->Subject('Увидомление о отключении бизнеса');
+                $m->Body($html_mail, "html");
                 $m->Priority(3);
+                $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/1.png", "", "image/png");
+                $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
                 $m->Send();
 
             }
 
             if (date('Y-m-d') == $rows['date_end']) {
 
+//                HTML::x($rows);
+//                die('sdf');
                 //меняем статус бизнеса в базе
                 $obj->disableBusines($rows['id']);
 
-                $message = 'Ваш бизнес отключен';
+                $message = 'Ваш бизнес <a href="http://topisrael.webremote.net/business/'.$rows['url'].'">'.$rows['name'].'</a> отключен';
+                $html_mail->content = $message;
 
                 $m = Email::factory();
-                $m->From("admin@top.com"); // от кого отправляется почта
+                $m->From("TopIsrael;admin@top.com"); // от кого отправляется почта
                 $m->To($rows['email']); // кому адресованно
+                $m->Cc($rows['EmailRedactor']);
                 $m->Subject('Отключение бизнеса');
-                $m->Body($message, "html");
+                $m->Body($html_mail, "html");
                 $m->Priority(3);
+                $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/1.png", "", "image/png");
+                $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
                 $m->Send();
             }
 

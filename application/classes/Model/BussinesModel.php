@@ -891,14 +891,32 @@ class Model_BussinesModel extends Model_BaseModel {
 
     /**
      * @return mixed
-     * todo получить всех бизнес пользователей
+     * todo получить все бизнесы пользователей для рассылки
      */
     public function getBusinesUserAll(){
-        return DB::select()
+
+        $query = DB::select()
             ->from('users')
             ->join('business')
             ->on('users.business_id','=','business.id')
+            ->where('business.status', '=', 1)
             ->execute()->as_array();
+
+        $query2 = DB::select()
+            ->from('users')
+            ->execute()->as_array();
+
+        $result = array();
+        foreach ($query as $rows) {
+            foreach ($query2 as $rows2) {
+                if ($rows2['id'] == $rows['redactor_user']) {
+                    $rows['EmailRedactor'] =  $rows2['email'];
+                }
+            }
+            $result[] = $rows;
+        }
+
+        return $result;
     }
 
     /**

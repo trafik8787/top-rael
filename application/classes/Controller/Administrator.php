@@ -489,6 +489,10 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud->add_action('StatusBusiness', 'ON', 'ban/actionAdd', '', $status);
 
+
+        $crud->links('name', '/business/', 'url');
+
+
         $crud->edit_fields('redactor_user',
             'date_create',
             'date_end',
@@ -633,6 +637,10 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_one_to_many('articles_relation_business', 'bussines_id', 'id_business', 'id_articles');
 
         $crud->set_field_type('images_article', array('file', 'uploads/img_articles', 'artic_', '', 'img'),'', '');
+
+        //добавляем ссылку записи в поле
+        $crud->links('name', '/article/', 'url');
+
 
         $crud->validation('url', array('required' => true, 'minlength' => 4, 'regexp' => '^[a-zA-Z0-9_]+$'),
             array('minlength' => 'URL должен быть минимум 4 символа',
@@ -883,7 +891,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('password', 'password');
         $crud->set_field_type('email', 'email');
 
-        $crud->show_columns('id', 'email', 'username','id_role', 'date_registration');
+        $crud->show_columns('id', 'email', 'username', 'secondname', 'date_registration');
         $crud->set_field_type('sex', 'select', array('m' => 'Мужчина', 'j' => 'Женщина'), '', '', '');
 
         if (Session::instance()->get('customer_id') == 1) {
@@ -922,7 +930,7 @@ class Controller_Administrator extends Controller_Core_Main {
          * 'name' - поле из которого будем брать
          * 'id' - поле по которому будем джойнить с 'business_id'
          */
-        $crud->show_name_old_table('id_role', 'roles', 'description', 'id');
+        //$crud->show_name_old_table('id_role', 'roles', 'description', 'id');
 
 
 
@@ -947,8 +955,8 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->validation('username', array('required' => true, 'minlength' => 3),
             array('required' => 'Это поле обязательно для заполнения', 'minlength' => 'Минимальное количество символов 3'));
 
-        $crud->validation('password', array('required' => true, 'maxlength' => 16, 'minlength' => 6),
-            array('required' => 'Это поле обязательно для заполнения', 'maxlength' => 'Максимальная длина пароля 16 символов', 'minlength' => 'Минимальное количество символов 6'));
+        $crud->validation('password', array('required' => true, 'minlength' => 6),
+            array('required' => 'Это поле обязательно для заполнения', 'minlength' => 'Минимальное количество символов 6'));
 
         $crud->callback_before_insert('call_bef_insert_user');
 

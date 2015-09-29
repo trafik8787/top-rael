@@ -20,7 +20,7 @@ class Controller_Pages_Sections extends Controller_BaseController {
         $bussines_section = View::factory('pages/bussines_section');
         $number_page = $this->request->param('page');
         $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($this->request->param('url_section'));
-
+       // HTML::x($category);
         //смотрим есть ли такой раздел если нет то 404
         if ($category === false) {
             throw new HTTP_Exception_404;

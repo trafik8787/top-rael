@@ -11,7 +11,7 @@ class Controller_Home extends Controller_BaseController {
 
 	public function action_index(){
 
-
+        //echo  Auth::instance()->hash('qweqweqwe');
       // phpinfo();
         //Rediset::getInstance()->flushDB();
 //        Rediset::getInstance()->set_coupon(62);

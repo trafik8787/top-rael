@@ -79,6 +79,9 @@ class Cruds extends Controller_Core_Main {
 
     public $show_name_old_table = null;
 
+    public $links = null;
+
+
     public function __construct () {
         parent::before();
     }
@@ -452,9 +455,23 @@ class Cruds extends Controller_Core_Main {
                 $htm_delete = '';
             }
 
+
+
+
+            //die(HTML::x($rows));
+
             $this->tmp_name_column_file = $rows; //сохраняем предидущее состояниемасива для получения не урезаных данных
             //удаляем все теги перед выводом в таблицу
             $rows = array_map(array($this, 'no_tag'), $rows);
+
+            //добавляем ссылку для нужной записи
+            if (!empty($this->links)) {
+
+                $rows[$this->links[0]] = '<a target="_blank" href="'.$this->links[1].$rows[$this->links[2]].'" >'.$rows[$this->links[0]].'</a>';
+
+            }
+
+
             //Вычислить пересечение массивов, сравнивая ключи
             $array_intersect_key_rows = array_intersect_key($rows, $array_flip_column);
 
@@ -839,6 +856,15 @@ class Cruds extends Controller_Core_Main {
             'old_table' => $old_table,
             'old_name_page' => $old_name_page,
             'id_old_table' => $id_old_table);
+    }
+
+
+    /**
+     * @param $name_field
+     * вешает ссилку на поле в таблице
+     */
+    public function links($name_field, $statik_link, $dinamik_link){
+        $this->links = array($name_field, $statik_link, $dinamik_link);
     }
 
 
