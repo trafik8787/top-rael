@@ -163,13 +163,55 @@ class Controller_Pages_Ajax extends Controller {
     /**
      * РАССЫЛКА ДЛЯ ПОДПИЩИКОВ
      */
-    public function action_SendEmailSubscribe(){
+    public function SendEmailSubscribe(){
 
         //каждый четверг
         if (date('l') == 'Thursday') {
 
-            $data = View::factory('email/mail');
+            $business = Model::factory('SubscribeModel')->getSubskribeBusiness();
+            $articless = Model::factory('SubscribeModel')->getSubskribeArticless();
+            $users = Model::factory('SubscribeModel')->getSubskribeUsers();
 
+
+
+            if (!empty($business) OR !empty($articless)) {
+
+                $data = View::factory('email/mail');
+                $data->business = $business;
+                $article_shift = array_shift($articless);
+                $data->article_shift = $article_shift;
+                $data->articless = $articless;
+
+
+                $m = Email::factory();
+                foreach ($users as $user_rows) {
+
+
+                    $m->reloadTo();
+                    $m->From("TopIsrael;admin@top.com"); // от кого отправляется почта
+                    $m->To($user_rows['email']); // кому адресованно
+                    $m->Subject('Рассылка TopIsrael');
+                    $m->Body($data, "html");
+                    $m->Priority(3);
+
+                    if (!empty($article_shift)) {
+                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($article_shift['images_article']), "", "");
+                    }
+
+                    foreach ($articless as $artic) {
+                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($artic['images_article']), "", "");
+                    }
+
+                    foreach ($business as $bus) {
+                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_business/thumbs/' . basename($bus['home_busines_foto']), "", "");
+                    }
+
+                    $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/1.png", "", "image/png");
+                    $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/2.png", "", "image/png");
+                    $m->Send();
+
+                }
+            }
         }
 
     }
@@ -182,6 +224,11 @@ class Controller_Pages_Ajax extends Controller {
      * sendbusiness
      */
     public function action_BussinesDisableEmailSevenDays() {
+
+        $dat = $this->SendEmailSubscribe();
+
+
+
 
         $obj = new Model_BussinesModel();
 
@@ -216,8 +263,6 @@ class Controller_Pages_Ajax extends Controller {
 
             if (date('Y-m-d') == $rows['date_end']) {
 
-//                HTML::x($rows);
-//                die('sdf');
                 //меняем статус бизнеса в базе
                 $obj->disableBusines($rows['id']);
 

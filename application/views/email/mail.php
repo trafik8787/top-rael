@@ -36,7 +36,7 @@
                                                            style="max-width:250px;">
                                                         <tr>
                                                             <td>
-                                                                <a href="#" target="_blank" style="display: block;">
+                                                                <a href="http://<?=$_SERVER['HTTP_HOST']?>" target="_blank" style="display: block;">
                                                                     <img src="cid:1.png" width="250" height="54"
                                                                          style="width:100%; height:auto;" alt="logo"/>
                                                                 </a>
@@ -73,25 +73,23 @@
                         <table cellpadding="0" cellspacing="0" width="100%">
                             <tr>
                                 <td style="padding:0 20px 15px 20px;">
-                                    <span style="font-size:12px; color: #a9a9a9;">Рассылка за 22 Июля 2015</span>
+                                    <span style="font-size:12px; color: #a9a9a9;">Рассылка за <?=Date::rusdate(strtotime(date('Y-m-d')), 'j %MONTH% Y'); ?></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <img src="images/image-large.png" width="600" height="420"
+                                    <img src="cid:<?=basename($article_shift['images_article'])?>" width="600" height="420"
                                          style="width: 100%; height:auto"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding:10px 20px;" bgcolor="#E6E6E6">
                                     <span style="font-size:30px">
-                                        <a href="#" style="color:#000;">TOP 5 Ресторанов Тель-Авива</a>
+                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$article_shift['url']?>" style="color:#000;"><?=$article_shift['name']?></a>
                                     </span>
 
                                     <p style="font-size:14px; margin:5px 0;">
-                                        Вы хотите сделать вашу свадьбу яркой и запоминающейся? Удивить ваших гостей и
-                                        родных? Хотите вспоминать о ней долгие годы, с радостью и видео со свадьбы?
-                                        Доверьте организацию свадьбы вашей мечты профессионалам!
+                                        <?=Text::limit_chars(strip_tags($article_shift['content']), 150, null, true)?>
                                     </p>
                                 </td>
                             </tr>
@@ -100,42 +98,42 @@
                                     <!-- Content -->
 
                                     <table cellpadding="0" cellspacing="0" width="100%" style="padding:20px;">
-                                        <tr>
-                                            <td>
+                                        <?foreach ($articless as $artic):?>
+                                            <tr>
+                                                <td>
 
-                                                <table cellpadding="0" cellspacing="0" width="100%" align="left"
-                                                       style="max-width:165px;">
-                                                    <tr>
-                                                        <td style="padding:0 20px 5px 0">
-                                                            <a href="#" style="display:block;">
-                                                                <img src="uploade/1.jpg" width="164" height="115"
-                                                                     style="width:100%; height:auto;"/>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                </table>
+                                                    <table cellpadding="0" cellspacing="0" width="100%" align="left"
+                                                           style="max-width:165px;">
+                                                        <tr>
+                                                            <td style="padding:0 20px 5px 0">
+                                                                <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['url']?>" style="display:block;">
+                                                                    <img src="cid:<?=basename($artic['images_article'])?>" width="164" height="115"
+                                                                         style="width:100%; height:auto;"/>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
 
-                                                <a href="#" style="font-size: 18px; color:#000; text-decoration: none;">
-                                                    <strong>
-                                                        Куда пойти завтра?
-                                                    </strong>
-                                                </a>
+                                                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['url']?>" style="font-size: 18px; color:#000; text-decoration: none;">
+                                                        <strong>
+                                                            <?=$artic['name']?>
+                                                        </strong>
+                                                    </a>
 
-                                                <p style="margin:10px 0; font-size:14px;">
-                                                    <strong>События стоящие вашего внимания</strong>
-                                                </p>
+                                                    <p style="margin:10px 0; font-size:14px;">
+                                                        <strong><?=$artic['secondname']?></strong>
+                                                    </p>
 
-                                                <p style="margin:10px 0; font-size:14px;">
-                                                    Вы хотите сделать вашу свадьбу яркой и
-                                                    запоминающейся? Удивить ваших гостей и родных? Хотите вспоминать о
-                                                    ней долгие годы, с радостью и
-                                                </p>
+                                                    <p style="margin:10px 0; font-size:14px;">
+                                                        <?=Text::limit_chars(strip_tags($artic['content']), 150, null, true)?>
+                                                    </p>
 
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        <?endforeach?>
                                         <tr>
                                             <td align="right">
-                                                <a href="#"
+                                                <a href="http://<?=$_SERVER['HTTP_HOST']?>/articles"
                                                    style="font-size:12px; text-decoration: none; color:#007898;">Открыть
                                                     все</a>
                                             </td>
@@ -143,88 +141,55 @@
 
                                     </table>
 
-                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                    <?if (!empty($business)):?>
+                                        <table cellpadding="0" cellspacing="0" width="100%">
                                         <tr>
                                             <td style="padding:0 10px;">
 
-                                                <table cellpadding="0" cellspacing="0" style="min-width:250px; max-width:288px;" align="left">
-                                                    <tr>
-                                                        <td style="padding:5px 10px;">
-                                                            <a href="#" style="display:block; overflow: hidden;">
-                                                                <img src="images/image-large.png"
-                                                                     style="width:100%; height:auto;"/>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="padding:5px 10px;">
-                                                            <a href="#"
-                                                               style="font-size:18px; color:#000; text-decoration: underline">
+                                                <?foreach ($business as $bus_rows):?>
+
+                                                    <table cellpadding="0" cellspacing="0" style="min-width:250px; max-width:288px;" align="left">
+                                                        <tr>
+                                                            <td style="padding:5px 10px;">
+                                                                <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows['url']?>" style="display:block; overflow: hidden;">
+                                                                    <img src="cid:<?=basename($bus_rows['home_busines_foto'])?>"
+                                                                         style="width:100%; height:auto;"/>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding:5px 10px;">
+                                                                <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows['url']?>"
+                                                                   style="font-size:18px; color:#000; text-decoration: underline">
+                                                                    <strong>
+                                                                        <?=$bus_rows['name']?>
+
+                                                                    </strong>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td style="padding:5px 10px; font-size:14px;">
                                                                 <strong>
-                                                                    Ресторан “Круглый стол”
+                                                                    <?=$bus_rows['CityName']?>. <?=$bus_rows['address']?>
                                                                 </strong>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                        </tr>
 
-                                                    <tr>
-                                                        <td style="padding:5px 10px; font-size:14px;">
-                                                            <strong>
-                                                                Тель-Авив. Арлозоров 5
-                                                            </strong>
-                                                        </td>
-                                                    </tr>
+                                                        <tr>
+                                                            <td style="padding:5px 10px 20px 10px; font-size:14px;">
+                                                                <?=Text::limit_chars(strip_tags($bus_rows['info']), 150, null, true)?>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
 
-                                                    <tr>
-                                                        <td style="padding:5px 10px 20px 10px; font-size:14px;">
-                                                            Вы хотите сделать вашу свадьбу яркой и запоминающейся?
-                                                            Удивить ваших гостей и родных? Хотите вспоминать о ней
-                                                            долгие годы, с радостью и
-                                                        </td>
-                                                    </tr>
-                                                </table>
-
-                                                <table cellpadding="0" cellspacing="0" style="min-width:250px; max-width:288px;" align="left">
-                                                    <tr>
-                                                        <td style="padding:5px 10px;">
-                                                            <a href="#" style="display:block; overflow: hidden;">
-                                                                <img src="images/image-large.png"
-                                                                     style="width:100%; height:auto;"/>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="padding:5px 10px;">
-                                                            <a href="#"
-                                                               style="font-size:18px; color:#000; text-decoration: underline">
-                                                                <strong>
-                                                                    Ресторан “Круглый стол”
-                                                                </strong>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td style="padding:5px 10px; font-size:14px;">
-                                                            <strong>
-                                                                Тель-Авив. Арлозоров 5
-                                                            </strong>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td style="padding:5px 10px 20px 10px; font-size:14px;">
-                                                            Вы хотите сделать вашу свадьбу яркой и запоминающейся?
-                                                            Удивить ваших гостей и родных? Хотите вспоминать о ней
-                                                            долгие годы, с радостью и
-                                                        </td>
-                                                    </tr>
-                                                </table>
+                                                <?endforeach?>
 
                                             </td>
                                         </tr>
-                                    </table>
-
+                                        </table>
+                                    <?endif?>
 
                                 </td>
                             </tr>

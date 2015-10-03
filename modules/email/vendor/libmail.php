@@ -816,6 +816,14 @@ class Mail
         }
     }
 
+
+    public function reloadTo($resource = 'webi'){
+
+        $this->sendto[$resource] = '';
+        $this->smtpsendto[$resource] = '';
+        $this->names_email[$resource]['To'] = '';
+    }
+
     /**
      * Проверка валидности email. Возвращает ошибку или проверенные адреса, это удобно, если адреса были нациоанальные, то вернуться они уже отконвертированные
      * @param string|array $aad один email или массив email

@@ -43,7 +43,75 @@ class Model_SubscribeModel extends Model_BaseModel {
     }
 
 
-    public function getSubskribe(){
-        
+    /**
+     * @return mixed
+     * todo получить все бизнесы для рассылки
+     */
+    public function getSubskribeBusiness(){
+
+        $query = DB::select('business.*', array('city.name', 'CityName'))
+            ->from('business')
+            ->join('city', 'LEFT')
+            ->on('business.city','=','city.id')
+            ->where('status_subscribe','=', 0)
+            ->execute()->as_array();
+
+        if (!empty($query)) {
+            $id_business = array();
+            foreach ($query as $rows) {
+                $id_business[] = $rows['id'];
+            }
+
+            DB::update('business')
+                ->set(array('status_subscribe' => 1))
+                ->where('id', 'IN', $id_business)
+                ->execute();
+
+        }
+
+        return $query;
     }
+
+    /**
+     * @return mixed
+     * todo полечить все статьи для рассылки
+     */
+    public function getSubskribeArticless(){
+
+        $query = DB::select()
+            ->from('articles')
+            ->where('status_subscribe','=', 0)
+            ->execute()->as_array();
+
+
+        if (!empty($query)) {
+
+            $id_articless = array();
+            foreach ($query as $rows) {
+                $id_articless[] = $rows['id'];
+            }
+
+            DB::update('articles')
+                ->set(array('status_subscribe' => 1))
+                ->where('id', 'IN', $id_articless)
+                ->execute();
+
+        }
+
+        return $query;
+    }
+
+
+    /**
+     * @return mixed
+     * todo получаем список подпищиков
+     */
+    public function getSubskribeUsers(){
+        return DB::select()
+            ->from('subscription')
+            ->where('action','=', 1)
+            ->and_where('enable_all','=',1)
+            ->execute()->as_array();
+    }
+
 }
