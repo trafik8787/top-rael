@@ -15,6 +15,8 @@ class Controller_Core_Crud extends Controller_Core_Main {
     protected $id_del_array;
 
 
+
+
     public function  action_delete () {
 
         $re = unserialize(base64_decode($_POST['obj']));

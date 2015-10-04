@@ -34,6 +34,16 @@ abstract class Controller_Core_Main extends Controller_Template {
     }
 
 
+    public function after () {
+
+
+        if (Auth::instance()->logged_in() === false) {
+
+            $this->redirect('/administrator');
+        }
+        parent::after();
+    }
+
     public static function meny_admin () {
 
 

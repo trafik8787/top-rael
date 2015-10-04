@@ -49,7 +49,13 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
         if ($this->auth->logged_in() === false) {
-            $this->response->body($this->adm);
+
+//            if ($this->request->uri() != 'administrator') {
+//                if (empty($this->request->post())) {
+//                    $this->redirect('/administrator');
+//                }
+//            }
+
         } else {
 
             $this->user = $this->auth->get_user();

@@ -10,6 +10,7 @@ class Controller_Home extends Controller_BaseController {
 
 
 	public function action_index(){
+       // HTML::x(date('Y-m-d', strftime(1458684000)));
 
         //echo  Auth::instance()->hash('qweqweqwe');
       // phpinfo();
