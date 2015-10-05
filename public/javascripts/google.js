@@ -255,7 +255,10 @@ function initMap() {
 
 
             var list = listContainer(marker.data.list);
-            var favorite = favoritBtn('', 'Сохранить в Избранное', '<i class="fa fa-star"></i>', marker, favoritesClick);
+
+
+            var favorite = favoritBtn(marker.data.id, marker.data.favoritBus);
+
             var luxury = luxuryBtn(marker.data.linkLuxury);
             var coupon = couponBtn(marker.data.linkCoupons);
 
@@ -271,7 +274,7 @@ function initMap() {
             sidebar.appendChild(favorite);
 
             if (luxury && marker.data.linkLuxury.name != null && marker.data.linkLuxury.link != null) {
-                console.log(luxury);
+
                 sidebar.appendChild(luxury);
             }
 
@@ -372,27 +375,21 @@ function initMap() {
             return $container;
         };
 
-        var favoritBtn = function ($class, text, icon, marker, callback) {
+        var favoritBtn = function ($id_bus, favoritBus) {
 
             var $container = document.createElement('div');
-            $container.setAttribute('class', 'marker-favorites ' + $class);
 
-            var $href = document.createElement('a');
+            if (favoritBus != 1) {
+                $container.innerHTML = '<a href="#" class="w-add-bussines-page-favor" data-id="'+ $id_bus +'">'
+                +'<i class="fa fa-star"></i><span class="w-text-bus-page">Сохранить в Избранное</span></a>';
 
-            $href.innerHTML = icon || '<i class="fa fa-star"></i>';
-            $href.innerHTML += text || 'Сохранить в Избранное';
+            } else {
+                $container.innerHTML = '<a href="#">'
+                +'<i class="fa fa-star"></i><span class="w-text-bus-page">В избранном</span></a>';
+            }
 
-            EventListener.add($href, 'click', function () {
-                try {
-                    callback(marker);
-                } catch (er) {
-                }
-            });
-
-            $container.appendChild($href);
-
-            return $container;
-        };
+        return $container;
+    };
 
         var luxuryBtn = function (link) {
 

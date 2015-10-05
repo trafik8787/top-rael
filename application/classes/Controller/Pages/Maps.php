@@ -78,6 +78,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
                 ),
                 'link' => "/business/".$row['BusUrl'],
                 'linkCoupons' => "http://google.com",
+                'favoritBus' => isset($row['bussines_favorit']) ? $row['bussines_favorit'] : 0,
                 'linkLuxury' => array(
                     'name' => $row['TagsName'],
                     'link' => $row['TagsUrl']
@@ -118,6 +119,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
                         ),
                         'link' => "/business/".$row['BusUrl'],
                         'linkCoupons' => "http://google.com",
+                        'favoritBus' => isset($row['bussines_favorit']) ? $row['bussines_favorit'] : 0,
                         'linkLuxury' => array(
                             'name' => $row['TagsName'],
                             'link' => $row['TagsUrl']

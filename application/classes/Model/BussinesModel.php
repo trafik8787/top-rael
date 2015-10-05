@@ -1009,7 +1009,25 @@ class Model_BussinesModel extends Model_BaseModel {
         $result_query = $query->execute()->as_array();
 
         if (!empty($result_query)) {
-            return $this->CreareArrayBusinessMaps($result_query);
+            $result = $this->CreareArrayBusinessMaps($result_query);
+
+            //die(HTML::x( $result));
+            Controller_BaseController::favorits_bussines();
+            if (!empty(Controller_BaseController::$favorits_bussines)) {
+
+                $new_result = array();
+                foreach ($result as $result_row) {
+
+                    if (in_array($result_row['BusId'], Controller_BaseController::$favorits_bussines)) {
+                        $result_row['bussines_favorit'] = 1;
+                    }
+                    $new_result[] = $result_row;
+                }
+                $result = $new_result;
+            }
+
+            return $result;
+
         } else {
             return array();
         }
