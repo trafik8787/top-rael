@@ -22,19 +22,18 @@
 
             <div class="google-map-shorkeys">
                 <a href="javascript:;" data-map-shortkey="Тель Авив">Тель Авив</a>
+                <a href="javascript:;" data-map-shortkey="Яффа">Яффо</a>
                 <a href="javascript:;" data-map-shortkey="Иерусалим">Иерусалим</a>
-                <a href="javascript:;" data-map-shortkey="Хайфа">Хайфа</a>
                 <a href="javascript:;" data-map-shortkey="Эйлат">Эйлат</a>
-                <a href="javascript:;" data-map-shortkey="Бат Ям">Бат Ям</a>
-                <a href="javascript:;" data-map-shortkey="Ашкелон">Ашкелон</a>
-                <a href="javascript:;" data-map-shortkey="Ашдод">Ашдод</a>
+                <a href="javascript:;" data-map-shortkey="Нетания">Нетания</a>
+                <a href="javascript:;" data-map-shortkey="Герцлия">Герцлия</a>
             </div>
 
             <div id="google-map-search">
                 <div class="inner-addon right-addon">
                     <i class="glyphicon glyphicon-search"></i>
                     <input type="text" class="form-control" id="pac-input"
-                           placeholder="Введите адресс или название места"/>
+                           placeholder="Напишите город"/>
                 </div>
             </div>
 

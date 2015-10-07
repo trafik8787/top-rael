@@ -27,7 +27,7 @@ function initMap() {
 
 
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 15,
+        zoom: 8,
         center: {lat: lat, lng: lng}
     });
 
@@ -35,6 +35,9 @@ function initMap() {
     var tmpl = template();
 
     markers = setMarkes(getData(), cluster);
+
+    // todo открывает окно описание маркера
+   // tmpl.open(map, markers[0]);
 
     cluster.addMarkers(markers);
 
@@ -233,6 +236,7 @@ function initMap() {
         var myOptions = {
             content: container,
             alignBottom: true,
+            //visible: true,
             boxClass: "marker",
             disableAutoPan: false,
             pixelOffset: new google.maps.Size(-50, -50),
@@ -241,6 +245,8 @@ function initMap() {
         };
 
         var ib = new InfoBox(myOptions);
+
+
 
         function open(map, marker) {
 

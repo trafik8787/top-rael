@@ -380,4 +380,41 @@ class Model_CouponsModel extends Model_BaseModel {
 
     }
 
+    /**
+     * @return mixed
+     * todo получить разделы в которых есть купоны и их дата актуальна
+     */
+    public function CouponsSectionCountCoupon($general_meny){
+
+        if (Cache::instance()->get('coupons_general_meny') == null) {
+
+            $query = DB::select()
+                ->from('coupon')
+                ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coupon.datestart AND coupon.dateoff'))
+                ->cached()
+                ->execute()->as_array();
+
+
+            $new_meny = array();
+            foreach ($general_meny as $rows_meny) {
+
+                foreach ($query as $rows_coupon) {
+
+                    if ($rows_coupon['id_section'] == $rows_meny['id']) {
+                        $new_meny[$rows_meny['id']] = $rows_meny;
+                    }
+
+                }
+
+            }
+
+            Cache::instance()->set('coupons_general_meny', $new_meny);
+
+        } else {
+            $new_meny = Cache::instance()->get('coupons_general_meny');
+        }
+
+        return $new_meny;
+    }
+
 }

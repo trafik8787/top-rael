@@ -260,7 +260,7 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
     public function action_contacts (){
-        Controller_Core_Main::$title_page = 'Контакты';
+        Controller_Core_Main::$title_page = 'Письма';
         $this->response->body(self::adminContacts()->render());
     }
 
@@ -508,10 +508,10 @@ class Controller_Administrator extends Controller_Core_Main {
             'keywords',
             'city',
             'address',
-            'maps_cordinate_x',
-            'maps_cordinate_y',
             'tel',
             'schedule',
+            'maps_cordinate_x',
+            'maps_cordinate_y',
             'dop_address',
             'website',
             'video',
@@ -534,10 +534,10 @@ class Controller_Administrator extends Controller_Core_Main {
             'keywords',
             'city',
             'address',
-            'maps_cordinate_x',
-            'maps_cordinate_y',
             'tel',
             'schedule',
+            'maps_cordinate_x',
+            'maps_cordinate_y',
             'dop_address',
             'website',
             'video',
@@ -565,11 +565,11 @@ class Controller_Administrator extends Controller_Core_Main {
             'services' => 'Приемущества и услуги',
             'website' => 'Веб сайт бизнеса',
             'video' => 'Видео',
-            'home_busines_foto' => 'Главное фото бизнеса',
-            'top_slider' => 'Верхний слайдер',
+            'home_busines_foto' => 'Главное фото бизнеса - 350х222',
+            'top_slider' => 'Обои - 1136х320',
             'file_meny' => 'Файл меню',
             'info' => 'Описание',
-            'logo' => 'Логотип',
+            'logo' => 'Логотип - 360х360',
             'cat_id' => 'Категория',
             'redactor_user' => 'Ответственный',
             'date_create' => 'Дата создания',

@@ -24,7 +24,7 @@
                 '<input class="form-control" placeholder="Широта" type="text" name="maps_x[]" value=""/>' +
                 '<input class="form-control" placeholder="Долгота" type="text" name="maps_y[]" value=""/>' +
                 '</div>'+
-                '<p> <button type="button" class="btn btn-default btn-lg w-button-delete"><span class="glyphicon glyphicon-remove-sign"></span> Delete</button></p></li>';
+                '<p> <button type="button" class="btn btn-default btn-lg w-button-delete"><span class="glyphicon glyphicon-remove-sign"></span> Удалить</button></p></li>';
             $(".media-list li.edit").last().after(add);
             jQuery('.chosen-select').chosen({no_results_text:'Нет результатов по'});
             return false;
@@ -37,7 +37,7 @@
     });
 </script>
 
-<div class="form-group has-feedback">
+<div class="form-group has-feedback" style="margin-top: 5%;">
 
     <label for="Видео" class="col-sm-2 control-label">Добавить адреса</label>
     <div class="col-sm-10">
@@ -46,7 +46,7 @@
             <?if ($data !=null):?>
                 <?foreach ($data as $key => $row_data):?>
                     <li class="edit">
-                        <select name="dop_sity[<?=$key?>]" class="form-control chosen-select" id="">
+                        <select name="dop_sity[<?=$key?>]" data-placeholder="Выбрать город" class="form-control chosen-select" id="">
                             <option value=""></option>
                             <?foreach ($list_sity as $row_list):?>
 
@@ -61,7 +61,7 @@
                             <input class="form-control" placeholder="Широта" type="text" name="maps_x[<?=$key?>]" value="<?=$row_data['maps_x']?>"/>
                             <input class="form-control" placeholder="Долгота" type="text" name="maps_y[<?=$key?>]" value="<?=$row_data['maps_y']?>"/>
                         </div>
-                        <p> <button type="button" class="btn btn-default btn-lg w-button-delete"><span class="glyphicon glyphicon-remove-sign"></span> Delete</button></p>
+                        <p> <button type="button" class="btn btn-default btn-lg w-button-delete"><span class="glyphicon glyphicon-remove-sign"></span> Удалить</button></p>
                     </li>
                 <?endforeach?>
             <?else:?>
@@ -84,7 +84,7 @@
                 </li>
             <?endif?>
         </ul>
-        <p> <button type="button" class="btn btn-default btn-lg w-button-add"><span class="glyphicon glyphicon-plus"></span> Add</button></p>
+        <p> <button type="button" class="btn btn-default btn-lg w-button-add"><span class="glyphicon glyphicon-plus"></span> Добавить</button></p>
 
     </div>
 </div>

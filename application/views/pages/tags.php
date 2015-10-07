@@ -185,7 +185,7 @@
                                 <ul class="nav nav-pills panel-navigation w-category-bloc">
 
                                     <li role="presentation" class="active"><a href="#" class="w-tags-coup-cat w-cat-active" >Все</a></li>
-                                    <?foreach($section as $row_category):?>
+                                    <?foreach($section_coupons as $row_category):?>
 
                                         <li role="presentation" class="" ><a href="#" data-section="<?=$row_category['url']?>" class="w-tags-coup-cat" ><?=$row_category['name']?></a></li>
 

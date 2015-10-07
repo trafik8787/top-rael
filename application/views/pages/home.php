@@ -64,7 +64,7 @@
                     <ul class="nav nav-pills panel-navigation">
 
                         <li class="active"><a class="w-coupon-section" href="#">Новые</a></li>
-                        <?foreach ($section as $row_section):?>
+                        <?foreach ($section_coupons as $row_section):?>
                             <li><a href="/coupons/<?=$row_section['url']?>" class="w-coupon-section" data-sectcop="<?=$row_section['url']?>"><?=$row_section['name']?></a></li>
                         <?endforeach?>
 

@@ -5,7 +5,7 @@
  * Date: 19.07.2015
  * Time: 18:09
  */
-//HTML::x(json_decode(Cookie::get('favoritcoup')));
+HTML::x($category);
 //HTML::x(Model::factory('CouponsModel')->getCouponsFavoritesUserId(41));
 ?>
 <script>
@@ -35,7 +35,7 @@
 
                             <div class="panel-buttons-group">
                                 <form action="" method="get" id="w-form-city">
-                                    <select class="form-control w-select-city" name="city" style="width: 20%">
+                                    <select class="form-control w-select-city" name="city">
                                         <option value="">По городам</option>
                                         <?foreach($city as $key_id => $row_city):?>
                                             <option <?if ($city_id == $key_id) { echo 'selected="selected"';}?> value="<?=$key_id?>"><?=$row_city?></option>

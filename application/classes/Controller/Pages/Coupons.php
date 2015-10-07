@@ -26,7 +26,9 @@ class Controller_Pages_Coupons extends Controller_BaseController {
         }
 
         $content = View::factory('pages/coupon_all');
-        $content->category =  self::$general_meny;
+
+        //получаем только те разделы в которых есть купоны
+        $content->category =  Model::factory('CouponsModel')->CouponsSectionCountCoupon(self::$general_meny);
 
         if ($this->request->param('url_section') == '') {
             $data = Model::factory('CouponsModel')->getCouponsSectionUrl(null, 10, $number_page, $city_id);

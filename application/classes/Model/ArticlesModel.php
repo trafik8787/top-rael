@@ -246,13 +246,14 @@ class Model_ArticlesModel extends Model_BaseModel {
 
                 array('bus.id', 'BusId'),
                 array('bus.name', 'BusName'),
-                array('bus.city', 'BusCity'),
                 array('bus.address', 'BusAddress'),
                 array('bus.home_busines_foto', 'BusImg'),
                 array('bus.info', 'BusInfo'),
                 array('bus.url', 'BusUrl'),
 
-                array('art_rel_coup.id_coupon', 'CoupId')
+                array('art_rel_coup.id_coupon', 'CoupId'),
+
+                array('cit.name', 'CityName')
             )
                 ->from(array('articles', 'artic'))
 
@@ -261,6 +262,10 @@ class Model_ArticlesModel extends Model_BaseModel {
 
                 ->join(array('business', 'bus'), 'LEFT')
                 ->on('art_rel_bus.id_business', '=', 'bus.id')
+
+                //город
+                ->join(array('city', 'cit'), 'LEFT')
+                ->on('bus.city', '=', 'cit.id')
 
                 ->join(array('articles_relation_coupon', 'art_rel_coup'), 'LEFT')
                 ->on('artic.id', '=', 'art_rel_coup.id_articles')
@@ -343,7 +348,7 @@ class Model_ArticlesModel extends Model_BaseModel {
                     $end_result['BusArr'][] = array(
                         'BusId' => $row['BusId'],
                         'BusName' => $row['BusName'],
-                        'BusCity' => $row['BusCity'],
+                        'BusCity' => $row['CityName'],
                         'BusAddress' => $row['BusAddress'],
                         'BusImg' => $row['BusImg'],
                         'BusInfo' => $row['BusInfo'],

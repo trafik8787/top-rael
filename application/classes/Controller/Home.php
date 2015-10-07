@@ -95,6 +95,7 @@ class Controller_Home extends Controller_BaseController {
             array($seo_home[0]['keywords'],''),array($seo_home[0]['description'],''));
 
         $content->section = $section;
+        $content->section_coupons = Model::factory('CouponsModel')->CouponsSectionCountCoupon($section);
         $content->coupons = $coupon;
         //получаем первый элемент масива статей
         $top_articles = array_shift($articles);
