@@ -232,8 +232,8 @@
                                                             <div class="coupon-object-top">
 
                                                                 <div class="coupon-title">
-                                                                    Купон
-                                                                    <small class="block"><?=$rows_data[0]['name']?></small>
+                                                                    <?=$rows_data[0]['name']?>
+<!--                                                                    <small class="block">--><?//=$rows_data[0]['name']?><!--</small>-->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -242,7 +242,7 @@
 
                                                                 <div class="coupon-title">
                                                                     <?=$rows_data[0]['secondname']?>
-                                                                    <span class="block">скидка</span>
+<!--                                                                    <span class="block">скидка</span>-->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -292,8 +292,8 @@
                                                                 <div class="coupon-object-top">
 
                                                                     <div class="coupon-title">
-                                                                        Купон
-                                                                        <small class="block"><?=$rows_data[1]['name']?></small>
+                                                                        <?=$rows_data[1]['name']?>
+<!--                                                                        <small class="block">--><?//=$rows_data[1]['name']?><!--</small>-->
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -302,7 +302,7 @@
 
                                                                     <div class="coupon-title">
                                                                         <?=$rows_data[1]['secondname']?>
-                                                                        <span class="block">скидка</span>
+<!--                                                                        <span class="block">скидка</span>-->
                                                                     </div>
                                                                 </div>
                                                             </div>

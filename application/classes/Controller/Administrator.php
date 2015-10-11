@@ -565,7 +565,7 @@ class Controller_Administrator extends Controller_Core_Main {
             'services' => 'Приемущества и услуги',
             'website' => 'Веб сайт бизнеса',
             'video' => 'Видео',
-            'home_busines_foto' => 'Главное фото бизнеса - 350х222',
+            'home_busines_foto' => 'Главное фото бизнеса - 350х230',
             'top_slider' => 'Обои - 1136х320',
             'file_meny' => 'Файл меню',
             'info' => 'Описание',
@@ -1055,8 +1055,10 @@ class Controller_Administrator extends Controller_Core_Main {
 
             //удаляем старые картинки
             if ($img === true and file_exists($_SERVER['DOCUMENT_ROOT'] . $old_array['home_busines_foto'])) {
-                unlink($_SERVER['DOCUMENT_ROOT'] . $old_array['home_busines_foto']);
-                unlink($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_business/thumbs/' . basename($old_array['home_busines_foto']));
+                if (!empty($old_array['home_busines_foto'])) {
+                    unlink($_SERVER['DOCUMENT_ROOT'] . $old_array['home_busines_foto']);
+                    unlink($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_business/thumbs/' . basename($old_array['home_busines_foto']));
+                }
             }
         }
 

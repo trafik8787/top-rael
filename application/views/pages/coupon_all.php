@@ -5,7 +5,7 @@
  * Date: 19.07.2015
  * Time: 18:09
  */
-HTML::x($category);
+//HTML::x($category);
 //HTML::x(Model::factory('CouponsModel')->getCouponsFavoritesUserId(41));
 ?>
 <script>

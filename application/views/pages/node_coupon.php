@@ -84,13 +84,13 @@
                                                 <div class="coupon-object-middle">
 
                                                     <div class="coupon-title">
-                                                        СКИДКА
-                                                        <span class="block"><strong><?=$data[0]['secondname']?></strong></span>
+                                                        <?=$data[0]['name']?>
+<!--                                                        <span class="block"><strong>--><?//=$data[0]['secondname']?><!--</strong></span>-->
                                                     </div>
 
                                                     <div class="text-center">
-                                                        <strong><?=$data[0]['name']?></strong>
-                                                        <small class="block"><?=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?></small>
+                                                        <strong><?=$data[0]['secondname']?></strong>
+<!--                                                        <small class="block">--><?//=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?><!--</small>-->
                                                     </div>
                                                 </div>
                                             </div>
@@ -115,7 +115,7 @@
                                             <div class="media">
                                                 <div class="media-left">
                                                     <a href="#">
-                                                        <img class="media-object" src="<?=$data[0]['BusLogo']?>" alt="...">
+                                                        <img class="media-object" src="<?=$data[0]['BusLogo']?>" width="88" height="88" alt="...">
                                                     </a>
                                                 </div>
                                                 <div class="media-body">
@@ -142,10 +142,7 @@
 
                         <div class="modal-footer">
                             <p class="rtl">
-                                כלל משחקים תחבורה ייִדיש ב. לחיבור הקנאים רב־לשוני את ויש, טיפול המלצת אל זכר, יידיש
-                                פיסול אקראי זאת של.<br/>
-                                צ'ט העמוד והגולשים את, מדע של מונחים מועמדים. מה שער מתוך ברית מונחונים. בקר מה הטבע
-                                הרוח ופיתוחה.
+                                <?=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?>
                             </p>
 
                             <div class="div-table">

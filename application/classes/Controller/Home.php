@@ -41,7 +41,7 @@ class Controller_Home extends Controller_BaseController {
        // die(phpinfo());
         $resultArr = array();
         $content = View::factory('pages/home');
-        $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+        $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'), 'order_by');
         $articles = Model::factory('ArticlesModel')->getArticlesInHome();
 
         //проверяем наличие кеша

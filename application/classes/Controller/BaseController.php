@@ -66,11 +66,12 @@ abstract class Controller_BaseController extends Controller_Template {
         }
 
         if (Cache::instance()->get('general_meny') == null) {
-            self::$general_meny = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', 0)); //меню разделов
+            self::$general_meny = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', 0), 'order_by'); //меню разделов
             Cache::instance()->set('general_meny', self::$general_meny);
         } else {
             self::$general_meny = Cache::instance()->get('general_meny');
         }
+
         $this->header->general_meny = self::$general_meny;
         $this->footer->general_meny = self::$general_meny;
 

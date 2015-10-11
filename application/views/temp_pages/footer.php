@@ -41,7 +41,7 @@
                         <div class="col-sm-4">
                             <nav>
                                 <ul>
-                                    <li><a href="/">Главная</a></li>
+                                    <li><a href="/">ГЛАВНАЯ</a></li>
                                     <?foreach($general_meny as $row_meny):?>
                                         <li><a href="/section/<?=$row_meny['url']?>"><?=$row_meny['name']?></a></li>
                                     <?endforeach?>

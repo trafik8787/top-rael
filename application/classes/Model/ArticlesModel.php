@@ -424,6 +424,7 @@ class Model_ArticlesModel extends Model_BaseModel {
                 ->from('articles')
                 ->join('city', 'LEFT')
                 ->on('articles.city', '=', 'city.id')
+                ->where('city.parent_id', '<>', 0)
                 ->cached()
                 ->execute()->as_array();
         } else {

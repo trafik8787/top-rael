@@ -22,7 +22,7 @@
 
                     <h1><?=$data['ArticName']?></h1>
 
-                    <p><i><strong><?=$data['ArticSecondname']?></strong></i></p>
+<!--                    <p><i><strong>--><?//=$data['ArticSecondname']?><!--</strong></i></p>-->
 
                     <br/>
                     <?if (!empty($data['ArticShortPreviev'])):?>
@@ -47,41 +47,72 @@
 
                             <div class="panel-heading">
 
-                                <div class="panel-title">Обзор бизнесов по определеной тематике</div>
+                                <div class="panel-title">Посмотрите личные страницы бизнесов</div>
 
                             </div>
 
                             <div class="panel-body">
 
                                 <?foreach ($data['BusArr'] as $rows_busines):?>
+                                    <div class="clearfix">
+                                        <div class="col-sm-6">
+                                            <div class="thumbnail">
 
-                                    <div class="col-sm-6">
-                                        <div class="thumbnail">
+                                                <?if (!empty($rows_busines[0]['bussines_favorit']))://если купон добавлен в избранное?>
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                        <i class="fa fa-star"></i>
+                                                    </a>
+                                                <?else:?>
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_busines[0]['BusId']?>" class="pin w-add-bussines-favor">
+                                                        <i class="fa fa-star"></i>
+                                                    </a>
+                                                <?endif?>
 
-                                            <?if (!empty($rows_busines['bussines_favorit']))://если купон добавлен в избранное?>
-                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                                    <i class="fa fa-star"></i>
+                                                <a href="/business/<?=$rows_busines[0]['BusUrl']?>" class="thumbnail-image">
+                                                    <img src="<?=$rows_busines[0]['BusImg']?>" width="240" height="150" alt="">
                                                 </a>
-                                            <?else:?>
-                                                <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_busines['BusId']?>" class="pin w-add-bussines-favor">
-                                                    <i class="fa fa-star"></i>
-                                                </a>
-                                            <?endif?>
 
-                                            <a href="/business/<?=$rows_busines['BusUrl']?>" class="thumbnail-image">
-                                                <img src="<?=$rows_busines['BusImg']?>" width="240" height="150" alt="">
-                                            </a>
+                                                <div class="thumbnail-content">
+                                                    <h2 class="thumbnail-title">
+                                                        <a href="/business/<?=$rows_busines[0]['BusUrl']?>"><?=$rows_busines[0]['BusName']?></a>
+                                                        <small><?=$rows_busines[0]['BusCity']?>. <?=$rows_busines[0]['BusAddress']?></small>
+                                                    </h2>
 
-                                            <div class="thumbnail-content">
-                                                <h2 class="thumbnail-title">
-                                                    <a href="/business/<?=$rows_busines['BusUrl']?>"><?=$rows_busines['BusName']?></a>
-                                                    <small><?=$rows_busines['BusCity']?>. <?=$rows_busines['BusAddress']?></small>
-                                                </h2>
+                                                    <?=Text::limit_chars(strip_tags($rows_busines[0]['BusInfo']), 100, null, true)?>
 
-                                                <?=Text::limit_chars(strip_tags($rows_busines['BusInfo']), 100, null, true)?>
-
+                                                </div>
                                             </div>
                                         </div>
+                                        <?if (!empty($rows_busines[1])):?>
+                                            <div class="col-sm-6">
+                                                <div class="thumbnail">
+
+                                                    <?if (!empty($rows_busines[1]['bussines_favorit']))://если купон добавлен в избранное?>
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                            <i class="fa fa-star"></i>
+                                                        </a>
+                                                    <?else:?>
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_busines[1]['BusId']?>" class="pin w-add-bussines-favor">
+                                                            <i class="fa fa-star"></i>
+                                                        </a>
+                                                    <?endif?>
+
+                                                    <a href="/business/<?=$rows_busines[1]['BusUrl']?>" class="thumbnail-image">
+                                                        <img src="<?=$rows_busines[1]['BusImg']?>" width="240" height="150" alt="">
+                                                    </a>
+
+                                                    <div class="thumbnail-content">
+                                                        <h2 class="thumbnail-title">
+                                                            <a href="/business/<?=$rows_busines[1]['BusUrl']?>"><?=$rows_busines[1]['BusName']?></a>
+                                                            <small><?=$rows_busines[1]['BusCity']?>. <?=$rows_busines[1]['BusAddress']?></small>
+                                                        </h2>
+
+                                                        <?=Text::limit_chars(strip_tags($rows_busines[1]['BusInfo']), 100, null, true)?>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?endif?>
                                     </div>
                                 <?endforeach?>
 
@@ -90,66 +121,6 @@
 
                     <?endif?>
 
-                    <p><i><strong><?=$data['ArticBigPreviev']?></strong></i></p>
-
-
-
-
-
-                    <hr/>
-
-                    <div class="recomendation">
-                        <strong>Рекомендуйте нас друзьям</strong>
-                        <br/>
-
-                        <script type="text/javascript">(function() {
-                                if (window.pluso)if (typeof window.pluso.start == "function") return;
-                                if (window.ifpluso==undefined) { window.ifpluso = 1;
-                                    var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
-                                    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
-                                    s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
-                                    var h=d[g]('body')[0];
-                                    h.appendChild(s);
-                                }})();</script>
-                        <div class="pluso" data-background="transparent" data-options="big,square,line,horizontal,nocounter,theme=08" data-services="vkontakte,odnoklassniki,facebook,twitter,google,moimir,email,print"></div>
-
-<!--                        <div class="recomendation-icons">-->
-<!--                            -->
-<!---->
-<!--                            <a href="#" class="social vk">-->
-<!--                                <i class="fa fa-vk"></i>-->
-<!--                            </a>-->
-<!---->
-<!--                            <a href="#" class="social facebook">-->
-<!--                                <i class="fa fa-facebook"></i>-->
-<!--                            </a>-->
-<!---->
-<!--                            <a href="#" class="social twitter">-->
-<!--                                <i class="fa fa-twitter"></i>-->
-<!--                            </a>-->
-<!---->
-<!--                            <a href="#" class="social email">-->
-<!--                                <i class="fa fa-envelope"></i>-->
-<!--                            </a>-->
-<!--                        </div>-->
-                        <?if (!empty($data['articles_favorit'])):?>
-                            <a href="#" class="btn btn-link" style="color: #003c4c;">
-                                <i class="fa fa-star"></i>
-                                В избранном
-                            </a>
-                        <?else:?>
-                            <a href="#" data-id="<?=$data['ArticId']?>"  class="btn btn-link w-add-article-favor">
-                                <i class="fa fa-star"></i>
-                                Добавить в Избранные места
-                            </a>
-                        <?endif?>
-                    </div>
-
-
-                    <hr/>
-
-
-
 
                     <?if (!empty($data['CoupArr'])):?>
 
@@ -157,7 +128,7 @@
                         <div class="panel panel-coupons">
 
                             <div class="panel-heading">
-                                <div class="panel-title">Обзор новых купонов по определеной тематике</div>
+                                <div class="panel-title">Купоны только на TopIsrael.ru</div>
                             </div>
 
                             <div class="panel-body">
@@ -295,6 +266,69 @@
 
 
                     <?endif?>
+
+<!--                    <p><i><strong>--><?//=$data['ArticBigPreviev']?><!--</strong></i></p>-->
+
+
+
+
+
+                    <hr/>
+
+                    <div class="recomendation">
+                        <strong>Рекомендуйте нас друзьям</strong>
+                        <br/>
+
+<!--                        <script type="text/javascript">(function() {-->
+<!--                                if (window.pluso)if (typeof window.pluso.start == "function") return;-->
+<!--                                if (window.ifpluso==undefined) { window.ifpluso = 1;-->
+<!--                                    var d = document, s = d.createElement('script'), g = 'getElementsByTagName';-->
+<!--                                    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;-->
+<!--                                    s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';-->
+<!--                                    var h=d[g]('body')[0];-->
+<!--                                    h.appendChild(s);-->
+<!--                                }})();</script>-->
+<!--                        <div class="pluso" data-background="transparent" data-options="big,square,line,horizontal,nocounter,theme=08" data-services="vkontakte,odnoklassniki,facebook,twitter,google,moimir,email,print"></div>-->
+
+                        <div class="recomendation-icons">
+
+
+                            <a href="#" class="social vk">
+                                <i class="fa fa-vk"></i>
+                            </a>
+
+                            <a href="#" class="social facebook">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+
+                            <a href="#" class="social twitter">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+
+                            <a href="#" class="social email">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        </div>
+                        <?if (!empty($data['articles_favorit'])):?>
+                            <a href="#" class="btn btn-link" style="color: #003c4c;">
+                                <i class="fa fa-star"></i>
+                                В избранном
+                            </a>
+                        <?else:?>
+                            <a href="#" data-id="<?=$data['ArticId']?>"  class="btn btn-link w-add-article-favor">
+                                <i class="fa fa-star"></i>
+                                Добавить в Избранные места
+                            </a>
+                        <?endif?>
+                    </div>
+
+
+                    <hr/>
+
+
+
+
+
 
 
 <!--                    <p><i><strong>Тут будет краткая выдержка основных смысловых блоков для привлечения внимания-->

@@ -185,6 +185,7 @@
                                     <?foreach ($rows_data_coupon as $rows_data_coupon_favor):?>
 
                                         <div class="col-md-4 col-sm-6">
+
                                             <div class="coupon coupon-big">
 
                                                 <a href="#" data-id="<?=$rows_data_coupon_favor['id']?>" class="pin w-delete-coupon-favor"><i class="fa fa-trash"></i></a>
@@ -207,8 +208,8 @@
                                                                 <div class="coupon-object-top">
 
                                                                     <div class="coupon-title">
-                                                                        Купон
-                                                                        <small class="block"><?=$rows_data_coupon_favor['name']?></small>
+                                                                        <?=$rows_data_coupon_favor['name']?>
+<!--                                                                        <small class="block">--><?//=$rows_data_coupon_favor['name']?><!--</small>-->
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -217,7 +218,7 @@
 
                                                                     <div class="coupon-title">
                                                                         <?=$rows_data_coupon_favor['secondname']?>
-                                                                        <span class="block">скидка</span>
+<!--                                                                        <span class="block">скидка</span>-->
                                                                     </div>
                                                                 </div>
                                                             </div>

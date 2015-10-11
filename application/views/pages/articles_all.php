@@ -76,7 +76,7 @@
                                                     <a href="/articles/<?=$data_shift['CatUrl']?>" class="media-link"><?=$data_shift['CatName']?></a>
                                                 </h2>
 
-                                                <?=Text::limit_chars(strip_tags($data_shift['content']), 250, null, true)?>
+                                                <?=$data_shift['big_previev']?>
                                             </div>
                                         </div>
 
@@ -84,6 +84,7 @@
                                 <?endif?>
 
                                 <div class="col-md-12">
+
                                     <?foreach($data as $rows_data):?>
                                         <div class="list-item">
                                             <?if (!empty($rows_data['CatUrl'])):?>
@@ -106,7 +107,7 @@
                                                         <small><?=$rows_data['secondname']?></small>
                                                     </h2>
 
-                                                    <?=Text::limit_chars(strip_tags($rows_data['content']), 350, null, true)?>
+                                                    <?=$rows_data['big_previev']?>
 
                                                 </div>
                                             </div>

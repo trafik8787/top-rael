@@ -14,11 +14,11 @@
         <div class="top">
 
             <div class="top-image">
-                <img src="<?=$articles['top_articles']['images_article']?>" width="600" height="420" class="img-responsive" alt="<?=$articles['top_articles']['secondname']?>"/>
+                <a href="/article/<?=$articles['top_articles']['url']?>"><img src="<?=$articles['top_articles']['images_article']?>" width="600" height="420" class="img-responsive" alt="<?=$articles['top_articles']['secondname']?>"/></a>
 
                 <div class="top-image-text">
-                    <h2><a href="/article/<?=$articles['top_articles']['url']?>"><?=$articles['top_articles']['secondname']?></a></h2>
-                    <?=$articles['top_articles']['short_previev']?>
+                    <h2><a href="/article/<?=$articles['top_articles']['url']?>"><?=$articles['top_articles']['name']?></a></h2>
+                    <?=$articles['top_articles']['secondname']?>
                 </div>
             </div>
 
@@ -34,9 +34,10 @@
                         <div class="media-body">
                             <h2 class="media-heading"><a href="/article/<?=$rows_articles['url']?>"><strong><?=$rows_articles['name']?></strong></a></h2>
 
-                            <strong><?=$rows_articles['secondname']?></strong>
+                            <p><?=$rows_articles['short_previev']?></p>
 
-                            <p> <?=Text::limit_chars(strip_tags($rows_articles['content']), 180, null, true)?></p>
+
+<!--                            <p> --><?//=Text::limit_chars(strip_tags($rows_articles['content']), 180, null, true)?><!--</p>-->
                         </div>
                     </div>
                 <?endforeach?>
@@ -110,8 +111,8 @@
                                                 <div class="coupon-object-top">
 
                                                     <div class="coupon-title">
-                                                        Купон
-                                                        <small class="block"><?=$rows_coupon['name']?></small>
+                                                        <?=$rows_coupon['name']?>
+<!--                                                        <small class="block">--><?//=$rows_coupon['name']?><!--</small>-->
                                                     </div>
                                                 </div>
                                             </div>
@@ -119,8 +120,7 @@
                                                 <div class="coupon-object-middle">
 
                                                     <div class="coupon-title">
-                                                        20%
-                                                        <span class="block">скидка</span>
+                                                        <?=$rows_coupon['secondname']?>
                                                     </div>
                                                 </div>
                                             </div>

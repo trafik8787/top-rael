@@ -36,8 +36,10 @@ function initMap() {
 
     markers = setMarkes(getData(), cluster);
 
-    // todo открывает окно описание маркера
-   // tmpl.open(map, markers[0]);
+    // todo открывает окно описание маркера если перешли с карточки бизнеса
+    if (window.busLng != 0 || window.busLat != 0) {
+         tmpl.open(map, markers[0]);
+    }
 
     cluster.addMarkers(markers);
 

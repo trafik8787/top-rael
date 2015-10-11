@@ -5,7 +5,7 @@
  * Date: 07.08.2015
  * Time: 14:32
  */
-//HTML::x($BusName);
+//HTML::x($content);
 ?>
 
 <?if (!empty($content)):?>
@@ -52,8 +52,8 @@
                                     <div class="coupon-object-top">
 
                                         <div class="coupon-title">
-                                            Купон
-                                            <small class="block">Массаж</small>
+                                            <?=$row['CoupName']?>
+<!--                                            <small class="block">Массаж</small>-->
                                         </div>
                                     </div>
                                 </div>
@@ -61,8 +61,9 @@
                                     <div class="coupon-object-middle">
 
                                         <div class="coupon-title">
-                                            20%
-                                            <span class="block">скидка</span>
+                                            <?=$row['CoupSecondname']?>
+<!--                                            20%-->
+<!--                                            <span class="block">скидка</span>-->
                                         </div>
                                     </div>
                                 </div>
@@ -70,7 +71,7 @@
 
                                     <div class="coupon-object-bottom">
 
-                                        <small class="coupon-date">до 1 апреля 2015</small>
+                                        <small class="coupon-date">до <?=Date::rusdate(strtotime($row['DateOff']), 'j %MONTH% Y'); ?></small>
                                     </div>
                                 </div>
                             </div>

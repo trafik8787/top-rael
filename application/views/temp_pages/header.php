@@ -91,14 +91,16 @@
                 <div id="header-bottom">
                     <nav>
                         <ul class="header-nav">
-                            <li><a href="/">Главная</a></li>
+                            <li><a href="/">ГЛАВНАЯ</a></li>
                             <?foreach($general_meny as $row_meny):?>
                                 <li><a href="/section/<?=$row_meny['url']?>"><?=$row_meny['name']?></a></li>
                             <?endforeach?>
                         </ul>
                         <?if (!empty($tags)):?>
                             <?foreach($tags as $tags_row):?>
-                                <a href="/tags/<?=$tags_row['url_tags']?>" class="button"><span><?=$tags_row['name_tags']?></span></a>
+                                <?if ($tags_row['url_tags'] == 'luxury'):?>
+                                    <a href="/tags/<?=$tags_row['url_tags']?>" class="button"><span><?=$tags_row['name_tags']?></span></a>
+                                <?endif?>
                             <?endforeach?>
                         <?endif?>
                     </nav>

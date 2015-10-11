@@ -42,8 +42,8 @@
                             <div class="coupon-object-top">
 
                                 <div class="coupon-title">
-                                    Купон
-                                    <small class="block"><?=$rows_coupon['name']?></small>
+                                    <?=$rows_coupon['name']?>
+<!--                                    <small class="block">--><?//=$rows_coupon['secondname']?><!--</small>-->
                                 </div>
                             </div>
                         </div>
@@ -51,8 +51,9 @@
                             <div class="coupon-object-middle">
 
                                 <div class="coupon-title">
-                                    20%
-                                    <span class="block">скидка</span>
+                                    <?=$rows_coupon['secondname']?>
+<!--                                    20%-->
+<!--                                    <span class="block">скидка</span>-->
                                 </div>
                             </div>
                         </div>

@@ -95,6 +95,7 @@ class Controller_Pages_Articles extends Controller_BaseController {
             array($data['ArticDesc'], $data['ArticContent']));
 
         $data['CoupArr'] = parent::convertArrayVievData($data['CoupArr']);
+        $data['BusArr'] = parent::convertArrayVievData($data['BusArr']);
 
         $content->data = $data;
         //читать еще

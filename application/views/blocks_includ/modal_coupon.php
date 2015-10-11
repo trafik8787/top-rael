@@ -36,21 +36,21 @@
                             <div class="coupon-object-middle">
 
                                 <div class="coupon-title">
-                                    СКИДКА
+                                    <?=$data[0]['name']?>
                                     <span class="block"><strong><?=$data[0]['secondname']?></strong></span>
                                 </div>
 
-                                <div class="text-center">
-                                    <strong><?=$data[0]['name']?></strong>
-                                    <small class="block"><?=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?></small>
-                                </div>
+<!--                                <div class="text-center">-->
+<!--                                    <strong>--><?//=$data[0]['name']?><!--</strong>-->
+<!--                                    <small class="block">--><?//=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?><!--</small>-->
+<!--                                </div>-->
                             </div>
                         </div>
 
                         <div class="coupon-sidebar-footer">
 
                             <div class="coupon-object-bottom">
-                                <small class="coupon-date"><?=Date::rusdate(strtotime($data[0]['dateoff']), 'j %MONTH% Y'); ?></small>
+                                <small class="coupon-date">до <?=Date::rusdate(strtotime($data[0]['dateoff']), 'j %MONTH% Y'); ?></small>
                             </div>
                         </div>
                     </div>
@@ -96,10 +96,7 @@
 <div class="modal-footer">
 
     <p class="rtl">
-        כלל משחקים תחבורה ייִדיש ב. לחיבור הקנאים רב־לשוני את ויש, טיפול המלצת אל זכר, יידיש
-        פיסול אקראי זאת של.<br/>
-        צ'ט העמוד והגולשים את, מדע של מונחים מועמדים. מה שער מתוך ברית מונחונים. בקר מה הטבע
-        הרוח ופיתוחה.
+        <?=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?>
     </p>
 
     <div class="div-table">
