@@ -125,6 +125,8 @@ class Model_BussinesModel extends Model_BaseModel {
         if (!empty($result)) {
 
             $city_arr = $this->getCityInCategory($url_category);
+            
+            $result = $this->SortArrayBusiness($result);
 
             //вызываем метод получения данных из куки
             Controller_BaseController::favorits_bussines();
@@ -257,6 +259,8 @@ class Model_BussinesModel extends Model_BaseModel {
         }
 
         $city_arr = $this->getCityInSection($arrChild);
+
+        $result = $this->SortArrayBusiness($result);
 
         //вызываем метод получения данных из куки
         Controller_BaseController::favorits_bussines();
@@ -1196,6 +1200,32 @@ class Model_BussinesModel extends Model_BaseModel {
             ->set(array('status' => 0))
             ->where('id', '=', $id_business)
             ->execute();
+    }
+
+
+    /**
+     * @param $data
+     * @return array
+     * todo сортировка масива бизнесов премиумов и стандарт
+     */
+    private function SortArrayBusiness($data){
+
+        $premium_result = array();
+        $result = array();
+        foreach ($data as $row) {
+
+            if ($row['client_status'] == 2) {
+                $premium_result[] = $row;
+            } else {
+                $result[] = $row;
+            }
+        }
+
+        shuffle($premium_result);
+
+        $result = array_merge($premium_result, $result);
+        return $result;
+
     }
 
 }

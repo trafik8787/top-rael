@@ -89,7 +89,7 @@
                                 </div>
 
                                 <div class="panel-footer text-center">
-                                    <a href="/section/<?=$rowsdata['category'][0]['url']?>" class="btn open-all" role="button">Открыть все</a>
+                                    <a href="/section/<?=$rowsdata['category'][0]['url']?>?city=<?=$city_id?>" class="btn open-all" role="button">Открыть все</a>
                                 </div>
 
 

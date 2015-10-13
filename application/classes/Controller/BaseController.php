@@ -48,7 +48,7 @@ abstract class Controller_BaseController extends Controller_Template {
         $this->top_meny = array('Купоны' => '/coupons',
             'Обзоры' => '/articles',
             'Тель-Авив' => '/city/telaviv',
-            'Иерусалим' => '/city/ierusalim',
+            'Иерусалим' => '/city/jerusalem',
             'Эйлат' => '/city/eilat',
             'На карте' => '/maps');
 

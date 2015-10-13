@@ -472,6 +472,8 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
         $crud->set_field_type('dop_address', 'hidden', '', '', '', '');
 
+        $crud->set_field_type('client_status', 'radio', array(1 => 'Стандарт', 2 => 'Премиум'), '', array('style' => 'margin-top: 10px; margin-bottom: 12px'), '');
+
 
         $crud->set_field_type('redactor_user', 'select', '', '', '', array('users', 'username', 'id', array('id', 'IN', $arr_user)));
 
@@ -502,6 +504,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->edit_fields('redactor_user',
             'date_create',
             'date_end',
+            'client_status',
             'name',
             'title',
             'description',
@@ -528,6 +531,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->add_field('redactor_user',
             'date_create',
             'date_end',
+            'client_status',
             'name',
             'title',
             'description',
@@ -556,6 +560,7 @@ class Controller_Administrator extends Controller_Core_Main {
             'description' => 'SEO Description',
             'title' => 'SEO Title',
             'keywords' => 'SEO Keywords',
+            'client_status' => 'Тип рекламы',
             'city' => 'Город',
             'address' => 'Адрес',
             'maps_cordinate_x' => 'Широта',
@@ -1051,7 +1056,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         //die(HTML::x($old_array));
         if (!empty($new_array['home_busines_foto'])) {
-            $img = self::create_images($new_array['home_busines_foto'], '/uploads/img_business/thumbs/', 240, 150);
+            $img = self::create_images($new_array['home_busines_foto'], '/uploads/img_business/thumbs/', 240, 158);
 
             //удаляем старые картинки
             if ($img === true and file_exists($_SERVER['DOCUMENT_ROOT'] . $old_array['home_busines_foto'])) {
@@ -1119,7 +1124,7 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function call_after_insert_business ($key_array = null) {
 
         if (!empty($key_array['home_busines_foto'])) {
-            self::create_images($key_array['home_busines_foto'], '/uploads/img_business/thumbs/', 240, 150);
+            self::create_images($key_array['home_busines_foto'], '/uploads/img_business/thumbs/', 240, 158);
         }
 
         if (!empty(Cruds::$post['name_user']) and !empty(Cruds::$post['secondname_user']) and !empty(Cruds::$post['email_user'])

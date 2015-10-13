@@ -13,7 +13,7 @@ class Controller_Pages_City extends Controller_BaseController {
             case 'telaviv':
                 $city_id = 59;
                 break;
-            case 'ierusalim':
+            case 'jerusalem':
                 $city_id = 23;
                 break;
             case 'eilat':
@@ -24,7 +24,7 @@ class Controller_Pages_City extends Controller_BaseController {
         }
 
         $content = View::factory('pages/city');
-        $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+        $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'), 'order_by');
 
 //        if (Cache::instance()->get($this->request->param('url_city')) == null) {
 
