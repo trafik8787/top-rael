@@ -5,7 +5,8 @@
  * Date: 12.08.2015
  * Time: 14:14
  */
-
+//HTML::x($_SERVER);
+//[REMOTE_ADDR] => 178.94.172.183
 ?>
 
 <content>

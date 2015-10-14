@@ -30,25 +30,29 @@ class Controller_Pages_City extends Controller_BaseController {
 
             foreach ($section as $row_section) {
 
-                $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($row_section['url']);
+                $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($row_section['url'], $city_id);
 
-               //HTML::x($category);
-                //сортировка категорий по количеству бизнесов в них
-                $count = array();
-                $rowArr = array();
-                foreach ($category[0]['childs'] as $key => $row) {
-                    $count[] = $row['COUNT'];
-                    $rowArr[] = $row;
+                if (!empty($category[0]['childs'])) {
+
+                    //сортировка категорий по количеству бизнесов в них
+                    $count = array();
+                    $rowArr = array();
+                    foreach ($category[0]['childs'] as $key => $row) {
+                        $count[] = $row['COUNT'];
+                        $rowArr[] = $row;
+                    }
+
+                    array_multisort($count, SORT_DESC, $rowArr, SORT_ASC, $category[0]['childs']);
+
+                    //получаем первые 5 категорий раздела дальше "еще..."
+                    $category[0]['childs'] = array_slice($category[0]['childs'], 0, 5);
+
+
+                    $data = Model::factory('BussinesModel')->getBussinesSectionUrl($row_section['url'], 3, 0, $city_id);
+
+                } else {
+                    $data['data'] = array();
                 }
-
-                array_multisort($count, SORT_DESC, $rowArr, SORT_ASC, $category[0]['childs']);
-
-                //получаем первые 5 категорий раздела дальше "еще..."
-                $category[0]['childs'] = array_slice($category[0]['childs'], 0, 5);
-
-
-                $data = Model::factory('BussinesModel')->getBussinesSectionUrl($row_section['url'], 3, 0, $city_id);
-
 
                 $resultArr[] = array('category' => $category, 'data' => $data['data']);
             }

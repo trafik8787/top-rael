@@ -34,6 +34,11 @@ abstract class Controller_BaseController extends Controller_Template {
 
         parent::before();
 
+//        if ($_SERVER['REMOTE_ADDR'] != '178.94.172.183') {
+//            die('Сайт временно закрыт ведутся работы');
+//        }
+
+
         //избранные купоны в куки
        self::favorits_coupon();
         //избранные бизнесы в куки

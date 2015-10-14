@@ -36,7 +36,8 @@ class Model_CategoryModel extends Model_BaseModel {
      * @return array
      * todo получам все категории раздела по урлу раздела
      */
-    public function getCategoryInSectionUrl($section_url){
+    public function getCategoryInSectionUrl($section_url, $city_id = null){
+
         $query = DB::select()
             ->from('category')
             ->where('url', '=', $section_url)
@@ -44,7 +45,7 @@ class Model_CategoryModel extends Model_BaseModel {
             ->execute()->as_array();
 
         if (!empty($query)) {
-            return $this->recurs_catalog($query[0]['id']);
+            return $this->recurs_catalog($query[0]['id'], $city_id);
         } else {
             return false;
         }
@@ -63,8 +64,8 @@ class Model_CategoryModel extends Model_BaseModel {
      * @return array
      * рекурсивная функция категорий
      */
-    public function recurs_catalog ($id = null){
-        //die($id);
+    public function recurs_catalog ($id = null, $city_id = null){
+
         if ($id == null) {
             $query = DB::select('category.*', array('businesscategory.business_id', 'BusCatId'))
                 ->from('category')
@@ -73,23 +74,28 @@ class Model_CategoryModel extends Model_BaseModel {
                 ->cached()
                 ->execute()->as_array();
         } else {
-            $query = DB::select('category.*', array('businesscategory.business_id', 'BusCatId'))
-                ->from('category')
 
-                ->join('businesscategory', 'LEFT')
-                ->on('businesscategory.category_id', '=', 'category.id')
+            $query = DB::select('category.*', array('businesscategory.business_id', 'BusCatId'));
+            $query->from('category');
 
-                ->join('business')
-                ->on('business.id', '=', 'businesscategory.business_id')
+            $query->join('businesscategory', 'LEFT');
+            $query->on('businesscategory.category_id', '=', 'category.id');
 
-                ->where('category.id', '=', $id)
-                ->or_where('category.parent_id', '=', $id)
-                ->and_where_open()
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
-                    ->and_where('business.status', '=', 1)
-                ->and_where_close()
-                ->cached()
-                ->execute()->as_array();
+            $query->join('business');
+            $query->on('business.id', '=', 'businesscategory.business_id');
+
+            $query->where('category.id', '=', $id);
+            $query->or_where('category.parent_id', '=', $id);
+
+            $query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'));
+            if ($city_id !== null) {
+                $query->and_where('business.city', '=', $city_id);
+            }
+            $query->and_where('business.status', '=', 1);
+            $query->cached();
+            $query = $query->execute()->as_array();
+
+
            // die(HTML::x($query));
             $query2 = DB::select('category.*', array('businesscategory.business_id', 'BusCatId'))
                 ->from('category')
@@ -100,22 +106,22 @@ class Model_CategoryModel extends Model_BaseModel {
                 ->execute()->as_array();
 
             $query = array_merge($query2, $query);
-
         }
+
+
 
         $cats = array();
         foreach ($query as $rows) {
             $cats[$rows['parent_id']][] =  $rows;
         }
 
-        //die(HTML::x($cats));
+
         return $this->build_tree($cats, 0);
     }
 
 
     public function build_tree(&$rs,$parent){
-//        HTML::x($rs);
-//        die('sdf');
+
         $tmpArr = array();
         $out = array();
         if (!isset($rs[$parent])) {
@@ -133,13 +139,12 @@ class Model_CategoryModel extends Model_BaseModel {
                 //считаем количество бизнесов в категории
 
                 if (!empty($row['BusCatId'])) {
-                    $tmpArr[$row['BusCatId']] = $row['BusCatId'];
+                    $tmpArr[$row['id']][] = $row['BusCatId'];
                 }
-                $row['COUNT'] = count($tmpArr);
+                $row['COUNT'] = count($tmpArr[$row['id']]);
 
                 if (!array_key_exists($row['id'], $out)) {
-                    //HTML::x($row['COUNT']);
-                    //$row['COUNT'] = '';
+
                     $out[$row['id']] = $row;
                     $tmpArr = '';
                 } else {
@@ -153,6 +158,7 @@ class Model_CategoryModel extends Model_BaseModel {
             }
 
         }
+
         return $out;
     }
 
