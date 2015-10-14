@@ -33,7 +33,7 @@
 
                                     <div class="panel-buttons-group">
 
-                                        <a href="/maps?section=<?=$rowsdata['category'][0]['url']?>" class="btn btn-default" role="button">На карте</a>
+                                        <a href="/maps?section=<?=$rowsdata['category'][0]['url']?>&city=<?=$city_id?>" class="btn btn-default" role="button">На карте</a>
                                     </div>
 
                                     <div class="collapse" id="restaurants-thumbnails-navigation">

@@ -77,6 +77,9 @@ function initMap() {
         resetMarkers(markers, cluster);
     });
 
+
+
+
     $('[data-map-shortkey]').off('click').on('click', function () {
 
         var $this = $(this);
@@ -93,6 +96,18 @@ function initMap() {
             map.setCenter(results[0].geometry.location);
         });
     });
+
+
+    //переходим сразу в город
+    if (window.cityName != 0) {
+       var tem = window.cityName;
+
+        workerSearchAdress(tem, geocoder, function (results) {
+            map.setZoom(14);
+            map.setCenter(results[0].geometry.location);
+        });
+    }
+
 
     function search(infobox) {
 

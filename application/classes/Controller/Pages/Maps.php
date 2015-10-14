@@ -32,6 +32,25 @@ class Controller_Pages_Maps extends Controller_BaseController {
             $url_section = $_GET['section'];
         }
 
+        if (!empty($_GET['city'])) {
+
+            switch ($_GET['city']) {
+                case 59:
+                    $content->cityName = 'Тель Авив';
+                    break;
+                case 23:
+                    $content->cityName = 'Иерусалим';
+                    break;
+                case 2:
+                    $content->cityName = 'Эйлат';
+                    break;
+                default:
+                    throw new HTTP_Exception_404;
+            }
+            $content->cityName = json_encode($content->cityName);
+
+        }
+
         $result = Model::factory('BussinesModel')->getBusinessAll_Maps($id, $url_category, $url_section);
 
 

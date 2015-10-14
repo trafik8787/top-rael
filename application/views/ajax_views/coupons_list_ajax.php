@@ -32,7 +32,7 @@
                         </div>
 
                         <a href="/modalcoupon/<?=$rows_data[0]['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm" class="coupon-image">
-                            <img src="<?=$rows_data[0]['img_coupon']?>" width="155" height="125" alt="" title="<?=$rows_data[0]['name']?>"/>
+                            <img src="<?=$rows_data[0]['img_coupon']?>" width="155" height="125" alt="<?=$rows_data[0]['BusName']?>" title="<?=$rows_data[0]['name']?>"/>
                         </a>
 
                     </div>

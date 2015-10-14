@@ -64,7 +64,7 @@ class Model_CategoryModel extends Model_BaseModel {
      * рекурсивная функция категорий
      */
     public function recurs_catalog ($id = null){
-
+        //die($id);
         if ($id == null) {
             $query = DB::select('category.*', array('businesscategory.business_id', 'BusCatId'))
                 ->from('category')
@@ -90,7 +90,7 @@ class Model_CategoryModel extends Model_BaseModel {
                 ->and_where_close()
                 ->cached()
                 ->execute()->as_array();
-
+           // die(HTML::x($query));
             $query2 = DB::select('category.*', array('businesscategory.business_id', 'BusCatId'))
                 ->from('category')
                 ->join('businesscategory', 'LEFT')

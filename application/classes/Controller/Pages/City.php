@@ -32,7 +32,7 @@ class Controller_Pages_City extends Controller_BaseController {
 
                 $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($row_section['url']);
 
-                //HTML::x($category);
+               //HTML::x($category);
                 //сортировка категорий по количеству бизнесов в них
                 $count = array();
                 $rowArr = array();
