@@ -93,6 +93,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->where_close()
                 ->limit($limit)
                 ->offset($ofset)
+                ->order_by('business.client_status', 'DESC')
                 ->order_by('business.id', 'DESC')
                 ->cached()
                 ->execute()->as_array();
@@ -117,6 +118,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->where_close()
                 ->limit($limit)
                 ->offset($ofset)
+                ->order_by('business.client_status', 'DESC')
                 ->order_by('business.id', 'DESC')
                 ->cached()
                 ->execute()->as_array();
@@ -232,6 +234,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->limit($limit)
                 ->offset($ofset)
                 ->group_by('business.id')
+                ->order_by('business.client_status', 'DESC')
                 ->order_by('business.id', 'DESC')
                 ->cached()
                 ->execute()->as_array();
@@ -253,6 +256,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->limit($limit)
                 ->offset($ofset)
                 ->group_by('business.id')
+                ->order_by('business.client_status', 'DESC')
                 ->order_by('business.id', 'DESC')
                 ->cached()
                 ->execute()->as_array();
