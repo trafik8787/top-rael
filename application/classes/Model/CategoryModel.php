@@ -141,7 +141,9 @@ class Model_CategoryModel extends Model_BaseModel {
                 if (!empty($row['BusCatId'])) {
                     $tmpArr[$row['id']][] = $row['BusCatId'];
                 }
-                $row['COUNT'] = count($tmpArr[$row['id']]);
+                if (!empty($tmpArr[$row['id']])) {
+                    $row['COUNT'] = count($tmpArr[$row['id']]);
+                }
 
                 if (!array_key_exists($row['id'], $out)) {
 

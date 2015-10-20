@@ -145,6 +145,8 @@ class Controller_Core_Crud extends Controller_Core_Main {
             $this->id = $get['id'];
         }
 
+        Session::instance()->set('id_field', $this->id);
+
         Cruds::$id = $this->id;
 
         if (isset($_POST['edit'])) {
@@ -356,7 +358,7 @@ class Controller_Core_Crud extends Controller_Core_Main {
 
         //валидация полей
         if ($retw->validation != null) {
-            $retw->validation_views();
+            $retw->validation_views($this->id);
             $viev_edit->script_validate = $retw->validation;
         }
 

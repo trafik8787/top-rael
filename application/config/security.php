@@ -20,6 +20,7 @@ return array(
         'sections'           => array('admin'),
         'category'           => array('admin'),
         'tags'           => array('admin'),
+        'locat'           => array('admin'),
         'banners'           => array('admin'),
         'about'           => array('admin'),
 

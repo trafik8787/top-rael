@@ -144,6 +144,25 @@ class Controller_Pages_Ajax extends Controller {
     }
 
 
+    /**
+     * todo мутод валидации поля URL в бизнесах
+     */
+    public function action_checUrlBusiness(){
+
+        if (!empty($_GET['id'])) {
+            $query = Model::factory('BaseModel')->table_count('business', 'id', array('id', '<>', $_GET['id']), array('url', '=', $this->request->post('url')));
+        } else {
+            $query = Model::factory('BaseModel')->table_count('business', 'id', array('url', '=', $this->request->post('url')));
+        }
+
+        if ($query != 0) {
+            echo 'false';
+        } else {
+            echo 'true';
+        }
+
+    }
+
 
 
 

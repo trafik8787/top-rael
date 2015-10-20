@@ -188,6 +188,11 @@ class Controller_Administrator extends Controller_Core_Main {
         $this->response->body(self::adminTags()->render());
     }
 
+    public function action_locat (){
+        Controller_Core_Main::$title_page = 'Локации';
+        $this->response->body(self::adminLocat()->render());
+    }
+
     public function action_banners (){
         Controller_Core_Main::$title_page = 'Банеры';
         $this->response->body(self::adminBanners()->render());
@@ -411,6 +416,24 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
 
+    public static function adminLocat (){
+        $crud = new Cruds();
+        $crud->load_table('city');
+        $crud->set_lang('ru');
+        $crud->disable_search();
+        $crud->remove_delete();
+        $crud->show_columns('id', 'name', 'name_en', 'name_he');
+        $crud->edit_fields('name', 'name_en', 'name_he');
+        $crud->add_field('name', 'name_en', 'name_he');
+        //$crud->disable_editor('description');
+        //$crud->disable_editor('keywords');
+        $crud->show_name_column(array('name' => 'Название',
+            'name_en' => 'Название_en',
+            'name_he' => 'Название_he'));
+        return $crud;
+    }
+
+
     public static function adminLotarey (){
 
         $crud = new Cruds();
@@ -583,10 +606,12 @@ class Controller_Administrator extends Controller_Core_Main {
             'status' => 'Статус'
             ));
 
-        $crud->validation('url', array('required' => true, 'minlength' => 4, 'regexp' => '^[a-zA-Z0-9_]+$'),
+        $crud->validation('url', array('required' => true, 'minlength' => 4, 'regexp' => '^[a-zA-Z0-9_]+$',
+            'remote' => array('url' => "/chec_url_bus", 'type' => 'post')),
             array('minlength' => 'URL должен быть минимум 4 символа',
                 'required' => 'Это поле обязательно для заполнения',
-                'regexp' => 'Url может состоять только из латинских букв, цифр и знака подчеркивания'));
+                'regexp' => 'Url может состоять только из латинских букв, цифр и знака подчеркивания',
+                'remote' => 'Такой URL уже существует'));
 
 
 

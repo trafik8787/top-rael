@@ -46,7 +46,7 @@
                                                 <li><a href="/section/<?=$rowsdata['category'][0]['url'].'/'.$row_category['url']?>" data-cat="<?=$row_category['url']?>" class="w-home-cat"><?=$row_category['name']?></a></li>
 
                                             <?endforeach?>
-                                            <li><a href="/section/<?=$rowsdata['category'][0]['url']?>">ещё...</a></li>
+                                            <li><a href="/section/<?=$rowsdata['category'][0]['url']?>?city=<?=$city_id?>">ещё...</a></li>
                                         </ul>
                                     </div>
                                 </div>

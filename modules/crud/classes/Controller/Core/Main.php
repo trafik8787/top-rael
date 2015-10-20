@@ -60,6 +60,7 @@ abstract class Controller_Core_Main extends Controller_Template {
             'Разделы' => array('metod' => 'sections', 'url' => 'sections', 'icon' => 'glyphicon-th-list'),
             'Категории' => array('metod' => 'category', 'url' => 'category', 'icon' => 'glyphicon-list-alt'),
             'Теги' => array('metod' => 'tags', 'url' => 'tags', 'icon' => 'glyphicon-tags'),
+            'Локации' => array('metod' => 'locat', 'url' => 'locat', 'icon' => 'glyphicon-flag'),
             'О проекте' => array('metod' => 'about', 'url' => 'about', 'icon' => 'glyphicon-star'),
             'Главная' => array('metod' => 'index', 'url' => '', 'icon' => 'glyphicon-home')
 

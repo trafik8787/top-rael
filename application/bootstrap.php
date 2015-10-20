@@ -152,6 +152,15 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+//запросы из админки бизнесов на проверку существования урла для валидации
+Route::set('checUrlBusiness', 'chec_url_bus')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'checUrlBusiness',
+    ));
+
+
 //включение и отключение подписки и параметров
 Route::set('subscribeEnable', 'subscribe_enable')
     ->defaults(array(

@@ -182,9 +182,28 @@ class Cruds extends Controller_Core_Main {
         $this->messages[$field_name] = $property_messages_arr;
         $this->validation_messages = json_encode($this->messages);
         $this->validation = json_encode($this->rules);
+
     }
 
-    public function validation_views () {
+    public function validation_views ($id = null) {
+
+        //фича добавляем к урлу параметра валидации remote id записи
+
+        if ($id !== null) {
+
+            $new_validate = array();
+            //die(HTML::x(json_decode($this->validation, true)));
+            foreach (json_decode($this->validation, true) as $key => $row) {
+
+                if (!empty($row['remote'])) {
+                    $row['remote']['url'] = $row['remote']['url'].'?id='.$id;
+                }
+                $new_validate[$key] = $row;
+            }
+            $this->validation = json_encode($new_validate);
+            //die(HTML::x(json_decode($this->validation, true)));
+        }
+
         $this->validation = View::factory('controls/scriptValidateJs', array('json_rules' => $this->validation, 'json_messages' => $this->validation_messages));
     }
 
