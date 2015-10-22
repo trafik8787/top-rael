@@ -66,7 +66,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
         }
 
 
-        //HTML::x($result);
+        HTML::x($result);
 
         foreach ($result as $row) {
 
@@ -105,7 +105,8 @@ class Controller_Pages_Maps extends Controller_BaseController {
                 'location' => array(
                     'lat' => $row['BusMapsX'],
                     'lng' => $row['BusMapsY']
-                )
+                ),
+                'coupon' => !empty($row['CoupArr']) ? 1 : 0
             );
 
             if (!empty($row['BusDopAddress'])) {
@@ -146,7 +147,8 @@ class Controller_Pages_Maps extends Controller_BaseController {
                         'location' => array(
                             'lat' => $rows_dop['maps_x'],
                             'lng' => $rows_dop['maps_y']
-                        )
+                        ),
+                        'coupon' => !empty($row['CoupArr']) ? 1 : 0
                     );
 
                 }

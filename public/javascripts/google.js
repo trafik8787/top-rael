@@ -301,7 +301,8 @@ function initMap() {
                 sidebar.appendChild(luxury);
             }
 
-            if (coupon) {
+            //если есть купон добавляем в вывод
+            if (coupon && marker.data.coupon == 1) {
                 sidebar.appendChild(coupon);
             }
 
@@ -427,7 +428,7 @@ function initMap() {
 
             var $container = document.createElement('div');
             $container.setAttribute('class', 'marker-coupon');
-            $container.innerHTML = '<a href="' + (link || '#') + '" target="_blank"><i class="fa fa-scissors"></i> Есть купон</a>';
+            $container.innerHTML = '<span><i class="fa fa-scissors"></i> Есть купон</span>';
 
             return link ? $container : false;
         };
