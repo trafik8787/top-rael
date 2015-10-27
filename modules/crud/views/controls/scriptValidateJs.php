@@ -40,6 +40,10 @@
                 element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
                 element.addClass('valid').closest('.form-group').find('.glyphicon-remove').hide();
                 element.addClass('valid').closest('.form-group').find('.glyphicon-ok').show();
+            },
+            submitHandler: function(form)
+            {
+                form.submit();
             }
 
         });

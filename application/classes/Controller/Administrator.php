@@ -613,8 +613,6 @@ class Controller_Administrator extends Controller_Core_Main {
                 'regexp' => 'Url может состоять только из латинских букв, цифр и знака подчеркивания',
                 'remote' => 'Такой URL уже существует'));
 
-
-
         $crud->validation('name', array('required' => true),
             array('required' => 'Это поле обязательно для заполнения'));
 

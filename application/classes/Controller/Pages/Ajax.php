@@ -156,9 +156,9 @@ class Controller_Pages_Ajax extends Controller {
         }
 
         if ($query != 0) {
-            echo 'false';
+            echo "false";
         } else {
-            echo 'true';
+            echo "true";
         }
 
     }

@@ -345,8 +345,9 @@ class Controller_Core_Crud extends Controller_Core_Main {
             echo 'window.parent.document.getElementById("circularG").style.display="none";';
             echo 'window.parent.document.getElementById("loading-example-btn").disabled = false';
             echo '</script>';
-
+           //die(HTML::x($_POST));
             if (!empty($_POST['edit_save'])) {
+
                 Controller::redirect($_POST['curent_uri']);
             }
         }
