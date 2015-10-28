@@ -37,7 +37,8 @@ class Controller_Pages_Business extends Controller_BaseController {
         $content->related = $related;
         $content->data = $data;
 
-        Rediset::getInstance()->set_business($data['BusId']);
+        //todo раскоментировать когда будет настроен редис
+        //Rediset::getInstance()->set_business($data['BusId']);
 
         $this->template->content = $content;
 	}
