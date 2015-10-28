@@ -12,8 +12,8 @@ class Controller_ModalBussines extends Controller {
 
         if (Request::initial()->is_ajax()) {
 
-            //todo раскоментировать когда будет настроен редис
-            //Rediset::getInstance()->set_business_favor($this->request->post('id_bussines'));
+
+            Rediset::getInstance()->set_business_favor($this->request->post('id_bussines'));
 
             //если пользователь авторизован
             if (Auth::instance()->get_user()) {

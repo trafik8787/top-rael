@@ -84,8 +84,8 @@ class Controller_Pages_Articles extends Controller_BaseController {
             throw new HTTP_Exception_404;
         }
 
-        //todo раскоментировать когда будет настроен редис
-        //Rediset::getInstance()->set_articles($data['ArticId']);
+
+        Rediset::getInstance()->set_articles($data['ArticId']);
 
         $other_articles = Model::factory('ArticlesModel')->getArticlesRandomIdCategory($data['ArticIdSection'], $data['ArticId']);
 

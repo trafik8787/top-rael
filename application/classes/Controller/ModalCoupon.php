@@ -46,8 +46,8 @@ class Controller_ModalCoupon extends Controller {
         if (Request::initial()->is_ajax()) {
 
             //считаем количество добавлений в избранное
-            //todo раскоментировать когда будет настроен редис
-            //Rediset::getInstance()->set_coupon($this->request->post('id_coupon'));
+
+            Rediset::getInstance()->set_coupon($this->request->post('id_coupon'));
 
             //если пользователь авторизован
             if (Auth::instance()->get_user()) {
