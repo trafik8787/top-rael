@@ -264,7 +264,7 @@ class Controller_Pages_Ajax extends Controller {
 
             //за 7 дней перед отключением
             if (date('Y-m-d') == $ert) {
-                $message = 'Ваш бизнес <a href="http://topisrael.webremote.net/business/'.$rows['url'].'">'.$rows['name'].'</a> будет отключен через 7 дней';
+                $message = 'Ваш бизнес <a href="http://'.$_SERVER['SERVER_NAME'].'/business/'.$rows['url'].'">'.$rows['name'].'</a> будет отключен через 7 дней';
                 $html_mail->content = $message;
 
                 $m = Email::factory();
@@ -285,7 +285,7 @@ class Controller_Pages_Ajax extends Controller {
                 //меняем статус бизнеса в базе
                 $obj->disableBusines($rows['id']);
 
-                $message = 'Ваш бизнес <a href="http://topisrael.webremote.net/business/'.$rows['url'].'">'.$rows['name'].'</a> отключен';
+                $message = 'Ваш бизнес <a href="http://'.$_SERVER['SERVER_NAME'].'/business/'.$rows['url'].'">'.$rows['name'].'</a> отключен';
                 $html_mail->content = $message;
 
                 $m = Email::factory();

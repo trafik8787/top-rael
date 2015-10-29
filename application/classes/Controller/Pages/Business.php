@@ -38,7 +38,7 @@ class Controller_Pages_Business extends Controller_BaseController {
         $content->data = $data;
 
         //todo Rediset
-        //Rediset::getInstance()->set_business($data['BusId']);
+        Rediset::getInstance()->set_business($data['BusId']);
 
         $this->template->content = $content;
 	}

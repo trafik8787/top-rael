@@ -48,7 +48,7 @@ class Controller_ModalCoupon extends Controller {
             //считаем количество добавлений в избранное
 
             //todo Rediset
-            //Rediset::getInstance()->set_coupon($this->request->post('id_coupon'));
+            Rediset::getInstance()->set_coupon($this->request->post('id_coupon'));
 
             //если пользователь авторизован
             if (Auth::instance()->get_user()) {

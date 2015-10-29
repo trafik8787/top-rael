@@ -85,7 +85,7 @@ class Controller_Pages_Articles extends Controller_BaseController {
         }
 
         //todo Rediset
-        //Rediset::getInstance()->set_articles($data['ArticId']);
+        Rediset::getInstance()->set_articles($data['ArticId']);
 
         $other_articles = Model::factory('ArticlesModel')->getArticlesRandomIdCategory($data['ArticIdSection'], $data['ArticId']);
 
