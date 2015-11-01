@@ -10,9 +10,9 @@
 
 
 <div class="panel panel-default">
-    <div class="panel-heading">Panel heading without title</div>
+    <div class="panel-heading">Журнал событий</div>
     <div class="w-logs panel-body">
-        <span class="text-success">fgh</span><br/>
+        <span class="text-success">Пользователь *** добавил бизнес ***</span><br/>
         <span class="text-danger">dfgdf</span><br/>
         <span class="text-warning">sfgd</span><br/>
 

@@ -42,7 +42,7 @@ class Controller_Home extends Controller_BaseController {
 
 
 
-        if ($_GET['t']== 'qwe') {
+        if (!empty($_GET['t'])) {
 
             $query = DB::select('id')->from('business')->where('id', '<', 585)->order_by('id', 'DESC')->execute()->as_array();
             $re = '2015-10-11';
