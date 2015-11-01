@@ -308,7 +308,22 @@ class Controller_Administrator extends Controller_Core_Main {
         Controller_Core_Main::$title_page = $title_page;
         $this->response->body(self::adminUsers()->render());
     }
-    
+
+
+    /**
+     * журналирование
+     */
+    public function action_logs (){
+        Controller_Core_Main::$title_page = 'Журнал';
+
+        $logs = View::factory('adm/logs');
+        $this->template->render = $logs;
+
+        $this->response->body($this->template);
+    }
+
+
+
     /**
      * @return Cruds
      * end ections
@@ -346,6 +361,7 @@ class Controller_Administrator extends Controller_Core_Main {
             'keywords'=> 'SEO Keywords'));
         return $crud;
     }
+
 
     public static function adminSections (){
         $crud = new Cruds();

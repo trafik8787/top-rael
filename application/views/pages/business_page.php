@@ -293,7 +293,7 @@
                                             <div class="tabs__content_galery <?if ($key == 0){?>active<?}?>">
 
                                                 <div class="bx-gallery">
-                                                    <? $shift_image = array_shift($galery_arr['FileArr']);?>
+                                                    <? $shift_image = $galery_arr['FileArr'][0];?>
                                                     <div class="bx-image">
                                                         <div class="layer">
                                                             <img src="<?=$shift_image['FileFilename']?>"/>

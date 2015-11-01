@@ -39,6 +39,26 @@ class Controller_Home extends Controller_BaseController {
         //$we = json_decode(Cookie::get('__count'));
         //HTML::x(json_decode(Cookie::get('coup-41')));
        // die(phpinfo());
+
+
+
+        if ($_GET['t']== 'qwe') {
+
+            $query = DB::select('id')->from('business')->where('id', '<', 585)->order_by('id', 'DESC')->execute()->as_array();
+            $re = '2015-10-11';
+            HTML::x($query);
+            foreach ($query as $row) {
+                $re = date('Y-m-d',strtotime($re. '-1day'));
+                 DB::update('business')->set(array('date_create'=> $re))->where('id', '=', $row['id'])->execute();
+            }
+
+        }
+
+
+
+
+
+
         $resultArr = array();
         $content = View::factory('pages/home');
         $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'), 'order_by');

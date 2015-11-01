@@ -25,6 +25,7 @@ return array(
         'about'           => array('admin'),
 
         'welcome'           => array('admin', 'redactor', 'manager'),
+        'logs'           => array('admin'),
         'index'           => array('admin'),
         'login'           => array('admin', 'redactor', 'manager'),
         'logout'           => array('admin', 'redactor', 'manager'),
