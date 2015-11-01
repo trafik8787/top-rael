@@ -107,6 +107,44 @@ class Model_Adm extends Model {
             $user_insert->add('roles', ORM::factory('Role', array('name' => 'business')));
         }
     }
-    
+
+
+    /**
+     * @param $type_node
+     * @param $name_node
+     * @param $status_node
+     * @throws Kohana_Exception
+     * todo сохраняем событие в админке в таблицу log
+     * $type_node - тип (бизнес, статья купон)
+     * $name_node - название
+     * $status_node - что это редактирование удаление или создание
+     */
+    public function log_add ($type_node, $name_node, $status_node){
+
+
+        $status = null;
+        $text = null;
+        switch ($status_node) {
+            case 'add':
+                $status = 1;
+                $text = 'Пользователь '.Auth::instance()->get_user()->username.' добавил '.$type_node.' '. $name_node;
+                break;
+            case 'edit':
+                $status = 2;
+                $text = 'Пользователь '.Auth::instance()->get_user()->username.' отредактировал '.$type_node.' '. $name_node;
+                break;
+            case 'del':
+                $status = 3;
+                $text = 'Пользователь '.Auth::instance()->get_user()->username.' удалил '.$type_node.' '. $name_node;
+                break;
+        }
+
+        DB::insert('log', array('text', 'status'))->values(array($text, $status))->execute();
+
+    }
+
+    public function get_log (){
+        return DB::select()->from('log')->execute()->as_array();
+    }
     
 }

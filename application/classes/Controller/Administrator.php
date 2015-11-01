@@ -314,9 +314,11 @@ class Controller_Administrator extends Controller_Core_Main {
      * журналирование
      */
     public function action_logs (){
+
         Controller_Core_Main::$title_page = 'Журнал';
 
         $logs = View::factory('adm/logs');
+        $logs->data = Model::factory('Adm')->get_log();
         $this->template->render = $logs;
 
         $this->response->body($this->template);
@@ -764,6 +766,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud->callback_before_edit('call_bef_edit_articles');
         $crud->callback_after_insert('call_after_insert_articles');
+        $crud->callback_before_delete('call_bef_del_articles');
 
         return $crud;
     }
@@ -849,6 +852,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud->callback_before_edit('call_bef_edit_coupons');
         $crud->callback_after_insert('call_after_insert_coupons');
+        $crud->callback_before_delete('call_befor_del_coupons');
 
         return $crud;
     }
@@ -881,6 +885,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->callback_befor_show_add('call_bef_insert_show_galery');
         $crud->callback_before_edit('call_bef_edit_galery');
         $crud->callback_after_insert('call_after_insert_galery');
+        $crud->callback_before_delete('call_bef_delete_galery');
         return $crud;
     }
 
@@ -1056,6 +1061,10 @@ class Controller_Administrator extends Controller_Core_Main {
             'date_end' => 'Дата конца'
         ));
 
+        $crud->callback_before_delete('call_bef_del_banners');
+        $crud->callback_after_insert('call_after_insert_banners');
+        $crud->callback_before_edit('call_bef_edit_banners');
+
         return $crud;
     }
 
@@ -1091,7 +1100,22 @@ class Controller_Administrator extends Controller_Core_Main {
      */
 
 
+    public static function call_bef_del_banners ($key_array = null){
+        Model::factory('Adm')->log_add('банер', $key_array['name'], 'del');
+    }
+
+    public static function call_after_insert_banners($key_array = null){
+        Model::factory('Adm')->log_add('банер', $key_array['name'], 'add');
+    }
+
+    public static function call_bef_edit_banners ($key_array = null){
+        Model::factory('Adm')->log_add('банер', $key_array['name'], 'edit');
+    }
+    
+
     public static function call_bef_edit_business ($new_array = null, $old_array = null) {
+
+        Model::factory('Adm')->log_add('бизнес', $old_array['name'], 'edit');
 
         //die(HTML::x($old_array));
         if (!empty($new_array['home_busines_foto'])) {
@@ -1174,6 +1198,8 @@ class Controller_Administrator extends Controller_Core_Main {
                                                     Cruds::$post['password'],
                                                     $key_array['id']);
         }
+
+        Model::factory('Adm')->log_add('бизнес', $key_array['name'], 'add');
     }
 
 
@@ -1250,6 +1276,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
     public static function call_befor_del_business ($new_array){
+        Model::factory('Adm')->log_add('бизнес', $new_array['name'], 'del');
         $user = DB::delete('users')->where('business_id', '=', $new_array['id'])->execute();
     }
 
@@ -1260,6 +1287,8 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function call_bef_edit_articles ($new_array = null, $old_array = null){
 
         //die(HTML::x($new_array));
+
+        Model::factory('Adm')->log_add('статью', $old_array['name'], 'edit');
 
         if (!empty($new_array['images_article'])) {
             $img = self::create_images($new_array['images_article'], '/uploads/img_articles/thumbs/', 260, 190);
@@ -1274,15 +1303,24 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
     public static function call_after_insert_articles ($key_array = null){
+
+        Model::factory('Adm')->log_add('статью', $key_array['name'], 'add');
+
         if (!empty($key_array['images_article'])) {
             self::create_images($key_array['images_article'], '/uploads/img_articles/thumbs/', 260, 190);
         }
+    }
+
+    public static function call_bef_del_articles ($key_array = null){
+        Model::factory('Adm')->log_add('статью', $key_array['name'], 'del');
     }
 
 
     //coupons
 
     public static function call_bef_edit_coupons ($new_array = null, $old_array = null){
+
+        Model::factory('Adm')->log_add('купон', $old_array['name'], 'edit');
 
         if (!empty($new_array['img_coupon'])) {
             $img = self::create_images($new_array['img_coupon'], '/uploads/img_coupons/thumbs/', 234, 196);
@@ -1296,9 +1334,16 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
     public static function call_after_insert_coupons ($key_array = null){
+
+        Model::factory('Adm')->log_add('купон', $key_array['name'], 'add');
+
         if (!empty($key_array['img_coupon'])) {
             self::create_images($key_array['img_coupon'], '/uploads/img_coupons/thumbs/', 234, 196);
         }
+    }
+
+    public static function call_befor_del_coupons($key_array = null){
+        Model::factory('Adm')->log_add('купон', $key_array['name'], 'del');
     }
 
 
@@ -1389,6 +1434,9 @@ class Controller_Administrator extends Controller_Core_Main {
             }
         }
 
+
+        Model::factory('Adm')->log_add('галерею', $old_array['name'].'ID '.$old_array['id'], 'edit');
+
     }
 
     public static function call_after_insert_galery ($key_array = null){
@@ -1412,6 +1460,13 @@ class Controller_Administrator extends Controller_Core_Main {
 
         }
 
+        Model::factory('Adm')->log_add('галерею', $key_array['name'], 'add');
+
+    }
+
+
+    public static function call_bef_delete_galery ($key_array = null){
+        Model::factory('Adm')->log_add('галерею', $key_array['name'].'ID '.$key_array['id'], 'del');
     }
 
 

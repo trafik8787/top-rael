@@ -41,24 +41,6 @@ class Controller_Home extends Controller_BaseController {
        // die(phpinfo());
 
 
-
-        if (!empty($_GET['t'])) {
-
-            $query = DB::select('id')->from('business')->where('id', '<', 585)->order_by('id', 'DESC')->execute()->as_array();
-            $re = '2015-10-11';
-            HTML::x($query);
-            foreach ($query as $row) {
-                $re = date('Y-m-d',strtotime($re. '-1day'));
-                 DB::update('business')->set(array('date_create'=> $re))->where('id', '=', $row['id'])->execute();
-            }
-
-        }
-
-
-
-
-
-
         $resultArr = array();
         $content = View::factory('pages/home');
         $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'), 'order_by');
