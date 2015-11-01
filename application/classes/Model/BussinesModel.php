@@ -44,7 +44,7 @@ class Model_BussinesModel extends Model_BaseModel {
                     ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
                     ->and_where('business.status', '=', 1)
                 ->where_close()
-                ->order_by('business.id', 'DESC')
+                ->order_by('business.date_create', 'DESC')
                 ->cached()
                 ->execute()->as_array();
         } else {
@@ -66,7 +66,7 @@ class Model_BussinesModel extends Model_BaseModel {
                     ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
                     ->and_where('business.status', '=', 1)
                 ->where_close()
-                ->order_by('business.id', 'DESC')
+                ->order_by('business.date_create', 'DESC')
                 ->cached()
                 ->execute()->as_array();
         }
@@ -94,7 +94,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->limit($limit)
                 ->offset($ofset)
                 ->order_by('business.client_status', 'DESC')
-                ->order_by('business.id', 'DESC')
+                ->order_by('business.date_create', 'DESC')
                 ->cached()
                 ->execute()->as_array();
         } else {
@@ -119,7 +119,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->limit($limit)
                 ->offset($ofset)
                 ->order_by('business.client_status', 'DESC')
-                ->order_by('business.id', 'DESC')
+                ->order_by('business.date_create', 'DESC')
                 ->cached()
                 ->execute()->as_array();
         }
@@ -191,7 +191,7 @@ class Model_BussinesModel extends Model_BaseModel {
                     ->and_where('business.status', '=', 1)
                 ->where_close()
                 ->group_by('business.id')
-                ->order_by('business.id', 'DESC')
+                ->order_by('business.date_create', 'DESC')
                 ->cached()
                 ->execute()->as_array();
         } else {
@@ -210,7 +210,7 @@ class Model_BussinesModel extends Model_BaseModel {
                     ->and_where('business.status', '=', 1)
                 ->where_close()
                 ->group_by('business.id')
-                ->order_by('business.id', 'DESC')
+                ->order_by('business.date_create', 'DESC')
                 ->cached()
                 ->execute()->as_array();
         }
@@ -235,7 +235,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->offset($ofset)
                 ->group_by('business.id')
                 ->order_by('business.client_status', 'DESC')
-                ->order_by('business.id', 'DESC')
+                ->order_by('business.date_create', 'DESC')
                 ->cached()
                 ->execute()->as_array();
         } else {
@@ -257,7 +257,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->offset($ofset)
                 ->group_by('business.id')
                 ->order_by('business.client_status', 'DESC')
-                ->order_by('business.id', 'DESC')
+                ->order_by('business.date_create', 'DESC')
                 ->cached()
                 ->execute()->as_array();
         }
