@@ -139,12 +139,29 @@ class Model_Adm extends Model {
                 break;
         }
 
-        DB::insert('log', array('text', 'status'))->values(array($text, $status))->execute();
+        DB::insert('log', array('text', 'status'))
+            ->values(array($text, $status))
+            ->execute();
 
     }
 
-    public function get_log (){
-        return DB::select()->from('log')->execute()->as_array();
+    public function get_log ($limit = null, $num_page = null){
+
+        if ($num_page != null) {
+            $ofset = $limit * ($num_page - 1);
+        } else {
+            $ofset = 0;
+        }
+
+        $query = DB::select()
+            ->from('log')
+            ->limit($limit)
+            ->offset($ofset)
+            ->order_by('date', 'DESC')
+            ->execute()->as_array();
+
+        $count = Model::factory('BaseModel')->table_count('log', 'id');
+        return array('data' => $query, 'count' => $count);
     }
     
 }

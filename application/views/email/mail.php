@@ -76,70 +76,73 @@
                                     <span style="font-size:12px; color: #a9a9a9;">Рассылка за <?=Date::rusdate(strtotime(date('Y-m-d')), 'j %MONTH% Y'); ?></span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <img src="cid:<?=basename($article_shift['images_article'])?>" width="600" height="420"
-                                         style="width: 100%; height:auto"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding:10px 20px;" bgcolor="#E6E6E6">
-                                    <span style="font-size:30px">
-                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$article_shift['url']?>" style="color:#000;"><?=$article_shift['name']?></a>
-                                    </span>
+                            <?if (!empty($article_shift)):?>
+                                <tr>
+                                    <td>
+                                        <img src="cid:<?=basename($article_shift['images_article'])?>" width="600" height="420"
+                                             style="width: 100%; height:auto"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px 20px;" bgcolor="#E6E6E6">
+                                        <span style="font-size:30px">
+                                            <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$article_shift['url']?>" style="color:#000;"><?=$article_shift['name']?></a>
+                                        </span>
 
-                                    <p style="font-size:14px; margin:5px 0;">
-                                        <?=Text::limit_chars(strip_tags($article_shift['content']), 150, null, true)?>
-                                    </p>
-                                </td>
-                            </tr>
+                                        <p style="font-size:14px; margin:5px 0;">
+                                            <?=Text::limit_chars(strip_tags($article_shift['content']), 150, null, true)?>
+                                        </p>
+                                    </td>
+                                </tr>
+                            <?endif?>
                             <tr>
                                 <td style="padding:10px 0;">
                                     <!-- Content -->
+                                    <?if (!empty($articless)):?>
+                                        <table cellpadding="0" cellspacing="0" width="100%" style="padding:20px;">
+                                            <?foreach ($articless as $artic):?>
+                                                <tr>
+                                                    <td>
 
-                                    <table cellpadding="0" cellspacing="0" width="100%" style="padding:20px;">
-                                        <?foreach ($articless as $artic):?>
+                                                        <table cellpadding="0" cellspacing="0" width="100%" align="left"
+                                                               style="max-width:165px;">
+                                                            <tr>
+                                                                <td style="padding:0 20px 5px 0">
+                                                                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['url']?>" style="display:block;">
+                                                                        <img src="cid:<?=basename($artic['images_article'])?>" width="164" height="115"
+                                                                             style="width:100%; height:auto;"/>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+
+                                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['url']?>" style="font-size: 18px; color:#000; text-decoration: none;">
+                                                            <strong>
+                                                                <?=$artic['name']?>
+                                                            </strong>
+                                                        </a>
+
+                                                        <p style="margin:10px 0; font-size:14px;">
+                                                            <strong><?=$artic['secondname']?></strong>
+                                                        </p>
+
+                                                        <p style="margin:10px 0; font-size:14px;">
+                                                            <?=Text::limit_chars(strip_tags($artic['content']), 150, null, true)?>
+                                                        </p>
+
+                                                    </td>
+                                                </tr>
+                                            <?endforeach?>
                                             <tr>
-                                                <td>
-
-                                                    <table cellpadding="0" cellspacing="0" width="100%" align="left"
-                                                           style="max-width:165px;">
-                                                        <tr>
-                                                            <td style="padding:0 20px 5px 0">
-                                                                <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['url']?>" style="display:block;">
-                                                                    <img src="cid:<?=basename($artic['images_article'])?>" width="164" height="115"
-                                                                         style="width:100%; height:auto;"/>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-
-                                                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['url']?>" style="font-size: 18px; color:#000; text-decoration: none;">
-                                                        <strong>
-                                                            <?=$artic['name']?>
-                                                        </strong>
-                                                    </a>
-
-                                                    <p style="margin:10px 0; font-size:14px;">
-                                                        <strong><?=$artic['secondname']?></strong>
-                                                    </p>
-
-                                                    <p style="margin:10px 0; font-size:14px;">
-                                                        <?=Text::limit_chars(strip_tags($artic['content']), 150, null, true)?>
-                                                    </p>
-
+                                                <td align="right">
+                                                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/articles"
+                                                       style="font-size:12px; text-decoration: none; color:#007898;">Открыть
+                                                        все</a>
                                                 </td>
                                             </tr>
-                                        <?endforeach?>
-                                        <tr>
-                                            <td align="right">
-                                                <a href="http://<?=$_SERVER['HTTP_HOST']?>/articles"
-                                                   style="font-size:12px; text-decoration: none; color:#007898;">Открыть
-                                                    все</a>
-                                            </td>
-                                        </tr>
 
-                                    </table>
+                                        </table>
+                                    <?endif?>
 
                                     <?if (!empty($business)):?>
                                         <table cellpadding="0" cellspacing="0" width="100%">

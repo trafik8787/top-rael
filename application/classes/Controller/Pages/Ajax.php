@@ -17,10 +17,7 @@ class Controller_Pages_Ajax extends Controller {
             $query = Model::factory('SubscribeModel')->addSubskribeLodatey($this->request->post('email'));
             Session::instance()->set('uniqid', uniqid());
 
-
-
             $html_mail = View::factory('email/mail_subskribe_enable');
-
             $html_mail->message = '<a href="http://'.$_SERVER['HTTP_HOST'].'/susses_subscribe?qid='.Session::instance()->get('uniqid').'&email='.$this->request->post('email').'">Подтвердить подписку</a>';
 
             $m = Email::factory();
@@ -33,10 +30,8 @@ class Controller_Pages_Ajax extends Controller {
             $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
             //$m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/3.jpg", "", "image/jpeg");
             $m->Send();
-
             echo json_encode($query);
         }
-
 	}
 
 
@@ -59,7 +54,6 @@ class Controller_Pages_Ajax extends Controller {
             }
 
             foreach ($data['data'] as $key => $rows) {
-
                 //заглушка если файл картинки не обнаружен
                 $busines_foto = '/public/uploade/thumbnail.jpg';
                 if (file_exists($_SERVER['DOCUMENT_ROOT'].$rows['home_busines_foto'])) {
@@ -73,7 +67,6 @@ class Controller_Pages_Ajax extends Controller {
             $content = View::factory('ajax_views/business_list_ajax');
             $content->data = $data;
             echo $content;
-            //echo json_encode($data);
         }
     }
 
@@ -99,9 +92,7 @@ class Controller_Pages_Ajax extends Controller {
             $content->data = $data;
 
             echo $content;
-
         }
-
     }
 
     /**
@@ -123,8 +114,6 @@ class Controller_Pages_Ajax extends Controller {
 
             $data = Controller_BaseController::convertArrayVievData($data);
 
-           // die(HTML::x($data));
-
             $content = View::factory('ajax_views/coupons_list_ajax');
             $content->data_coupon = $data;
             echo $content;
@@ -138,9 +127,7 @@ class Controller_Pages_Ajax extends Controller {
     public function action_subscribeEnable(){
 
         $query = Model::factory('SubscribeModel')->updateSubskribEmail($this->request->post());
-
         echo json_encode($query);
-
     }
 
 
@@ -183,15 +170,12 @@ class Controller_Pages_Ajax extends Controller {
      * РАССЫЛКА ДЛЯ ПОДПИЩИКОВ
      */
     public function SendEmailSubscribe(){
-
         //каждый четверг
         if (date('l') == 'Thursday') {
 
             $business = Model::factory('SubscribeModel')->getSubskribeBusiness();
             $articless = Model::factory('SubscribeModel')->getSubskribeArticless();
             $users = Model::factory('SubscribeModel')->getSubskribeUsers();
-
-
 
             if (!empty($business) OR !empty($articless)) {
 
@@ -201,13 +185,11 @@ class Controller_Pages_Ajax extends Controller {
                 $data->article_shift = $article_shift;
                 $data->articless = $articless;
 
-
                 $m = Email::factory();
                 foreach ($users as $user_rows) {
 
-
                     $m->reloadTo();
-                    $m->From("TopIsrael;admin@top.com"); // от кого отправляется почта
+                    $m->From("TopIsrael;send@topisrael.ru"); // от кого отправляется почта
                     $m->To($user_rows['email']); // кому адресованно
                     $m->Subject('Рассылка TopIsrael');
                     $m->Body($data, "html");
@@ -232,9 +214,7 @@ class Controller_Pages_Ajax extends Controller {
                 }
             }
         }
-
     }
-
 
 
     /**
@@ -243,65 +223,41 @@ class Controller_Pages_Ajax extends Controller {
      * sendbusiness
      */
     public function action_BussinesDisableEmailSevenDays() {
-
+        //запуск рассылки
         $dat = $this->SendEmailSubscribe();
+        //лотарея
+        $this->LotareyCron();
 
-
-
+        //сохраняем базу редис один рас в сутки
+        Rediset::getInstance()->save();
 
         $obj = new Model_BussinesModel();
-
         //пользователи и бизнесы
         $data = $obj->getBusinesUserAll();
-
-        $html_mail = View::factory('email/mail_business');
-        $this->LotareyCron();
+        $curent_date = date('Y-m-d');
 
         foreach ($data as $rows) {
 
             $d = new DateTime($rows['date_end']);
             $ert = $d->modify('-7 days')->format("Y-m-d");
-
             //за 7 дней перед отключением
-            if (date('Y-m-d') == $ert) {
+            if ($curent_date == $ert) {
                 $message = 'Ваш бизнес <a href="http://'.$_SERVER['SERVER_NAME'].'/business/'.$rows['url'].'">'.$rows['name'].'</a> будет отключен через 7 дней';
-                $html_mail->content = $message;
-
-                $m = Email::factory();
-                $m->From("TopIsrael;admin@top.com"); // от кого отправляется почта
-                $m->To($rows['email']); // кому адресованно
-                $m->Cc($rows['EmailRedactor']);
-                $m->Subject('Увидомление о отключении бизнеса');
-                $m->Body($html_mail, "html");
-                $m->Priority(3);
-                $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/1.png", "", "image/png");
-                $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
-                $m->Send();
-
+                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'Увидомление о отключении бизнеса', $message);
             }
 
-            if (date('Y-m-d') == $rows['date_end']) {
-
+            if ($curent_date == $rows['date_end']) {
                 //меняем статус бизнеса в базе
                 $obj->disableBusines($rows['id']);
-
                 $message = 'Ваш бизнес <a href="http://'.$_SERVER['SERVER_NAME'].'/business/'.$rows['url'].'">'.$rows['name'].'</a> отключен';
-                $html_mail->content = $message;
-
-                $m = Email::factory();
-                $m->From("TopIsrael;admin@top.com"); // от кого отправляется почта
-                $m->To($rows['email']); // кому адресованно
-                $m->Cc($rows['EmailRedactor']);
-                $m->Subject('Отключение бизнеса');
-                $m->Body($html_mail, "html");
-                $m->Priority(3);
-                $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/1.png", "", "image/png");
-                $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
-                $m->Send();
+                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'Отключение бизнеса', $message);
             }
 
+            if ($curent_date == $rows['date_create']) {
+                $message = 'Ваш бизнес <a href="http://'.$_SERVER['SERVER_NAME'].'/business/'.$rows['url'].'">'.$rows['name'].'</a> подключен.';
+                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'Подключение бизнеса', $message);
+            }
         }
-
     }
 
 
@@ -316,7 +272,6 @@ class Controller_Pages_Ajax extends Controller {
         if ($lotery !== false) {
 
             $message = 'Победитель лотареи';
-
             $m = Email::factory();
             $m->From("admin@top.com"); // от кого отправляется почта
             $m->To($lotery['email']); // кому адресованно
@@ -325,9 +280,29 @@ class Controller_Pages_Ajax extends Controller {
             $m->Priority(3);
             $m->Send();
         }
-
-        //HTML::x($lotery);
     }
 
+    /**
+     * @param $to
+     * @param null $cc
+     * @param $subject
+     * @param $message
+     * todo шаблон письма для отправки увидомительных писем
+     */
+    public function template_mail_message ($to, $cc = null, $subject, $message){
 
+        $html_mail = View::factory('email/mail_business');
+        $html_mail->content = $message;
+
+        $m = Email::factory();
+        $m->From("TopIsrael;send@topisrael.ru"); // от кого отправляется почта
+        $m->To($to); // кому адресованно
+        $m->Cc($cc);
+        $m->Subject($subject);
+        $m->Body($html_mail, "html");
+        $m->Priority(3);
+        $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/1.png", "", "image/png");
+        $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
+        $m->Send();
+    }
 }

@@ -131,8 +131,8 @@ class Controller_Administrator extends Controller_Core_Main {
                     $check_permission = TRUE;
         }
 
-        if($check_permission != TRUE)
-            exit('Access deny - 403 ');
+//        if($check_permission != TRUE)
+//            exit('Access deny - 403 ');
     }
 
 
@@ -316,9 +316,11 @@ class Controller_Administrator extends Controller_Core_Main {
     public function action_logs (){
 
         Controller_Core_Main::$title_page = 'Журнал';
-
+        $number_page = $this->request->param('page');
         $logs = View::factory('adm/logs');
-        $logs->data = Model::factory('Adm')->get_log();
+        $data = Model::factory('Adm')->get_log(35, $number_page);
+        $logs->data = $data['data'];
+        $logs->pagination = Pagination::factory(array('total_items' => $data['count'], 'items_per_page' => 35));
         $this->template->render = $logs;
 
         $this->response->body($this->template);
@@ -665,7 +667,6 @@ class Controller_Administrator extends Controller_Core_Main {
             $crud->set_where('id_section', '=', Session::instance()->get('customer_id'));
         }
 
-
         $crud->disable_editor('description');
         $crud->disable_editor('keywords');
         $crud->disable_editor('short_previev');
@@ -913,12 +914,18 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
     public static function adminSubscription (){
+
         $crud = new Cruds();
         $crud->load_table('subscription');
         $crud->set_lang('ru');
         $crud->remove_edit();
         $crud->remove_add();
-        $crud->show_columns('id','email');
+        $crud->show_columns('id','email', 'date');
+
+        $crud->show_name_column(array(
+            'email' => 'Email',
+            'date' => 'Дата подписки'
+            ));
 
         $status['page'] = 'action';
         $status['position'][0] = array('class' =>'btn-warning', 'text' => 'OFF');
@@ -1460,7 +1467,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         }
 
-        Model::factory('Adm')->log_add('галерею', $key_array['name'], 'add');
+        Model::factory('Adm')->log_add('галерею', $key_array['name'].'ID '.$key_array['id'], 'add');
 
     }
 
@@ -1562,7 +1569,7 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function create_images ($img_src, $upload_src, $w, $h, $flag = 100){
         if (!empty($img_src)) {
             $image = Image::factory('.' . $img_src);
-            $image->resize($w, $h, Image::NONE);
+            $image->resize($w, $h, Image::AUTO);
             $image->save('.'.$upload_src . basename($img_src), $flag);
             return true;
         } else {

@@ -437,6 +437,11 @@ Route::set('Sections', 'section(/<url_section>(/<url_category>(/<page>)))', arra
         'action'     => 'index',
     ));
 
+Route::set('LogsAdmin', 'administrator/logs(/<page>)', array('page' => '[0-9]+'))
+    ->defaults(array(
+        'controller' => 'Administrator',
+        'action'     => 'logs',
+    ));
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
     ->defaults(array(

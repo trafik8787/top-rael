@@ -23,4 +23,8 @@
             <?endif?>
         <?endforeach?>
     </div>
+
+</div>
+<div class="text-center">
+<?=isset($pagination) ? $pagination : ''?>
 </div>
