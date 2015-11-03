@@ -314,12 +314,12 @@
                                                                 <div class="layer">
                                                                     <div>
                                                                         <a href="javascript:;" data-bx-image="<?=$galery_file[0]['FileFilename']?>" data-bx-caption="<?=$galery_file[0]['FileTitle']?>"><img
-                                                                                src="/uploads/img_galery/thumbs/<?=basename($galery_file[0]['FileFilename'])?>" width="100" hidden="72"/></a>
+                                                                                src="/uploads/img_galery/thumbs/<?=basename($galery_file[0]['FileFilename'])?>" width="auto" hidden="auto"/></a>
                                                                     </div>
                                                                     <?if (!empty($galery_file[1])):?>
                                                                         <div>
                                                                             <a href="javascript:;" data-bx-image="<?=$galery_file[1]['FileFilename']?>"  data-bx-caption="<?=$galery_file[1]['FileTitle']?>"><img
-                                                                                    src="/uploads/img_galery/thumbs/<?=basename($galery_file[1]['FileFilename'])?>" width="100" hidden="72"/></a>
+                                                                                    src="/uploads/img_galery/thumbs/<?=basename($galery_file[1]['FileFilename'])?>" width="auto" hidden="auto"/></a>
                                                                         </div>
                                                                     <?endif?>
                                                                 </div>

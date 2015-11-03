@@ -11680,8 +11680,8 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   position: absolute;
   left: 50%;
   top: 50%;
-  max-width: 100%;
-  max-height: 100%;
+  /*max-width: 100%;*/
+  /*max-height: 100%;*/
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
