@@ -1299,11 +1299,12 @@ class Controller_Administrator extends Controller_Core_Main {
 
         if (!empty($new_array['images_article'])) {
             $img = self::create_images($new_array['images_article'], '/uploads/img_articles/thumbs/', 260, 190);
-            //die(HTML::x($old_array[0]['images_article']));
+            //die(HTML::x($old_array['images_article']));
             //удаляем старые картинки
             if ($img === true and file_exists($_SERVER['DOCUMENT_ROOT'] . $old_array['images_article'])) {
-                unlink($_SERVER['DOCUMENT_ROOT'] . $old_array['images_article']);
-                unlink($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($old_array['images_article']));
+                //todo не работает удаление на продакшене
+                //unlink($_SERVER['DOCUMENT_ROOT'] . $old_array['images_article']);
+                //unlink($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($old_array['images_article']));
             }
         }
 
@@ -1375,8 +1376,10 @@ class Controller_Administrator extends Controller_Core_Main {
         //определяем отностельные и абсолютные пути
         $thumbs = '/uploads/img_galery/thumbs/';
         $img_galery = '/uploads/img_galery/';
+        $img_galery_original = '/uploads/img_galery_original/';
         $file_path_thumbs = $_SERVER['DOCUMENT_ROOT'] . $thumbs;
-        $file_path = $_SERVER['DOCUMENT_ROOT'] . $img_galery;
+        //$file_path = $_SERVER['DOCUMENT_ROOT'] . $img_galery;
+        $file_path = $_SERVER['DOCUMENT_ROOT'] . $img_galery_original;
 
         //получаем первоначальный список картинок
         $file_start = Model::factory('Adm')->get_table('files', array('gallery', '=', Cruds::$post['id']));
@@ -1410,7 +1413,9 @@ class Controller_Administrator extends Controller_Core_Main {
 
                 Model::factory('Adm')->update_galery($img_galery.$name_file, Cruds::$post['title'][$key], $key);
                 self::save_img(Cruds::$files['filename']['tmp_name'][$key], $name_file, $file_path);
-                $img = self::create_images($img_galery.$name_file, $thumbs, 300, 196);
+
+                $img = self::create_images($img_galery_original.$name_file, $thumbs, 300, 196);
+                $img2 = self::create_images($img_galery_original.$name_file, $img_galery, 475, 350);
                 //удаление старых катинок
                 self::unlink_file($rows_filename, $thumbs);
 
@@ -1427,7 +1432,8 @@ class Controller_Administrator extends Controller_Core_Main {
 
                 Model::factory('Adm')->insert_galery($img_galery.$name_file, Cruds::$post['title'][$key], Cruds::$post['id']);
                 self::save_img($tmp_name, $name_file, $file_path);
-                $img = self::create_images($img_galery.$name_file, $thumbs, 300, 196);
+                $img = self::create_images($img_galery_original.$name_file, $thumbs, 300, 196);
+                $img2 = self::create_images($img_galery_original.$name_file, $img_galery, 475, 350);
             }
 
         }
@@ -1451,8 +1457,11 @@ class Controller_Administrator extends Controller_Core_Main {
         //определяем отностельные и абсолютные пути
         $thumbs = '/uploads/img_galery/thumbs/';
         $img_galery = '/uploads/img_galery/';
+        $img_galery_original = '/uploads/img_galery_original/';
+
         $file_path_thumbs = $_SERVER['DOCUMENT_ROOT'] . $thumbs;
-        $file_path = $_SERVER['DOCUMENT_ROOT'] . $img_galery;
+        //$file_path = $_SERVER['DOCUMENT_ROOT'] . $img_galery;
+        $file_path = $_SERVER['DOCUMENT_ROOT'] . $img_galery_original;
 
 
         //новые добавления картинок
@@ -1463,7 +1472,8 @@ class Controller_Administrator extends Controller_Core_Main {
 
             Model::factory('Adm')->insert_galery($img_galery.$name_file, Cruds::$post['title'][$key], $key_array['id']);
             self::save_img($tmp_name, $name_file, $file_path);
-            $img = self::create_images($img_galery.$name_file, $thumbs, 300, 196);
+            $img = self::create_images($img_galery_original.$name_file, $thumbs, 300, 196);
+            $img2 = self::create_images($img_galery_original.$name_file, $img_galery, 475, 350);
 
         }
 
