@@ -846,7 +846,13 @@ class Controller_Core_Crud extends Controller_Core_Main {
             $styles_add = $retw->add_style_add;
         }
 
-        $viev_add->curent_uri = $retw->curent_uri;
+        //обнуляем curent_uri для правильной работы создания галереи из бизнеса
+        if (!empty($_GET['uri_galery'])) {
+            $viev_add->curent_uri = $_GET['uri_galery'];
+        } else {
+            $viev_add->curent_uri = $retw->curent_uri;
+        }
+
         $viev_add->add_property = array('field' => $fields,
             'scripts_add' => $scripts_add,
             'styles_add' => $styles_add,

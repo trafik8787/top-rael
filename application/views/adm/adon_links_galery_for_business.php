@@ -18,8 +18,9 @@
                         <li><a class="btn btn-info btn-lg" role="button" href="/admin/edit?obj=YToyOntzOjU6InRhYmxlIjtzOjc6ImdhbGxlcnkiO3M6MjQ6ImNhbGxiYWNrX2Z1bmN0aW9uc19hcnJheSI7YTozOntzOjg6ImZ1bmN0aW9uIjtzOjExOiJhZG1pbkdhbGVyeSI7czo1OiJjbGFzcyI7czoyNDoiQ29udHJvbGxlcl9BZG1pbmlzdHJhdG9yIjtzOjIyOiJjYWxsYmFja19mdW5jdGlvbl9uYW1lIjtzOjEwOiJsb2FkX3RhYmxlIjt9fQ%3D%3D&id=<?=$row_data['id']?>"><?=$row_data['name']?></a></li>
                     <?endforeach?>
                 <?endif?>
-                <li><a class="btn btn-primary btn-lg" role="button" href="/admin/add?obj=YToyOntzOjU6InRhYmxlIjtzOjc6ImdhbGxlcnkiO3M6MjQ6ImNhbGxiYWNrX2Z1bmN0aW9uc19hcnJheSI7YTozOntzOjg6ImZ1bmN0aW9uIjtzOjExOiJhZG1pbkdhbGVyeSI7czo1OiJjbGFzcyI7czoyNDoiQ29udHJvbGxlcl9BZG1pbmlzdHJhdG9yIjtzOjIyOiJjYWxsYmFja19mdW5jdGlvbl9uYW1lIjtzOjEwOiJsb2FkX3RhYmxlIjt9fQ%3D%3D">Добавить галерею</a></li>
+                <li><a class="btn btn-primary btn-lg" role="button" href="/admin/add?obj=YToyOntzOjU6InRhYmxlIjtzOjc6ImdhbGxlcnkiO3M6MjQ6ImNhbGxiYWNrX2Z1bmN0aW9uc19hcnJheSI7YTozOntzOjg6ImZ1bmN0aW9uIjtzOjExOiJhZG1pbkdhbGVyeSI7czo1OiJjbGFzcyI7czoyNDoiQ29udHJvbGxlcl9BZG1pbmlzdHJhdG9yIjtzOjIyOiJjYWxsYmFja19mdW5jdGlvbl9uYW1lIjtzOjEwOiJsb2FkX3RhYmxlIjt9fQ%3D%3D&uri_galery=/administrator/galery">Добавить галерею</a></li>
             </ul>
 
         </div>
     </div>
+

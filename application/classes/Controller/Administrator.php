@@ -1303,8 +1303,8 @@ class Controller_Administrator extends Controller_Core_Main {
             //удаляем старые картинки
             if ($img === true and file_exists($_SERVER['DOCUMENT_ROOT'] . $old_array['images_article'])) {
                 //todo не работает удаление на продакшене
-                //unlink($_SERVER['DOCUMENT_ROOT'] . $old_array['images_article']);
-                //unlink($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($old_array['images_article']));
+                unlink($_SERVER['DOCUMENT_ROOT'] . $old_array['images_article']);
+                unlink($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($old_array['images_article']));
             }
         }
 
@@ -1390,9 +1390,16 @@ class Controller_Administrator extends Controller_Core_Main {
             $file_result_filename[$row_value['id']] = $row_value['filename'];
             $file_result_title[$row_value['id']] = $row_value['title'];
         }
-        //вычисляем расхождение масивов для удаление
-        $diferen = array_diff($file_result_filename, Cruds::$post['filename']);
 
+       // HTML::x($file_result_filename);
+
+
+        if (!empty(Cruds::$post['filename'])) {
+            //вычисляем расхождение масивов для удаление
+            $diferen = array_diff($file_result_filename, Cruds::$post['filename']);
+        } else {
+            $diferen = $file_result_filename;
+        }
         //если не пустой значит некоторые картинки были удалены
         if (!empty($diferen)) {
             foreach ($diferen as $key =>$dif) {
@@ -1403,22 +1410,24 @@ class Controller_Administrator extends Controller_Core_Main {
             Model::factory('Adm')->delete_galery($del);
         }
 
-        //редактирование картинки
-        foreach (Cruds::$post['filename'] as $key => $rows_filename) {
+        if (!empty(Cruds::$post['filename'])) {
             //редактирование картинки
-            if (!empty(Cruds::$files['filename']['tmp_name'][$key])) {
-                //формируем имя файла с раширением
-                $type_file = '.'. strtolower(pathinfo(Cruds::$files['filename']['name'][$key], PATHINFO_EXTENSION));
-                $name_file = uniqid().$type_file;
+            foreach (Cruds::$post['filename'] as $key => $rows_filename) {
+                //редактирование картинки
+                if (!empty(Cruds::$files['filename']['tmp_name'][$key])) {
+                    //формируем имя файла с раширением
+                    $type_file = '.' . strtolower(pathinfo(Cruds::$files['filename']['name'][$key], PATHINFO_EXTENSION));
+                    $name_file = uniqid() . $type_file;
 
-                Model::factory('Adm')->update_galery($img_galery.$name_file, Cruds::$post['title'][$key], $key);
-                self::save_img(Cruds::$files['filename']['tmp_name'][$key], $name_file, $file_path);
+                    Model::factory('Adm')->update_galery($img_galery . $name_file, Cruds::$post['title'][$key], $key);
+                    self::save_img(Cruds::$files['filename']['tmp_name'][$key], $name_file, $file_path);
 
-                $img = self::create_images($img_galery_original.$name_file, $thumbs, 300, 196);
-                $img2 = self::create_images($img_galery_original.$name_file, $img_galery, 475, 350);
-                //удаление старых катинок
-                self::unlink_file($rows_filename, $thumbs);
+                    $img = self::create_images($img_galery_original . $name_file, $thumbs, 300, 196);
+                    $img2 = self::create_images($img_galery_original . $name_file, $img_galery, 475, 350);
+                    //удаление старых катинок
+                    self::unlink_file($rows_filename, $thumbs);
 
+                }
             }
         }
 
