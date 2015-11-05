@@ -515,7 +515,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
         $crud->set_field_type('dop_address', 'hidden', '', '', '', '');
 
-        $crud->set_field_type('client_status', 'radio', array(1 => 'Стандарт', 2 => 'Премиум'), '', array('style' => 'margin-top: 10px; margin-bottom: 12px'), '');
+        $crud->set_field_type('client_status', 'radio', array(1 => 'Стандарт', 2 => 'Топ'), '', array('style' => 'margin-top: 10px; margin-bottom: 12px'), '');
 
 
         $crud->set_field_type('redactor_user', 'select', '', '', '', array('users', 'username', 'id', array('id', 'IN', $arr_user)));

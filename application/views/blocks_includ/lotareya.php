@@ -55,7 +55,7 @@
 
                     <div class="media">
                         <div class="media-left media-middle">
-                            <a href="#">
+                            <a href="/business/<?=$data['BusUrl']?>">
                                 <img src="<?=$data['img']?>" width="88" height="88" class="media-object"/>
                             </a>
                         </div>

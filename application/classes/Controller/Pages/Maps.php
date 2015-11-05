@@ -66,6 +66,12 @@ class Controller_Pages_Maps extends Controller_BaseController {
         }
 
 
+        //SEO
+        $this->SeoShowPage(array('Карта мест для отдыха, развлечений и покупок в Израиле', ''),
+            array('Удобный обзор всех интересных мест на карте Израиля', ''),
+            array('Удобный обзор всех интересных мест на карте Израиля', ''));
+
+
         //HTML::x($result);
 
         foreach ($result as $row) {

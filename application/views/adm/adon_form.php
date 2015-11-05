@@ -28,7 +28,9 @@
 
     });
 </script>
+
 <div class="col-sm-offset-2 col-sm-10">
+    <b>"Обратите внимание! Фотографии должны быть весом не более 200 Kb. Максимальный размер 1200 px</b>
     <div class="row">
         <div class="col-md-12">
             <p> <button type="button" class="btn btn-default btn-lg w-button-add"><span class="glyphicon glyphicon-plus"></span> Добавить</button></p>
@@ -39,9 +41,10 @@
                         <li class="media edit">
                             <img class="media-object pull-left" src="/uploads/img_galery/thumbs/<?=basename($row['filename'])?>" alt="" width="15%">
                             <input type="hidden" name="filename[<?=$row['id']?>]" value="<?=$row['filename']?>"/>
-                            <input type="file" title="dfg" name="filename[<?=$row['id']?>]"/><b>470х340</b>
+                            <input type="file" title="dfg" name="filename[<?=$row['id']?>]"/>
                             <div class="media-body text-left">
                                 <input type="text" name="title[<?=$row['id']?>]" class="form-control" value="<?=$row['title']?>"  placeholder="Описание">
+
                             </div>
                             <p> <button type="button" class="btn btn-default btn-lg w-button-delete"><span class="glyphicon glyphicon-remove-sign"></span> Удалить</button></p>
                         </li>

@@ -10,8 +10,13 @@ class Model_LotareyModel extends Model_BaseModel {
 
     public function getLotareya (){
 
-        return DB::query(Database::SELECT, 'SELECT * FROM lotarey WHERE status=2 AND DATE(NOW()) BETWEEN date_start AND date_end LIMIT 1;')
-          ->cached()->execute()->as_array();
+        return DB::select('lotarey.*', array('business.url', 'BusUrl'))
+            ->from('lotarey')
+            ->join('business')
+            ->on('lotarey.business_id', '=', 'business.id')
+            ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('lotarey.date_start AND lotarey.date_end'))
+            ->limit(1)
+            ->cached()->execute()->as_array();
 
     }
 
