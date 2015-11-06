@@ -575,5 +575,22 @@ class Model_ArticlesModel extends Model_BaseModel {
 
         return $result;
     }
-    
+
+
+    /**
+     * @return mixed
+     * todo получаем список разделов в которых присутсвуют обзоры
+     */
+    public function getSectionArticles(){
+
+        return DB::select('category.*')
+            ->from('articles')
+            ->join('category')
+            ->on('articles.id_section', '=', 'category.id')
+            ->group_by('category.id')
+            ->cached()
+            ->execute()->as_array();
+
+    }
+
 }

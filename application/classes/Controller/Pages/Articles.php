@@ -28,7 +28,8 @@ class Controller_Pages_Articles extends Controller_BaseController {
         }
 
         $content = View::factory('pages/articles_all');
-        $content->category =  self::$general_meny;
+
+        $content->category =  Model::factory('ArticlesModel')->getSectionArticles();
 
         if ($this->request->param('url_section') == '') {
             $data = Model::factory('ArticlesModel')->getArticlesSectionUrl(null, 10, $number_page, $city_id);
