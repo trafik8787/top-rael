@@ -442,14 +442,17 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_lang('ru');
         $crud->disable_search();
         $crud->remove_delete();
-        $crud->show_columns('id', 'name', 'name_en', 'name_he');
-        $crud->edit_fields('name', 'name_en', 'name_he');
-        $crud->add_field('name', 'name_en', 'name_he');
-        //$crud->disable_editor('description');
-        //$crud->disable_editor('keywords');
+        $crud->show_columns('id', 'name', 'url', 'name_en', 'name_he');
+        $crud->edit_fields('name', 'name_en', 'name_he', 'url', 'title', 'description', 'keywords');
+        $crud->add_field('name', 'name_en', 'name_he', 'url', 'title', 'description', 'keywords');
+        $crud->set_where('parent_id', '<>', '0');
         $crud->show_name_column(array('name' => 'Название',
             'name_en' => 'Название_en',
-            'name_he' => 'Название_he'));
+            'name_he' => 'Название_he',
+            'url' => 'URL',
+            'title' => 'SEO Title',
+            'description' => 'SEO Description',
+            'keywords' => 'SEO Keywords'));
         return $crud;
     }
 

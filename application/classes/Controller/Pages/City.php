@@ -9,24 +9,19 @@ class Controller_Pages_City extends Controller_BaseController {
 
 	public function action_index(){
 
-        switch ($this->request->param('url_city')) {
-            case 'telaviv':
-                $city_id = 59;
-                break;
-            case 'jerusalem':
-                $city_id = 23;
-                break;
-            case 'eilat':
-                $city_id = 2;
-                break;
-            default:
-                throw new HTTP_Exception_404;
-        }
+
+        $city_data = Model::factory('BaseModel')->getCityUrl($this->request->param('url_city'));
+        $city_id = $city_data[0]['id'];
+
+        $this->SeoShowPage(array($city_data[0]['title'], ''),
+            array($city_data[0]['keywords'], ''),
+            array($city_data[0]['description'], ''));
+
 
         $content = View::factory('pages/city');
         $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'), 'order_by');
 
-//        if (Cache::instance()->get($this->request->param('url_city')) == null) {
+        if (Cache::instance()->get($this->request->param('url_city')) == null) {
 
             foreach ($section as $row_section) {
 
@@ -57,12 +52,12 @@ class Controller_Pages_City extends Controller_BaseController {
                 $resultArr[] = array('category' => $category, 'data' => $data['data']);
             }
 
-//            //кешируем
-//            Cache::instance()->set($this->request->param('url_city'), $resultArr);
-//
-//        } else {
-//            $resultArr = Cache::instance()->get($this->request->param('url_city'));
-//        }
+            //кешируем
+            Cache::instance()->set($this->request->param('url_city'), $resultArr);
+
+        } else {
+            $resultArr = Cache::instance()->get($this->request->param('url_city'));
+        }
 
         //Cache::instance()->delete($this->request->param('url_city'));
 

@@ -223,4 +223,23 @@ class Model_BaseModel extends Model {
     }
 
 
+    /**
+     * @param $url_city
+     * @return mixed
+     * todo получить ID города по URl
+     */
+    public function getCityUrl($url_city){
+        $query = DB::select()
+            ->from('city')
+            ->where('url', '=', $url_city)
+            ->limit(1)
+            ->cached()->execute()->as_array();
+
+        if (empty($query)){
+            throw new HTTP_Exception_404;
+        }
+
+        return $query;
+    }
+
 }
