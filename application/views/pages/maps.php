@@ -50,7 +50,7 @@
                             <i class="input-icon fa fa-check"></i>
                         </div>
 
-                        Рестораны
+                        РЕСТОРАНЫ И БАРЫ
                     </label>
 
                     <label class="purchases" data-map-filter="2">
@@ -59,17 +59,17 @@
                             <i class="input-icon fa fa-check"></i>
                         </div>
 
-                        Шоппинг
+                        МАГАЗИНЫ
                     </label>
 
-                    <label class="night-life" data-map-filter="3">
-                        <div class="form-control input-md">
-                            <input type="checkbox" value="26" checked="checked">
-                            <i class="input-icon fa fa-check"></i>
-                        </div>
-
-                        Бары
-                    </label>
+<!--                    <label class="night-life" data-map-filter="3">-->
+<!--                        <div class="form-control input-md">-->
+<!--                            <input type="checkbox" value="26" checked="checked">-->
+<!--                            <i class="input-icon fa fa-check"></i>-->
+<!--                        </div>-->
+<!---->
+<!--                        Бары-->
+<!--                    </label>-->
 
                     <label class="relax" data-map-filter="4">
                         <div class="form-control input-md">
@@ -77,7 +77,7 @@
                             <i class="input-icon fa fa-check"></i>
                         </div>
 
-                        Отдых
+                        ОТДЫХ
                     </label>
 
                     <label class="beauty" data-map-filter="5">
@@ -86,7 +86,7 @@
                             <i class="input-icon fa fa-check"></i>
                         </div>
 
-                        Красота
+                        КРАСОТА И ЗДОРОВЬЕ
                     </label>
 
 
@@ -96,7 +96,7 @@
                             <i class="input-icon fa fa-check"></i>
                         </div>
 
-                        Отели
+                        ОТЕЛИ
                     </label>
                 </div>
 

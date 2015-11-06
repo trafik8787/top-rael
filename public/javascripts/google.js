@@ -14,6 +14,7 @@ function initMap() {
 
     var lat = 32.0650;
     var lng = 34.7700;
+    var zoom = 8;
 
     function favoritesClick() {
         console.log(arguments);
@@ -23,11 +24,12 @@ function initMap() {
     if (window.busLng != 0 || window.busLat != 0) {
         lat = window.busLat;
         lng = window.busLng;
+        zoom = 16;
     }
 
 
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 8,
+        zoom: zoom,
         center: {lat: lat, lng: lng}
     });
 

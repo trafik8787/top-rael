@@ -53,6 +53,11 @@ class Controller_Pages_Articles extends Controller_BaseController {
             View::factory('blocks_includ/baners_right'),
         ));
 
+
+        $this->SeoShowPage(array('Эксклюзивные обзоры мест для отдыха, развлечений и покупок в Израиле', ''),
+            array('Откройте для себя новый Израиль, который Вы еще не знаете!', ''),
+            array('Откройте для себя новый Израиль, который Вы еще не знаете!', ''));
+
         //передаем параметр значения выбраного города для селекта
         $content->city_id = $city_id;
 
