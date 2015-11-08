@@ -111,77 +111,77 @@
                 </div>
             </div>
 
-            <div class="sidebar-tabs">
-
-                <div class="sidebar-tabs-heading">
-                    <div class="sidebar-tabs-title">Победители</div>
-                </div>
-
-                <div class="sidebar-tabs-body">
-                    <div class="media">
-                        <div class="media-left media-middle">
-                            <a href="#" >
-                                <img src="/public/uploade/no_avatar.jpg" width="43" height="43"
-                                     class="media-object img-circle"/>
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <strong>Александр Жуков</strong><br/>
-                            11.6.15 - 500ш в ресторан<br/>
-                            <a href="#">"Круглый стол"</a>
-                        </div>
-                    </div>
-
-                    <div class="media">
-                        <div class="media-left media-middle">
-                            <a href="#" >
-                                <img src="/public/uploade/no_avatar.jpg" width="43" height="43"
-                                     class="media-object img-circle"/>
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <strong>Александр Жуков</strong><br/>
-                            11.6.15 - 500ш в ресторан<br/>
-                            <a href="#">"Круглый стол"</a>
-                        </div>
-                    </div>
-
-                    <div class="media">
-
-                        <div class="media-left media-middle">
-                            <a href="#" >
-                                <img src="/public/uploade/no_avatar.jpg" width="43" height="43"
-                                     class="media-object img-circle"/>
-                            </a>
-                        </div>
-
-                        <div class="media-body">
-                            <strong>Александр Жуков</strong><br/>
-                            11.6.15 - 500ш в ресторан<br/>
-                            <a href="#">"Круглый стол"</a>
-                        </div>
-                    </div>
-
-                    <div class="media">
-                        <div class="media-left media-middle">
-                            <a href="#" >
-                                <img src="/public/uploade/no_avatar.jpg" width="43" height="43"
-                                     class="media-object img-circle"/>
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <strong>Александр Жуков</strong><br/>
-                            11.6.15 - 500ш в ресторан<br/>
-                            <a href="#">"Круглый стол"</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            <div class="sidebar-tabs">-->
+<!---->
+<!--                <div class="sidebar-tabs-heading">-->
+<!--                    <div class="sidebar-tabs-title">Победители</div>-->
+<!--                </div>-->
+<!---->
+<!--                <div class="sidebar-tabs-body">-->
+<!--                    <div class="media">-->
+<!--                        <div class="media-left media-middle">-->
+<!--                            <a href="#" >-->
+<!--                                <img src="/public/uploade/no_avatar.jpg" width="43" height="43"-->
+<!--                                     class="media-object img-circle"/>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="media-body">-->
+<!--                            <strong>Александр Жуков</strong><br/>-->
+<!--                            11.6.15 - 500ш в ресторан<br/>-->
+<!--                            <a href="#">"Круглый стол"</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="media">-->
+<!--                        <div class="media-left media-middle">-->
+<!--                            <a href="#" >-->
+<!--                                <img src="/public/uploade/no_avatar.jpg" width="43" height="43"-->
+<!--                                     class="media-object img-circle"/>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="media-body">-->
+<!--                            <strong>Александр Жуков</strong><br/>-->
+<!--                            11.6.15 - 500ш в ресторан<br/>-->
+<!--                            <a href="#">"Круглый стол"</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="media">-->
+<!---->
+<!--                        <div class="media-left media-middle">-->
+<!--                            <a href="#" >-->
+<!--                                <img src="/public/uploade/no_avatar.jpg" width="43" height="43"-->
+<!--                                     class="media-object img-circle"/>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!---->
+<!--                        <div class="media-body">-->
+<!--                            <strong>Александр Жуков</strong><br/>-->
+<!--                            11.6.15 - 500ш в ресторан<br/>-->
+<!--                            <a href="#">"Круглый стол"</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="media">-->
+<!--                        <div class="media-left media-middle">-->
+<!--                            <a href="#" >-->
+<!--                                <img src="/public/uploade/no_avatar.jpg" width="43" height="43"-->
+<!--                                     class="media-object img-circle"/>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="media-body">-->
+<!--                            <strong>Александр Жуков</strong><br/>-->
+<!--                            11.6.15 - 500ш в ресторан<br/>-->
+<!--                            <a href="#">"Круглый стол"</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
 
-        <div class="sidebar-lottery-footer">
-            <a href="/arhiv_lotery">Архив лотереи</a>
-        </div>
+<!--        <div class="sidebar-lottery-footer">-->
+<!--            <a href="/arhiv_lotery">Архив лотереи</a>-->
+<!--        </div>-->
     </div>
 <?endif?>
 
