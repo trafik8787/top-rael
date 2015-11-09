@@ -73,7 +73,7 @@ class Controller_Pages_Tags extends Controller_BaseController {
         $content->data_coupon =  $data_coupons;
         //разделы для обзоров
         $content->section =  Model::factory('ArticlesModel')->getSectionArticlesTag($this->request->param('url_tags'));
-        $content->section_coupons = Model::factory('CouponsModel')->CouponsSectionCountCoupon(self::$general_meny);
+        $content->section_coupons = Model::factory('CouponsModel')->CouponsSectionCountCouponTags($this->request->param('url_tags'));
 
 
         $content->data = $resultArr;

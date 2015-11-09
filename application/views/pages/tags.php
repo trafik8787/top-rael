@@ -168,7 +168,7 @@
                     <?endforeach?>
 
 
-
+                    <?HTML::x($section_coupons)?>
                     <?if (!empty($data_coupon)):?>
                         <div class="panel panel-coupons w-bloc-section">
 

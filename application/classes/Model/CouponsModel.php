@@ -417,4 +417,32 @@ class Model_CouponsModel extends Model_BaseModel {
         return $new_meny;
     }
 
+
+    /**
+     * @param $url_tags
+     * @return mixed
+     * todo получить разделы в в теге которых есть купоны и их дата актуальна
+     */
+    public function CouponsSectionCountCouponTags($url_tags){
+
+        return DB::select('category.*')
+            ->from('coupon')
+            ->join('category')
+            ->on('coupon.id_section', '=', 'category.id')
+
+            ->join('tags_relation_coupons')
+            ->on('tags_relation_coupons.id_coupons','=','coupon.id')
+
+            ->join('tags')
+            ->on('tags.id','=','tags_relation_coupons.id_tags')
+
+            ->where('tags.url_tags','=',$url_tags)
+            ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coupon.datestart AND coupon.dateoff'))
+            ->group_by('category.id')
+            ->cached()
+            ->execute()->as_array();
+
+    }
+
+
 }
