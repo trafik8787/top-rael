@@ -39,10 +39,10 @@
                                     <div class="collapse" id="restaurants-thumbnails-navigation">
 
                                         <ul class="nav nav-pills panel-navigation w-category-bloc">
-                                            <li class="active"><a href="/section/<?=$rowsdata['category'][0]['url']?>" data-section="<?=$rowsdata['category'][0]['url']?>" class="w-home-cat w-cat-active">Новые</a></li>
+                                            <li class="active"><a href="/section/<?=$rowsdata['category'][0]['url']?>" data-section="<?=$rowsdata['category'][0]['url']?>" class="w-tags-bus-cat w-cat-active">Новые</a></li>
 
                                             <?foreach($rowsdata['category'][0]['childs'] as $row_category):?>
-                                                <li><a href="/section/<?=$rowsdata['category'][0]['url'].'/'.$row_category['url']?>" data-cat="<?=$row_category['url']?>" class="w-home-cat"><?=$row_category['name']?></a></li>
+                                                <li><a href="/section/<?=$rowsdata['category'][0]['url'].'/'.$row_category['url']?>" data-cat="<?=$row_category['url']?>" class="w-tags-bus-cat"><?=$row_category['name']?></a></li>
 
                                             <?endforeach?>
                                         </ul>

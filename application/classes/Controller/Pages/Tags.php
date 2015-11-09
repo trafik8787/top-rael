@@ -30,24 +30,28 @@ class Controller_Pages_Tags extends Controller_BaseController {
 
         foreach ($section as $row_section) {
 
-            $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($row_section['url']);
+            $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($row_section['url'], null, $this->request->param('url_tags'));
 
             //HTML::x($category);
             //сортировка категорий по количеству бизнесов в них
             $count = array();
             $rowArr = array();
-            foreach ($category[0]['childs'] as $key => $row) {
-                $count[] = $row['COUNT'];
-                $rowArr[] = $row;
-            }
 
-            array_multisort($count, SORT_DESC, $rowArr, SORT_ASC, $category[0]['childs']);
-            //получаем первые 5 категорий раздела дальше "еще..."
+            if (!empty($category[0]['childs'])) {
+                foreach ($category[0]['childs'] as $key => $row) {
+                    $count[] = $row['COUNT'];
+                    $rowArr[] = $row;
+                }
+
+                array_multisort($count, SORT_DESC, $rowArr, SORT_ASC, $category[0]['childs']);
+                //получаем первые 5 категорий раздела дальше "еще..."
+            }
 
             $data = Model::factory('BussinesModel')->getBussinesSectionTagsUrl($row_section['url'], $this->request->param('url_tags'));
             $data['data'] = $this->convertArrayTagsBusiness($data['data']);
             $resultArr[] = array('category' => $category, 'data' => $data['data']);
         }
+
 
 
         $content->bloc_right = parent::RightBloc(array(

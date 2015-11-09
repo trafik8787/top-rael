@@ -36,7 +36,7 @@ class Model_CategoryModel extends Model_BaseModel {
      * @return array
      * todo получам все категории раздела по урлу раздела
      */
-    public function getCategoryInSectionUrl($section_url, $city_id = null){
+    public function getCategoryInSectionUrl($section_url, $city_id = null, $url_tags=null){
 
         $query = DB::select()
             ->from('category')
@@ -45,7 +45,7 @@ class Model_CategoryModel extends Model_BaseModel {
             ->execute()->as_array();
 
         if (!empty($query)) {
-            return $this->recurs_catalog($query[0]['id'], $city_id);
+            return $this->recurs_catalog($query[0]['id'], $city_id, $url_tags);
         } else {
             return false;
         }
@@ -64,7 +64,7 @@ class Model_CategoryModel extends Model_BaseModel {
      * @return array
      * рекурсивная функция категорий
      */
-    public function recurs_catalog ($id = null, $city_id = null){
+    public function recurs_catalog ($id = null, $city_id = null, $url_tags=null){
 
         if ($id == null) {
             $query = DB::select('category.*', array('businesscategory.business_id', 'BusCatId'))
@@ -84,8 +84,19 @@ class Model_CategoryModel extends Model_BaseModel {
             $query->join('business');
             $query->on('business.id', '=', 'businesscategory.business_id');
 
+            if ($url_tags != null) {
+                $query->join('tags_relation_business');
+                $query->on('tags_relation_business.id_business', '=', 'business.id');
+                $query->join('tags');
+                $query->on('tags_relation_business.id_tags', '=', 'tags.id');
+            }
+
             $query->where('category.id', '=', $id);
             $query->or_where('category.parent_id', '=', $id);
+
+            if ($url_tags != null) {
+                $query->and_where('tags.url_tags', '=', $url_tags);
+            }
 
             $query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'));
             if ($city_id !== null) {

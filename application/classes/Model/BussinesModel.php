@@ -783,6 +783,7 @@ class Model_BussinesModel extends Model_BaseModel {
      */
     public function getBussinesCategoryTagsUrl ($url_category, $url_tags = null, $limit = null){
 
+        //die(HTML::x($url_tags));
 
         $result = DB::select('bus.*',
             array('tag.name_tags', 'TagName'),
