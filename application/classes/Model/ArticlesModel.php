@@ -593,4 +593,30 @@ class Model_ArticlesModel extends Model_BaseModel {
 
     }
 
+    /**
+     * @param $url_tags
+     * @return mixed
+     * todo получаем список разделов в которых присутсвуют обзоры в тегах
+     */
+    public function getSectionArticlesTag($url_tags){
+
+        return DB::select('category.*')
+            ->from('articles')
+            ->join('category')
+            ->on('articles.id_section', '=', 'category.id')
+
+            ->join('tags_relation_articles')
+            ->on('tags_relation_articles.id_articles','=','articles.id')
+
+            ->join('tags')
+            ->on('tags.id','=','tags_relation_articles.id_tags')
+
+            ->where('tags.url_tags','=',$url_tags)
+
+            ->group_by('category.id')
+            ->cached()
+            ->execute()->as_array();
+    }
+
+
 }

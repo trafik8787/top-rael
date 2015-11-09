@@ -812,7 +812,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->and_where('bus.status', '=', 1)
             ->where_close()
             ->limit($limit)
-            //->cached()
+            ->cached()
             ->execute()->as_array();
 
         //вызываем метод получения данных из куки
