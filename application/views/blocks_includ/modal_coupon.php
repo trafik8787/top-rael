@@ -128,7 +128,7 @@
 
 
             <div class="div-cell">
-                <a href="/coupon/<?=$data[0]['url']?>" class="btn btn-primary btn-lg btn-block pin-aria">
+                <a href="/coupon/<?=$data[0]['url']?>" target="_blank" class="btn btn-primary btn-lg btn-block pin-aria">
                     <span class="pin"><i class="fa fa-mobile"></i></span>
                     <strong><i>Открыть на телефоне</i></strong>
                 </a>
