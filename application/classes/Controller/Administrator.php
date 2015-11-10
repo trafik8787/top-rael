@@ -959,19 +959,24 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->show_columns('id', 'email', 'username', 'secondname', 'date_registration');
         $crud->set_field_type('sex', 'select', array('m' => 'Мужчина', 'j' => 'Женщина'), '', '', '');
 
+
+
         if (Session::instance()->get('customer_id') == 1) {
 
             //если это обычные пользователи
             $crud->remove_add();
-            $crud->edit_fields('email', 'username', 'secondname', 'sex', 'age', 'ip', 'profil_soc_seti','date_registration');
+            $crud->set_field_type('photo', array('file', 'uploads/img_users', 'user_', '', 'img'),'','');
+            $crud->edit_fields('email', 'username', 'secondname', 'sex', 'age', 'tel', 'city', 'ip', 'photo', 'date_registration');
             $crud->add_field('email', 'username', 'date_registration');
+
+            $crud->callback_befor_show_edit('call_bef_show_edit_users');
 
 
         } elseif (Session::instance()->get('customer_id') == 5) {
 
             $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
-            $crud->edit_fields('email', 'password', 'username', 'secondname', 'sex', 'age', 'tel', 'profil_soc_seti', 'business_id','date_registration');
-            $crud->add_field('email', 'password', 'username', 'secondname', 'sex', 'age', 'tel', 'profil_soc_seti', 'business_id','date_registration');
+            $crud->edit_fields('email', 'password', 'username', 'secondname', 'sex', 'age', 'tel', 'business_id','date_registration');
+            $crud->add_field('email', 'password', 'username', 'secondname', 'sex', 'age', 'tel',  'business_id','date_registration');
             $crud->callback_after_insert('call_after_insert_userBusines');
 
         } else {
@@ -1006,8 +1011,9 @@ class Controller_Administrator extends Controller_Core_Main {
             'sex' => 'Пол',
             'age' => 'Возраст',
             'tel' => 'Телефон',
+            'city' => 'Город',
             'ip' => 'IP адрес',
-            'profil_soc_seti' => 'Профиль соц. сети',
+            'photo' => 'Фото',
             'password' => 'Пароль',
             'id_role' => 'Группа',
             'business_id' => 'Бизнес',
@@ -1553,6 +1559,16 @@ class Controller_Administrator extends Controller_Core_Main {
         $query = DB::update('subscription')->set(array('action' => $status))->where('id', '=', $key_array[0]['id'])->execute();
     }
 
+
+    public static function call_bef_show_edit_users($new_array)
+    {
+
+        $data = View::factory('adm/statistic_user');
+        $data->data = Model::factory('Adm')->getFaforitUser($new_array['id']);
+        $user = Model::factory('Adm')->getUserId($new_array['id']);
+        $data->last_login = date('d-m-Y', strftime($user->last_login));
+        Cruds::$adon_form[] = array('page' => 'date_registration', 'view' => $data);
+    }
 
 
 

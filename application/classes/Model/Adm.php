@@ -163,5 +163,48 @@ class Model_Adm extends Model {
         $count = Model::factory('BaseModel')->table_count('log', 'id');
         return array('data' => $query, 'count' => $count);
     }
+
+
+    /**
+     * @param $user_id
+     * @return array
+     * todo получаем статистику добавленную в избранное пользователя для админки вывод в каточке пользователя
+     */
+    public function getFaforitUser($user_id){
+
+        $articles = DB::select('articles.name')
+            ->from('users_relation_favorites_article')
+            ->join('articles')
+            ->on('articles.id', '=', 'users_relation_favorites_article.article_id')
+            ->where('users_relation_favorites_article.user_id', '=', $user_id)
+            ->execute()->as_array();
+
+        $business = DB::select('business.name')
+            ->from('users_relation_favorites_bus')
+            ->join('business')
+            ->on('business.id', '=', 'users_relation_favorites_bus.business_id')
+            ->where('users_relation_favorites_bus.user_id', '=', $user_id)
+            ->execute()->as_array();
+
+        $coupons = DB::select('coupon.secondname', 'coupon.id')
+            ->from('users_relation_favorites_coup')
+            ->join('coupon')
+            ->on('coupon.id', '=', 'users_relation_favorites_coup.coupon_id')
+            ->where('users_relation_favorites_coup.user_id', '=', $user_id)
+            ->execute()->as_array();
+
+        return array('articles' => $articles, 'business' => $business, 'coupons' =>  $coupons);
+
+    }
+
+
+    public function getUserId ($id)
+    {
+        $user = ORM::factory('user');
+        $user->where('id', ' = ', $id)
+            ->find();
+        return $user;
+    }
+    
     
 }

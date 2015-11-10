@@ -374,17 +374,8 @@
                                     <input type="submit" class="btn" value="Изменить пароль"/>
                                 </form>
 
-                                <h3>Аккаунты социальных сетей:</h3>
 
-                                <? if (isset($networks) && count($networks) > 0) {
-                                    foreach ($networks as $n) echo "<a href='{$n['identity']}' target='_blank'>{$n['identity']}</a><br />";
-                                } else {
-                                    echo 'Аккаунты социальных сетей еще не добавлены :(';
-                                } ?>
-                                <hr/>
-                                Добавить другие аккаунты:
-                                <br/>
-                                <?= $ulogin; ?>
+
                                 <hr/>
                                 <a href="/account/logout" class="btn">Выйти</a>
 
