@@ -61,6 +61,10 @@ class Controller_Pages_Account extends Controller_BaseController {
 
 
 
+
+
+
+
         if ($data->user = Auth::instance()->get_user()) // если пользователь авторизован
         {
 

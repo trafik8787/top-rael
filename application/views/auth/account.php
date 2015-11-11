@@ -359,6 +359,31 @@
                                     <li>E-mail: <?= $user->email; ?></li>
                                     <li>Последнее посещение: <?= Date::fuzzy_span($user->last_login); ?></li>
                                 </ul>
+
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="inputCity" class="col-sm-2 control-label">Город</label>
+                                        <div class="col-md-5">
+                                            <input name="city" id="inputCity" class="form-control" value="<?=$user->city?>" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputTel" class="col-sm-2 control-label">Телефон</label>
+                                        <div class="col-md-5">
+                                            <input name="tel" id="inputTel"  class="form-control" value="<?=$user->tel?>" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputAge" class="col-sm-2 control-label">Дата рождения</label>
+                                        <div class="col-md-5">
+                                            <input name="age" id="inputAge"  class="form-control" value="<?=$user->age?>" type="date">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Сохранить</button>
+                                </form>
+                                
+                                
                                 <hr/>
                                 <? if (isset($_GET['changeok'])) {
                                     echo "Новый пароль был успешно сохранен<hr />";

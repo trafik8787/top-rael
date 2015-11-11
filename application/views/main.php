@@ -34,6 +34,8 @@
         <script src="<?=URL::base();?><?=$scripts_map?>"></script>
     <?endif?>
 <!--    <link rel="shortcut icon" href="../../public/img/favicon.ico" type="image/x-icon">-->
+    <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="windows-1251"></script>
+
 </head>
 <body>
 <?=$header;?>

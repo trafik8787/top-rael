@@ -153,6 +153,14 @@ Kohana::modules(array(
  */
 
 //запросы из админки бизнесов на проверку существования урла для валидации
+Route::set('checUrlArticles', 'chec_url_articles')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'checUrlArticles',
+    ));
+
+//запросы из админки бизнесов на проверку существования урла для валидации
 Route::set('checUrlBusiness', 'chec_url_bus')
     ->defaults(array(
         'directory' => 'Pages',

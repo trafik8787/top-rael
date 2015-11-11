@@ -150,6 +150,23 @@ class Controller_Pages_Ajax extends Controller {
 
     }
 
+    /**
+     * todo мутод валидации поля URL в обзорах
+     */
+    public function action_checUrlArticles(){
+
+        if (!empty($_GET['id'])) {
+            $query = Model::factory('BaseModel')->table_count('articles', 'id', array('id', '<>', $_GET['id']), array('url', '=', $this->request->post('url')));
+        } else {
+            $query = Model::factory('BaseModel')->table_count('articles', 'id', array('url', '=', $this->request->post('url')));
+        }
+
+        if ($query != 0) {
+            echo "false";
+        } else {
+            echo "true";
+        }
+    }
 
 
 

@@ -423,23 +423,42 @@
                 <div class="recomendation">
                     <strong>Рекомендуйте нас друзьям</strong>
 
+
+
                     <div class="recomendation-icons">
 
-                        <a href="#" class="social vk">
-                            <i class="fa fa-vk"></i>
-                        </a>
+                       <script type="text/javascript">
+                            document.write(VK.Share.button({
+                                url: '<?=Request::full_current_url()?>',
+                                title: '<?=$data['BusName']?>',
+                                description: '<?=Text::limit_chars(strip_tags($data['BusInfo']), 150, null, true)?>',
+                                image: 'http://<?=$_SERVER['HTTP_HOST']?><?=$data['BusLogo']?>',
+                                noparse: true
+                            }, {
+                                type: 'custom',
+                                text: '<span class="social vk"><i class="fa fa-vk"></i></span>'
+                            }));
+                        </script>
 
-                        <a href="#" class="social facebook">
-                            <i class="fa fa-facebook"></i>
-                        </a>
 
-                        <a href="#" class="social twitter">
+
+
+                        <?php
+                        $image_url = 'http://'.$_SERVER['HTTP_HOST'].$data['BusLogo']; // URL изображения
+                        ?>
+                        <a href="http://www.facebook.com/sharer.php?s=100&p[url]=<?= urlencode(  Request::full_current_url() ); ?>&p[title]=<?=$data['BusName'] ?>&p[summary]=<?=Text::limit_chars(strip_tags($data['BusInfo']), 150, null, true)?>&p[images][0]=<?=$image_url ?>" onclick="window.open(this.href, this.title, 'toolbar=0, status=0, width=548, height=325'); return false" class="social facebook" title="Поделиться ссылкой на Фейсбук" target="_parent"><i class="fa fa-facebook"></i></a>
+
+
+
+                        <a href="https://twitter.com/intent/tweet?text=<?=Text::limit_chars(strip_tags($data['BusInfo']), 100, null, true).' '.Request::full_current_url()?>" class="social twitter">
                             <i class="fa fa-twitter"></i>
                         </a>
+<!---->
+<!--                        <a href="#" class="social email">-->
+<!--                            <i class="fa fa-envelope"></i>-->
+<!--                        </a>-->
 
-                        <a href="#" class="social email">
-                            <i class="fa fa-envelope"></i>
-                        </a>
+
                     </div>
                     <?if (!empty($data['bussines_favorit']))://если купон добавлен в избранное?>
                         <a href="#" class="btn btn-link">

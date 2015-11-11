@@ -698,10 +698,12 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->links('name', '/article/', 'url');
 
 
-        $crud->validation('url', array('required' => true, 'minlength' => 4, 'regexp' => '^[a-zA-Z0-9_]+$'),
+        $crud->validation('url', array('required' => true, 'minlength' => 4, 'regexp' => '^[a-zA-Z0-9_]+$',
+            'remote' => array('url' => "/chec_url_articles", 'type' => 'post')),
             array('minlength' => 'URL должен быть минимум 4 символа',
                 'required' => 'Это поле обязательно для заполнения',
-                'regexp' => 'Url может состоять только из латинских букв, цифр и знака подчеркивания'));
+                'regexp' => 'Url может состоять только из латинских букв, цифр и знака подчеркивания',
+                'remote' => 'Такой URL уже существует'));
 
         $crud->validation('name', array('required' => true),
             array('required' => 'Это поле обязательно для заполнения'));
@@ -957,7 +959,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('email', 'email');
 
         $crud->show_columns('id', 'email', 'username', 'secondname', 'date_registration');
-        $crud->set_field_type('sex', 'select', array('m' => 'Мужчина', 'j' => 'Женщина'), '', '', '');
+        $crud->set_field_type('sex', 'select', array('2' => 'Мужчина', '1' => 'Женщина'), '', '', '');
 
 
 
