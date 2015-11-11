@@ -279,35 +279,36 @@
                         <strong>Рекомендуйте нас друзьям</strong>
                         <br/>
 
-<!--                        <script type="text/javascript">(function() {-->
-<!--                                if (window.pluso)if (typeof window.pluso.start == "function") return;-->
-<!--                                if (window.ifpluso==undefined) { window.ifpluso = 1;-->
-<!--                                    var d = document, s = d.createElement('script'), g = 'getElementsByTagName';-->
-<!--                                    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;-->
-<!--                                    s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';-->
-<!--                                    var h=d[g]('body')[0];-->
-<!--                                    h.appendChild(s);-->
-<!--                                }})();</script>-->
-<!--                        <div class="pluso" data-background="transparent" data-options="big,square,line,horizontal,nocounter,theme=08" data-services="vkontakte,odnoklassniki,facebook,twitter,google,moimir,email,print"></div>-->
-
                         <div class="recomendation-icons">
 
 
-                            <a href="#" class="social vk">
-                                <i class="fa fa-vk"></i>
-                            </a>
+                            <script type="text/javascript">
+                                document.write(VK.Share.button({
+                                    url: '<?=Request::full_current_url()?>',
+                                    title: '<?=$data['ArticName']?>',
+                                    description: '<?=Text::limit_chars(strip_tags($data['ArticShortPreviev']), 120, null, true)?>',
+                                    image: 'http://<?=$_SERVER['HTTP_HOST']?><?=$data['ArticImg']?>',
+                                    noparse: true
+                                }, {
+                                    type: 'custom',
+                                    text: '<span class="social vk"><i class="fa fa-vk"></i></span>'
+                                }));
+                            </script>
 
-                            <a href="#" class="social facebook">
-                                <i class="fa fa-facebook"></i>
-                            </a>
 
-                            <a href="#" class="social twitter">
+
+
+                            <?php
+                            $image_url = 'http://'.$_SERVER['HTTP_HOST'].$data['ArticImg']; // URL изображения
+                            ?>
+                            <a href="http://www.facebook.com/sharer.php?s=100&p[url]=<?= urlencode(  Request::full_current_url() ); ?>&p[title]=<?=$data['ArticName'] ?>&p[summary]=<?=Text::limit_chars(strip_tags($data['ArticShortPreviev']), 150, null, true)?>&p[images][0]=<?=$image_url ?>" onclick="window.open(this.href, this.title, 'toolbar=0, status=0, width=548, height=325'); return false" class="social facebook" title="Поделиться ссылкой на Фейсбук" target="_parent"><i class="fa fa-facebook"></i></a>
+
+
+
+                            <a href="https://twitter.com/intent/tweet?text=<?=Text::limit_chars(strip_tags($data['ArticShortPreviev']), 100, null, true).' '.Request::full_current_url()?>" class="social twitter">
                                 <i class="fa fa-twitter"></i>
                             </a>
 
-                            <a href="#" class="social email">
-                                <i class="fa fa-envelope"></i>
-                            </a>
                         </div>
                         <?if (!empty($data['articles_favorit'])):?>
                             <a href="#" class="btn btn-link" style="color: #003c4c;">
