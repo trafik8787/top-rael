@@ -431,7 +431,7 @@
                             document.write(VK.Share.button({
                                 url: '<?=Request::full_current_url()?>',
                                 title: '<?=$data['BusName']?>',
-                                description: '<?=Text::limit_chars(strip_tags($data['BusInfo']), 150, null, true)?>',
+                                description: '<?=Text::limit_chars(strip_tags($data['BusInfo']), 120, null, true)?>',
                                 image: 'http://<?=$_SERVER['HTTP_HOST']?><?=$data['BusLogo']?>',
                                 noparse: true
                             }, {
