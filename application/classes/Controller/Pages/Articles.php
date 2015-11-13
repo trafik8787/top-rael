@@ -98,8 +98,8 @@ class Controller_Pages_Articles extends Controller_BaseController {
         //HTML::x($data['CoupArr']);
 
         $this->SeoShowPage(array($data['ArticTitle'], $data['ArticName']),
-            array($data['ArticKeywords'], $data['ArticContent']),
-            array($data['ArticDesc'], $data['ArticContent']));
+            array($data['ArticKeywords'], ''),
+            array($data['ArticDesc'], ''));
 
         $data['CoupArr'] = parent::convertArrayVievData($data['CoupArr']);
         $data['BusArr'] = parent::convertArrayVievData($data['BusArr']);

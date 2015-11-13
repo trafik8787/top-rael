@@ -50,6 +50,10 @@ class Controller_Pages_Coupons extends Controller_BaseController {
         $result_data = parent::convertArrayVievData($data['data']);
 
 
+        $this->SeoShowPage(array('Купоны с эксклюзивными скидками и подарками в Израиле', ''),
+            array('Получите бесплатно купоны со скидками в места отдыха и развлечений, рестораны и магазины',''),
+            array('Получите бесплатно купоны со скидками в места отдыха и развлечений, рестораны и магазины', ''));
+
 
         //рисуем купоны
         $content_coupons = View::factory('ajax_views/coupons_list_ajax');
