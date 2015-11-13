@@ -23,6 +23,32 @@ class Controller_Pages_Account extends Controller_BaseController {
         $bloc_sndmail = View::factory('blocks_includ/bloc_sendmail_profile');
         $ulogin = Ulogin::factory(); // создаем экземпляр класса юлогин
 
+
+        if ($this->request->post('profil')) {
+
+            if (!empty($_FILES['avatar'])) {
+                $filename = $this->_save_image($_FILES['avatar']);
+            } else {
+                $filename = $this->request->post('old_photo');
+            }
+
+            if (!$filename) {
+                $bloc_sndmail->error_message = 'Не тот формат файла';
+            }
+
+            ORM::factory('user', Auth::instance()->get_user()->id)
+                ->values(array('username' => $this->request->post('username'),
+                    'secondname' => $this->request->post('secondname'),
+                    'city' => $this->request->post('city'),
+                    'tel' => $this->request->post('tel'),
+                    'age' => $this->request->post('age'),
+                    'photo' => $filename
+                ))->save();
+            $this->redirect('/account');
+        }
+
+
+
         if (!$ulogin->mode()) { // если ранее юлогин не вызывался
             $this->template->login = $ulogin->render(); // рисуем значки соц.сетей
         } else {
@@ -62,9 +88,6 @@ class Controller_Pages_Account extends Controller_BaseController {
 
 
 
-
-
-
         if ($data->user = Auth::instance()->get_user()) // если пользователь авторизован
         {
 
@@ -72,6 +95,7 @@ class Controller_Pages_Account extends Controller_BaseController {
             $bloc_sndmail->user = Auth::instance()->get_user();
             $bloc_sndmail->generall_menu = parent::$general_meny;
         }
+
 
         $data->panel_subscribe = $bloc_sndmail;
 
@@ -92,6 +116,7 @@ class Controller_Pages_Account extends Controller_BaseController {
         }
 
         $data->ulogin = $ulogin->render(); // стартуем сессии
+
 
         $this->template->content = $data;
     }
@@ -415,6 +440,36 @@ class Controller_Pages_Account extends Controller_BaseController {
         $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
         //$m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/3.jpg", "", "image/jpeg");
         $m->Send();
+    }
+
+
+    protected function _save_image($image)
+    {
+        if (
+            ! Upload::valid($image) OR
+            ! Upload::not_empty($image) OR
+            ! Upload::type($image, array('jpg', 'jpeg', 'png', 'gif')))
+        {
+            return FALSE;
+        }
+
+        $directory = DOCROOT.'uploads/img_users/';
+
+        if ($file = Upload::save($image, NULL, $directory))
+        {
+            $filename = strtolower(Text::random('alnum', 20)).'.jpg';
+
+            Image::factory($file)
+                ->resize(100, 100, Image::AUTO)
+                ->save($directory.$filename);
+
+            // Delete the temporary file
+            unlink($file);
+
+            return '/uploads/img_users/'.$filename;
+        }
+
+        return FALSE;
     }
     
 

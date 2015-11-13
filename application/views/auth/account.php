@@ -352,35 +352,72 @@
                         <div class="panel-body">
                             <div class="col-md-12">
 
-
-                                <h2><?=isset($user->username) ? $user->username : '' ?></h2>
-                                <ul>
-                                    <li>Аватарка: <img src="<?= $photo; ?>" class="img-rounded"/></li>
-                                    <li>E-mail: <?= $user->email; ?></li>
-                                    <li>Последнее посещение: <?= Date::fuzzy_span($user->last_login); ?></li>
-                                </ul>
-
-                                <form class="form-horizontal" role="form">
+                                <form class="form-horizontal" role="form" method="post" action="/account" enctype="multipart/form-data">
                                     <div class="form-group">
-                                        <label for="inputCity" class="col-sm-2 control-label">Город</label>
+
+                                        <label for="inputEmail" class="col-sm-1 control-label">E-mail</label>
+                                        <div class="col-md-5">
+                                            <input type="text" id="inputEmail"  class="form-control" disabled="disabled" value="<?=$user->email?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputFoto" class="col-sm-1 control-label"><img src="<?=$photo?>" width="50" height="50" class="img-circle"/></label>
+                                        <div class="col-md-5">
+                                            <input type="hidden" name="old_photo" value="<?=$photo?>">
+                                            <input  type="file"  id="inputFoto" class="form-control" value="" name="avatar">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="inputName" class="col-sm-1 control-label">Имя</label>
+                                        <div class="col-md-5">
+                                            <input name="username" required id="inputName" class="form-control" value="<?=$user->username?>" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputSecondname" class="col-sm-1 control-label">Фамилия</label>
+                                        <div class="col-md-5">
+                                            <input name="secondname" id="inputSecondname" class="form-control" value="<?=$user->secondname?>" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputCity" class="col-sm-1 control-label">Город</label>
                                         <div class="col-md-5">
                                             <input name="city" id="inputCity" class="form-control" value="<?=$user->city?>" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputTel" class="col-sm-2 control-label">Телефон</label>
+                                        <label for="inputTel" class="col-sm-1 control-label">Телефон</label>
                                         <div class="col-md-5">
-                                            <input name="tel" id="inputTel"  class="form-control" value="<?=$user->tel?>" type="text">
+                                            <input name="tel" id="inputTel"  class="form-control" value="<?=$user->tel?>" pattern="(\+?\d[- .]*){7,13}"  title="Международный, государственный или местный телефонный номер" type="tel">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputAge" class="col-sm-2 control-label">Дата рождения</label>
+                                        <label for="inputAge" class="col-sm-1 control-label">Дата рождения</label>
                                         <div class="col-md-5">
                                             <input name="age" id="inputAge"  class="form-control" value="<?=$user->age?>" type="date">
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-default">Сохранить</button>
+
+                                    <div class="form-group">
+                                        <span class="col-sm-1 control-label">Последнее посещение</span>
+                                        <div class="col-md-5">
+                                            <span><?= Date::fuzzy_span($user->last_login); ?></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-1 col-sm-5">
+
+                                            <button type="submit" name="profil" value="1" class="btn btn-primary">Сохранить</button>
+                                        </div>
+                                    </div>
+
+
                                 </form>
                                 
                                 
@@ -391,18 +428,35 @@
                                 <? if (isset($_GET['changefalse'])) {
                                     echo "Старый пароль введен не верно или новый пароль слишком слабый<hr />";
                                 } ?>
-                                <form action="/account/changepass" method="post">
-                                    Смена пароля:
-                                    <input type="password" name="oldpassword" placeholder="Старый пароль"/><br/>
-                                    Новый пароль:
-                                    <input type="password" name="newpassword" placeholder="Новый пароль"/><br/>
-                                    <input type="submit" class="btn" value="Изменить пароль"/>
+                                <form class="form-horizontal" role="form" action="/account/changepass" method="post">
+                                    <h3>Смена пароля</h3>
+                                    <div class="form-group">
+                                        <label for="inputSpas" class="col-sm-1 control-label">Старый пароль</label>
+                                        <div class="col-md-5">
+                                            <input name="oldpassword" id="inputSpas"  class="form-control" value="" type="password">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputPas" class="col-sm-1 control-label">Новый пароль</label>
+                                        <div class="col-md-5">
+                                            <input name="newpassword" id="inputPas"  class="form-control" value="" type="password">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-1 col-sm-5">
+                                            <button type="submit" class="btn btn-primary">Изменить пароль</button>
+                                        </div>
+                                    </div>
+
                                 </form>
 
 
 
                                 <hr/>
-                                <a href="/account/logout" class="btn">Выйти</a>
+                                <a href="/account/logout" class="btn btn-primary">Выйти</a>
 
 
                             </div>
