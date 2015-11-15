@@ -48,19 +48,14 @@ class Controller_Administrator extends Controller_Core_Main {
         $this->adm = View::factory('/adm/auth_admin');
 
 
-        if ($this->auth->logged_in() === false) {
-
-//            if ($this->request->uri() != 'administrator') {
-//                if (empty($this->request->post())) {
-//                    $this->redirect('/administrator');
-//                }
-//            }
-
-        } else {
+        if ($this->auth->logged_in('admin') !== false OR $this->auth->logged_in('manager') !== false OR $this->auth->logged_in('redactor') !== false) {
 
             $this->user = $this->auth->get_user();
            $this->user_roles = $this->user->roles->find_all()->as_array(NULL,'name');
             $this->_check_permission();
+        } else {
+
+            $this->response->body($this->adm);
         }
 
     }
@@ -68,10 +63,11 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public function after () {
 
-        if ($this->auth->logged_in() === false) {
-            $this->response->body($this->adm);
-        } else {
+        if ($this->auth->logged_in('admin') !== false OR $this->auth->logged_in('manager') !== false OR $this->auth->logged_in('redactor') !== false) {
+
             $this->_check_permission();
+        } else {
+            $this->response->body($this->adm);
         }
 
     }
