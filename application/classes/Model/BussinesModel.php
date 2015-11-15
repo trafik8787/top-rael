@@ -520,18 +520,33 @@ class Model_BussinesModel extends Model_BaseModel {
 
                 //купоны
                 if (!empty($row['CoupId'])) {
+
                     if (!array_key_exists($row['CoupId'], $CoupTmp)) {
-                        $CoupTmp[$row['CoupId']] = $row['CoupId'];
-                        $end_result['CoupArr'][] = array('CoupId' => $row['CoupId'],
-                            'CoupName' => $row['CoupName'],
-                            'CoupSecondname' => $row['CoupSecondname'],
-                            'CoupUrl' => $row['CoupUrl'],
-                            'CoupInfo' => $row['CoupInfo'],
-                            'CoupImg' => $row['CoupImg'],
-                            'DateOff' => $row['DateOff'],
-                            'CoupTags' => $row['CoupTags']
-                        );
+
+                        if ($row['DateOff'] > date('Y-m-d')) {
+
+                            $CoupTmp[$row['CoupId']] = $row['CoupId'];
+                            $end_result['CoupArr'][] = array('CoupId' => $row['CoupId'],
+                                'CoupName' => $row['CoupName'],
+                                'CoupSecondname' => $row['CoupSecondname'],
+                                'CoupUrl' => $row['CoupUrl'],
+                                'CoupInfo' => $row['CoupInfo'],
+                                'CoupImg' => $row['CoupImg'],
+                                'DateOff' => $row['DateOff'],
+                                'CoupTags' => $row['CoupTags']
+                            );
+
+                        } else {
+
+                            if (!empty($end_result['CoupArr'])) {
+                                $end_result['CoupArr'][] = array();
+                            } else {
+                                $end_result['CoupArr'] = array();
+                            }
+
+                        }
                     }
+
                 } else {
                     $end_result['CoupArr'] = array();
                 }
