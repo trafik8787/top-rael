@@ -26,24 +26,28 @@ class Controller_Pages_Account extends Controller_BaseController {
 
         if ($this->request->post('profil')) {
 
-            if (!empty($_FILES['avatar'])) {
+            if (!empty($_FILES['avatar']['name'])) {
                 $filename = $this->_save_image($_FILES['avatar']);
-            } else {
-                $filename = $this->request->post('old_photo');
             }
 
-            if (!$filename) {
-                $bloc_sndmail->error_message = 'Не тот формат файла';
-            }
 
-            ORM::factory('user', Auth::instance()->get_user()->id)
-                ->values(array('username' => $this->request->post('username'),
-                    'secondname' => $this->request->post('secondname'),
-                    'city' => $this->request->post('city'),
-                    'tel' => $this->request->post('tel'),
-                    'age' => $this->request->post('age'),
-                    'photo' => $filename
-                ))->save();
+            $profin_user = ORM::factory('user', Auth::instance()->get_user()->id);
+//                ->values(array('username' => $this->request->post('username'),
+//                    'secondname' => $this->request->post('secondname'),
+//                    'city' => $this->request->post('city'),
+//                    'tel' => $this->request->post('tel'),
+//                    'age' => $this->request->post('age'),
+//                    'photo' => $filename
+//                ))->save();
+            $profin_user->username = $this->request->post('username');
+            $profin_user->secondname = $this->request->post('secondname');
+            $profin_user->city = $this->request->post('city');
+            $profin_user->tel = $this->request->post('tel');
+            $profin_user->age = $this->request->post('age');
+            if (!empty($_FILES['avatar']['name'])) {
+                $profin_user->photo = $filename;
+            }
+            $profin_user->save();
             $this->redirect('/account');
         }
 

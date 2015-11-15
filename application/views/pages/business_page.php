@@ -276,7 +276,7 @@
                                         <div class="panel-links">
                                             <span class="tabs__caption_galery">
                                                 <?foreach ($data['GalryArr'] as $key => $rows_galery_name):?>
-                                                    <a href="#" <?if ($key == 0){?>class="active"<?}?>><?=$rows_galery_name['GalryName']?></a>
+                                                    <a href="#" title="<?=!empty($data['GalryDesk']) ? $data['GalryDesk'] : ''?>" <?if ($key == 0){?>class="active"<?}?>><?=$rows_galery_name['GalryName']?></a>
                                                     <?if (next($data['GalryArr'])):?>
                                                     &nbsp;|&nbsp;
                                                     <?endif?>

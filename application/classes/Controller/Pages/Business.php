@@ -29,7 +29,7 @@ class Controller_Pages_Business extends Controller_BaseController {
 
         //SEO
         $this->SeoShowPage(array($data['BusTitle'], $data['BusName']),
-            array($data['BusKeywords'], $data['BusInfo']),
+            array($data['BusKeywords'], ''),
             array($data['BusDescription'], $data['BusInfo']));
 
         $related = Model::factory('BussinesModel')->getBusinessRelated($data['CatArr'][0]['CatUrl2'], $data['BusId']);

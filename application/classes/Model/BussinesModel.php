@@ -350,6 +350,7 @@ class Model_BussinesModel extends Model_BaseModel {
 
                 array('galry.id', 'GalryId'),
                 array('galry.name', 'GalryName'),
+                array('galry.galery_text', 'GalryDesk'),
 
                 array('file.id', 'FileId'),
                 array('file.filename', 'FileFilename'),
@@ -558,7 +559,7 @@ class Model_BussinesModel extends Model_BaseModel {
                         }
 
                         $GalryTmp[$row['GalryId']] = $row['GalryId'];
-                        $end_result['GalryArr'][] = array('GalryId' => $row['GalryId'], 'GalryName' => $row['GalryName'],
+                        $end_result['GalryArr'][] = array('GalryId' => $row['GalryId'], 'GalryName' => $row['GalryName'], 'GalryDesk' => $row['GalryDesk'],
                             'FileArr' => $FileArr);
                         $FileArr = array();
                     }

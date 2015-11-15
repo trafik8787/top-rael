@@ -224,6 +224,14 @@ Route::set('Informers', 'informers')
         'action'     => 'index',
     ));
 
+//архив рассылок
+Route::set('ArhivSubscribe', 'newsletter')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'ArhivSubscribe',
+        'action'     => 'index',
+    ));
+
 Route::set('Feed', 'feed(/<action>)')
     ->defaults(array(
         'controller' => 'Feed',
