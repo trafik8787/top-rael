@@ -28,9 +28,7 @@ class Controller_Pages_ArhivSubscribe extends Controller_BaseController {
             $article_shift = array_shift($result['DataArtic']);
             $data->article_shift = $article_shift;
             $data->articless = $result['DataArtic'];
-            $business = Model::factory('SubscribeModel')->getSubskribeBusiness();
             $content->data = $data;
-            HTML::x($business);
 
         } else  {
             $data_list = Model::factory('CategoryModel')->get_section('subscription_arhiv');
