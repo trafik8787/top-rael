@@ -225,7 +225,7 @@ Route::set('Informers', 'informers')
     ));
 
 //архив рассылок
-Route::set('ArhivSubscribe', 'newsletter')
+Route::set('ArhivSubscribe', 'newsletter(/<id>)')
     ->defaults(array(
         'directory' => 'Pages',
         'controller' => 'ArhivSubscribe',

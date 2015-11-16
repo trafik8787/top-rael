@@ -8,6 +8,7 @@
 
 class Model_SubscribeModel extends Model_BaseModel {
 
+    private $id_arhiv_subskribe = null;
     /**
      * @param $email
      * @return array
@@ -53,17 +54,25 @@ class Model_SubscribeModel extends Model_BaseModel {
             ->from('business')
             ->join('city', 'LEFT')
             ->on('business.city','=','city.id')
-            ->where('status_subscribe','=', 0)
+            ->where('business.status_subscribe','=', 0)
+            ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
+            ->and_where('business.status', '=', 1)
             ->execute()->as_array();
 
         if (!empty($query)) {
+
+            //записываем id рассылки
+            if ($this->id_arhiv_subskribe === null) {
+                $this->id_arhiv_subskribe = $this->insertSubscribeArhiv();
+            }
+
             $id_business = array();
             foreach ($query as $rows) {
                 $id_business[] = $rows['id'];
             }
 
             DB::update('business')
-                ->set(array('status_subscribe' => 1))
+                ->set(array('status_subscribe' => $this->id_arhiv_subskribe))
                 ->where('id', 'IN', $id_business)
                 ->execute();
 
@@ -86,13 +95,18 @@ class Model_SubscribeModel extends Model_BaseModel {
 
         if (!empty($query)) {
 
+            //записываем id рассылки
+            if ($this->id_arhiv_subskribe === null) {
+                $this->id_arhiv_subskribe = $this->insertSubscribeArhiv();
+            }
+
             $id_articless = array();
             foreach ($query as $rows) {
                 $id_articless[] = $rows['id'];
             }
 
             DB::update('articles')
-                ->set(array('status_subscribe' => 1))
+                ->set(array('status_subscribe' => $this->id_arhiv_subskribe))
                 ->where('id', 'IN', $id_articless)
                 ->execute();
 
@@ -112,6 +126,53 @@ class Model_SubscribeModel extends Model_BaseModel {
             ->where('action','=', 1)
             ->and_where('enable_all','=',1)
             ->execute()->as_array();
+    }
+
+
+    /**
+     * @return object
+     * @throws Kohana_Exception
+     * todo запись рассылки в архив
+     */
+    public function insertSubscribeArhiv(){
+        $query = DB::insert('subscription_arhiv', array('data'))
+            ->values(array(date('Y-m-d')))
+            ->execute();
+
+        return $query[0];
+    }
+
+
+    public function getMailSubskribe ($id){
+
+        $query = DB::select()
+            ->from('subscription_arhiv')
+            ->where('id','=',$id)
+            ->execute()
+            ->as_array();
+
+        $query_bus = DB::select('bus.*', array('city.name', 'CityName'))
+            ->from(array('subscription_arhiv', 'subarhiv'))
+            ->join(array('business', 'bus'), 'LEFT')
+            ->on('subarhiv.id', '=', 'bus.status_subscribe')
+
+            ->join('city', 'LEFT')
+            ->on('bus.city','=','city.id')
+
+            ->where('subarhiv.id','=',$id)
+            ->execute()
+            ->as_array();
+
+        $query_artic = DB::select('artic.*')
+
+            ->from(array('subscription_arhiv', 'subarhiv'))
+            ->join(array('articles', 'artic'), 'LEFT')
+            ->on('subarhiv.id', '=', 'artic.status_subscribe')
+            ->where('subarhiv.id','=',$id)
+            ->execute()
+            ->as_array();
+
+        return array($query[0], 'DataBus' => $query_bus, 'DataArtic' => $query_artic);
     }
 
 }

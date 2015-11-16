@@ -187,9 +187,13 @@ class Controller_Pages_Ajax extends Controller {
      * РАССЫЛКА ДЛЯ ПОДПИЩИКОВ
      */
     public function SendEmailSubscribe(){
+
+
+
         //каждый четверг
         if (date('l') == 'Thursday') {
 
+            //получаем бизнесы которые еще не попадали в рассылку
             $business = Model::factory('SubscribeModel')->getSubskribeBusiness();
             $articless = Model::factory('SubscribeModel')->getSubskribeArticless();
             $users = Model::factory('SubscribeModel')->getSubskribeUsers();
@@ -240,6 +244,8 @@ class Controller_Pages_Ajax extends Controller {
      * sendbusiness
      */
     public function action_BussinesDisableEmailSevenDays() {
+
+
         //запуск рассылки
         $dat = $this->SendEmailSubscribe();
         //лотарея
