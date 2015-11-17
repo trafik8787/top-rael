@@ -78,7 +78,7 @@
 
                     <div class="user-object">
                         <small>Добро пожаловать</small>
-                        <strong class="user-name"><?=$user->username?> <?=$user->secondname?></strong>
+                        <strong class="user-name"><?=!empty($user->name) ? $user->name : $user->username?> <?=$user->secondname?></strong>
                     </div>
 
                     <?if (!empty($user->bdate)):?>
@@ -361,7 +361,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputFoto" class="col-sm-1 control-label"><img src="<?=$photo?>" width="50" height="50" class="img-circle"/></label>
+                                        <label for="inputFoto" class="col-sm-1 control-label"><img src="<?=!empty($photo) ? $photo : '/public/uploade/no_avatar.jpg'?>" width="50" height="50" class="img-circle"/></label>
                                         <div class="col-md-5">
                                             <input type="hidden" name="old_photo" value="<?=$photo?>">
                                             <input  type="file"  id="inputFoto" class="form-control" value="" name="avatar">
@@ -372,7 +372,7 @@
                                     <div class="form-group">
                                         <label for="inputName" class="col-sm-1 control-label">Имя</label>
                                         <div class="col-md-5">
-                                            <input name="username" required id="inputName" class="form-control" value="<?=$user->username?>" type="text">
+                                            <input name="name"  id="inputName" class="form-control" value="<?=$user->name?>" type="text">
                                         </div>
                                     </div>
 

@@ -14,12 +14,11 @@
             <?=$message?>
         <?endif?>
         <hr />
-        <form method="post" action="/account/forgot">
-            <label>E-Mail адрес</label>
-            <input type="email" name="email" value="<?=$email;?>" class="span3">
-            </label>
+        <form method="post" class="form-inline" role="form" action="/account/forgot">
+
+            <input type="email" name="email" class="form-control" value="<?=$email;?>" placeholder="Введите Email">
+
             <input type="submit" value="Восстановить пароль" class="btn btn-primary">
-            <div class="clearfix"></div>
         </form>
     </div>
 </div>

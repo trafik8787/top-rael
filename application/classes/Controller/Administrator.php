@@ -693,6 +693,7 @@ class Controller_Administrator extends Controller_Core_Main {
         //добавляем ссылку записи в поле
         $crud->links('name', '/article/', 'url');
 
+        $crud->toptip_fields(array('images_article' => 'Минимальный размер 750 px'));
 
         $crud->validation('url', array('required' => true, 'minlength' => 4, 'regexp' => '^[a-zA-Z0-9_]+$',
             'remote' => array('url' => "/chec_url_articles", 'type' => 'post')),
@@ -964,7 +965,7 @@ class Controller_Administrator extends Controller_Core_Main {
             //если это обычные пользователи
             $crud->remove_add();
             $crud->set_field_type('photo', array('file', 'uploads/img_users', 'user_', '', 'img'),'','');
-            $crud->edit_fields('email', 'username', 'secondname', 'sex', 'age', 'tel', 'city', 'ip', 'photo', 'date_registration');
+            $crud->edit_fields('email', 'username', 'name', 'secondname', 'sex', 'age', 'tel', 'city', 'ip', 'photo', 'date_registration');
             $crud->add_field('email', 'username', 'date_registration');
 
             $crud->callback_befor_show_edit('call_bef_show_edit_users');
@@ -973,16 +974,16 @@ class Controller_Administrator extends Controller_Core_Main {
         } elseif (Session::instance()->get('customer_id') == 5) {
 
             $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
-            $crud->edit_fields('email', 'password', 'username', 'secondname', 'sex', 'age', 'tel', 'business_id','date_registration');
-            $crud->add_field('email', 'password', 'username', 'secondname', 'sex', 'age', 'tel',  'business_id','date_registration');
+            $crud->edit_fields('email', 'password', 'username', 'name', 'secondname', 'sex', 'age', 'tel', 'business_id','date_registration');
+            $crud->add_field('email', 'password', 'username', 'name', 'secondname', 'sex', 'age', 'tel',  'business_id','date_registration');
             $crud->callback_after_insert('call_after_insert_userBusines');
 
         } else {
 
             $crud->select_multiselect('id_role');
             $crud->set_one_to_many('roles_users', 'id_role','role_id', 'user_id');
-            $crud->add_field('email', 'username', 'secondname', 'password', 'id_role');
-            $crud->edit_fields('email', 'username', 'secondname', 'password', 'id_role');
+            $crud->add_field('email', 'username', 'name', 'secondname', 'password', 'id_role');
+            $crud->edit_fields('email', 'username', 'name', 'secondname', 'password', 'id_role');
             $crud->set_field_type('id_role', 'select', '', 'multiple', '', array('roles','description','id', array('id', 'NOT IN', array(5, 1))));
             $crud->callback_after_insert('call_after_insert_userAdmin');
             $crud->callback_before_edit('call_befor_edit_userAdmin');
@@ -1004,7 +1005,8 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud->show_name_column(array(
             'email'=> 'Email',
-            'username' => 'Имя',
+            'username' => 'Логин',
+            'name' => 'Имя',
             'secondname' => 'Фамилия',
             'sex' => 'Пол',
             'age' => 'Возраст',
@@ -1144,9 +1146,10 @@ class Controller_Administrator extends Controller_Core_Main {
             }
         }
 
-        if (!empty(Cruds::$post['name_user']) and !empty(Cruds::$post['secondname_user']) and !empty(Cruds::$post['email_user'])
+        if (!empty(Cruds::$post['name_user']) and !empty(Cruds::$post['email_user'])
             and !empty(Cruds::$post['id'])) {
             Model::factory('Adm')->add_busines_user(Cruds::$post['name_user'],
+                                                    Cruds::$post['nameses'],
                                                     Cruds::$post['secondname_user'],
                                                     Cruds::$post['email_user'],
                                                     Cruds::$post['age'],
@@ -1204,9 +1207,10 @@ class Controller_Administrator extends Controller_Core_Main {
             self::create_images($key_array['home_busines_foto'], '/uploads/img_business/thumbs/', 240, 158);
         }
 
-        if (!empty(Cruds::$post['name_user']) and !empty(Cruds::$post['secondname_user']) and !empty(Cruds::$post['email_user'])
+        if (!empty(Cruds::$post['name_user']) and !empty(Cruds::$post['email_user'])
             and !empty($key_array['id']) and !empty(Cruds::$post['password'])) {
             Model::factory('Adm')->add_busines_user(Cruds::$post['name_user'],
+                                                    Cruds::$post['nameses'],
                                                     Cruds::$post['secondname_user'],
                                                     Cruds::$post['email_user'],
                                                     Cruds::$post['password'],
@@ -1281,6 +1285,7 @@ class Controller_Administrator extends Controller_Core_Main {
             $user->sex = $orm_user['sex'];
             $user->telephone = $orm_user['tel'];
             $user->name_user = $orm_user['username'];
+            $user->nameses = $orm_user['name'];
             $user->secondname_user = $orm_user['secondname'];
             $user->email_user = $orm_user['email'];
         }

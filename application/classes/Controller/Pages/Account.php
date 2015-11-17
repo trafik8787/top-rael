@@ -30,16 +30,10 @@ class Controller_Pages_Account extends Controller_BaseController {
                 $filename = $this->_save_image($_FILES['avatar']);
             }
 
-
+           // die(HTML::x($this->request->post()));
             $profin_user = ORM::factory('user', Auth::instance()->get_user()->id);
-//                ->values(array('username' => $this->request->post('username'),
-//                    'secondname' => $this->request->post('secondname'),
-//                    'city' => $this->request->post('city'),
-//                    'tel' => $this->request->post('tel'),
-//                    'age' => $this->request->post('age'),
-//                    'photo' => $filename
-//                ))->save();
-            $profin_user->username = $this->request->post('username');
+
+            $profin_user->name = $this->request->post('name');
             $profin_user->secondname = $this->request->post('secondname');
             $profin_user->city = $this->request->post('city');
             $profin_user->tel = $this->request->post('tel');
@@ -435,9 +429,9 @@ class Controller_Pages_Account extends Controller_BaseController {
         $html_mail = View::factory('email/mail_registration');
 
         $m = Email::factory();
-        $m->From("TopIsraelSubscribe@top.com"); // от кого отправляется почта
+        $m->From("mail@topisrael.ru"); // от кого отправляется почта
         $m->To($email); // кому адресованно
-        $m->Subject('Подтверждение подписки');
+        $m->Subject('Регистрация на topisrael.ru');
         $m->Body($html_mail, "html");
         $m->Priority(3);
         $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/1.png", "", "image/png");

@@ -49,7 +49,7 @@
                         <div class="header-profile-info">
                             <div>
                                 <small>Добро пожаловать</small>
-                                <small class="profile-username"><?=$user->username?> <?=$user->secondname?></small>
+                                <small class="profile-username"><?=!empty($user->name) ? $user->name : $user->username?> <?=$user->secondname?></small>
                                 <a href="/account#profile">Профиль</a> <a href="/account/logout"><i class="fa fa-sign-out"></i></a>
                             </div>
                         </div>

@@ -75,13 +75,14 @@ class Model_Adm extends Model {
      * @throws Kohana_Exception
      * todo добавление собственника бизнеса в админке
      */
-    public function add_busines_user ($name_user = null, $secondname_user = null, $email_user = null, $age = null, $sex = null, $telephone = null, $password = null, $id_business = null){
+    public function add_busines_user ($name_user = null, $name='', $secondname_user = '', $email_user = null, $age = '', $sex = '', $telephone = '', $password = null, $id_business = null){
 
         $user = ORM::factory('User')->where('business_id', '=', $id_business)->find();
 
         //die(HTML::x($user->business_id));
         if (!empty($user->business_id)) {
             $user->username = $name_user;
+            $user->name = $name;
             $user->secondname = $secondname_user;
             $user->business_id = $id_business;
             $user->password = $password;
@@ -94,6 +95,7 @@ class Model_Adm extends Model {
         } else {
             $user_insert = ORM::factory('User');
             $user_insert->username = $name_user;
+            $user_insert->name = $name;
             $user_insert->secondname = $secondname_user;
             $user_insert->business_id = $id_business;
             $user_insert->password = $password;

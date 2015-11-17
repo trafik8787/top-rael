@@ -55,7 +55,7 @@
                 } ?>
                 <div class="form-group clearfix">
                     <div class="col-md-4">
-                        <label>Отображаемое имя</label>
+                        <label>Логин</label>
                     </div>
                     <div class="col-md-8">
                         <input type="text" name="username" value="<?=$username;?>" class="form-control input-lg">

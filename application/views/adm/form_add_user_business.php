@@ -33,7 +33,8 @@
                     <div class="panel-body">
                         <div class="form-inline">
 
-                            <input type="text" data-toggle="tooltip" data-original-title="Имя пользователя" name="name_user" class="form-control" placeholder="Имя пользователя" value="<?=isset($name_user) ? $name_user : ''?>"/>
+                            <input type="text" data-toggle="tooltip" data-original-title="Логин" name="name_user" class="form-control" placeholder="Логин пользователя" value="<?=isset($name_user) ? $name_user : ''?>"/>
+                            <input type="text" data-toggle="tooltip" data-original-title="Имя" name="nameses" class="form-control" placeholder="Имя пользователя" value="<?=isset($nameses) ? $nameses : ''?>"/>
                             <input type="text" data-toggle="tooltip" data-original-title="Фамилия пользователя" name="secondname_user" class="form-control" placeholder="Фамилия пользователя" value="<?=isset($secondname_user) ? $secondname_user : ''?>"/>
                             <input type="email" data-toggle="tooltip" data-original-title="Email" name="email_user" class="form-control" placeholder="Email" value="<?=isset($email_user)? $email_user: ''?>"/>
 
