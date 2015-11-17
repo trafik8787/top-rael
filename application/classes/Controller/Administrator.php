@@ -1245,6 +1245,34 @@ class Controller_Administrator extends Controller_Core_Main {
 
         Cruds::$adon_form[] = array('page' => 'maps_cordinate_y', 'view' => $city);
 
+
+        $static = View::factory('adm/statistic_business');
+        $static->business_favorit = Rediset::getInstance()->get_business_favor($new_array['id']);
+        $static->business_show = Rediset::getInstance()->get_business_all($new_array['id']);
+        //получаем купоны бизнеса если они есть
+        $coupon_business = Model::factory('CouponsModel')->getCouponsInBusinessId($new_array['id']);
+
+        if (!empty($coupon_business)) {
+            $count_coupon_show = null;
+            foreach ($coupon_business as $row_coupon) {
+                $count_coupon_show += Rediset::getInstance()->get_coupon_show($row_coupon['id']);
+            }
+            $static->coupons_show = $count_coupon_show;
+        }
+
+        $article_business = Model::factory('ArticlesModel')->getArticlesInBusinessId($new_array['id']);
+        if (!empty($article_business)) {
+            $article_count_show = null;
+            foreach ($article_business as $row_article) {
+                $article_count_show += Rediset::getInstance()->get_articles($row_article['id']);
+            }
+            $static->article_show = $article_count_show;
+        }
+
+
+
+        Cruds::$adon_top_form[] = $static;
+
         $user = View::factory('adm/form_add_user_business');
         $orm_user = ORM::factory('User')->where('business_id', '=', $new_array['id'])->find()->as_array();
 
@@ -1257,7 +1285,7 @@ class Controller_Administrator extends Controller_Core_Main {
             $user->email_user = $orm_user['email'];
         }
 
-        Cruds::$adon_top_form = $user;
+        Cruds::$adon_top_form[] = $user;
 
         //вивод связаных купонов с этим бизнесом
         $cont = View::factory('adm/adon_links_coupon_for_business');

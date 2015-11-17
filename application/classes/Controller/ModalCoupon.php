@@ -15,11 +15,14 @@ class Controller_ModalCoupon extends Controller {
 
         if (Request::initial()->is_ajax()) {
 
+
             $id_coupon = $this->request->param('id_coupon');
             $favoritcoup = Cookie::get('favoritcoup');
 
+            Rediset::getInstance()->set_coupon_show($id_coupon);
+
             $content = View::factory('blocks_includ/modal_coupon');
-            $data = Model::factory('CouponsModel')->getCouponsId($this->request->param('id_coupon'));
+            $data = Model::factory('CouponsModel')->getCouponsId($id_coupon);
             //ищем в масиве из куки файла id купона если находим то передаем парамерт что такой
             //купон уже добавлен в избранное
 

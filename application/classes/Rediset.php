@@ -89,6 +89,10 @@ final class Rediset {
         return self::$redis->get('coupon-'.$id_coupon);
     }
 
+    public function get_coupon_show($id_coupon) {
+        return self::$redis->get('couponshow-'.$id_coupon);
+    }
+
     /**
      * @param $id_business
      * @param null $data
@@ -157,6 +161,16 @@ final class Rediset {
         self::$redis->incr('coupon-'.$id_coupon);
 
     }
+
+
+    public static function set_coupon_show ($id_coupon){
+        if (!self::$redis->exists('couponshow-'.$id_coupon)) {
+            self::$redis->set("couponshow-".$id_coupon, 0);
+        }
+
+        self::$redis->incr('couponshow-'.$id_coupon);
+    }
+
 
     /**
      * @param $id_business

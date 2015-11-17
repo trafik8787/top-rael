@@ -58,7 +58,9 @@
 
             <form method="POST" enctype="multipart/form-data" id="w-form-edit" class="form-horizontal" role="form" >
                 <?if (Cruds::$adon_top_form != null):?>
-                    <?=Cruds::$adon_top_form?>
+                    <?foreach(Cruds::$adon_top_form as $rows_top_form):?>
+                        <?=$rows_top_form?>
+                    <?endforeach?>
                 <?endif?>
                 <?foreach ($edit_property['field'] as $name_fied => $value_fild):?>
                     <?if ($name_fied != $edit_property['key_primary'] and empty($edit_property['join_key'][$name_fied])):?>
