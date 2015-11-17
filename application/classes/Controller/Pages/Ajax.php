@@ -169,6 +169,16 @@ class Controller_Pages_Ajax extends Controller {
     }
 
 
+    /**
+     * todo запись кликов по банерам
+     */
+    public function action_SetBaners (){
+        if (Request::initial()->is_ajax()) {
+           Rediset::getInstance()->set_baners($this->request->post('id_baner'));
+            echo json_encode(array('qwe' => 1));
+        }
+    }
+
 
 
 

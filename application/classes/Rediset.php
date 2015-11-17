@@ -89,6 +89,10 @@ final class Rediset {
         return self::$redis->get('coupon-'.$id_coupon);
     }
 
+    public function get_baner ($id_baner){
+        return self::$redis->get('baner-'.$id_baner);
+    }
+
     public function get_coupon_show($id_coupon) {
         return self::$redis->get('couponshow-'.$id_coupon);
     }
@@ -163,6 +167,10 @@ final class Rediset {
     }
 
 
+    /**
+     * @param $id_coupon
+     * todo количество просмотров купона
+     */
     public static function set_coupon_show ($id_coupon){
         if (!self::$redis->exists('couponshow-'.$id_coupon)) {
             self::$redis->set("couponshow-".$id_coupon, 0);
@@ -213,6 +221,18 @@ final class Rediset {
         }
 
         self::$redis->incr('article-'.$id_article);
+    }
+
+    /**
+     * @param $id_baner
+     * todo запись кликов по банеру
+     */
+    public function set_baners($id_baner){
+        if (!self::$redis->exists('baner-'.$id_baner)) {
+            self::$redis->set('baner-'.$id_baner, 0);
+        }
+
+        self::$redis->incr('baner-'.$id_baner);
     }
 
     /**

@@ -930,4 +930,18 @@ $(document).ready(function(){
         return false;
     });
 
+    //baners
+    $(document).on('click', '.w-baner-click', function(){
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "JSON", // указываем, что нам вернется JSON
+            url: '/set_baners',
+            data: 'id_baner='+$(this).data('id'),
+            success: function(response) { // когда получаем ответ
+
+            }
+        });
+    });
+
+
 });

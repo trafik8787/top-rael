@@ -152,6 +152,14 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+//запись кликов по банерам
+Route::set('SetBaners', 'set_baners')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'SetBaners',
+    ));
+
 //запросы из админки бизнесов на проверку существования урла для валидации
 Route::set('checUrlArticles', 'chec_url_articles')
     ->defaults(array(
