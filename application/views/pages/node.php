@@ -168,7 +168,6 @@
                                                                 <div class="coupon-object-top">
 
                                                                     <div class="coupon-title">
-                                                                        Купон
                                                                         <small class="block"><?=$rows_coupons[0]['name']?></small>
                                                                     </div>
                                                                 </div>
@@ -178,7 +177,7 @@
 
                                                                     <div class="coupon-title">
                                                                         <?=$rows_coupons[0]['secondname']?>
-                                                                        <span class="block">скидка</span>
+
                                                                     </div>
                                                                 </div>
                                                             </div>

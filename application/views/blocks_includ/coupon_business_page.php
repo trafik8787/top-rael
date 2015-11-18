@@ -53,7 +53,6 @@
 
                                         <div class="coupon-title">
                                             <?=$row['CoupName']?>
-<!--                                            <small class="block">Массаж</small>-->
                                         </div>
                                     </div>
                                 </div>
@@ -62,8 +61,7 @@
 
                                         <div class="coupon-title">
                                             <?=$row['CoupSecondname']?>
-<!--                                            20%-->
-<!--                                            <span class="block">скидка</span>-->
+
                                         </div>
                                     </div>
                                 </div>
