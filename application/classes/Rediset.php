@@ -93,6 +93,30 @@ final class Rediset {
         return self::$redis->get('baner-'.$id_baner);
     }
 
+
+    /**
+     * @param $id_baner
+     * @param $data_start
+     * @param $data_end
+     * todo получить по диапазону дат
+     */
+    public function get_baner_date ($id_baner, $data_start, $data_end){
+
+        $arr_date = Date::diapDate($data_start, $data_end);
+        $result = array();
+        foreach ($arr_date as $row) {
+            if (self::$redis->exists('baner@'.$id_baner.'@'.$row)) {
+                $result[$row] = self::$redis->get('baner@'.$id_baner.'@'.$row);
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * @param $id_coupon
+     * @return mixed
+     * todo получить количество просмотра купона
+     */
     public function get_coupon_show($id_coupon) {
         return self::$redis->get('couponshow-'.$id_coupon);
     }
@@ -152,6 +176,57 @@ final class Rediset {
         self::$redis->del('bus@'.$id_business.'@'.$data);
         self::$redis->del('bus-'.$id_business);
     }
+
+    /**
+     * @param $id_business
+     * todo получить количество добавленого бизнеса в избранное
+     */
+    public function del_business_favor ($id_business){
+        if (self::$redis->exists('busfavor-'.$id_business)) {
+            self::$redis->del('busfavor-' . $id_business);
+        }
+    }
+
+    /**
+     * @param $id_articles
+     * todo удалить статью
+     */
+    public function del_articles($id_articles){
+        if (self::$redis->exists('article-'.$id_articles)) {
+            self::$redis->del('article-' . $id_articles);
+        }
+    }
+
+    /**
+     * @param $id_baner
+     * todo удалить банер
+     */
+    public function del_baner($id_baner){
+        if (self::$redis->exists('baner-'.$id_baner)) {
+            self::$redis->del('baner-' . $id_baner);
+        }
+    }
+
+    /**
+     * @param $id_coupon
+     * todo удалить количество добавленого купона в избранное
+     */
+    public function del_coupon ($id_coupon){
+        if (self::$redis->exists('coupon-'.$id_coupon)){
+            self::$redis->del('coupon-' . $id_coupon);
+        }
+    }
+
+    /**
+     * @param $id_coupon
+     * todo удалить количество просмотров купона
+     */
+    public function del_coupon_show ($id_coupon){
+        if (self::$redis->exists('couponshow-'.$id_coupon)) {
+            self::$redis->del('couponshow-' . $id_coupon);
+        }
+    }
+
     /**
      * @param $id_coupon
      * todo количество добавление купона в избранное
@@ -228,11 +303,18 @@ final class Rediset {
      * todo запись кликов по банеру
      */
     public function set_baners($id_baner){
+
         if (!self::$redis->exists('baner-'.$id_baner)) {
+            self::$redis->set('baner@'.$id_baner.'@'.date('Y-m-d'), 0);
             self::$redis->set('baner-'.$id_baner, 0);
         }
 
+        if (!self::$redis->exists('baner@'.$id_baner.'@'.date('Y-m-d'))) {
+            self::$redis->set('baner@'.$id_baner.'@'.date('Y-m-d'), 0);
+        }
+
         self::$redis->incr('baner-'.$id_baner);
+        self::$redis->incr('baner@'.$id_baner.'@'.date('Y-m-d'));
     }
 
     /**

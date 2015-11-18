@@ -133,4 +133,29 @@ class Date extends Kohana_Date {
         $interval = $datetime1->diff($datetime2);
         return $interval->format('%d%');
     }
+
+
+    /**
+     * @param null $date_start
+     * @param null $date_end
+     * @return array
+     * todo получить диапазон дат
+     */
+    public static function diapDate ($date_start = null, $date_end = null){
+        $from = new DateTime($date_start);
+        $to   = new DateTime($date_end);
+
+        $period = new DatePeriod($from, new DateInterval('P1D'), $to);
+
+        $arrayOfDates = array_map(
+            function($item){
+                return $item->format('Y-m-d');
+            },
+            iterator_to_array($period)
+        );
+
+        return $arrayOfDates;
+    }
+
+
 }

@@ -147,6 +147,12 @@ class Model_Adm extends Model {
 
     }
 
+    /**
+     * @param null $limit
+     * @param null $num_page
+     * @return array
+     * todo получить лог
+     */
     public function get_log ($limit = null, $num_page = null){
 
         if ($num_page != null) {
@@ -199,13 +205,39 @@ class Model_Adm extends Model {
 
     }
 
-
+    /**
+     * @param $id
+     * @return ORM
+     * @throws Kohana_Exception
+     * todo получить данные пользователя по ID
+     */
     public function getUserId ($id)
     {
         $user = ORM::factory('user');
         $user->where('id', ' = ', $id)
             ->find();
         return $user;
+    }
+
+
+    /**
+     * todo переносим из базы Redis в MySQL данные по кликам банеров
+     */
+    public function saveMySQLclickBaners (){
+
+        $baners = DB::select()
+            ->from('banners')
+            ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('date_start AND date_end'))
+            ->execute()
+            ->as_array();
+
+        foreach ($baners as $row) {
+            DB::update('banners')->set(array('count_clik' => Rediset::getInstance()->get_baner($row['id'])))
+                ->where('id', '=', $row['id'])
+                ->execute();
+        }
+
+
     }
     
     

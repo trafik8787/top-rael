@@ -255,6 +255,8 @@ class Controller_Pages_Ajax extends Controller {
      */
     public function action_BussinesDisableEmailSevenDays() {
 
+        //сохраняем в таблицу банеров количество кликов
+        Model::factory('Adm')->saveMySQLclickBaners();
 
         //запуск рассылки
         $dat = $this->SendEmailSubscribe();

@@ -1059,7 +1059,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('position', 'select', array('1' => 'Верхний', '2' => 'Правый'), '', '', '');
         $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
 
-        $crud->show_columns('id', 'name', 'date_start', 'date_end');
+        $crud->show_columns('id', 'name', 'date_start', 'date_end', 'count_clik');
 
 
         $crud->edit_fields('name', 'section', 'category', 'business_id', 'website', 'images', 'position', 'date_start', 'date_end');
@@ -1074,12 +1074,15 @@ class Controller_Administrator extends Controller_Core_Main {
             'website' => 'Внешняя ссылка',
             'position' => 'Позиция',
             'date_start' => 'Дата старта',
-            'date_end' => 'Дата конца'
+            'date_end' => 'Дата конца',
+            'count_clik' => 'Клики'
         ));
 
         $crud->callback_before_delete('call_bef_del_banners');
         $crud->callback_after_insert('call_after_insert_banners');
         $crud->callback_before_edit('call_bef_edit_banners');
+
+        $crud->callback_befor_show_edit('call_bef_show_edit_baners');
 
         return $crud;
     }
@@ -1115,9 +1118,17 @@ class Controller_Administrator extends Controller_Core_Main {
      * hooks
      */
 
+    public static function call_bef_show_edit_baners($key_array = null){
+        $static = View::factory('adm/statistic_baners');
+        //die(HTML::x($key_array));
+        $static->data = Rediset::getInstance()->get_baner_date($key_array['id'], $key_array['date_start'], $key_array['date_end']);
+        Cruds::$adon_top_form[] = $static;
+    }
+
 
     public static function call_bef_del_banners ($key_array = null){
         Model::factory('Adm')->log_add('банер', $key_array['name'], 'del');
+        Rediset::getInstance()->del_baner($key_array['id']);
     }
 
     public static function call_after_insert_banners($key_array = null){
@@ -1325,6 +1336,8 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function call_befor_del_business ($new_array){
         Model::factory('Adm')->log_add('бизнес', $new_array['name'], 'del');
         $user = DB::delete('users')->where('business_id', '=', $new_array['id'])->execute();
+        Rediset::getInstance()->del_business_favor($new_array['id']);
+        Rediset::getInstance()->del_business($new_array['id']);
     }
 
 
@@ -1361,6 +1374,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_bef_del_articles ($key_array = null){
         Model::factory('Adm')->log_add('статью', $key_array['name'], 'del');
+        Rediset::getInstance()->del_articles($key_array['id']);
     }
 
 
@@ -1392,6 +1406,8 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_befor_del_coupons($key_array = null){
         Model::factory('Adm')->log_add('купон', $key_array['name'], 'del');
+        Rediset::getInstance()->del_coupon($key_array['id']);
+        Rediset::getInstance()->del_coupon_show($key_array['id']);
     }
 
 
