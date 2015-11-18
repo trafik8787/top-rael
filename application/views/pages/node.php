@@ -168,7 +168,7 @@
                                                                 <div class="coupon-object-top">
 
                                                                     <div class="coupon-title">
-                                                                        <small class="block"><?=$rows_coupons[0]['name']?></small>
+                                                                        <?=$rows_coupons[0]['name']?>
                                                                     </div>
                                                                 </div>
                                                             </div>
