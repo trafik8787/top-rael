@@ -1249,4 +1249,9 @@ class Model_BussinesModel extends Model_BaseModel {
 
     }
 
+
+    public function getBannersUser (){
+
+    }
+
 }

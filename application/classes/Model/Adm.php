@@ -14,11 +14,19 @@ class Model_Adm extends Model {
      * @return mixed
      * todo получить данные произвольной таблицы по условию
      */
-    public function get_table ($table, $where){
-        return DB::select()
-            ->from($table)
-            ->where($where[0], $where[1], $where[2])
-            ->execute()->as_array();
+    public function get_table ($table, $where=null){
+
+        if ($where === null) {
+            return DB::select()
+                ->from($table)
+                ->execute()->as_array();
+        } else {
+            return DB::select()
+                ->from($table)
+                ->where($where[0], $where[1], $where[2])
+                ->execute()->as_array();
+        }
+
     }
 
     /**

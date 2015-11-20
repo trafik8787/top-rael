@@ -7,6 +7,9 @@
  */
 class Controller_Pages_Ajax extends Controller {
 
+
+
+
     /**
      * добавляем подписчика
      */
@@ -196,12 +199,12 @@ class Controller_Pages_Ajax extends Controller {
     /**
      * РАССЫЛКА ДЛЯ ПОДПИЩИКОВ
      */
-    public function SendEmailSubscribe(){
+    public function SendEmailSubscribe($flag = null){
 
 
 
         //каждый четверг
-        if (date('l') == 'Thursday') {
+        if (date('l') == 'Thursday' or $flag !== null) {
 
             //получаем бизнесы которые еще не попадали в рассылку
             $business = Model::factory('SubscribeModel')->getSubskribeBusiness();
@@ -258,8 +261,14 @@ class Controller_Pages_Ajax extends Controller {
         //сохраняем в таблицу банеров количество кликов
         Model::factory('Adm')->saveMySQLclickBaners();
 
+        if (isset($_GET['flag'])) {
+            $flag = $_GET['flag'];
+        } else {
+            $flag = null;
+        }
+
         //запуск рассылки
-        $dat = $this->SendEmailSubscribe();
+       $this->SendEmailSubscribe($flag);
         //лотарея
         $this->LotareyCron();
 
@@ -340,4 +349,19 @@ class Controller_Pages_Ajax extends Controller {
         $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
         $m->Send();
     }
+
+
+    public function subskribeBaners (){
+
+        $baners = Model::factory('Adm')->get_table('banners');
+        $curent_date = date('Y-m-d');
+
+        foreach ($baners as $rows) {
+
+            $d = new DateTime($rows['date_end']);
+            $ert = $d->modify('-7 days')->format("Y-m-d");
+
+        }
+    }
+
 }
