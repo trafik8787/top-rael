@@ -271,6 +271,10 @@ class Controller_Pages_Ajax extends Controller {
        $this->SendEmailSubscribe($flag);
         //лотарея
         $this->LotareyCron();
+        //включение отключение уведомление по банерам
+        $this->subskribeBaners();
+        //включение отключение уведомление по купонам
+        $this->subskribeCoupons();
 
         //сохраняем базу редис один рас в сутки
         Rediset::getInstance()->save();
@@ -351,15 +355,67 @@ class Controller_Pages_Ajax extends Controller {
     }
 
 
+    /**
+     * todo рассылка по банерам
+     */
     public function subskribeBaners (){
 
-        $baners = Model::factory('Adm')->get_table('banners');
+        $baners = Model::factory('BussinesModel')->getBannersUser();
         $curent_date = date('Y-m-d');
 
         foreach ($baners as $rows) {
 
-            $d = new DateTime($rows['date_end']);
+            $d = new DateTime($rows['BanersDateEnd']);
             $ert = $d->modify('-7 days')->format("Y-m-d");
+
+            //за 7 дней перед отключением
+            if ($curent_date == $ert) {
+                $message = 'Ваш баннер будет отключен через 7 дней';
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Увидомление о отключении баннера', $message);
+            }
+
+            if ($curent_date == $rows['BanersDateEnd']) {
+                $message = 'Ваш баннер отключен';
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Отключение баннера', $message);
+            }
+
+            if ($curent_date == $rows['BanersDateStart']) {
+                $message = 'Ваш баннер включен.';
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Подключение баннера', $message);
+            }
+
+        }
+    }
+
+
+    /**
+     * todo рассылка по купонам
+     */
+    public function subskribeCoupons (){
+
+        $coupons = Model::factory('BussinesModel')->getCouponsUser();
+        $curent_date = date('Y-m-d');
+
+        foreach ($coupons as $rows) {
+
+            $d = new DateTime($rows['CouponsDateEnd']);
+            $ert = $d->modify('-7 days')->format("Y-m-d");
+
+            //за 7 дней перед отключением
+            if ($curent_date == $ert) {
+                $message = 'Ваш купон будет отключен через 7 дней';
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Увидомление о отключении купона', $message);
+            }
+
+            if ($curent_date == $rows['CouponsDateEnd']) {
+                $message = 'Ваш купон отключен';
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Отключение купона', $message);
+            }
+
+            if ($curent_date == $rows['CouponsDateStart']) {
+                $message = 'Ваш купон включен.';
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Подключение купона', $message);
+            }
 
         }
     }

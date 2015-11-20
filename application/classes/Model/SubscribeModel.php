@@ -143,6 +143,11 @@ class Model_SubscribeModel extends Model_BaseModel {
     }
 
 
+    /**
+     * @param $id
+     * @return array
+     * todo получаем данные для вывода архива рассылки
+     */
     public function getMailSubskribe ($id){
 
         $query = DB::select()

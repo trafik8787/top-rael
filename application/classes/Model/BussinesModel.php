@@ -1250,7 +1250,84 @@ class Model_BussinesModel extends Model_BaseModel {
     }
 
 
+    /**
+     * @return array
+     * todo получаем банеры для отправки писем о окончании или старте
+     */
     public function getBannersUser (){
+
+        $query = DB::select(array('users.email', 'UserEmail'),
+            array('banners.date_start', 'BanersDateStart'),
+            array('banners.date_end', 'BanersDateEnd'),
+            array('business.redactor_user', 'BusIdRedactor')
+        )
+            ->from('banners')
+
+            ->join('business')
+            ->on('banners.business_id','=','business.id')
+
+            ->join('users')
+            ->on('business.id','=','users.business_id')
+
+            ->where('business.status', '=', 1)
+            ->execute()->as_array();
+
+
+        $query2 = DB::select()
+            ->from('users')
+            ->execute()->as_array();
+
+        $result = array();
+        foreach ($query as $rows) {
+            foreach ($query2 as $rows2) {
+                if ($rows2['id'] == $rows['BusIdRedactor']) {
+                    $rows['EmailRedactor'] =  $rows2['email'];
+                }
+            }
+            $result[] = $rows;
+        }
+
+        return $result;
+    }
+
+
+    /**
+     * @return array
+     * todo получаем купоны для отправки писем о окончании или старте
+     */
+    public function getCouponsUser (){
+
+        $query = DB::select(array('users.email', 'UserEmail'),
+            array('coupon.datestart', 'CouponsDateStart'),
+            array('coupon.dateoff', 'CouponsDateEnd'),
+            array('business.redactor_user', 'BusIdRedactor')
+        )
+            ->from('coupon')
+
+            ->join('business')
+            ->on('coupon.business_id','=','business.id')
+
+            ->join('users')
+            ->on('business.id','=','users.business_id')
+
+            ->where('business.status', '=', 1)
+            ->execute()->as_array();
+
+        $query2 = DB::select()
+            ->from('users')
+            ->execute()->as_array();
+
+        $result = array();
+        foreach ($query as $rows) {
+            foreach ($query2 as $rows2) {
+                if ($rows2['id'] == $rows['BusIdRedactor']) {
+                    $rows['EmailRedactor'] =  $rows2['email'];
+                }
+            }
+            $result[] = $rows;
+        }
+
+        return $result;
 
     }
 

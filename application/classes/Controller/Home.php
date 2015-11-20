@@ -11,7 +11,7 @@ class Controller_Home extends Controller_BaseController {
 
 	public function action_index(){
        // HTML::x(date('Y-m-d', strftime(1458684000)));
-
+        HTML::x(Model::factory('BussinesModel')->getCouponsUser());
         //echo  Auth::instance()->hash('qweqweqwe');
       // phpinfo();
         //Rediset::getInstance()->flushDB();
