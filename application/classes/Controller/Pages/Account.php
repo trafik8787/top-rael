@@ -179,6 +179,24 @@ class Controller_Pages_Account extends Controller_BaseController {
     }
 
 
+    public function action_login_business(){
+
+
+        $local_thit = $this->template;
+        $this->template = View::factory('auth/login_business');
+
+
+        if (!Auth::instance()->get_user()) {
+
+            $this->template->email = array_key_exists('email', $this->request->post()) ? htmlspecialchars($this->request->post('email')) : '';
+            $this->template->username = array_key_exists('username', $this->request->post()) ? htmlspecialchars($this->request->post('username')) : ''; // вставляем данные в формы, если они были введены
+            $this->template->style = $local_thit->style;
+            $this->template->script = $local_thit->script;
+        } else {
+            $this->redirect('/');
+        }
+    }
+
     /**
      * @throws Kohana_Exception
      * регистрация

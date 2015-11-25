@@ -8,7 +8,7 @@
 
 ?>
 <?if (!empty($data)):?>
-    <a href="<?=$data?>">
+    <a href="<?=$data?>" target="_blank">
         <img src="/public/uploade/restaurant-sidebar.jpg" width="360" height="230" alt="" title=""
              class="img-responsive sidebar-images"/>
     </a>

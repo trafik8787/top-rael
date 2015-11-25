@@ -69,10 +69,10 @@
                                     <li><a href="/rss">RSS лента</a></li>
                                 </ul>
                                 <br/>
-<!--                                <ul>-->
+                                <ul>
 <!--                                    <li><a href="/contacts">צור קשר</a></li>-->
-<!--                                    <li><a href="/account_business">כניסה למפרסם</a></li>-->
-<!--                                </ul>-->
+                                    <li><a href="/account_business">כניסה למפרסם</a></li>
+                                </ul>
                             </nav>
                         </div>
                     </div>
