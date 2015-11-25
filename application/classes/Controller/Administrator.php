@@ -1356,8 +1356,8 @@ class Controller_Administrator extends Controller_Core_Main {
             //удаляем старые картинки
             if ($img === true and file_exists($_SERVER['DOCUMENT_ROOT'] . $old_array['images_article'])) {
                 //todo не работает удаление на продакшене
-//                unlink($_SERVER['DOCUMENT_ROOT'] . $old_array['images_article']);
-//                unlink($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($old_array['images_article']));
+                unlink($_SERVER['DOCUMENT_ROOT'] . $old_array['images_article']);
+                unlink($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($old_array['images_article']));
             }
         }
 

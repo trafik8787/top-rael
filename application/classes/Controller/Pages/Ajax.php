@@ -24,7 +24,7 @@ class Controller_Pages_Ajax extends Controller {
             $html_mail->message = '<a href="http://'.$_SERVER['HTTP_HOST'].'/susses_subscribe?qid='.Session::instance()->get('uniqid').'&email='.$this->request->post('email').'">Подтвердить подписку</a>';
 
             $m = Email::factory();
-            $m->From("TopIsraelSubscribe@top.com"); // от кого отправляется почта
+            $m->From("TopIsrael;send@topisrael.ru"); // от кого отправляется почта
             $m->To($this->request->post('email')); // кому адресованно
             $m->Subject('Подтверждение подписки');
             $m->Body($html_mail, "html");
@@ -321,7 +321,7 @@ class Controller_Pages_Ajax extends Controller {
 
             $message = 'Победитель лотареи';
             $m = Email::factory();
-            $m->From("admin@top.com"); // от кого отправляется почта
+            $m->From("TopIsrael;send@topisrael.ru"); // от кого отправляется почта
             $m->To($lotery['email']); // кому адресованно
             $m->Subject('Победитель лотареи');
             $m->Body($message, "html");

@@ -179,11 +179,32 @@ class Controller_Pages_Account extends Controller_BaseController {
     }
 
 
+    /**
+     * вход для бизнес пользователей
+     */
     public function action_login_business(){
 
 
         $local_thit = $this->template;
         $this->template = View::factory('auth/login_business');
+
+
+        if (HTTP_Request::POST == $this->request->method()){ // если переданы POST данные
+            // проверяем - стоит ли флаг - запомнить меня
+            $remember = array_key_exists('rememberme', $this->request->post()) ? (bool) $this->request->post('rememberme') : FALSE;
+            // пробуем авторизовать пользователя
+            $user = Auth::instance()->login($this->request->post('email'), $this->request->post('password'), $remember);
+
+            if ($user) { // если авторизовали успешно
+
+                $this->redirect('/account_business');
+
+            } else {
+
+                $this->template->message = Kohana::message('auth','wrongPass'); // если не удалось авторизоваться - выводим соответствующий мессадж
+            }
+            $this->template->email = $this->request->post('email');
+        }
 
 
         if (!Auth::instance()->get_user()) {
@@ -269,9 +290,8 @@ class Controller_Pages_Account extends Controller_BaseController {
     public function action_changepass() {
 
         $object = Validation::factory($this->request->post());  // проверяем новый пароль на корректность заполнения
-        $object
-            ->rule('newpassword', 'not_empty')
-            ->rule('newpassword', 'min_length', array(':value', '5'));
+        $object->rule('newpassword', 'not_empty')
+                ->rule('newpassword', 'min_length', array(':value', '5'));
         if ($object->check())  // если новый пароль удовлетворяет требованиям
         {
             $realoldpass = Auth::instance()->get_user()->password; // берем хэш текущего пароль пользователя
@@ -315,7 +335,7 @@ class Controller_Pages_Account extends Controller_BaseController {
                 $message = 'Для сброса пароля пройдите по ссылке - <a href="http://'.$_SERVER['SERVER_NAME'].'/account/forgot?change='.$hash.'">СБРОСИТЬ</a>';
 
                 $m = Email::factory();
-                $m->From("registr@top.com"); // от кого отправляется почта
+                $m->From("TopIsrael;send@topisrael.ru"); // от кого отправляется почта
                 $m->To($this->request->post('email')); // кому адресованно
                 $m->Subject(Kohana::message('account', 'email.themes.passworReset'));
                 $m->Body($message, "html");
@@ -331,7 +351,7 @@ class Controller_Pages_Account extends Controller_BaseController {
             if ($session->get('forgotpass') === $restore) // проверяем его сессию - действительно ли именно он запросил сброс?
             {
                 $m = Email::factory();
-                $m->From("registr@top.com");
+                $m->From("TopIsrael;send@topisrael.ru");
                 $m->Subject(Kohana::message('account', 'email.themes.newPassword'));
 
                 // генерируем новый пароль
@@ -447,7 +467,7 @@ class Controller_Pages_Account extends Controller_BaseController {
         $html_mail = View::factory('email/mail_registration');
 
         $m = Email::factory();
-        $m->From("mail@topisrael.ru"); // от кого отправляется почта
+        $m->From("TopIsrael;send@topisrael.ru"); // от кого отправляется почта
         $m->To($email); // кому адресованно
         $m->Subject('Регистрация на topisrael.ru');
         $m->Body($html_mail, "html");

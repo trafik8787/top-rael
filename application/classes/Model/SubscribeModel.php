@@ -180,4 +180,18 @@ class Model_SubscribeModel extends Model_BaseModel {
         return array($query[0], 'DataBus' => $query_bus, 'DataArtic' => $query_artic);
     }
 
+
+    public function getSubscribeAcountBusiness ($id){
+
+        $query = DB::select()
+            ->from('subscription_arhiv')
+            ->where('id', '=', $id)
+            ->cached()
+            ->execute()
+            ->as_array();
+
+        return  $query;
+
+    }
+
 }

@@ -5,8 +5,96 @@
  * Date: 08.09.2015
  * Time: 13:06
  */
-HTML::x(Date::diffDay('', '2015-09-20'));
+HTML::x($subscribe);
 ?>
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><?= isset($seo_title) ? $seo_title : '' ?></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="<?= isset($seo_keywords) ? $seo_keywords : '' ?>">
+    <meta name="description" content="<?= isset($seo_description) ? $seo_description : '' ?>">
+
+
+    <? foreach ($style as $row_style): ?>
+        <link rel="stylesheet" href="<?= URL::base(); ?><?= $row_style ?>">
+    <? endforeach ?>
+
+    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <? foreach ($script as $row_script): ?>
+        <script src="<?= URL::base(); ?><?= $row_script ?>"></script>
+    <? endforeach ?>
+
+    <? if (!empty($scripts_map)): //скрипт для карты?>
+        <script src="<?= URL::base(); ?><?= $scripts_map ?>"></script>
+    <? endif ?>
+    <!--    <link rel="shortcut icon" href="../../public/img/favicon.ico" type="image/x-icon">-->
+    <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="windows-1251"></script>
+
+
+    <script>
+
+        $(document).ready(function(){
+            $('.tabs__caption').on('click', 'a:not(.active)', function() {
+                $(this)
+                    .addClass('active').siblings().removeClass('active')
+                    .closest('.tabs').find('.tabs__content').removeClass('active').eq($(this).index()).addClass('active');
+                return false;
+            });
+        });
+    </script>
+
+    <style>
+        .tabs__caption {
+            font-size: 14px!important;
+        }
+        .tabs__content {
+            display: none; /* по умолчанию прячем все блоки */
+        }
+        .tabs__content.active {
+            display: block; /* по умолчанию показываем нужный блок */
+            font-size: 13px!important;
+        }
+
+        .tabs a.active {
+            font-weight: bold;
+            color: #000000;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="wrapper" class="container">
+
+
+    <header>
+        <div id="header">
+
+            <a class="menu-toggle" role="button" data-toggle="collapse" href="#nav-header" aria-controls="nav-header">
+                <i class="fa fa-bars"></i>
+            </a>
+
+            <a href="/" class="icons logo">TopIsrael</a>
+
+            <div class="collapse" id="nav-header">
+
+                <div class="header-profile">
+                    <a href="/account/logout">Logout</a>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
 
 <content dir="rtl">
     <div id="content" class="rtl">
@@ -53,38 +141,42 @@ HTML::x(Date::diffDay('', '2015-09-20'));
                                 </div>
 
                                 <div class="col-md-4 div-cell">
-                                    <div>
-                                        <a href="#">
-                                            הרצליה
-                                        </a>
-                                        &nbsp; | &nbsp;
-                                        <a href="#">
-                                            אשדוד
-                                        </a>
-                                        &nbsp; | &nbsp;
-                                        <a href="#">
-                                            חיפה
-                                        </a>
-                                    </div>
 
-                                    <br/>
+                                     <span class="tabs">
+                                        <p class="tabs__caption">
+                                            <a href="#" class="active"><?=$data['BusCity']?></a>
+                                            <?if (!empty($data['BusDopAddress'])):?>
+                                                <?foreach ($data['BusDopAddress'] as $key => $dop_adress_city):?>
+                                                    <?if ($dop_adress_city['name'] != ''):?>
+                                                        &nbsp; &nbsp; | &nbsp; &nbsp;
+                                                        <a href="#"><?=$dop_adress_city['name']?></a>
+                                                    <?endif?>
+                                                <?endforeach?>
+                                            <?endif?>
+                                        </p>
+                                        <span>
+                                             <p class="tabs__content active">
+                                                 Адрес: <?=$data['BusAddress']?><br/>
+                                                 <?if ($data['BusTel'] != ''):?>
+                                                     Тел: <?=$data['BusTel']?><br/>
+                                                 <?endif?>
 
-                                    <div>
-                                        <div>
-                                            כתובת:&nbsp; ארלוזורוב 39
-                                        </div>
+                                             </p>
+                                            <?if (!empty($data['BusDopAddress'])):?>
+                                                <?foreach ($data['BusDopAddress'] as $key => $dop_adress_address):?>
 
-                                        <div>
-                                            טלפון:&nbsp; 0547-555 777
+                                                    <span class="tabs__content">
+                                                         Адрес: <?=isset($dop_adress_address['address']) ? $dop_adress_address['address'] : ''?><br/>
+                                                         Тел: <?=isset($dop_adress_address['tel_dop_adress']) ? $dop_adress_address['tel_dop_adress'] : ''?><br/>
 
-                                        </div>
+                                                     </span>
+                                                <?endforeach?>
+                                            <?endif?>
+                                        </span>
 
-                                        <div>
-                                            פתוח מ-&nbsp; 09:00 עד 18:00
+                                      </span>
 
-                                        </div>
 
-                                    </div>
                                 </div>
 
                             </div>
@@ -120,7 +212,7 @@ HTML::x(Date::diffDay('', '2015-09-20'));
                                                     נכון לתאריך
                                                 </strong>
 
-                                                2015 יולי 22
+                                                <?=date('d/m/Y')?>
                                             </small>
                                         </div>
                                     </div>
@@ -132,12 +224,12 @@ HTML::x(Date::diffDay('', '2015-09-20'));
 
                                     <div class="div-row">
                                         <div class="div-cell">ביקורים בדף:</div>
-                                        <div class="div-cell"><strong>3500</strong></div>
+                                        <div class="div-cell"><strong><?=Rediset::getInstance()->get_business_all($data['BusId'])?></strong></div>
                                     </div>
 
                                     <div class="div-row">
                                         <div class="div-cell">הוסיפו למועדפים:</div>
-                                        <div class="div-cell"><strong>3500</strong></div>
+                                        <div class="div-cell"><strong><?=Rediset::getInstance()->get_business_favor($data['BusId'])?></strong></div>
                                     </div>
                                 </div>
                             </div>
@@ -146,13 +238,13 @@ HTML::x(Date::diffDay('', '2015-09-20'));
                                 <div class="div-table counters">
 
                                     <div class="div-row">
-                                        <div class="div-cell">ביקורים בדף:</div>
-                                        <div class="div-cell"><strong>3500</strong></div>
+                                        <div class="div-cell">בצפיות בקופון:</div>
+                                        <div class="div-cell"><strong><?=Rediset::getInstance()->get_coupon_show($data['CoupArr'][0]['CoupId'])?></strong></div>
                                     </div>
 
                                     <div class="div-row">
                                         <div class="div-cell">הוסיפו למועדפים:</div>
-                                        <div class="div-cell"><strong>3500</strong></div>
+                                        <div class="div-cell"><strong><?=Rediset::getInstance()->get_coupon($data['CoupArr'][0]['CoupId'])?></strong></div>
                                     </div>
                                 </div>
                             </div>
@@ -167,37 +259,36 @@ HTML::x(Date::diffDay('', '2015-09-20'));
 
         <?if (!empty($data['CoupArr'])):?>
             <div class="panel panel-page-profile">
+                <?foreach ($data['CoupArr'] as $rows_coup):?>
+                    <div class="panel-body">
 
-                <div class="panel-body">
+                        <div class="col-md-4 col-xs-12 rtl pull-left">
+                            <div class="panel-heading">
+                                <div class="panel-title rtl pull-left">
 
-                    <div class="col-md-4 col-xs-12 rtl pull-left">
-                        <div class="panel-heading">
-                            <div class="panel-title rtl pull-left">
-
-                                <strong>
-                                    קופון
-                                </strong>
+                                    <strong>
+                                        קופון
+                                    </strong>
 
 
-                                <div>
-                                    <small>
-                                        <strong>
-                                            נכון לתאריך
-                                        </strong>
+                                    <div>
+                                        <small>
+                                            <strong>
+                                                נכון לתאריך
+                                            </strong>
 
-                                        2015 יולי 22
-                                    </small>
+                                            <?=date('d/m/Y',strtotime($rows_coup['DateOff']))?>
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
 
-                    <?foreach ($data['CoupArr'] as $rows_coup):?>
+
                         <div class="col-md-4 col-sm-6 col-xs-12 rtl pull-left">
-                            <div class="coupon coupon-big">
 
-<!--                                <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>-->
+                            <div class="coupon coupon-big">
 
                                 <div class="coupon-body">
 
@@ -207,8 +298,10 @@ HTML::x(Date::diffDay('', '2015-09-20'));
                                             <?=$data['BusName']?>
                                         </div>
 
-                                        <img src="<?=$rows_coup['CoupImg']?>" width="155" height="125" alt="" title=""
-                                             class="coupon-image"/>
+
+                                        <img src="<?=$rows_coup['CoupImg']?>" width="155" height="125"  class="coupon-image"/>
+
+
                                     </div>
 
                                     <div class="coupon-sidebar">
@@ -217,8 +310,7 @@ HTML::x(Date::diffDay('', '2015-09-20'));
                                                 <div class="coupon-object-top">
 
                                                     <div class="coupon-title">
-                                                        Купон
-                                                        <small class="block"><?=$rows_coup['CoupName']?></small>
+                                                        <?=$rows_coup['CoupName']?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -227,7 +319,6 @@ HTML::x(Date::diffDay('', '2015-09-20'));
 
                                                     <div class="coupon-title">
                                                         <?=$rows_coup['CoupSecondname']?>
-                                                        <span class="block">скидка</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -244,9 +335,10 @@ HTML::x(Date::diffDay('', '2015-09-20'));
                                 </div>
                             </div>
                         </div>
-                    <?endforeach?>
 
-                </div>
+
+                    </div>
+                <?endforeach?>
             </div>
 
             <hr/>
@@ -254,41 +346,40 @@ HTML::x(Date::diffDay('', '2015-09-20'));
 
         <?if (!empty($baners)):?>
             <div class="panel panel-page-profile">
+                <?foreach ($baners as $row_baners):?>
+                    <div class="panel-body">
+                        <div class="col-md-4 col-xs-12 rtl pull-left">
 
-                <div class="panel-body">
-                    <div class="col-md-4 col-xs-12 rtl pull-left">
+                            <div class="panel-heading">
+                                <div class="panel-title rtl pull-left">
 
-                        <div class="panel-heading">
-                            <div class="panel-title rtl pull-left">
+                                    <strong>
+                                        באנר
+                                    </strong>
 
-                                <strong>
-                                    באנר
-                                </strong>
+                                    <div>
+                                        <small>
+                                            <strong>
+                                                נכון לתאריך
+                                            </strong>
 
-                                <div>
-                                    <small>
-                                        <strong>
-                                            נכון לתאריך
-                                        </strong>
-
-                                        2015 יולי 22
-                                    </small>
+                                            <?=date('d/m/Y',strtotime($row_baners['date_end']))?>
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
 
+                        <div class="col-md-4 col-sm-6 col-xs-12 rtl pull-left">
+                                <div class="col-md-12 col-xs-12 ">
+
+                                    <a href="#"><img src="<?=$row_baners['images']?>" class="img-responsive" style="margin-bottom: 5px"></a>
+
+                                </div>
+                        </div>
                     </div>
-
-                    <?foreach ($baners as $row_baners):?>
-                        <div class="clearfix">
-                            <div class="col-md-12 col-xs-12 ">
-
-                                <a href="#"><img src="<?=$row_baners['images']?>" class="img-responsive" style="margin-bottom: 5px"></a>
-
-                            </div>
-                        </div>
-                    <?endforeach?>
-                </div>
+                <?endforeach?>
             </div>
 
             <hr/>
@@ -308,15 +399,7 @@ HTML::x(Date::diffDay('', '2015-09-20'));
                                     מאמרים
                                 </strong>
 
-                                <div>
-                                    <small>
-                                        <strong>
-                                            נכון לתאריך
-                                        </strong>
 
-                                        2015 יולי 22
-                                    </small>
-                                </div>
                             </div>
                         </div>
 
@@ -375,15 +458,6 @@ HTML::x(Date::diffDay('', '2015-09-20'));
                                 דיוורים שלך
                             </strong>
 
-                            <div>
-                                <small>
-                                    <strong>
-                                        נכון לתאריך
-                                    </strong>
-
-                                    2015 יולי 22
-                                </small>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -392,98 +466,50 @@ HTML::x(Date::diffDay('', '2015-09-20'));
 
                     <div class="row">
 
-                        <div class="col-md-4 col-sm-6 col-xs-12 rtl pull-left">
-                            <div class="flag">
-
-                                <div class="flag-sidebar">
-                                    <div class="flag-date">
-                                        <di><strong>20</strong></di>
-                                        <div>יולי</div>
-                                        <di>2015</di>
-                                    </div>
-                                </div>
-
-                                <div class="flag-context rtl">
-
-                                    <a href="#">
-                                            <span class="flag-title">
-                                            דיוור
-                                            </span>
-                                        <small class="flag-description">
-                                            הנחות חדשות
-                                            חדשות החברה
-                                            זוכים
-                                        </small>
-
-                                    </a>
-
-                                </div>
 
 
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-sm-6 col-xs-12 rtl pull-left">
-                            <div class="flag">
-
-                                <div class="flag-sidebar">
-                                    <div class="flag-date">
-                                        <di><strong>20</strong></di>
-                                        <div>יולי</div>
-                                        <di>2015</di>
-                                    </div>
-                                </div>
-
-                                <div class="flag-context rtl">
-
-                                    <a href="#">
-                                            <span class="flag-title">
-                                            דיוור
-                                            </span>
-                                        <small class="flag-description">
-                                            הנחות חדשות
-                                            חדשות החברה
-                                            זוכים
-                                        </small>
-
-                                    </a>
-
-                                </div>
-
-
-                            </div>
-                        </div>
 
                         <div class="col-md-4 col-sm-6 col-xs-12 pull-left">
-                            <div class="flag">
+                                <?if (!empty($subscribe)):?>
+                                    <?foreach($subscribe as $row_subscribe):?>
+                                        <div class="flag">
 
-                                <div class="flag-sidebar">
-                                    <div class="flag-date">
-                                        <di><strong>20</strong></di>
-                                        <div>יולי</div>
-                                        <di>2015</di>
-                                    </div>
-                                </div>
-
-                                <div class="flag-context rtl">
-
-                                    <a href="#">
-                                            <span class="flag-title">
-                                            דיוור
-                                            </span>
-                                        <small class="flag-description">
-                                            הנחות חדשות
-                                            חדשות החברה
-                                            זוכים
-                                        </small>
-
-                                    </a>
-
-                                </div>
+                                            <div class="flag-sidebar">
+                                                <div class="flag-date">
+                                                    <?=Date::rusdate(strtotime($row_subscribe['data']), 'j %MONTH% Y', 0, 'he')?>
+            <!--                                        <di><strong>20</strong></di>-->
+            <!--                                        <div>יולי</div>-->
+            <!--                                        <di>2015</di>-->
+                                                </div>
+                                            </div>
 
 
-                            </div>
+                                            <div class="flag-context rtl">
+
+                                                <a href="/newsletter/<?=$row_subscribe['id']?>">
+                                                        <span class="flag-title">
+                                                        דיוור
+                                                        </span>
+                                                    <small class="flag-description">
+                                                        הנחות חדשות
+                                                        חדשות החברה
+                                                        זוכים
+                                                    </small>
+
+                                                </a>
+
+                                            </div>
+
+
+                                        </div>
+                                    <?endforeach?>
+                                <?endif?>
+
                         </div>
+
+
+
+
                     </div>
 
                 </div>
@@ -492,3 +518,28 @@ HTML::x(Date::diffDay('', '2015-09-20'));
 
     </div>
 </content>
+
+
+    <footer>
+        <div class="panel panel-footer">
+
+            <div class="panel-heading">
+
+                <div class="col-md-7 col-sm-6">
+                    <span class="icons logo white">TopIsrael</span>
+                </div>
+
+
+
+            </div>
+
+
+
+
+        </div>
+    </footer>
+</div>
+<div id="fb-root"></div>
+
+</body>
+</html>

@@ -74,6 +74,13 @@
                                     <li><a href="/account_business">כניסה למפרסם</a></li>
                                 </ul>
                             </nav>
+
+                            <div id="google_translate_element"></div><script type="text/javascript">
+                                function googleTranslateElementInit() {
+                                    new google.translate.TranslateElement({pageLanguage: 'ru', includedLanguages: 'de,en,es,fr,it,iw,zh-CN', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false, gaTrack: true, gaId: 'UA-69897111-1'}, 'google_translate_element');
+                                }
+                            </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
                         </div>
                     </div>
 
