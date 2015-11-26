@@ -181,6 +181,11 @@ class Model_SubscribeModel extends Model_BaseModel {
     }
 
 
+    /**
+     * @param $id
+     * @return mixed
+     * todo получем для бизнес профиля рассылки к которым имеет отношение бизнес и его статьи
+     */
     public function getSubscribeAcountBusiness ($id){
 
         $query = DB::select()
@@ -190,7 +195,14 @@ class Model_SubscribeModel extends Model_BaseModel {
             ->execute()
             ->as_array();
 
-        return  $query;
+        $query2 = DB::select()
+            ->from('articles')
+            ->where('status_subscribe', '=', $id)
+            ->cached()
+            ->execute()
+            ->as_array();
+
+        return  array('business' => $query, 'articles' => $query2);
 
     }
 

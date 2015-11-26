@@ -5,7 +5,7 @@
  * Date: 08.09.2015
  * Time: 13:06
  */
-HTML::x($subscribe);
+//HTML::x($data);
 ?>
 
 
@@ -212,7 +212,8 @@ HTML::x($subscribe);
                                                     נכון לתאריך
                                                 </strong>
 
-                                                <?=date('d/m/Y')?>
+
+                                                <?=Date::rusdate(strtotime(date('Y-m-d')), 'j %MONTH% Y', 0, 'he')?>
                                             </small>
                                         </div>
                                     </div>
@@ -277,7 +278,7 @@ HTML::x($subscribe);
                                                 נכון לתאריך
                                             </strong>
 
-                                            <?=date('d/m/Y',strtotime($rows_coup['DateOff']))?>
+                                           <?=Date::rusdate(strtotime($rows_coup['DateOff']), 'j %MONTH% Y', 0, 'he')?>
                                         </small>
                                     </div>
                                 </div>
@@ -363,7 +364,7 @@ HTML::x($subscribe);
                                                 נכון לתאריך
                                             </strong>
 
-                                            <?=date('d/m/Y',strtotime($row_baners['date_end']))?>
+                                            <?=Date::rusdate(strtotime($row_baners['date_end']), 'j %MONTH% Y', 0, 'he')?>
                                         </small>
                                     </div>
                                 </div>
@@ -470,8 +471,8 @@ HTML::x($subscribe);
 
 
                         <div class="col-md-4 col-sm-6 col-xs-12 pull-left">
-                                <?if (!empty($subscribe)):?>
-                                    <?foreach($subscribe as $row_subscribe):?>
+                                <?if (!empty($subscribe['business'])):?>
+                                    <?foreach($subscribe['business'] as $row_subscribe):?>
                                         <div class="flag">
 
                                             <div class="flag-sidebar">
@@ -491,9 +492,11 @@ HTML::x($subscribe);
                                                         דיוור
                                                         </span>
                                                     <small class="flag-description">
-                                                        הנחות חדשות
-                                                        חדשות החברה
-                                                        זוכים
+                                                        <?if (!empty($subscribe['articles'])):?>
+                                                            חדשות
+                                                        <?endif?>
+                                                        <br>
+                                                        דיוור
                                                     </small>
 
                                                 </a>

@@ -1328,9 +1328,18 @@ class Model_BussinesModel extends Model_BaseModel {
             }
             $result[] = $rows;
         }
-
         return $result;
+    }
 
+
+    public function cityAcountBusines (array $city_array){
+
+        return DB::select()
+            ->from('city')
+            ->where('name','IN', $city_array)
+            ->and_where('parent_id','<>', '0')
+            ->cached()
+            ->execute()->as_array();
     }
 
 }
