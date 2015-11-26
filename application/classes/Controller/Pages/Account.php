@@ -38,6 +38,11 @@ class Controller_Pages_Account extends Controller_BaseController {
             $profin_user->city = $this->request->post('city');
             $profin_user->tel = $this->request->post('tel');
             $profin_user->age = $this->request->post('age');
+
+            if (!empty($this->request->post('lotery'))) {
+                $profin_user->suses_lotery = $this->request->post('lotery');
+            }
+
             if (!empty($_FILES['avatar']['name'])) {
                 $profin_user->photo = $filename;
             }
@@ -91,6 +96,8 @@ class Controller_Pages_Account extends Controller_BaseController {
 
             $data->photo = Auth::instance()->get_user()->photo;
             $bloc_sndmail->user = Auth::instance()->get_user();
+
+            $data->lotery_checen =  Model::factory('LotareyModel')->ChekedSusesLotarey(Auth::instance()->get_user()->email);
             $bloc_sndmail->generall_menu = parent::$general_meny;
         }
 

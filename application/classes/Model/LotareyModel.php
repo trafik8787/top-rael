@@ -67,4 +67,20 @@ class Model_LotareyModel extends Model_BaseModel {
     }
 
 
+    /**
+     * @param $email
+     * @return mixed
+     * todo находим победителя по email
+     */
+    public function ChekedSusesLotarey($email){
+        $query = DB::select()
+            ->from('subscription')
+            ->where('email','=', $email)
+            ->and_where('lotery', '<>', '0')
+            ->limit(1)
+            ->execute()->as_array();
+        return $query;
+    }
+
+
 }

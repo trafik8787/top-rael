@@ -5,7 +5,7 @@
  * Date: 02.08.2015
  * Time: 23:15
  */
-
+HTML::x($lotery_checen);
 ?>
 <script>
     //открытие нужной вкладки по якорю
@@ -402,6 +402,20 @@
                                             <input name="age" id="inputAge"  class="form-control" value="<?=$user->age?>" type="date">
                                         </div>
                                     </div>
+
+                                    <?if (!empty($lotery_checen)):?>
+
+                                        <div class="form-group">
+                                            <div class="col-md-offset-1 col-md-5">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input name="lotery" <?if ($user->suses_lotery != 0):?> checked <?endif?> type="checkbox" value="<?=$lotery_checen[0]['lotery']?>"> Показать в победителях
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    <?endif?>
 
                                     <div class="form-group">
                                         <span class="col-sm-1 control-label">Последнее посещение</span>
