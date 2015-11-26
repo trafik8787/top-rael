@@ -156,9 +156,9 @@
                                         </p>
                                         <span>
                                              <p class="tabs__content active">
-                                                 Адрес: <?=$data['BusAddress']?><br/>
+                                                 כתובת: <?=$data['BusAddress']?><br/>
                                                  <?if ($data['BusTel'] != ''):?>
-                                                     Тел: <?=$data['BusTel']?><br/>
+                                                     טלפון: <?=$data['BusTel']?><br/>
                                                  <?endif?>
 
                                              </p>
@@ -166,8 +166,8 @@
                                                 <?foreach ($data['BusDopAddress'] as $key => $dop_adress_address):?>
 
                                                     <span class="tabs__content">
-                                                         Адрес: <?=isset($dop_adress_address['address']) ? $dop_adress_address['address'] : ''?><br/>
-                                                         Тел: <?=isset($dop_adress_address['tel_dop_adress']) ? $dop_adress_address['tel_dop_adress'] : ''?><br/>
+                                                         כתובת: <?=isset($dop_adress_address['address']) ? $dop_adress_address['address'] : ''?><br/>
+                                                        טלפון: <?=isset($dop_adress_address['tel_dop_adress']) ? $dop_adress_address['tel_dop_adress'] : ''?><br/>
 
                                                      </span>
                                                 <?endforeach?>
@@ -275,7 +275,7 @@
                                     <div>
                                         <small>
                                             <strong>
-                                                נכון לתאריך
+                                                המועד אחרון
                                             </strong>
 
                                            <?=Date::rusdate(strtotime($rows_coup['DateOff']), 'j %MONTH% Y', 0, 'he')?>
@@ -361,7 +361,7 @@
                                     <div>
                                         <small>
                                             <strong>
-                                                נכון לתאריך
+                                                המועד אחרון
                                             </strong>
 
                                             <?=Date::rusdate(strtotime($row_baners['date_end']), 'j %MONTH% Y', 0, 'he')?>
@@ -478,9 +478,6 @@
                                             <div class="flag-sidebar">
                                                 <div class="flag-date">
                                                     <?=Date::rusdate(strtotime($row_subscribe['data']), 'j %MONTH% Y', 0, 'he')?>
-            <!--                                        <di><strong>20</strong></di>-->
-            <!--                                        <div>יולי</div>-->
-            <!--                                        <di>2015</di>-->
                                                 </div>
                                             </div>
 
@@ -496,7 +493,7 @@
                                                             חדשות
                                                         <?endif?>
                                                         <br>
-                                                        דיוור
+                                                        החברה
                                                     </small>
 
                                                 </a>
@@ -506,6 +503,39 @@
 
                                         </div>
                                     <?endforeach?>
+                                <?endif?>
+
+                                <?if (!empty($subscribe['articles2'])):?>
+
+                                    <?foreach($subscribe['articles2'] as $row_subscribe_artic2):?>
+                                        <div class="flag">
+
+                                            <div class="flag-sidebar">
+                                                <div class="flag-date">
+                                                    <?=Date::rusdate(strtotime($row_subscribe_artic2['data']), 'j %MONTH% Y', 0, 'he')?>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="flag-context rtl">
+
+                                                <a href="/newsletter/<?=$row_subscribe_artic2['id']?>">
+                                                        <span class="flag-title">
+                                                        דיוור
+                                                        </span>
+                                                    <small class="flag-description">
+                                                            חדשות
+                                                    </small>
+
+                                                </a>
+
+                                            </div>
+
+
+                                        </div>
+                                    <?endforeach?>
+
+
                                 <?endif?>
 
                         </div>

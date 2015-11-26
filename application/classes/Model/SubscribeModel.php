@@ -186,23 +186,35 @@ class Model_SubscribeModel extends Model_BaseModel {
      * @return mixed
      * todo получем для бизнес профиля рассылки к которым имеет отношение бизнес и его статьи
      */
-    public function getSubscribeAcountBusiness ($id){
+    public function getSubscribeAcountBusiness ($id_subs, $id_business){
 
         $query = DB::select()
             ->from('subscription_arhiv')
-            ->where('id', '=', $id)
+            ->where('id', '=', $id_subs)
             ->cached()
             ->execute()
             ->as_array();
-
+        //есть ли статья в той же рассылке что и бизнес
         $query2 = DB::select()
             ->from('articles')
-            ->where('status_subscribe', '=', $id)
+            ->where('status_subscribe', '=', $id_subs)
             ->cached()
             ->execute()
             ->as_array();
+        //была ли статья в отдельной рассылке\
 
-        return  array('business' => $query, 'articles' => $query2);
+        $query3 = DB::select()
+            ->from('articles_relation_business')
+            ->join('articles')
+            ->on('articles_relation_business.id_articles', '=', 'articles.id')
+            ->join('subscription_arhiv')
+            ->on('articles.status_subscribe','=','subscription_arhiv.id')
+            ->where('articles_relation_business.id_business', '=', $id_business)
+            ->and_where('articles.status_subscribe', '<>', $id_subs)
+            ->cached()->execute()->as_array();
+
+
+        return  array('business' => $query, 'articles' => $query2, 'articles2' => $query3);
 
     }
 

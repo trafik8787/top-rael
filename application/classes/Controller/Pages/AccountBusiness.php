@@ -20,7 +20,7 @@ class Controller_Pages_AccountBusiness extends Controller_CommonAuthorized {
 
         $data = $this->CityAsotiation($data);
 
-        $this->template->subscribe = Model::factory('SubscribeModel')->getSubscribeAcountBusiness($url_business[0]['status_subscribe']);
+        $this->template->subscribe = Model::factory('SubscribeModel')->getSubscribeAcountBusiness($url_business[0]['status_subscribe'], $url_business[0]['id']);
         $this->template->style = $local_thit->style;
         $this->template->script = $local_thit->script;
         $this->template->data = $data;
