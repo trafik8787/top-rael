@@ -152,6 +152,16 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+
+//карта сайта
+Route::set('Sitemap', 'sitemap')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Sitemap',
+        'action'     => 'index',
+    ));
+
+
 //запись кликов по банерам
 Route::set('SetBaners', 'set_baners')
     ->defaults(array(

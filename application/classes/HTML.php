@@ -32,4 +32,23 @@ class HTML extends Kohana_HTML {
                 ?></td>
         </tr></table><?
     }
+
+
+    /**
+     * @param null $link
+     * @return string
+     * получаем полный урл вместе с HTTP
+     */
+    public static function HostSite ($link = null)
+    {
+        $str_link = 'http://' . $_SERVER['HTTP_HOST'];
+        if ($link != null) {
+            $str_link = 'http://' . $_SERVER['HTTP_HOST'] . $link;
+        }
+
+        return $str_link;
+    }
+
+
+    
 }
