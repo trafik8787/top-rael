@@ -285,7 +285,7 @@ class Controller_Pages_Ajax extends Controller {
             '/maps',
             '/account/login',
             '/account/registration',
-            '/about', '/rss', '/account#izbran', '/account#coupons'));
+            '/about', '/rss', '/account#izbran', '/account#coupons', '/newsletter'));
 
 
 

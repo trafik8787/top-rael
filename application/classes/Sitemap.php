@@ -150,6 +150,20 @@ final class Sitemap {
         }
 
 
+
+        $subscription_arhiv = Model::factory('CategoryModel')->get_section('subscription_arhiv');
+
+        if (!empty($subscription_arhiv)) {
+            foreach ($subscription_arhiv as $rows_subs) {
+                $row  = $xmlbase->addChild("url");
+                $row->addChild("loc", HTML::HostSite('/newsletter/'.$rows_subs['id']));
+                $row->addChild("lastmod",date("c"));
+                $row->addChild("changefreq","monthly");
+                $row->addChild("priority","0.6");
+            }
+        }
+
+
         if($static_page != null) {
 
             foreach ($static_page as $rows) {
