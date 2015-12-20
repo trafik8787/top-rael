@@ -18,19 +18,18 @@
 
             <div class="panel-heading">
 
-                <div class="col-md-7 col-sm-6">
+                <div class="col-md-8 col-sm-6">
                     <span class="icons logo white">TopIsrael</span>
                 </div>
+                <div class="col-md-4">
+                    <form class="form-inline">
 
-                <div class="col-md-5 col-sm-6">
-                    <form class="search">
-                        <div class="inner-addon right-addon">
-                            <i class="glyphicon glyphicon-search"></i>
-                            <input type="text" class="form-control" placeholder="Что вы хотите найти?" name="srch-term"/>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="inputPassword2" placeholder="Email">
                         </div>
+                        <button type="submit" class="btn btn-default">Подписатся</button>
                     </form>
                 </div>
-
             </div>
 
             <div class="panel-body">
@@ -113,7 +112,7 @@
 
             <div class="panel-footer">
                 <div class="col-md-12">
-                    Все права защищены, перепечатка контента только с разрешения компании
+                    &copy; 2008-<?=date('Y')?> г. Все права защищены, перепечатка контента только с разрешения компании.
                 </div>
             </div>
         </div>

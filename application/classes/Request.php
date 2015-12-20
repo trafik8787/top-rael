@@ -30,4 +30,15 @@ class Request extends Kohana_Request {
         // Уфф, вроде получилось!
         return $result;
     }
+
+    public function DetectUri () {
+        $url = $this->uri();
+        $url = explode('/', $url);
+
+        if (isset($url[1])) {
+            return '/'.$url[0] .'/'.$url[1];
+        }
+
+    }
+
 }

@@ -28,7 +28,7 @@
                     <div class="coupon-sidebar-content">
                         <div class="coupon-sidebar-heading">
                             <div class="coupon-object-middle text-center">
-                                <a href="#" class="icons logo md">TopIsrael</a>
+                                <a href="/" class="icons logo md">TopIsrael</a>
                             </div>
                         </div>
 

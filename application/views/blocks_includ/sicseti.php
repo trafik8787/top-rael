@@ -36,9 +36,7 @@
 
     <div class="sidebar-socials-body">
         <div role="tabpanel" class="tab-pane active" id="tab-facebook">
-            <div class="fb-page" data-href="https://www.facebook.com/facebook"
-                 data-small-header="true" data-adapt-container-width="true"
-                 data-hide-cover="true" data-show-facepile="true" data-show-posts="false"></div>
+            <div class="fb-page" data-href="https://www.facebook.com/TopIsrael.ru/timeline" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/TopIsrael.ru/timeline"><a href="https://www.facebook.com/TopIsrael.ru/timeline">TopIsrael.ru - Обзоры, купоны и каталог лучших мест в Израиле</a></blockquote></div></div>
         </div>
         <div role="tabpanel" class="tab-pane" id="tab-twitter">Twitter</div>
         <div role="tabpanel" class="tab-pane" id="tab-vk">Vk</div>

@@ -31,7 +31,7 @@ http://www.bootstrapzen.com/item/135/simple-login-form-logo/
 
 
 body {
-    background: url('../img/GHr12sH.jpg') no-repeat center center fixed;
+    /*background: url('../img/GHr12sH.jpg') no-repeat center center fixed;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -69,6 +69,17 @@ form[role=login] > div {
     margin-top: 1em;
     margin-bottom: 50px;
 }
-.form-links a {
-    color: #fff;
+
+
+
+.icons.logo {
+    background-position: 0 0;
+    width: 250px;
+    height: 54px;
+}
+
+.icons {
+    display: inline-block;
+    background: url("../../public/images/icons.png") no-repeat;
+    text-indent: -9999px;
 }

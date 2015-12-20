@@ -866,7 +866,7 @@ class Controller_Administrator extends Controller_Core_Main {
      */
     public static function adminGalery (){
         $crud = new Cruds();
-        $crud->load_table('gallery');
+        $crud->load_table('gallery', array('0', 'DESC'));
         $crud->set_lang('ru');
         $crud->show_columns('id','name', 'business_id');
         $crud->disable_editor('galery_text');

@@ -3719,7 +3719,7 @@ h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: inherit;
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 1;
   color: inherit;
 }
 /* line 16, c:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_type.scss */
@@ -11791,21 +11791,28 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   margin: 0;
   border-bottom: 1px solid #57a5ba;
 }
-/* line 751, ../.sass/panel.scss */
-.panel.panel-footer .panel-heading .search {
-  padding-top: 5px;
+
+.w-search {
+    width: 25%;
+    display: inline-block;
+    position: relative;
+    top: -3px;
 }
+}
+
+
 @media (max-width: 767px) {
   /* line 751, ../.sass/panel.scss */
-  .panel.panel-footer .panel-heading .search {
+  .w-search .search {
     padding-top: 15px;
   }
 }
 /* line 759, ../.sass/panel.scss */
-.panel.panel-footer .panel-heading .search .form-control {
+.w-search .form-control {
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
   border-radius: 20px;
+    height: 30px;
 }
 /* line 765, ../.sass/panel.scss */
 .panel.panel-footer .panel-footer {
@@ -11969,7 +11976,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 @media (min-width: 768px) {
   /* line 117, ../.sass/header.scss */
   #header .header-profile .header-profile-shape a {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 18px;
   }
 }
@@ -12175,6 +12182,12 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
     border-color: #44b2cd;
     line-height: 24px;
   }
+
+
+  #header #header-bottom .header-nav > li > a.active {
+    color: #FFFFA0!important;
+  }
+
 }
 
 /* line 8, ../.sass/footer.scss */

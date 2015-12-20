@@ -91,11 +91,15 @@
                 <div id="header-bottom">
                     <nav>
                         <ul class="header-nav">
-                            <li><a href="/">ГЛАВНАЯ</a></li>
+                            <li>
+                                <a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+                            </li>
                             <?foreach($general_meny as $row_meny):?>
-                                <li><a href="/section/<?=$row_meny['url']?>"><?=$row_meny['name']?></a></li>
+                                <li><a <?if (Request::initial()->DetectUri() == '/section/'.$row_meny['url']):?> class="active" <?endif?> href="/section/<?=$row_meny['url']?>"><?=$row_meny['name']?></a></li>
                             <?endforeach?>
                         </ul>
+
+
                         <?if (!empty($tags)):?>
                             <?foreach($tags as $tags_row):?>
                                 <?if ($tags_row['url_tags'] == 'luxury'):?>
@@ -103,7 +107,21 @@
                                 <?endif?>
                             <?endforeach?>
                         <?endif?>
+
+
+
+                        <div class="w-search">
+                            <form class="search">
+                                <div class="inner-addon right-addon">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                    <input type="text" class="form-control" placeholder="Что вы хотите найти?" name="srch-term"/>
+                                </div>
+                            </form>
+                        </div>
                     </nav>
+
+
+
                 </div>
             </div>
         </div>

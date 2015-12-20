@@ -27,7 +27,8 @@
             <div class="col-md-4">
                 <section class="login-form">
                     <form method="post" action="/administrator/login" role="login">
-                        <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
+<!--                        <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />-->
+                        <a href="/" class="icons logo">TopIsrael</a>
                         <input type="text" name="login" placeholder="Login" required class="form-control input-lg" />
 
                         <input type="password" class="form-control input-lg" name="password" id="password" placeholder="Password" required="" />
