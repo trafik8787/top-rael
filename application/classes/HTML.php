@@ -2,7 +2,7 @@
 
 class HTML extends Kohana_HTML {
 
-    public static function x($message, $title = false, $access = true, $color = '#008B8B')
+    public static function x($message, $die = false, $title = false, $access = true, $color = '#008B8B')
     {
 
         ?>
@@ -28,7 +28,9 @@ class HTML extends Kohana_HTML {
                 $a = $a[0];
                 echo "{$a['file']}: {$a['line']}";
                 echo '</div>';
-
+                if ($die === true) {
+                    die();
+                }
                 ?></td>
         </tr></table><?
     }

@@ -25,8 +25,9 @@ class Controller_Feed extends Controller {
         $items = array();
         foreach ($data as $rows) {
             $infort = Text::limit_chars(strip_tags($rows['short_previev']), 200, null, true);
+            $infort = htmlspecialchars($infort);
             $items[] = array(
-                'title' => $rows['name'],
+                'title' => htmlspecialchars($rows['name']),
                 'link' => 'http://'.$_SERVER['SERVER_NAME'].'/article/'.$rows['url'],
                 'description' => '<img src="http://'.$_SERVER['SERVER_NAME'].'/uploads/img_articles/thumbs/'.basename($rows['images_article']).'"><p>'.$infort.'</p>',
                 'pubDate' => $rows['datecreate'],
@@ -71,7 +72,37 @@ class Controller_Feed extends Controller {
         echo Feed::create($info, $items);
     }
 
+
     public function action_coupons(){
+        $info = array(
+            'title' => 'Купоны',
+            'link' => 'http://'.$_SERVER['SERVER_NAME'].'/coupons',
+            'language' => 'ru'
+        );
+
+        $data = Model::factory('CouponsModel')->getCouponsAfter(10);
+        //HTML::x($data, true);
+        $items = array();
+
+        foreach ($data as $rows) {
+
+            $infort = Text::limit_chars(strip_tags($rows['CoupSecond']), 200, null, true);
+            $infort = htmlspecialchars($infort);
+
+            $bus_info = Text::limit_chars(strip_tags($rows['BusInfo']), 100, null, true);
+            $bus_info = htmlspecialchars($bus_info);
+
+            $items[] = array(
+                'title' => htmlspecialchars($rows['CoupName']).' '.$infort,
+                'link' => 'http://'.$_SERVER['SERVER_NAME'].'/coupon/'.$rows['CoupUrl'],
+                'description' => '<img src="'.$rows['CoupImg'].'"><p>'.htmlspecialchars($rows['BusName']).'</p><p>'.$bus_info.'</p>',
+                'pubDate' => $rows['CoupDatcreate']
+            );
+
+        }
+
+        $this->response->headers("Content-Type", "text/xml");
+        echo Feed::create($info, $items);
 
     }
 

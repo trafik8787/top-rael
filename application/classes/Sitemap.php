@@ -179,7 +179,7 @@ final class Sitemap {
 
 
         //сохраняем все это в файл
-        $xmlbase->saveXML($_SERVER['DOCUMENT_ROOT']."/uploads/sitemap.xml");
+        $xmlbase->saveXML($_SERVER['DOCUMENT_ROOT']."/sitemap.xml");
     }
 
 }

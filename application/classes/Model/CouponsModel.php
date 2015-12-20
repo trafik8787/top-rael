@@ -444,5 +444,29 @@ class Model_CouponsModel extends Model_BaseModel {
 
     }
 
+    /**
+     * @param int $limit
+     * @return mixed
+     * todo получить последние добвленные купоны
+     */
+    public function getCouponsAfter($limit = 10){
+        return DB::select(array('coupon.name', 'CoupName'),
+            array('coupon.url','CoupUrl'),
+            array('coupon.datecreate', 'CoupDatcreate'),
+            array('coupon.img_coupon', 'CoupImg'),
+            array('coupon.secondname', 'CoupSecond'),
+            array('business.name', 'BusName'),
+            array('business.info', 'BusInfo')
+            )
+            ->from('coupon')
+            ->join('business')
+            ->on('coupon.business_id', '=', 'business.id')
+            ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coupon.datestart AND coupon.dateoff'))
+            ->order_by('coupon.id', 'DESC')
+            ->limit($limit)
+            ->cached(10000)
+            ->execute()->as_array();
+    }
+
 
 }
