@@ -22,10 +22,13 @@ class Model_ArticlesModel extends Model_BaseModel {
         } else {
             $ofset = 0;
         }
-        //HTML::x(Controller_BaseController::$general_meny);
+
         if ($url_section != null) {
             $id = 0;
-            foreach (Controller_BaseController::$general_meny as $rows) {
+
+            $general_meny = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', 0), 'order_by');
+
+            foreach ($general_meny as $rows) {
                 if ($rows['url'] == $url_section) {
                     $id = $rows['id'];
                 }

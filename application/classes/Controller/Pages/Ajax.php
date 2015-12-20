@@ -258,6 +258,16 @@ class Controller_Pages_Ajax extends Controller {
      */
     public function action_BussinesDisableEmailSevenDays() {
 
+
+        //формируем файл карты сайта в /uploads
+        Sitemap::FileGenerane(array('/coupons',
+            '/articles',
+            '/maps',
+            '/account/login',
+            '/account/registration',
+            '/about', '/rss', '/account#izbran', '/account#coupons', '/newsletter'));
+
+
         //сохраняем в таблицу банеров количество кликов
         Model::factory('Adm')->saveMySQLclickBaners();
 
@@ -278,14 +288,6 @@ class Controller_Pages_Ajax extends Controller {
 
         //сохраняем базу редис один рас в сутки
         Rediset::getInstance()->save();
-
-        //формируем файл карты сайта в /uploads
-        Sitemap::FileGenerane(array('/coupons',
-            '/articles',
-            '/maps',
-            '/account/login',
-            '/account/registration',
-            '/about', '/rss', '/account#izbran', '/account#coupons', '/newsletter'));
 
 
 
