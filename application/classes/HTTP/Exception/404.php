@@ -6,7 +6,7 @@ class HTTP_Exception_404 extends Kohana_HTTP_Exception_404 {
     {
 
         $view = View::factory('pages/404');
-        $view->style = array('bootstrap.min', 'style');
+        $view->style = array('bootstrap.min', 'common', 'screen', 'font-awesome.min', 'style');
         $view->script = array('jquery-1.11.2.min', 'bootstrap.min', 'jquery.validate.min','app');
         // Remembering that `$this` is an instance of HTTP_Exception_404
         $view->message = $this->getMessage();
