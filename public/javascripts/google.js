@@ -148,7 +148,7 @@ function initMap() {
     }
 
     function setMarkes(data) {
-
+        console.log(data);
         var $markers = [];
 
         for (var i = 0; i < data.length; i++) {

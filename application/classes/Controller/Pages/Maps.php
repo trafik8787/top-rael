@@ -84,7 +84,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
                 'section' => array(
                     'id' => $row['CatArr'][0]['CatId'],
                     'name' => $row['CatArr'][0]['CatName'],
-                    'icon' => $row['CatArr'][0]['CatIcon'],
+                    'icon' => '/public/images/map-markers/new_marcer2.png',
                     'visible' => true
                 ),
                 'list' => array(
@@ -126,7 +126,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
                         'section' => array(
                             'id' => $row['CatArr'][0]['CatId'],
                             'name' => $row['CatArr'][0]['CatName'],
-                            'icon' => $row['CatArr'][0]['CatIcon'],
+                            'icon' => '/public/images/map-markers/new_marcer2.png',
                             'visible' => true
                         ),
                         'list' => array(

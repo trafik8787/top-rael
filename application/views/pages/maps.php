@@ -53,7 +53,7 @@
                         РЕСТОРАНЫ И БАРЫ
                     </label>
 
-                    <label class="purchases" data-map-filter="2">
+                    <label class="restaurants" data-map-filter="2">
                         <div class="form-control input-md">
                             <input type="checkbox" value="25" checked="checked">
                             <i class="input-icon fa fa-check"></i>
@@ -71,7 +71,7 @@
 <!--                        Бары-->
 <!--                    </label>-->
 
-                    <label class="relax" data-map-filter="4">
+                    <label class="restaurants" data-map-filter="4">
                         <div class="form-control input-md">
                             <input type="checkbox" value="32" checked="checked">
                             <i class="input-icon fa fa-check"></i>
@@ -80,7 +80,7 @@
                         ОТДЫХ
                     </label>
 
-                    <label class="beauty" data-map-filter="5">
+                    <label class="restaurants" data-map-filter="5">
                         <div class="form-control input-md">
                             <input type="checkbox" value="42" checked="checked">
                             <i class="input-icon fa fa-check"></i>
@@ -90,7 +90,7 @@
                     </label>
 
 
-                    <label class="hotels" data-map-filter="6">
+                    <label class="restaurants" data-map-filter="6">
                         <div class="form-control input-md">
                             <input type="checkbox" value="43" checked="checked">
                             <i class="input-icon fa fa-check"></i>

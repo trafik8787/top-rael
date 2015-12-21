@@ -260,7 +260,7 @@ class Controller_Pages_Ajax extends Controller {
 
 
         //формируем файл карты сайта в /uploads
-        Sitemap::FileGenerane(array('/coupons',
+        Sitemap::FileGenerane(array('/coupons', '/city/telaviv', '/city/jerusalem', '/city/eilat',
             '/articles',
             '/maps',
             '/account/login',
