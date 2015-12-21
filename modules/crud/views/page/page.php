@@ -111,6 +111,33 @@
                 }
             },
 
+            <?if ($table_propery['rows_color_where'] != null):?>
+            "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+
+                if ("<?=$table_propery['rows_color_where'][1]?>" == '==') {
+
+                    if (aData[<?=$table_propery['rows_color_where'][0]?>] == <?=$table_propery['rows_color_where'][2]?>) {
+                        $('td', nRow).css('background-color', '<?=$table_propery['rows_color_where'][3]?>');
+                    }
+                }
+
+                if ("<?=$table_propery['rows_color_where'][1]?>" == '<') {
+
+                    if (aData[<?=$table_propery['rows_color_where'][0]?>] < '<?=$table_propery['rows_color_where'][2]?>') {
+                        $('td', nRow).css('background-color', '<?=$table_propery['rows_color_where'][3]?>');
+                    }
+                }
+
+                if ("<?=$table_propery['rows_color_where'][1]?>" == '>') {
+
+                    if (aData[<?=$table_propery['rows_color_where'][0]?>] > '<?=$table_propery['rows_color_where'][2]?>') {
+                        $('td', nRow).css('background-color', '<?=$table_propery['rows_color_where'][3]?>');
+                    }
+                }
+
+            },
+            <?endif?>
+
             "bStateSave": true,
             //после выполнения ajax запроса
             "fnInitComplete" : function () {

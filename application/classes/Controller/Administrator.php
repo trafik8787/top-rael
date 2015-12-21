@@ -526,7 +526,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud->disable_editor('title');
         $crud->select_multiselect('cat_id');
-        $crud->show_columns('id', 'name', 'url');
+        $crud->show_columns('id', 'name', 'url', 'status');
 
         $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
         $crud->set_field_type('dop_address', 'hidden', '', '', '', '');
@@ -558,6 +558,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
         $crud->links('name', '/business/', 'url');
+        $crud->rows_color_where(3, '==', 0, '#959999');
 
 
         $crud->edit_fields('redactor_user',
@@ -801,7 +802,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud = new Cruds();
         $crud->load_table('coupon', array('0', 'DESC'));
         $crud->set_lang('ru');
-        $crud->show_columns('id', 'name', 'business_id');
+        $crud->show_columns('id', 'name', 'business_id', 'dateoff');
         $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
         $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
         $crud->set_field_type('id_section', 'select', '', '', '', array('category', 'name','id', array('parent_id','=','0')));
@@ -827,6 +828,8 @@ class Controller_Administrator extends Controller_Core_Main {
          * 'id' - поле по которому будем джойнить с 'business_id'
          */
         $crud->show_name_old_table('business_id', 'business', 'name', 'id');
+
+        $crud->rows_color_where(3, '<', date('Y-m-d'), '#959999');
 
         $crud->edit_fields('name',
             'secondname',
@@ -1081,6 +1084,8 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud->edit_fields('name', 'section', 'category', 'business_id', 'website', 'images', 'position', 'date_start', 'date_end');
         $crud->add_field('name','section', 'category', 'business_id', 'website', 'images', 'position', 'date_start', 'date_end');
+
+        $crud->rows_color_where(3, '<', date('Y-m-d'), '#959999');
 
         $crud->show_name_column(array(
             'name'=> 'Название',

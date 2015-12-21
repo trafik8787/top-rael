@@ -36,11 +36,12 @@ if (!empty($_GET['city'])) {
             <option  value="<?=$row_list['id']?>" <?if ($row_list['id'] == $section) {echo 'selected="selected"';}?>><?=$row_list['name']?></option>
         <?endforeach?>
     </select>
-
-    <select name="city" class="form-control chosen-select" data-placeholder="Все" id="filtr_city_adm">
-        <option value="">Все</option>
-        <?foreach ($city as $key => $row_city):?>
-            <option  value="<?=$key?>" <?if ($key == $citys) {echo 'selected="selected"';}?>><?=$row_city?></option>
-        <?endforeach?>
-    </select>
+    <?if (!empty($city)):?>
+        <select name="city" class="form-control chosen-select" data-placeholder="Все" id="filtr_city_adm">
+            <option value="">Все</option>
+            <?foreach ($city as $key => $row_city):?>
+                <option  value="<?=$key?>" <?if ($key == $citys) {echo 'selected="selected"';}?>><?=$row_city?></option>
+            <?endforeach?>
+        </select>
+    <?endif?>
 </form>

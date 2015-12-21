@@ -78,6 +78,8 @@ class Cruds extends Controller_Core_Main {
     public $opder_by_default = null; //сортировка по дефолту
 
     public $show_name_old_table = null;
+    public $rows_color_where = null;
+
 
     public $links = null;
 
@@ -309,6 +311,7 @@ class Cruds extends Controller_Core_Main {
 
         return array(
             'key_primary' => $this->key_primary,
+            'rows_color_where' => $this->rows_color_where,
             //'add_insert' => 'asd',
             'add_action_url_icon' => $this->add_action, //добавление екшенов
             'dafeult_order_by' => $this->opder_by_default,
@@ -886,6 +889,13 @@ class Cruds extends Controller_Core_Main {
         $this->links = array($name_field, $statik_link, $dinamik_link);
     }
 
+
+    /**
+     * для задания цвета строке таблицы по условию
+     */
+    public function rows_color_where($rows, $operand, $str, $bagraut_color){
+        $this->rows_color_where = array($rows, $operand, $str, $bagraut_color);
+    }
 
 }
 

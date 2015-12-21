@@ -500,3 +500,9 @@ li.media.edit img.media-object.pull-left {
         transform:scale(.3)}
 
 }
+
+
+
+tr input[value=StatusBusiness] {
+    color: #0c0c0c;
+}
