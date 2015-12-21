@@ -153,6 +153,13 @@ Kohana::modules(array(
  */
 
 
+Route::set('Search', 'search')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Search',
+        'action'     => 'index',
+    ));
+
 //карта сайта
 Route::set('Sitemap', 'sitemap')
     ->defaults(array(

@@ -111,12 +111,26 @@
 
 
                         <div class="w-search">
-                            <form class="search">
+<!--                            <form class="search">-->
+<!--                                <div class="inner-addon right-addon">-->
+<!--                                    <i class="glyphicon glyphicon-search"></i>-->
+<!--                                    <input type="text" class="form-control" placeholder="Что вы хотите найти?" name="srch-term"/>-->
+<!--                                </div>-->
+<!--                            </form>-->
+
+
+                            <form class="search" action="http://topisrael.ru/search" id="cse-search-box">
                                 <div class="inner-addon right-addon">
                                     <i class="glyphicon glyphicon-search"></i>
-                                    <input type="text" class="form-control" placeholder="Что вы хотите найти?" name="srch-term"/>
+                                    <input type="hidden" name="cx" value="partner-pub-6089615049498543:4215273310" />
+                                    <input type="hidden" name="cof" value="FORID:10" />
+                                    <input type="hidden" name="ie" value="UTF-8" />
+                                    <input type="text" class="form-control" name="q" size="100" />
+<!--                                    <input type="submit" name="sa" value="&#x041f;&#x043e;&#x0438;&#x0441;&#x043a;" />-->
                                 </div>
                             </form>
+
+                            <script type="text/javascript" src="http://www.google.co.il/coop/cse/brand?form=cse-search-box&amp;lang=ru"></script>
                         </div>
                     </nav>
 
