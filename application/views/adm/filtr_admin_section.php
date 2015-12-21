@@ -6,14 +6,24 @@
  * Time: 14:27
  */
 $section = '';
+$citys = '';
 if (!empty($_GET['section'])) {
     $section = $_GET['section'];
+}
+
+if (!empty($_GET['city'])) {
+    $citys = $_GET['city'];
 }
 
 ?>
 <script>
     $(document).ready(function(){
         $(document).on('change', '#filtr_section_adm', function(){
+            $('#filtr_city_adm').val('');
+            $('#w-form-filtr-adm').submit();
+        });
+
+        $(document).on('change', '#filtr_city_adm', function(){
             $('#w-form-filtr-adm').submit();
         });
     });
@@ -24,6 +34,13 @@ if (!empty($_GET['section'])) {
         <?foreach ($data as $row_list):?>
 
             <option  value="<?=$row_list['id']?>" <?if ($row_list['id'] == $section) {echo 'selected="selected"';}?>><?=$row_list['name']?></option>
+        <?endforeach?>
+    </select>
+
+    <select name="city" class="form-control chosen-select" data-placeholder="Все" id="filtr_city_adm">
+        <option value="">Все</option>
+        <?foreach ($city as $key => $row_city):?>
+            <option  value="<?=$key?>" <?if ($key == $citys) {echo 'selected="selected"';}?>><?=$row_city?></option>
         <?endforeach?>
     </select>
 </form>

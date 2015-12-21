@@ -204,26 +204,43 @@ class Controller_Administrator extends Controller_Core_Main {
 
         //die(HTML::x(Model::factory('CategoryModel')->recurs_catalog()));
 
+        $city_id = null;
+
+        if (!empty($_GET['city']) and $_GET['city'] != '') {
+            $city_id = $_GET['city'];
+        }
+
         if (!empty($_GET['section'])) {
             $category = Model::factory('CategoryModel')->recurs_catalog($_GET['section']);
-            $arrChild = array();
 
-            foreach ($category[0]['childs'] as $row_cat) {
-                $arrChild[] = $row_cat['id'];
-            }
 
-            $busssines = Model::factory('CategoryModel')->businesscategory($arrChild);
+            $data =  Model::factory('BussinesModel')->getBussinesSectionUrl($category[0]['url'], null ,null, $city_id);
+
+
+           //HTML::x( $city, true);
+
             $name = $category[0]['name'];
         } else {
             $busssines = null;
             $name = '';
+            $data =  Model::factory('BussinesModel')->getBussinesSectionUrl(null, null ,null, $city_id);
+            $data['city'] = Model::factory('BussinesModel')->getCityInSection(null, true);
         }
+
+        $busssines = array();
+        foreach ($data['data'] as $row_cat) {
+            $busssines[] = $row_cat['id'];
+        }
+
+        $busssines = '('.implode(",", $busssines).')';
+        $city = $data['city'];
 
         $filtr = View::factory('adm/filtr_admin_section');
         $filtr->data = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+        $filtr->city = $city;
         Controller_Core_Main::$filtr = $filtr;
 
-//        die(HTML::x($category));
+
 
         Session::instance()->set('customer_id', $busssines);
         Controller_Core_Main::$title_page = 'Бизнесы '.$name;

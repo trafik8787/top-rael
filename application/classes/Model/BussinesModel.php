@@ -23,106 +23,66 @@ class Model_BussinesModel extends Model_BaseModel {
             $ofset = 0;
         }
 
+
+        //только по категории получаем количество
+        $query_count = DB::select('business.*',
+            array('category.title', 'CatTitle'),
+            array('category.keywords', 'CatKeywords'),
+            array('category.description', 'CatDesc'));
+
+        $query_count->from('category');
+        $query_count->join('businesscategory');
+        $query_count->on('category.id', '=', 'businesscategory.category_id');
+        $query_count->join('business');
+        $query_count->on('businesscategory.business_id', '=', 'business.id');
+        $query_count->join('city', 'LEFT');
+        $query_count->on('business.city', '=', 'city.id');
+        $query_count->where('category.url', '=', $url_category);
         ////получаем количество записей для пагинации сортировка по городу и категории
         if ($id_city != null) {
-            $result1 = DB::select('business.*',
-                array('category.title', 'CatTitle'),
-                array('category.keywords', 'CatKeywords'),
-                array('category.description', 'CatDesc')
-
-            )
-                ->from('category')
-                ->join('businesscategory')
-                ->on('category.id', '=', 'businesscategory.category_id')
-                ->join('business')
-                ->on('businesscategory.business_id', '=', 'business.id')
-                ->join('city', 'LEFT')
-                ->on('business.city', '=', 'city.id')
-                ->where_open()
-                    ->where('category.url', '=', $url_category)
-                    ->and_where('city.id', '=', $id_city)
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
-                    ->and_where('business.status', '=', 1)
-                ->where_close()
-                ->order_by('business.date_create', 'DESC')
-                ->cached()
-                ->execute()->as_array();
-        } else {
-            //только по категории
-            $result1 = DB::select('business.*',
-                array('category.title', 'CatTitle'),
-                array('category.keywords', 'CatKeywords'),
-                array('category.description', 'CatDesc')
-            )
-                ->from('category')
-                ->join('businesscategory')
-                ->on('category.id', '=', 'businesscategory.category_id')
-                ->join('business')
-                ->on('businesscategory.business_id', '=', 'business.id')
-                ->join('city', 'LEFT')
-                ->on('business.city', '=', 'city.id')
-                ->where_open()
-                    ->where('category.url', '=', $url_category)
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
-                    ->and_where('business.status', '=', 1)
-                ->where_close()
-                ->order_by('business.date_create', 'DESC')
-                ->cached()
-                ->execute()->as_array();
+            $query_count->and_where('city.id', '=', $id_city);
         }
+
+        $query_count->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'));
+        $query_count->and_where('business.status', '=', 1);
+        $query_count->order_by('business.date_create', 'DESC');
+        $query_count->cached();
+
+        $result1 = $query_count->execute()->as_array();
+
+
+
+        //получаем данные
+        $query_data = DB::select('business.*',
+            array('city.name', 'CityName'),
+            array('category.title', 'CatTitle'),
+            array('category.keywords', 'CatKeywords'),
+            array('category.description', 'CatDesc'));
+
+        $query_data->from('category');
+        $query_data->join('businesscategory');
+        $query_data->on('category.id', '=', 'businesscategory.category_id');
+        $query_data->join('business');
+        $query_data->on('businesscategory.business_id', '=', 'business.id');
+        $query_data->join('city', 'LEFT');
+        $query_data->on('business.city', '=', 'city.id');
+        $query_data->where('category.url', '=', $url_category);
 
         if ($id_city != null) {
-            $result = DB::select('business.*',
-                array('city.name', 'CityName'),
-                array('category.title', 'CatTitle'),
-                array('category.keywords', 'CatKeywords'),
-                array('category.description', 'CatDesc')
-            )
-                ->from('category')
-                ->join('businesscategory')
-                ->on('category.id', '=', 'businesscategory.category_id')
-                ->join('business')
-                ->on('businesscategory.business_id', '=', 'business.id')
-                ->join('city', 'LEFT')
-                ->on('business.city', '=', 'city.id')
-                ->where_open()
-                    ->where('category.url', '=', $url_category)
-                    ->and_where('city.id', '=', $id_city)
-                ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
-                    ->and_where('business.status', '=', 1)
-                ->where_close()
-                ->limit($limit)
-                ->offset($ofset)
-                ->order_by('business.client_status', 'DESC')
-                ->order_by('business.date_create', 'DESC')
-                ->cached()
-                ->execute()->as_array();
-        } else {
-            $result = DB::select('business.*',
-                array('city.name', 'CityName'),
-                array('category.title', 'CatTitle'),
-                array('category.keywords', 'CatKeywords'),
-                array('category.description', 'CatDesc')
-            )
-                ->from('category')
-                ->join('businesscategory')
-                ->on('category.id', '=', 'businesscategory.category_id')
-                ->join('business')
-                ->on('businesscategory.business_id', '=', 'business.id')
-                ->join('city', 'LEFT')
-                ->on('business.city', '=', 'city.id')
-                ->where_open()
-                    ->where('category.url', '=', $url_category)
-                ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
-                    ->and_where('business.status', '=', 1)
-                ->where_close()
-                ->limit($limit)
-                ->offset($ofset)
-                ->order_by('business.client_status', 'DESC')
-                ->order_by('business.date_create', 'DESC')
-                ->cached()
-                ->execute()->as_array();
+            $query_data->and_where('city.id', '=', $id_city);
         }
+
+        $query_data->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'));
+        $query_data->and_where('business.status', '=', 1);
+        $query_data->limit($limit);
+        $query_data->offset($ofset);
+        $query_data->order_by('business.client_status', 'DESC');
+        $query_data->order_by('business.date_create', 'DESC');
+        $query_data->cached();
+
+        $result = $query_data->execute()->as_array();
+
+
 
         if (!empty($result)) {
 
@@ -157,9 +117,10 @@ class Model_BussinesModel extends Model_BaseModel {
     /**
      * @param null $url_section
      * @return mixed
+     * $adm - переключатель для фильтра по разделам в админке( только для админки ) отключает сортировку по статусу и дате
      * todo получаем все бизнесы из раздела
      */
-    public function getBussinesSectionUrl($url_section = null, $limit = null, $num_page = null, $id_city = null){
+    public function getBussinesSectionUrl($url_section = null, $limit = null, $num_page = null, $id_city = null, $adm = false){
 
         if ($num_page != null) {
             $ofset = $limit * ($num_page - 1);
@@ -167,103 +128,88 @@ class Model_BussinesModel extends Model_BaseModel {
             $ofset = 0;
         }
 
-        $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($url_section);
+        if ($url_section != null) {
 
-        $arrChild = array();
-        foreach ($category[0]['childs'] as $row_cat) {
-            $arrChild[] = $row_cat['id'];
+            $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($url_section);
+
+            $arrChild = array();
+            foreach ($category[0]['childs'] as $row_cat) {
+                $arrChild[] = $row_cat['id'];
+            }
         }
 
         ////получаем количество записей для пагинации сортировка по городу и категориям раздела
+        $query_count = DB::select('business.*', array('city.name', 'CityName'));
+
+        $query_count->from('category');
+        $query_count->join('businesscategory');
+        $query_count->on('category.id', '=', 'businesscategory.category_id');
+        $query_count->join('business');
+        $query_count->on('businesscategory.business_id', '=', 'business.id');
+        $query_count->join('city', 'LEFT');
+        $query_count->on('business.city', '=', 'city.id');
+        if ($url_section != null) {
+            $query_count->where('businesscategory.category_id', 'IN', $arrChild);
+        }
         if ($id_city != null) {
-            $result1 = DB::select('business.*', array('city.name', 'CityName'))
-                ->from('category')
-                ->join('businesscategory')
-                ->on('category.id', '=', 'businesscategory.category_id')
-                ->join('business')
-                ->on('businesscategory.business_id', '=', 'business.id')
-                ->join('city', 'LEFT')
-                ->on('business.city', '=', 'city.id')
-                ->where_open()
-                    ->where('businesscategory.category_id', 'IN', $arrChild)
-                    ->and_where('city.id', '=', $id_city)
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
-                    ->and_where('business.status', '=', 1)
-                ->where_close()
-                ->group_by('business.id')
-                ->order_by('business.date_create', 'DESC')
-                ->cached()
-                ->execute()->as_array();
-        } else {
-            //получаем количество записей для пагинации выборка по всем категориям раздела
-            $result1 = DB::select('business.*', array('city.name', 'CityName'))
-                ->from('category')
-                ->join('businesscategory')
-                ->on('category.id', '=', 'businesscategory.category_id')
-                ->join('business')
-                ->on('businesscategory.business_id', '=', 'business.id')
-                ->join('city', 'LEFT')
-                ->on('business.city', '=', 'city.id')
-                ->where_open()
-                    ->where('businesscategory.category_id', 'IN', $arrChild)
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
-                    ->and_where('business.status', '=', 1)
-                ->where_close()
-                ->group_by('business.id')
-                ->order_by('business.date_create', 'DESC')
-                ->cached()
-                ->execute()->as_array();
+            $query_count->and_where('city.id', '=', $id_city);
         }
 
+        if ($adm === false) {
+            $query_count->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'));
+            $query_count->and_where('business.status', '=', 1);
+        }
+        $query_count->group_by('business.id');
+        $query_count->order_by('business.date_create', 'DESC');
+        $query_count->cached();
+
+        $result1 = $query_count->execute()->as_array();
+
+
+        /**
+         * $query data
+         */
+
+        //выборка с лимитами тоько по категориям раздела
+        $query_data = DB::select('business.*', array('city.name', 'CityName'));
+
+        $query_data->from('category');
+        $query_data->join('businesscategory');
+        $query_data->on('category.id', '=', 'businesscategory.category_id');
+        $query_data->join('business');
+        $query_data->on('businesscategory.business_id', '=', 'business.id');
+        $query_data->join('city', 'LEFT');
+        $query_data->on('business.city', '=', 'city.id');
+        if ($url_section != null) {
+            $query_data->where('businesscategory.category_id', 'IN', $arrChild);
+        }
+        //выборка с лимитами по городу и всем категориям раздела
         if ($id_city != null) {
-            //выборка с лимитами по городу и всем категориям раздела
-            $result = DB::select('business.*', array('city.name', 'CityName'))
-                ->from('category')
-                ->join('businesscategory')
-                ->on('category.id', '=', 'businesscategory.category_id')
-                ->join('business')
-                ->on('businesscategory.business_id', '=', 'business.id')
-                ->join('city', 'LEFT')
-                ->on('business.city', '=', 'city.id')
-                ->where_open()
-                    ->where('businesscategory.category_id', 'IN', $arrChild)
-                    ->and_where('city.id', '=', $id_city)
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
-                    ->and_where('business.status', '=', 1)
-                ->where_close()
-                ->limit($limit)
-                ->offset($ofset)
-                ->group_by('business.id')
-                ->order_by('business.client_status', 'DESC')
-                ->order_by('business.date_create', 'DESC')
-                ->cached()
-                ->execute()->as_array();
-        } else {
-            //выборка с лимитами тоько по категориям раздела
-            $result = DB::select('business.*', array('city.name', 'CityName'))
-                ->from('category')
-                ->join('businesscategory')
-                ->on('category.id', '=', 'businesscategory.category_id')
-                ->join('business')
-                ->on('businesscategory.business_id', '=', 'business.id')
-                ->join('city', 'LEFT')
-                ->on('business.city', '=', 'city.id')
-                ->where_open()
-                    ->where('businesscategory.category_id', 'IN', $arrChild)
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
-                    ->and_where('business.status', '=', 1)
-                ->where_close()
-                ->limit($limit)
-                ->offset($ofset)
-                ->group_by('business.id')
-                ->order_by('business.client_status', 'DESC')
-                ->order_by('business.date_create', 'DESC')
-                ->cached()
-                ->execute()->as_array();
+            $query_data->and_where('city.id', '=', $id_city);
+        }
+        if ($adm === false) {
+            $query_data->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'));
+            $query_data->and_where('business.status', '=', 1);
+        }
+        if ($limit != null) {
+            $query_data->limit($limit);
         }
 
-        $city_arr = $this->getCityInSection($arrChild);
+        if ($num_page != null) {
+            $query_data->offset($ofset);
+        }
+        $query_data->group_by('business.id');
+        $query_data->order_by('business.client_status', 'DESC');
+        $query_data->order_by('business.date_create', 'DESC');
+        $query_data->cached();
 
+        $result = $query_data->execute()->as_array();
+
+        if ($url_section != null) {
+            $city_arr = $this->getCityInSection($arrChild);
+        } else {
+            $city_arr = array();
+        }
         $result = $this->SortArrayBusiness($result);
 
         //вызываем метод получения данных из куки
@@ -634,25 +580,32 @@ class Model_BussinesModel extends Model_BaseModel {
      * @return array
      * todo метод получаем список городов во всех категориях раздела
      */
-    public function getCityInSection ($arrChild){
+    public function getCityInSection ($arrChild = null, $adm = false){
 
-        $result1 = DB::select('business.*', array('city.name', 'CityName'))
-            ->from('category')
-            ->join('businesscategory')
-            ->on('category.id', '=', 'businesscategory.category_id')
-            ->join('business')
-            ->on('businesscategory.business_id', '=', 'business.id')
-            ->join('city', 'LEFT')
-            ->on('business.city', '=', 'city.id')
-            ->where_open()
-                ->where('businesscategory.category_id', 'IN', $arrChild)
-                ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
-                ->and_where('business.status', '=', 1)
-            ->where_close()
-            ->group_by('business.id')
-            ->order_by('business.id', 'DESC')
-            ->cached()
-            ->execute()->as_array();
+        $query_data = DB::select('business.*', array('city.name', 'CityName'));
+        $query_data->from('category');
+        $query_data->join('businesscategory');
+        $query_data->on('category.id', '=', 'businesscategory.category_id');
+        $query_data->join('business');
+        $query_data->on('businesscategory.business_id', '=', 'business.id');
+        $query_data->join('city', 'LEFT');
+        $query_data->on('business.city', '=', 'city.id');
+
+        if ($arrChild != null) {
+            $query_data->where('businesscategory.category_id', 'IN', $arrChild);
+        }
+
+        if ($adm === false) {
+            $query_data->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'));
+            $query_data->and_where('business.status', '=', 1);
+        }
+
+        $query_data->group_by('business.id');
+        $query_data->order_by('business.id', 'DESC');
+        $query_data->cached();
+
+
+        $result1 = $query_data->execute()->as_array();
 
         $city_arr = array();
         foreach ($result1 as $row_city) {
