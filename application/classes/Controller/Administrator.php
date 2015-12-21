@@ -214,7 +214,7 @@ class Controller_Administrator extends Controller_Core_Main {
             $category = Model::factory('CategoryModel')->recurs_catalog($_GET['section']);
 
 
-            $data =  Model::factory('BussinesModel')->getBussinesSectionUrl($category[0]['url'], null ,null, $city_id);
+            $data =  Model::factory('BussinesModel')->getBussinesSectionUrl($category[0]['url'], null ,null, $city_id, true);
 
 
            //HTML::x( $city, true);
@@ -223,7 +223,7 @@ class Controller_Administrator extends Controller_Core_Main {
         } else {
             $busssines = null;
             $name = '';
-            $data =  Model::factory('BussinesModel')->getBussinesSectionUrl(null, null ,null, $city_id);
+            $data =  Model::factory('BussinesModel')->getBussinesSectionUrl(null, null ,null, $city_id, true);
             $data['city'] = Model::factory('BussinesModel')->getCityInSection(null, true);
         }
 
