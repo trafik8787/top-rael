@@ -85,30 +85,31 @@
 
 
                 </div>
+                <?if (!empty($jornal)):?>
+                    <div class="col-md-5">
+                        <div class="row">
 
-                <div class="col-md-5">
-                    <div class="row">
+                            <div class="col-md-7 col-sm-8">
+                                <p><strong class="fz big">О журнале</strong></p>
 
-                        <div class="col-md-7 col-sm-8">
-                            <p><strong class="fz big">О журнале</strong></p>
+                                <p>
+                                    <small>Печатный журнал TopIsrael.ru является уникальным принт-изданием Израиля на русском языке, ориентированном на туристов из стран СНГ. Выходит ежеквартально.
 
-                            <p>
-                                <small>Печатный журнал TopIsrael.ru является уникальным принт-изданием Израиля на русском языке, ориентированном на туристов из стран СНГ. Выходит ежеквартально.
+                                    </small>
 
-                                </small>
+                                </p>
+                                <a style="color: #fff" href="/jornal">Архив журналов</a>
 
-                            </p>
-                            <a style="color: #fff" href="/jornal">Архив журналов</a>
+                                <p><i class="fa fa-arrow-right pull-right hidden-xs"></i></p>
+                            </div>
 
-                            <p><i class="fa fa-arrow-right pull-right hidden-xs"></i></p>
+                            <div class="col-md-5 col-sm-4">
+                                <a href="/jornal"><img src="<?=$jornal[0]['img']?>" width="202" height="211" alt="" class="img-responsive"/></a>
+                            </div>
+
                         </div>
-
-                        <div class="col-md-5 col-sm-4">
-                            <a href="/jornal"><img src="<?=$jornal[0]['img']?>" width="202" height="211" alt="" class="img-responsive"/></a>
-                        </div>
-
                     </div>
-                </div>
+                <?endif?>
             </div>
 
             <div class="panel-footer">
