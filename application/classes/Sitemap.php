@@ -164,6 +164,20 @@ final class Sitemap {
         }
 
 
+        $city_page = Model::factory('CategoryModel')->get_section('city', array('url', '<>', ''));
+
+
+        if (!empty($city_page)) {
+            foreach ($city_page as $rows_city) {
+                $row  = $xmlbase->addChild("url");
+                $row->addChild("loc", HTML::HostSite('/city/'.$rows_city['url']));
+                $row->addChild("lastmod",date("c"));
+                $row->addChild("changefreq","monthly");
+                $row->addChild("priority","0.8");
+            }
+        }
+
+
         if($static_page != null) {
 
             foreach ($static_page as $rows) {

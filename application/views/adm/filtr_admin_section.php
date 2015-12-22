@@ -29,7 +29,7 @@ if (!empty($_GET['city'])) {
     });
 </script>
 <form role="form" action="" id="w-form-filtr-adm">
-    <select name="section" class="form-control chosen-select" data-placeholder="Все" id="filtr_section_adm">
+    <select name="section" class="form-control chosen-select" data-placeholder="Выбрать раздел" id="filtr_section_adm">
         <option value=""></option>
         <?foreach ($data as $row_list):?>
 
@@ -37,7 +37,7 @@ if (!empty($_GET['city'])) {
         <?endforeach?>
     </select>
     <?if (!empty($city)):?>
-        <select name="city" class="form-control chosen-select" data-placeholder="Все" id="filtr_city_adm">
+        <select name="city" class="form-control chosen-select" data-placeholder="Выбрать город" id="filtr_city_adm">
             <option value="">Все</option>
             <?foreach ($city as $key => $row_city):?>
                 <option  value="<?=$key?>" <?if ($key == $citys) {echo 'selected="selected"';}?>><?=$row_city?></option>

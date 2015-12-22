@@ -558,7 +558,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
         $crud->links('name', '/business/', 'url');
-        $crud->rows_color_where(3, '==', 0, '#959999');
+        $crud->rows_color_where(3, '==', 0, ' #cccccc');
 
 
         $crud->edit_fields('redactor_user',
@@ -829,7 +829,7 @@ class Controller_Administrator extends Controller_Core_Main {
          */
         $crud->show_name_old_table('business_id', 'business', 'name', 'id');
 
-        $crud->rows_color_where(3, '<', date('Y-m-d'), '#959999');
+        $crud->rows_color_where(3, '<', date('Y-m-d'), ' #cccccc');
 
         $crud->edit_fields('name',
             'secondname',
@@ -1085,7 +1085,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->edit_fields('name', 'section', 'category', 'business_id', 'website', 'images', 'position', 'date_start', 'date_end');
         $crud->add_field('name','section', 'category', 'business_id', 'website', 'images', 'position', 'date_start', 'date_end');
 
-        $crud->rows_color_where(3, '<', date('Y-m-d'), '#959999');
+        $crud->rows_color_where(3, '<', date('Y-m-d'), ' #cccccc');
 
         $crud->show_name_column(array(
             'name'=> 'Название',

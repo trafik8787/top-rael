@@ -11,11 +11,6 @@ class Controller_Pages_Search extends Controller_BaseController {
 	{
         $content = View::factory('pages/search');
 
-        $content->bloc_right = parent::RightBloc(array(
-            $this->lotarey(),
-            View::factory('blocks_includ/sicseti'),
-        ));
-
         $this->template->content = $content;
 	}
 
