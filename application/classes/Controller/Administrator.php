@@ -1164,7 +1164,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_bef_edit_business ($new_array = null, $old_array = null) {
 
-        Model::factory('Adm')->log_add('бизнес', $old_array['name'], 'edit');
+        Model::factory('Adm')->log_add('бизнес', $old_array['name'], 'edit', $old_array['id']);
 
         //die(HTML::x($old_array));
         if (!empty($new_array['home_busines_foto'])) {
@@ -1306,9 +1306,16 @@ class Controller_Administrator extends Controller_Core_Main {
             $static->article_show = $article_count_show;
         }
 
-
-
         Cruds::$adon_top_form[] = $static;
+
+
+
+        $log = View::factory('adm/log_business');
+        $data = Model::factory('Adm')->get_log_business($new_array['id']);
+        $log->data = $data;
+        Cruds::$adon_top_form[] = $log;
+
+
 
         $user = View::factory('adm/form_add_user_business');
         $orm_user = ORM::factory('User')->where('business_id', '=', $new_array['id'])->find()->as_array();
@@ -1356,7 +1363,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
     public static function call_befor_del_business ($new_array){
-        Model::factory('Adm')->log_add('бизнес', $new_array['name'], 'del');
+        Model::factory('Adm')->log_add('бизнес', $new_array['name'], 'del', $new_array['id']);
         $user = DB::delete('users')->where('business_id', '=', $new_array['id'])->execute();
         Rediset::getInstance()->del_business_favor($new_array['id']);
         Rediset::getInstance()->del_business($new_array['id']);

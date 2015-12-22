@@ -129,7 +129,7 @@ class Model_Adm extends Model {
      * $name_node - название
      * $status_node - что это редактирование удаление или создание
      */
-    public function log_add ($type_node, $name_node, $status_node){
+    public function log_add ($type_node, $name_node, $status_node, $id_business = 0){
 
 
         $status = null;
@@ -149,8 +149,8 @@ class Model_Adm extends Model {
                 break;
         }
 
-        DB::insert('log', array('text', 'status'))
-            ->values(array($text, $status))
+        DB::insert('log', array('text', 'status', 'business_id'))
+            ->values(array($text, $status, $id_business))
             ->execute();
 
     }
@@ -180,6 +180,19 @@ class Model_Adm extends Model {
         return array('data' => $query, 'count' => $count);
     }
 
+    /**
+     * @param $id_business
+     * @return mixed
+     * todo получить лог по бизнесу
+     */
+    public function get_log_business ($id_business)
+    {
+        return DB::select()
+            ->from('log')
+            ->where('business_id','=', $id_business)
+            ->order_by('date', 'DESC')
+            ->execute()->as_array();
+    }
 
     /**
      * @param $user_id
