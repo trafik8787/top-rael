@@ -152,7 +152,14 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+Route::set('Jornal', 'jornal')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Jornal',
+        'action'     => 'index',
+    ));
 
+//поиск
 Route::set('Search', 'search')
     ->defaults(array(
         'directory' => 'Pages',

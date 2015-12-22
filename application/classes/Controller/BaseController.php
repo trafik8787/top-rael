@@ -34,6 +34,8 @@ abstract class Controller_BaseController extends Controller_Template {
 
         parent::before();
 
+
+
 //        if ($_SERVER['REMOTE_ADDR'] != '178.94.172.183') {
 //            die('Сайт временно закрыт ведутся работы');
 //        }
@@ -63,6 +65,8 @@ abstract class Controller_BaseController extends Controller_Template {
         $this->header->tags = $this->tags();
         $this->header->top_meny = $this->top_meny; //самое верхнее меню
         $this->footer->top_meny = $this->top_meny;
+
+        $this->footer->jornal = Model::factory('JornalModel')->rowJornal();
 
         if (Auth::instance()->get_user('login')) { // смотрим - если пользователь авторизован
 

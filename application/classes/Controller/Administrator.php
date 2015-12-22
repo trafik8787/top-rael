@@ -340,6 +340,11 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
 
+    public function action_jornal() {
+        Controller_Core_Main::$title_page = 'Печатный журнал';
+        $this->response->body(self::adminJornal()->render());
+    }
+
 
     /**
      * @return Cruds
@@ -934,6 +939,25 @@ class Controller_Administrator extends Controller_Core_Main {
         return $crud;
     }
 
+
+    public static function adminJornal () {
+        $crud = new Cruds();
+        $crud->load_table('jornal');
+        $crud->set_lang('ru');
+        $crud->disable_search();
+        $crud->show_columns('id', 'info', 'date');
+        $crud->disable_editor('info');
+        $crud->set_field_type('file', array('file', 'uploads/file_jornal', 'jornal_', '', 'others'),'', '');
+        $crud->set_field_type('img', array('file', 'uploads/img_jornal', 'jornal_', '', 'img'),'', '');
+        $crud->show_name_column(array(
+            'id' => 'ID',
+            'info'=> 'Краткое описание',
+            'file' => 'Файл журнала',
+            'img' => 'Фото',
+            'date'=>'Дата выпуска'));
+
+        return $crud;
+    }
 
     public static function adminSubscription (){
 

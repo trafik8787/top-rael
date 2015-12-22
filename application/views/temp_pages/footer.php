@@ -86,28 +86,29 @@
 
                 </div>
 
-<!--                <div class="col-md-5">-->
-<!--                    <div class="row">-->
-<!---->
-<!--                        <div class="col-md-7 col-sm-8">-->
-<!--                            <p><strong class="fz big">О журнале</strong></p>-->
-<!---->
-<!--                            <p>-->
-<!--                                <small>С другой стороны постоянное информационно-пропагандистское обеспечение нашей-->
-<!--                                    деятельности способствует подготовки и реализации систем массового участия. Значимость-->
-<!--                                    этих проблем настолько очевидна, что консультация с-->
-<!--                                </small>-->
-<!--                            </p>-->
-<!---->
-<!--                            <p><i class="fa fa-arrow-right pull-right hidden-xs"></i></p>-->
-<!--                        </div>-->
-<!---->
-<!--                        <div class="col-md-5 col-sm-4">-->
-<!--                            <img src="/public/uploade/journal.png" width="202" height="211" alt="" class="img-responsive"/>-->
-<!--                        </div>-->
-<!---->
-<!--                    </div>-->
-<!--                </div>-->
+                <div class="col-md-5">
+                    <div class="row">
+
+                        <div class="col-md-7 col-sm-8">
+                            <p><strong class="fz big">О журнале</strong></p>
+
+                            <p>
+                                <small>Печатный журнал TopIsrael.ru является уникальным принт-изданием Израиля на русском языке, ориентированном на туристов из стран СНГ. Выходит ежеквартально.
+
+                                </small>
+
+                            </p>
+                            <a style="color: #fff" href="/jornal">Архив журналов</a>
+
+                            <p><i class="fa fa-arrow-right pull-right hidden-xs"></i></p>
+                        </div>
+
+                        <div class="col-md-5 col-sm-4">
+                            <a href="/jornal"><img src="<?=$jornal[0]['img']?>" width="202" height="211" alt="" class="img-responsive"/></a>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
             <div class="panel-footer">
