@@ -10662,14 +10662,14 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 /* line 4, ../.sass/icons.scss */
 .icons {
   display: inline-block;
-  background: url("../images/icons.png") no-repeat;
+  background: url("../images/logo-new.png") no-repeat;
   text-indent: -9999px;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
   /* line 17, ../.sass/icons.scss */
   .icons {
-    background-image: url("../images/icons@2x.png");
-    background-size: 500px 500px;
+    background-image: url("../images/logo-new.png");
+    background-size: 257px 76px;
   }
 }
 /* line 24, ../.sass/icons.scss */
@@ -10681,8 +10681,8 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 /* line 31, ../.sass/icons.scss */
 .icons.logo {
   background-position: 0 0;
-  width: 250px;
-  height: 54px;
+  width: 332px;
+  height: 93px;
 }
 /* line 38, ../.sass/icons.scss */
 .icons.logo.white {
@@ -11792,11 +11792,17 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   border-bottom: 1px solid #57a5ba;
 }
 
+.w-search-button {
+  border: 0;
+  background: inherit;
+}
+
 .w-search {
-    width: 23%;
-    display: inline-block;
-    position: relative;
-    top: -3px;
+  width: 26%;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  right: -12%;
 }
 }
 
@@ -11919,6 +11925,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   /* line 56, ../.sass/header.scss */
   #header .header-profile {
     float: right;
+    padding-top: 15px;
   }
 }
 /* line 71, ../.sass/header.scss */
@@ -12048,6 +12055,8 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   border-right: 1px solid transparent;
   padding: 0 15px;
 }
+
+
 /* line 201, ../.sass/header.scss */
 #header .header-nav > li:last-child a {
   border-right: 0;
@@ -12097,7 +12106,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   #header #header-top {
     text-align: center;
     padding: 0;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
   }
 }
 /* line 50, ../.sass/_common-variables.scss */
@@ -12111,6 +12120,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   #header #header-top .header-nav {
     display: inline-block;
     margin: 0 auto;
+    padding-top: 13px;
   }
 }
 /* line 253, ../.sass/header.scss */
@@ -12125,6 +12135,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   /* line 262, ../.sass/header.scss */
   #header #header-top .header-nav > li a {
     border-color: #d3d3d3;
+    padding: 0 10px;
   }
 }
 /* line 272, ../.sass/header.scss */
@@ -12185,7 +12196,10 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 
 
   #header #header-bottom .header-nav > li > a.active {
-    color: #FFFFA0!important;
+    color: #007898!important;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 5px;
   }
 
 }
@@ -12792,7 +12806,7 @@ footer {
 .inner-addon .glyphicon {
   position: absolute;
   padding: 10px;
-  pointer-events: none;
+  /*pointer-events: none;*/
   color: #777777;
   top: -1px;
 }
