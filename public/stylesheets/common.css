@@ -10662,14 +10662,21 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 /* line 4, ../.sass/icons.scss */
 .icons {
   display: inline-block;
-  background: url("../images/logo-new.png") no-repeat;
+  background: url("../images/icons.png") no-repeat;
   text-indent: -9999px;
 }
+
+.w-logo {
+  text-indent: -9999px;
+  background: url("../images/logo-new.png") no-repeat;
+  background-size: 250px;
+}
+
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
   /* line 17, ../.sass/icons.scss */
   .icons {
     background-image: url("../images/logo-new.png");
-    background-size: 257px 76px;
+    background-size: 250px;
   }
 }
 /* line 24, ../.sass/icons.scss */
@@ -10681,8 +10688,8 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 /* line 31, ../.sass/icons.scss */
 .icons.logo {
   background-position: 0 0;
-  width: 332px;
-  height: 93px;
+  width: 250px;
+  height: 66px;
 }
 /* line 38, ../.sass/icons.scss */
 .icons.logo.white {
@@ -11800,9 +11807,9 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 .w-search {
   width: 26%;
   display: inline-block;
-  position: relative;
-  top: 2px;
-  right: -12%;
+  position: absolute;
+  top: 108px;
+  right: 18px;
 }
 }
 
@@ -11925,7 +11932,6 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   /* line 56, ../.sass/header.scss */
   #header .header-profile {
     float: right;
-    padding-top: 15px;
   }
 }
 /* line 71, ../.sass/header.scss */
@@ -12106,7 +12112,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   #header #header-top {
     text-align: center;
     padding: 0;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
   }
 }
 /* line 50, ../.sass/_common-variables.scss */
@@ -12120,7 +12126,6 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   #header #header-top .header-nav {
     display: inline-block;
     margin: 0 auto;
-    padding-top: 13px;
   }
 }
 /* line 253, ../.sass/header.scss */
@@ -12135,7 +12140,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   /* line 262, ../.sass/header.scss */
   #header #header-top .header-nav > li a {
     border-color: #d3d3d3;
-    padding: 0 10px;
+
   }
 }
 /* line 272, ../.sass/header.scss */

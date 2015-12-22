@@ -29,7 +29,7 @@
                 <i class="fa fa-bars"></i>
             </a>
 
-            <a href="/" class="icons logo">TopIsrael</a>
+            <a href="/" class="icons logo w-logo">TopIsrael</a>
 
             <div class="collapse" id="nav-header">
                 <?if (isset($user)):?>
