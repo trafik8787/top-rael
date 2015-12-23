@@ -15,20 +15,26 @@
                 <div id="context">
 
 
-                    <div id="cse-search-results"></div>
-                    <script type="text/javascript">
-                        var googleSearchIframeName = "cse-search-results";
-                        var googleSearchFormName = "cse-search-box";
-                        var googleSearchFrameWidth = 750;
-                        var googleSearchDomain = "www.google.com";
-                        var googleSearchPath = "/cse";
+                    <script>
+                        (function() {
+                            var cx = 'partner-pub-6089615049498543:4215273310';
+                            var gcse = document.createElement('script');
+                            gcse.type = 'text/javascript';
+                            gcse.async = true;
+                            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                                '//cse.google.com/cse.js?cx=' + cx;
+                            var s = document.getElementsByTagName('script')[0];
+                            s.parentNode.insertBefore(gcse, s);
+                        })();
                     </script>
-                    <script type="text/javascript" src="http://www.google.com/afsonline/show_afs_search.js"></script>
+                    <gcse:searchresults-only><h2>Подождите, идет поиск</h2></gcse:searchresults-only>
+
 
                 </div>
             </div>
 
             <!-- Bloc Right -->
+
             <?=isset($bloc_right)? $bloc_right : ''?>
         </div>
 

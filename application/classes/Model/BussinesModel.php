@@ -291,6 +291,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 array('coup.tags', 'CoupTags'),
                 array('coup.secondname', 'CoupSecondname'),
                 array('coup.dateoff', 'DateOff'),
+                array('coup.datestart', 'DateStart'),
 
                 array('topslider.id', 'TopsliderId'),
                 array('topslider.img_path', 'TopsliderImg'),
@@ -347,8 +348,12 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->join(array('articles', 'artic'), 'LEFT')
                 ->on('artrelbus.id_articles', '=', 'artic.id')
 
+
                 ->where('bus.url', '=', $url_business)
+
                 ->and_where('bus.status', '=', 1)
+                ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
+
                 ->cached()
                 ->execute()->as_array();
 
@@ -467,11 +472,12 @@ class Model_BussinesModel extends Model_BaseModel {
                 }
 
                 //купоны
+
                 if (!empty($row['CoupId'])) {
 
                     if (!array_key_exists($row['CoupId'], $CoupTmp)) {
 
-                        if ($row['DateOff'] > date('Y-m-d')) {
+                        if ($row['DateOff'] > date('Y-m-d') and $row['DateStart'] <= date('Y-m-d')) {
 
                             $CoupTmp[$row['CoupId']] = $row['CoupId'];
                             $end_result['CoupArr'][] = array('CoupId' => $row['CoupId'],
@@ -486,9 +492,7 @@ class Model_BussinesModel extends Model_BaseModel {
 
                         } else {
 
-                            if (!empty($end_result['CoupArr'])) {
-                                $end_result['CoupArr'][] = array();
-                            } else {
+                            if (empty($end_result['CoupArr'])) {
                                 $end_result['CoupArr'] = array();
                             }
 
