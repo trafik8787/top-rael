@@ -294,6 +294,10 @@ class Controller_Pages_Ajax extends Controller {
         $obj = new Model_BussinesModel();
         //пользователи и бизнесы
         $data = $obj->getBusinesUserAll();
+        //получаем бизнесы для смены статуса
+        $business_data = $obj->getBusinesDateDisable();
+
+        //HTML::x($business_data, true);
         $curent_date = date('Y-m-d');
 
         foreach ($data as $rows) {
@@ -316,12 +320,12 @@ class Controller_Pages_Ajax extends Controller {
                 $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'Подключение бизнеса', $message);
             }
 
-            if ($curent_date >= $rows['date_end']) {
-                //меняем статус бизнеса в базе
-                $obj->disableBusines($rows['id']);
-            }
-
         }
+
+        if (!empty($business_data)) {
+            $obj->disableBusines($business_data);
+        }
+
     }
 
 

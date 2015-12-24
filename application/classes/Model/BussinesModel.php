@@ -1176,12 +1176,31 @@ class Model_BussinesModel extends Model_BaseModel {
      * todo отключить бизнес по id
      */
     public function disableBusines($id_business){
-        $sub_update = DB::update('business')
-            ->set(array('status' => 0))
-            ->where('id', '=', $id_business)
-            ->execute();
+
+        if (is_array($id_business)) {
+            $sub_update = DB::update('business')
+                ->set(array('status' => 0))
+                ->where('id', 'IN', $id_business)
+                ->execute();
+        } else {
+            $sub_update = DB::update('business')
+                ->set(array('status' => 0))
+                ->where('id', '=', $id_business)
+                ->execute();
+        }
     }
 
+    /**
+     * @return mixed
+     * todo получить бизнесы для отключения с прострочеными датами
+     */
+    public function getBusinesDateDisable (){
+         return DB::select('id')
+            ->from('business')
+            ->where('status', '=', 1)
+            ->and_where(DB::expr('DATE(NOW())'), '>=', DB::expr('business.date_end'))
+            ->execute()->as_array();
+    }
 
     /**
      * @param $data
