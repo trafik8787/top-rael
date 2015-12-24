@@ -307,8 +307,6 @@ class Controller_Pages_Ajax extends Controller {
             }
 
             if ($curent_date == $rows['date_end']) {
-                //меняем статус бизнеса в базе
-                $obj->disableBusines($rows['id']);
                 $message = 'Ваш бизнес <a href="http://'.$_SERVER['SERVER_NAME'].'/business/'.$rows['url'].'">'.$rows['name'].'</a> отключен';
                 $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'Отключение бизнеса', $message);
             }
@@ -317,6 +315,12 @@ class Controller_Pages_Ajax extends Controller {
                 $message = 'Ваш бизнес <a href="http://'.$_SERVER['SERVER_NAME'].'/business/'.$rows['url'].'">'.$rows['name'].'</a> подключен.';
                 $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'Подключение бизнеса', $message);
             }
+
+            if ($curent_date >= $rows['date_end']) {
+                //меняем статус бизнеса в базе
+                $obj->disableBusines($rows['id']);
+            }
+
         }
     }
 
