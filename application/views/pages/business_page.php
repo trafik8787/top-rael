@@ -165,8 +165,8 @@
 
                         <div class="profile-link">
                             <?if(!empty($data['BusWebsite'])):?>
-                                <?$web_url = parse_url($data['BusWebsite'])?>
-                                <a target="_blank" href="<?=$data['BusWebsite']?>">http://<?=$web_url['host']?></a>
+                                <?$web_url = URL::parse_link($data['BusWebsite'])?>
+                                <a target="_blank" href="<?=$web_url['link']?>"><?=$web_url['text']?></a>
                             <?endif?>
                         </div>
 
