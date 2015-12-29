@@ -92,6 +92,9 @@ class Controller_ModalCoupon extends Controller {
 
         $data = Model::factory('CouponsModel')->getCouponsId(null, $this->request->param('url_coupon'));
 
+        if (empty($data)) {
+            throw new HTTP_Exception_404;
+        }
 
         if (!empty($favoritcoup)) {
             $favoritcoup = json_decode($favoritcoup);

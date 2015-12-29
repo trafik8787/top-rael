@@ -60,6 +60,8 @@ class Model_CouponsModel extends Model_BaseModel {
                 $query->where('coup.url', '=', $coupon_url);
             }
 
+            $query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'));
+
             $result = $query->cached()->execute()->as_array();
             return $result;
 
@@ -95,11 +97,11 @@ class Model_CouponsModel extends Model_BaseModel {
                     ->join(array('category', 'cat'))
                     ->on('coup.id_section', '=', 'cat.id')
 
-                    ->where_open()
+
                     ->where('cat.url', '=', $url_section)
                     ->and_where('coup.city', '=', $id_city)
-                    ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
-                    ->where_close()
+                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
 
                     ->limit($limit)
                     ->offset($ofset)
@@ -117,11 +119,10 @@ class Model_CouponsModel extends Model_BaseModel {
                     ->join(array('category', 'cat'))
                     ->on('coup.id_section', '=', 'cat.id')
 
-                    ->where_open()
                     ->where('cat.url', '=', $url_section)
                     ->and_where('coup.city', '=', $id_city)
                     ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
-                    ->where_close()
+                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
 
                     ->order_by('coup.id', 'DESC')
                     ->cached()
@@ -144,6 +145,7 @@ class Model_CouponsModel extends Model_BaseModel {
                     ->limit($limit)
                     ->offset($ofset)
                     ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
                     ->order_by('coup.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
@@ -159,6 +161,7 @@ class Model_CouponsModel extends Model_BaseModel {
 
                     ->where('cat.url', '=', $url_section)
                     ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
                     ->order_by('coup.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
@@ -176,6 +179,7 @@ class Model_CouponsModel extends Model_BaseModel {
                     ->limit($limit)
                     ->offset($ofset)
                     ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
                     ->order_by('coup.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
@@ -188,6 +192,7 @@ class Model_CouponsModel extends Model_BaseModel {
                     ->limit($limit)
                     ->offset($ofset)
                     ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
                     ->order_by('coup.id', 'DESC')
                     ->cached()
                     ->execute()->as_array();
@@ -332,11 +337,11 @@ class Model_CouponsModel extends Model_BaseModel {
                 ->join(array('tags', 'tag'))
                 ->on('tag.id', '=', 'tagrelcoup.id_tags')
 
-                ->where_open()
                 ->where('tag.url_tags', '=', $url_tags)
                 ->and_where('cat.url', '=', $url_section)
                 ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
-                ->where_close()
+                ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
+
 
                 ->order_by('coup.id', 'DESC')
                 ->cached()
@@ -354,6 +359,7 @@ class Model_CouponsModel extends Model_BaseModel {
                 ->on('tag.id', '=', 'tagrelcoup.id_tags')
                 ->where('tag.url_tags', '=', $url_tags)
                 ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+                ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
                 ->order_by('coup.id', 'DESC')
                 ->cached()
                 ->execute()->as_array();
@@ -462,6 +468,7 @@ class Model_CouponsModel extends Model_BaseModel {
             ->join('business')
             ->on('coupon.business_id', '=', 'business.id')
             ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coupon.datestart AND coupon.dateoff'))
+            ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
             ->order_by('coupon.id', 'DESC')
             ->limit($limit)
             ->cached(10000)
