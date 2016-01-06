@@ -30,7 +30,8 @@
                     <div class="page-context">
                         <p>
                             <i>
-                                Заполните и отправьте форму связи и наши сотрудники ответят вам как можно скорее
+                                Заполните и отправьте форму связи и наши сотрудники ответят вам как можно скорее <br>
+                                или звоните нам 03-5604505
                             </i>
                         </p>
                     </div>
@@ -82,11 +83,11 @@
                     </div>
 
                     <div class="form-group  clearfix">
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <label>Ваше сообщение:</label>
                         </div>
-                        <div class="col-md-7">
-                            <textarea class="form-control input-lg" name="desc" cols="3" rows="4"></textarea>
+                        <div class="col-md-8">
+                            <textarea class="form-control input-lg" name="desc" cols="3" rows="7"></textarea>
                         </div>
                     </div>
                     <div class="form-group  clearfix">

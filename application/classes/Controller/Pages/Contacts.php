@@ -18,6 +18,23 @@ class Controller_Pages_Contacts extends Controller_BaseController {
             if (Captcha::valid($_POST['captcha'])) {
                 $result = Model::factory('BaseModel')->addContacts($_POST);
 
+
+                $html_mail = 'Имя: '.$_POST['fullname'].'<br>'.
+                    'Страна: '.$_POST['city'].'<br>'.
+                    'Email: '.$_POST['email'].'<br>'.
+                    'Телефон: '.$_POST['tel'].'<br>'.
+                    'Сообщение: '.$_POST['desc'];
+
+                $m = Email::factory();
+                $m->From("TopIsrael;contact@topisrael.ru"); // от кого отправляется почта
+                $m->To('leon@topisrael.ru'); // кому адресованно
+                $m->Cc('boris@briker.biz');
+                $m->Subject('Контактная форма');
+                $m->Body($html_mail, "html");
+                $m->Priority(3);
+                $m->Send();
+
+
                 if ($result === true) {
                     $this->redirect('/contacts?susses=true');
                 } else {
