@@ -700,7 +700,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('id_section', 'select', '', '', '', array('category', 'name','id', array('parent_id','=','0')));
         $crud->set_field_type('id_category', 'select', $recurs_cat, '', '', '');
         $crud->set_field_type('bussines_id', 'select', '', 'multiple', '', array('business', 'name','id'));
-        $crud->set_field_type('coupon', 'select', '', 'multiple', '', array('coupon', 'name','id'));
+        $crud->set_field_type('coupon', 'select', '', 'multiple', '', array('coupon', '{name} - {secondname}','id', array(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('datestart AND dateoff'))));
 
         $crud->set_field_type('tags', 'checkbox', '', 'multiple', '', array('tags', 'name_tags','id'));
         $crud->set_one_to_many('tags_relation_articles', 'tags', 'id_tags', 'id_articles');

@@ -227,8 +227,7 @@
                                                                     <div class="coupon-object-top">
 
                                                                         <div class="coupon-title">
-                                                                            Купон
-                                                                            <small class="block"><?=$rows_coupons[1]['name']?></small>
+                                                                            <?=$rows_coupons[1]['name']?>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -237,7 +236,6 @@
 
                                                                         <div class="coupon-title">
                                                                             <?=$rows_coupons[1]['secondname']?>
-                                                                            <span class="block">скидка</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -265,9 +263,6 @@
 
 
                     <?endif?>
-
-<!--                    <p><i><strong>--><?//=$data['ArticBigPreviev']?><!--</strong></i></p>-->
-
 
 
 

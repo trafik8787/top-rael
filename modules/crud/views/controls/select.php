@@ -57,9 +57,11 @@
                     <div class="entry input-group">
                         <select <?=$attr?> data-placeholder="Выбрать" class="form-control chosen-select" style="height: 20px;" <?=$multiselect?> name="<?=$name_fied?>[]" id="">
                             <option value=""></option>
-                            <?foreach ($value_fild as $val => $row):?>
-                                <option value="<?=$val?>"><?=$row?></option>
-                            <?endforeach?>
+                            <?if (!empty($value_fild)):?>
+                                <?foreach ($value_fild as $val => $row):?>
+                                    <option value="<?=$val?>"><?=$row?></option>
+                                <?endforeach?>
+                            <?endif?>
                         </select>
                     </div>
                 <?endif?>
