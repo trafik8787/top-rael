@@ -221,6 +221,14 @@ abstract class Controller_BaseController extends Controller_Template {
         return $content;
     }
 
+
+    public function google_adssens (){
+        $content = View::factory('blocks_includ/google_adssens');
+
+        return $content;
+    }
+
+
     private function tags (){
         return Model::factory('TagsModel')->getAllTags();
     }
