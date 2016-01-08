@@ -8,13 +8,11 @@
 
 ?>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 336x280 -->
+<!-- 300x600 -->
 <ins class="adsbygoogle"
-     style="display:inline-block;width:336px;height:280px"
+     style="display:inline-block;width:300px;height:600px"
      data-ad-client="ca-pub-6089615049498543"
-     data-ad-slot="1122206117"></ins>
+     data-ad-slot="2598939313"></ins>
 <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-
-
