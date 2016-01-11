@@ -152,6 +152,13 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+Route::set('GroupBookings', 'group_bookings')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'GroupBookings',
+        'action'     => 'index',
+    ));
+
 Route::set('Jornal', 'jornal')
     ->defaults(array(
         'directory' => 'Pages',
