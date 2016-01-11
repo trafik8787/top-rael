@@ -26,10 +26,10 @@ class Controller_Pages_Contacts extends Controller_BaseController {
                     'Сообщение: '.$_POST['desc'];
 
                 $m = Email::factory();
-                $m->From("TopIsrael;contact@topisrael.ru"); // от кого отправляется почта
+                $m->From("TopIsrael;".$_POST['email']); // от кого отправляется почта
                 $m->To('leon@topisrael.ru'); // кому адресованно
                 $m->Cc('boris@briker.biz');
-                $m->Subject('Контактная форма');
+                $m->Subject('Письмо от пользователя TopIsrael');
                 $m->Body($html_mail, "html");
                 $m->Priority(3);
                 $m->Send();

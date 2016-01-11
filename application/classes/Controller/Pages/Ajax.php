@@ -29,7 +29,7 @@ class Controller_Pages_Ajax extends Controller {
             $m->Subject('Подтверждение подписки');
             $m->Body($html_mail, "html");
             $m->Priority(3);
-            $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/1.png", "", "image/png");
+            $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new.png", "", "image/png");
             $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
             //$m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/3.jpg", "", "image/jpeg");
             $m->Send();
@@ -241,7 +241,7 @@ class Controller_Pages_Ajax extends Controller {
                         $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_business/thumbs/' . basename($bus['home_busines_foto']), "", "");
                     }
 
-                    $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/1.png", "", "image/png");
+                    $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/images/logo-new.png", "", "image/png");
                     $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/2.png", "", "image/png");
                     $m->Send();
 
@@ -369,7 +369,7 @@ class Controller_Pages_Ajax extends Controller {
         $m->Subject($subject);
         $m->Body($html_mail, "html");
         $m->Priority(3);
-        $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/1.png", "", "image/png");
+        $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new.png", "", "image/png");
         $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
         $m->Send();
     }

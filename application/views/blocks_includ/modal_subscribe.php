@@ -22,7 +22,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         class="lnr lnr-cross"></span></button>
 
-                <a href="#" class="icons logo md">TopIsrael</a>
+                <a href="#" class="icons w-logo md">TopIsrael</a>
             </div>
 
             <div class="modal-body">

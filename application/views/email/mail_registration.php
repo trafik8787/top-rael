@@ -38,7 +38,7 @@
                                                         <tr>
                                                             <td>
                                                                 <a href="http://<?=$_SERVER['HTTP_HOST']?>/" target="_blank" style="display: block;">
-                                                                    <img src="cid:1.png" width="250" height="54" alt="logo"
+                                                                    <img src="cid:logo-new.png" width="250" height="54" alt="logo"
                                                                          style="width:100%; height:auto;"/>
                                                                 </a>
                                                             </td>

@@ -14496,12 +14496,53 @@ footer {
   .modal.modal-coupon .coupon.coupon-modal .coupon-body .coupon-image,
   .modal.modal-coupon .coupon.coupon-modal .coupon-body .coupon-image img {
     position: static;
+    width: 100%;
     -moz-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
     -webkit-transform: translate(0, 0);
     transform: translate(0, 0);
   }
+
+  .modal.modal-coupon .coupon.coupon-modal .coupon-body .w-logo {
+    width: 100%;
+    height: 75px;
+    background-position: 50%;
+  }
+
+  .modal.modal-subscribe .modal-content .w-logo {
+    width: 100%;
+    height: 75px;
+    background-position: 50%;
+  }
+
+
+  .modal.modal-subscribe .gift-container > div {
+    font-size: 28px;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .modal.modal-subscribe .modal-content .modal-body p i {
+    font-size: 20px;
+  }
+
 }
+
+
+.modal.modal-subscribe .modal-content .w-logo {
+  width: 100%;
+  height: 75px;
+}
+
+
+.modal.modal-coupon .coupon.coupon-modal .coupon-body .w-logo {
+  width: 100%;
+  height: 75px;
+}
+
+
+
+
 /* line 295, ../.sass/modal.scss */
 .modal.modal-coupon .coupon .div-table {
   font-size: 14px;

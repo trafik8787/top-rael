@@ -479,7 +479,7 @@ class Controller_Pages_Account extends Controller_BaseController {
         $m->Subject('Регистрация на topisrael.ru');
         $m->Body($html_mail, "html");
         $m->Priority(3);
-        $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/1.png", "", "image/png");
+        $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new.png", "", "image/png");
         $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
         //$m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/3.jpg", "", "image/jpeg");
         $m->Send();
