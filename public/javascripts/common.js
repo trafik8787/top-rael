@@ -19,7 +19,9 @@ function verticalGallery() {
         var gallery = $('.bx-slider .layers', this).bxSlider({
             mode: 'vertical',
             responsive: true,
-            minSlides: minSlides,
+           // minSlides: minSlides,
+            minSlides: 2,
+            maxSlides: 2,
             pager: false,
             controls: false,
             slideMargin: 20

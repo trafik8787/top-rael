@@ -34,7 +34,7 @@
                         <div class="media-body">
                             <h2 class="media-heading"><a href="/article/<?=$rows_articles['url']?>"><strong><?=$rows_articles['name']?></strong></a></h2>
 
-                            <p><?=$rows_articles['short_previev']?></p>
+                            <p class="hidden-xs"><?=$rows_articles['short_previev']?></p>
 
 
 <!--                            <p> --><?//=Text::limit_chars(strip_tags($rows_articles['content']), 180, null, true)?><!--</p>-->
@@ -162,8 +162,8 @@
                             <div class="panel-heading">
 
                                 <a class="menu-toggle" role="button" data-toggle="collapse"
-                                   href="#restaurants-thumbnails-navigation"
-                                   aria-controls="restaurants-thumbnails-navigation">
+                                   href="#<?=$rowsdata['category'][0]['url']?>-thumbnails-navigation"
+                                   aria-controls="<?=$rowsdata['category'][0]['url']?>-thumbnails-navigation">
                                     <i class="fa fa-bars"></i>
                                 </a>
 
@@ -181,7 +181,7 @@
                                     <a href="/maps?section=<?=$rowsdata['category'][0]['url']?>" class="btn btn-default" role="button">На карте</a>
                                 </div>
 
-                                <div class="collapse" id="restaurants-thumbnails-navigation">
+                                <div class="collapse" id="<?=$rowsdata['category'][0]['url']?>-thumbnails-navigation">
 
                                     <ul class="nav nav-pills panel-navigation w-category-bloc">
                                         <li class="active"><a href="/section/<?=$rowsdata['category'][0]['url']?>" data-section="<?=$rowsdata['category'][0]['url']?>" class="w-home-cat w-cat-active">Новые</a></li>

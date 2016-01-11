@@ -31,6 +31,25 @@
 
             <a href="/" class="icons logo w-logo">TopIsrael</a>
 
+
+            <div class="w-search-mobile visible-xs-block">
+
+                <form class="search" action="http://topisrael.ru/search" id="cse-search-box">
+                    <div class="inner-addon right-addon">
+                        <!--                                    <i class="glyphicon glyphicon-search"></i>-->
+                        <button class="glyphicon glyphicon-search w-search-button" name="sa" value="&#x041f;&#x043e;&#x0438;&#x0441;&#x043a;" type="submit"></button>
+                        <input type="hidden" name="cx" value="partner-pub-6089615049498543:4215273310" />
+                        <input type="hidden" name="cof" value="FORID:10" />
+                        <input type="hidden" name="ie" value="UTF-8" />
+                        <input type="text" class="form-control" name="q" size="100" />
+                        <!--                                    <input class="glyphicon glyphicon-search" type="submit" name="sa" value="&#x041f;&#x043e;&#x0438;&#x0441;&#x043a;" />-->
+                    </div>
+                </form>
+
+                <script type="text/javascript" src="http://www.google.co.il/coop/cse/brand?form=cse-search-box&amp;lang=ru"></script>
+            </div>
+
+
             <div class="collapse" id="nav-header">
                 <?if (isset($user)):?>
 
@@ -110,7 +129,7 @@
 
 
 
-                        <div class="w-search">
+                        <div class="w-search hidden-xs">
 
                             <form class="search" action="http://topisrael.ru/search" id="cse-search-box">
                                 <div class="inner-addon right-addon">

@@ -10674,10 +10674,10 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
   /* line 17, ../.sass/icons.scss */
-  .icons {
-    background-image: url("../images/logo-new.png");
-    background-size: 250px;
-  }
+  /*.icons {*/
+    /*background-image: url("../images/logo-new.png");*/
+    /*background-size: 250px;*/
+  /*}*/
 }
 /* line 24, ../.sass/icons.scss */
 .icons.plane {
@@ -11031,7 +11031,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 }
 /* line 48, ../.sass/panel.scss */
 .panel .panel-heading .panel-title + .panel-buttons-group, .panel .panel-heading .panel-title + .panel-links {
-  margin-left: 50px;
+  /*margin-left: 50px;*/
   float: left;
 }
 /* line 54, ../.sass/panel.scss */
@@ -11804,6 +11804,10 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   background: inherit;
 }
 
+.w-search-mobile {
+  margin-top: 15px;
+}
+
 .w-search {
   width: 26%;
   display: inline-block;
@@ -11819,6 +11823,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   .w-search .search {
     padding-top: 15px;
   }
+
 }
 /* line 759, ../.sass/panel.scss */
 .w-search .form-control {
@@ -11949,6 +11954,17 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
     right: 12px;
     top: 12px;
   }
+
+  #header #header-top {
+    position: relative!important;
+    top: 188px!important;
+  }
+
+  #header #header-bottom {
+    position: relative!important;
+    top: -188px!important;
+  }
+
 }
 @media (min-width: 768px) {
   /* line 71, ../.sass/header.scss */
@@ -14253,8 +14269,9 @@ footer {
 @media (max-width: 768px) {
   /* line 75, ../.sass/modal.scss */
   .modal.modal-subscribe .modal-body {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 100%;
   }
 }
 /* line 85, ../.sass/modal.scss */
