@@ -238,6 +238,7 @@ class Model_CouponsModel extends Model_BaseModel {
                 ->from('coupon')
                 ->join('city', 'LEFT')
                 ->on('coupon.city', '=', 'city.id')
+                ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coupon.datestart AND coupon.dateoff'))
                 ->cached()
                 ->execute()->as_array();
         } else {
@@ -249,6 +250,7 @@ class Model_CouponsModel extends Model_BaseModel {
                 ->join('city')
                 ->on('coupon.city', '=', 'city.id')
                 ->where('category.url', '=', $arrSection)
+                ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coupon.datestart AND coupon.dateoff'))
                 ->cached()
                 ->execute()->as_array();
 

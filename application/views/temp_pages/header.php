@@ -138,7 +138,7 @@
                                     <input type="hidden" name="cx" value="partner-pub-6089615049498543:4215273310" />
                                     <input type="hidden" name="cof" value="FORID:10" />
                                     <input type="hidden" name="ie" value="UTF-8" />
-                                    <input type="text" class="form-control" name="q" size="100" />
+                                    <input type="text" placeholder="Поиск" class="form-control" name="q" size="100" />
 <!--                                    <input class="glyphicon glyphicon-search" type="submit" name="sa" value="&#x041f;&#x043e;&#x0438;&#x0441;&#x043a;" />-->
                                 </div>
                             </form>
