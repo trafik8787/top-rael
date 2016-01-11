@@ -83,7 +83,7 @@
                             <div class="coupon coupon-small">
 
                                 <?if (!empty($rows_coupon['coupon_favorit']))://если купон добавлен в избранное?>
-                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Купон уже в Избранном" class="pin" style="background-color: #ccc">
                                         <i class="fa fa-thumb-tack"></i>
                                     </a>
                                 <?else:?>
@@ -203,7 +203,7 @@
                                         <div class="thumbnail">
 
                                             <?if (!empty($rows['bussines_favorit']))://если бизнес добавлен в избранное?>
-                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Место уже в Избранном" class="pin" style="background-color: #ccc">
                                                     <i class="fa fa-star"></i>
                                                 </a>
                                             <?else:?>
