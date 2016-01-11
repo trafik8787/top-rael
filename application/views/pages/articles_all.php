@@ -41,7 +41,7 @@
 
                             <div class="collapse" id="nav-review">
                                 <ul class="nav nav-pills panel-navigation" role="tablist">
-                                    <li role="presentation" class="<? if (Controller_BaseController::$detect_uri == URL::site('articles').$pagesUrl) { echo 'active'; }?>"><a href="/articles" >Новые</a></li>
+                                    <li role="presentation" class="<? if (Controller_BaseController::$detect_uri == URL::site('articles').$pagesUrl) { echo 'active'; }?>"><a href="/articles" >Всё</a></li>
                                     <?foreach($category as $row_category):?>
 
                                         <li role="presentation" class="<? if (Controller_BaseController::$detect_uri == '/articles/'.$row_category['url'].$pagesUrl) { echo 'active'; }?>"><a href="/articles/<?=$row_category['url']?>" ><?=$row_category['name']?></a></li>

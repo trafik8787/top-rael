@@ -38,6 +38,10 @@ you can use the generic selector below, but it's slower:
   -webkit-font-smoothing: antialiased;
 }
 
+body {
+  line-height: 1!important;
+}
+
 /* line 41, ../.sass/elegant-icons.scss */
 .arrow_up:before {
   content: "\21";
@@ -3784,17 +3788,17 @@ h6 .small, .h6 small,
 
 /* line 47, c:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_type.scss */
 h1, .h1 {
-  font-size: 36px;
+  font-size: 32px;
 }
 
 /* line 48, c:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_type.scss */
 h2, .h2 {
-  font-size: 30px;
+  font-size: 26px;
 }
 
 /* line 49, c:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_type.scss */
 h3, .h3 {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 /* line 50, c:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_type.scss */
@@ -3814,7 +3818,7 @@ h6, .h6 {
 
 /* line 58, c:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_type.scss */
 p {
-  margin: 0 0 10px;
+  margin: 0 0 15px;
 }
 
 /* line 62, c:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_type.scss */
@@ -11028,6 +11032,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   font-size: 30px;
   line-height: 1.25;
   float: left;
+  margin-right: 15px;
 }
 /* line 48, ../.sass/panel.scss */
 .panel .panel-heading .panel-title + .panel-buttons-group, .panel .panel-heading .panel-title + .panel-links {
@@ -11097,10 +11102,19 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 }
 /* line 106, ../.sass/panel.scss */
 .panel .panel-heading .panel-links {
-  font-size: 14px;
+  font-size: 15px;
   color: #dedede;
-  padding: 8.5px 0;
+  padding: 12.5px 0 0 0;
 }
+
+.w-add-bussines-favor:hover {
+  background-color: #E44F44;
+}
+
+.w-add-coupon-favor:hover {
+  background-color: #E44F44;
+}
+
 /* line 113, ../.sass/panel.scss */
 .panel .panel-body {
   margin-bottom: 20px;
@@ -12608,13 +12622,18 @@ footer {
 /* line 35, ../.sass/top.scss */
 .top .top-image .top-image-text {
   width: 50%;
-  padding: 15px;
+  padding: 0px 15px 11px 15px;
   background: rgba(0, 0, 0, 0.5);
   position: absolute;
   left: 0;
   bottom: 0;
   color: #fff;
 }
+
+.top .top-image .top-image-text h2 {
+  margin-top: 11px;
+}
+
 /* line 49, ../.sass/top.scss */
 .top .top-image .top-image-text a {
   color: #fff;
@@ -12629,6 +12648,10 @@ footer {
   .top .top-image .top-image-text {
     position: inherit;
     width: 100%;
+
+    padding-top: 2px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 @media (max-width: 1024px) {

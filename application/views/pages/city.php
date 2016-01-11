@@ -40,7 +40,7 @@
                                     <div class="collapse" id="restaurants-thumbnails-navigation">
 
                                         <ul class="nav nav-pills panel-navigation w-category-bloc">
-                                            <li class="active"><a href="/section/<?=$rowsdata['category'][0]['url']?>" data-section="<?=$rowsdata['category'][0]['url']?>" class="w-home-cat w-cat-active">Новые</a></li>
+                                            <li class="active"><a href="/section/<?=$rowsdata['category'][0]['url']?>" data-section="<?=$rowsdata['category'][0]['url']?>" class="w-home-cat w-cat-active">Всё</a></li>
 
                                             <?foreach($rowsdata['category'][0]['childs'] as $row_category):?>
                                                 <li><a href="/section/<?=$rowsdata['category'][0]['url'].'/'.$row_category['url']?>" data-cat="<?=$row_category['url']?>" class="w-home-cat"><?=$row_category['name']?></a></li>
@@ -59,11 +59,11 @@
                                             <div class="thumbnail">
 
                                                 <?if (!empty($rows['bussines_favorit']))://если купон добавлен в избранное?>
-                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                                        <i class="fa fa-star"></i>
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">
+                                                        <i class="fa fa-star" style="color: #E44F44"></i>
                                                     </a>
                                                 <?else:?>
-                                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows['id']?>" class="pin w-add-bussines-favor">
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows['id']?>" title="Добавить в Личный кабинет" class="pin w-add-bussines-favor">
                                                         <i class="fa fa-star"></i>
                                                     </a>
                                                 <?endif?>

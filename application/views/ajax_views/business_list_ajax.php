@@ -14,11 +14,11 @@
             <div class="thumbnail">
 
                 <?if (!empty($rows[0]['bussines_favorit']))://если бизнес добавлен в избранное?>
-                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                        <i class="fa fa-star"></i>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">
+                        <i class="fa fa-star" style="color: #E44F44"></i>
                     </a>
                 <?else:?>
-                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows[0]['id']?>" class="pin w-add-bussines-favor">
+                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows[0]['id']?>" title="Добавить в Личный кабинет" class="pin w-add-bussines-favor">
                         <i class="fa fa-star"></i>
                     </a>
                 <?endif?>
@@ -47,11 +47,11 @@
                 <div class="thumbnail">
 
                     <?if (!empty($rows[1]['bussines_favorit']))://если бизнес добавлен в избранное?>
-                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                            <i class="fa fa-star"></i>
+                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">
+                            <i class="fa fa-star" style="color: #E44F44"></i>
                         </a>
                     <?else:?>
-                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows[1]['id']?>" class="pin w-add-bussines-favor">
+                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows[1]['id']?>" title="Добавить в Личный кабинет" class="pin w-add-bussines-favor">
                             <i class="fa fa-star"></i>
                         </a>
                     <?endif?>
@@ -81,11 +81,11 @@
                 <div class="thumbnail">
 
                     <?if (!empty($rows[2]['bussines_favorit']))://если бизнес добавлен в избранное?>
-                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                            <i class="fa fa-star"></i>
+                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">
+                            <i class="fa fa-star" style="color: #E44F44"></i>
                         </a>
                     <?else:?>
-                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows[2]['id']?>" class="pin w-add-bussines-favor">
+                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows[2]['id']?>" title="Добавить в Личный кабинет" class="pin w-add-bussines-favor">
                             <i class="fa fa-star"></i>
                         </a>
                     <?endif?>

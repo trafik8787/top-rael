@@ -14,11 +14,11 @@
         <div class="coupon coupon-small">
 
             <?if (!empty($rows_coupon['coupon_favorit']))://если купон добавлен в избранное?>
-                <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                    <i class="fa fa-thumb-tack"></i>
+                <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin">
+                    <i class="fa fa-thumb-tack" style="color: #E44F44"></i>
                 </a>
             <?else:?>
-                <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupon['id']?>" class="pin w-add-coupon-favor">
+                <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupon['id']?>" title="Добавить в Личный кабинет" class="pin w-add-coupon-favor">
                     <i class="fa fa-thumb-tack"></i>
                 </a>
             <?endif?>

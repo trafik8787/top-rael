@@ -59,11 +59,11 @@
                                             <div class="thumbnail">
 
                                                 <?if (!empty($rows_busines[0]['bussines_favorit']))://если купон добавлен в избранное?>
-                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                                        <i class="fa fa-star"></i>
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">
+                                                        <i class="fa fa-star" style="color: #E44F44"></i>
                                                     </a>
                                                 <?else:?>
-                                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_busines[0]['BusId']?>" class="pin w-add-bussines-favor">
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_busines[0]['BusId']?>" title="Добавить в Личный кабинет" class="pin w-add-bussines-favor">
                                                         <i class="fa fa-star"></i>
                                                     </a>
                                                 <?endif?>
@@ -88,11 +88,11 @@
                                                 <div class="thumbnail">
 
                                                     <?if (!empty($rows_busines[1]['bussines_favorit']))://если купон добавлен в избранное?>
-                                                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                                            <i class="fa fa-star"></i>
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">
+                                                            <i class="fa fa-star" style="color: #E44F44"></i>
                                                         </a>
                                                     <?else:?>
-                                                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_busines[1]['BusId']?>" class="pin w-add-bussines-favor">
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_busines[1]['BusId']?>" title="Добавить в Личный кабинет" class="pin w-add-bussines-favor">
                                                             <i class="fa fa-star"></i>
                                                         </a>
                                                     <?endif?>
@@ -140,11 +140,11 @@
                                             <div class="coupon coupon-big">
 
                                                 <?if (!empty($rows_coupons[0]['coupon_favorit']))://если купон добавлен в избранное?>
-                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                                        <i class="fa fa-thumb-tack"></i>
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin">
+                                                        <i class="fa fa-thumb-tack" style="color: #E44F44"></i>
                                                     </a>
                                                 <?else:?>
-                                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons[0]['id']?>" class="pin w-add-coupon-favor">
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons[0]['id']?>" title="Добавить в Личный кабинет" class="pin w-add-coupon-favor">
                                                         <i class="fa fa-thumb-tack"></i>
                                                     </a>
                                                 <?endif?>
@@ -199,11 +199,11 @@
                                                 <div class="coupon coupon-big">
 
                                                     <?if (!empty($rows_coupons[1]['coupon_favorit']))://если купон добавлен в избранное?>
-                                                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin" style="background-color: #ccc">
-                                                            <i class="fa fa-thumb-tack"></i>
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin">
+                                                            <i class="fa fa-thumb-tack" style="color: #E44F44"></i>
                                                         </a>
                                                     <?else:?>
-                                                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons[1]['id']?>" class="pin w-add-coupon-favor">
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons[1]['id']?>" title="Добавить в Личный кабинет" class="pin w-add-coupon-favor">
                                                             <i class="fa fa-thumb-tack"></i>
                                                         </a>
                                                     <?endif?>
@@ -270,7 +270,7 @@
                     <hr/>
 
                     <div class="recomendation">
-                        <strong>Рекомендуйте нас друзьям</strong>
+                        <strong>Порекомендуйте прочитать этот обзор другим</strong>
                         <br/>
 
                         <div class="recomendation-icons">

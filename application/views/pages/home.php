@@ -83,11 +83,11 @@
                             <div class="coupon coupon-small">
 
                                 <?if (!empty($rows_coupon['coupon_favorit']))://если купон добавлен в избранное?>
-                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Купон уже в Избранном" class="pin" style="background-color: #ccc">
-                                        <i class="fa fa-thumb-tack"></i>
+                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Купон уже в Избранном" class="pin">
+                                        <i class="fa fa-thumb-tack" style="color: #E44F44"></i>
                                     </a>
                                 <?else:?>
-                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupon['id']?>" class="pin w-add-coupon-favor">
+                                    <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupon['id']?>" title="Добавить в Личный кабинет" class="pin w-add-coupon-favor">
                                         <i class="fa fa-thumb-tack"></i>
                                     </a>
                                 <?endif?>
@@ -203,11 +203,11 @@
                                         <div class="thumbnail">
 
                                             <?if (!empty($rows['bussines_favorit']))://если бизнес добавлен в избранное?>
-                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Место уже в Избранном" class="pin" style="background-color: #ccc">
-                                                    <i class="fa fa-star"></i>
+                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Место уже в Избранном" class="pin">
+                                                    <i class="fa fa-star" style="color: #E44F44"></i>
                                                 </a>
                                             <?else:?>
-                                                <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows['id']?>" class="pin w-add-bussines-favor">
+                                                <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows['id']?>" title="Добавить в Личный кабинет" class="pin w-add-bussines-favor">
                                                     <i class="fa fa-star"></i>
                                                 </a>
                                             <?endif?>
