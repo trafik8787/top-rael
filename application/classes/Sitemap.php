@@ -196,4 +196,15 @@ final class Sitemap {
         $xmlbase->saveXML($_SERVER['DOCUMENT_ROOT']."/sitemap.xml");
     }
 
+
+    /**
+     * @return mixed
+     */
+    public static function pageGeterateMap(){
+
+        return Model::factory('CategoryModel')->recurs_catalog();
+
+    }
+
+
 }

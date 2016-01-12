@@ -7,9 +7,11 @@
  */
 class Controller_Pages_Sitemap extends Controller_BaseController {
 
-	public function action_index()
-	{
+	public function action_index(){
+
         $content = View::factory('pages/sitemap');
+
+        $content->category = Sitemap::pageGeterateMap();
 
         $content->bloc_right = parent::RightBloc(array(
             $this->lotarey(),

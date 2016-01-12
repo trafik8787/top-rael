@@ -175,7 +175,7 @@ Route::set('Search', 'search')
     ));
 
 //карта сайта
-Route::set('Sitemap', 'sitemap')
+Route::set('Sitemap', 'map')
     ->defaults(array(
         'directory' => 'Pages',
         'controller' => 'Sitemap',
