@@ -66,6 +66,7 @@
 <!--                                    <li><a href="/partners">Наши партнеры</a></li>-->
 <!--                                    <li><a href="/informers">Информеры</a></li>-->
                                     <li><a href="/rss">RSS лента</a></li>
+                                    <li><a href="/map">Карта сайта</a></li>
                                 </ul>
                                 <br/>
                                 <ul>

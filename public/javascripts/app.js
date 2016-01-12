@@ -581,9 +581,12 @@ $(document).ready(function(){
             }
         });
 
-        $(this).css('color', '#003c4c');
-        $(this).html('<i class="fa fa-star"></i> В избранном');
+        var pin =  $(this).find('.pin');
         $(this).removeClass('w-add-article-favor');
+        $(this).find('.w-text-artic-page').text('В избранном');
+        pin.attr('data-original-title', 'Обзор добавлен в Избранное').tooltip('show');
+        pin.find('i').css('color', '#E44F44');
+        $('[data-toggle="tooltip"]').tooltip();
 
         return false;
 

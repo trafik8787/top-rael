@@ -30,6 +30,7 @@
                     mode: 'vertical',
                     responsive: true,
                     minSlides: minSlides,
+                    maxSlides: 4,
                     pager: false,
                     controls: false,
                     slideMargin: 20

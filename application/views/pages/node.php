@@ -20,6 +20,25 @@
 
                     <img src="<?=$data['ArticImg']?>" width="800" height="600" class="img-responsive" alt="<?=$data['ArticName']?>"/>
 
+                    <p style="margin-top: 5px">
+
+                        <?if (!empty($data['articles_favorit'])):?>
+                            <a href="#" class="pin-aria">
+                            <span class="pin" data-toggle="tooltip" data-placement="right" title="Этот обзор уже добавлен в Избранное">
+                                <i class="fa fa-star" style="color: #E44F44"></i>
+                            </span><span class="w-text-bus-page">В избранном</span>
+                            </a>
+                        <?else:?>
+                            <a href="#" class="pin-aria w-add-article-favor" data-id="<?=$data['ArticId']?>">
+                            <span class="pin" data-toggle="tooltip" data-placement="right">
+                                <i class="fa fa-star"></i>
+                            </span><span class="w-text-artic-page">Добавить в избраные места</span>
+                            </a>
+                        <?endif?>
+
+
+                    </p>
+
                     <h1><?=$data['ArticName']?></h1>
 
 <!--                    <p><i><strong>--><?//=$data['ArticSecondname']?><!--</strong></i></p>-->
@@ -304,17 +323,7 @@
                             </a>
 
                         </div>
-                        <?if (!empty($data['articles_favorit'])):?>
-                            <a href="#" class="btn btn-link" style="color: #003c4c;">
-                                <i class="fa fa-star"></i>
-                                В избранном
-                            </a>
-                        <?else:?>
-                            <a href="#" data-id="<?=$data['ArticId']?>"  class="btn btn-link w-add-article-favor">
-                                <i class="fa fa-star"></i>
-                                Добавить в Избранные места
-                            </a>
-                        <?endif?>
+
                     </div>
 
 
