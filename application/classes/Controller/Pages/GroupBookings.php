@@ -30,7 +30,7 @@ class Controller_Pages_GroupBookings extends Controller_BaseController {
                     'Сообщение: '.$_POST['desc'];
 
                 $m = Email::factory();
-                $m->From("TopIsrael;contact@topisrael.ru"); // от кого отправляется почта
+                $m->From($_POST['fullname'].";".$_POST['email']); // от кого отправляется почта
                 $m->To('leon@topisrael.ru'); // кому адресованно
                 $m->Cc('boris@briker.biz');
                 $m->Subject('Групповой заказ TopIsrael.ru');
@@ -41,13 +41,15 @@ class Controller_Pages_GroupBookings extends Controller_BaseController {
 
                 if ($result === true) {
                     $this->redirect('/group_bookings?susses=true');
-                } else {
-                    HTML::x($result);
                 }
             } else {
                 $this->redirect('/group_bookings?err_cap='.base64_encode('Неверно введен проверочный код'));
             }
         }
+
+        $this->SeoShowPage(array('Групповые заказы на отдых, развлечения и покупки в Израиле', ''),
+            array('Эксклюзивные скидки для группы, на отдых и развлечения в Израиле. Более 500 мест.',''),
+            array('Эксклюзивные скидки для группы, на отдых и развлечения в Израиле. Более 500 мест.', ''));
 
 
         $this->template->content = $content;
