@@ -597,10 +597,12 @@ class Model_BussinesModel extends Model_BaseModel {
 
         if ($arrChild != null) {
             $query_data->where('businesscategory.category_id', 'IN', $arrChild);
+            $query_data->and_where('business.city', '<>', 0);
         }
 
         if ($adm === false) {
             $query_data->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'));
+            $query_data->and_where('business.city', '<>', 0);
             $query_data->and_where('business.status', '=', 1);
         }
 
@@ -639,6 +641,7 @@ class Model_BussinesModel extends Model_BaseModel {
             ->where_open()
                 ->where('category.url', '=', $url_category)
                 ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
+                ->and_where('business.city', '<>', 0)
                 ->and_where('business.status', '=', 1)
             ->where_close()
             ->cached()

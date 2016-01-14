@@ -19,7 +19,7 @@
             <div class="panel-heading">
 
                 <div class="col-md-8 col-sm-6">
-                    <span class="icons logo white">TopIsrael</span>
+                    <span class="w-logo-footer"></span>
                 </div>
                 <div class="col-md-4">
                     <form class="form-inline">

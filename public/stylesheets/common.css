@@ -10666,8 +10666,18 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 /* line 4, ../.sass/icons.scss */
 .icons {
   display: inline-block;
-  background: url("../images/icons.png") no-repeat;
+  background: url("../images/logo-futer.png") no-repeat;
   text-indent: -9999px;
+}
+
+.w-logo-footer {
+  display: inline-block;
+  background: url("../images/logo-futer.png");
+  background-repeat: no-repeat;
+  background-size: 231px;
+  width: 237px;
+  height: 64px;
+  margin-bottom: 10px;
 }
 
 .w-logo {
