@@ -10680,6 +10680,24 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   margin-bottom: 10px;
 }
 
+
+.w-convert-contact {
+  display: inline-block;
+  background: url("../images/icons.png") no-repeat;
+  text-indent: -9999px;
+  width: 146px;
+  height: 144px;
+  background-position: 100% 0;
+}
+
+
+.w-convert-contact.plane {
+  margin-bottom: -20px;
+  position: relative;
+  bottom: 27px;
+  float: right;
+}
+
 .w-logo {
   text-indent: -9999px;
   background: url("../images/logo-new.png") no-repeat;

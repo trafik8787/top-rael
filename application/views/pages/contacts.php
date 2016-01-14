@@ -22,7 +22,7 @@
 
             <div class="page-heading">
 
-                <span class="icons plane hidden-xs"></span>
+                <span class="w-convert-contact plane hidden-xs"></span>
 
                 <div>
                     <div class="page-title">Свяжитесь с нами</div>
