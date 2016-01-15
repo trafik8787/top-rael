@@ -366,7 +366,7 @@ $(document).ready(function(){
                     //console.log(value);
 
                     if (value.bussines_favorit != undefined) {
-                        bus_icon = '<a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">'+
+                        bus_icon = '<a href="#" data-toggle="tooltip" data-placement="left" title="Добавлено в ваш Личный кабинет" class="pin">'+
                         '<i class="fa fa-star" style="color: #E44F44"></i></a>';
                     } else {
                         bus_icon = '<a href="#" data-toggle="tooltip" data-placement="left" data-id="'+value.id+'" title="Добавить в Личный кабинет" class="pin w-add-bussines-favor">'+
@@ -436,7 +436,7 @@ $(document).ready(function(){
                     //console.log(value);
 
                     if (value.bussines_favorit != undefined) {
-                        bus_icon = '<a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">'+
+                        bus_icon = '<a href="#" data-toggle="tooltip" data-placement="left" title="Добавлено в ваш Личный кабинет" class="pin">'+
                         '<i class="fa fa-star" style="color: #E44F44"></i></a>';
                     } else {
                         bus_icon = '<a href="#" data-toggle="tooltip" data-placement="left" data-id="'+value.id+'" title="Добавить в Личный кабинет" class="pin w-add-bussines-favor">'+
@@ -632,7 +632,7 @@ $(document).ready(function(){
 
         $(this).removeClass('w-add-bussines-favor');
         $(this).find('i').css('color', '#E44F44');
-        $(this).attr('data-original-title', 'Бизнес добавлен в Избранное').tooltip('show');
+        $(this).attr('data-original-title', 'Добавлено в ваш Личный кабинет').tooltip('show');
         $('[data-toggle="tooltip"]').tooltip();
 
         return false;
@@ -658,7 +658,7 @@ $(document).ready(function(){
         var pin =  $(this).find('.pin');
         $(this).removeClass('w-add-bussines-page-favor');
         $(this).find('.w-text-bus-page').text('В избранном');
-        pin.attr('data-original-title', 'Бизнес добавлен в Избранное').tooltip('show');
+        pin.attr('data-original-title', 'Добавлено в ваш Личный кабинет').tooltip('show');
         pin.find('i').css('color', '#E44F44');
         $('[data-toggle="tooltip"]').tooltip();
 

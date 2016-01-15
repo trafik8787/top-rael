@@ -38,9 +38,6 @@ you can use the generic selector below, but it's slower:
   -webkit-font-smoothing: antialiased;
 }
 
-body {
-  line-height: 1!important;
-}
 
 /* line 41, ../.sass/elegant-icons.scss */
 .arrow_up:before {

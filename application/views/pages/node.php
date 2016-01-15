@@ -32,7 +32,7 @@
                             <a href="#" class="pin-aria w-add-article-favor" data-id="<?=$data['ArticId']?>">
                             <span class="pin" data-toggle="tooltip" data-placement="right">
                                 <i class="fa fa-star"></i>
-                            </span><span class="w-text-artic-page">Добавить в избраные места</span>
+                            </span><span class="w-text-artic-page">Добавить в Избранное</span>
                             </a>
                         <?endif?>
 
@@ -78,7 +78,7 @@
                                             <div class="thumbnail">
 
                                                 <?if (!empty($rows_busines[0]['bussines_favorit']))://если купон добавлен в избранное?>
-                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">
+                                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Добавлено в ваш Личный кабинет" class="pin">
                                                         <i class="fa fa-star" style="color: #E44F44"></i>
                                                     </a>
                                                 <?else:?>
@@ -107,7 +107,7 @@
                                                 <div class="thumbnail">
 
                                                     <?if (!empty($rows_busines[1]['bussines_favorit']))://если купон добавлен в избранное?>
-                                                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">
+                                                        <a href="#" data-toggle="tooltip" data-placement="left" title="Добавлено в ваш Личный кабинет" class="pin">
                                                             <i class="fa fa-star" style="color: #E44F44"></i>
                                                         </a>
                                                     <?else:?>

@@ -231,7 +231,7 @@
 
                         <?if (!empty($data['bussines_favorit']))://если купон добавлен в избранное?>
                             <a href="#" class="pin-aria">
-                            <span class="pin" data-toggle="tooltip" data-placement="right" title="Этот бизнес уже добавлен в Избранное">
+                            <span class="pin" data-toggle="tooltip" data-placement="right" title="Добавлено в ваш Личный кабинет">
                                 <i class="fa fa-star" style="color: #E44F44"></i>
                             </span><span class="w-text-bus-page">В избранном</span>
                             </a>
@@ -498,7 +498,7 @@
                         <div class="thumbnail">
 
                             <?if (!empty($rows_related['bussines_favorit']))://если купон добавлен в избранное?>
-                                <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Добавлено в ваш Личный кабинет" class="pin">
                                     <i class="fa fa-star" style="color: #E44F44"></i>
                                 </a>
                             <?else:?>

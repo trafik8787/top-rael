@@ -14,7 +14,7 @@
             <div class="thumbnail">
 
                 <?if (!empty($rows[0]['bussines_favorit']))://если бизнес добавлен в избранное?>
-                    <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Добавлено в ваш Личный кабинет" class="pin">
                         <i class="fa fa-star" style="color: #E44F44"></i>
                     </a>
                 <?else:?>
@@ -47,7 +47,7 @@
                 <div class="thumbnail">
 
                     <?if (!empty($rows[1]['bussines_favorit']))://если бизнес добавлен в избранное?>
-                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">
+                        <a href="#" data-toggle="tooltip" data-placement="left" title="Добавлено в ваш Личный кабинет" class="pin">
                             <i class="fa fa-star" style="color: #E44F44"></i>
                         </a>
                     <?else:?>
@@ -81,7 +81,7 @@
                 <div class="thumbnail">
 
                     <?if (!empty($rows[2]['bussines_favorit']))://если бизнес добавлен в избранное?>
-                        <a href="#" data-toggle="tooltip" data-placement="left" title="Этот бизнес уже добавлен в Избранное" class="pin">
+                        <a href="#" data-toggle="tooltip" data-placement="left" title="Добавлено в ваш Личный кабинет" class="pin">
                             <i class="fa fa-star" style="color: #E44F44"></i>
                         </a>
                     <?else:?>

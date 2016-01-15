@@ -229,7 +229,7 @@ class Model_CouponsModel extends Model_BaseModel {
     /**
      * @param null $arrSection
      * @return array
-     * todo Получить города раздела бизнесов
+     * todo Получить города
      */
     public function getCityCouponInSection($arrSection = null){
 
@@ -239,6 +239,7 @@ class Model_CouponsModel extends Model_BaseModel {
                 ->join('city', 'LEFT')
                 ->on('coupon.city', '=', 'city.id')
                 ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coupon.datestart AND coupon.dateoff'))
+                ->and_where('coupon.city', '<>', 0)
                 ->cached()
                 ->execute()->as_array();
         } else {
@@ -251,6 +252,7 @@ class Model_CouponsModel extends Model_BaseModel {
                 ->on('coupon.city', '=', 'city.id')
                 ->where('category.url', '=', $arrSection)
                 ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coupon.datestart AND coupon.dateoff'))
+                ->and_where('coupon.city', '<>', 0)
                 ->cached()
                 ->execute()->as_array();
 
