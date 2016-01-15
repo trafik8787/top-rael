@@ -338,15 +338,19 @@ class Controller_Pages_Account extends Controller_BaseController {
                 $session->set('forgotmail', $this->request->post('email')); // и почту записываем
 
 
+                $html_mail = View::factory('email/mail_forgot');
+
                 // отправляем ссылку с хэшем для сброса пароля
-                $message = 'Для сброса пароля пройдите по ссылке - <a href="http://'.$_SERVER['SERVER_NAME'].'/account/forgot?change='.$hash.'">СБРОСИТЬ</a>';
+                $html_mail->message = '<strong><a href="http://'.$_SERVER['SERVER_NAME'].'/account/forgot?change='.$hash.'">Нажмите на эту ссылку, чтобы получить новый пароль</a></strong>';
 
                 $m = Email::factory();
-                $m->From("TopIsrael;send@topisrael.ru"); // от кого отправляется почта
+                $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
                 $m->To($this->request->post('email')); // кому адресованно
-                $m->Subject(Kohana::message('account', 'email.themes.passworReset'));
-                $m->Body($message, "html");
+                $m->Subject('Изменение пароля в Личном кабинете Topisrael');
+                $m->Body($html_mail, "html");
                 $m->Priority(3);
+                $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new.png", "", "image/png");
+                $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
                 $m->Send();
             }
         }
@@ -472,11 +476,13 @@ class Controller_Pages_Account extends Controller_BaseController {
     private function SendMailRegistration($email){
 
         $html_mail = View::factory('email/mail_registration');
+        $html_mail->email = $email;
+
 
         $m = Email::factory();
-        $m->From("TopIsrael;send@topisrael.ru"); // от кого отправляется почта
+        $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
         $m->To($email); // кому адресованно
-        $m->Subject('Регистрация на topisrael.ru');
+        $m->Subject('Регистрация на Topisrael - ваши новые возможности планировать отдых и развлечения в Израиле');
         $m->Body($html_mail, "html");
         $m->Priority(3);
         $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new.png", "", "image/png");

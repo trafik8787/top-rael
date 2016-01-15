@@ -13,9 +13,9 @@ return array(
     'email'    =>    array(
         'from'    =>    'robot@---.ru',
         'themes'    =>    array(
-            'registration'    =>    'Регистрация на top.ru',
-            'passwordReset'    =>    'Восстановление пароля на top.ru',
-            'newPassword'    =>    'Ваш новый пароль на top.ru',
+            'registration'    =>    'Регистрация на Topisrael',
+            'passwordReset'    =>    'Изменение пароля в Личном кабинете Topisrael',
+            'newPassword'    =>    'Ваш новый пароль на Topisrael',
         ),
     ),
 );

@@ -21,12 +21,13 @@ class Controller_Pages_Ajax extends Controller {
             Session::instance()->set('uniqid', uniqid());
 
             $html_mail = View::factory('email/mail_subskribe_enable');
-            $html_mail->message = '<a href="http://'.$_SERVER['HTTP_HOST'].'/susses_subscribe?qid='.Session::instance()->get('uniqid').'&email='.$this->request->post('email').'">Подтвердить подписку</a>';
+            $html_mail->email = $this->request->post('email');
+            $html_mail->message = '<strong><a href="http://'.$_SERVER['HTTP_HOST'].'/susses_subscribe?qid='.Session::instance()->get('uniqid').'&email='.$this->request->post('email').'">Нажмите на эту ссылку, чтобы подтвердить и получать рассылку</a></strong>';
 
             $m = Email::factory();
-            $m->From("TopIsrael;send@topisrael.ru"); // от кого отправляется почта
+            $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
             $m->To($this->request->post('email')); // кому адресованно
-            $m->Subject('Подтверждение подписки');
+            $m->Subject('Подтвердите подписку на рассылку новинок Topisrae');
             $m->Body($html_mail, "html");
             $m->Priority(3);
             $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new.png", "", "image/png");
@@ -339,13 +340,17 @@ class Controller_Pages_Ajax extends Controller {
 
         if ($lotery !== false) {
 
-            $message = 'Победитель лотареи';
+            $html_mail = View::factory('email/mail_lotery');
+            $html_mail->email = $lotery['email'];
+
             $m = Email::factory();
-            $m->From("TopIsrael;send@topisrael.ru"); // от кого отправляется почта
+            $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
             $m->To($lotery['email']); // кому адресованно
-            $m->Subject('Победитель лотареи');
-            $m->Body($message, "html");
+            $m->Subject('Поздравляем Вас! Вы выиграли в Лотерее Topisrael');
+            $m->Body($html_mail, "html");
             $m->Priority(3);
+            $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new.png", "", "image/png");
+            $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
             $m->Send();
         }
     }
