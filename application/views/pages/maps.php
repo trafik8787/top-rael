@@ -10,6 +10,8 @@
      window.dataMapsBus = <?=$json?>;
      window.busLng = <?=isset($lng) ? $lng : 0?>;
      window.busLat = <?=isset($lat) ? $lat : 0?>;
+     window.busId = <?=isset($id) ? $id : 0?>;
+     window.mapx = <?=isset($mapx) ? $mapx : 0?>;
 
      window.cityName = <?=isset($cityName) ? $cityName: 0?>;
 </script>

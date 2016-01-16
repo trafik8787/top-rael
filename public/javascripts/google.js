@@ -17,7 +17,7 @@ function initMap() {
     var zoom = 8;
 
     function favoritesClick() {
-        console.log(arguments);
+        //console.log(arguments);
     }
 
 
@@ -38,14 +38,23 @@ function initMap() {
 
     markers = setMarkes(getData(), cluster);
 
-    // todo открывает окно описание маркера если перешли с карточки бизнеса
-    if (window.busLng != 0 || window.busLat != 0) {
-         tmpl.open(map, markers[0]);
-    }
 
     cluster.addMarkers(markers);
 
     for (var i = 0; i < markers.length; i++) {
+
+        // todo открывает окно описание маркера если перешли с карточки бизнеса
+        if (window.busId != 0) {
+            if (markers[i].data.id == window.busId && markers[i].data.mapx == window.mapx) {
+                tmpl.open(map, markers[i]);
+            }
+
+            if (markers[i].data.id == window.busId && window.mapx == 0) {
+                tmpl.open(map, markers[i]);
+            }
+        }
+
+
         google.maps.event.addListener(markers[i], 'click', function () {
             tmpl.open(map, this);
         });
@@ -148,7 +157,7 @@ function initMap() {
     }
 
     function setMarkes(data) {
-        console.log(data);
+
         var $markers = [];
 
         for (var i = 0; i < data.length; i++) {

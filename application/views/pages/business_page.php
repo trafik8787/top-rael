@@ -74,8 +74,12 @@
             return gallery;
         }
 
+        var hrefmap = $('.w-link-maps').attr('href');
 
         $('.tabs__caption').on('click', 'a:not(.active)', function() {
+
+            $('.w-link-maps').attr('href', hrefmap+'&mapx='+$(this).data('item'));
+
             $(this)
                 .addClass('active').siblings().removeClass('active')
                 .closest('.tabs').find('.tabs__content').removeClass('active').eq($(this).index()).addClass('active');
@@ -189,12 +193,12 @@
 
                         <span class="tabs">
                             <p class="tabs__caption">
-                                <a href="#" class="active"><?=$data['BusCity']?></a>
+                                <a href="#" data-item="<?=$data['BusMapsX']?>" class="active"><?=$data['BusCity']?></a>
                                 <?if (!empty($data['BusDopAddress'])):?>
                                     <?foreach ($data['BusDopAddress'] as $key => $dop_adress_city):?>
                                         <?if ($dop_adress_city['name'] != ''):?>
                                             &nbsp; &nbsp; | &nbsp; &nbsp;
-                                            <a href="#"><?=$dop_adress_city['name']?></a>
+                                            <a href="#" data-item="<?=$dop_adress_city['maps_x']?>"><?=$dop_adress_city['name']?></a>
                                         <?endif?>
                                     <?endforeach?>
                                 <?endif?>
@@ -246,7 +250,7 @@
 
                     <div class="profile-sidebar">
 
-                        <a href="/maps?id=<?=$data['BusId']?>" class="pin-aria">
+                        <a href="/maps?id=<?=$data['BusId']?>" class="pin-aria w-link-maps">
                             <span class="pin"><i class="fa fa-map-marker"></i></span>Посмотреть на карте
                         </a>
                     </div>

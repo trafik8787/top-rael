@@ -11,6 +11,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
 	{
         $data = array();
         $id = null;
+        $mapx = null;
         $url_category = null;
         $url_section = null;
         $content = View::factory('pages/maps');
@@ -22,6 +23,10 @@ class Controller_Pages_Maps extends Controller_BaseController {
 
         if (!empty($_GET['id'])) {
             $id = $_GET['id'];
+        }
+
+        if (!empty($_GET['mapx'])) {
+            $mapx = $_GET['mapx'];
         }
 
         if (!empty($_GET['cat'])) {
@@ -51,17 +56,16 @@ class Controller_Pages_Maps extends Controller_BaseController {
 
         }
 
-        $result = Model::factory('BussinesModel')->getBusinessAll_Maps($id, $url_category, $url_section);
+        $result = Model::factory('BussinesModel')->getBusinessAll_Maps($url_category, $url_section);
 
+
+//        HTML::x($result);
 
         $content->section = parent::$general_meny;
 
         if ($id != null) {
-
-            if (!empty($result[0]['BusMapsX']) and !empty($result[0]['BusMapsX'])) {
-                $content->lat = $result[0]['BusMapsX'];
-                $content->lng = $result[0]['BusMapsY'];
-            }
+            $content->id = $id;
+            $content->mapx = $mapx;
 
         }
 
@@ -76,11 +80,18 @@ class Controller_Pages_Maps extends Controller_BaseController {
 
         foreach ($result as $row) {
 
+            if ($id != null) {
+                if ($row['BusId'] == $id) {
+                    $content->lat = $row['BusMapsX'];
+                    $content->lng = $row['BusMapsY'];
+                }
+            }
 
             $data[] = array(
                 'id' => $row['BusId'],
                 'title' => $row['BusName'],
                 'logo' => $row['BusLogo'],
+                'mapx' => $row['BusMapsX'],
                 'section' => array(
                     'id' => $row['CatArr'][0]['CatId'],
                     'name' => $row['CatArr'][0]['CatName'],
@@ -115,7 +126,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
                 'coupon' => !empty($row['CoupArr']) ? 1 : 0
             );
 
-            if (!empty($row['BusDopAddress'])) {
+            if (!empty($row['BusDopAddress']) and $row['BusDopAddress'][0]['address'] != '') {
 
                 foreach ($row['BusDopAddress'] as $rows_dop) {
 
@@ -123,6 +134,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
                         'id' => $row['BusId'],
                         'title' => $row['BusName'],
                         'logo' => $row['BusLogo'],
+                        'mapx' => $rows_dop['maps_x'],
                         'section' => array(
                             'id' => $row['CatArr'][0]['CatId'],
                             'name' => $row['CatArr'][0]['CatName'],
@@ -164,6 +176,7 @@ class Controller_Pages_Maps extends Controller_BaseController {
 
         }
 
+        rsort($data);
 
         $content->json = json_encode($data);
         $this->template->content = $content;
