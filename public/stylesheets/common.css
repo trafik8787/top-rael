@@ -14554,7 +14554,7 @@ footer {
   .modal.modal-coupon .coupon.coupon-modal .coupon-body .w-logo {
     width: 100%;
     height: 75px;
-    background-position: 50%;
+    background-position: 50%!important;
   }
 
   .modal.modal-subscribe .modal-content .w-logo {
@@ -14586,6 +14586,7 @@ footer {
 .modal.modal-coupon .coupon.coupon-modal .coupon-body .w-logo {
   width: 100%;
   height: 75px;
+  background-position: 10px 0;
 }
 
 
