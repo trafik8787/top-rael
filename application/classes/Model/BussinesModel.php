@@ -1078,11 +1078,11 @@ class Model_BussinesModel extends Model_BaseModel {
                             if ($row_category['id'] == $row['CatParentId']) {
                                 $row['CatUrl'] = $row_category['url'];
                                 $row['CatName'] = $row_category['name'];
-                                $row['CatIcon'] = $row_category['icons_maps'];
+                                //$row['CatIcon'] = $row_category['icons_maps'];
                             }
                         }
 
-                        $end_result['CatArr'][] = array('CatId' => $row['CatParentId'], 'CatName' => $row['CatName'], 'CatUrl' => $row['CatUrl'], 'CatIcon' => $row['CatIcon']);
+                        $end_result['CatArr'][] = array('CatId' => $row['CatParentId'], 'CatName' => $row['CatName'], 'CatUrl' => $row['CatUrl']);
                     }
 
 
