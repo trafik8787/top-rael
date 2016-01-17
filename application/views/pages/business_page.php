@@ -17,11 +17,20 @@
     $(document).ready(function(){
         var gallery = verticalGallery();
 
+        console.log($(window).width());
+
+
+
         function verticalGallery() {
             var gallery = [];
             $('.bx-gallery').each(function (i) {
 
                 var minSlides = 4;
+
+                if ($(window).width() < 768) {
+                    minSlides = 2;
+                }
+
                 var bxImageBlock = $('.bx-image', this);
                 var bxImage = $('.layer img', bxImageBlock);
                 var bxCaption = $('.bx-caption', bxImageBlock);
@@ -30,7 +39,6 @@
                     mode: 'vertical',
                     responsive: true,
                     minSlides: minSlides,
-                    maxSlides: 4,
                     pager: false,
                     controls: false,
                     slideMargin: 20

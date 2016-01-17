@@ -23,7 +23,7 @@
         </div>
     </div>
 <?else:?>
-    <div class="discount">
+    <div class="discount" style="text-align: center;">
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- 970x90 -->
         <ins class="adsbygoogle"
