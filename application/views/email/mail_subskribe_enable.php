@@ -76,7 +76,7 @@
                                     <table cellpadding="0" cellspacing="0" align="left">
                                         <tr>
                                             <td>
-                                                <span style="font-size:24px;">Подтвердите подписку на рассылку новинок Topisrae</span>
+                                                <span style="font-size:24px;">Подтвердите подписку на рассылку новинок Topisrael</span>
                                             </td>
                                         </tr>
                                     </table>

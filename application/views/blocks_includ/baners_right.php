@@ -20,4 +20,16 @@
             <?endforeach?>
         </div>
     </div>
+<?else:?>
+    <div class="discount">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 336x280 -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:336px;height:280px"
+             data-ad-client="ca-pub-6089615049498543"
+             data-ad-slot="1122206117"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 <?endif?>
