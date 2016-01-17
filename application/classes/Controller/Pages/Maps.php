@@ -130,44 +130,47 @@ class Controller_Pages_Maps extends Controller_BaseController {
 
                 foreach ($row['BusDopAddress'] as $rows_dop) {
 
-                    $data[] = array(
-                        'id' => $row['BusId'],
-                        'title' => $row['BusName'],
-                        'logo' => $row['BusLogo'],
-                        'mapx' => $rows_dop['maps_x'],
-                        'section' => array(
-                            'id' => $row['CatArr'][0]['CatId'],
-                            'name' => $row['CatArr'][0]['CatName'],
-                            'icon' => '/public/images/map-markers/new_marcer2.png',
-                            'visible' => true
-                        ),
-                        'list' => array(
-                            array(
-                                'key' => "",
-                                'value' => isset($rows_dop['dop_sheduler']) ? $rows_dop['dop_sheduler'] : ''
+                    if ($rows_dop['maps_x'] != '' and $rows_dop['maps_y'] != '') {
+
+                        $data[] = array(
+                            'id' => $row['BusId'],
+                            'title' => $row['BusName'],
+                            'logo' => $row['BusLogo'],
+                            'mapx' => $rows_dop['maps_x'],
+                            'section' => array(
+                                'id' => $row['CatArr'][0]['CatId'],
+                                'name' => $row['CatArr'][0]['CatName'],
+                                'icon' => '/public/images/map-markers/new_marcer2.png',
+                                'visible' => true
                             ),
-                            array(
-                                'key' => "Адрес",
-                                'value' => isset($rows_dop['address']) ? $rows_dop['address'] : ''
+                            'list' => array(
+                                array(
+                                    'key' => "",
+                                    'value' => isset($rows_dop['dop_sheduler']) ? $rows_dop['dop_sheduler'] : ''
+                                ),
+                                array(
+                                    'key' => "Адрес",
+                                    'value' => isset($rows_dop['address']) ? $rows_dop['address'] : ''
+                                ),
+                                array(
+                                    'key' => "Тел",
+                                    'value' => isset($rows_dop['tel_dop_adress']) ? $rows_dop['tel_dop_adress'] : ''
+                                )
                             ),
-                            array(
-                                'key' => "Тел",
-                                'value' => isset($rows_dop['tel_dop_adress']) ? $rows_dop['tel_dop_adress'] : ''
-                            )
-                        ),
-                        'link' => "/business/".$row['BusUrl'],
-                        'linkCoupons' => "http://google.com",
-                        'favoritBus' => isset($row['bussines_favorit']) ? $row['bussines_favorit'] : 0,
-                        'linkLuxury' => array(
-                            'name' => $row['TagsName'],
-                            'link' => $row['TagsUrl']
-                        ),
-                        'location' => array(
-                            'lat' => $rows_dop['maps_x'],
-                            'lng' => $rows_dop['maps_y']
-                        ),
-                        'coupon' => !empty($row['CoupArr']) ? 1 : 0
-                    );
+                            'link' => "/business/" . $row['BusUrl'],
+                            'linkCoupons' => "http://google.com",
+                            'favoritBus' => isset($row['bussines_favorit']) ? $row['bussines_favorit'] : 0,
+                            'linkLuxury' => array(
+                                'name' => $row['TagsName'],
+                                'link' => $row['TagsUrl']
+                            ),
+                            'location' => array(
+                                'lat' => $rows_dop['maps_x'],
+                                'lng' => $rows_dop['maps_y']
+                            ),
+                            'coupon' => !empty($row['CoupArr']) ? 1 : 0
+                        );
+                    }
 
                 }
 

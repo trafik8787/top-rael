@@ -338,12 +338,6 @@ Route::set('Maps', 'maps')
         'action'     => 'index',
     ));
 
-Route::set('ArhivLotarey', 'arhivlotarey')
-    ->defaults(array(
-        'directory' => 'Pages',
-        'controller' => 'ArhivLotarey',
-        'action'     => 'index',
-    ));
 
 Route::set('About', 'about')
     ->defaults(array(

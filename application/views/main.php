@@ -35,7 +35,8 @@
     <?endif?>
 <!--    <link rel="shortcut icon" href="../../public/img/favicon.ico" type="image/x-icon">-->
     <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="windows-1251"></script>
-
+    <link href="../../favicon.ico" type="image/x-icon" rel="shortcut icon" />
+    <link href="../../iconmob.png" rel="apple-touch-icon" />
 </head>
 <body>
 <?=$header;?>

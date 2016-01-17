@@ -59,6 +59,23 @@
                     <p><?=$data['ArticContent']?></p>
 
                     <?if (!empty($data['BusArr'])):?>
+
+                        <hr/>
+
+                        <?if (!empty($data['articles_favorit'])):?>
+                            <a href="#" class="pin-aria">
+                            <span class="pin" data-toggle="tooltip" data-placement="right" title="Этот обзор уже добавлен в Избранное">
+                                <i class="fa fa-star" style="color: #E44F44"></i>
+                            </span><span class="w-text-bus-page">В избранном</span>
+                            </a>
+                        <?else:?>
+                            <a href="#" class="pin-aria w-add-article-favor" data-id="<?=$data['ArticId']?>">
+                            <span class="pin" data-toggle="tooltip" data-placement="right">
+                                <i class="fa fa-star"></i>
+                            </span><span class="w-text-artic-page">Добавить в Избранное</span>
+                            </a>
+                        <?endif?>
+
                         <hr/>
 
 

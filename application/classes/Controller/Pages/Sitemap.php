@@ -13,6 +13,11 @@ class Controller_Pages_Sitemap extends Controller_BaseController {
 
         $content->category = Sitemap::pageGeterateMap();
 
+         $this->SeoShowPage(array('Карта сайта Topisrael', ''),
+                array('Карта сайта Topisrael', ''),
+                array('Карта сайта Topisrael', ''));
+
+
         $content->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
