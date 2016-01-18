@@ -7,7 +7,7 @@
  */
 ?>
 <?if (!empty($data)):?>
-    <div class="discount">
+    <div class="discount w-bloc-right">
         <div class="owl-carousel">
             <?foreach ($data as $rows):?>
                 <?if ($rows['website'] == ''):?>
@@ -21,13 +21,14 @@
         </div>
     </div>
 <?else:?>
-    <div class="discount">
+    <div class="discount w-bloc-right">
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- 336x280 -->
+        <!-- Адаптивный -->
         <ins class="adsbygoogle"
-             style="display:inline-block;width:336px;height:280px"
+             style="display:block"
              data-ad-client="ca-pub-6089615049498543"
-             data-ad-slot="1122206117"></ins>
+             data-ad-slot="5552405714"
+             data-ad-format="auto"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>

@@ -7,7 +7,7 @@
  */
 ?>
 
-<div class="sidebar-socials">
+<div class="sidebar-socials w-bloc-right">
 
     <div class="sidebar-socials-heading">
         <ul>

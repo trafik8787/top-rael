@@ -289,7 +289,7 @@ abstract class Controller_BaseController extends Controller_Template {
 
     public function blocCity (){
         $content = View::factory('blocks_includ/bloc_city');
-
+        $content->data = Model::factory('BussinesModel')->getCityListBlocRight();
         return $content;
     }
 

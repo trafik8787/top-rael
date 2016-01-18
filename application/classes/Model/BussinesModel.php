@@ -1321,4 +1321,36 @@ class Model_BussinesModel extends Model_BaseModel {
             ->execute()->as_array();
     }
 
+
+    /**
+     * @param int $limit
+     * @return array
+     * todo получаем список городов для блока с права по заполнености
+     */
+    public function getCityListBlocRight($limit = 10){
+
+        $query = DB::select(array(DB::expr('COUNT(city.id)'), 'total'),
+            array('city.id', 'cityId'),
+            array('city.name', 'cityName'),
+            array('city.url', 'cityUrl')
+        )
+            ->from('city')
+            ->join('business')
+            ->on('city.id', '=', 'business.city')
+            ->where('city.url', '<>', '')
+            ->group_by('city.id')
+            ->order_by('total', 'DESC')
+            ->cached()
+            ->execute()->as_array();
+
+        if (count($query) > $limit) {
+            $general = array_slice($query, 0, $limit);
+        } else {
+            $general = $query;
+        }
+
+        return array('general' => $general, 'all' => $query);
+
+    }
+
 }
