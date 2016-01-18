@@ -11,6 +11,7 @@ class Controller_Pages_ArhivLotery extends Controller_BaseController {
     public function action_index()
     {
         $content = View::factory('pages/arhiv_lotery');
+        $content->data_user = Model::factory('LotareyModel')->getUserLotarey();
 
         $content->bloc_right = parent::RightBloc(array(
             $this->lotarey(),

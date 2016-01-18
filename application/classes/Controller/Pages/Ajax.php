@@ -341,11 +341,13 @@ class Controller_Pages_Ajax extends Controller {
         if ($lotery !== false) {
 
             $html_mail = View::factory('email/mail_lotery');
-            $html_mail->email = $lotery['email'];
+            $html_mail->email = $lotery['user']['email'];
+            $html_mail->name = $lotery['lotery']['name'];
+
 
             $m = Email::factory();
             $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
-            $m->To($lotery['email']); // кому адресованно
+            $m->To($lotery['user']['email']); // кому адресованно
             $m->Subject('Поздравляем Вас! Вы выиграли в Лотерее Topisrael');
             $m->Body($html_mail, "html");
             $m->Priority(3);

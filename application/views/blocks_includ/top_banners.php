@@ -25,11 +25,12 @@
 <?else:?>
     <div class="discount" style="text-align: center;">
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- 970x90 -->
+        <!-- Адаптивный -->
         <ins class="adsbygoogle"
-             style="display:inline-block;width:970px;height:90px"
+             style="display:block"
              data-ad-client="ca-pub-6089615049498543"
-             data-ad-slot="4075672515"></ins>
+             data-ad-slot="5552405714"
+             data-ad-format="auto"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>

@@ -100,7 +100,7 @@
 
                         <p>Ваш маил <?=$email?> выиграл в лотерее TopIsrael.ru!</p>
 
-                        <p><strong style="color: #004FD1; font-size:24px;">Приз - <?=$name?></strong></p>\
+                        <p><strong style="color: #004FD1; font-size:24px;">Приз - <?=$name?></strong></p>
 
                         <p>--------------------------</p>
 

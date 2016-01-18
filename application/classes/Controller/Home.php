@@ -40,6 +40,8 @@ class Controller_Home extends Controller_BaseController {
         //HTML::x(json_decode(Cookie::get('coup-41')));
        // die(phpinfo());
 
+        HTML::x(Model::factory('LotareyModel')->getUserLotarey());
+
 
         $resultArr = array();
         $content = View::factory('pages/home');

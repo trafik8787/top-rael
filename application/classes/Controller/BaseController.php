@@ -213,8 +213,10 @@ abstract class Controller_BaseController extends Controller_Template {
     public function lotarey(){
         $content = View::factory('blocks_includ/lotareya');
         $data = Model::factory('LotareyModel')->getLotareya();
+
         if (!empty($data)) {
             $content->data = $data[0];
+            $content->data_user = Model::factory('LotareyModel')->getUserLotarey(4);
         } else {
             $content->data = array();
         }
@@ -284,5 +286,11 @@ abstract class Controller_BaseController extends Controller_Template {
 
     }
 
+
+    public function blocCity (){
+        $content = View::factory('blocks_includ/bloc_city');
+
+        return $content;
+    }
 
 }

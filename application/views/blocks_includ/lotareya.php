@@ -111,77 +111,52 @@
                 </div>
             </div>
 
-<!--            <div class="sidebar-tabs">-->
-<!---->
-<!--                <div class="sidebar-tabs-heading">-->
-<!--                    <div class="sidebar-tabs-title">Победители</div>-->
-<!--                </div>-->
-<!---->
-<!--                <div class="sidebar-tabs-body">-->
-<!--                    <div class="media">-->
-<!--                        <div class="media-left media-middle">-->
-<!--                            <a href="#" >-->
-<!--                                <img src="/public/uploade/no_avatar.jpg" width="43" height="43"-->
-<!--                                     class="media-object img-circle"/>-->
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                        <div class="media-body">-->
-<!--                            <strong>Александр Жуков</strong><br/>-->
-<!--                            11.6.15 - 500ш в ресторан<br/>-->
-<!--                            <a href="#">"Круглый стол"</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!---->
-<!--                    <div class="media">-->
-<!--                        <div class="media-left media-middle">-->
-<!--                            <a href="#" >-->
-<!--                                <img src="/public/uploade/no_avatar.jpg" width="43" height="43"-->
-<!--                                     class="media-object img-circle"/>-->
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                        <div class="media-body">-->
-<!--                            <strong>Александр Жуков</strong><br/>-->
-<!--                            11.6.15 - 500ш в ресторан<br/>-->
-<!--                            <a href="#">"Круглый стол"</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!---->
-<!--                    <div class="media">-->
-<!---->
-<!--                        <div class="media-left media-middle">-->
-<!--                            <a href="#" >-->
-<!--                                <img src="/public/uploade/no_avatar.jpg" width="43" height="43"-->
-<!--                                     class="media-object img-circle"/>-->
-<!--                            </a>-->
-<!--                        </div>-->
-<!---->
-<!--                        <div class="media-body">-->
-<!--                            <strong>Александр Жуков</strong><br/>-->
-<!--                            11.6.15 - 500ш в ресторан<br/>-->
-<!--                            <a href="#">"Круглый стол"</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!---->
-<!--                    <div class="media">-->
-<!--                        <div class="media-left media-middle">-->
-<!--                            <a href="#" >-->
-<!--                                <img src="/public/uploade/no_avatar.jpg" width="43" height="43"-->
-<!--                                     class="media-object img-circle"/>-->
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                        <div class="media-body">-->
-<!--                            <strong>Александр Жуков</strong><br/>-->
-<!--                            11.6.15 - 500ш в ресторан<br/>-->
-<!--                            <a href="#">"Круглый стол"</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-        </div>
+            <? if (!empty($data_user)): ?>
 
-<!--        <div class="sidebar-lottery-footer">-->
-<!--            <a href="/arhiv_lotery">Архив лотереи</a>-->
-<!--        </div>-->
+                <div class="sidebar-tabs">
+
+                    <div class="sidebar-tabs-heading">
+                        <div class="sidebar-tabs-title">Победители</div>
+                    </div>
+
+                    <div class="sidebar-tabs-body">
+
+                        <? foreach ($data_user as $row_user): ?>
+
+                            <div class="media">
+                                <div class="media-left media-middle">
+                                    <a href="#" >
+                                        <? if (!empty($row_user['usersPhoto'])): ?>
+
+                                        <img src="<?=$row_user['usersPhoto'] ?>" width="43" height="43"
+                                             class="media-object img-circle"/>
+
+                                            <?else:?>
+
+                                            <img src="/public/uploade/no_avatar.jpg" width="43" height="43"
+                                                 class="media-object img-circle"/>
+
+                                        <?endif?>
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <strong><?=$row_user['usersName']?> <?=$row_user['usersSecondname']?></strong><br/>
+                                    <?=date('d-m-Y', strtotime($row_user['loteryDate'])) ?> - <?=$row_user['loteryName'] ?><br/>
+                                    <a href="/business/<?=$row_user['busUrl'] ?>"><?=$row_user['busName'] ?></a>
+                                </div>
+                            </div>
+
+                        <? endforeach ?>
+                    </div>
+                </div>
+
+            <? endif ?>
+        </div>
+        <? if (!empty($data_user)): ?>
+            <div class="sidebar-lottery-footer">
+                <a href="/arhiv_lotery">Архив лотереи</a>
+            </div>
+        <? endif ?>
     </div>
 <?endif?>
 

@@ -56,7 +56,7 @@ class Model_LotareyModel extends Model_BaseModel {
                     ->where('id', '=', $subscription[$number]['id'])
                     ->execute();
 
-                return $subscription[$number];
+                return array('user' => $subscription[$number], 'lotery' => $lotery[0]);
             } else {
                 return false;
             }
@@ -80,6 +80,38 @@ class Model_LotareyModel extends Model_BaseModel {
             ->limit(1)
             ->execute()->as_array();
         return $query;
+    }
+
+
+    /**
+     * @return mixed
+     * todo получаем список победителей лотареи
+     */
+    public function getUserLotarey($limit = null){
+
+        $query = DB::select(
+            array('users.name', 'usersName'),
+            array('users.secondname', 'usersSecondname'),
+            array('lotarey.date_end', 'loteryDate'),
+            array('lotarey.name', 'loteryName'),
+            array('business.name', 'busName'),
+            array('business.url', 'busUrl'),
+            array('users.photo', 'usersPhoto')
+        );
+        $query->from('subscription');
+        $query->join('lotarey');
+        $query->on('subscription.lotery', '=', 'lotarey.id');
+        $query->join('business');
+        $query->on('lotarey.business_id', '=', 'business.id');
+        $query->join('users');
+        $query->on('subscription.email', '=', 'users.email');
+        $query->where('users.suses_lotery', '<>', 0);
+        $query->order_by('lotarey.id', 'DESC');
+        if ($limit != null) {
+            $query->limit($limit);
+        }
+        return $query->cached()->execute()->as_array();
+
     }
 
 
