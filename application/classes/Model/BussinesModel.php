@@ -1238,6 +1238,7 @@ class Model_BussinesModel extends Model_BaseModel {
     public function getBannersUser (){
 
         $query = DB::select(array('users.email', 'UserEmail'),
+            array('banners.id', 'BanersId'),
             array('banners.date_start', 'BanersDateStart'),
             array('banners.date_end', 'BanersDateEnd'),
             array('business.redactor_user', 'BusIdRedactor')
@@ -1258,17 +1259,85 @@ class Model_BussinesModel extends Model_BaseModel {
             ->from('users')
             ->execute()->as_array();
 
+        $banerId = array();
         $result = array();
         foreach ($query as $rows) {
             foreach ($query2 as $rows2) {
                 if ($rows2['id'] == $rows['BusIdRedactor']) {
+                    $banerId[] = $rows['BanersId'];
                     $rows['EmailRedactor'] =  $rows2['email'];
                 }
             }
             $result[] = $rows;
         }
 
-        return $result;
+        //получаем урлы разделов в которых есть банеры
+        $baner_section = DB::select('banners_relation_section.*', array('category.url', 'sectionUrl'))
+            ->from('banners_relation_section')
+            ->join('category')
+            ->on('banners_relation_section.section_id', '=', 'category.id')
+            ->where('banners_relation_section.banners_id', 'IN', $banerId)
+            ->execute()->as_array();
+
+        //получаем урли категорий в которых есть банеры
+        $baner_category = DB::select('banners_relation.*', array('category.url', 'categoryUrl'))
+            ->from('banners_relation')
+            ->join('category')
+            ->on('banners_relation.category_id', '=', 'category.id')
+            ->where('banners_relation.banners_id', 'IN', $banerId)
+            ->execute()->as_array();
+
+
+        $recurs = Model::factory('CategoryModel')->recurs_catalog();
+
+        $result_new = array();
+        foreach ($result as $item) {
+
+            $section_baner = array();
+            $category_baner = array();
+
+            if (!empty($baner_section)) {
+                foreach ($baner_section as $item_section_baner) {
+                    if ($item['BanersId'] == $item_section_baner['banners_id']) {
+                        $section_baner[] = $item_section_baner;
+                    }
+                }
+            }
+
+
+            if (!empty($baner_category)) {
+                foreach ($baner_category as $item_category_baner) {
+                    if ($item['BanersId'] == $item_category_baner['banners_id']) {
+                        $item_category_baner['categoryUrl'] = $this->SectionURLCategoryJoin($recurs, $item_category_baner['category_id']);
+                        $category_baner[] = $item_category_baner;
+                    }
+                }
+            }
+
+            $item['CATEGORY'] = $category_baner;
+            $item['SECTION'] = $section_baner;
+            $result_new[] = $item;
+        }
+
+
+        return $result_new;
+    }
+
+    //метод создаем ссылку раздел категория по id категории
+    private function SectionURLCategoryJoin($recurs, $category_id){
+
+        foreach ($recurs as $rows) {
+
+            if (!empty($rows['childs'])) {
+                foreach ($rows['childs'] as $child) {
+                    if ($child['id'] == $category_id) {
+                        return $rows['url'].'/'.$child['url'];
+                    }
+                }
+            }
+
+        }
+
     }
 
 
@@ -1281,6 +1350,7 @@ class Model_BussinesModel extends Model_BaseModel {
         $query = DB::select(array('users.email', 'UserEmail'),
             array('coupon.datestart', 'CouponsDateStart'),
             array('coupon.dateoff', 'CouponsDateEnd'),
+            array('coupon.url', 'CouponsUrl'),
             array('business.redactor_user', 'BusIdRedactor')
         )
             ->from('coupon')

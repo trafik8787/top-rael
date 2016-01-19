@@ -37,7 +37,7 @@
                                                         <tr>
                                                             <td>
                                                                 <a href="#" target="_blank" style="display: block;">
-                                                                    <img src="cid:logo-new.png" width="250" height="54"
+                                                                    <img src="cid:logo-new.png" width="250"
                                                                          style="width:100%; height:auto;" alt="logo"/>
                                                                 </a>
                                                             </td>
@@ -97,9 +97,10 @@
 
                         <p>
                             <strong style="font-size:18px;">
-                                Это автоматическое письмо - не отвечайте на него.
+
                             </strong>
                         </p>
+
                        <?=$content?>
 
 

@@ -307,18 +307,21 @@ class Controller_Pages_Ajax extends Controller {
             $ert = $d->modify('-7 days')->format("Y-m-d");
             //за 7 дней перед отключением
             if ($curent_date == $ert) {
-                $message = 'Ваш бизнес <a href="http://'.$_SERVER['SERVER_NAME'].'/business/'.$rows['url'].'">'.$rows['name'].'</a> будет отключен через 7 дней';
-                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'Увидомление о отключении бизнеса', $message);
+                $message = View::factory('email/text_bussines_warning');
+                $message->data = $rows;
+                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'Ваша реклама на Topisrael скоро закончится', $message);
             }
 
             if ($curent_date == $rows['date_end']) {
-                $message = 'Ваш бизнес <a href="http://'.$_SERVER['SERVER_NAME'].'/business/'.$rows['url'].'">'.$rows['name'].'</a> отключен';
-                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'Отключение бизнеса', $message);
+                $message = View::factory('email/text_bussines_end');
+                $message->data = $rows;
+                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'Ваша реклама на Topisrael закончилась', $message);
             }
 
             if ($curent_date == $rows['date_create']) {
-                $message = 'Ваш бизнес <a href="http://'.$_SERVER['SERVER_NAME'].'/business/'.$rows['url'].'">'.$rows['name'].'</a> подключен.';
-                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'Подключение бизнеса', $message);
+                $message = View::factory('email/text_bussines_start');
+                $message->data = $rows;
+                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'Ваша реклама включена на Topisrael', $message);
             }
 
         }
@@ -370,7 +373,7 @@ class Controller_Pages_Ajax extends Controller {
         $html_mail->content = $message;
 
         $m = Email::factory();
-        $m->From("TopIsrael;send@topisrael.ru"); // от кого отправляется почта
+        $m->From("TopIsrael;top@topisrael.ru"); // от кого отправляется почта
         $m->To($to); // кому адресованно
         $m->Cc($cc);
         $m->Subject($subject);
@@ -397,18 +400,21 @@ class Controller_Pages_Ajax extends Controller {
 
             //за 7 дней перед отключением
             if ($curent_date == $ert) {
-                $message = 'Ваш баннер будет отключен через 7 дней';
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Увидомление о отключении баннера', $message);
+                $message = View::factory('email/text_baner_warning');
+                $message->data = $rows;
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Ваш баннер на Topisrael скоро закончится', $message);
             }
 
             if ($curent_date == $rows['BanersDateEnd']) {
-                $message = 'Ваш баннер отключен';
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Отключение баннера', $message);
+                $message = View::factory('email/text_baner_end');
+                $message->data = $rows;
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Ваш баннер на Topisrael закончился', $message);
             }
 
             if ($curent_date == $rows['BanersDateStart']) {
-                $message = 'Ваш баннер включен.';
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Подключение баннера', $message);
+                $message = View::factory('email/text_baner_start');
+                $message->data = $rows;
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Ваш баннер включен на Topisrael', $message);
             }
 
         }
@@ -430,18 +436,21 @@ class Controller_Pages_Ajax extends Controller {
 
             //за 7 дней перед отключением
             if ($curent_date == $ert) {
-                $message = 'Ваш купон будет отключен через 7 дней';
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Увидомление о отключении купона', $message);
+                $message = View::factory('email/text_coupon_warning');
+                $message->data = $rows;
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Ваша купон на Topisrael скоро закончится', $message);
             }
 
             if ($curent_date == $rows['CouponsDateEnd']) {
-                $message = 'Ваш купон отключен';
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Отключение купона', $message);
+                $message = View::factory('email/text_coupon_end');
+                $message->data = $rows;
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Ваш купон на Topisrael отключен', $message);
             }
 
             if ($curent_date == $rows['CouponsDateStart']) {
-                $message = 'Ваш купон включен.';
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Подключение купона', $message);
+                $message = View::factory('email/text_coupon_start');
+                $message->data = $rows;
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'Ваш купон включен на Topisrael', $message);
             }
 
         }

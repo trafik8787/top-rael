@@ -38,7 +38,7 @@
                                                         <tr>
                                                             <td>
                                                                 <a href="http://<?=$_SERVER['HTTP_HOST']?>/" target="_blank" style="display: block;">
-                                                                    <img src="cid:logo-new.png" width="250" height="54" alt="logo"
+                                                                    <img src="cid:logo-new.png" width="250" alt="logo"
                                                                          style="width:100%; height:auto;"/>
                                                                 </a>
                                                             </td>
@@ -115,7 +115,7 @@
 
                         <p>Это автоматическое письмо, пожалуйста, не отвечайте на него.</p>
 
-                        <p>Если у вас есть вопросы или пожелания, <a href="http://<?=$_SERVER['HTTP_HOST']?>/contacts"></a>пишите или звоните нам.</p>
+                        <p>Если у вас есть вопросы или пожелания, <a href="http://<?=$_SERVER['HTTP_HOST']?>/contacts">пишите или звоните нам.</a></p>
 
                         <p>С уважением, команда TopIsrael.ru</p>
 

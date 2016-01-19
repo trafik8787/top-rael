@@ -361,12 +361,15 @@ class Controller_Pages_Account extends Controller_BaseController {
             $session = Session::instance();
             if ($session->get('forgotpass') === $restore) // проверяем его сессию - действительно ли именно он запросил сброс?
             {
+
+                $html_pass = View::factory('email/mail_forgot');
                 $m = Email::factory();
-                $m->From("TopIsrael;send@topisrael.ru");
-                $m->Subject(Kohana::message('account', 'email.themes.newPassword'));
+                $m->From("TopIsrael;noreplay@topisrael.ru");
+                $m->Subject('Пароль в Личный кабинете Topisrael');
 
                 // генерируем новый пароль
                 $newpass = substr(md5(time().$session->get('forgotmail')),0,8);
+                $html_pass->message = '<p>Ваш новый пароль - <strong>'.$newpass.'</strong> <a href="http://'.$_SERVER['SERVER_NAME'].'/account/">Войти в Личный кабинет</a></p>';
                 // кому адресованно
                 $m->To($session->get('forgotmail'));
 
@@ -378,11 +381,10 @@ class Controller_Pages_Account extends Controller_BaseController {
                 $session->delete('forgotmail');
 
 
-                // отправляем новый пароль пользователю
-                $message = 'Ваш новый пароль - "'.$newpass.'" без кавычек. <a href="http://'.$_SERVER['SERVER_NAME'].'/account/">Войти</a>';
-
-                $m->Body($message, "html");
+                $m->Body($html_pass, "html");
                 $m->Priority(3);
+                $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new.png", "", "image/png");
+                $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
                 $m->Send();
 
                 // сообщаем об успехе процедуры
@@ -487,7 +489,6 @@ class Controller_Pages_Account extends Controller_BaseController {
         $m->Priority(3);
         $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new.png", "", "image/png");
         $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
-        //$m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/3.jpg", "", "image/jpeg");
         $m->Send();
     }
 

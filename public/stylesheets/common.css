@@ -11655,6 +11655,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   display: block;
   /*min-width: 100%;*/
   /*min-height: 100%;*/
+  width: 100%;
   height: auto;
   position: absolute;
   left: 50%;
@@ -11856,6 +11857,11 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 }
 }
 
+@media (max-width: 767px) {
+  .panel.panel-vertical-gallery .panel-body .bx-gallery .bx-image .layer img {
+    width: 100%!important;
+  }
+}
 
 @media (max-width: 767px) {
   /* line 751, ../.sass/panel.scss */
