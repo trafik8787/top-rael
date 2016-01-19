@@ -287,9 +287,19 @@ abstract class Controller_BaseController extends Controller_Template {
     }
 
 
+    /**
+     * @return View
+     * todo блок городов справа
+     */
     public function blocCity (){
         $content = View::factory('blocks_includ/bloc_city');
         $content->data = Model::factory('BussinesModel')->getCityListBlocRight();
+        return $content;
+    }
+
+    public function blocTags (){
+        $content = View::factory('blocks_includ/bloc_tags');
+        $content->data = Model::factory('TagsModel')->getAllTags();
         return $content;
     }
 
