@@ -19,13 +19,13 @@
 
 <? if (!empty($data['SECTION'])): ?>
     <? foreach ($data['SECTION'] as $row_s): ?>
-        <a href="http://<?=$_SERVER['HTTP_HOST']?>/section/<?=$row_s['sectionUrl'] ?>"></a><br>
+        <a href="http://<?=$_SERVER['HTTP_HOST']?>/section/<?=$row_s['sectionUrl'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/section/<?=$row_s['sectionUrl'] ?></a><br>
     <? endforeach ?>
 <? endif ?>
 
 <? if (!empty($data['CATEGORY'])): ?>
     <? foreach ($data['CATEGORY'] as $row_с): ?>
-        <a href="http://<?=$_SERVER['HTTP_HOST']?>/<?=$row_с['categoryUrl'] ?>"></a><br>
+        <a href="http://<?=$_SERVER['HTTP_HOST']?>/section/<?=$row_с['categoryUrl'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/section/<?=$row_с['categoryUrl'] ?></a><br>
     <? endforeach ?>
 <? endif ?>
 
@@ -36,21 +36,28 @@
 <p>Позвоните 052-5512121, 03-5604505 или напишите нам top@topisrael.ru.</p>
 <p>С уважением, команда TopIsrael.ru</p>
 
+<span style="direction: rtl;">
+    <p>תקופת הפרסום של באנר של העסק שלך באתר טופ ישראל עומדת להסתיים</p>
 
-<p>תקופת הפרסום של העסק שלך באתר טופ ישראל הסתיימה</p>
+    <p>
+        שלום!<br>
+        תקופת הפרסום של באנר של העסק שלך באתר טופ ישראל עומדת להסתיים.<br>
+        נשארו 7 ימים בלבד עד הסיום.<br>
+        ניתן לראות את הבאנר במקומות הבאים באתר:<br>
+        תקופת פרסום הבאנר תסתיים בתאריך:<br>
+    </p>
 
-<p>שלום!
-    תקופת הפרסום של העסק שלך באתר טופ ישראל הסתיימה.
-    עמוד העסק שלך אינו פעיל יותר:
-    הפרסום הסתיים בתאריך:</p>
+    <p>
+    <hr>
+    </p>
 
-<p>
-<hr>
-</p>
+    <p>
+        תגדילו את כמות הלקוחות הרוסיים – האריכו את תקופת פרסום הבאנר!<br>
+        אנא פנו אלינו בטלפון: 052-5512121, 03-5604505 או במייל: top@topisrael.ru<br>
 
-<p>אל תאבדו את הלקוחות הרוסיים, האריכו את תקופת הפרסום באתר!
-    כרגע יש לנו מחירים מיוחדים וכלים שיווקיים חדשים!
-    אנא פנו אלינו בטלפון: 052-5512121, 03-5604505 או במייל: top@topisrael.ru</p>
+    </p>
 
 
-<p>בכבוד רב, צוות האתר TopIsrael.ru</p>
+    <p>בכבוד רב, צוות האתר TopIsrael.ru</p>
+
+</span>

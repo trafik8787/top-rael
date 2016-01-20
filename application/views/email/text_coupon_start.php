@@ -16,7 +16,7 @@
 
 <p>Посмотреть купон можно по адресу</p>
 
-<p><strong>http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$data['CouponsUrl'] ?></strong></p>
+<p><strong><a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$data['CouponsUrl'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$data['CouponsUrl'] ?></a></strong></p>
 
 <p>--------------------------</p>
 
@@ -26,14 +26,16 @@
 
 <p>С уважением, команда TopIsrael.ru</p>
 
+<span style="direction: rtl;">
 <p>קופון של העסק שלך עלה לאתר טופ ישראל</p>
 
-<p>שלום!
-    קופון של העסק שלך עלה לאתר טופ ישראל TopIsrael.ru</p>
+<p>
+    שלום!<br>
+    קופון של העסק שלך עלה לאתר טופ ישראל TopIsrael.ru<br>
+    הקופון יהיה פעיל מ- ועד<br>
+    ניתן לראות את הקופון בכתובת הבאה:<br>
+</p>
 
-
-<p>הקופון יהיה פעיל מ- ועד</p>
-<p>ניתן לראות את הקופון בכתובת הבאה:</p>
 
 <p>
 <hr>
@@ -43,3 +45,4 @@
     03-5604505</p>
 
 <p>בכבוד רב, צוות האתר TopIsrael.ru</p>
+</span>

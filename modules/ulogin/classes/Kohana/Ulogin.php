@@ -138,8 +138,9 @@ class Kohana_Ulogin {
                         $data[$field] = $user[$field];
                 }
 
-                $data['bdate'] = date('Y-m-d', strtotime($user['bdate']));
-
+                if (!empty($data['bdate'])) {
+                    $data['bdate'] = date('Y-m-d', strtotime($user['bdate']));
+                }
                 $orm_user = $this->create_new_user($data);
                 
                 $user['user_id'] = $orm_user->id;
