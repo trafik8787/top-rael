@@ -114,7 +114,6 @@ class Kohana_Ulogin {
 
             if (($orm_user = Auth::instance()->get_user()))
             {
-
                 $this->create_ulogin($ulogin, $user);
             }
             else
@@ -125,6 +124,7 @@ class Kohana_Ulogin {
                 
                 $data['username'] = trim($data['username']);
                 $data['id_role'] = 1;
+
 
                 if (!$data['username'])
                     throw new Kohana_Exception('Username fields not set in config/ulogin.php');
@@ -138,6 +138,7 @@ class Kohana_Ulogin {
                         $data[$field] = $user[$field];
                 }
 
+                $data['bdate'] = date('Y-m-d', strtotime($user['bdate']));
 
                 $orm_user = $this->create_new_user($data);
                 

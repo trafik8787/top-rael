@@ -10718,7 +10718,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 .icons.logo {
   background-position: 0 0;
   width: 250px;
-  height: 66px;
+  height: 70px;
 }
 /* line 38, ../.sass/icons.scss */
 .icons.logo.white {
@@ -12173,7 +12173,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   #header #header-top {
     text-align: center;
     padding: 0;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 }
 /* line 50, ../.sass/_common-variables.scss */
