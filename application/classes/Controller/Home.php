@@ -39,7 +39,7 @@ class Controller_Home extends Controller_BaseController {
         //$we = json_decode(Cookie::get('__count'));
         //HTML::x(json_decode(Cookie::get('coup-41')));
        // die(phpinfo());
-        HTML::x( Model::factory('BussinesModel')->getBannersUser());
+       // HTML::x( Model::factory('BussinesModel')->getBannersUser());
 
         $resultArr = array();
         $content = View::factory('pages/home');
