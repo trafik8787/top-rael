@@ -99,6 +99,7 @@ abstract class Controller_BaseController extends Controller_Template {
             'public/stylesheets/jquery.bxslider.min.css',
             'public/stylesheets/common.css',
             'public/stylesheets/ie.css',
+            'public_a/css/bootstrap-datetimepicker.min.css',
             '/fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin,cyrillic'
         );
 
@@ -108,6 +109,12 @@ abstract class Controller_BaseController extends Controller_Template {
             'public/javascripts/bootstrap.min.js',
             'public/javascripts/owl.carousel.min.js',
             'public/javascripts/jquery.bxslider.min.js',
+
+
+            'public_a/js/min/moment.min.js',
+            'public_a/js/min/moment-with-locales.min.js',
+            'public_a/js/bootstrap-datetimepicker.min.js',
+
             'public/javascripts/orb.min.js',
             'public/javascripts/jquery.validate.min.js',
             'public/javascripts/common.js',

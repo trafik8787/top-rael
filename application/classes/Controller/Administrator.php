@@ -243,6 +243,11 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
         Session::instance()->set('customer_id', $busssines);
+
+        if (empty($_GET['section']) and empty($_GET['city'])) {
+            Session::instance()->set('customer_id', null);
+        }
+
         Controller_Core_Main::$title_page = 'Бизнесы '.$name;
         $this->response->body(self::adminBussines()->render());
 
@@ -483,7 +488,11 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('status', 'radio', array('1' => 'Ожидает', '2' => 'Идет', '3' => 'Завершен'));
         $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
         $crud->set_field_type('img', array('file', 'uploads/img_lotarey', 'lot_', '', 'img'),'', '');
-        $crud->show_columns('id', 'name', 'date_start', 'date_end');
+        $crud->show_columns('id', 'name', 'date_start', 'date_end', 'status');
+
+        $crud->callback_befor_show_edit('call_bef_show_edit_lotery');
+        $crud->rows_color_where(4, '==', 3, ' #cccccc');
+
         $crud->show_name_column(array('name' => 'Название',
             'secondname' => 'Заголовок',
             'description' => 'Описание',
@@ -657,6 +666,16 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud->validation('name', array('required' => true),
             array('required' => 'Это поле обязательно для заполнения'));
+
+        $crud->validation('address', array('required' => true),
+            array('required' => 'Это поле обязательно для заполнения'));
+
+        $crud->validation('info', array('required' => true),
+            array('required' => 'Это поле обязательно для заполнения'));
+
+        $crud->validation('tel', array('required' => true),
+            array('required' => 'Это поле обязательно для заполнения'));
+
 
         $crud->validation('top_slider', array('required' => true),
             array('required' => 'Это поле обязательно для заполнения'));
@@ -1074,7 +1093,7 @@ class Controller_Administrator extends Controller_Core_Main {
             array('required' => 'Это поле обязательно для заполнения', 'minlength' => 'Минимальное количество символов 6'));
 
         $crud->callback_before_insert('call_bef_insert_user');
-
+        $crud->callback_befor_show_edit('call_bef_show_user');
 
         return $crud;
     }
@@ -1669,6 +1688,32 @@ class Controller_Administrator extends Controller_Core_Main {
         $data->last_login = date('d-m-Y', strftime($user->last_login));
         Cruds::$adon_form[] = array('page' => 'date_registration', 'view' => $data);
     }
+
+
+    public static  function call_bef_show_edit_lotery ($new_array)
+    {
+        Session::instance()->set('customer_id', 1);
+        $cont = View::factory('adm/adon_links_user_for_lotery');
+        $data = Model::factory('LotareyModel')->getUserLotarey(null, array('lotarey.id', '=', $new_array['id']));
+        if (!empty($data)) {
+            $cont->data = $data;
+            Cruds::$adon_top_form[] = $cont;
+        }
+    }
+
+    public static function call_bef_show_user($new_array)
+    {
+        $cont = View::factory('adm/adon_lotery_for_users');
+        $data = Model::factory('LotareyModel')->getUserLotarey(null, array('users.id', '=', $new_array['id']));
+        if (!empty($data)) {
+            $cont->data = $data;
+            Cruds::$adon_top_form[] = $cont;
+        }
+    }
+
+
+
+
 
 
 

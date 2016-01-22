@@ -25,7 +25,7 @@
         var field_property = <?=$json_rules?>;
         var field_message = <?=$json_messages?>;
 
-
+        //$.validator.setDefaults({ ignore: ":hidden:not(select)" });
         $('#w-form-add, #w-form-edit').validate({
             rules: field_property,
 
@@ -47,6 +47,8 @@
             }
 
         });
+
+
 
     });
 

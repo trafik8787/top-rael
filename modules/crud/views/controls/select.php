@@ -78,7 +78,7 @@
                     }
                     ?>
 
-                    <select  <?=$attr?> data-placeholder="Выбрать" class="form-control chosen-select validate[required]" style="height: 20px;" <?=$multiselect?> name="<?=$name_fied?>[]" id="">
+                    <select  <?=$attr?> data-placeholder="Выбрать" class="form-control chosen-select" style="height: 20px;" <?=$multiselect?> name="<?=$name_fied?>[]" id="">
                         <option value=""></option>
                         <?foreach ($value_fild as $val => $row):?>
                             <?if (is_array($row)):?>

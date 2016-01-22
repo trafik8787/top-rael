@@ -7,6 +7,41 @@
  */
 
 ?>
+<style>
+    .input-group-addon {
+
+        padding: 6px 12px!important;
+        font-size: 14px!important;
+        font-weight: 400!important;
+        line-height: 1!important;
+        color: #555!important;
+        text-align: center!important;
+        background-color: #eee!important;
+        border: 1px solid #ccc!important;
+        border-radius: 4px!important;
+    }
+
+    .input-group-addon:last-child {
+        border-left: 0!important;
+    }
+
+
+    .input-group {
+        position: relative!important;
+        display: table!important;
+        border-collapse: separate!important;
+    }
+
+    .input-group-addon, .input-group-btn {
+        width: 1%!important;
+        white-space: nowrap!important;
+        vertical-align: middle!important;
+    }
+
+    .input-group-addon, .input-group-btn, .input-group .form-control {
+        display: table-cell!important;
+    }
+</style>
 <script>
     //открытие нужной вкладки по якорю
     $(function () {
@@ -26,6 +61,96 @@
 
         });
 
+
+       $('#myModalLotaryProfile').modal('show');
+
+        $('.w-datetimepicer').datetimepicker({
+            locale: 'ru',
+            format: 'YYYY-MM-DD',
+            defaultDate: 'moment'
+        });
+        //$.validator.setDefaults({ ignore: ":hidden:not(input)" });
+//
+//        $('w-modal-profil').on('click', function() {
+//
+//        });
+
+
+        $('.w-form-profile-lotery').validate({
+            rules: {
+
+                //                old_photo: {
+                //                    required:  true
+                //
+                //                },
+
+                name:{
+                    required: true,
+                    minlength: 3
+                },
+                secondname:{
+                    required: true,
+                    minlength: 3
+                },
+
+                city:{
+                    required: true
+                },
+
+                tel:{
+                    required: true
+                }
+
+
+
+            },
+
+            messages: {
+
+                //                old_photo: {
+                //                    required: "Загрузите пожалуйста"
+                //                },
+
+                name:{
+                    required: "Это поле обязательно для заполнения",
+                    minlength: "Имя должно быть не менее 3 символов"
+                },
+
+                secondname:{
+                    required: "Это поле обязательно для заполнения",
+                    minlength: "Фамилия должна быть не менее 3 символов"
+                },
+
+                city:{
+                    required: "Это поле обязательно для заполнения"
+                },
+
+                tel:{
+                    required: "Это поле обязательно для заполнения"
+                }
+            },
+
+            submitHandler: function(form)
+            {
+
+                //form.submit();
+                $.post('/account',
+                    $(form).serialize() ,
+                    function(data){
+
+                    }, "json");
+
+                $('#myModalLotaryProfile .modal-body').empty();
+                $('#myModalLotaryProfile .modal-body').html('<h3>Спасибо! Ваши данные отправлены администрации сайта. Мы скоро свяжемся с вами.</h3><p class="text-center"><button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button></p>');
+                return false;
+                //$('#myModalLotaryProfile').modal('hide');
+
+            }
+
+        });
+
+
+
     });
 
 
@@ -36,6 +161,72 @@
 
 
     <div id="content">
+
+        <?if (!empty($lotery_checen) and (empty($user->name) or empty($user->secondname) or empty($user->city) or empty($user->tel))):?>
+            <div class="modal fade" id="myModalLotaryProfile" data-backdrop="static" role="dialog" aria-labelledby="W-myModalLabel"  aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="W-myModalLabel"><strong>Удача улыбнулась Вам!</strong></h4>
+                        </div>
+                        <div class="modal-body">
+                            <span style="font-size: 16px">
+                            <p>Поздравляем! Ваш e-mail <strong><?=$user->email?></strong> выиграл приз - <?=$lotery_checen[0]['loteryName']?></p>
+
+                            <p>Заполните все поля в анкете и мы свяжемся с вами для вручения приза.</p>
+                            </span>
+                            <form role="form" method="post" class="w-form-profile-lotery" action="/account" enctype="multipart/form-data">
+
+                                <div class="form-group">
+                                    <label for="inputFoto" class="control-label"><img src="<?=!empty($photo) ? $photo : '/public/uploade/no_avatar.jpg'?>" width="50" height="50" class="img-circle"/></label>
+                                    <input type="hidden" name="old_photo" value="<?=$photo?>">
+                                    <input  type="file"  id="inputFoto" class="form-control" value="" name="avatar">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="inputName" class="control-label">Имя</label>
+                                    <input name="name"  id="inputName" class="form-control" value="<?=$user->name?>" type="text">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputSecondname" class="control-label">Фамилия</label>
+                                    <input name="secondname" id="inputSecondname" class="form-control" value="<?=$user->secondname?>" type="text">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputCity" class="control-label">Город</label>
+                                    <input name="city" id="inputCity" class="form-control" value="<?=$user->city?>" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputTel" class="control-label">Телефон</label>
+                                    <input name="tel" id="inputTel"  class="form-control" value="<?=$user->tel?>" pattern="(\+?\d[- .]*){7,13}"  title="Международный, государственный или местный телефонный номер" type="tel">
+                                </div>
+
+                                <div class="form-group" style="height: 55px;">
+                                    <label for="age" class="control-label">Дата рождения</label>
+                                    <div class="input-group date  w-datetimepicer">
+                                        <input name="age" id="age" data-placement="bottom"  class="form-control  w-datetimepicer" value="<?=$user->age?>" type="text">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input style="position: relative;margin-left: 0;" name="lotery" <?if ($user->suses_lotery != 0):?> checked <?endif?> type="checkbox" value="<?=$lotery_checen[0]['lotery']?>"> <strong>Показать в победителях</strong>
+                                    </label>
+                                </div>
+                                <button type="submit" name="profil" value="1" class="btn btn-primary w-modal-profil">Сохранить</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?endif?>
+
 
         <div class="user-container">
 
@@ -352,7 +543,7 @@
                         <div class="panel-body">
                             <div class="col-md-12">
 
-                                <form class="form-horizontal" role="form" method="post" action="/account" enctype="multipart/form-data">
+                                <form class="form-horizontal w-form-profile-lotery" role="form" method="post" action="/account" enctype="multipart/form-data">
                                     <div class="form-group">
 
                                         <label for="inputEmail" class="col-sm-1 control-label">E-mail</label>
@@ -393,17 +584,26 @@
                                         <label for="inputTel" class="col-sm-1 control-label">Телефон</label>
                                         <div class="col-md-5">
                                             <input name="tel" id="inputTel"  class="form-control" value="<?=$user->tel?>" pattern="(\+?\d[- .]*){7,13}"  title="Международный, государственный или местный телефонный номер" type="tel">
+
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputAge" class="col-sm-1 control-label">Дата рождения</label>
+
+
+                                        <label for="age" class="col-sm-1 control-label">Дата рождения</label>
                                         <div class="col-md-5">
-                                            <input name="age" id="inputAge"  class="form-control" value="<?=$user->age?>" type="date">
+                                            <input name="age" class="form-control w-datetimepicer" value="<?=$user->age?>" type="text">
+
                                         </div>
+
+
                                     </div>
 
+
+
                                     <?if (!empty($lotery_checen)):?>
+
 
                                         <div class="form-group">
                                             <div class="col-md-offset-1 col-md-5">

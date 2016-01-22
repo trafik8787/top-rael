@@ -73,10 +73,12 @@ class Model_LotareyModel extends Model_BaseModel {
      * todo находим победителя по email
      */
     public function ChekedSusesLotarey($email){
-        $query = DB::select()
+        $query = DB::select('subscription.*', array('lotarey.name', 'loteryName'))
             ->from('subscription')
-            ->where('email','=', $email)
-            ->and_where('lotery', '<>', '0')
+            ->join('lotarey')
+            ->on('subscription.lotery', '=', 'lotarey.id')
+            ->where('subscription.email','=', $email)
+            ->and_where('subscription.lotery', '<>', '0')
             ->limit(1)
             ->execute()->as_array();
         return $query;
@@ -85,9 +87,9 @@ class Model_LotareyModel extends Model_BaseModel {
 
     /**
      * @return mixed
-     * todo получаем список победителей лотареи
+     * todo получаем список победителей лотареи или победителя по id лотареи
      */
-    public function getUserLotarey($limit = null){
+    public function getUserLotarey($limit = null, $id = null){
 
         $query = DB::select(
             array('users.name', 'usersName'),
@@ -96,16 +98,29 @@ class Model_LotareyModel extends Model_BaseModel {
             array('lotarey.name', 'loteryName'),
             array('business.name', 'busName'),
             array('business.url', 'busUrl'),
-            array('users.photo', 'usersPhoto')
+            array('users.photo', 'usersPhoto'),
+            array('users.email', 'usersEmail'),
+            array('subscription.email', 'subscriptionEmail'),
+            array('users.id', 'usersId')
         );
         $query->from('subscription');
         $query->join('lotarey');
         $query->on('subscription.lotery', '=', 'lotarey.id');
         $query->join('business');
         $query->on('lotarey.business_id', '=', 'business.id');
-        $query->join('users');
+
+        if ($id === null) {
+            $query->join('users');
+        } else {
+            $query->join('users', 'LEFT');
+        }
+
         $query->on('subscription.email', '=', 'users.email');
-        $query->where('users.suses_lotery', '<>', 0);
+        if ($id === null) {
+            $query->where('users.suses_lotery', '<>', 0);
+        } else {
+            $query->where($id[0], $id[1], $id[2]);
+        }
         $query->order_by('lotarey.id', 'DESC');
         if ($limit != null) {
             $query->limit($limit);

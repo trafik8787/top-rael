@@ -76,7 +76,7 @@
                                     <table cellpadding="0" cellspacing="0" align="left">
                                         <tr>
                                             <td>
-                                                <span style="font-size:24px;">Поздравляем Вас! Вы выиграли в Лотерее Topisrae</span>
+                                                <span style="font-size:24px;">Поздравляем Вас! Вы выиграли в Лотерее Topisrael</span>
                                             </td>
                                         </tr>
                                     </table>

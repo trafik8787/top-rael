@@ -23,7 +23,6 @@ class Controller_Pages_Account extends Controller_BaseController {
         $bloc_sndmail = View::factory('blocks_includ/bloc_sendmail_profile');
         $ulogin = Ulogin::factory(); // создаем экземпляр класса юлогин
 
-
         if ($this->request->post('profil')) {
 
             if (!empty($_FILES['avatar']['name'])) {
@@ -41,6 +40,8 @@ class Controller_Pages_Account extends Controller_BaseController {
 
             if (!empty($this->request->post('lotery'))) {
                 $profin_user->suses_lotery = $this->request->post('lotery');
+            } else {
+                $profin_user->suses_lotery = 0;
             }
 
             if (!empty($_FILES['avatar']['name'])) {
