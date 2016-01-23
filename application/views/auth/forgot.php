@@ -11,8 +11,9 @@
 <div class="row">
     <div class="col-md-12">
         <? if (isset($message)) :?>
-            <?=$message?>
+            <h3 style="margin-top: 100px;margin-bottom: 100px;text-align: center;"><strong><?=$message?></strong></h3>
         <?endif?>
+
         <hr />
         <form method="post" class="form-inline" role="form" action="/account/forgot">
 

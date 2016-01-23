@@ -26,7 +26,7 @@
 <hr>
 <div class="w-bloc-right">
     <h2>По городам</h2>
-    <table class="table">
+    <table class="table" style="margin-bottom: 6px;">
     <? foreach (array_chunk($data['general'], 3) as $row): ?>
 
         <tr>

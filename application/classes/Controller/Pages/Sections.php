@@ -96,9 +96,9 @@ class Controller_Pages_Sections extends Controller_BaseController {
         //подключаем правый блок
         $bussines_section->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
+            View::factory('blocks_includ/sicseti'),
             $this->blocCity(),
             $this->blocTags(),
-            View::factory('blocks_includ/sicseti'),
             parent::$right_baners,
             View::factory('blocks_includ/articles_category_bloc', array('content' => $data_articles))
         ));

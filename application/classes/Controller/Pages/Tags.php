@@ -56,9 +56,9 @@ class Controller_Pages_Tags extends Controller_BaseController {
 
         $content->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
-            $this->blocCity(),
-            $this->blocTags(),
             View::factory('blocks_includ/sicseti'),
+            $this->blocCity(),
+            $this->blocTags()
         ));
 
         //SEO
