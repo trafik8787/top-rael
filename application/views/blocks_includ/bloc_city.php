@@ -42,7 +42,7 @@
 
         <a href="#"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Другие города <span class="caret"></span> </a>
 
-        <div class="dropdown-menu">
+        <div class="dropdown-menu" style="width: 330px;">
             <table class="table">
             <? foreach (array_chunk($data['all'], 3) as $row_all): ?>
 
