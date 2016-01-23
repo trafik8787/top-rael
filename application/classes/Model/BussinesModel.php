@@ -1416,18 +1416,7 @@ class Model_BussinesModel extends Model_BaseModel {
         $result = array();
         if (count($query) > $limit) {
             $general = array_slice($query, 0, $limit);
-
-            foreach ($query as $query_rows) {
-
-                foreach ($general as $general_rows) {
-
-                    if ($query_rows['cityId'] != $general_rows['cityId']) {
-                        $result[] = $query_rows;
-                    }
-
-                }
-
-            }
+            $result =  array_slice($query, $limit);
 
         } else {
             $general = $query;
