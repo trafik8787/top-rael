@@ -8,22 +8,7 @@
 
 ?>
 <style>
-    .input-group-addon {
 
-        padding: 6px 12px!important;
-        font-size: 14px!important;
-        font-weight: 400!important;
-        line-height: 1!important;
-        color: #555!important;
-        text-align: center!important;
-        background-color: #eee!important;
-        border: 1px solid #ccc!important;
-        border-radius: 4px!important;
-    }
-
-    .input-group-addon:last-child {
-        border-left: 0!important;
-    }
 
 
     .input-group {
@@ -32,15 +17,6 @@
         border-collapse: separate!important;
     }
 
-    .input-group-addon, .input-group-btn {
-        width: 1%!important;
-        white-space: nowrap!important;
-        vertical-align: middle!important;
-    }
-
-    .input-group-addon, .input-group-btn, .input-group .form-control {
-        display: table-cell!important;
-    }
 </style>
 <script>
     //открытие нужной вкладки по якорю
@@ -322,7 +298,7 @@
                         <div class="user-object">
                             <small>Год рождения</small>
                             <strong>
-                                <?=$user->bdate?>
+                                <?=date('d-m-Y', strtotime($user->bdate))?>
                             </strong>
                         </div>
                     <?endif?>

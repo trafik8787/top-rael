@@ -131,7 +131,7 @@ class Controller_Pages_Ajax extends Controller {
     public function action_subscribeEnable(){
 
         $query = Model::factory('SubscribeModel')->updateSubskribEmail($this->request->post());
-        echo json_encode($query);
+        echo json_encode(array('status' => $this->request->post('subscrib_disable'), 'susses' => $query));
     }
 
 

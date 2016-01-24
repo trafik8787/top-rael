@@ -113,10 +113,10 @@
 
                         <div class="input-group">
 
-                            <input type="email" name="email" class="form-control input-lg"/>
+                            <input type="email" name="email" class="form-control input-lg w-email-profile-subscribe"/>
 
                             <div class="input-group-addon">
-                                <button type="submit" class="btn btn-lg btn-danger">Отправить</button>
+                                <button type="submit" class="btn btn-lg btn-danger w-button-profile-subscribe">Отправить</button>
                             </div>
                         </div>
                     </div>

@@ -225,9 +225,14 @@ abstract class Controller_BaseController extends Controller_Template {
             $content->data = $data[0];
             $content->data_user = Model::factory('LotareyModel')->getUserLotarey(4);
         } else {
-            $content->data = array();
+            $content = $this->show_bloc_right_subscribe();
         }
         return $content;
+    }
+
+
+    public function show_bloc_right_subscribe (){
+        return  View::factory('blocks_includ/bloc_right_subscribe');
     }
 
 

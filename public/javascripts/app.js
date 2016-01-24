@@ -153,13 +153,45 @@ $(document).ready(function(){
 
         submitHandler: function(form){
 
+            var input_email =  $('.w-button-profile-subscribe');
+
             $.ajax({ // описываем наш запрос
                 type: "POST", // будем передавать данные через POST
                 dataType: "JSON", // указываем, что нам вернется JSON
                 url: '/subscribe_enable',
                 data: $(form).serialize(), // передаем данные из формы
                 success: function(response) { // когда получаем ответ
-                    console.log(response);
+
+                    if (response.status == 1) {
+                        console.log(response);
+                        input_email.popover({
+                            placement: 'bottom',
+                            content: 'Подписка включена!',
+                            delay: { show: 100, hide: 500 }
+                        });
+                        input_email.popover('show');
+                        $('.popover.fade.bottom.in').css('background-color','greenyellow');
+                        $('.popover.bottom>.arrow').addClass('susses-email');
+
+                        setTimeout(function () {
+                            input_email.popover('destroy');
+                        }, 2000);
+
+                    } else {
+                        input_email.popover({
+                            placement: 'bottom',
+                            content: 'Подписка отключена!',
+                            delay: { show: 100, hide: 500 }
+                        });
+                        input_email.popover('show');
+
+                        $('.popover.fade.bottom.in').css('background-color','#FF7272');
+                        $('.popover.bottom>.arrow').addClass('errors-email');
+
+                        setTimeout(function () {
+                            input_email.popover('destroy');
+                        }, 2000);
+                    }
                 }
             });
 
@@ -857,7 +889,7 @@ $(document).ready(function(){
                    }
 
                    if (response.dublicate_email != undefined) {
-                       console.log(response.dublicate_email);
+
                        input_email.popover({
                            placement: 'bottom',
                            content: response.dublicate_email,
@@ -888,6 +920,58 @@ $(document).ready(function(){
     //
     //    return false;
     //});
+
+
+    $('.w-bloc-right-subscribe').submit(function(){
+
+        var input_email = $('.w-input-email-subcribe');
+
+        $.ajax({ // описываем наш запрос
+            type: "POST", // будем передавать данные через POST
+            dataType: "JSON", // указываем, что нам вернется JSON
+            url: '/subscribe',
+            data: $(this).serialize(),
+            success: function(response) { // когда получаем ответ
+
+                if (response.susses != undefined) {
+                    input_email.popover({
+                        placement: 'bottom',
+                        content: response.susses,
+                        delay: { show: 100, hide: 500 }
+                    });
+                    input_email.popover('show');
+                    $('.popover.fade.bottom.in').css('background-color','greenyellow');
+                    $('.popover.bottom>.arrow').addClass('susses-email');
+                    setTimeout(function () {
+                        input_email.popover('destroy');
+                    }, 2000);
+                }
+
+                if (response.dublicate_email != undefined) {
+
+                    input_email.popover({
+                        placement: 'bottom',
+                        content: response.dublicate_email,
+                        delay: { show: 100, hide: 500 }
+                    });
+                    input_email.popover('show');
+
+                    $('.popover.fade.bottom.in').css('background-color','#FF7272');
+                    $('.popover.bottom>.arrow').addClass('errors-email');
+
+                    setTimeout(function () {
+                        input_email.popover('destroy');
+                    }, 2000);
+                }
+
+
+
+            }
+        });
+
+        return false;
+    });
+
 
 
     $('.w-modal-subscribe').submit(function(){

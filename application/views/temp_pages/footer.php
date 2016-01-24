@@ -21,13 +21,14 @@
                 <div class="col-md-8 col-sm-6">
                     <span class="w-logo-footer"></span>
                 </div>
-                <div class="col-md-4">
-                    <form class="form-inline">
+                <div class="col-md-4 text-right">
+                    <h4 class="text-right">Рассылка новинок сайта</h4>
+                    <form class="form-inline w-bloc-right-subscribe">
 
                         <div class="form-group">
-                            <input type="email" class="form-control" id="inputPassword2" placeholder="Email">
+                            <input type="email" style="width: 236px;" class="form-control w-input-email-subcribe" name="email" required="required" placeholder="Email">
                         </div>
-                        <button type="submit" class="btn btn-default">Подписатся</button>
+                        <button value="1" type="submit" class="btn btn-default w-subskrip-buton">Подписатся</button>
                     </form>
                 </div>
             </div>
