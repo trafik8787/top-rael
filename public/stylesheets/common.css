@@ -11641,6 +11641,11 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
     margin-bottom: 20px;
     float: none;
   }
+
+  .panel.panel-vertical-gallery .panel-body .bx-gallery .bx-image .layer img {
+    width: 100%;
+  }
+
 }
 /* line 472, ../.sass/panel.scss */
 .panel.panel-vertical-gallery .panel-body .bx-gallery .bx-image .layer {
@@ -11655,7 +11660,6 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   display: block;
   /*min-width: 100%;*/
   /*min-height: 100%;*/
-  width: 100%;
   height: auto;
   position: absolute;
   left: 50%;
