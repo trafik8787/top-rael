@@ -566,15 +566,24 @@
                             <div class="col-md-12">
 
                                 <form class="form-horizontal w-form-profile-lotery" role="form" method="post" action="/account" enctype="multipart/form-data">
+
+                                    <div class="form-group" style="margin:30px 0px;">
+                                        <span class="col-sm-2 control-label">Последний вход:</span>
+                                        <div class="col-md-5" style="padding-top:7px;">
+                                            <?= Date::fuzzy_span($user->last_login); ?>
+                                        </div>
+                                    </div>
+
+
                                     <div class="form-group">
 
-                                        <label for="inputEmail" class="col-sm-1 control-label">E-mail</label>
+                                        <label for="inputEmail" class="col-sm-2 control-label">Регистрационный E-mail</label>
                                         <div class="col-md-5">
                                             <input type="text" id="inputEmail"  class="form-control" disabled="disabled" value="<?=$user->email?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputFoto" class="col-sm-1 control-label"><img src="<?=!empty($photo) ? $photo : '/public/uploade/no_avatar.jpg'?>" width="50" height="50" class="img-circle"/></label>
+                                        <label for="inputFoto" class="col-sm-2 control-label"><img src="<?=!empty($photo) ? $photo : '/public/uploade/no_avatar.jpg'?>" width="50" height="50" class="img-circle"/></label>
                                         <div class="col-md-5">
                                             <input type="hidden" name="old_photo" value="<?=$photo?>">
                                             <input  type="file"  id="inputFoto" class="form-control" value="" name="avatar">
@@ -583,27 +592,27 @@
 
 
                                     <div class="form-group">
-                                        <label for="inputName" class="col-sm-1 control-label">Имя</label>
+                                        <label for="inputName" class="col-sm-2 control-label">Имя</label>
                                         <div class="col-md-5">
                                             <input name="name"  id="inputName" class="form-control" value="<?=$user->name?>" type="text">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputSecondname" class="col-sm-1 control-label">Фамилия</label>
+                                        <label for="inputSecondname" class="col-sm-2 control-label">Фамилия</label>
                                         <div class="col-md-5">
                                             <input name="secondname" id="inputSecondname" class="form-control" value="<?=$user->secondname?>" type="text">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputCity" class="col-sm-1 control-label">Город</label>
+                                        <label for="inputCity" class="col-sm-2 control-label">Адрес</label>
                                         <div class="col-md-5">
                                             <input name="city" id="inputCity" class="form-control" value="<?=$user->city?>" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputTel" class="col-sm-1 control-label">Телефон</label>
+                                        <label for="inputTel" class="col-sm-2 control-label">Телефон</label>
                                         <div class="col-md-5">
                                             <input name="tel" id="inputTel"  class="form-control" value="<?=$user->tel?>" pattern="(\+?\d[- .]*){7,13}"  title="Международный, государственный или местный телефонный номер" type="tel">
 
@@ -613,7 +622,7 @@
                                     <div class="form-group">
 
 
-                                        <label for="bdate" class="col-sm-1 control-label">Дата рождения</label>
+                                        <label for="bdate" class="col-sm-2 control-label">Дата рождения</label>
                                         <div class="col-md-5">
                                             <input name="bdate" class="form-control w-datetimepicer" value="<?=date('d-m-Y', strtotime($user->bdate))?>" type="text">
                                         </div>
@@ -627,7 +636,7 @@
 
 
                                         <div class="form-group">
-                                            <div class="col-md-offset-1 col-md-5">
+                                            <div class="col-md-offset-3 col-md-8">
                                                 <div class="checkbox">
                                                     <label>
                                                         <input name="lotery" <?if ($user->suses_lotery != 0):?> checked <?endif?> type="checkbox" value="<?=$lotery_checen[0]['lotery']?>"> Показать в победителях
@@ -638,17 +647,11 @@
 
                                     <?endif?>
 
-                                    <div class="form-group">
-                                        <span class="col-sm-1 control-label">Последнее посещение</span>
-                                        <div class="col-md-5">
-                                            <span><?= Date::fuzzy_span($user->last_login); ?></span>
-                                        </div>
-                                    </div>
 
                                     <div class="form-group">
 
 
-                                        <div class="col-sm-offset-1 col-sm-5">
+                                        <div class="col-sm-offset-2 col-sm-5">
                                             <div class="progress" style="margin-top: 5px; display: none">
                                                 <div class="progress-bar" id="progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                                                     0%
@@ -674,14 +677,14 @@
                                 <form class="form-horizontal" role="form" action="/account/changepass" method="post">
                                     <h3>Смена пароля</h3>
                                     <div class="form-group">
-                                        <label for="inputSpas" class="col-sm-1 control-label">Старый пароль</label>
+                                        <label for="inputSpas" class="col-sm-2 control-label">Старый пароль</label>
                                         <div class="col-md-5">
                                             <input name="oldpassword" id="inputSpas"  class="form-control" value="" type="password">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputPas" class="col-sm-1 control-label">Новый пароль</label>
+                                        <label for="inputPas" class="col-sm-2 control-label">Новый пароль</label>
                                         <div class="col-md-5">
                                             <input name="newpassword" id="inputPas"  class="form-control" value="" type="password">
                                         </div>
@@ -689,7 +692,7 @@
 
 
                                     <div class="form-group">
-                                        <div class="col-sm-offset-1 col-sm-5">
+                                        <div class="col-sm-offset-2 col-sm-5">
                                             <button type="submit" class="btn btn-primary">Изменить пароль</button>
                                         </div>
                                     </div>
@@ -699,7 +702,7 @@
 
 
                                 <hr/>
-                                <a href="/account/logout" class="btn btn-primary">Выйти</a>
+<!--                                <a href="/account/logout" class="btn btn-primary">Выйти</a>-->
 
 
                             </div>
