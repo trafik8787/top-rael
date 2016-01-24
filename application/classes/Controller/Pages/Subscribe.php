@@ -24,7 +24,7 @@ class Controller_Pages_Subscribe extends Controller_BaseController {
             if ($_GET['qid'] == Session::instance()->get('uniqid')) {
                 Model::factory('SubscribeModel')->addSubskribeLodatey($_GET['email'], 1);
                 Session::instance()->delete('uniqid');
-                $content->data = 'Спасибо за подписку';
+                $content->data = 'Спасибо что подписались на нашу рассылку!';
             } else {
                 $content->data = 'Ошибка';
             }

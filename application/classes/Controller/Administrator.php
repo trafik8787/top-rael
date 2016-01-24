@@ -1028,7 +1028,7 @@ class Controller_Administrator extends Controller_Core_Main {
             //если это обычные пользователи
             $crud->remove_add();
             $crud->set_field_type('photo', array('file', 'uploads/img_users', 'user_', '', 'img'),'','');
-            $crud->edit_fields('email', 'username', 'name', 'secondname', 'sex', 'age', 'tel', 'city', 'ip', 'photo', 'date_registration');
+            $crud->edit_fields('email', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel', 'city', 'ip', 'photo', 'date_registration');
             $crud->add_field('email', 'username', 'date_registration');
 
             $crud->callback_befor_show_edit('call_bef_show_edit_users');
@@ -1037,8 +1037,8 @@ class Controller_Administrator extends Controller_Core_Main {
         } elseif (Session::instance()->get('customer_id') == 5) {
 
             $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
-            $crud->edit_fields('email', 'password', 'username', 'name', 'secondname', 'sex', 'age', 'tel', 'business_id','date_registration');
-            $crud->add_field('email', 'password', 'username', 'name', 'secondname', 'sex', 'age', 'tel',  'business_id','date_registration');
+            $crud->edit_fields('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel', 'business_id','date_registration');
+            $crud->add_field('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel',  'business_id','date_registration');
             $crud->callback_after_insert('call_after_insert_userBusines');
 
         } else {
@@ -1072,7 +1072,7 @@ class Controller_Administrator extends Controller_Core_Main {
             'name' => 'Имя',
             'secondname' => 'Фамилия',
             'sex' => 'Пол',
-            'age' => 'Возраст',
+            'bdate' => 'Возраст',
             'tel' => 'Телефон',
             'city' => 'Город',
             'ip' => 'IP адрес',

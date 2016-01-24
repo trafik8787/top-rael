@@ -36,7 +36,7 @@ class Controller_Pages_Account extends Controller_BaseController {
             $profin_user->secondname = $this->request->post('secondname');
             $profin_user->city = $this->request->post('city');
             $profin_user->tel = $this->request->post('tel');
-            $profin_user->age = $this->request->post('age');
+            $profin_user->bdate = date('Y-m-d', strtotime($this->request->post('bdate')));
 
             if (!empty($this->request->post('lotery'))) {
                 $profin_user->suses_lotery = $this->request->post('lotery');

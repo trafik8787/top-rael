@@ -66,14 +66,14 @@
 
         $('.w-datetimepicer').datetimepicker({
             locale: 'ru',
-            format: 'YYYY-MM-DD',
+            format: 'DD-MM-YYYY',
             defaultDate: 'moment'
         });
+
         //$.validator.setDefaults({ ignore: ":hidden:not(input)" });
-//
-//        $('w-modal-profil').on('click', function() {
-//
-//        });
+
+
+
 
 
         $('.w-form-profile-lotery').validate({
@@ -133,15 +133,54 @@
             submitHandler: function(form)
             {
 
-                //form.submit();
-                $.post('/account',
-                    $(form).serialize() ,
-                    function(data){
 
-                    }, "json");
+                var progressBar = $('#progressbar');
+                var $that = $('.w-form-profile-lotery');
 
-                $('#myModalLotaryProfile .modal-body').empty();
-                $('#myModalLotaryProfile .modal-body').html('<h3>Спасибо! Ваши данные отправлены администрации сайта. Мы скоро свяжемся с вами.</h3><p class="text-center"><button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button></p>');
+                formData = new FormData($that.get(0));
+
+
+                $.ajax({ // описываем наш запрос
+                    type: "POST", // будем передавать данные через POST
+                    dataType: "text", // указываем, что нам вернется JSON
+                    url: '/account',
+                    contentType: false, // важно - убираем форматирование данных по умолчанию
+                    processData: false, // важно - убираем преобразование строк по умолчанию
+                    data: formData,
+                    xhr: function(){
+                        var xhr = $.ajaxSettings.xhr(); // получаем объект XMLHttpRequest
+                        progressBar.parents('.progress').show();
+                        xhr.upload.addEventListener('progress', function(evt){ // добавляем обработчик события progress (onprogress)
+                            if(evt.lengthComputable) { // если известно количество байт
+                                // высчитываем процент загруженного
+                                var percentComplete = Math.ceil(evt.loaded / evt.total * 100);
+                                // устанавливаем значение в атрибут value тега <progress>
+                                // и это же значение альтернативным текстом для браузеров, не поддерживающих <progress>
+                                //progressBar.val(percentComplete).text('Загружено ' + percentComplete + '%');
+                                progressBar.attr('aria-valuenow', percentComplete);
+                                progressBar.css('width', percentComplete+'%');
+                                progressBar.text(percentComplete+'%');
+
+                            }
+                        }, false);
+
+                        xhr.addEventListener("load", function(evt) {
+
+                            progressBar.parents('.progress').delay(800).fadeOut();
+                            $('.w-save-info').show();
+                            $('#myModalLotaryProfile .modal-body').delay(3000).empty();
+                            $('#myModalLotaryProfile .modal-body').html('<h3>Спасибо! Ваши данные отправлены администрации сайта. Мы скоро свяжемся с вами.</h3><p class="text-center"><button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button></p>');
+                            $('.w-save-info').delay(3000).fadeOut();
+                        }, false);
+
+
+                        return xhr;
+                    },
+                    success: function(response) { // когда получаем ответ
+
+                    }
+                });
+
                 return false;
                 //$('#myModalLotaryProfile').modal('hide');
 
@@ -181,6 +220,7 @@
                                     <label for="inputFoto" class="control-label"><img src="<?=!empty($photo) ? $photo : '/public/uploade/no_avatar.jpg'?>" width="50" height="50" class="img-circle"/></label>
                                     <input type="hidden" name="old_photo" value="<?=$photo?>">
                                     <input  type="file"  id="inputFoto" class="form-control" value="" name="avatar">
+
                                 </div>
 
 
@@ -204,9 +244,9 @@
                                 </div>
 
                                 <div class="form-group" style="height: 55px;">
-                                    <label for="age" class="control-label">Дата рождения</label>
+                                    <label for="bdate" class="control-label">Дата рождения</label>
                                     <div class="input-group date  w-datetimepicer">
-                                        <input name="age" id="age" data-placement="bottom"  class="form-control  w-datetimepicer" value="<?=$user->age?>" type="text">
+                                        <input name="bdate" id="bdate" data-placement="bottom"  class="form-control  w-datetimepicer" value="<?=date('d-m-Y', strtotime($user->bdate))?>" type="text">
                                     </div>
                                 </div>
 
@@ -216,6 +256,11 @@
                                     <label>
                                         <input style="position: relative;margin-left: 0;" name="lotery" <?if ($user->suses_lotery != 0):?> checked <?endif?> type="checkbox" value="<?=$lotery_checen[0]['lotery']?>"> <strong>Показать в победителях</strong>
                                     </label>
+                                </div>
+                                <div class="progress" style="margin-top: 5px; display: none">
+                                    <div class="progress-bar" id="progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                        0%
+                                    </div>
                                 </div>
                                 <button type="submit" name="profil" value="1" class="btn btn-primary w-modal-profil">Сохранить</button>
                             </form>
@@ -591,10 +636,9 @@
                                     <div class="form-group">
 
 
-                                        <label for="age" class="col-sm-1 control-label">Дата рождения</label>
+                                        <label for="bdate" class="col-sm-1 control-label">Дата рождения</label>
                                         <div class="col-md-5">
-                                            <input name="age" class="form-control w-datetimepicer" value="<?=$user->age?>" type="text">
-
+                                            <input name="bdate" class="form-control w-datetimepicer" value="<?=date('d-m-Y', strtotime($user->bdate))?>" type="text">
                                         </div>
 
 
@@ -625,9 +669,17 @@
                                     </div>
 
                                     <div class="form-group">
+
+
                                         <div class="col-sm-offset-1 col-sm-5">
+                                            <div class="progress" style="margin-top: 5px; display: none">
+                                                <div class="progress-bar" id="progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                    0%
+                                                </div>
+                                            </div>
 
                                             <button type="submit" name="profil" value="1" class="btn btn-primary">Сохранить</button>
+                                            <span style="color: green; display: none" class="w-save-info"><strong>Информация сохранена!</strong></span>
                                         </div>
                                     </div>
 

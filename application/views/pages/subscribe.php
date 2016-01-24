@@ -15,7 +15,7 @@
             <!-- Context -->
             <div class="col-md-8">
                 <div id="context">
-                    <?=$data?>
+                    <p class="text-center"><strong><?=$data?></strong></p>
                 </div>
             </div>
             <!-- Bloc Right -->
