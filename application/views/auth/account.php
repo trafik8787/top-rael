@@ -168,9 +168,10 @@
 
                             progressBar.parents('.progress').delay(800).fadeOut();
                             $('.w-save-info').show();
-                            $('#myModalLotaryProfile .modal-body').delay(3000).empty();
+                            $('#myModalLotaryProfile .modal-body').empty();
                             $('#myModalLotaryProfile .modal-body').html('<h3>Спасибо! Ваши данные отправлены администрации сайта. Мы скоро свяжемся с вами.</h3><p class="text-center"><button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button></p>');
-                            $('.w-save-info').delay(3000).fadeOut();
+                            $('.w-save-info').delay(2000).fadeOut();
+                            setTimeout(function() {window.location.reload();}, 2000);
                         }, false);
 
 
