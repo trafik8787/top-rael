@@ -82,7 +82,7 @@
             return gallery;
         }
 
-        var hrefmap = $('.w-link-maps').attr('href');
+        var hrefmap = $('.w-baselink-maps').val();
 
         $('.tabs__caption').on('click', 'a:not(.active)', function() {
 
@@ -257,8 +257,8 @@
                     </div>
 
                     <div class="profile-sidebar">
-
-                        <a href="/maps?id=<?=$data['BusId']?>" class="pin-aria w-link-maps">
+                        <input type="hidden" value="/maps?id=<?=$data['BusId']?>" class="w-baselink-maps">
+                        <a href="/maps?id=<?=$data['BusId']?>&mapx=<?=$data['BusMapsX']?>" class="pin-aria w-link-maps">
                             <span class="pin"><i class="fa fa-map-marker"></i></span>Посмотреть на карте
                         </a>
                     </div>
