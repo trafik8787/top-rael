@@ -922,55 +922,151 @@ $(document).ready(function(){
     //});
 
 
-    $('.w-bloc-right-subscribe').submit(function(){
+    $('.w-bloc-right-subscribe').validate({
 
-        var input_email = $('.w-input-email-subcribe');
+        rules:{
 
-        $.ajax({ // описываем наш запрос
-            type: "POST", // будем передавать данные через POST
-            dataType: "JSON", // указываем, что нам вернется JSON
-            url: '/subscribe',
-            data: $(this).serialize(),
-            success: function(response) { // когда получаем ответ
-
-                if (response.susses != undefined) {
-                    input_email.popover({
-                        placement: 'bottom',
-                        content: response.susses,
-                        delay: { show: 100, hide: 500 }
-                    });
-                    input_email.popover('show');
-                    $('.popover.fade.bottom.in').css('background-color','greenyellow');
-                    $('.popover.bottom>.arrow').addClass('susses-email');
-                    setTimeout(function () {
-                        input_email.popover('destroy');
-                    }, 2000);
-                }
-
-                if (response.dublicate_email != undefined) {
-
-                    input_email.popover({
-                        placement: 'bottom',
-                        content: response.dublicate_email,
-                        delay: { show: 100, hide: 500 }
-                    });
-                    input_email.popover('show');
-
-                    $('.popover.fade.bottom.in').css('background-color','#FF7272');
-                    $('.popover.bottom>.arrow').addClass('errors-email');
-
-                    setTimeout(function () {
-                        input_email.popover('destroy');
-                    }, 2000);
-                }
-
-
-
+            email:{
+                required: true,
+                email: true
             }
-        });
 
-        return false;
+        },
+
+        messages:{
+
+            email:{
+                required: "Это поле обязательно для заполнения",
+                email: "Неправильный формат email"
+            }
+
+        },
+
+        submitHandler: function(form){
+
+            var input_email = $(form).find('.w-input-email-subcribe');
+
+            $.ajax({ // описываем наш запрос
+                type: "POST", // будем передавать данные через POST
+                dataType: "JSON", // указываем, что нам вернется JSON
+                url: '/subscribe',
+                data: $(form).serialize(),
+                success: function(response) { // когда получаем ответ
+
+                    if (response.susses != undefined) {
+                        input_email.popover({
+                            placement: 'bottom',
+                            content: response.susses,
+                            delay: { show: 100, hide: 500 }
+                        });
+                        input_email.popover('show');
+                        $('.popover.fade.bottom.in').css('background-color','greenyellow');
+                        $('.popover.bottom>.arrow').addClass('susses-email');
+                        setTimeout(function () {
+                            input_email.popover('destroy');
+                        }, 2000);
+                    }
+
+                    if (response.dublicate_email != undefined) {
+
+                        input_email.popover({
+                            placement: 'bottom',
+                            content: response.dublicate_email,
+                            delay: { show: 100, hide: 500 }
+                        });
+                        input_email.popover('show');
+
+                        $('.popover.fade.bottom.in').css('background-color','#FF7272');
+                        $('.popover.bottom>.arrow').addClass('errors-email');
+
+                        setTimeout(function () {
+                            input_email.popover('destroy');
+                        }, 2000);
+                    }
+
+                }
+            });
+
+            return false;
+
+        }
     });
+
+
+
+    $('.w-bloc-futer-subscribe').validate({
+
+        rules:{
+
+            email:{
+                required: true,
+                email: true
+            }
+
+        },
+
+        messages:{
+
+            email:{
+                required: "Это поле обязательно для заполнения",
+                email: "Неправильный формат email"
+            }
+
+        },
+
+        submitHandler: function(form){
+
+            var input_email = $(form).find('.w-input-email-subcribe');
+
+            $.ajax({ // описываем наш запрос
+                type: "POST", // будем передавать данные через POST
+                dataType: "JSON", // указываем, что нам вернется JSON
+                url: '/subscribe',
+                data: $(form).serialize(),
+                success: function(response) { // когда получаем ответ
+
+                    if (response.susses != undefined) {
+                        input_email.popover({
+                            placement: 'bottom',
+                            content: response.susses,
+                            delay: { show: 100, hide: 500 }
+                        });
+                        input_email.popover('show');
+                        $('.popover.fade.bottom.in').css('background-color','greenyellow');
+                        $('.popover.bottom>.arrow').addClass('susses-email');
+                        setTimeout(function () {
+                            input_email.popover('destroy');
+                        }, 2000);
+                    }
+
+                    if (response.dublicate_email != undefined) {
+
+                        input_email.popover({
+                            placement: 'bottom',
+                            content: response.dublicate_email,
+                            delay: { show: 100, hide: 500 }
+                        });
+                        input_email.popover('show');
+
+                        $('.popover.fade.bottom.in').css('background-color','#FF7272');
+                        $('.popover.bottom>.arrow').addClass('errors-email');
+
+                        setTimeout(function () {
+                            input_email.popover('destroy');
+                        }, 2000);
+                    }
+
+                }
+            });
+
+            return false;
+
+        }
+    });
+
+
+
+
 
 
 

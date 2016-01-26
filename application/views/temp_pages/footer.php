@@ -6,7 +6,13 @@
  * Time: 16:40
  */
 ?>
+<style>
 
+    #email-error {
+        display: block!important;
+    }
+
+</style>
 
     <footer>
 
@@ -21,12 +27,13 @@
                 <div class="col-md-8 col-sm-6">
                     <span class="w-logo-footer"></span>
                 </div>
-                <div class="col-md-4 text-right">
-                    <h4 class="text-right">Рассылка новинок сайта</h4>
-                    <form class="form-inline w-bloc-right-subscribe">
+                <div class="col-md-4 text-right hidden-xs" style="top: -10px;">
 
-                        <div class="form-group">
-                            <input type="email" style="width: 236px;" class="form-control w-input-email-subcribe" name="email" required="required" placeholder="Email">
+                    <h4 class="text-left"><a href="/newsletter" style="color: #ffffff">РАССЫЛКА НОВИНОК САЙТА</a></h4>
+                    <form role="form" class="form-inline w-bloc-futer-subscribe">
+
+                        <div class="form-group" style="height: 33px;">
+                            <input type="email" style="width: 236px;" class="form-control w-input-email-subcribe" name="email" placeholder="Email">
                         </div>
                         <button value="1" type="submit" class="btn btn-default w-subskrip-buton">Подписатся</button>
                     </form>
