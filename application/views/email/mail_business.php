@@ -37,7 +37,7 @@
                                                         <tr>
                                                             <td>
                                                                 <a href="#" target="_blank" style="display: block;">
-                                                                    <img src="cid:logo-new.png" width="250"
+                                                                    <img src="cid:logo-new-h.png" width="250"
                                                                          style="width:100%; height:auto;" alt="logo"/>
                                                                 </a>
                                                             </td>
@@ -76,7 +76,7 @@
                                     <table cellpadding="0" cellspacing="0" align="left">
                                         <tr>
                                             <td>
-                                                <span style="font-size:24px;">Вы получили письмо от TopIsrael</span>
+                                                <span style="font-size:24px;"></span>
                                             </td>
                                         </tr>
                                     </table>

@@ -76,7 +76,7 @@
                                     <table cellpadding="0" cellspacing="0" align="left">
                                         <tr>
                                             <td>
-                                                <span style="font-size:24px;">Поздравляем Вас! Вы выиграли в Лотерее Topisrael</span>
+                                                <span style="font-size:24px;">Вы выиграли в Лотерее Topisrael.ru!</span>
                                             </td>
                                         </tr>
                                     </table>
@@ -102,7 +102,7 @@
 
                         <p><strong style="color: #004FD1; font-size:24px;">Приз - <?=$name?></strong></p>
 
-                        <p>--------------------------</p>
+<hr>
 
 
                         <p>Как получить приз?</p>
@@ -111,7 +111,7 @@
 
                         <p>После получения анкеты, мы вышлем ваш Приз.</p>
 
-                        <p>--------------------------</p>
+<hr>
 
                         <p>Это автоматическое письмо, пожалуйста, не отвечайте на него.</p>
 

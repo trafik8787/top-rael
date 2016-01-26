@@ -57,6 +57,13 @@ class Model_SubscribeModel extends Model_BaseModel {
             ->where('business.status_subscribe','=', 0)
             ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
             ->and_where('business.status', '=', 1)
+            ->and_where('business.name', '<>', '')
+            ->and_where('business.city', '<>', '')
+            ->and_where('business.address', '<>', '')
+            ->and_where('business.tel', '<>', '')
+            ->and_where('business.home_busines_foto', '<>', '')
+            ->and_where('business.logo', '<>', '')
+            ->and_where('business.info', '<>', '')
             ->execute()->as_array();
 
         if (!empty($query)) {
