@@ -11,7 +11,7 @@
 <?if (!empty($content)):?>
 
 
-    <div class="sidebar-coupons">
+    <div class="sidebar-coupons w-bussines-coupons">
 
         <div class="sidebar-coupons-heading">
             <div class="sidebar-coupons-title">Купоны</div>
@@ -42,39 +42,40 @@
                                 <?=$BusName?>
                             </div>
                             <a href="/modalcoupon/<?=$row['CoupId']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm" class="coupon-image">
-                                <img src="<?=$row['CoupImg']?>" width="155" height="125" alt="" title=""/>
+                                <img src="<?=$row['CoupImg']?>" alt="<?=$BusName?>" title="Посмотреть полный купон"/>
                             </a>
                         </div>
+                        <a href="/modalcoupon/<?=$row['CoupId']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm" class="coupon-image" title="Посмотреть полный купон">
+                            <div class="coupon-sidebar">
+                                <div class="coupon-sidebar-content">
+                                    <div class="coupon-sidebar-heading">
+                                        <div class="coupon-object-top">
 
-                        <div class="coupon-sidebar">
-                            <div class="coupon-sidebar-content">
-                                <div class="coupon-sidebar-heading">
-                                    <div class="coupon-object-top">
+                                            <div class="coupon-title">
+                                                <?=$row['CoupName']?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="coupon-sidebar-body">
+                                        <div class="coupon-object-middle">
 
-                                        <div class="coupon-title">
-                                            <?=$row['CoupName']?>
+                                            <div class="coupon-title">
+                                                <?=$row['CoupSecondname']?>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="coupon-sidebar-footer">
+
+                                        <div class="coupon-object-bottom">
+
+                                            <small class="coupon-date">до <?=Date::rusdate(strtotime($row['DateOff']), 'j %MONTH% Y'); ?></small>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="coupon-sidebar-body">
-                                    <div class="coupon-object-middle">
 
-                                        <div class="coupon-title">
-                                            <?=$row['CoupSecondname']?>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="coupon-sidebar-footer">
-
-                                    <div class="coupon-object-bottom">
-
-                                        <small class="coupon-date">до <?=Date::rusdate(strtotime($row['DateOff']), 'j %MONTH% Y'); ?></small>
-                                    </div>
-                                </div>
                             </div>
-
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -124,7 +124,7 @@ abstract class Controller_BaseController extends Controller_Template {
             '/maps.googleapis.com/maps/api/js?v=3&libraries=places',
             'public/javascripts/markerclusterer_compiled.js',
             'public/javascripts/infobox.js',
-
+            'public/javascripts/jquery.printElement.min.js',
             'public/javascripts/app.js'
         );
 
@@ -193,9 +193,9 @@ abstract class Controller_BaseController extends Controller_Template {
      * @return array
      * преобразование масиива для вывода бизнесов например в две колонки
      */
-    public static function convertArrayVievData($data){
+    public static function convertArrayVievData($data, $count = 2){
 
-        return array_chunk($data, 2);
+        return array_chunk($data, $count);
     }
 
 

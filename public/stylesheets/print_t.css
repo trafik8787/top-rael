@@ -1,0 +1,89 @@
+/* Welcome to Compass. Use this file to define print styles.
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" /> */
+@page {
+  size: A4;
+  margin: 5mm;
+}
+@media print {
+  /* line 11, ../.sass/print.scss */
+  html, body {
+    width: 210mm;
+    height: 297mm;
+  }
+}
+/* line 17, ../.sass/print.scss */
+#wrapper,
+.img {
+  display: none !important;
+}
+
+/* line 22, ../.sass/print.scss */
+/*.modal.modal-coupon {*/
+  /*width: 400px !important;*/
+  /*position: relative;*/
+/*}*/
+/*!* line 30, ../.sass/print.scss *!*/
+/*.modal.modal-coupon .coupon-modal > .div-table > .div-row > .div-cell {*/
+  /*float: left !important;*/
+/*}*/
+/*!* line 34, ../.sass/print.scss *!*/
+/*.modal.modal-coupon .coupon-modal > .div-table > .div-row > .div-cell:first-child {*/
+  /*width: 62% !important;*/
+  /*padding-left: 0 !important;*/
+/*}*/
+/*!* line 39, ../.sass/print.scss *!*/
+/*.modal.modal-coupon .coupon-modal > .div-table > .div-row > .div-cell:last-child {*/
+  /*width: 38% !important;*/
+/*}*/
+/*!* line 43, ../.sass/print.scss *!*/
+/*.modal.modal-coupon .coupon-modal > .div-table > .div-row > .div-cell:before {*/
+  /*display: none !important;*/
+/*}*/
+/*!* line 49, ../.sass/print.scss *!*/
+/*.modal.modal-coupon .coupon-modal .coupon-image,*/
+/*.modal.modal-coupon .coupon-modal .coupon-image img {*/
+  /*min-width: unset !important;*/
+  /*min-height: unset !important;*/
+  /*width: 440px !important;*/
+/*}*/
+/*!* line 56, ../.sass/print.scss *!*/
+/*.modal.modal-coupon .coupon-modal .coupon-content {*/
+  /*width: 62% !important;*/
+  /*float: left !important;*/
+/*}*/
+/*!* line 61, ../.sass/print.scss *!*/
+/*.modal.modal-coupon .coupon-modal .coupon-sidebar {*/
+  /*width: 38% !important;*/
+  /*float: left !important;*/
+/*}*/
+/*!* line 68, ../.sass/print.scss *!*/
+/*.modal.modal-coupon .close {*/
+  /*display: none !important;*/
+/*}*/
+/*!* line 72, ../.sass/print.scss *!*/
+/*.modal.modal-coupon .modal-dialog {*/
+  /*padding: 0 !important;*/
+/*}*/
+/*!* line 77, ../.sass/print.scss *!*/
+/*.modal.modal-coupon .modal-footer .div-table {*/
+  /*display: none !important;*/
+/*}*/
+
+/*!* line 84, ../.sass/print.scss *!*/
+/*.icons.logo.md {*/
+  /*color: #fff !important;*/
+  /*position: relative;*/
+  /*overflow: hidden;*/
+  /*text-indent: 0;*/
+/*}*/
+/*!* line 92, ../.sass/print.scss *!*/
+/*.icons.logo.md:before {*/
+  /*width: 500px;*/
+  /*height: 500px;*/
+  /*background: #fff;*/
+  /*content: url("../images/icons.png");*/
+  /*position: absolute;*/
+  /*left: 0;*/
+  /*top: -97px;*/
+/*}*/

@@ -100,39 +100,39 @@
                                             <?=$rows_coupon['BusName']?>
                                         </div>
                                         <a href="/modalcoupon/<?=$rows_coupon['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm" class="coupon-image">
-                                            <img src="<?=$rows_coupon['img_coupon']?>" width="155" height="125" alt="" title=""/>
+                                            <img src="<?=$rows_coupon['img_coupon']?>" width="155" height="125" alt="" title="Посмотреть полный купон"/>
                                         </a>
 
                                     </div>
 
                                     <div class="coupon-sidebar">
-                                        <div class="coupon-sidebar-content">
-                                            <div class="coupon-sidebar-heading">
-                                                <div class="coupon-object-top">
+                                        <a href="/modalcoupon/<?=$rows_coupon['id']?>"  data-toggle="modal" data-target=".bs-coupon-modal-sm" class="coupon-image" title="Посмотреть полный купон">
+                                            <div class="coupon-sidebar-content">
+                                                <div class="coupon-sidebar-heading">
+                                                    <div class="coupon-object-top">
 
-                                                    <div class="coupon-title">
-                                                        <?=$rows_coupon['name']?>
-<!--                                                        <small class="block">--><?//=$rows_coupon['name']?><!--</small>-->
+                                                        <div class="coupon-title">
+                                                            <?=$rows_coupon['name']?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="coupon-sidebar-body">
+                                                    <div class="coupon-object-middle">
+
+                                                        <div class="coupon-title">
+                                                            <?=$rows_coupon['secondname']?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="coupon-sidebar-footer">
+
+                                                    <div class="coupon-object-bottom">
+
+                                                        <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_coupon['dateoff']), 'j %MONTH% Y'); ?></small>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="coupon-sidebar-body">
-                                                <div class="coupon-object-middle">
-
-                                                    <div class="coupon-title">
-                                                        <?=$rows_coupon['secondname']?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="coupon-sidebar-footer">
-
-                                                <div class="coupon-object-bottom">
-
-                                                    <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_coupon['dateoff']), 'j %MONTH% Y'); ?></small>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                        </a>
                                     </div>
                                 </div>
                             </div>

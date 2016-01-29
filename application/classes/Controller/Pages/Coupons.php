@@ -31,9 +31,9 @@ class Controller_Pages_Coupons extends Controller_BaseController {
         $content->category =  Model::factory('CouponsModel')->CouponsSectionCountCoupon(self::$general_meny);
 
         if ($this->request->param('url_section') == '') {
-            $data = Model::factory('CouponsModel')->getCouponsSectionUrl(null, 10, $number_page, $city_id);
+            $data = Model::factory('CouponsModel')->getCouponsSectionUrl(null, 12, $number_page, $city_id);
         } else {
-            $data = Model::factory('CouponsModel')->getCouponsSectionUrl($this->request->param('url_section'), 10, $number_page, $city_id);
+            $data = Model::factory('CouponsModel')->getCouponsSectionUrl($this->request->param('url_section'), 12, $number_page, $city_id);
         }
 
         $content->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
@@ -47,7 +47,7 @@ class Controller_Pages_Coupons extends Controller_BaseController {
 
 
         //преобразование масива для правильного вывода
-        $result_data = parent::convertArrayVievData($data['data']);
+        $result_data = parent::convertArrayVievData($data['data'], 3);
 
 
         $this->SeoShowPage(array('Купоны с эксклюзивными скидками и подарками в Израиле', ''),

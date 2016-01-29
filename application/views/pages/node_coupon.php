@@ -13,11 +13,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?=$data[0]['name']?></title>
+    <title><?=strip_tags($data[0]['info'])?> <?=$data[0]['BusName']?> <?=$data[0]['CityName']?></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
+    <meta name="keywords" content="<?=$data[0]['dateoff']?> Скидки и подарки только при предъявлении купона TopIsrael.ru">
+    <meta name="description" content="<?=$data[0]['dateoff']?> Скидки и подарки только при предъявлении купона TopIsrael.ru">
 
 
 
@@ -43,7 +43,7 @@
     <script src="/public/javascripts/markerclusterer_compiled.js"></script>
     <script src="/public/javascripts/infobox.js"></script>
     <script src="/public/javascripts/app.js"></script>
-
+    <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="windows-1251"></script>
 </head>
 
 
@@ -76,7 +76,7 @@
                                         <div class="coupon-sidebar-content">
                                             <div class="coupon-sidebar-heading">
                                                 <div class="coupon-object-middle text-center">
-                                                    <a href="#" class="icons w-logo md"><!-- TopIsrael --></a>
+                                                    <a href="/" class="icons w-logo md"><!-- TopIsrael --></a>
                                                 </div>
                                             </div>
 
@@ -85,12 +85,12 @@
 
                                                     <div class="coupon-title">
                                                         <?=$data[0]['name']?>
-<!--                                                        <span class="block"><strong>--><?//=$data[0]['secondname']?><!--</strong></span>-->
+
                                                     </div>
 
                                                     <div class="text-center">
                                                         <strong><?=$data[0]['secondname']?></strong>
-<!--                                                        <small class="block">--><?//=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?><!--</small>-->
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,7 +98,9 @@
                                             <div class="coupon-sidebar-footer">
 
                                                 <div class="coupon-object-bottom">
-                                                    <small class="coupon-date">до <?=Date::rusdate(strtotime($data[0]['dateoff']), 'j %MONTH% Y'); ?></small>
+                                                    <small class="coupon-date">до <?=Date::rusdate(strtotime($data[0]['dateoff']), 'j %MONTH% Y'); ?>
+                                                        <br> Только при предъявление этого купона</small>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -114,8 +116,8 @@
 
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <a href="#">
-                                                        <img class="media-object" src="<?=$data[0]['BusLogo']?>" width="88" height="88" alt="...">
+                                                    <a href="/business/<?=$data[0]['BusUrl']?>">
+                                                        <img class="media-object" src="<?=$data[0]['BusLogo']?>" width="88" height="88" alt="<?=$data[0]['BusName']?>">
                                                     </a>
                                                 </div>
                                                 <div class="media-body">
@@ -141,6 +143,9 @@
                         </div>
 
                         <div class="modal-footer">
+
+
+
                             <p class="rtl">
                                 <?=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?>
                             </p>
@@ -176,6 +181,66 @@
                                 </div>
 
                             </div>
+
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="text-center">
+                                        <span>Отправьте ссылку на этот купон</span><br>
+                                        <?php
+                                        $image_url = 'http://'.$_SERVER['HTTP_HOST'].$data[0]['img_coupon']; // URL изображения
+                                        ?>
+                                        <a href="http://www.facebook.com/sharer.php?s=100&p[url]=<?= urlencode(  Request::full_current_url() ); ?>&p[title]=<?=$data[0]['name'] ?>&p[summary]=<?=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?>&p[images][0]=<?=$image_url ?>" onclick="window.open(this.href, this.title, 'toolbar=0, status=0, width=548, height=325'); return false" class="social facebook" title="Поделиться ссылкой на Фейсбук" target="_parent"><i class="fa fa-facebook"></i></a>
+
+
+                                        <script type="text/javascript">
+                                            document.write(VK.Share.button({
+                                                url: '<?=Request::full_current_url()?>',
+                                                title: '<?=$data[0]['name']?>',
+                                                description: '<?=Text::limit_chars(strip_tags($data[0]['info']), 120, null, true)?>',
+                                                image: 'http://<?=$_SERVER['HTTP_HOST']?><?=$data[0]['img_coupon']?>',
+                                                noparse: true
+                                            }, {
+                                                type: 'custom',
+                                                text: '<span class="social vk"><i class="fa fa-vk"></i></span>'
+                                            }));
+                                        </script>
+
+
+
+                                        <div id="ok_shareWidget" style="display: inline-block;position: relative;top: 19px"></div>
+                                        <script>
+                                            !function (d, id, did, st) {
+                                                var js = d.createElement("script");
+                                                js.src = "https://connect.ok.ru/connect.js";
+                                                js.onload = js.onreadystatechange = function () {
+                                                    if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+                                                        if (!this.executed) {
+                                                            this.executed = true;
+                                                            setTimeout(function () {
+                                                                OK.CONNECT.insertShareWidget(id,did,st);
+                                                            }, 0);
+                                                        }
+                                                    }};
+                                                d.documentElement.appendChild(js);
+                                            }(document,"ok_shareWidget","http://<?=$_SERVER['HTTP_HOST']?>/","{width:40,height:40,st:'straight',sz:45,nt:1,nc:1}");
+                                        </script>
+
+
+
+
+                                        <a style="top: 1px;position: relative;" href="https://plus.google.com/share?url=<?=HTML::HostSite($_SERVER['REQUEST_URI'])?>" onclick="javascript:window.open(this.href,
+                                                        '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img
+                                                src="../../../public/images/google_icon.png" width="45" alt="Share on Google+"/></a>
+
+                                        <a href="https://twitter.com/intent/tweet?text=<?=Text::limit_chars(strip_tags($data[0]['info']), 100, null, true).' '.Request::full_current_url()?>" class="social twitter">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>

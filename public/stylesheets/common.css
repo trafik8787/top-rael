@@ -10862,7 +10862,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 }
 /* line 16, ../.sass/coupon.scss */
 .coupon.coupon-small .coupon-body {
-  height: 130px;
+  height: 280px;
   font-size: 19px;
   line-height: 1.1;
 }
@@ -10874,13 +10874,16 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 }
 /* line 32, ../.sass/coupon.scss */
 .coupon.coupon-big .coupon-body {
-  height: 170px;
+  /*height: 170px;*/
   font-size: 25px;
   line-height: 1.1;
 }
 /* line 40, ../.sass/coupon.scss */
 .coupon.coupon-modal .coupon-body {
-  height: 360px;
+  display: table;
+  width: 100%;
+  height: 100%;
+
   font-size: 48px;
   line-height: 1.1;
 }
@@ -10890,53 +10893,100 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 }
 /* line 51, ../.sass/coupon.scss */
 .coupon .coupon-body {
-  display: table;
-  width: 100%;
-  height: 100%;
+  /*display: table;*/
+  /*width: 100%;*/
+  /*height: 100%;*/
   color: #e02929;
 }
+
+
 /* line 57, ../.sass/coupon.scss */
 .coupon .coupon-body .coupon-content {
+  /*position: relative;*/
+  /*width: 62%;*/
+  /*height: 100%;*/
+  /*overflow: hidden;*/
+  /*float: left;*/
+}
+
+
+.coupon.coupon-modal .coupon-body .coupon-content {
   position: relative;
   width: 62%;
   height: 100%;
   overflow: hidden;
   float: left;
 }
+
 /* line 66, ../.sass/coupon.scss */
 .coupon .coupon-body .coupon-content .coupon-content-heading {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  z-index: 1001;
+  /*position: absolute;*/
+  /*left: 0;*/
+  /*top: 0;*/
+  /*right: 0;*/
+  /*z-index: 1001;*/
   color: #fff;
   font-size: 80%;
   background: rgba(0, 0, 0, 0.5);
   padding: 5px 10px;
 }
+
+
+.coupon-big .coupon-body .coupon-content .coupon-content-heading {
+  height: 54px;
+}
+
+.coupon-small .coupon-body .coupon-content .coupon-content-heading {
+  height: 42px;
+}
+
+.coupon-big .coupon-body .coupon-sidebar .coupon-title {
+  font-size: 18px;
+}
+
 /* line 83, ../.sass/coupon.scss */
 .coupon .coupon-body .coupon-content .coupon-image {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: 1000;
+  /*position: absolute;*/
+  /*left: 50%;*/
+  /*top: 50%;*/
+  /*z-index: 1000;*/
 }
 /* line 91, ../.sass/coupon.scss */
 .coupon .coupon-body .coupon-sidebar {
+  /*width: 38%;*/
+  /*height: 100%;*/
+  /*float: right;*/
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.coupon.coupon-modal .coupon-body .coupon-sidebar {
   width: 38%;
   height: 100%;
   float: right;
+  padding: 5px 0 0 0;
 }
+
+.coupon.coupon-big {
+  height: 400px;
+}
+
 /* line 98, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content {
+  /*display: table;*/
+  /*height: 100%;*/
+  /*width: 100%;*/
+}
+
+.coupon.coupon-modal .coupon-sidebar-content {
   display: table;
   height: 100%;
   width: 100%;
 }
+
 /* line 103, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content .coupon-sidebar-heading {
-  display: table-row;
+  /*display: table-row;*/
 }
 /* line 106, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content .coupon-sidebar-heading .coupon-title {
@@ -10944,30 +10994,58 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 }
 /* line 111, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content .coupon-sidebar-body {
-  display: table-row;
+  /*display: table-row;*/
 }
 /* line 115, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content .coupon-sidebar-footer {
-  display: table-row;
+  position: absolute;
+  bottom: 2px;
+  display: block;
+  width: 100%;
 }
+
+.coupon-modal .coupon-sidebar-content .coupon-sidebar-footer {
+  position: relative;
+  top: 139px;
+}
+
 /* line 120, ../.sass/coupon.scss */
 .coupon .coupon-object-top {
-  display: table-cell;
-  vertical-align: top;
+  /*display: table-cell;*/
+  /*vertical-align: top;*/
 }
 /* line 125, ../.sass/coupon.scss */
 .coupon .coupon-object-middle {
-  display: table-cell;
+  /*display: table-cell;*/
   vertical-align: middle;
 }
 /* line 130, ../.sass/coupon.scss */
 .coupon .coupon-object-bottom {
-  display: table-cell;
+  /*display: table-cell;*/
   vertical-align: bottom;
 }
 /* line 135, ../.sass/coupon.scss */
 .coupon .coupon-image,
 .coupon .coupon-image img {
+  text-decoration: none;
+  width: 100%;
+  color: #e02929;
+  /*display: block;*/
+  /*min-width: 100%;*/
+  /*min-height: 100%;*/
+  /*height: auto;*/
+  /*position: absolute;*/
+  /*left: 50%;*/
+  /*top: 50%;*/
+  /*-moz-transform: translate(-50%, -50%);*/
+  /*-ms-transform: translate(-50%, -50%);*/
+  /*-webkit-transform: translate(-50%, -50%);*/
+  /*transform: translate(-50%, -50%);*/
+}
+
+
+.coupon.coupon-modal .coupon-image img {
+
   display: block;
   min-width: 100%;
   min-height: 100%;
@@ -10980,6 +11058,8 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
+
 /* line 151, ../.sass/coupon.scss */
 .coupon .coupon-title {
   text-align: center;
@@ -12443,6 +12523,12 @@ footer {
 /* line 69, ../.sass/sidebar.scss */
 .sidebar-coupons .sidebar-coupons-body {
   margin-bottom: 15px;
+}
+
+.w-bussines-coupons .sidebar-coupons-body {
+  width: 227px;
+  margin: 0 auto;
+  margin-bottom: 17px;
 }
 
 /* line 74, ../.sass/sidebar.scss */
@@ -14498,8 +14584,9 @@ footer {
 }
 /* line 235, ../.sass/modal.scss */
 .modal.modal-coupon .coupon.coupon-modal .coupon-body .coupon-title {
-  font-size: 48px;
-  margin-bottom: 20px;
+  font-size: 33px;
+  margin-bottom: 13px;
+  margin-top: 13px;
 }
 /* line 240, ../.sass/modal.scss */
 .modal.modal-coupon .coupon.coupon-modal .coupon-body .coupon-title span {
@@ -14530,6 +14617,17 @@ footer {
     width: 100%;
     float: none;
   }
+
+  .modal.modal-coupon .coupon.coupon-modal .coupon-body .coupon-content img {
+    width: 100%!important;
+    height: auto!important;
+  }
+
+  .coupon-modal .coupon-sidebar-content .coupon-sidebar-footer {
+    position: relative;
+    top: 16px;
+  }
+
   /* line 271, ../.sass/modal.scss */
   .modal.modal-coupon .coupon.coupon-modal .coupon-body .coupon-sidebar-heading,
   .modal.modal-coupon .coupon.coupon-modal .coupon-body .coupon-sidebar-body,

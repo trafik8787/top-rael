@@ -539,7 +539,7 @@ $(document).ready(function(){
                             items: 3
                         },
                         1170: {
-                            items: 4
+                            items: 5
                         }
                     },
                     nav: true,
@@ -573,7 +573,7 @@ $(document).ready(function(){
                 items: 3
             },
             1170: {
-                items: 4
+                items: 5
             }
         },
         nav: true,
@@ -593,10 +593,9 @@ $(document).ready(function(){
     $(document).on('click', '.w-button-print', function(){
         $(".w-print-coupon").print({
             globalStyles: true,
-            stylesheet: '/public/stylesheets/print.css'
+            stylesheet: 'http://topisrael.webremote.net/public/stylesheets/print.css'
         });
     });
-
 
 
 
