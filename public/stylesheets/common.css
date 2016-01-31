@@ -14565,6 +14565,7 @@ footer {
   .modal.modal-coupon .modal-body {
     display: block;
     width: auto;
+    height: 100%!important;
   }
 }
 /* line 223, ../.sass/modal.scss */

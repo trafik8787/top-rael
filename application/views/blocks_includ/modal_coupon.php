@@ -12,11 +12,11 @@
         aria-label="Close"><span
         class="lnr lnr-cross"></span></button>
 
-<div class="modal-body print w-print-coupon">
+<div class="modal-body print w-print-coupon" style="height: 540px;">
 
         <div class="coupon coupon-modal">
 
-            <div class="coupon-body">
+            <div class="coupon-body" style="height: 360px;">
 
                 <div class="coupon-content">
 
@@ -59,7 +59,7 @@
 
                 <div class="div-row">
 
-                    <div class="div-cell">
+                    <div class="div-cell" style="width: 434px;">
 
                         <div class="media">
                             <div class="media-left">
@@ -77,7 +77,7 @@
 
                     </div>
 
-                    <div class="div-cell">
+                    <div class="div-cell" style="width: 266px; padding-left: 41px!important;">
                         <div> <?=$data[0]['BusSchedule']?></div>
                         <div>Адрес: <?=$data[0]['BusAddress']?></div>
                         <div><?=$data[0]['CityName']?></div>
@@ -86,17 +86,16 @@
                 </div>
             </div>
 
+            <p class="rtl" style="font-size: 17px; padding-right: 10px;">
+                <?=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?>
+            </p>
+
         </div>
 
 </div>
 
 <div class="modal-footer">
 
-
-
-    <p class="rtl">
-        <?=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?>
-    </p>
 
     <div class="div-table">
 
