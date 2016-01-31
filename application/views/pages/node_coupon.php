@@ -235,6 +235,9 @@
                                         <a href="https://twitter.com/intent/tweet?text=<?=Text::limit_chars(strip_tags($data[0]['info']), 100, null, true).' '.Request::full_current_url()?>" class="social twitter">
                                             <i class="fa fa-twitter"></i>
                                         </a>
+
+                                        <a href="mailto:?Subject=Купон <?=$data[0]['name']?> <?=$data[0]['secondname']?>&body=<?=HTML::HostSite('/'.Request::detect_uri())?>"><span class="w-icon-mail"></span></a>
+
                                     </div>
                                 </div>
 

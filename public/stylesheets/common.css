@@ -6190,6 +6190,15 @@ select[multiple].input-lg,
   width: auto!important;
 }
 
+.w-icon-mail {
+  background: url('../../public/images/icon_mail.png') no-repeat;
+  width: 45px;
+  height: 45px;
+  display: inline-block;
+  position: relative;
+  top: 19px;
+}
+
 @media (min-width: 768px) {
   /* line 472, c:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_forms.scss */
   .form-inline .form-group {
