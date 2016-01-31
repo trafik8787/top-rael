@@ -41,7 +41,6 @@
 
                     <h1><?=$data['ArticName']?></h1>
 
-<!--                    <p><i><strong>--><?//=$data['ArticSecondname']?><!--</strong></i></p>-->
 
                     <br/>
                     <?if (!empty($data['ArticShortPreviev'])):?>
@@ -56,7 +55,9 @@
                     <?endif?>
                     <br/>
 
-                    <p><?=$data['ArticContent']?></p>
+                    <span class="w-node-article">
+                        <p><?=$data['ArticContent']?></p>
+                    </span>
 
                     <?if (!empty($data['BusArr'])):?>
 

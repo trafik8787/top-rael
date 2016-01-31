@@ -6180,13 +6180,33 @@ select[multiple].input-lg,
   color: #737373;
 }
 
+
+.form-inline .w-form-group {
+  margin-bottom: 0!important;
+  width: auto!important;
+}
+
+.form-inline .w-form-group .form-control {
+  width: auto!important;
+}
+
 @media (min-width: 768px) {
   /* line 472, c:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_forms.scss */
   .form-inline .form-group {
     display: inline-block;
-    margin-bottom: 0;
+    /*margin-bottom: 0;*/
     vertical-align: middle;
   }
+
+  .form-inline .w-form-group {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .form-inline .w-form-group .form-control {
+    width: 100%;
+  }
+
   /* line 479, c:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_forms.scss */
   .form-inline .form-control {
     display: inline-block;
@@ -11936,7 +11956,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   width: 26%;
   display: inline-block;
   position: absolute;
-  top: 108px;
+  top: 107px;
   right: 18px;
 }
 }
@@ -12779,6 +12799,7 @@ footer {
   /* line 65, ../.sass/top.scss */
   .top .top-image .top-image-text {
     background: #666666;
+    bottom: auto;
   }
 }
 /* line 71, ../.sass/top.scss */
@@ -14976,6 +14997,11 @@ i {
 /* line 134, ../.sass/common.scss */
 .open-all:hover {
   background: #F7F7F7;
+}
+
+
+.w-node-article img {
+  width: 100%;
 }
 
 /* line 139, ../.sass/common.scss */

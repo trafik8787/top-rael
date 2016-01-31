@@ -24,12 +24,12 @@
 
             <div class="panel-heading">
 
-                <div class="col-md-8 col-sm-6">
+                <div class="col-md-7 col-sm-6">
                     <span class="w-logo-footer"></span>
                 </div>
-                <div class="col-md-4 text-right hidden-xs" style="top: -10px;">
+                <div class="col-md-5 text-right hidden-xs" style="top: -10px;">
 
-                    <h4 class="text-left"><a href="/newsletter" style="color: #ffffff">РАССЫЛКА НОВИНОК САЙТА</a></h4>
+                    <h4 class="text-right"><a href="/newsletter" style="color: #ffffff">РАССЫЛКА НОВИНОК САЙТА</a></h4>
                     <form role="form" class="form-inline w-bloc-futer-subscribe">
 
                         <div class="form-group" style="height: 33px;">

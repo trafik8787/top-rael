@@ -36,13 +36,11 @@
 
                             <p class="hidden-xs"><?=$rows_articles['short_previev']?></p>
 
-
-<!--                            <p> --><?//=Text::limit_chars(strip_tags($rows_articles['content']), 180, null, true)?><!--</p>-->
                         </div>
                     </div>
                 <?endforeach?>
 
-                <div class="text-center">
+                <div class="text-center media">
                     <a href="/articles" class="btn open-all" role="button">Открыть все</a>
                 </div>
             </div>
@@ -234,6 +232,7 @@
                             </div>
 
                             <div class="panel-footer text-center">
+                                
                                 <a href="/section/<?=$rowsdata['category'][0]['url']?>" class="btn open-all" role="button">Открыть все</a>
                             </div>
 
