@@ -76,10 +76,11 @@
                                     <span style="font-size:12px; color: #a9a9a9;">Рассылка за <?=Date::rusdate(strtotime($date_subscribe), 'j %MONTH% Y'); ?></span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><span><h3 style="margin: 0;padding: 0 0 10px 7px;">Обзоры</h3></span></td>
-                            </tr>
                             <?if (!empty($article_shift)):?>
+                                <tr>
+                                    <td><span><h3 style="margin: 0;padding: 0 0 10px 7px;">Обзоры</h3></span></td>
+                                </tr>
+
                                 <tr>
                                     <td>
                                         <img src="/uploads/img_articles/thumbs/<?=basename($article_shift['images_article'])?>" width="600" height="420"
@@ -151,11 +152,11 @@
 
 
                                     <table cellpadding="0" cellspacing="0" width="100%" style="margin-top: 20px;">
-                                        <tr>
-                                            <td><span><h3 style="margin: 0;padding: 0 0 10px 7px;">Купоны</h3></span></td>
-                                        </tr>
-
                                         <? if (!empty($coupons)): ?>
+
+                                            <tr>
+                                                <td><span><h3 style="margin: 0;padding: 0 0 10px 7px;">Купоны</h3></span></td>
+                                            </tr>
 
                                             <? foreach ($coupons as $row_coupons): ?>
 

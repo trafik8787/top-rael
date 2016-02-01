@@ -160,11 +160,11 @@
 
 
                                     <table cellpadding="0" cellspacing="0" width="100%" style="margin-top: 20px;">
-                                        <tr>
-                                            <td><span><h3 style="margin: 0;padding: 0 0 10px 7px;">Купоны</h3></span></td>
-                                        </tr>
 
                                         <? if (!empty($coupons)): ?>
+                                            <tr>
+                                                <td><span><h3 style="margin: 0;padding: 0 0 10px 7px;">Купоны</h3></span></td>
+                                            </tr>
 
                                             <? foreach ($coupons as $row_coupons): ?>
 
