@@ -208,14 +208,26 @@ class Controller_Pages_Ajax extends Controller {
         if (date('l') == 'Thursday' or $flag !== null) {
 
             //получаем бизнесы которые еще не попадали в рассылку
-            $business = Model::factory('SubscribeModel')->getSubskribeBusiness();
-            $articless = Model::factory('SubscribeModel')->getSubskribeArticless();
-            $users = Model::factory('SubscribeModel')->getSubskribeUsers();
+            $SubscribeModel = new Model_SubscribeModel();
 
-            if (!empty($business) OR !empty($articless)) {
+            $business = $SubscribeModel->getSubskribeBusiness();
+            $articless = $SubscribeModel->getSubskribeArticless();
+            $coupons = $SubscribeModel->getSubskribeCoupons();
+            $lotery = Model::factory('LotareyModel')->getLotareya();
+            $users_lotery =  Model::factory('LotareyModel')->getUserLotarey(3);
+
+
+            $users = $SubscribeModel->getSubskribeUsers();
+
+            if (!empty($business) OR !empty($articless) OR !empty($coupons)) {
 
                 $data = View::factory('email/mail');
                 $data->business = $business;
+                $data->coupons = Controller_BaseController::convertArrayVievData($coupons);
+
+                $data->users = $users_lotery;
+                $data->lotarey = $lotery;
+
                 $article_shift = array_shift($articless);
                 $data->article_shift = $article_shift;
                 $data->articless = $articless;
@@ -234,13 +246,42 @@ class Controller_Pages_Ajax extends Controller {
                         $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($article_shift['images_article']), "", "");
                     }
 
-                    foreach ($articless as $artic) {
-                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($artic['images_article']), "", "");
+                    if (!empty($articless)) {
+                        foreach ($articless as $artic) {
+                            $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($artic['images_article']), "", "");
+                        }
+                    }
+
+                    if (!empty($coupons)) {
+                        foreach ($coupons as $row_coupon) {
+                            $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_coupons/' . basename($row_coupon['img_coupon']), "", "");
+                        }
+                    }
+
+                    if (!empty($lotery)) {
+                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . $lotery[0]['img'], "", "");
+                    }
+
+                    if (!empty($users_lotery)) {
+                        foreach ($users_lotery as $item_lotery) {
+                            if (!empty($item_lotery['usersPhoto'])) {
+                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . $item_lotery['usersPhoto'], "", "");
+                            } else {
+                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/public/uploade/no_avatar.jpg', "", "");
+                            }
+                        }
                     }
 
                     foreach ($business as $bus) {
-                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_business/thumbs/' . basename($bus['home_busines_foto']), "", "");
+
+                        if (!empty($bus['BusArr'])){
+
+                            foreach ($bus['BusArr'] as $bus_item) {
+                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_business/thumbs/' . basename($bus_item['home_busines_foto']), "", "");
+                            }
+                        }
                     }
+
 
                     $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/images/logo-new.png", "", "image/png");
                     $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/2.png", "", "image/png");
@@ -280,6 +321,7 @@ class Controller_Pages_Ajax extends Controller {
 
         //запуск рассылки
        $this->SendEmailSubscribe($flag);
+
         //лотарея
         $this->LotareyCron();
         //включение отключение уведомление по банерам

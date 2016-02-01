@@ -490,6 +490,9 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('img', array('file', 'uploads/img_lotarey', 'lot_', '', 'img'),'', '');
         $crud->show_columns('id', 'name', 'date_start', 'date_end', 'status');
 
+        $crud->edit_fields('secondname','description','img','business_id','date_start','date_end','status');
+        $crud->add_field('secondname','description','img','business_id','date_start','date_end','status');
+
         $crud->callback_befor_show_edit('call_bef_show_edit_lotery');
         $crud->rows_color_where(4, '==', 3, ' #cccccc');
 

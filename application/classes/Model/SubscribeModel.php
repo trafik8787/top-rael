@@ -50,10 +50,27 @@ class Model_SubscribeModel extends Model_BaseModel {
      */
     public function getSubskribeBusiness(){
 
-        $query = DB::select('business.*', array('city.name', 'CityName'))
+
+        $query_bus = DB::select('business.*',
+            array('city.name', 'CityName'),
+            array('cat2.id', 'CatId'),
+            array('cat2.name', 'CatName')
+
+        )
             ->from('business')
+
+            ->join(array('businesscategory', 'buscat'))
+            ->on('buscat.business_id', '=', 'business.id')
+
+            ->join(array('category', 'cat'))
+            ->on('buscat.category_id', '=', 'cat.id')
+
+            ->join(array('category', 'cat2'))
+            ->on('cat.parent_id', '=', 'cat2.id')
+
             ->join('city', 'LEFT')
             ->on('business.city','=','city.id')
+
             ->where('business.status_subscribe','=', 0)
             ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
             ->and_where('business.status', '=', 1)
@@ -66,7 +83,22 @@ class Model_SubscribeModel extends Model_BaseModel {
             ->and_where('business.info', '<>', '')
             ->execute()->as_array();
 
-        if (!empty($query)) {
+
+        $result_bus = array();
+        foreach ($query_bus as $rows_bus) {
+
+            if (empty($result_bus[$rows_bus['CatId']]['CatName'])) {
+                $result_bus[$rows_bus['CatId']]['CatName'] = $rows_bus['CatName'];
+                $result_bus[$rows_bus['CatId']]['BusArr'][$rows_bus['id']] = $rows_bus;
+            } else {
+                $result_bus[$rows_bus['CatId']]['BusArr'][$rows_bus['id']] = $rows_bus;
+            }
+
+        }
+
+
+
+        if (!empty($result_bus)) {
 
             //записываем id рассылки
             if ($this->id_arhiv_subskribe === null) {
@@ -74,8 +106,14 @@ class Model_SubscribeModel extends Model_BaseModel {
             }
 
             $id_business = array();
-            foreach ($query as $rows) {
-                $id_business[] = $rows['id'];
+
+            foreach ($result_bus as $rows) {
+
+                if (!empty($rows['BusArr'])){
+                    foreach ($rows['BusArr'] as $bus_item) {
+                        $id_business[] = $bus_item['id'];
+                    }
+                }
             }
 
             DB::update('business')
@@ -85,7 +123,7 @@ class Model_SubscribeModel extends Model_BaseModel {
 
         }
 
-        return $query;
+        return $result_bus;
     }
 
     /**
@@ -121,6 +159,56 @@ class Model_SubscribeModel extends Model_BaseModel {
 
         return $query;
     }
+
+
+    /**
+     * @return mixed
+     * todo  получить все купоны для рассылки
+     */
+    public function getSubskribeCoupons (){
+
+        $query = DB::select('coup.*',
+            array('bus.name', 'BusName'),
+            array('bus.logo', 'BusLogo'),
+            array('bus.url', 'BusUrl'),
+            array('bus.info', 'BusInfo'),
+            array('bus.tel', 'BusTel'),
+            array('bus.schedule', 'BusSchedule'),
+            array('bus.address', 'BusAddress')
+        )
+
+            ->from(array('coupon', 'coup'))
+            ->join(array('business', 'bus'))
+            ->on('coup.business_id', '=', 'bus.id')
+
+            ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
+            ->and_where('coup.status_subscribe','=', 0)
+            ->cached()
+            ->execute()->as_array();
+
+
+        if (!empty($query)) {
+
+            //записываем id рассылки
+            if ($this->id_arhiv_subskribe === null) {
+                $this->id_arhiv_subskribe = $this->insertSubscribeArhiv();
+            }
+
+            $id_coupons = array();
+            foreach ($query as $rows) {
+                $id_coupons[] = $rows['id'];
+            }
+
+            DB::update('coupon')
+                ->set(array('status_subscribe' => $this->id_arhiv_subskribe))
+                ->where('id', 'IN', $id_coupons)
+                ->execute();
+
+        }
+
+        return $query;
+    }
+
 
 
     /**
@@ -163,28 +251,84 @@ class Model_SubscribeModel extends Model_BaseModel {
             ->execute()
             ->as_array();
 
-        $query_bus = DB::select('bus.*', array('city.name', 'CityName'))
-            ->from(array('subscription_arhiv', 'subarhiv'))
-            ->join(array('business', 'bus'), 'LEFT')
-            ->on('subarhiv.id', '=', 'bus.status_subscribe')
+        $query_bus = DB::select('bus.*',
+
+            array('city.name', 'CityName'),
+            array('cat2.id', 'CatId'),
+            array('cat2.name', 'CatName')
+
+        )
+
+            ->from(array('business', 'bus'))
+
+
+            ->join(array('businesscategory', 'buscat'))
+            ->on('buscat.business_id', '=', 'bus.id')
+
+            ->join(array('category', 'cat'))
+            ->on('buscat.category_id', '=', 'cat.id')
+
+            ->join(array('category', 'cat2'))
+            ->on('cat.parent_id', '=', 'cat2.id')
 
             ->join('city', 'LEFT')
             ->on('bus.city','=','city.id')
 
-            ->where('subarhiv.id','=',$id)
+            ->where('bus.status_subscribe','=',$id)
+            ->cached()
             ->execute()
             ->as_array();
+
+        $result_bus = array();
+        foreach ($query_bus as $rows_bus) {
+
+            if (empty($result_bus[$rows_bus['CatId']]['CatName'])) {
+                $result_bus[$rows_bus['CatId']]['CatName'] = $rows_bus['CatName'];
+                $result_bus[$rows_bus['CatId']]['BusArr'][$rows_bus['id']] = $rows_bus;
+            } else {
+                $result_bus[$rows_bus['CatId']]['BusArr'][$rows_bus['id']] = $rows_bus;
+            }
+
+        }
+
+        //HTML::x($result_bus, true);
 
         $query_artic = DB::select('artic.*')
 
-            ->from(array('subscription_arhiv', 'subarhiv'))
-            ->join(array('articles', 'artic'), 'LEFT')
-            ->on('subarhiv.id', '=', 'artic.status_subscribe')
-            ->where('subarhiv.id','=',$id)
+            ->from(array('articles', 'artic'))
+            ->where('artic.status_subscribe','=',$id)
+            ->cached()
             ->execute()
             ->as_array();
 
-        return array($query[0], 'DataBus' => $query_bus, 'DataArtic' => $query_artic);
+
+        $query_lotery = DB::select()
+            ->from('lotarey')
+            ->where('status_subscribe', '=', $id)
+            ->cached()
+            ->execute()
+            ->as_array();
+
+        $query_coupons = DB::select('coup.*',
+            array('bus.name', 'BusName'),
+            array('bus.logo', 'BusLogo'),
+            array('bus.url', 'BusUrl'),
+            array('bus.info', 'BusInfo'),
+            array('bus.tel', 'BusTel'),
+            array('bus.schedule', 'BusSchedule'),
+            array('bus.address', 'BusAddress')
+        )
+
+        ->from(array('coupon', 'coup'))
+        ->join(array('business', 'bus'))
+        ->on('coup.business_id', '=', 'bus.id')
+
+
+        ->where('coup.status_subscribe','=', $id)
+        ->cached()
+        ->execute()->as_array();
+
+        return array($query[0], 'DataBus' => $result_bus, 'DataArtic' => $query_artic, 'DataCoup' => $query_coupons, 'DataLotery' => $query_lotery);
     }
 
 

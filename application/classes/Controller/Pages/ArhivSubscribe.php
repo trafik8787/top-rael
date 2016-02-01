@@ -8,6 +8,8 @@
 
 class Controller_Pages_ArhivSubscribe extends Controller_BaseController {
 
+
+
     public function action_index (){
 
         $content = View::factory('pages/subscribe_arhiv');
@@ -25,6 +27,9 @@ class Controller_Pages_ArhivSubscribe extends Controller_BaseController {
             $data = View::factory('email/mail_arhiv');
             $data->date_subscribe = $result[0]['data'];
             $data->business = $result['DataBus'];
+            $data->coupons = parent::convertArrayVievData($result['DataCoup']);
+            $data->lotarey = $result['DataLotery'];
+
             $article_shift = array_shift($result['DataArtic']);
             $data->article_shift = $article_shift;
             $data->articless = $result['DataArtic'];
