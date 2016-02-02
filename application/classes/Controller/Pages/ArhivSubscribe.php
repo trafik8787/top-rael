@@ -40,6 +40,9 @@ class Controller_Pages_ArhivSubscribe extends Controller_BaseController {
             $content->data_list = $data_list;
         }
 
+        $this->SeoShowPage(array('Архив рассылок TopIsrael.ru', ''),
+            array('Все выпуски писем с анонсами новых обзоров, интересных мест и купонов со скидками', ''),
+            array('Все выпуски писем с анонсами новых обзоров, интересных мест и купонов со скидками', ''));
 
         $this->template->content = $content;
 

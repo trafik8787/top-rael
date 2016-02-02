@@ -18,6 +18,11 @@ class Controller_Pages_Jornal extends Controller_BaseController {
             View::factory('blocks_includ/sicseti'),
         ));
 
+        $this->SeoShowPage(array('Печатный журнал TopIsrael.ru', ''),
+                array('Печатный журнал TopIsrael.ru', ''),
+                array('Печатный журнал TopIsrael.ru', ''));
+
+
         $this->template->content = $content;
 	}
 

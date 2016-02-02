@@ -45,6 +45,9 @@ class Controller_Pages_Contacts extends Controller_BaseController {
             }
         }
 
+        $this->SeoShowPage(array('Контакты TopIsrael.ru', ''),
+            array('Контакты TopIsrael.ru', ''),
+            array('Контакты TopIsrael.ru', ''));
 
         $this->template->content = $content;
     }

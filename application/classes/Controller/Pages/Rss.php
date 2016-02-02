@@ -16,6 +16,10 @@ class Controller_Pages_Rss extends Controller_BaseController {
             View::factory('blocks_includ/sicseti'),
         ));
 
+            $this->SeoShowPage(array('RSS TopIsrael.ru', ''),
+                array('RSS TopIsrael.ru', ''),
+                array('RSS TopIsrael.ru', ''));
+
         $this->template->content = $content;
 	}
 
