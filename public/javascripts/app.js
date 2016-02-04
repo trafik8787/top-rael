@@ -593,7 +593,7 @@ $(document).ready(function(){
     $(document).on('click', '.w-button-print', function(){
         $(".w-print-coupon").print({
             globalStyles: true,
-            stylesheet: 'http://topisrael.webremote.net/public/stylesheets/print.css'
+            stylesheet: '/public/stylesheets/print.css'
         });
     });
 

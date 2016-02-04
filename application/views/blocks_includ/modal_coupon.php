@@ -8,6 +8,29 @@
 //die(HTML::x($data));
 ?>
 
+<style>
+    @media print {
+
+        a:after{
+            content: "" !important;
+        }
+
+        .coupon-date {
+            font-size: 14px!important;
+        }
+
+        .media-left img {
+            position: absolute;
+        }
+
+        .media-body {
+            position: relative;
+            left: 92px;
+        }
+
+    }
+</style>
+
 <button type="button" class="close" data-dismiss="modal"
         aria-label="Close"><span
         class="lnr lnr-cross"></span></button>
@@ -28,7 +51,9 @@
                     <div class="coupon-sidebar-content">
                         <div class="coupon-sidebar-heading">
                             <div class="coupon-object-middle text-center">
-                                <a href="/" class="icons w-logo md">TopIsrael</a>
+                                <a href="/" class="md">
+                                    <img src="/public/images/logo-new.png" width="238" alt="">
+                                </a>
                             </div>
                         </div>
 

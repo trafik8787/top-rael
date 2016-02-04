@@ -10,14 +10,13 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?=strip_tags($data[0]['info'])?> <?=$data[0]['BusName']?> <?=$data[0]['CityName']?></title>
+    <title><?=strip_tags($data[0]['name'])?> <?=$data[0]['BusName']?> <?=$data[0]['CityName']?></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="<?=$data[0]['dateoff']?> Скидки и подарки только при предъявлении купона TopIsrael.ru">
-    <meta name="description" content="<?=$data[0]['dateoff']?> Скидки и подарки только при предъявлении купона TopIsrael.ru">
+    <meta name="description" content="Действительно до. <?=Date::rusdate(strtotime($data[0]['dateoff']), 'j %MONTH% Y'); ?> Скидки и подарки только при предъявлении купона TopIsrael.ru">
 
 
 
@@ -44,6 +43,39 @@
     <script src="/public/javascripts/infobox.js"></script>
     <script src="/public/javascripts/app.js"></script>
     <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="windows-1251"></script>
+
+    <style>
+        @media print {
+
+            a:after{
+                content: "" !important;
+            }
+
+            .coupon-date {
+                font-size: 14px!important;
+            }
+
+            .media-left img {
+                position: absolute;
+            }
+
+            .media-body {
+                position: relative;
+                left: 92px;
+            }
+
+            .coupon-sidebar-heading a {
+
+            }
+
+            .coupon-sidebar-heading {
+                text-align: center!important;
+            }
+
+        }
+    </style>
+
+
 </head>
 
 
@@ -75,9 +107,9 @@
                                     <div class="coupon-sidebar">
                                         <div class="coupon-sidebar-content">
                                             <div class="coupon-sidebar-heading">
-                                                <div class="coupon-object-middle text-center">
-                                                    <a href="/" class="icons w-logo md"><!-- TopIsrael --></a>
-                                                </div>
+                                                <a href="/" class="md">
+                                                    <img src="/public/images/logo-new.png" width="238" alt="">
+                                                </a>
                                             </div>
 
                                             <div class="coupon-sidebar-body">

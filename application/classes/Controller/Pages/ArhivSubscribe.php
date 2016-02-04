@@ -36,7 +36,7 @@ class Controller_Pages_ArhivSubscribe extends Controller_BaseController {
             $content->data = $data;
 
         } else  {
-            $data_list = Model::factory('CategoryModel')->get_section('subscription_arhiv');
+            $data_list = Model::factory('CategoryModel')->get_section('subscription_arhiv', array(), 'id', 'DESC');
             $content->data_list = $data_list;
         }
 
