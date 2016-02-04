@@ -78,7 +78,7 @@
                     <ul>
                         <li><a href="/section/shops">Магазины</a></li>
                         <li><a href="/section/beauty">Красота и Здоровье</a></li>
-                        <li><a href="/section/oteli">Отели</a></li>
+                        <li><a href="/section/hotels">Отели</a></li>
                     </ul>
                 </nav>
             </div>

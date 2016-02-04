@@ -18,7 +18,7 @@ Subject for mail:
 
 
 <p>
- שלום!
+    שלום!
 </p>
 
 <p>
@@ -27,25 +27,25 @@ Subject for mail:
 </p>
 
 <p>
- תקופת הפרסום היא בין
- <?=date('d/m/Y', strtotime($data['date_create'])) ?> 
-  ל-
-  <?=date('d/m/Y', strtotime($data['date_end']))?></p>
+    תקופת הפרסום היא בין
+    <?=date('d/m/Y', strtotime($data['date_create'])) ?>
+    ל-
+    <?=date('d/m/Y', strtotime($data['date_end']))?></p>
 
-<p> 
-את כרטיס העסק שלך ניתן לראות בכתובת הבאה:
+<p>
+    את כרטיס העסק שלך ניתן לראות בכתובת הבאה:
 </p>
 
-<p><strong><a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$data['url'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$data['url'] ?></strong></p>
+<p><strong><a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$data['url'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$data['url'] ?></a></strong></p>
 
 
 
 <p><hr></p>
 
 
-<p>
-אם יהיו לך שאלות או בקשות, נא לפנות אלינו במייל: top@topisrael.ru או להתקשר בטלפון:
-    03-5604505
+    <p>
+        אם יהיו לך שאלות או בקשות, נא לפנות אלינו במייל: top@topisrael.ru או להתקשר בטלפון:
+        03-5604505
     </p>
 
 <p>בכבוד רב, צוות האתר TopIsrael.ru</p>

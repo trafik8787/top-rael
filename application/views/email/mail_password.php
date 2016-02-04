@@ -76,7 +76,7 @@
                                     <table cellpadding="0" cellspacing="0" align="left">
                                         <tr>
                                             <td>
-                                                <span style="font-size:24px;">Изменение пароля в Личном кабинете Topisrael.ru</span>
+                                                <span style="font-size:24px;">Изменение пароля в Личном кабинете TopIsrael.ru</span>
                                             </td>
                                         </tr>
                                     </table>
@@ -98,7 +98,7 @@
 
 
                         <p> <?=$message?></p>
-<hr>
+                        <hr>
 
                         <p>Это автоматическое письмо, пожалуйста, не отвечайте на него.</p>
 

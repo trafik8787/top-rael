@@ -12,25 +12,32 @@
         <div class="row">
             <!-- Context -->
             <div class="col-md-8">
-                <div id="context">
+                <div id="context" >
                     <?if (!empty($data)):?>
                         <?foreach ($data as $row):?>
 
                             <div class="well">
                                 <div class="media">
-                                    <a class="pull-left" href="<?=$row['file']?>">
-                                        <img class="media-object" src="<?=$row['img']?>" width="180">
+                                    <a class="pull-left" href="<?=$row['file']?>" target="_blank">
+                                        <img class="media-object" src="<?=$row['img']?>" width="180" alt="посмотреть журнал в PDF">
                                     </a>
-                                    <div class="media-body">
-                                        <p><?=$row['info']?></p>
+                                    <div>
+                                        <br>
                                         <ul class="list-inline list-unstyled">
                                             <li>
                                                 <span>
-                                                    <i class="glyphicon glyphicon-calendar"></i>
+                                                   <i class="glyphicon glyphicon-calendar"></i> Дата выхода:
                                                     <?=Date::rusdate(strtotime($row['date']))?>
                                                 </span>
                                             </li>
                                         </ul>
+
+                                        <p><?=$row['info']?></p>
+
+
+                                        <p><a class="pull-left" href="<?=$row['file']?>" target="_blank">
+                                                <i class="glyphicon glyphicon-paperclip"></i> Скачать журнал - формат PDF
+                                            </a></p>
                                     </div>
                                 </div>
                             </div>

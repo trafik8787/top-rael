@@ -76,7 +76,7 @@
                                     <table cellpadding="0" cellspacing="0" align="left">
                                         <tr>
                                             <td>
-                                                <span style="font-size:24px;">Вы выиграли в Лотерее Topisrael.ru!</span>
+                                                <span style="font-size:24px;">Вы выиграли в Лотерее TopIsrael.ru!</span>
                                             </td>
                                         </tr>
                                     </table>
@@ -98,20 +98,20 @@
 
                         <p>Поздравляем Вас!</p>
 
-                        <p>Ваш маил <?=$email?> выиграл в лотерее TopIsrael.ru!</p>
+                        <p>Ваш e-mail <?=$email?> выиграл в лотерее TopIsrael.ru!</p>
 
                         <p><strong style="color: #004FD1; font-size:24px;">Приз - <?=$name?></strong></p>
 
-<hr>
+                        <hr>
 
 
                         <p>Как получить приз?</p>
 
                         <p><strong>Пройдите в Личный Кабинет </strong> <a href="http://<?=$_SERVER['HTTP_HOST']?>/account">по этой ссылке и заполните анкету победителя</a></p>
 
-                        <p>После получения анкеты, мы вышлем ваш Приз.</p>
+                        <p>После получения анкеты, мы вышлем  Приз.</p>
 
-<hr>
+                        <hr>
 
                         <p>Это автоматическое письмо, пожалуйста, не отвечайте на него.</p>
 

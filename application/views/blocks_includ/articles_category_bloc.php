@@ -26,11 +26,11 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h2 class="media-heading">
+                        <h3 class="media-heading">
                             <a href="/article/<?=$row['url']?>">
                                 <strong><?=$row['name']?></strong>
                             </a>
-                        </h2>
+                        </h3>
 
                         <strong class="fz small"><?=$row['secondname']?></strong>
 

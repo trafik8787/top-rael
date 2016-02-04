@@ -12,7 +12,7 @@
         <div class="row">
             <!-- Context -->
             <div class="col-md-8">
-                <div id="context">
+                <div id="context" class="full-text">
                     <?=isset($data[0]['text'])? $data[0]['text'] : ''?>
                 </div>
             </div>
