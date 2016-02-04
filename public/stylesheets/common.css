@@ -11017,10 +11017,15 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 /* line 103, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content .coupon-sidebar-heading {
   /*display: table-row;*/
+  padding-top: 10px;
 }
 /* line 106, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content .coupon-sidebar-heading .coupon-title {
   margin-top: 10px;
+}
+
+.coupon-big .coupon-sidebar-content .coupon-sidebar-heading .coupon-title {
+  margin-top: 20px!important;
 }
 /* line 111, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content .coupon-sidebar-body {
@@ -14495,8 +14500,8 @@ footer {
 
 /* line 131, ../.sass/modal.scss */
 .modal.modal-coupon .modal-dialog {
-  padding-top: 50px;
-  margin: 30px auto;
+
+  margin: 25px auto;
   width: 700px;
 }
 @media (max-width: 768px) {
@@ -14616,7 +14621,7 @@ footer {
 /* line 235, ../.sass/modal.scss */
 .modal.modal-coupon .coupon.coupon-modal .coupon-body .coupon-title {
   font-size: 26px;
-  margin-top: 13px;
+  margin-top: 20px;
 }
 /* line 240, ../.sass/modal.scss */
 .modal.modal-coupon .coupon.coupon-modal .coupon-body .coupon-title span {

@@ -84,123 +84,61 @@ class Model_CouponsModel extends Model_BaseModel {
         } else {
             $ofset = 0;
         }
-        if ($url_section != null) {
 
 
-            if ($id_city != null) {
-                $result = DB::select('coup.*', array('bus.name', 'BusName'))
-                    ->from(array('coupon', 'coup'))
 
-                    ->join(array('business', 'bus'))
-                    ->on('coup.business_id', '=', 'bus.id')
+        $query = DB::select('coup.*', array('bus.name', 'BusName'));
+            $query->from(array('coupon', 'coup'));
 
-                    ->join(array('category', 'cat'))
-                    ->on('coup.id_section', '=', 'cat.id')
+            $query->join(array('business', 'bus'));
+            $query->on('coup.business_id', '=', 'bus.id');
 
+            $query->join(array('category', 'cat'));
+            $query->on('coup.id_section', '=', 'cat.id');
 
-                    ->where('cat.url', '=', $url_section)
-                    ->and_where('coup.city', '=', $id_city)
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
-
-                    ->limit($limit)
-                    ->offset($ofset)
-                    ->order_by('coup.id', 'DESC')
-                    ->cached()
-                    ->execute()->as_array();
-
-                //количество
-                $count = DB::select(array(DB::expr('COUNT(coup.id)'), 'total'))
-                    ->from(array('coupon', 'coup'))
-
-                    ->join(array('business', 'bus'))
-                    ->on('coup.business_id', '=', 'bus.id')
-
-                    ->join(array('category', 'cat'))
-                    ->on('coup.id_section', '=', 'cat.id')
-
-                    ->where('cat.url', '=', $url_section)
-                    ->and_where('coup.city', '=', $id_city)
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
-
-                    ->order_by('coup.id', 'DESC')
-                    ->cached()
-                    ->execute()->as_array();
-
-                $count = $count[0]['total'];
-
-            } else {
-
-                $result = DB::select('coup.*', array('bus.name', 'BusName'))
-                    ->from(array('coupon', 'coup'))
-
-                    ->join(array('business', 'bus'))
-                    ->on('coup.business_id', '=', 'bus.id')
-
-                    ->join(array('category', 'cat'))
-                    ->on('coup.id_section', '=', 'cat.id')
-
-                    ->where('cat.url', '=', $url_section)
-                    ->limit($limit)
-                    ->offset($ofset)
-                    ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
-                    ->order_by('coup.id', 'DESC')
-                    ->cached()
-                    ->execute()->as_array();
-                //количество
-                $count = DB::select(array(DB::expr('COUNT(coup.id)'), 'total'))
-                    ->from(array('coupon', 'coup'))
-
-                    ->join(array('business', 'bus'))
-                    ->on('coup.business_id', '=', 'bus.id')
-
-                    ->join(array('category', 'cat'))
-                    ->on('coup.id_section', '=', 'cat.id')
-
-                    ->where('cat.url', '=', $url_section)
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
-                    ->order_by('coup.id', 'DESC')
-                    ->cached()
-                    ->execute()->as_array();
-
-                $count = $count[0]['total'];
+            if ($url_section != null) {
+                $query->where('cat.url', '=', $url_section);
             }
-
-        } else {
             if ($id_city != null) {
-                $result = DB::select('coup.*', array('bus.name', 'BusName'))
-                    ->from(array('coupon', 'coup'))
-                    ->join(array('business', 'bus'))
-                    ->on('coup.business_id', '=', 'bus.id')
-                    ->where('coup.city', '=', $id_city)
-                    ->limit($limit)
-                    ->offset($ofset)
-                    ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
-                    ->order_by('coup.id', 'DESC')
-                    ->cached()
-                    ->execute()->as_array();
-                $count = $this->table_count('coupon', 'id', array('city', '=', $id_city));
-            } else {
-                $result = DB::select('coup.*', array('bus.name', 'BusName'))
-                    ->from(array('coupon', 'coup'))
-                    ->join(array('business', 'bus'))
-                    ->on('coup.business_id', '=', 'bus.id')
-                    ->limit($limit)
-                    ->offset($ofset)
-                    ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'))
-                    ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
-                    ->order_by('coup.id', 'DESC')
-                    ->cached()
-                    ->execute()->as_array();
-
-                $count = $this->table_count('coupon', 'id', null);
+                $query->and_where('coup.city', '=', $id_city);
             }
+            $query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'));
+            $query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'));
 
-        }
+            $query->limit($limit);
+            $query->offset($ofset);
+            $query->order_by('coup.id', 'DESC');
+            $query->cached();
+
+            $result = $query->execute()->as_array();
+
+
+
+        //количество
+        $count_query = DB::select(array(DB::expr('COUNT(coup.id)'), 'total'));
+            $count_query->from(array('coupon', 'coup'));
+
+            $count_query->join(array('business', 'bus'));
+            $count_query->on('coup.business_id', '=', 'bus.id');
+
+            $count_query->join(array('category', 'cat'));
+            $count_query->on('coup.id_section', '=', 'cat.id');
+
+            if ($url_section != null) {
+                $count_query->where('cat.url', '=', $url_section);
+            }
+            if ($id_city != null) {
+                $count_query->and_where('coup.city', '=', $id_city);
+            }
+            $count_query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'));
+            $count_query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'));
+
+            $count_query->order_by('coup.id', 'DESC');
+            $count_query->cached();
+            $result_count = $count_query->execute()->as_array();
+
+            $count = $result_count[0]['total'];
+
 
         //вызываем метод получения данных из куки
         Controller_BaseController::favorits_coupon();

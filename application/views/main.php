@@ -34,7 +34,7 @@
         <script src="<?=URL::base();?><?=$scripts_map?>"></script>
     <?endif?>
 <!--    <link rel="shortcut icon" href="../../public/img/favicon.ico" type="image/x-icon">-->
-    <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="windows-1251"></script>
+    <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="UTF-8"></script>
     <link href="<?=HTML::HostSite('/favicon.ico')?>" type="image/x-icon" rel="shortcut icon" />
     <link href="<?=HTML::HostSite('/iconmob.png')?>" rel="apple-touch-icon" />
     <link rel="stylesheet" href="/public/stylesheets/print.css" media="print">

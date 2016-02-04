@@ -13,10 +13,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?=strip_tags($data[0]['name'])?> <?=$data[0]['BusName']?> <?=$data[0]['CityName']?></title>
+    <title><?=strip_tags($data[0]['name'])?>. <?=$data[0]['BusName']?>, <?=$data[0]['CityName']?></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Действительно до. <?=Date::rusdate(strtotime($data[0]['dateoff']), 'j %MONTH% Y'); ?> Скидки и подарки только при предъявлении купона TopIsrael.ru">
+    <meta name="description" content="Действительно до <?=Date::rusdate(strtotime($data[0]['dateoff']), 'j %MONTH% Y'); ?>. Скидки и подарки только при предъявлении купона TopIsrael.ru">
 
 
 
@@ -42,7 +42,7 @@
     <script src="/public/javascripts/markerclusterer_compiled.js"></script>
     <script src="/public/javascripts/infobox.js"></script>
     <script src="/public/javascripts/app.js"></script>
-    <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="windows-1251"></script>
+    <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="UTF-8"></script>
 
     <style>
         @media print {
