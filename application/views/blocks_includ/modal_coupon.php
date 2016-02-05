@@ -166,6 +166,11 @@
         <div class="col-sm-12">
             <div class="text-center">
                 <span>Отправьте ссылку на этот купон</span><br>
+
+                <a class="w-icon-mail" href="mailto:?Subject=Купон <?=$data[0]['name']?> <?=$data[0]['secondname']?>&body=<?=HTML::HostSite('/'.Request::detect_uri())?>">
+                    <span></span>
+                </a>
+
                 <?php
                 $image_url = 'http://'.$_SERVER['HTTP_HOST'].$data[0]['img_coupon']; // URL изображения
                 ?>

@@ -13,7 +13,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?=strip_tags($data[0]['name'])?>. <?=$data[0]['BusName']?>, <?=$data[0]['CityName']?></title>
+    <title><?=strip_tags($data[0]['name'])?> <?=strip_tags($data[0]['secondname'])?>. <?=$data[0]['BusName']?>, <?=$data[0]['CityName']?></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Действительно до <?=Date::rusdate(strtotime($data[0]['dateoff']), 'j %MONTH% Y'); ?>. Скидки и подарки только при предъявлении купона TopIsrael.ru">
@@ -72,6 +72,11 @@
                 text-align: center!important;
             }
 
+            .coupon-object-middle {
+                font-size: 28px;
+                padding-top: 20px;
+            }
+
         }
     </style>
 
@@ -100,7 +105,7 @@
 
                                     <div class="coupon-content">
 
-                                        <img src="<?=$data[0]['img_coupon']?>" width="440" height="360" class="coupon-image"/>
+                                        <img src="<?=$data[0]['img_coupon']?>" width="100%" height="auto" class="coupon-image"/>
 
                                     </div>
 
@@ -217,7 +222,15 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="text-center">
+
+
                                         <span>Отправьте ссылку на этот купон</span><br>
+
+                                        <a class="w-icon-mail" href="mailto:?Subject=Купон <?=$data[0]['name']?> <?=$data[0]['secondname']?>&body=<?=HTML::HostSite('/'.Request::detect_uri())?>">
+                                            <span></span>
+                                        </a>
+
+
                                         <?php
                                         $image_url = 'http://'.$_SERVER['HTTP_HOST'].$data[0]['img_coupon']; // URL изображения
                                         ?>
@@ -268,7 +281,6 @@
                                             <i class="fa fa-twitter"></i>
                                         </a>
 
-                                        <a href="mailto:?Subject=Купон <?=$data[0]['name']?> <?=$data[0]['secondname']?>&body=<?=HTML::HostSite('/'.Request::detect_uri())?>"><span class="w-icon-mail"></span></a>
 
                                     </div>
                                 </div>
