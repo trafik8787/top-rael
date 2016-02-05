@@ -240,6 +240,14 @@ Route::set('Susses_subscribe', 'susses_subscribe')
         'action'     => 'SussesSubscribe',
     ));
 
+//отписатся от рассылки
+Route::set('Unsubscribe', 'unsubscribe')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Subscribe',
+        'action'     => 'Unsubscribe',
+    ));
+
 //запускается по крону и сравнивает даты если до даты окончания бизнеса остается 7 дней
 Route::set('BussinesDisableEmailSevenDays', 'sendbusiness')
     ->defaults(array(

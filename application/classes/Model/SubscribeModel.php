@@ -369,4 +369,10 @@ class Model_SubscribeModel extends Model_BaseModel {
 
     }
 
+
+    public function Unsubscribe ($email) {
+        return DB::delete('subscription')->where('email', '=', $email)
+            ->execute();
+    }
+
 }
