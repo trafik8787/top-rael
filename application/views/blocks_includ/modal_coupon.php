@@ -205,8 +205,6 @@
                     <i class="fa fa-twitter"></i>
                 </a>
 
-                <a title="Отправить на email" href="mailto:?Subject=Купон <?=$data[0]['name']?> <?=$data[0]['secondname']?>&body=<?=HTML::HostSite('/coupon/'.$data[0]['url'])?>"><span class="w-icon-mail"></span></a>
-
             </div>
         </div>
 

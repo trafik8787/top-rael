@@ -8,16 +8,29 @@
 
 ?>
 
+
 <?if (!empty($data)):?>
     <div class="discount">
         <div class="owl-carousel">
             <?foreach ($data as $rows):?>
                 <?if ($rows['website'] == ''):?>
-                    <a href="/business/<?=$rows['BusUrl']?>" class="w-baner-click" data-id="<?=$rows['id']?>"><img src="<?=$rows['images']?>" width="1200" height="200" alt=""
-                                 class="img-responsive"></a>
+
+                    <a href="/business/<?=$rows['BusUrl']?>" class="w-baner-click" data-id="<?=$rows['id']?>">
+                        <? if ($rows['type_baners'] == 1): ?>
+                            <img src="<?=$rows['images']?>" width="1200" height="200" alt="" class="img-responsive">
+                        <?else:?>
+                            <?=htmlspecialchars_decode($rows['images'])?>
+                        <?endif?>
+
+                    </a>
                 <?else:?>
-                    <a href="<?=$rows['website']?>" class="w-baner-click" data-id="<?=$rows['id']?>"><img src="<?=$rows['images']?>" width="1200" height="200" alt=""
-                                                                  class="img-responsive"></a>
+                    <a href="<?=$rows['website']?>" class="w-baner-click" data-id="<?=$rows['id']?>">
+                        <? if ($rows['type_baners'] == 1): ?>
+                            <img src="<?=$rows['images']?>" width="1200" height="200" alt="" class="img-responsive">
+                        <?else:?>
+                            <?=htmlspecialchars_decode($rows['images'])?>
+                        <?endif?>
+                    </a>
                 <?endif?>
             <?endforeach?>
         </div>

@@ -1125,11 +1125,13 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('position', 'select', array('1' => 'Верхний', '2' => 'Правый'), '', '', '');
         $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
 
+        $crud->set_field_type('type_baners', 'radio', array('1' => 'Картинка', '2' => 'HTML банер'));
+
         $crud->show_columns('id', 'name', 'date_start', 'date_end', 'count_clik');
 
 
-        $crud->edit_fields('name', 'section', 'category', 'business_id', 'website', 'images', 'position', 'date_start', 'date_end');
-        $crud->add_field('name','section', 'category', 'business_id', 'website', 'images', 'position', 'date_start', 'date_end');
+        $crud->edit_fields('name', 'section', 'category', 'business_id', 'website', 'images', 'position', 'type_baners', 'text_banners', 'date_start', 'date_end');
+        $crud->add_field('name','section', 'category', 'business_id', 'website', 'images', 'position', 'type_baners', 'text_banners', 'date_start', 'date_end');
 
         $crud->rows_color_where(3, '<', date('Y-m-d'), ' #cccccc');
 
@@ -1141,14 +1143,25 @@ class Controller_Administrator extends Controller_Core_Main {
             'business_id' => 'Бизнес',
             'website' => 'Внешняя ссылка',
             'position' => 'Позиция',
+            'type_baners' => 'Тип банера',
+            'text_banners' => 'Текст банера',
             'date_start' => 'Дата старта',
             'date_end' => 'Дата конца',
             'count_clik' => 'Клики'
         ));
 
+
+        $crud->validation('type_baners', array('required' => true),
+            array('required' => 'Вам нужно сделать выбор'));
+
+        $crud->validation('text_banners', array('required' => true, 'maxlength' => 50),
+            array('required' => 'Вам нужно сделать выбор', 'maxlength' => 'Не более 50 символов'));
+
         $crud->callback_before_delete('call_bef_del_banners');
         $crud->callback_after_insert('call_after_insert_banners');
         $crud->callback_before_edit('call_bef_edit_banners');
+        $crud->callback_before_insert('call_bef_add_banners');
+
 
         $crud->callback_befor_show_edit('call_bef_show_edit_baners');
 
@@ -1205,8 +1218,46 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_bef_edit_banners ($key_array = null){
         Model::factory('Adm')->log_add('банер', $key_array['name'], 'edit');
+
+        if ($key_array['type_baners'] == 2) {
+
+            if ($key_array['position'] == 1) {
+                $baner = View::factory('blocks_includ/template_baner');
+            } else {
+                $baner = View::factory('blocks_includ/template_baner_right');
+            }
+
+            $data_business = DB::select()->from('business')->where('id', '=', $key_array['business_id'])->execute()->as_array();
+
+            $data = $key_array;
+            $data['logo'] = $data_business[0]['logo'];
+            $baner->data = $data;
+            $key_array['images'] = htmlspecialchars($baner->render());
+            return $key_array;
+        }
     }
-    
+
+
+    public static function call_bef_add_banners($key_array = null) {
+        if ($key_array['type_baners'] == 2) {
+
+            if ($key_array['position'] == 1) {
+                $baner = View::factory('blocks_includ/template_baner');
+            } else {
+                $baner = View::factory('blocks_includ/template_baner_right');
+            }
+
+
+            $data_business = DB::select()->from('business')->where('id', '=', $key_array['business_id'])->execute()->as_array();
+
+            $data = $key_array;
+            $data['logo'] = $data_business[0]['logo'];
+            $baner->data = $data;
+            $key_array['images'] = htmlspecialchars($baner->render());
+            return $key_array;
+        }
+    }
+
 
     public static function call_bef_edit_business ($new_array = null, $old_array = null) {
 

@@ -472,7 +472,7 @@
                                 </td>
                                 <td>
                                     <span style="font-size: 18px;text-decoration: underline;">
-                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/contacts" style="color: #ffffff;">Связятся с нами</a>
+                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/contacts" style="color: #ffffff;">Связаться с нами</a>
                                     </span>
                                 </td>
                             </tr>

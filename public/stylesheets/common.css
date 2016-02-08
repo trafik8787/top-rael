@@ -6197,13 +6197,15 @@ select[multiple].input-lg,
   height: 45px;
   display: inline-block;
   position: relative;
-  top: 4px;
+  top: 12px;
 }
 
 .w-icon-mail span:before {
- color: #ffffff;
+  color: #ffffff;
   content: "\2709";
-  font-size: 28px;
+  font-size: 35px;
+  position: relative;
+  top: -4px;
 }
 
 @media (min-width: 768px) {
@@ -15353,3 +15355,96 @@ html, body, #wrapper {
 .btn.btn-angle-left.btn-primary:hover:before {
   border-right: 10px dashed #005065 !important;
 }
+
+
+
+
+.w-baner-top-row {
+  height: 240px;
+}
+
+.w-baner-top-logo {
+  padding: 0 0 0 15px;
+  width: 21.8%;
+}
+
+.w-baner-top-logo > img{
+  width: 240px;
+  height: 240px;
+}
+
+.w-baner-top-bagraunt {
+  padding: 0 15px 0 0;
+  width: 78%;
+}
+
+.w-baner-top-opacity-bloc {
+  position: absolute;
+  bottom: 0;
+  width: 98.3%;
+  background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+  height: 70px;
+  text-align: center;
+}
+
+.w-baner-top-opacity-bloc span {
+  font-size: 36px;
+  color: #ffffff;
+  font-family: Georgia;
+}
+
+@media (max-width: 768px) {
+  .w-baner-top-bagraunt {
+    padding: 0 15px 0 15px;
+    width: 100%;
+  }
+
+  .w-baner-top-bagraunt img {
+    width: 100%;
+    height: auto;
+  }
+
+  .w-baner-top-opacity-bloc span {
+    font-size: 19px;
+    color: #ffffff;
+    line-height: 1.2;
+  }
+
+  .w-baner-top-opacity-bloc {
+    position: absolute;
+    bottom: 0;
+    width: 91.8%;
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+    height: 50px;
+    text-align: center;
+  }
+
+  .w-baner-top-row {
+    height: 96px;
+  }
+
+}
+
+
+
+.w-baner-right-logo {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  z-index: 2;
+  top: 37%;
+  left: 37%;
+  border: 3px solid #fff;
+}
+
+.w-baner-right-text {
+  height: 150px;
+  background-color: #5D5D5D;
+  color: #ffffff;
+  font-size: 26px;
+  font-family: Georgia;
+  padding-top: 35px;
+}
+
+
+

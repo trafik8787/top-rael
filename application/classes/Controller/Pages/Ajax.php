@@ -236,14 +236,14 @@ class Controller_Pages_Ajax extends Controller {
                 foreach ($users as $user_rows) {
 
                     $m->reloadTo();
-                    $m->From("TopIsrael;send@topisrael.ru"); // от кого отправляется почта
+                    $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
                     $m->To($user_rows['email']); // кому адресованно
                     $m->Subject('Рассылка TopIsrael');
                     $m->Body($data, "html");
                     $m->Priority(3);
 
                     if (!empty($article_shift)) {
-                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($article_shift['images_article']), "", "");
+                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/' . basename($article_shift['images_article']), "", "");
                     }
 
                     if (!empty($articless)) {
