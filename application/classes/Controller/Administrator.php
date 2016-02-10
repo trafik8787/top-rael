@@ -1125,13 +1125,15 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('position', 'select', array('1' => 'Верхний', '2' => 'Правый'), '', '', '');
         $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
 
+        $crud->set_field_type('city_banners', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
+
         $crud->set_field_type('type_baners', 'radio', array('1' => 'Картинка Верхний - 1136х240, Правый - 350х350', '2' => 'HTML банер Верхний фон 900х240, Правый 350х200'));
 
         $crud->show_columns('id', 'name', 'date_start', 'date_end', 'count_clik');
 
 
-        $crud->edit_fields('name', 'section', 'category', 'business_id', 'website', 'type_baners', 'images', 'position', 'text_banners', 'date_start', 'date_end');
-        $crud->add_field('name','section', 'category', 'business_id', 'website', 'type_baners', 'images', 'position',  'text_banners', 'date_start', 'date_end');
+        $crud->edit_fields('name', 'section', 'category', 'city_banners', 'business_id', 'website', 'type_baners', 'images', 'position', 'text_banners', 'date_start', 'date_end');
+        $crud->add_field('name','section', 'category', 'city_banners', 'business_id', 'website', 'type_baners', 'images', 'position',  'text_banners', 'date_start', 'date_end');
 
         $crud->rows_color_where(3, '<', date('Y-m-d'), ' #cccccc');
 
@@ -1144,6 +1146,7 @@ class Controller_Administrator extends Controller_Core_Main {
             'images' => 'Картинка',
             'section' => 'Раздел',
             'category' => 'Категории',
+            'city_banners' => 'Город',
             'business_id' => 'Бизнес',
             'website' => 'Внешняя ссылка',
             'position' => 'Позиция',
@@ -1206,13 +1209,10 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function call_bef_show_edit_baners($key_array = null){
         $static = View::factory('adm/statistic_baners');
 
-
-
         if ($key_array['type_baners'] == 2) {
             $in =  unserialize($key_array['images']);
             $key_array['images'] = $in['images'];
         }
-        HTML::x($key_array);
 
         $static->data = Rediset::getInstance()->get_baner_date($key_array['id'], $key_array['date_start'], $key_array['date_end']);
         Cruds::$adon_top_form[] = $static;
