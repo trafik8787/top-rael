@@ -132,6 +132,7 @@ Kohana::modules(array(
     'pagination' => MODPATH.'pagination',
     'email'	  => MODPATH.'email',
     'ulogin'	  => MODPATH.'ulogin',
+    //'phpjquery'	  => MODPATH.'phpjquery',
 	// 'minion'     => MODPATH.'minion',     // CLI Tasks
 	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing

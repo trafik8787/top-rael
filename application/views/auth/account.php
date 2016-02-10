@@ -397,7 +397,7 @@
 
                                     <?foreach ($rows_data_coupon as $rows_data_coupon_favor):?>
 
-                                        <div class="col-md-4 col-sm-6">
+                                        <div class="col-md-3 col-sm-6">
 
                                             <div class="coupon coupon-big">
 
@@ -411,7 +411,7 @@
                                                             <?=$rows_data_coupon_favor['BusName']?>
                                                         </div>
                                                         <a class="coupon-image" href="/modalcoupon/<?=$rows_data_coupon_favor['id']?>" data-toggle="modal" data-target=".bs-coupon-modal-sm">
-                                                            <img src="<?=$rows_data_coupon_favor['img_coupon']?>" width="155" height="125" alt="" title=""/>
+                                                            <img src="<?=$rows_data_coupon_favor['img_coupon']?>" alt="" title=""/>
                                                         </a>
                                                     </div>
 
@@ -422,7 +422,6 @@
 
                                                                     <div class="coupon-title">
                                                                         <?=$rows_data_coupon_favor['name']?>
-<!--                                                                        <small class="block">--><?//=$rows_data_coupon_favor['name']?><!--</small>-->
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -431,7 +430,6 @@
 
                                                                     <div class="coupon-title">
                                                                         <?=$rows_data_coupon_favor['secondname']?>
-<!--                                                                        <span class="block">скидка</span>-->
                                                                     </div>
                                                                 </div>
                                                             </div>

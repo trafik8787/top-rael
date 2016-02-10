@@ -11009,6 +11009,15 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   height: 375px;
 }
 
+
+@media (max-width: 767px) {
+
+  .coupon.coupon-big {
+    height: 450px;
+  }
+
+}
+
 /* line 98, ../.sass/coupon.scss */
 .coupon .coupon-sidebar-content {
   /*display: table;*/

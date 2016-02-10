@@ -105,7 +105,7 @@
 
                                     <div class="coupon-content">
 
-                                        <img src="<?=$data[0]['img_coupon']?>" width="100%" height="auto" class="coupon-image"/>
+                                        <img src="<?=$data[0]['img_coupon']?>" width="440" height="360" class="coupon-image"/>
 
                                     </div>
 
@@ -126,7 +126,7 @@
                                                     </div>
 
                                                     <div class="text-center">
-                                                        <strong><?=$data[0]['secondname']?></strong>
+                                                        <strong style="font-size: 23.4px;"><?=$data[0]['secondname']?></strong>
 
                                                     </div>
                                                 </div>

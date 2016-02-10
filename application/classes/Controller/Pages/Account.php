@@ -108,7 +108,7 @@ class Controller_Pages_Account extends Controller_BaseController {
         //получаем избранные купоны
         if (parent::$favorits_coupon != null) {
             $data->favorit_coupon = Model::factory('CouponsModel')->getCouponsId(parent::$favorits_coupon);
-            $data->favorit_coupon = parent::convertArrayTagsBusiness($data->favorit_coupon, 3);
+            $data->favorit_coupon = parent::convertArrayTagsBusiness($data->favorit_coupon, 4);
         }
         //получаем избранные бизнесы
         if (parent::$favorits_bussines != null) {

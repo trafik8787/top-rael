@@ -19,7 +19,10 @@
                         <? if ($rows['type_baners'] == 1): ?>
                             <img src="<?=$rows['images']?>" width="1200" height="200" alt="" class="img-responsive">
                         <?else:?>
-                            <?=htmlspecialchars_decode($rows['images'])?>
+                            <?
+                            $un = unserialize($rows['images']);
+                            echo htmlspecialchars_decode($un['html'])
+                            ?>
                         <?endif?>
 
                     </a>
@@ -28,7 +31,10 @@
                         <? if ($rows['type_baners'] == 1): ?>
                             <img src="<?=$rows['images']?>" width="1200" height="200" alt="" class="img-responsive">
                         <?else:?>
-                            <?=htmlspecialchars_decode($rows['images'])?>
+                            <?
+                            $un = unserialize($rows['images']);
+                            echo htmlspecialchars_decode($un['html'])
+                            ?>
                         <?endif?>
                     </a>
                 <?endif?>

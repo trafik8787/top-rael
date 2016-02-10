@@ -98,6 +98,7 @@ abstract class Controller_BaseController extends Controller_Template {
             //'public/stylesheets/print.css',
             'public/stylesheets/owl.carousel.min.css',
             'public/stylesheets/jquery.bxslider.min.css',
+            'public/stylesheets/jquery.minicolors.css',
             'public/stylesheets/common.css',
             'public/stylesheets/ie.css',
             'public_a/css/bootstrap-datetimepicker.min.css',
@@ -110,6 +111,7 @@ abstract class Controller_BaseController extends Controller_Template {
             'public/javascripts/bootstrap.min.js',
             'public/javascripts/owl.carousel.min.js',
             'public/javascripts/jquery.bxslider.min.js',
+            'public/javascripts/jquery.minicolors.js',
 
 
             'public_a/js/min/moment.min.js',

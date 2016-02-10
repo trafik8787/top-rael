@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <img src="<?=$data['images']?>" width="350" height="200" alt="">
+                <img class="w-baner-html-dom" src="<?=$data['images']?>" width="350" height="200" alt="">
             </div>
         </div>
         <div class="row" >

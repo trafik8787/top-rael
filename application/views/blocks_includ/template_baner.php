@@ -13,7 +13,7 @@
         <img src="<?=$data['logo']?>" alt="">
     </div>
     <div class="col-md-9 col-xs-12 w-baner-top-bagraunt">
-        <img src="<?=$data['images']?>" width="900" height="240" alt="">
+        <img class="w-baner-html-dom" src="<?=$data['images']?>" width="900" height="240" alt="">
         <div class="w-baner-top-opacity-bloc">
             <span><?=$data['text_banners']?></span>
         </div>

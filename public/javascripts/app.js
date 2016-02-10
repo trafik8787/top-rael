@@ -600,7 +600,7 @@ $(document).ready(function(){
 
 
     //добавить статью в избранное
-    $(document).on('click', '.w-add-article-favor', function(){
+    $(document).on('click touchstart', '.w-add-article-favor', function(){
 
         $.ajax({ // описываем наш запрос
             type: "POST", // будем передавать данные через POST
@@ -624,7 +624,7 @@ $(document).ready(function(){
     });
 
     //удалить статью из избранного
-    $(document).on('click', '.w-delete-article-favor', function(){
+    $(document).on('click touchstart', '.w-delete-article-favor', function(){
         $.ajax({ // описываем наш запрос
             type: "POST", // будем передавать данные через POST
             dataType: "JSON", // указываем, что нам вернется JSON
@@ -644,7 +644,7 @@ $(document).ready(function(){
 
 
     //добавить бизнес в избранное
-    $(document).on('click', '.w-add-bussines-favor', function(){
+    $(document).on('click touchstart', '.w-add-bussines-favor', function(){
 
         $.ajax({ // описываем наш запрос
             type: "POST", // будем передавать данные через POST
@@ -670,7 +670,7 @@ $(document).ready(function(){
     });
 
     //добавить бизнес в избранное с страницы бизнеса
-    $(document).on('click', '.w-add-bussines-page-favor', function(){
+    $(document).on('click touchstart', '.w-add-bussines-page-favor', function(){
         $.ajax({ // описываем наш запрос
             type: "POST", // будем передавать данные через POST
             dataType: "JSON", // указываем, что нам вернется JSON
@@ -699,7 +699,7 @@ $(document).ready(function(){
 
 
     //удаляем бизнес из избранного
-    $(document).on('click', '.w-delete-bussines-favor', function(){
+    $(document).on('click touchstart', '.w-delete-bussines-favor', function(){
 
         $.ajax({ // описываем наш запрос
             type: "POST", // будем передавать данные через POST
@@ -726,7 +726,7 @@ $(document).ready(function(){
 
 
     //добавить купон в избранное
-    $(document).on('click', '.w-add-coupon-favor', function(){
+    $(document).on('click touchstart', '.w-add-coupon-favor', function(){
 
         $.ajax({ // описываем наш запрос
             type: "POST", // будем передавать данные через POST
@@ -754,7 +754,7 @@ $(document).ready(function(){
 
 
     //добавить купон в избранное из модального окна купона
-    $(document).on('click', '.w-add-coupon-favor-modal', function(){
+    $(document).on('click touchstart', '.w-add-coupon-favor-modal', function(){
 
         $.ajax({ // описываем наш запрос
             type: "POST", // будем передавать данные через POST
@@ -784,7 +784,7 @@ $(document).ready(function(){
 
 
     //удалить купоны в избранном
-    $(document).on('click', '.w-delete-coupon-favor', function(){
+    $(document).on('click touchstart', '.w-delete-coupon-favor', function(){
 
         $.ajax({ // описываем наш запрос
             type: "POST", // будем передавать данные через POST

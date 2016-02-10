@@ -418,6 +418,7 @@ class Controller_Pages_Ajax extends Controller {
         $m->From("TopIsrael;top@topisrael.ru"); // от кого отправляется почта
         $m->To($to); // кому адресованно
         $m->Cc($cc);
+        $m->Bcc('boris@briker.biz');
         $m->Subject($subject);
         $m->Body($html_mail, "html");
         $m->Priority(3);

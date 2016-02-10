@@ -1,0 +1,35 @@
+.form-group.inline {
+    float: left;
+    margin: 0 15px;
+}
+
+.minicolors {
+    border: 1px solid #ccc;
+    width: 30px !important;
+    height: 30px !important;
+}
+
+#cities {
+    max-width: 200px;
+    float: none;
+}
+
+#limit {
+    max-width: 100px;
+    float: none;
+}
+
+#fontSizeName {
+    max-width: 100px;
+    float: none;
+}
+
+#fontSizeText {
+    max-width: 100px;
+    float: none;
+}
+
+#layoutWidth {
+    max-width: 100px;
+    float: none;
+}
