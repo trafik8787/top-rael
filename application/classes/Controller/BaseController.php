@@ -254,11 +254,11 @@ abstract class Controller_BaseController extends Controller_Template {
      * @param $url
      * Рендеринг банеров
      */
-    public function getBaners ($url, $url_section_category){
+    public function getBaners ($url, $url_section_category, $city_id){
 
         $top_content = View::factory('blocks_includ/top_banners');
         $right_content =  View::factory('blocks_includ/baners_right');
-        $data = Model::factory('BaseModel')->getBaners($url, $url_section_category);
+        $data = Model::factory('BaseModel')->getBaners($url, $url_section_category, $city_id);
 
         if (!empty($data['top_baners'])) {
             $top_content->data = $data['top_baners'];

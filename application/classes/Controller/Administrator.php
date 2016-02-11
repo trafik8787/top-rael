@@ -1220,16 +1220,25 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
 
+
+
+
     public static function call_bef_del_banners ($key_array = null){
         Model::factory('Adm')->log_add('банер', $key_array['name'], 'del');
         Rediset::getInstance()->del_baner($key_array['id']);
     }
 
+
+
     public static function call_after_insert_banners($key_array = null){
         Model::factory('Adm')->log_add('банер', $key_array['name'], 'add');
     }
 
-    public static function call_bef_edit_banners ($key_array = null){
+
+
+
+    public static function call_bef_edit_banners ($key_array = null,  $old_array = null){
+
         Model::factory('Adm')->log_add('банер', $key_array['name'], 'edit');
 
         if ($key_array['type_baners'] == 2) {
@@ -1242,13 +1251,21 @@ class Controller_Administrator extends Controller_Core_Main {
 
             $data_business = DB::select()->from('business')->where('id', '=', $key_array['business_id'])->execute()->as_array();
 
+            if (empty($key_array['images'])) {
+                $in =  unserialize($old_array['images']);
+                $key_array['images'] = $in['images'];
+            }
+
+
             $data = $key_array;
             $data['logo'] = $data_business[0]['logo'];
             $baner->data = $data;
-            $key_array['images'] = serialize(array('html' => htmlspecialchars($baner->render()), 'img' =>  $key_array['images']));
+            $key_array['images'] = serialize(array('html' => htmlspecialchars($baner->render()), 'images' =>  $key_array['images']));
             return $key_array;
         }
     }
+
+
 
 
     public static function call_bef_add_banners($key_array = null) {
@@ -1270,6 +1287,8 @@ class Controller_Administrator extends Controller_Core_Main {
             return $key_array;
         }
     }
+
+
 
 
     public static function call_bef_edit_business ($new_array = null, $old_array = null) {

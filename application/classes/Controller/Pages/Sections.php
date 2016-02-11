@@ -65,7 +65,7 @@ class Controller_Pages_Sections extends Controller_BaseController {
             $data_articles = Model::factory('ArticlesModel')->getArticlesCategoryUrl($this->request->param('url_category'));
 
             //вызов метода банеров получаем в параметрах parent::$top_baners и parent::$right_baners
-            $this->getBaners($this->request->param('url_category'), 'category');
+            $this->getBaners($this->request->param('url_category'), 'category', $city_id);
 
             //передаем URL текущей категории для кнопки на карте
             $bussines_section->curent_category = $this->request->param('url_category');
@@ -82,7 +82,7 @@ class Controller_Pages_Sections extends Controller_BaseController {
                 array($category[0]['keywords'],$category[0]['name']),
                 array($category[0]['description'], $category[0]['name']));
 
-            $this->getBaners($this->request->param('url_section'), 'section');
+            $this->getBaners($this->request->param('url_section'), 'section', $city_id);
 
             //передаем URL текущей категории для кнопки на карте
             $bussines_section->curent_section = $this->request->param('url_section');

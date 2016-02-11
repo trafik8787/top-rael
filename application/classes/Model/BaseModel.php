@@ -106,34 +106,38 @@ class Model_BaseModel extends Model {
      * @return array
      *  todo вывод банеров в разделах и категориях
      */
-    public function getBaners($url, $url_section_category){
+    public function getBaners($url, $url_section_category, $city_id){
 
+
+        $query = DB::select('ban.*', array('bus.id', 'BusId'),
+            array('bus.url', 'BusUrl'));
+        $query->from(array('banners', 'ban'));
+        $query->join(array('business', 'bus'));
+        $query->on('ban.business_id', '=', 'bus.id');
         //вывод в категориях
-        if ($url_section_category == 'category') {
-            $query = DB::query(Database::SELECT, "SELECT `ban`.*, `bus`.`id` AS
-                                                    `BusId`, `bus`.`url` AS
-                                                    `BusUrl` FROM `banners` AS `ban`
-                                                    JOIN `business` AS `bus` ON (`ban`.`business_id` = `bus`.`id`)
-                                                    JOIN `banners_relation` AS `banrel` ON (`banrel`.`banners_id` = `ban`.`id`)
-                                                    JOIN `category` AS `cat` ON (`banrel`.`category_id` = `cat`.`id`)
-                                                    WHERE `cat`.`url` = '".$url."' AND DATE(NOW()) BETWEEN ban.date_start AND ban.date_end")
-                ->cached()
-                ->execute()
-                ->as_array();
+            if ($url_section_category == 'category') {
+                $query->join(array('banners_relation', 'banrel'));
+                $query->on('banrel.banners_id', '=', 'ban.id');
+                $query->join(array('category','cat'));
+                $query->on('banrel.category_id', '=', 'cat.id');
+                //вывод в разделах
+            } elseif ($url_section_category == 'section') {
+                $query->join(array('banners_relation_section', 'banrel'));
+                $query->on('banrel.banners_id', '=', 'ban.id');
+                $query->join(array('category','cat'));
+                $query->on('banrel.section_id', '=', 'cat.id');
+            }
 
-            //вывод в разделах
-        } elseif ($url_section_category == 'section') {
-            $query = DB::query(Database::SELECT, "SELECT `ban`.*, `bus`.`id` AS
-                                                    `BusId`, `bus`.`url` AS
-                                                    `BusUrl` FROM `banners` AS `ban`
-                                                    JOIN `business` AS `bus` ON (`ban`.`business_id` = `bus`.`id`)
-                                                    JOIN `banners_relation_section` AS `banrel` ON (`banrel`.`banners_id` = `ban`.`id`)
-                                                    JOIN `category` AS `cat` ON (`banrel`.`section_id` = `cat`.`id`)
-                                                    WHERE `cat`.`url` = '".$url."' AND DATE(NOW()) BETWEEN ban.date_start AND ban.date_end")
-                ->cached()
-                ->execute()
-                ->as_array();
+
+        $query->where('cat.url', '=', $url);
+        if ($city_id != ''){
+            $query->and_where('ban.city_banners','=', $city_id);
         }
+        $query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('ban.date_start AND ban.date_end'));
+        $query->cached();
+        $query = $query->execute()->as_array();
+
+
 
 
         $result = array();
