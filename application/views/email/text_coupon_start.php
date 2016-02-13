@@ -12,28 +12,27 @@
 <span style="direction: rtl;">
 <!--p>
 subject for mail:
-קופון של העסק שלך עלה לאתר טופ ישראל
+הפעלת קופון באתר טופ ישראל
 </p-->
 
 
 
 <p> 
-שלום!
+שלום,
 </p>
 
 <p>
-    קופון של העסק שלך עלה לאתר טופ ישראל TopIsrael.ru
-
+פרסום הקופון באתר TopIsrael החל.
 </p>
 
 <p>
- הקופון יהיה פעיל מ-
+משך הפרסום: החל מ 
  <?=date('d/m/Y', strtotime($data['CouponsDateStart']))?> 
   ועד
   <?=date('d/m/Y', strtotime($data['CouponsDateEnd']))?></p>
 
 <p>
-ניתן לראות את הקופון בכתובת הבאה:
+למעבר לצפייה בקופון לחץ על הקישור:
 </p>
 
 <p><strong><a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$data['CouponsUrl'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$data['CouponsUrl'] ?></a></strong></p>
@@ -45,9 +44,13 @@ subject for mail:
 
 
 <p>
-אם יהיו לך שאלות או בקשות, נא לפנות אלינו במייל: top@topisrael.ru או להתקשר בטלפון:
-    03-5604505
+לשאלות ובקשות פנה באמצעות הדוא"ל, לכתובת: top@topisrael.ru או חייג: 03-5604505
     </p>
 
-<p>בכבוד רב, צוות האתר TopIsrael.ru</p>
+
+<p>
+בכבוד רב,<br>
+קבוצת מדיה טופ ישראל
+ </p>
+
 </span>

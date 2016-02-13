@@ -15042,6 +15042,12 @@ i {
   width: 100%;
 }
 
+@media (max-width: 768px) {
+  .w-node-article img {
+    width: inherit!important;
+  }
+}
+
 /* line 139, ../.sass/common.scss */
 html, body, #wrapper {
   min-height: 100%;

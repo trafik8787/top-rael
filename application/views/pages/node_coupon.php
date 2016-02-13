@@ -226,7 +226,7 @@
 
                                         <span>Отправьте ссылку на этот купон</span><br>
 
-                                        <a class="w-icon-mail" href="mailto:?Subject=Купон <?=$data[0]['name']?> <?=$data[0]['secondname']?>&body=<?=HTML::HostSite('/'.Request::detect_uri())?>">
+                                        <a class="w-icon-mail" href="mailto:?Subject=Купон <?=strip_tags($data[0]['name'])?> <?=strip_tags($data[0]['secondname'])?>. <?=$data[0]['BusName']?>, <?=$data[0]['CityName']?>&body=<?=HTML::HostSite('/'.Request::detect_uri())?> <?=strip_tags($data[0]['name'])?> <?=strip_tags($data[0]['secondname'])?>. <?=$data[0]['BusName']?>, <?=$data[0]['CityName']?>">
                                             <span></span>
                                         </a>
 

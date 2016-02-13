@@ -83,8 +83,9 @@
 
                                 <tr>
                                     <td>
-                                        <img src="/uploads/img_articles/thumbs/<?=basename($article_shift['images_article'])?>" width="600" height="420"
-                                             style="width: 100%; height:auto"/>
+                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$article_shift['url']?>">
+                                            <img src="/uploads/img_articles/<?=basename($article_shift['images_article'])?>" width="600" height="420" style="width: 100%; height:auto"/>
+                                        </a>
                                     </td>
                                 </tr>
                                 <tr>

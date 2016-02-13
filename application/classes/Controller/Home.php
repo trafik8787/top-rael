@@ -41,6 +41,7 @@ class Controller_Home extends Controller_BaseController {
        // die(phpinfo());
        // HTML::x( Model::factory('BussinesModel')->getBannersUser());
 
+
         $resultArr = array();
         $content = View::factory('pages/home');
         $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'), 'order_by');

@@ -167,14 +167,14 @@
             <div class="text-center">
                 <span>Отправьте ссылку на этот купон</span><br>
 
-                <a class="w-icon-mail" href="mailto:?Subject=Купон <?=$data[0]['name']?> <?=$data[0]['secondname']?>&body=<?=HTML::HostSite('/'.Request::detect_uri())?>">
+                <a class="w-icon-mail" href="mailto:?Subject=Купон <?=strip_tags($data[0]['name'])?> <?=strip_tags($data[0]['secondname'])?>. <?=$data[0]['BusName']?>, <?=$data[0]['CityName']?>&body=<?=HTML::HostSite('/coupon/'.$data[0]['url'])?> <?=strip_tags($data[0]['name'])?> <?=strip_tags($data[0]['secondname'])?>. <?=$data[0]['BusName']?>, <?=$data[0]['CityName']?>">
                     <span></span>
                 </a>
 
                 <?php
                 $image_url = 'http://'.$_SERVER['HTTP_HOST'].$data[0]['img_coupon']; // URL изображения
                 ?>
-                <a href="http://www.facebook.com/sharer.php?s=100&p[url]=<?= urlencode(  Request::full_current_url() ); ?>&p[title]=<?=$data[0]['name'] ?>&p[summary]=<?=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?>&p[images][0]=<?=$image_url ?>" onclick="window.open(this.href, this.title, 'toolbar=0, status=0, width=548, height=325'); return false" class="social facebook" title="Поделиться ссылкой на Фейсбук" target="_parent"><i class="fa fa-facebook"></i></a>
+                <a href="http://www.facebook.com/sharer.php?s=100&p[url]=<?= urlencode( HTML::HostSite('/coupon/'.$data[0]['url'])); ?>&p[title]=<?=$data[0]['name'] ?>&p[summary]=<?=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?>&p[images][0]=<?=$image_url ?>" onclick="window.open(this.href, this.title, 'toolbar=0, status=0, width=548, height=325'); return false" class="social facebook" title="Поделиться ссылкой на Фейсбук" target="_parent"><i class="fa fa-facebook"></i></a>
 
 
 
@@ -197,11 +197,11 @@
                 </script>
 
 
-                <a style="top: 1px;position: relative;" href="https://plus.google.com/share?url=<?=HTML::HostSite($_SERVER['REQUEST_URI'])?>" onclick="javascript:window.open(this.href,
+                <a style="top: 1px;position: relative;" href="https://plus.google.com/share?url=<?=HTML::HostSite('/coupon/'.$data[0]['url'])?>" onclick="javascript:window.open(this.href,
                                                         '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img
                         src="../../../public/images/google_icon.png" width="45" alt="Share on Google+"/></a>
 
-                <a href="https://twitter.com/intent/tweet?text=<?=Text::limit_chars(strip_tags($data[0]['info']), 100, null, true).' '.Request::full_current_url()?>" class="social twitter">
+                <a href="https://twitter.com/intent/tweet?text=<?=Text::limit_chars(strip_tags($data[0]['info']), 100, null, true).' '.HTML::HostSite('/coupon/'.$data[0]['url'])?>" class="social twitter">
                     <i class="fa fa-twitter"></i>
                 </a>
 

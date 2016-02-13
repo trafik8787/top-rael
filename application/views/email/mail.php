@@ -91,8 +91,9 @@
 
                                 <tr>
                                     <td>
+                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$article_shift['url']?>">
                                         <img src="cid:<?=basename($article_shift['images_article'])?>" width="600" height="420"
-                                             style="width: 100%; height:auto"/>
+                                             style="width: 100%; height:auto"/></a>
                                     </td>
                                 </tr>
                                 <tr>

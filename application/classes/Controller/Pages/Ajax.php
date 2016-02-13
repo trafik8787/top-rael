@@ -345,25 +345,28 @@ class Controller_Pages_Ajax extends Controller {
 
         foreach ($data as $rows) {
 
+            //эжемесячная рассылка по числу создания бизнеса
+            $this->sendBussinesMount($rows);
+
             $d = new DateTime($rows['date_end']);
             $ert = $d->modify('-7 days')->format("Y-m-d");
             //за 7 дней перед отключением
             if ($curent_date == $ert) {
                 $message = View::factory('email/text_bussines_warning');
                 $message->data = $rows;
-                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'תקופת הפרסום של העסק שלך באתר טופ ישראל עומדת להסתיים', $message);
+                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'התראה לסיום פרסום באתר טופ ישראל', $message);
             }
 
             if ($curent_date == $rows['date_end']) {
                 $message = View::factory('email/text_bussines_end');
                 $message->data = $rows;
-                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'תקופת הפרסום של העסק שלך באתר טופ ישראל הסתיימה', $message);
+                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'הפסקת פרסום', $message);
             }
 
             if ($curent_date == $rows['date_create']) {
                 $message = View::factory('email/text_bussines_start');
                 $message->data = $rows;
-                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'כרטיס העסק שלך עלה לאתר טופ-ישראל', $message);
+                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'החלת פרסום באתר טופ ישראל', $message);
             }
 
         }
@@ -417,8 +420,7 @@ class Controller_Pages_Ajax extends Controller {
         $m = Email::factory();
         $m->From("TopIsrael;top@topisrael.ru"); // от кого отправляется почта
         $m->To($to); // кому адресованно
-        $m->Cc($cc);
-        $m->Bcc('boris@briker.biz');
+        $m->Bcc(array($cc ,'boris@briker.biz'));
         $m->Subject($subject);
         $m->Body($html_mail, "html");
         $m->Priority(3);
@@ -445,19 +447,19 @@ class Controller_Pages_Ajax extends Controller {
             if ($curent_date == $ert) {
                 $message = View::factory('email/text_baner_warning');
                 $message->data = $rows;
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], '    תקופת הפרסום של באנר של העסק שלך באתר טופ ישראל עומדת להסתיים', $message);
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'התראה לסיום פרסום באנר', $message);
             }
 
             if ($curent_date == $rows['BanersDateEnd']) {
                 $message = View::factory('email/text_baner_end');
                 $message->data = $rows;
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'תקופת פרסום הבאנר של העסק שלך באתר טופ ישראל הסתיימה', $message);
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], ' הפסקת באנר', $message);
             }
 
             if ($curent_date == $rows['BanersDateStart']) {
                 $message = View::factory('email/text_baner_start');
                 $message->data = $rows;
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'הבאנר של העסק שלך עלה לאתר טופ ישראל', $message);
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'הפעלת הבאנר באתר טופ ישראל', $message);
             }
 
         }
@@ -481,21 +483,46 @@ class Controller_Pages_Ajax extends Controller {
             if ($curent_date == $ert) {
                 $message = View::factory('email/text_coupon_warning');
                 $message->data = $rows;
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'תקופת הפרסום של קופון העסק שלך באתר טופ ישראל עומדת להסתיים', $message);
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'התראה לסיום פרסום הקופון', $message);
             }
 
             if ($curent_date == $rows['CouponsDateEnd']) {
                 $message = View::factory('email/text_coupon_end');
                 $message->data = $rows;
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'תקופת הפרסום של קופון העסק שלך באתר טופ ישראל הסתיימה', $message);
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'ניתוק קופון ', $message);
             }
 
             if ($curent_date == $rows['CouponsDateStart']) {
                 $message = View::factory('email/text_coupon_start');
                 $message->data = $rows;
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'קופון של העסק שלך עלה לאתר טופ ישראל', $message);
+                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'הפעלת קופון באתר טופ ישראל', $message);
             }
 
+        }
+    }
+
+    /**
+     * @param $data_business
+     * todo отправка ежемесячной рассылки
+     */
+    public function sendBussinesMount($data_business){
+
+        $date_subs_mount = date('m', strtotime($data_business['date_subscribe_mount']));
+        $date_curent_mount = date('m');
+
+        //если рассылки еще не было
+        if (empty($date_send_mount)) {
+            DB::update('business')->set(array('date_subscribe_mount' => date('Y-m-d')))->where('id', '=', $data_business['id'])->execute();
+            $message = View::factory('email/text_reminders');
+            $this->template_mail_message($data_business['email'], $data_business['EmailRedactor'], 'ספר על עצמך יותר באתר טופ ישראל', $message);
+        } else {
+
+            if (($date_subs_mount < $date_curent_mount) and (date('d', strtotime($data_business['date_create'])) == date('d'))) {
+
+                $message = View::factory('email/text_reminders');
+                $this->template_mail_message($data_business['email'], $data_business['EmailRedactor'], 'ספר על עצמך יותר באתר טופ ישראל', $message);
+
+            }
         }
     }
 

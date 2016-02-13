@@ -38,6 +38,7 @@
     <link href="<?=HTML::HostSite('/favicon.ico')?>" type="image/x-icon" rel="shortcut icon" />
     <link href="<?=HTML::HostSite('/iconmob.png')?>" rel="apple-touch-icon" />
     <link rel="stylesheet" href="/public/stylesheets/print.css" media="print">
+    <link href="/public/stylesheets/informers.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <?=$header;?>

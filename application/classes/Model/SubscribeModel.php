@@ -135,6 +135,7 @@ class Model_SubscribeModel extends Model_BaseModel {
         $query = DB::select()
             ->from('articles')
             ->where('status_subscribe','=', 0)
+            ->order_by('id', 'DESC')
             ->execute()->as_array();
 
 
@@ -297,6 +298,7 @@ class Model_SubscribeModel extends Model_BaseModel {
 
             ->from(array('articles', 'artic'))
             ->where('artic.status_subscribe','=',$id)
+            ->order_by('id', 'DESC')
             ->cached()
             ->execute()
             ->as_array();

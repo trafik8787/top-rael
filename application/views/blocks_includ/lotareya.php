@@ -17,6 +17,7 @@
     }
 </style>
 
+
 <?if (!empty($data)):?>
     <div class="sidebar-lottery w-bloc-right">
 

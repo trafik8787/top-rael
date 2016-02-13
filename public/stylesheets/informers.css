@@ -33,3 +33,9 @@
     max-width: 100px;
     float: none;
 }
+
+#topIsraelInformerReviews,
+#topIsraelInformerBusiness,
+#topIsraelInformerCoupon {
+    margin: 0 auto;
+}
