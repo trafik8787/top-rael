@@ -18,8 +18,21 @@
 </style>
 
 
+
 <?if (!empty($data)):?>
     <div class="sidebar-lottery w-bloc-right">
+
+        <!-- Display Informer -->
+        <div id="topIsraelInformerBusiness"></div>
+        <!-- Css -->
+        <style type="text/css">#topIsraelInformerBusiness.ti-container{font-family:  Arial, 'Helvetica Neue', Helvetica, sans-serif; color: #000000; background: #fff; border:1px solid #C7C6C6; width: 300px;}#topIsraelInformerBusiness.ti-container .ti-header{ font-size: 20px; line-height: 1.25; margin: 5px 0; padding:5px 10px 10px; border-bottom:1px solid #ECECEC; display: block;}#topIsraelInformerBusiness.ti-container .ti-footer{ font-size: 20px; line-height: 1.25; margin: 5px 0; padding:10px 10px 5px 10px; border-top:1px solid #ECECEC; display: block;}#topIsraelInformerBusiness.ti-container .ti-item{display:block; text-decoration:none; margin:10px;}#topIsraelInformerBusiness.ti-container .ti-item .ti-image{float:left; margin:0 10px 0 0; width:50px; height:50px; background:#F2F2F2;}#topIsraelInformerBusiness.ti-container .ti-item .ti-image img{display:block; width:100%; height:auto;}#topIsraelInformerBusiness.ti-container .ti-item .ti-context{display:block; position:relative; overflow:hidden;}#topIsraelInformerBusiness.ti-container .ti-item .ti-context .ti-title{display:block;  margin:0 0 5px 0; font-size:18px; line-height: 1.25; color: #103DD3;}#topIsraelInformerBusiness.ti-container .ti-item .ti-context .ti-text{display:block; margin:0 0 5px 0; font-size:14px; line-height: 1.25; color: #000000;}#topIsraelInformerBusiness.ti-container .ti-item .ti-context .ti-category{display:block; margin:0 0 5px 0; font-size:11px; line-height: 1.25; color: #000000;}#topIsraelInformerBusiness.ti-container .ti-item .ti-context .ti-adress{display:block; margin:0 0 5px 0; font-size:11px; line-height: 1.25; color: #000000;}#topIsraelInformerBusiness.ti-clear{display:block; clear:both; height:0; overflow: hidden;}</style>
+        <!-- Script -->
+        <script type="text/javascript">(function (w, d, t, p, e, m) {
+                _rs = {"container":"topIsraelInformerBusiness","city":0,"category":0,"limit":3};
+                e = d.createElement(t); e.async = 1; e.src = p;
+                m = d.getElementsByTagName(t)[0]; m.parentNode.insertBefore(e, m);
+            })(window, document, 'script', '/public/javascripts/data/business.js');</script>
+
 
         <!-- Modal -->
         <div class="modal fade" id="myPravilaLotarey" tabindex="-1" role="dialog" aria-labelledby="myPravilaLotarey" aria-hidden="true">

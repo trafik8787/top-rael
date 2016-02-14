@@ -14,18 +14,6 @@
 
     var $template = function (params, $defaults) {
 
-        if (!$defaults['font'].hasOwnProperty('color')) {
-            $defaults['font']['color'] = {};
-        }
-
-        if (!$defaults['font']['color'].hasOwnProperty('title')) {
-            $defaults['font']['color']['title'] = "#113FD6";
-        }
-
-        if (!$defaults['font']['color'].hasOwnProperty('text')) {
-            $defaults['font']['color']['text'] = "#000";
-        }
-
         return String()
             + "<a href=\"#\" class=\"ti-item\">\n"
             + " <span class=\"ti-image\">\n"

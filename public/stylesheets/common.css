@@ -15038,13 +15038,9 @@ i {
 }
 
 
-.w-node-article img {
-  width: 100%;
-}
-
 @media (max-width: 768px) {
   .w-node-article img {
-    width: inherit!important;
+    width: 100%;
   }
 }
 
