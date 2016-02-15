@@ -61,7 +61,7 @@
     $container.className = "ti-container";
     $container.innerHTML = '<span class=\"ti-header\">Информер бизнеса</span>';
     $container.innerHTML += $render.join("\n");
-    $container.innerHTML += '<span class=\"ti-footer\"><img src="images/logo.png" width="100" height="20" alt="" title=""/></span>';
+    $container.innerHTML += '<span class=\"ti-footer\"><img src="http://'+location.hostname +'/public/images/logo-new.png" width="150" alt="" title=""/></span>';
 
     function data() {
         return [

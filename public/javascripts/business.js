@@ -28,7 +28,7 @@ var $businessSettings = {
     }
 };
 
-var $path = "/public/javascripts/data/business.js";
+var $path = "http://"+location.hostname+"/public/javascripts/data/business.js";
 var $id = "topIsraelInformerBusiness";
 
 var $reviewScript = previewScript($path, $businessSettings);
@@ -105,7 +105,7 @@ $(function () {
 
         var script = document.createElement('div');
         script.appendChild(previewScript($path, {
-            "container": $id,
+            "container": '#' + $id,
             "city": $businessSettings['city'],
             "category": $businessSettings['category'],
             "limit": $businessSettings['limit']
