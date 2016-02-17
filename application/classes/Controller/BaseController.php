@@ -318,4 +318,10 @@ abstract class Controller_BaseController extends Controller_Template {
         return $content;
     }
 
+
+    public function generateFileInformer (){
+        Model::factory('BussinesModel')->getInformersBussinesId();
+    }
+
+
 }

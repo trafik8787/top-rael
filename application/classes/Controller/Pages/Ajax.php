@@ -427,6 +427,7 @@ class Controller_Pages_Ajax extends Controller {
         $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new-h.png", "", "image/png");
         $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
         $m->Send();
+
     }
 
 
@@ -507,18 +508,20 @@ class Controller_Pages_Ajax extends Controller {
      */
     public function sendBussinesMount($data_business){
 
+        //получаем меся последней отправки письма
         $date_subs_mount = date('m', strtotime($data_business['date_subscribe_mount']));
         $date_curent_mount = date('m');
 
         //если рассылки еще не было
-        if (empty($date_send_mount)) {
+        if ($data_business['date_subscribe_mount'] == null) {
+
             DB::update('business')->set(array('date_subscribe_mount' => date('Y-m-d')))->where('id', '=', $data_business['id'])->execute();
             $message = View::factory('email/text_reminders');
             $this->template_mail_message($data_business['email'], $data_business['EmailRedactor'], 'ספר על עצמך יותר באתר טופ ישראל', $message);
         } else {
 
             if (($date_subs_mount < $date_curent_mount) and (date('d', strtotime($data_business['date_create'])) == date('d'))) {
-
+                DB::update('business')->set(array('date_subscribe_mount' => date('Y-m-d')))->where('id', '=', $data_business['id'])->execute();
                 $message = View::factory('email/text_reminders');
                 $this->template_mail_message($data_business['email'], $data_business['EmailRedactor'], 'ספר על עצמך יותר באתר טופ ישראל', $message);
 

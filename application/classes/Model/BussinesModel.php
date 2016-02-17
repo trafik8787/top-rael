@@ -1426,4 +1426,81 @@ class Model_BussinesModel extends Model_BaseModel {
 
     }
 
+
+    /**
+     * todo метод генерации json файла бизнесов для информера
+     */
+    public function getInformersBussinesId ()
+    {
+
+        $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+        $result = array();
+        foreach ($section as $row_section) {
+
+
+            $query_bus = DB::select(
+                array('business.id', 'BusId'),
+                array('business.name', 'BusName'),
+                array('business.url', 'BusUrl'),
+                array('business.info', 'BusInfo'),
+                array('business.address', 'BusAdress'),
+                array('business.home_busines_foto', 'BusImage'),
+                array('city.id', 'CityId'),
+                array('city.name', 'CityName'),
+                array('cat2.id', 'CatId'),
+                array('cat2.name', 'CatName')
+
+            )
+                ->distinct(TRUE)
+                ->from('business')
+
+                ->join(array('businesscategory', 'buscat'))
+                ->on('buscat.business_id', '=', 'business.id')
+
+                ->join(array('category', 'cat'))
+                ->on('buscat.category_id', '=', 'cat.id')
+
+                ->join(array('category', 'cat2'))
+                ->on('cat.parent_id', '=', 'cat2.id')
+
+                ->join('city', 'LEFT')
+                ->on('business.city','=','city.id')
+
+                ->where('cat2.url','=', $row_section['url'])
+                ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
+                ->and_where('business.status', '=', 1)
+                ->and_where('business.name', '<>', '')
+                ->and_where('business.city', '<>', '')
+                ->and_where('business.address', '<>', '')
+                ->and_where('business.tel', '<>', '')
+                ->and_where('business.home_busines_foto', '<>', '')
+                ->and_where('business.logo', '<>', '')
+                ->and_where('business.info', '<>', '')
+                ->order_by('business.id', 'DESC')
+                ->execute()->as_array();
+
+            $result = array_merge($result, $query_bus);
+        }
+
+        $arr_in_json = array();
+        foreach ($result as $rows) {
+
+            $arr_in_json[] = array('category' => array('value' => $rows['CatId'], 'label' => $rows['CatName']),
+                'city' => array('value' => $rows['CityId'], 'label' => $rows['CityName']),
+                'url' => $rows['BusUrl'],
+                'image' => array('url' => $rows['BusImage']),
+                'title' => $rows['BusName'],
+                'description' => Text::limit_chars(strip_tags($rows['BusInfo']), 150, null, true),
+                'adress' => $rows['CityName'] .' '. $rows['BusAdress']
+
+            );
+        }
+
+
+        if (file_exists($_SERVER['DOCUMENT_ROOT'].'/bus.json')) {
+            unlink($_SERVER['DOCUMENT_ROOT'].'/bus.json');
+        }
+        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/bus.json', json_encode($arr_in_json));
+    }
+
 }

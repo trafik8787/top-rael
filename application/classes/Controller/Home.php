@@ -10,7 +10,7 @@ class Controller_Home extends Controller_BaseController {
 
 
 	public function action_index(){
-       // HTML::x(date('Y-m-d', strftime(1458684000)));
+      //  HTML::x($_SERVER);
        //HTML::x(Model::factory('BussinesModel')->getCouponsUser());
         //echo  Auth::instance()->hash('qweqweqwe');
       // phpinfo();
@@ -41,6 +41,10 @@ class Controller_Home extends Controller_BaseController {
        // die(phpinfo());
        // HTML::x( Model::factory('BussinesModel')->getBannersUser());
 
+
+        //$this->generateFileInformer();
+
+       // file_put_contents($_SERVER['DOCUMENT_ROOT'].'/bus.json', json_encode($arr));
 
         $resultArr = array();
         $content = View::factory('pages/home');

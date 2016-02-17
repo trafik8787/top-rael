@@ -15,13 +15,13 @@
     var $template = function (params, $defaults) {
 
         return String()
-            + "<a href=\"#\" class=\"ti-item\">\n"
+            + "<a href=\"http://"+location.hostname+'/business/'+params['url']+"\" class=\"ti-item\">\n"
             + " <span class=\"ti-image\">\n"
-            + "     <img src=\"" + params['image']['url'] + "\" width=\"50\" height=\"50\" alt=\"\" title=\"\"/>\n"
+            + "     <img src=\"" + params['image']['url'] + "\" width=\"50\" alt=\"\" title=\"\"/>\n"
             + " </span>"
             + " <span class=\"ti-context\">"
             + "     <span class=\"ti-title\">" + params['title'] + "</span>\n"
-            + "     <small class=\"ti-category\">" + params['category']['name'] + "</small>\n"
+            + "     <small class=\"ti-category\">" + params['category']['label'] + "</small>\n"
             + "     <small class=\"ti-adress\">" + params['adress'] + "</small>\n"
             + "     <span class=\"ti-text\">" + params['description'] + "</span>\n"
             + " </span>\n"
@@ -45,10 +45,10 @@
 
     for (var i = 0; i < $data.length; i++) {
 
-        if ($defaults['city'] && $data[i]['city'] !== $defaults['city'])
+        if ($defaults['city'] && $data[i]['city']['value'] !== $defaults['city'])
             continue;
 
-        if ($defaults['category'] && $data[i]['category']['id'] !== $defaults['category'])
+        if ($defaults['category'] && $data[i]['category']['value'] !== $defaults['category'])
             continue;
 
         if ($render.length >= $defaults['limit']) {
@@ -61,115 +61,16 @@
     $container.className = "ti-container";
     $container.innerHTML = '<span class=\"ti-header\">Информер бизнеса</span>';
     $container.innerHTML += $render.join("\n");
-    $container.innerHTML += '<span class=\"ti-footer\"><img src="http://'+location.hostname +'/public/images/logo-new.png" width="150" alt="" title=""/></span>';
+    $container.innerHTML += '<span class=\"ti-footer\"><img src="http://'+location.hostname+'/public/images/logo-new.png" width="150" alt="" title=""/></span>';
 
     function data() {
-        return [
-            {
-                'category': {
-                    'id': 1,
-                    'name': 'Category Name'
-                },
-                'city': 1,
-                'image': {
-                    'url': "url1"
-                },
-                'title': "title",
-                'description': "description1",
-                'adress': 'adress'
-            },
-            {
-                'category': {
-                    'id': 2,
-                    'name': 'Category Name'
-                },
-                'city': 2,
-                'image': {
-                    'url': "url2"
-                },
-                'title': "title",
-                'description': "description2",
-                'adress': 'adress'
-            },
-            {
-                'city': 3,
-                'category': {
-                    'id': 3,
-                    'name': 'Category Name'
-                },
-                'image': {
-                    'url': "url1"
-                },
-                'title': "title",
-                'description': "description1",
-                'adress': 'adress'
-            },
-            {
-                'city': 4,
-                'category': {
-                    'id': 1,
-                    'name': 'Category Name'
-                },
-                'image': {
-                    'url': "url2"
-                },
-                'title': "title",
-                'description': "description2",
-                'adress': 'adress'
-            },
-            {
-                'city': 5,
-                'category': {
-                    'id': 2,
-                    'name': 'Category Name'
-                },
-                'image': {
-                    'url': "url1"
-                },
-                'title': "title",
-                'description': "description1",
-                'adress': 'adress'
-            },
-            {
-                'category': {
-                    'id': 4,
-                    'name': 'Category Name'
-                },
-                'city': 6,
-                'image': {
-                    'url': "url2"
-                },
-                'title': "title",
-                'description': "description2",
-                'adress': 'adress'
-            },
-            {
-                'category': {
-                    'id': 2,
-                    'name': 'Category Name'
-                },
-                'city': 7,
-                'image': {
-                    'url': "url1"
-                },
-                'title': "title",
-                'description': "description1",
-                'adress': 'adress'
-            },
-            {
-                'category': {
-                    'id': 3,
-                    'name': 'Category Name'
-                },
-                'city': 8,
-                'image': {
-                    'url': "url2"
-                },
-                'title': "title",
-                'description': "description2",
-                'adress': 'adress'
-            }
-        ]
+
+        var request = new XMLHttpRequest();
+        request.open("GET", "/bus.json", false);
+        request.send(null);
+        var my_JSON_object = JSON.parse(request.responseText);
+        return my_JSON_object;
+
     }
 
     /*

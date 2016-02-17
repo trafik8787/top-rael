@@ -20,7 +20,7 @@
             + "     <img src=\"" + params['image']['url'] + "\" width=\"50\" height=\"50\" alt=\"\" title=\"\"/>\n"
             + " </span>"
             + " <span class=\"ti-context\">"
-            + "     <small class=\"ti-category\">" + params['category']['name'] + "</small>\n"
+            + "     <small class=\"ti-category\">" + params['category']['label'] + "</small>\n"
             + "     <span class=\"ti-text\">" + params['description'] + "</span>\n"
             + " </span>\n"
             + " <span class=\"ti-clear\"></span>\n"
@@ -43,10 +43,10 @@
 
     for (var i = 0; i < $data.length; i++) {
 
-        if ($defaults['city'] && $data[i]['city'] !== $defaults['city'])
+        if ($defaults['city'] && $data[i]['city']['value'] !== $defaults['city'])
             continue;
 
-        if ($defaults['category'] && $data[i]['category']['id'] !== $defaults['category'])
+        if ($defaults['category'] && $data[i]['category']['value'] !== $defaults['category'])
             continue;
 
         if ($render.length >= $defaults['limit']) {
@@ -65,35 +65,12 @@
         return [
             {
                 'category': {
-                    'id': 1,
-                    'name': 'Category Name'
+                    'value': 1,
+                    'label': 'Category Name'
                 },
-                'city': 1,
-                'image': {
-                    'url': "url1"
-                },
-                'title': "title",
-                'description': "description1",
-                'adress': 'adress'
-            },
-            {
-                'category': {
-                    'id': 2,
-                    'name': 'Category Name'
-                },
-                'city': 2,
-                'image': {
-                    'url': "url2"
-                },
-                'title': "title",
-                'description': "description2",
-                'adress': 'adress'
-            },
-            {
-                'city': 3,
-                'category': {
-                    'id': 3,
-                    'name': 'Category Name'
+                'city': {
+                    'value': 1,
+                    'label': 'City'
                 },
                 'image': {
                     'url': "url1"
@@ -103,10 +80,13 @@
                 'adress': 'adress'
             },
             {
-                'city': 4,
                 'category': {
-                    'id': 1,
-                    'name': 'Category Name'
+                    'value': 2,
+                    'label': 'Category Name'
+                },
+                'city': {
+                    'value': 1,
+                    'label': 'City'
                 },
                 'image': {
                     'url': "url2"
@@ -116,10 +96,45 @@
                 'adress': 'adress'
             },
             {
-                'city': 5,
+                'city': {
+                    'value': 1,
+                    'label': 'City'
+                },
                 'category': {
-                    'id': 2,
-                    'name': 'Category Name'
+                    'value': 3,
+                    'label': 'Category Name'
+                },
+                'image': {
+                    'url': "url1"
+                },
+                'title': "title",
+                'description': "description1",
+                'adress': 'adress'
+            },
+            {
+                'city': {
+                    'value': 1,
+                    'label': 'City'
+                },
+                'category': {
+                    'value': 1,
+                    'label': 'Category Name'
+                },
+                'image': {
+                    'url': "url2"
+                },
+                'title': "title",
+                'description': "description2",
+                'adress': 'adress'
+            },
+            {
+                'city': {
+                    'value': 1,
+                    'label': 'City'
+                },
+                'category': {
+                    'value': 2,
+                    'label': 'Category Name'
                 },
                 'image': {
                     'url': "url1"
@@ -130,10 +145,13 @@
             },
             {
                 'category': {
-                    'id': 4,
-                    'name': 'Category Name'
+                    'value': 4,
+                    'label': 'Category Name'
                 },
-                'city': 6,
+                'city': {
+                    'value': 1,
+                    'label': 'City'
+                },
                 'image': {
                     'url': "url2"
                 },
@@ -143,10 +161,13 @@
             },
             {
                 'category': {
-                    'id': 2,
-                    'name': 'Category Name'
+                    'value': 2,
+                    'label': 'Category Name'
                 },
-                'city': 7,
+                'city': {
+                    'value': 1,
+                    'label': 'City'
+                },
                 'image': {
                     'url': "url1"
                 },
@@ -156,10 +177,13 @@
             },
             {
                 'category': {
-                    'id': 3,
-                    'name': 'Category Name'
+                    'value': 3,
+                    'label': 'Category Name'
                 },
-                'city': 8,
+                'city': {
+                    'value': 1,
+                    'label': 'City'
+                },
                 'image': {
                     'url': "url2"
                 },

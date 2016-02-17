@@ -1,50 +1,6 @@
 /**
  * Created by Fedor on 2/7/2016.
  */
-function categories(name, selected, callback) {
-
-    var $select = document.querySelectorAll('select[name="categories[' + (name || "") + ']"]');
-
-    var $defaults = [
-        {
-            "name": "Все"
-        },
-        {
-            "name": "Развлечения"
-        },
-        {
-            "name": "Рестораны"
-        },
-        {
-            "name": "Покупки"
-        },
-        {
-            "name": "Отели"
-        }
-    ];
-
-    for (var i = 0; i < $select.length; i++) {
-
-        for (var j = 0; j < $defaults.length; j++) {
-
-            var $option = document.createElement('option');
-            $option.innerText = $defaults[j]['name'];
-            $option.value = (j + 1);
-
-            $select[i].appendChild($option);
-        }
-
-        $select[i].onchange = function () {
-
-            if (typeof callback === "function") {
-                callback(this);
-            }
-        };
-
-        $select[i].onchange();
-    }
-}
-
 function cities(name, selected, callback) {
 
     var $select = document.querySelectorAll('select[name="cities[' + (name || "") + ']"]');
@@ -52,43 +8,43 @@ function cities(name, selected, callback) {
     var $defaults = {
         "selected": (selected !== undefined ? selected : 1),
         "cities": [
-            'Все',
-            'Акко',
-            'Арад',
-            'Ариэль',
-            'Афула',
-            'Ашдод',
-            'Ашкелон',
-            'Бат-Ям',
-            'Бейт-Шеан',
-            'Бейт-Шемеш',
-            'Бейтар-Илит',
-            'Беэр-Шева',
-            'Бней-Брак',
-            'Герцлия',
-            'Гиват-Шмуэль',
-            'Гиватаим',
-            'Димона',
-            'Зихрон-Яаков',
-            'Иерусалим',
-            'Йехуд',
-            'Йокнеам',
-            'Кармиэль',
-            'Кирьят-Арба',
-            'Кирьят-Ата',
-            'Кирьят-Бялик',
-            'Кирьят-Гат',
-            'Кирьят-Малахи',
-            'Кирьят-Моцкин',
-            'Кирьят-Оно',
-            'Кирьят-Тивон',
-            'Кирьят-Хаим',
-            'Кирьят-Шмона',
-            'Кирьят-Ям',
-            'Кфар-Саба',
-            'Лод',
-            'Маале-Адумим',
-            'Маалот-Таршиха'
+            {value: 0, label: 'Все'},
+            {value: 1, label: 'Акко'},
+            {value: 2, label: 'Арад'},
+            {value: 3, label: 'Ариэль'},
+            {value: 4, label: 'Афула'},
+            {value: 5, label: 'Ашдод'},
+            {value: 6, label: 'Ашкелон'},
+            {value: 7, label: 'Бат-Ям'},
+            {value: 8, label: 'Бейт-Шеан'},
+            {value: 9, label: 'Бейт-Шемеш'},
+            {value: 10, label: 'Бейтар-Илит'},
+            {value: 11, label: 'Беэр-Шева'},
+            {value: 12, label: 'Бней-Брак'},
+            {value: 13, label: 'Герцлия'},
+            {value: 14, label: 'Гиват-Шмуэль'},
+            {value: 15, label: 'Гиватаим'},
+            {value: 16, label: 'Димона'},
+            {value: 17, label: 'Зихрон-Яаков'},
+            {value: 18, label: 'Иерусалим'},
+            {value: 19, label: 'Йехуд'},
+            {value: 20, label: 'Йокнеам'},
+            {value: 21, label: 'Кармиэль'},
+            {value: 22, label: 'Кирьят-Арба'},
+            {value: 23, label: 'Кирьят-Ата'},
+            {value: 24, label: 'Кирьят-Бялик'},
+            {value: 25, label: 'Кирьят-Гат'},
+            {value: 26, label: 'Кирьят-Малахи'},
+            {value: 27, label: 'Кирьят-Моцкин'},
+            {value: 28, label: 'Кирьят-Оно'},
+            {value: 29, label: 'Кирьят-Тивон'},
+            {value: 30, label: 'Кирьят-Хаим'},
+            {value: 31, label: 'Кирьят-Шмона'},
+            {value: 32, label: 'Кирьят-Ям'},
+            {value: 33, label: 'Кфар-Саба'},
+            {value: 34, label: 'Лод'},
+            {value: 35, label: 'Маале-Адумим'},
+            {value: 36, label: 'Маалот-Таршиха'}
         ]
     };
 
@@ -97,8 +53,8 @@ function cities(name, selected, callback) {
         for (var j = 0; j < $defaults.cities.length; j++) {
 
             var $option = document.createElement('option');
-            $option.innerText = $defaults.cities[j];
-            $option.value = j;
+            $option.innerText = $defaults.cities[j].label;
+            $option.value = $defaults.cities[j].value;
 
             if ($defaults.selected === j) {
                 $option.selected = true;
@@ -123,11 +79,11 @@ function category(name, selected, callback) {
     var $defaults = {
         "selected": (selected !== undefined ? selected : 1),
         "categories": [
-            'Все',
-            'Развлечения',
-            'Рестораны',
-            'Покупки',
-            'Отели'
+            {value: 0, label: 'Все'},
+            {value: 1, label: 'Развлечения'},
+            {value: 2, label: 'Рестораны'},
+            {value: 3, label: 'Покупки'},
+            {value: 4, label: 'Отели'}
         ]
     };
 
@@ -136,8 +92,8 @@ function category(name, selected, callback) {
         for (var j = 0; j < $defaults.categories.length; j++) {
 
             var $option = document.createElement('option');
-            $option.innerText = $defaults.categories[j];
-            $option.value = j;
+            $option.innerText = $defaults.categories[j].label;
+            $option.value = $defaults.categories[j].value;
 
             if ($defaults.selected === j) {
                 $option.selected = true;
@@ -272,7 +228,7 @@ function previewCss(id, params) {
         + "#" + id + ".ti-container .ti-header{ font-size: 20px; line-height: 1.25; margin: 5px 0; padding:5px 10px 10px; border-bottom:1px solid #ECECEC; display: block;}"
         + "#" + id + ".ti-container .ti-footer{ font-size: 20px; line-height: 1.25; margin: 5px 0; padding:10px 10px 5px 10px; border-top:1px solid #ECECEC; display: block;}"
         + "#" + id + ".ti-container .ti-item{display:block; text-decoration:none; margin:10px;}"
-        + "#" + id + ".ti-container .ti-item .ti-image{float:left; margin:0 10px 0 0; width:50px; height:50px; background:#F2F2F2;}"
+        + "#" + id + ".ti-container .ti-item .ti-image{float:left; margin:0 10px 0 0; width:70px; background:#F2F2F2;}"
         + "#" + id + ".ti-container .ti-item .ti-image img{display:block; width:100%; height:auto;}"
         + "#" + id + ".ti-container .ti-item .ti-context{display:block; position:relative; overflow:hidden;}"
         + "#" + id + ".ti-container .ti-item .ti-context .ti-title{display:block;  margin:0 0 5px 0; font-size:" + params['font']['size']['title'] + "px; line-height: 1.25; color: " + params['font']['color']['title'] + ";}"

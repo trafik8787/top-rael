@@ -43,10 +43,10 @@
 
     for (var i = 0; i < $data.length; i++) {
 
-        if ($defaults['city'] && $data[i]['city'] !== $defaults['city'])
+        if ($defaults['city'] && $data[i]['city']['value'] !== $defaults['city'])
             continue;
 
-        if ($defaults['category'] && $data[i]['category']['id'] !== $defaults['category'])
+        if ($defaults['category'] && $data[i]['category']['value'] !== $defaults['category'])
             continue;
 
         if ($render.length >= $defaults['limit']) {
@@ -64,100 +64,132 @@
     function data() {
         return [
             {
-                'city': 1,
                 'category': {
-                    'id': 2,
-                    'name': 'Category Name'
+                    'value': 1,
+                    'label': 'Category Name'
+                },
+                'city': {
+                    'value': 1,
+                    'label': 'City'
                 },
                 'image': {
                     'url': "url1"
                 },
                 'title': "title",
-                'description': "description1"
+                'description': "description1",
+                'adress': 'adress'
             },
             {
-                'city': 2,
                 'category': {
-                    'id': 1,
-                    'name': 'Category Name'
+                    'value': 2,
+                    'label': 'Category Name'
+                },
+                'city': {
+                    'value': 1,
+                    'label': 'City'
                 },
                 'image': {
                     'url': "url2"
                 },
                 'title': "title",
-                'description': "description2"
+                'description': "description2",
+                'adress': 'adress'
             },
             {
-                'city': 3,
+                'city': {
+                    'value': 1,
+                    'label': 'City'
+                },
                 'category': {
-                    'id': 3,
-                    'name': 'Category Name'
+                    'value': 3,
+                    'label': 'Category Name'
                 },
                 'image': {
                     'url': "url1"
                 },
                 'title': "title",
-                'description': "description1"
+                'description': "description1",
+                'adress': 'adress'
             },
             {
-                'city': 4,
+                'city': {
+                    'value': 1,
+                    'label': 'City'
+                },
                 'category': {
-                    'id': 2,
-                    'name': 'Category Name'
+                    'value': 1,
+                    'label': 'Category Name'
                 },
                 'image': {
                     'url': "url2"
                 },
                 'title': "title",
-                'description': "description2"
+                'description': "description2",
+                'adress': 'adress'
             },
             {
-                'city': 5,
+                'city': {
+                    'value': 1,
+                    'label': 'City'
+                },
                 'category': {
-                    'id': 1,
-                    'name': 'Category Name'
+                    'value': 2,
+                    'label': 'Category Name'
                 },
                 'image': {
                     'url': "url1"
                 },
                 'title': "title",
-                'description': "description1"
+                'description': "description1",
+                'adress': 'adress'
             },
             {
-                'city': 6,
                 'category': {
-                    'id': 3,
-                    'name': 'Category Name'
+                    'value': 4,
+                    'label': 'Category Name'
+                },
+                'city': {
+                    'value': 1,
+                    'label': 'City'
                 },
                 'image': {
                     'url': "url2"
                 },
                 'title': "title",
-                'description': "description2"
+                'description': "description2",
+                'adress': 'adress'
             },
             {
-                'city': 7,
                 'category': {
-                    'id': 2,
-                    'name': 'Category Name'
+                    'value': 2,
+                    'label': 'Category Name'
+                },
+                'city': {
+                    'value': 1,
+                    'label': 'City'
                 },
                 'image': {
                     'url': "url1"
                 },
                 'title': "title",
-                'description': "description1"
+                'description': "description1",
+                'adress': 'adress'
             },
             {
-                'city': 8,
                 'category': {
-                    'id': 1,
-                    'name': 'Category Name'
+                    'value': 3,
+                    'label': 'Category Name'
+                },
+                'city': {
+                    'value': 1,
+                    'label': 'City'
                 },
                 'image': {
                     'url': "url2"
                 },
                 'title': "title",
-                'description': "description2"
+                'description': "description2",
+                'adress': 'adress'
             }
         ]
     }
