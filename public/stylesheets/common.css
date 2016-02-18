@@ -12831,6 +12831,9 @@ footer {
   .top .top-image .top-image-text {
     background: #666666;
     bottom: auto;
+    width: 100%;
+    padding-top: 2px;
+    position: relative;
   }
 }
 /* line 71, ../.sass/top.scss */
