@@ -265,7 +265,24 @@ Route::set('Partners', 'partners')
         'action'     => 'index',
     ));
 
-Route::set('Informers', 'informers')
+
+//получаем список разделов для информера
+Route::set('Informgetsection', 'informgetsection')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'getAjaxInformerSection',
+    ));
+
+//получаем список городов для информера
+Route::set('InformgetCity', 'informgetcity')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'getAjaxInformerCity',
+    ));
+
+Route::set('Informers', 'informers(/<action>)', array('action' => 'coupon|article'))
     ->defaults(array(
         'directory' => 'Pages',
         'controller' => 'Informers',

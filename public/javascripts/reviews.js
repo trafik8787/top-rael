@@ -28,7 +28,7 @@ var $reviewsSettings = {
     }
 };
 
-var $path = "./javascripts/data/reviews.js";
+var $path = "http://"+location.hostname+"/public/javascripts/data/reviews.js";
 var $id = "topIsraelInformerReviews";
 
 var $reviewScript = previewScript($path, $reviewsSettings);
@@ -105,7 +105,7 @@ $(function () {
 
         var script = document.createElement('div');
         script.appendChild(previewScript($path, {
-            "container": $id,
+            "container": '#' + $id,
             "city": $reviewsSettings['city'],
             "category": $reviewsSettings['category'],
             "limit": $reviewsSettings['limit']

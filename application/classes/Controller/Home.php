@@ -42,9 +42,6 @@ class Controller_Home extends Controller_BaseController {
        // HTML::x( Model::factory('BussinesModel')->getBannersUser());
 
 
-        //$this->generateFileInformer();
-
-       // file_put_contents($_SERVER['DOCUMENT_ROOT'].'/bus.json', json_encode($arr));
 
         $resultArr = array();
         $content = View::factory('pages/home');

@@ -418,4 +418,54 @@ class Model_CouponsModel extends Model_BaseModel {
     }
 
 
+    public function getInformersCouponsId (){
+
+        $query = DB::select(
+            array('coupon.id', 'CoupId'),
+            array('coupon.secondname', 'CoupSecondname'),
+            array('coupon.info', 'CoupInfo'),
+            array('coupon.url', 'CoupUrl'),
+            array('coupon.img_coupon', 'CoupImg'),
+            array('category.name', 'CatName'),
+            array('category.id', 'CatId'),
+            array('city.id', 'CityId'),
+            array('city.name', 'CityName'),
+            array('business.name', 'BusName'),
+            array('business.address', 'BusAddress')
+
+
+        )
+            ->from('coupon')
+            ->join('category')
+            ->on('coupon.id_section','=','category.id')
+            ->join('city')
+            ->on('coupon.city','=','city.id')
+            ->join('business')
+            ->on('coupon.business_id','=','business.id')
+            ->execute()->as_array();
+
+            //HTML::x($query);
+
+            $arr_in_json = array();
+            foreach ($query as $rows) {
+
+                $arr_in_json[] = array('category' => array('value' => $rows['CatId'], 'label' => $rows['CatName']),
+                    'city' => array('value' => $rows['CityId'], 'label' => $rows['CityName']),
+                    'url' => $rows['CoupUrl'],
+                    'image' => array('url' => $rows['CoupImg']),
+                    'title' => $rows['CoupSecondname'],
+                    'description' => Text::limit_chars(strip_tags($rows['CoupInfo']), 150, null, true),
+                    'adress' => $rows['CityName'] .', '. $rows['BusAddress']
+
+                );
+            }
+
+
+            if (file_exists($_SERVER['DOCUMENT_ROOT'].'/coup.json')) {
+                unlink($_SERVER['DOCUMENT_ROOT'].'/coup.json');
+            }
+            file_put_contents($_SERVER['DOCUMENT_ROOT'].'/coup.json', json_encode($arr_in_json));
+
+    }
+
 }

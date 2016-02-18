@@ -17,7 +17,7 @@
         return String()
             + "<a href=\"http://"+location.hostname+'/business/'+params['url']+"\" class=\"ti-item\">\n"
             + " <span class=\"ti-image\">\n"
-            + "     <img src=\"" + params['image']['url'] + "\" width=\"50\" alt=\"\" title=\"\"/>\n"
+            + "     <img src=\"http://"+location.hostname + params['image']['url'] + "\" width=\"50\" alt=\"\" title=\"\"/>\n"
             + " </span>"
             + " <span class=\"ti-context\">"
             + "     <span class=\"ti-title\">" + params['title'] + "</span>\n"
@@ -45,10 +45,12 @@
 
     for (var i = 0; i < $data.length; i++) {
 
-        if ($defaults['city'] && $data[i]['city']['value'] !== $defaults['city'])
+        // console.log($data[i]['category']);
+
+        if ($defaults['city'] && parseInt($data[i]['city']['value']) !== parseInt($defaults['city']))
             continue;
 
-        if ($defaults['category'] && $data[i]['category']['value'] !== $defaults['category'])
+        if ($defaults['category'] && parseInt($data[i]['category']['value']) !== parseInt($defaults['category']))
             continue;
 
         if ($render.length >= $defaults['limit']) {

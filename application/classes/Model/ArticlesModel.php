@@ -622,4 +622,52 @@ class Model_ArticlesModel extends Model_BaseModel {
     }
 
 
+    public function getInformersArticlesId (){
+
+
+
+        $query = DB::select(
+            array('articles.id', 'ArticId'),
+            array('articles.name', 'ArticName'),
+            array('articles.content', 'ArticContent'),
+            array('articles.url', 'ArticUrl'),
+            array('articles.images_article', 'ArticImg'),
+            array('category.name', 'CatName'),
+            array('category.id', 'CatId'),
+            array('city.id', 'CityId'),
+            array('city.name', 'CityName')
+
+        )
+            ->from('articles')
+            ->join('category')
+            ->on('articles.id_section','=','category.id')
+            ->join('city')
+            ->on('articles.city','=','city.id')
+
+            ->execute()->as_array();
+
+
+        $arr_in_json = array();
+        foreach ($query as $rows) {
+
+            $arr_in_json[] = array('category' => array('value' => $rows['CatId'], 'label' => $rows['CatName']),
+                'city' => array('value' => $rows['CityId'], 'label' => $rows['CityName']),
+                'url' => $rows['ArticUrl'],
+                'image' => array('url' => $rows['ArticImg']),
+                'title' => $rows['ArticName'],
+                'description' => Text::limit_chars(strip_tags($rows['ArticContent']), 150, null, true),
+                'adress' => ''
+
+            );
+        }
+
+
+        if (file_exists($_SERVER['DOCUMENT_ROOT'].'/article.json')) {
+            unlink($_SERVER['DOCUMENT_ROOT'].'/article.json');
+        }
+        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/article.json', json_encode($arr_in_json));
+
+    }
+
+
 }

@@ -2,50 +2,20 @@
  * Created by Fedor on 2/7/2016.
  */
 function cities(name, selected, callback) {
-
+    var $CityAjaxList;
     var $select = document.querySelectorAll('select[name="cities[' + (name || "") + ']"]');
+
+    //получаем города
+    var req = new XMLHttpRequest();
+    req.open("GET", '/informgetcity?page='+window.location, false);
+    req.send(null);
+
+    $CityAjaxList = JSON.parse(req.responseText);
+
 
     var $defaults = {
         "selected": (selected !== undefined ? selected : 1),
-        "cities": [
-            {value: 0, label: 'Все'},
-            {value: 1, label: 'Акко'},
-            {value: 2, label: 'Арад'},
-            {value: 3, label: 'Ариэль'},
-            {value: 4, label: 'Афула'},
-            {value: 5, label: 'Ашдод'},
-            {value: 6, label: 'Ашкелон'},
-            {value: 7, label: 'Бат-Ям'},
-            {value: 8, label: 'Бейт-Шеан'},
-            {value: 9, label: 'Бейт-Шемеш'},
-            {value: 10, label: 'Бейтар-Илит'},
-            {value: 11, label: 'Беэр-Шева'},
-            {value: 12, label: 'Бней-Брак'},
-            {value: 13, label: 'Герцлия'},
-            {value: 14, label: 'Гиват-Шмуэль'},
-            {value: 15, label: 'Гиватаим'},
-            {value: 16, label: 'Димона'},
-            {value: 17, label: 'Зихрон-Яаков'},
-            {value: 18, label: 'Иерусалим'},
-            {value: 19, label: 'Йехуд'},
-            {value: 20, label: 'Йокнеам'},
-            {value: 21, label: 'Кармиэль'},
-            {value: 22, label: 'Кирьят-Арба'},
-            {value: 23, label: 'Кирьят-Ата'},
-            {value: 24, label: 'Кирьят-Бялик'},
-            {value: 25, label: 'Кирьят-Гат'},
-            {value: 26, label: 'Кирьят-Малахи'},
-            {value: 27, label: 'Кирьят-Моцкин'},
-            {value: 28, label: 'Кирьят-Оно'},
-            {value: 29, label: 'Кирьят-Тивон'},
-            {value: 30, label: 'Кирьят-Хаим'},
-            {value: 31, label: 'Кирьят-Шмона'},
-            {value: 32, label: 'Кирьят-Ям'},
-            {value: 33, label: 'Кфар-Саба'},
-            {value: 34, label: 'Лод'},
-            {value: 35, label: 'Маале-Адумим'},
-            {value: 36, label: 'Маалот-Таршиха'}
-        ]
+        "cities": $CityAjaxList
     };
 
     for (var i = 0; i < $select.length; i++) {
@@ -72,19 +42,23 @@ function cities(name, selected, callback) {
     }
 }
 
-function category(name, selected, callback) {
 
+function category(name, selected, callback) {
+    var $CatAjaxList;
     var $select = document.querySelectorAll('select[name="category[' + (name || "") + ']"]');
+
+
+    //получаем категории
+    var req = new XMLHttpRequest();
+    req.open("GET", '/informgetsection', false);
+    req.send(null);
+
+    $CatAjaxList = JSON.parse(req.responseText);
+
 
     var $defaults = {
         "selected": (selected !== undefined ? selected : 1),
-        "categories": [
-            {value: 0, label: 'Все'},
-            {value: 1, label: 'Развлечения'},
-            {value: 2, label: 'Рестораны'},
-            {value: 3, label: 'Покупки'},
-            {value: 4, label: 'Отели'}
-        ]
+        "categories": $CatAjaxList
     };
 
     for (var i = 0; i < $select.length; i++) {

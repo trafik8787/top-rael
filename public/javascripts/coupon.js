@@ -28,7 +28,7 @@ var $couponSettings = {
     }
 };
 
-var $path = "./javascripts/data/coupon.js";
+var $path = "http://"+location.hostname+"/public/javascripts/data/coupon.js";
 var $id = "topIsraelInformerCoupon";
 
 var $reviewScript = previewScript($path, $couponSettings);
@@ -105,7 +105,7 @@ $(function () {
 
         var script = document.createElement('div');
         script.appendChild(previewScript($path, {
-            "container": $id,
+            "container": '#' + $id,
             "city": $couponSettings['city'],
             "category": $couponSettings['category'],
             "limit": $couponSettings['limit']

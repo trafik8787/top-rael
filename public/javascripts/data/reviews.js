@@ -15,9 +15,9 @@
     var $template = function (params, $defaults) {
 
         return String()
-            + "<a href=\"#\" class=\"ti-item\">\n"
+            + "<a href=\"http://"+location.hostname+'/article/'+params['url']+"\" class=\"ti-item\">\n"
             + " <span class=\"ti-image\">\n"
-            + "     <img src=\"" + params['image']['url'] + "\" width=\"50\" height=\"50\" alt=\"\" title=\"\"/>\n"
+            + "     <img src=\"http://"+location.hostname + params['image']['url'] + "\" width=\"50\" height=\"50\" alt=\"\" title=\"\"/>\n"
             + " </span>"
             + " <span class=\"ti-context\">"
             + "     <span class=\"ti-title\">" + params['title'] + "</span>\n"
@@ -43,10 +43,10 @@
 
     for (var i = 0; i < $data.length; i++) {
 
-        if ($defaults['city'] && $data[i]['city']['value'] !== $defaults['city'])
+        if ($defaults['city'] && parseInt($data[i]['city']['value']) !== parseInt($defaults['city']))
             continue;
 
-        if ($defaults['category'] && $data[i]['category']['value'] !== $defaults['category'])
+        if ($defaults['category'] && parseInt($data[i]['category']['value']) !== parseInt($defaults['category']))
             continue;
 
         if ($render.length >= $defaults['limit']) {
@@ -57,141 +57,17 @@
     }
 
     $container.className = "ti-container";
-    $container.innerHTML = '<span class=\"ti-header\">Информер обзора</span>';
+    $container.innerHTML = '<span class=\"ti-header\">Информер обзоров</span>';
     $container.innerHTML += $render.join("\n");
-    $container.innerHTML += '<span class=\"ti-footer\"><img src="images/logo.png" width="100" height="20" alt="" title=""/></span>';
+    $container.innerHTML += '<span class=\"ti-footer\"><img src="http://'+location.hostname+'/public/images/logo-new.png" width="150" alt="" title=""/></span>';
 
     function data() {
-        return [
-            {
-                'category': {
-                    'value': 1,
-                    'label': 'Category Name'
-                },
-                'city': {
-                    'value': 1,
-                    'label': 'City'
-                },
-                'image': {
-                    'url': "url1"
-                },
-                'title': "title",
-                'description': "description1",
-                'adress': 'adress'
-            },
-            {
-                'category': {
-                    'value': 2,
-                    'label': 'Category Name'
-                },
-                'city': {
-                    'value': 1,
-                    'label': 'City'
-                },
-                'image': {
-                    'url': "url2"
-                },
-                'title': "title",
-                'description': "description2",
-                'adress': 'adress'
-            },
-            {
-                'city': {
-                    'value': 1,
-                    'label': 'City'
-                },
-                'category': {
-                    'value': 3,
-                    'label': 'Category Name'
-                },
-                'image': {
-                    'url': "url1"
-                },
-                'title': "title",
-                'description': "description1",
-                'adress': 'adress'
-            },
-            {
-                'city': {
-                    'value': 1,
-                    'label': 'City'
-                },
-                'category': {
-                    'value': 1,
-                    'label': 'Category Name'
-                },
-                'image': {
-                    'url': "url2"
-                },
-                'title': "title",
-                'description': "description2",
-                'adress': 'adress'
-            },
-            {
-                'city': {
-                    'value': 1,
-                    'label': 'City'
-                },
-                'category': {
-                    'value': 2,
-                    'label': 'Category Name'
-                },
-                'image': {
-                    'url': "url1"
-                },
-                'title': "title",
-                'description': "description1",
-                'adress': 'adress'
-            },
-            {
-                'category': {
-                    'value': 4,
-                    'label': 'Category Name'
-                },
-                'city': {
-                    'value': 1,
-                    'label': 'City'
-                },
-                'image': {
-                    'url': "url2"
-                },
-                'title': "title",
-                'description': "description2",
-                'adress': 'adress'
-            },
-            {
-                'category': {
-                    'value': 2,
-                    'label': 'Category Name'
-                },
-                'city': {
-                    'value': 1,
-                    'label': 'City'
-                },
-                'image': {
-                    'url': "url1"
-                },
-                'title': "title",
-                'description': "description1",
-                'adress': 'adress'
-            },
-            {
-                'category': {
-                    'value': 3,
-                    'label': 'Category Name'
-                },
-                'city': {
-                    'value': 1,
-                    'label': 'City'
-                },
-                'image': {
-                    'url': "url2"
-                },
-                'title': "title",
-                'description': "description2",
-                'adress': 'adress'
-            }
-        ]
+
+        var request = new XMLHttpRequest();
+        request.open("GET", "/article.json", false);
+        request.send(null);
+        var my_JSON_object = JSON.parse(request.responseText);
+        return my_JSON_object;
     }
 
     /*

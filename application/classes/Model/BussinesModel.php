@@ -1435,6 +1435,7 @@ class Model_BussinesModel extends Model_BaseModel {
 
         $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
         $result = array();
+        $result_all = array();
         foreach ($section as $row_section) {
 
 
@@ -1480,9 +1481,26 @@ class Model_BussinesModel extends Model_BaseModel {
                 ->execute()->as_array();
 
             $result = array_merge($result, $query_bus);
+
+            $result_all[] = $query_bus[0];
         }
 
         $arr_in_json = array();
+
+
+        foreach ($result_all as $item) {
+            $arr_in_json[] = array('category' => array('value' => 0, 'label' => $item['CatName']),
+                'city' => array('value' => $item['CityId'], 'label' => $item['CityName']),
+                'url' => $item['BusUrl'],
+                'image' => array('url' => $item['BusImage']),
+                'title' => $item['BusName'],
+                'description' => Text::limit_chars(strip_tags($item['BusInfo']), 150, null, true),
+                'adress' => $item['CityName'] .', '. $item['BusAdress']
+
+            );
+        }
+
+
         foreach ($result as $rows) {
 
             $arr_in_json[] = array('category' => array('value' => $rows['CatId'], 'label' => $rows['CatName']),
@@ -1491,7 +1509,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 'image' => array('url' => $rows['BusImage']),
                 'title' => $rows['BusName'],
                 'description' => Text::limit_chars(strip_tags($rows['BusInfo']), 150, null, true),
-                'adress' => $rows['CityName'] .' '. $rows['BusAdress']
+                'adress' => $rows['CityName'] .', '. $rows['BusAdress']
 
             );
         }

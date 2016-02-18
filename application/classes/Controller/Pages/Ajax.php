@@ -332,7 +332,8 @@ class Controller_Pages_Ajax extends Controller {
         //сохраняем базу редис один рас в сутки
         Rediset::getInstance()->save();
 
-
+        //каждый день генерируем фаллы json для информеров
+        $this->generateFileInformer();
 
         $obj = new Model_BussinesModel();
         //пользователи и бизнесы
@@ -527,6 +528,56 @@ class Controller_Pages_Ajax extends Controller {
 
             }
         }
+    }
+
+
+    public function action_getAjaxInformerSection ()
+    {
+        $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+
+        $arr_result = array();
+        $arr_result[] = array("value" => 0, "label" => 'Все');
+        foreach ($section as $item) {
+            $arr_result[] = array("value" => $item['id'], "label" => $item['name']);
+        }
+
+        echo json_encode($arr_result);
+
+    }
+
+
+    public function action_getAjaxInformerCity () {
+
+        $page = parse_url($_GET['page']);
+        $city = array();
+
+
+
+       if ($page['path'] == '/informers') {
+           $city = Model::factory('BaseModel')->getCityListInformersBusiness();
+       } elseif ($page['path'] == '/informers/coupon') {
+           $city = Model::factory('BaseModel')->getCityListInformersCoupons();
+       } elseif ($page['path'] == '/informers/article') {
+           $city = Model::factory('BaseModel')->getCityListInformersArticles();
+       }
+
+
+        $arr_result = array();
+        $arr_result[] = array("value" => 0, "label" => 'Все');
+        foreach ($city as $item) {
+            $arr_result[] = array("value" => $item['cityId'], "label" => $item['cityName']);
+        }
+
+        echo json_encode($arr_result);
+
+    }
+
+
+
+    public function generateFileInformer (){
+        Model::factory('BussinesModel')->getInformersBussinesId();
+        Model::factory('CouponsModel')->getInformersCouponsId();
+        Model::factory('ArticlesModel')->getInformersArticlesId();
     }
 
 }

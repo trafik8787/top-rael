@@ -246,4 +246,71 @@ class Model_BaseModel extends Model {
         return $query;
     }
 
+
+    /**
+     * @return mixed
+     * todo получаем города для бизнесов информера
+     */
+    public function getCityListInformersBusiness(){
+
+        $query = DB::select(array(DB::expr('COUNT(city.id)'), 'total'),
+            array('city.id', 'cityId'),
+            array('city.name', 'cityName'),
+            array('city.url', 'cityUrl')
+        )
+            ->from('city')
+            ->join('business')
+            ->on('city.id', '=', 'business.city')
+            ->group_by('city.id')
+            ->order_by('total', 'DESC')
+            ->cached()
+            ->execute()->as_array();
+
+        return $query;
+    }
+
+    /**
+     * @return mixed
+     * todo получаем города для купонов информера
+     */
+    public function getCityListInformersCoupons(){
+
+        $query = DB::select(array(DB::expr('COUNT(city.id)'), 'total'),
+            array('city.id', 'cityId'),
+            array('city.name', 'cityName'),
+            array('city.url', 'cityUrl')
+        )
+            ->from('coupon')
+            ->join('city')
+            ->on('city.id', '=', 'coupon.city')
+            ->group_by('city.id')
+            ->order_by('total', 'DESC')
+            ->cached()
+            ->execute()->as_array();
+
+        return $query;
+    }
+
+    /**
+     * @return mixed
+     * todo получаем города для статей информера
+     */
+    public function getCityListInformersArticles(){
+
+        $query = DB::select(array(DB::expr('COUNT(city.id)'), 'total'),
+            array('city.id', 'cityId'),
+            array('city.name', 'cityName'),
+            array('city.url', 'cityUrl')
+        )
+            ->from('articles')
+            ->join('city')
+            ->on('city.id', '=', 'articles.city')
+            ->group_by('city.id')
+            ->order_by('total', 'DESC')
+            ->cached()
+            ->execute()->as_array();
+
+        return $query;
+    }
+
 }
