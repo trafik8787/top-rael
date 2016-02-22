@@ -27,7 +27,7 @@ class Controller_Pages_Ajax extends Controller {
             $m = Email::factory();
             $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
             $m->To($this->request->post('email')); // кому адресованно
-            $m->Subject('Подтвердите подписку на рассылку новинок Topisrae');
+            $m->Subject('Подтвердите подписку на рассылку новинок Topisrael');
             $m->Body($html_mail, "html");
             $m->Priority(3);
             $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new.png", "", "image/png");

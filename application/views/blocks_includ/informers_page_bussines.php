@@ -13,8 +13,8 @@
 
     <div class="panel">
 
-        <div class="panel-heading">
-            <div class="panel-title">Настройки внешего вида информера</div>
+        <div class="panel-heading" style="margin-bottom: 0">
+            <div class="panel-title">Настройки внешего вида</div>
         </div>
 
         <div class="panel-body">

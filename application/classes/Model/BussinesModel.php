@@ -353,6 +353,7 @@ class Model_BussinesModel extends Model_BaseModel {
 
                 ->and_where('bus.status', '=', 1)
                 ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'))
+                ->order_by('artic.id', 'DESC')
 
                 ->cached()
                 ->execute()->as_array();
@@ -1515,10 +1516,14 @@ class Model_BussinesModel extends Model_BaseModel {
         }
 
 
-        if (file_exists($_SERVER['DOCUMENT_ROOT'].'/bus.json')) {
-            unlink($_SERVER['DOCUMENT_ROOT'].'/bus.json');
+        $bus = View::factory('render_informer/bus');
+        $bus->json = json_encode($arr_in_json);
+
+
+        if (file_exists($_SERVER['DOCUMENT_ROOT'].'/public/javascripts/data/business.js')) {
+            unlink($_SERVER['DOCUMENT_ROOT'].'/public/javascripts/data/business.js');
         }
-        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/bus.json', json_encode($arr_in_json));
+        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/public/javascripts/data/business.js', $bus->render());
     }
 
 }

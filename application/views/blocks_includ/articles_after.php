@@ -27,7 +27,7 @@
                 <h2 class="media-heading fz normal"><a href="/article/<?=$rows['url']?>"><strong><?=$rows['name']?></strong></a>
                 </h2>
 
-                <strong class="fz small"><?=$rows['secondname']?></strong>
+<!--                <strong class="fz small">--><?//=$rows['secondname']?><!--</strong>-->
 
                 <div class="fz small">
                     <?=Text::limit_chars(strip_tags($rows['content']), 100, null, true)?>

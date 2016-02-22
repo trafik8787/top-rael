@@ -22,19 +22,24 @@
                 <div class="media">
                     <div class="media-left">
                         <a href="/article/<?=$row['url']?>">
-                            <img src="/uploads/img_articles/thumbs/<?=basename($row['images_article'])?>" width="120" height="85" alt="<?=$row['name']?>" class="media-object"/>
+                            <img src="/uploads/img_articles/thumbs/<?=basename($row['images_article'])?>" width="120" height="85" alt="<?=$row['secondname']?>" class="media-object"/>
                         </a>
                     </div>
                     <div class="media-body">
                         <h3 class="media-heading">
                             <a href="/article/<?=$row['url']?>">
-                                <strong><?=$row['name']?></strong>
+                             <b><?=$row['name']?></b>
                             </a>
                         </h3>
 
+<!--
                         <strong class="fz small"><?=$row['secondname']?></strong>
+                        
+-->                        
 
                         <p><?=Text::limit_chars(strip_tags($row['content']), 100, null, true)?></p>
+                        
+
                     </div>
                 </div>
 

@@ -7,11 +7,12 @@
  */
 
 ?>
-
-<a href="/informers" class="btn btn-default <?if ('/'.Request::detect_uri() == '/informers') echo 'active' ?>">Бизнесы</a>
-<a href="/informers/coupon" class="btn btn-default <?if ('/'.Request::detect_uri() == '/informers/coupon') echo 'active' ?>">Купоны</a>
-<a href="/informers/article" class="btn btn-default <?if ('/'.Request::detect_uri() == '/informers/article') echo 'active' ?>">Статьи</a>
-
+<p style="font-size: 30px;">Темы информеров</p>
+<p style="margin-bottom: 25px;">
+    <a href="/informers" class="btn btn-default <?if ('/'.Request::detect_uri() == '/informers') echo 'active' ?>">Новые места</a>
+    <a href="/informers/coupon" class="btn btn-default <?if ('/'.Request::detect_uri() == '/informers/coupon') echo 'active' ?>">Купоны</a>
+    <a href="/informers/article" class="btn btn-default <?if ('/'.Request::detect_uri() == '/informers/article') echo 'active' ?>">Обзоры</a>
+</p>
 <script src="/public/javascripts/methods.js" type="application/javascript"></script>
 <content>
     <div id="content">

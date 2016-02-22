@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-md-5 text-right hidden-xs" style="top: -10px;">
 
-                    <h4 class="text-right"><a href="/newsletter" style="color: #ffffff">РАССЫЛКА НОВИНОК САЙТА</a></h4>
+                    <h4 class="text-right"><a href="/newsletter" style="color: #ffffff">Почтовая рассылка &mdash; новое за неделю</a></h4>
                     <form role="form" class="form-inline w-bloc-futer-subscribe">
 
                         <div class="form-group" style="height: 33px;">
@@ -71,23 +71,19 @@
                                 <ul>
                                     <li><a href="/contacts">Связь с нами</a></li>
                                     <li><a href="/about">О проекте</a></li>
-<!--                                    <li><a href="/partners">Наши партнеры</a></li>-->
-<!--                                    <li><a href="/informers">Информеры</a></li>-->
+                                   <li><a href="/group_bookings">Групповые заказы</a></li>
+                                    <li style="margin-left:-20px;"><a href="/informers"><span class="glyphicon glyphicon-th-large" aria-hidden="true" ></span> Информеры</a></li>
                                     <li><a href="/rss">RSS лента</a></li>
                                     <li><a href="/map">Карта сайта</a></li>
                                 </ul>
-                                <br/>
+                                
                                 <ul>
 <!--                                    <li><a href="/contacts">צור קשר</a></li>-->
                                     <li><a href="/account_business">כניסה למפרסם</a></li>
                                 </ul>
-                            </nav>
+                                                           </nav>
 
-                            <div id="google_translate_element"></div><script type="text/javascript">
-                                function googleTranslateElementInit() {
-                                    new google.translate.TranslateElement({pageLanguage: 'ru', includedLanguages: 'de,en,es,fr,it,iw,zh-CN', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false, gaTrack: true, gaId: 'UA-69897111-1'}, 'google_translate_element');
-                                }
-                            </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                         
 
                         </div>
                     </div>
@@ -120,12 +116,29 @@
                     </div>
                 <?endif?>
             </div>
+            
+           
+     
+            
+            
 
             <div class="panel-footer">
-                <div class="col-md-12">
-                    &copy; 2008-<?=date('Y')?> г. Все права защищены, перепечатка контента только с разрешения компании.
+                <div class="col-md-10">
+                    &copy; 2008 &mdash; <?=date('Y')?> г. &nbsp; Все права защищены, перепечатка контента только с разрешения компании.
+                </div>
+                
+                <div class="col-md-2">
+                  <div id="google_translate_element"></div><script type="text/javascript">
+                                function googleTranslateElementInit() {
+                                    new google.translate.TranslateElement({pageLanguage: 'ru', includedLanguages: 'de,en,es,fr,it,iw,zh-CN', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false, gaTrack: true, gaId: 'UA-69897111-1'}, 'google_translate_element');
+                                }
+                            </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
                 </div>
             </div>
+            
+            
+            
         </div>
 
 

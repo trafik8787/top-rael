@@ -53,7 +53,7 @@
         </div>
 
         <div class="sidebar-lottery-heading">
-            <div class="sidebar-lottery-title">Еженедельная лотерея</div>
+            <div class="sidebar-lottery-title">Лотерея TopIsrael.ru</div>
         </div>
 
         <div class="sidebar-lottery-body">
@@ -61,15 +61,15 @@
 
             <div class="sidebar-tabs">
 
-                <div class="sidebar-tabs-heading">
+                <!--div class="sidebar-tabs-heading">
                     <div class="sidebar-tabs-title">Приз</div>
-                </div>
+                </div-->
 
                 <div class="sidebar-tabs-body">
 
 
                     <div class="media">
-                        <div class="media-left media-middle">
+                        <div class="media-left media-top">
                             <a href="/business/<?=$data['BusUrl']?>">
                                 <img src="<?=$data['img']?>" width="88" height="88" class="media-object"/>
                             </a>
@@ -77,7 +77,7 @@
                         <div class="media-body">
                             <div class="media-heading prize-title"><?=$data['secondname']?></div>
                             <p><?=$data['description']?></p>
-                            <p>до розыгрыша осталось <?=Date::diffDay('', $data['date_end'])?> дней</p>
+                            <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span>  <?=Date::diffDay('', $data['date_end'])?> дней до розыгрыша</p>
                         </div>
                     </div>
 

@@ -7,6 +7,21 @@
  */
 ?>
 
+<hr>
+
+<div class="w-bloc-right">
+     
+<p>    
+  <h4 class=""><a href="/group_bookings"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span> Групповые заказы</a>
+  <br><small>Команда TopIsrael поможет вам организовать самый лучший отдых в Израиле, по привлекательным ценам.</small></h4>
+  </p>
+
+</div>
+
+
+
+<hr>
+
 <div class="sidebar-socials w-bloc-right">
 
     <div class="sidebar-socials-heading">

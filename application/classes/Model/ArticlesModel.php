@@ -643,7 +643,7 @@ class Model_ArticlesModel extends Model_BaseModel {
             ->on('articles.id_section','=','category.id')
             ->join('city')
             ->on('articles.city','=','city.id')
-
+            ->order_by('articles.id', 'DESC')
             ->execute()->as_array();
 
 
@@ -661,11 +661,13 @@ class Model_ArticlesModel extends Model_BaseModel {
             );
         }
 
+        $artic = View::factory('render_informer/reviews');
+        $artic->json = json_encode($arr_in_json);
 
-        if (file_exists($_SERVER['DOCUMENT_ROOT'].'/article.json')) {
-            unlink($_SERVER['DOCUMENT_ROOT'].'/article.json');
+        if (file_exists($_SERVER['DOCUMENT_ROOT'].'/public/javascripts/data/reviews.js')) {
+            unlink($_SERVER['DOCUMENT_ROOT'].'/public/javascripts/data/reviews.js');
         }
-        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/article.json', json_encode($arr_in_json));
+        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/public/javascripts/data/reviews.js', $artic->render());
 
     }
 

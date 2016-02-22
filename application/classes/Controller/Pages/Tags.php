@@ -71,7 +71,7 @@ class Controller_Pages_Tags extends Controller_BaseController {
 
         //купоны группы лакшери выборка по тегам
         $data_coupons = Model::factory('CouponsModel')->getCouponsSectionTagsUrl(null, $this->request->param('url_tags'));
-        $data_coupons = parent::convertArrayVievData($data_coupons);
+        $data_coupons = parent::convertArrayVievData($data_coupons, 3);
         $content->data_coupon =  $data_coupons;
         //разделы для обзоров
         $content->section =  Model::factory('ArticlesModel')->getSectionArticlesTag($this->request->param('url_tags'));

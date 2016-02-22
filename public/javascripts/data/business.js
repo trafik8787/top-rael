@@ -15,14 +15,14 @@
     var $template = function (params, $defaults) {
 
         return String()
-            + "<a href=\"http://"+location.hostname+'/business/'+params['url']+"\" class=\"ti-item\">\n"
+            + "<a href=\"http://topisrael.webremote.net/business/"+params['url']+"\" class=\"ti-item\">\n"
             + " <span class=\"ti-image\">\n"
-            + "     <img src=\"http://"+location.hostname + params['image']['url'] + "\" width=\"50\" alt=\"\" title=\"\"/>\n"
+            + "     <img src=\"http://topisrael.webremote.net"+ params['image']['url'] + "\" width=\"50\" alt=\"\" title=\"\"/>\n"
             + " </span>"
             + " <span class=\"ti-context\">"
             + "     <span class=\"ti-title\">" + params['title'] + "</span>\n"
-            + "     <small class=\"ti-category\">" + params['category']['label'] + "</small>\n"
             + "     <small class=\"ti-adress\">" + params['adress'] + "</small>\n"
+            + "     <small class=\"ti-category\">" + params['category']['label'] + "</small>\n"
             + "     <span class=\"ti-text\">" + params['description'] + "</span>\n"
             + " </span>\n"
             + " <span class=\"ti-clear\"></span>\n"
@@ -61,15 +61,15 @@
     }
 
     $container.className = "ti-container";
-    $container.innerHTML = '<span class=\"ti-header\">Информер бизнеса</span>';
+    $container.innerHTML = '<span class=\"ti-header\">Новые места</span>';
     $container.innerHTML += $render.join("\n");
-    $container.innerHTML += '<span class=\"ti-footer\"><img src="http://'+location.hostname+'/public/images/logo-new.png" width="150" alt="" title=""/></span>';
+    $container.innerHTML += '<span class=\"ti-footer\"><img src="http://topisrael.webremote.net/public/images/logo-new.png" width="150" alt="" title=""/></span>';
 
     function data() {
 
         var request = new XMLHttpRequest();
-        request.open("GET", "/bus.json", false);
-        request.send(null);
+        request.open("GET", "http://topisrael.webremote.net/bus.json", false);
+        request.send(body);
         var my_JSON_object = JSON.parse(request.responseText);
         return my_JSON_object;
 

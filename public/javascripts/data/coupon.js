@@ -22,6 +22,7 @@
             + " </span>"
             + " <span class=\"ti-context\">"
             + "     <span class=\"ti-title\">" + params['title'] + "</span>\n"
+            + "     <span class=\"ti-text\">" + params['secondname'] + "</span>\n"
             + "     <small class=\"ti-category\">" + params['category']['label'] + "</small>\n"
             + "     <small class=\"ti-adress\">" + params['adress'] + "</small>\n"
             + "     <span class=\"ti-text\">" + params['description'] + "</span>\n"
@@ -61,7 +62,7 @@
     }
 
     $container.className = "ti-container";
-    $container.innerHTML = '<span class=\"ti-header\">Информер купонов</span>';
+    $container.innerHTML = '<span class=\"ti-header\">Купоны со скидками</span>';
     $container.innerHTML += $render.join("\n");
     $container.innerHTML += '<span class=\"ti-footer\"><img src="http://'+location.hostname+'/public/images/logo-new.png" width="150" alt="" title=""/></span>';
 

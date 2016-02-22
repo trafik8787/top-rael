@@ -72,7 +72,7 @@
 
                             <div class="coupon-object-bottom">
                                 <small class="coupon-date">до <?=Date::rusdate(strtotime($data[0]['dateoff']), 'j %MONTH% Y'); ?>
-                                    <br> Только при предъявление этого купона</small>
+                                    <br>Только при предъявлении купона</small>
                             </div>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                 </div>
             </div>
 
-            <p class="rtl" style="font-size: 17px; padding-right: 10px;">
+            <p class="rtl" style="font-size: 17px;text-align: center;padding-top: 11px;">
                 <?=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?>
             </p>
 
@@ -121,7 +121,7 @@
 
 <div class="modal-footer">
 
-
+    <hr>
     <div class="div-table">
 
         <div class="div-row">

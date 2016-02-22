@@ -14,72 +14,70 @@
 
     <div class="panel">
 
-        <div class="panel-heading">
-            <div class="panel-title">Настройки внешего вида информера</div>
+        <div class="panel-heading" style="margin-bottom: 0">
+            <div class="panel-title">Настройки внешего вида</div>
         </div>
 
         <div class="panel-body">
 
-            <div class="panel-body">
 
-                <div class="clearfix">
+            <div class="clearfix">
 
-                    <div class="form-group inline">
-                        <label for="cities">Города</label>
-                        <select name="cities[]" class="form-control input-lg col-md-6" id="cities"></select>
-                    </div>
-
-                    <div class="form-group inline" style="max-width: 205px;">
-                        <label for="cities">Раздел</label>
-                        <select name="category[]" class="form-control input-lg col-md-6" id="category"></select>
-                    </div>
-
-                    <div class="form-group inline">
-                        <label>Кол-во анонсов</label>
-                        <select name="limit[]" class="form-control input-lg" id="limit"></select>
-                    </div>
-
-                    <div class="form-group inline">
-                        <label>Размер заголовка</label>
-                        <input type="number" name="font.size[title]" class="form-control input-lg"
-                               id="fontSizeName"/>
-                    </div>
-
-                    <div class="form-group inline">
-                        <label>Размер текста</label>
-                        <input type="number" name="font.size[text]" class="form-control input-lg"
-                               id="fontSizeText"/>
-                    </div>
-
-                    <div class="form-group inline">
-                        <label>Ширина</label>
-                        <input type="number" name="layout.width[]" class="form-control input-lg"
-                               id="layoutWidth"/>
-                    </div>
-
-                    <div class="form-group inline">
-                        <br/><br/>
-                        <label>Цвета заголовка</label>
-                        <input type="hidden" class="minicolors" name="font.color[title]" value="#113fd6"
-                               id="fontColorHeading"/>
-                    </div>
-
-                    <div class="form-group inline">
-                        <br/><br/>
-                        <label>Цвета текста</label>
-                        <input type="hidden" class="minicolors" name="font.color[text]" value="#000"
-                               id="fontColorText"/>
-                    </div>
-
-                    <div class="form-group inline">
-                        <br/><br/>
-                        <label>Цвет фона</label>
-                        <input type="hidden" class="minicolors" name="font.color[background]" value="#FFF"
-                               id="layoutBackgroundColor"/>
-                    </div>
+                <div class="form-group inline">
+                    <label for="cities">Города</label>
+                    <select name="cities[]" class="form-control input-lg col-md-6" id="cities"></select>
                 </div>
 
+                <div class="form-group inline" style="max-width: 205px;">
+                    <label for="cities">Раздел</label>
+                    <select name="category[]" class="form-control input-lg col-md-6" id="category"></select>
+                </div>
+
+                <div class="form-group inline">
+                    <label>Кол-во анонсов</label>
+                    <select name="limit[]" class="form-control input-lg" id="limit"></select>
+                </div>
+
+                <div class="form-group inline">
+                    <label>Размер заголовка</label>
+                    <input type="number" name="font.size[title]" class="form-control input-lg"
+                           id="fontSizeName"/>
+                </div>
+
+                <div class="form-group inline">
+                    <label>Размер текста</label>
+                    <input type="number" name="font.size[text]" class="form-control input-lg"
+                           id="fontSizeText"/>
+                </div>
+
+                <div class="form-group inline">
+                    <label>Ширина</label>
+                    <input type="number" name="layout.width[]" class="form-control input-lg"
+                           id="layoutWidth"/>
+                </div>
+
+                <div class="form-group inline">
+                    <br/><br/>
+                    <label>Цвета заголовка</label>
+                    <input type="hidden" class="minicolors" name="font.color[title]" value="#113fd6"
+                           id="fontColorHeading"/>
+                </div>
+
+                <div class="form-group inline">
+                    <br/><br/>
+                    <label>Цвета текста</label>
+                    <input type="hidden" class="minicolors" name="font.color[text]" value="#000"
+                           id="fontColorText"/>
+                </div>
+
+                <div class="form-group inline">
+                    <br/><br/>
+                    <label>Цвет фона</label>
+                    <input type="hidden" class="minicolors" name="font.color[background]" value="#FFF"
+                           id="layoutBackgroundColor"/>
+                </div>
             </div>
+
 
         </div>
 

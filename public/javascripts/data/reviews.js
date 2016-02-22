@@ -57,7 +57,7 @@
     }
 
     $container.className = "ti-container";
-    $container.innerHTML = '<span class=\"ti-header\">Информер обзоров</span>';
+    $container.innerHTML = '<span class=\"ti-header\">Обзоры интересных мест</span>';
     $container.innerHTML += $render.join("\n");
     $container.innerHTML += '<span class=\"ti-footer\"><img src="http://'+location.hostname+'/public/images/logo-new.png" width="150" alt="" title=""/></span>';
 
