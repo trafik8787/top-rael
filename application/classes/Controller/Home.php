@@ -41,9 +41,9 @@ class Controller_Home extends Controller_BaseController {
        // die(phpinfo());
        // HTML::x( Model::factory('BussinesModel')->getBannersUser());
 
-        Model::factory('CouponsModel')->getInformersCouponsId();
-        Model::factory('ArticlesModel')->getInformersArticlesId();
-        Model::factory('BussinesModel')->getInformersBussinesId();
+        //Model::factory('CouponsModel')->getInformersCouponsId();
+       // Model::factory('ArticlesModel')->getInformersArticlesId();
+        //Model::factory('BussinesModel')->getInformersBussinesId();
 
         $resultArr = array();
         $content = View::factory('pages/home');
