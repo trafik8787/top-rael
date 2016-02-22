@@ -855,6 +855,7 @@ class Controller_Administrator extends Controller_Core_Main {
          * 'id' - поле по которому будем джойнить с 'business_id'
          */
         $crud->show_name_old_table('business_id', 'business', 'name', 'id');
+        $crud->disable_editor('info');
 
         $crud->rows_color_where(3, '<', date('Y-m-d'), ' #cccccc');
 

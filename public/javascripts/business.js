@@ -114,7 +114,8 @@ $(function () {
         var style = document.createElement('div');
         style.appendChild(previewCss($id, $businessSettings));
 
-        var value = "<!-- Display Informer -->\n";
+        var value = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\n';
+        value += "<!-- Display Informer -->\n";
         value += "<div id=\"" + $id + "\"></div>\n";
         value += "<!-- Css -->\n";
         value += style.innerHTML + "\n";
