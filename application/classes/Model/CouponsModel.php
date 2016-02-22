@@ -443,6 +443,7 @@ class Model_CouponsModel extends Model_BaseModel {
             ->on('coupon.city','=','city.id')
             ->join('business')
             ->on('coupon.business_id','=','business.id')
+            ->order_by('coupon.id', 'DESC')
             ->execute()->as_array();
 
             //HTML::x($query);
