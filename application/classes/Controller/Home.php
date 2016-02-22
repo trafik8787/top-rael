@@ -94,6 +94,8 @@ class Controller_Home extends Controller_BaseController {
         $content->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
+            $this->blocCity(),
+            $this->blocTags(),
             $this->google_adssens(),
             //View::factory('blocks_includ/baners_right'),
         ));
