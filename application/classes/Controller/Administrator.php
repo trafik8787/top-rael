@@ -889,7 +889,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->show_name_column(array(
             'name' => 'Название',
             'secondname' => 'Подзаголовок',
-            'info' => 'Описание',
+            'info' => 'Иврит',
             'url' => 'URL',
             'img_coupon' => 'Фото купона',
             'id_section' => 'Раздел',
