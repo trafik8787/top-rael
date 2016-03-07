@@ -160,6 +160,14 @@ Route::set('GroupBookings', 'group_bookings')
         'action'     => 'index',
     ));
 
+
+Route::set('CacheClear', 'cacheclear')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'CacheClear',
+        'action'     => 'index',
+    ));
+
 Route::set('Jornal', 'jornal')
     ->defaults(array(
         'directory' => 'Pages',

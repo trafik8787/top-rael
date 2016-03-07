@@ -60,7 +60,7 @@ return array
 	'file'    => array(
 		'driver'             => 'file',
 		'cache_dir'          => APPPATH.'cache',
-		'default_expire'     => 3600,
+		'default_expire'     => 10000,
 		'ignore_on_delete'   => array(
 			'.gitignore',
 			'.git',
