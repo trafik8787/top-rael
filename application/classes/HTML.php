@@ -52,5 +52,23 @@ class HTML extends Kohana_HTML {
     }
 
 
-    
+
+    public static function removeDirectory($dir) {
+        if ($objs = glob($dir."/*")) {
+            foreach($objs as $obj) {
+                if (is_dir($obj)) {
+                    self::removeDirectory($obj);
+                } else {
+                    unlink($obj);
+
+                }
+
+            }
+        }
+        if ($dir != $_SERVER['DOCUMENT_ROOT'].'/application/cache') {
+            rmdir($dir);
+        }
+    }
+
+
 }

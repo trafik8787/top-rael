@@ -15,7 +15,7 @@ class Controller_Pages_CacheClear extends Controller  {
 
             $data['syses'] = 'Success';
 
-            $this->removeDirectory($_SERVER['DOCUMENT_ROOT'].'/application/cache');
+            HTML::removeDirectory($_SERVER['DOCUMENT_ROOT'].'/application/cache');
 
 
         }
@@ -23,20 +23,4 @@ class Controller_Pages_CacheClear extends Controller  {
         $this->response->body(View::factory('pages/cache_clear', $data));
     }
 
-    private function removeDirectory($dir) {
-        if ($objs = glob($dir."/*")) {
-            foreach($objs as $obj) {
-                if (is_dir($obj)) {
-                    $this->removeDirectory($obj);
-                } else {
-                    unlink($obj);
-
-                }
-
-            }
-        }
-        if ($dir != $_SERVER['DOCUMENT_ROOT'].'/application/cache') {
-            rmdir($dir);
-        }
-    }
 }

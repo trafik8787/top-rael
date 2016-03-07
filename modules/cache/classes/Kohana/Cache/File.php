@@ -148,6 +148,8 @@ class Kohana_Cache_File extends Cache implements Cache_GarbageCollect {
 				// If we're at the EOF at this point, corrupted!
 				if ($data->eof())
 				{
+                    //todo при повреждении файла кеша обнуляем всю папку кеша
+                    HTML::removeDirectory($_SERVER['DOCUMENT_ROOT'].'/application/cache');
 					throw new Cache_Exception(__METHOD__.' corrupted cache file!');
 				}
 
