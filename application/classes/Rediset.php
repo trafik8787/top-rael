@@ -263,8 +263,13 @@ final class Rediset {
 
         if (!self::$redis->exists('bus@'.$id_business.'@'.date('Y-m-d'))) {
             self::$redis->set('bus@'.$id_business.'@'.date('Y-m-d'), 0);
+        }
+
+        if (!self::$redis->exists('bus-'.$id_business)) {
             self::$redis->set('bus-'.$id_business, 0);
         }
+
+
         self::$redis->incr('bus-'.$id_business);
         self::$redis->incr('bus@'.$id_business.'@'.date('Y-m-d'));
 

@@ -41,7 +41,7 @@ class Controller_Pages_Contacts extends Controller_BaseController {
                     HTML::x($result);
                 }
             } else {
-                $this->redirect('/contacts?err_cap='.base64_encode('Неверно введен проверочный код'));
+                $this->redirect('/contacts?err_cap=1');
             }
         }
 

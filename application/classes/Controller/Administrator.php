@@ -488,7 +488,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('status', 'radio', array('1' => 'Ожидает', '2' => 'Идет', '3' => 'Завершен'));
         $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
         $crud->set_field_type('img', array('file', 'uploads/img_lotarey', 'lot_', '', 'img'),'', '');
-        $crud->show_columns('id', 'name', 'date_start', 'date_end', 'status');
+        $crud->show_columns('id', 'secondname', 'date_start', 'date_end', 'status');
 
         $crud->edit_fields('secondname','description','img','business_id','date_start','date_end','status');
         $crud->add_field('secondname','description','img','business_id','date_start','date_end','status');

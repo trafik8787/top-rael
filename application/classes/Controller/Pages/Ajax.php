@@ -514,7 +514,7 @@ class Controller_Pages_Ajax extends Controller {
         $date_curent_mount = date('m');
 
         //если рассылки еще не было
-        if ($data_business['date_subscribe_mount'] == null) {
+        if (($data_business['date_subscribe_mount'] == null) and ($date_subs_mount < $date_curent_mount)) {
 
             DB::update('business')->set(array('date_subscribe_mount' => date('Y-m-d')))->where('id', '=', $data_business['id'])->execute();
             $message = View::factory('email/text_reminders');

@@ -163,7 +163,7 @@
 
                                             <tr style="width: 100%">
                                                 <td style="width: 50%">
-                                                    <div style="padding: 10px; ">
+                                                    <div style="padding: 10px; width: 288px;">
                                                         <div style="height: 400px;position: relative; border: 1px solid #d8d8d8;box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;">
                                                             <div style="font-size: 25px;line-height: 1.1;color: #e02929;">
                                                                 <div>

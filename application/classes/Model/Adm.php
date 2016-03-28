@@ -83,7 +83,7 @@ class Model_Adm extends Model {
      * @throws Kohana_Exception
      * todo добавление собственника бизнеса в админке
      */
-    public function add_busines_user ($name_user = null, $name='', $secondname_user = '', $email_user = null, $age = '', $sex = '', $telephone = '', $password = null, $id_business = null){
+    public function add_busines_user ($name_user = null, $name='', $secondname_user = '', $email_user = null, $bdate = '', $sex = '', $telephone = '', $password = null, $id_business = null){
 
         $user = ORM::factory('User')->where('business_id', '=', $id_business)->find();
 
@@ -96,7 +96,7 @@ class Model_Adm extends Model {
             $user->password = $password;
             $user->email = $email_user;
             $user->tel = $telephone;
-            $user->age = $age;
+            $user->bdate = $bdate;
             $user->sex = $sex;
             $user->id_role = 5;
             $user->save();
@@ -109,7 +109,7 @@ class Model_Adm extends Model {
             $user_insert->password = $password;
             $user_insert->email = $email_user;
             $user_insert->tel = $telephone;
-            $user_insert->age = $age;
+            $user_insert->bdate = $bdate;
             $user_insert->sex = $sex;
             $user_insert->id_role = 5;
             $user_insert->save();
