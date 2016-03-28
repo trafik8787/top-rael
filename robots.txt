@@ -1,6 +1,4 @@
 User-agent: *
 Crawl-delay: 5
-Disallow: /public/
-Disallow: /public_a/
 Host: topisrael.ru
 Sitemap: http://topisrael.ru/sitemap.xml

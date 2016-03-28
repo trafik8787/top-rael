@@ -151,6 +151,8 @@
 
             ga('create', 'UA-69897111-1', 'auto');
             ga('send', 'pageview');
+            setTimeout("ga('send', 'event', 'read', '30_seconds')", 30000);
+
 
         </script>
 
