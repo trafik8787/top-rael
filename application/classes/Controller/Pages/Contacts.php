@@ -41,7 +41,9 @@ class Controller_Pages_Contacts extends Controller_BaseController {
                     HTML::x($result);
                 }
             } else {
-                $this->redirect('/contacts?err_cap=1');
+                //$this->redirect('/contacts?err_cap=1');
+                $content->err_cap = 1;
+                $content->post = $_POST;
             }
         }
 

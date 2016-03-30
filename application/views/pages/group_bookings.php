@@ -59,7 +59,7 @@
                             <label>Ваше полное имя:</label>
                         </div>
                         <div class="col-md-7">
-                            <input type="text" name="fullname" class="form-control input-lg">
+                            <input type="text" value="<?=isset($post['fullname']) ? $post['fullname'] : ''?>" name="fullname" class="form-control input-lg">
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@
                             <label>Страна проживания:</label>
                         </div>
                         <div class="col-md-7">
-                            <input type="text" name="city" class="form-control input-lg">
+                            <input type="text" value="<?=isset($post['city']) ? $post['city'] : ''?>" name="city" class="form-control input-lg">
                         </div>
                     </div>
 
@@ -77,7 +77,7 @@
                             <label>Email:</label>
                         </div>
                         <div class="col-md-7">
-                            <input type="text" name="email" class="form-control input-lg">
+                            <input type="text" value="<?=isset($post['email']) ? $post['email'] : ''?>" name="email" class="form-control input-lg">
                         </div>
                     </div>
 
@@ -86,7 +86,7 @@
                             <label>Телефон:</label>
                         </div>
                         <div class="col-md-7">
-                            <input type="text" name="tel" class="form-control input-lg">
+                            <input type="text" value="<?=isset($post['tel']) ? $post['tel'] : ''?>" name="tel" class="form-control input-lg">
                         </div>
                     </div>
 
@@ -95,7 +95,7 @@
                             <label>Ваше сообщение:</label>
                         </div>
                         <div class="col-md-8">
-                            <textarea class="form-control input-lg" name="desc" cols="3" rows="7"></textarea>
+                            <textarea class="form-control input-lg" name="desc" cols="3" rows="7"><?=isset($post['desc']) ? $post['desc'] : ''?></textarea>
                         </div>
                     </div>
                     <div class="form-group  clearfix">
@@ -104,7 +104,7 @@
                         </div>
                         <div class="col-md-7">
                             <span style="display: inline-block;"><?=$captcha; ?></span> <input type="text" name="captcha" class="form-control input-lg" style="width: 49%;display: inline-block;"/>
-                            <?if (!empty($_GET['err_cap'])):?>
+                            <?if (!empty($err_cap)):?>
                                 <label id="captcha-error" class="error" for="captcha">Неверно введен проверочный код</label>
                             <?endif?>
                         </div>

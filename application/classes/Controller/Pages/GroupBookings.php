@@ -43,7 +43,9 @@ class Controller_Pages_GroupBookings extends Controller_BaseController {
                     $this->redirect('/group_bookings?susses=true');
                 }
             } else {
-                $this->redirect('/group_bookings?err_cap=1');
+//                $this->redirect('/group_bookings?err_cap=1');
+                $content->err_cap = 1;
+                $content->post = $_POST;
             }
         }
 
