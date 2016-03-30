@@ -27,6 +27,7 @@ class Controller_Pages_Ajax extends Controller {
             $m = Email::factory();
             $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
             $m->To($this->request->post('email')); // кому адресованно
+            $m->Bcc('boris@briker.biz');
             $m->Subject('Подтвердите подписку на рассылку новинок Topisrael');
             $m->Body($html_mail, "html");
             $m->Priority(3);
@@ -238,6 +239,7 @@ class Controller_Pages_Ajax extends Controller {
                     $m->reloadTo();
                     $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
                     $m->To($user_rows['email']); // кому адресованно
+                    $m->Bcc('boris@briker.biz');
                     $m->Subject('Рассылка TopIsrael');
                     $m->Body($data, "html");
                     $m->Priority(3);
@@ -397,6 +399,7 @@ class Controller_Pages_Ajax extends Controller {
             $m = Email::factory();
             $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
             $m->To($lotery['user']['email']); // кому адресованно
+            $m->Bcc('boris@briker.biz');
             $m->Subject('Поздравляем Вас! Вы выиграли в Лотерее Topisrael');
             $m->Body($html_mail, "html");
             $m->Priority(3);

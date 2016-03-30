@@ -485,6 +485,7 @@ class Controller_Pages_Account extends Controller_BaseController {
         $m = Email::factory();
         $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
         $m->To($email); // кому адресованно
+        $m->Bcc('boris@briker.biz');
         $m->Subject('Регистрация на Topisrael - ваши новые возможности планировать отдых и развлечения в Израиле');
         $m->Body($html_mail, "html");
         $m->Priority(3);

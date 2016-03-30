@@ -43,7 +43,7 @@ class Controller_Pages_GroupBookings extends Controller_BaseController {
                     $this->redirect('/group_bookings?susses=true');
                 }
             } else {
-                $this->redirect('/group_bookings?err_cap='.base64_encode('Неверно введен проверочный код'));
+                $this->redirect('/group_bookings?err_cap=1');
             }
         }
 
