@@ -41,7 +41,7 @@
                             </tr>
                             <tr>
                                 <td>Количество добавленно в избранное:</td>
-                                <td><?=isset($business_favorit) ? $business_show : ''?></td>
+                                <td><?=isset($business_favorit) ? $business_favorit : ''?></td>
                             </tr>
                         </table>
                     </div>
