@@ -40,8 +40,94 @@ class Controller_Pages_Ajax extends Controller {
 	}
 
 
+    /**
+     *
+     * todo отправка контакта
+     */
+    public function action_sendContact(){
+
+        if (Request::initial()->is_ajax()) {
+
+            $data = array();
+
+            if (Captcha::valid($_POST['captcha'])) {
+                $result = Model::factory('BaseModel')->addContacts($_POST);
 
 
+                $html_mail = 'Имя: '.$_POST['fullname'].'<br>'.
+                    'Страна: '.$_POST['city'].'<br>'.
+                    'Email: '.$_POST['email'].'<br>'.
+                    'Телефон: '.$_POST['tel'].'<br>'.
+                    'Сообщение: '.$_POST['desc'];
+
+                $m = Email::factory();
+                $m->From($_POST['email']); // от кого отправляется почта
+                $m->To('leon@topisrael.ru'); // кому адресованно
+                $m->Cc('boris@briker.biz');
+                $m->Subject('Письмо от пользователя TopIsrael');
+                $m->Body($html_mail, "html");
+                $m->Priority(3);
+                $m->Send();
+
+
+                if ($result === true) {
+                    $data = array('susses' => 1);
+                }
+
+            } else {
+
+                $data = array('err_cap' => 'Неправильно введен проверочный код');
+            }
+
+            echo json_encode($data);
+        }
+
+    }
+
+
+    /**
+     * груповые заказы
+     */
+    public function action_sendGroupBookins() {
+
+        if (Request::initial()->is_ajax()) {
+
+            $data = array();
+
+
+            if (Captcha::valid($_POST['captcha'])) {
+                $result = Model::factory('BaseModel')->addContacts($_POST);
+
+
+                $html_mail = 'Имя: '.$_POST['fullname'].'<br>'.
+                    'Страна: '.$_POST['city'].'<br>'.
+                    'Email: '.$_POST['email'].'<br>'.
+                    'Телефон: '.$_POST['tel'].'<br>'.
+                    'Сообщение: '.$_POST['desc'];
+
+                $m = Email::factory();
+                $m->From($_POST['fullname'].";".$_POST['email']); // от кого отправляется почта
+                $m->To('leon@topisrael.ru'); // кому адресованно
+                $m->Cc('boris@briker.biz');
+                $m->Subject('Групповой заказ TopIsrael.ru');
+                $m->Body($html_mail, "html");
+                $m->Priority(3);
+                $m->Send();
+
+
+                if ($result === true) {
+                    $data = array('susses' => 1);
+                }
+
+            } else {
+                $data = array('err_cap' => 'Неправильно введен проверочный код');
+            }
+
+            echo json_encode($data);
+        }
+    }
+    
+    
 
 
     /**

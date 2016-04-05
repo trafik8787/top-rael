@@ -47,78 +47,78 @@
 
             </div>
 
-            <?if (empty($_GET['susses'])):?>
-                <form class="row" method="post" id="w-form-contact">
 
-                    <div class="col-md-12">
-                        <div class="form-title">Форма связи</div>
+            <form class="row" method="post" id="w-form-group-bookings">
+
+                <div class="col-md-12">
+                    <div class="form-title">Форма связи</div>
+                </div>
+
+                <div class="form-group clearfix">
+                    <div class="col-md-5">
+                        <label>Ваше полное имя:</label>
                     </div>
-
-                    <div class="form-group clearfix">
-                        <div class="col-md-5">
-                            <label>Ваше полное имя:</label>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" value="<?=isset($post['fullname']) ? $post['fullname'] : ''?>" name="fullname" class="form-control input-lg">
-                        </div>
+                    <div class="col-md-7">
+                        <input type="text" value="<?=isset($post['fullname']) ? $post['fullname'] : ''?>" name="fullname" class="form-control input-lg">
                     </div>
+                </div>
 
-                    <div class="form-group clearfix">
-                        <div class="col-md-5">
-                            <label>Страна проживания:</label>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" value="<?=isset($post['city']) ? $post['city'] : ''?>" name="city" class="form-control input-lg">
-                        </div>
+                <div class="form-group clearfix">
+                    <div class="col-md-5">
+                        <label>Страна проживания:</label>
                     </div>
-
-                    <div class="form-group  clearfix">
-                        <div class="col-md-5">
-                            <label>Email:</label>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" value="<?=isset($post['email']) ? $post['email'] : ''?>" name="email" class="form-control input-lg">
-                        </div>
+                    <div class="col-md-7">
+                        <input type="text" value="<?=isset($post['city']) ? $post['city'] : ''?>" name="city" class="form-control input-lg">
                     </div>
+                </div>
 
-                    <div class="form-group  clearfix">
-                        <div class="col-md-5">
-                            <label>Телефон:</label>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" value="<?=isset($post['tel']) ? $post['tel'] : ''?>" name="tel" class="form-control input-lg">
-                        </div>
+                <div class="form-group  clearfix">
+                    <div class="col-md-5">
+                        <label>Email:</label>
                     </div>
-
-                    <div class="form-group  clearfix">
-                        <div class="col-md-4">
-                            <label>Ваше сообщение:</label>
-                        </div>
-                        <div class="col-md-8">
-                            <textarea class="form-control input-lg" name="desc" cols="3" rows="7"><?=isset($post['desc']) ? $post['desc'] : ''?></textarea>
-                        </div>
+                    <div class="col-md-7">
+                        <input type="text" value="<?=isset($post['email']) ? $post['email'] : ''?>" name="email" class="form-control input-lg">
                     </div>
-                    <div class="form-group  clearfix">
-                        <div class="col-md-5">
-                            <label>Код</label>
-                        </div>
-                        <div class="col-md-7">
-                            <span style="display: inline-block;"><?=$captcha; ?></span> <input type="text" name="captcha" class="form-control input-lg" style="width: 49%;display: inline-block;"/>
-                            <?if (!empty($err_cap)):?>
-                                <label id="captcha-error" class="error" for="captcha">Неверно введен проверочный код</label>
-                            <?endif?>
-                        </div>
+                </div>
+
+                <div class="form-group  clearfix">
+                    <div class="col-md-5">
+                        <label>Телефон:</label>
                     </div>
-
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-danger btn-lg pull-right">Отправить</button>
+                    <div class="col-md-7">
+                        <input type="text" value="<?=isset($post['tel']) ? $post['tel'] : ''?>" name="tel" class="form-control input-lg">
                     </div>
+                </div>
 
-                </form>
-            <?else:?>
+                <div class="form-group  clearfix">
+                    <div class="col-md-4">
+                        <label>Ваше сообщение:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <textarea class="form-control input-lg" name="desc" cols="3" rows="7"><?=isset($post['desc']) ? $post['desc'] : ''?></textarea>
+                    </div>
+                </div>
+                <div class="form-group  clearfix">
+                    <div class="col-md-5">
+                        <label>Код</label>
+                    </div>
+                    <div class="col-md-7">
+                        <span style="display: inline-block;"><?=$captcha; ?></span> <input type="text" name="captcha" class="form-control input-lg" style="width: 49%;display: inline-block;"/>
 
-                <h2 style="color: #009900"><i> Ваш запрос отправлен. Спасибо за обращение к нам!</i></h2>
-            <?endif?>
+                        <label id="captcha-error" class="error" for="captcha"  style="display: none;"></label>
+
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-danger btn-lg pull-right">Отправить</button>
+                </div>
+
+            </form>
+
+
+            <h2 class="w-contact-sysses" style="color: #009900; display: none;"><i> Ваш запрос отправлен. Спасибо за обращение к нам!</i></h2>
+
         </div>
 
     </div>

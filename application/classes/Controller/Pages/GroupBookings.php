@@ -18,36 +18,6 @@ class Controller_Pages_GroupBookings extends Controller_BaseController {
         $content->captcha = Captcha::instance();
 
 
-        if (!empty($_POST)) {
-            if (Captcha::valid($_POST['captcha'])) {
-                $result = Model::factory('BaseModel')->addContacts($_POST);
-
-
-                $html_mail = 'Имя: '.$_POST['fullname'].'<br>'.
-                    'Страна: '.$_POST['city'].'<br>'.
-                    'Email: '.$_POST['email'].'<br>'.
-                    'Телефон: '.$_POST['tel'].'<br>'.
-                    'Сообщение: '.$_POST['desc'];
-
-                $m = Email::factory();
-                $m->From($_POST['fullname'].";".$_POST['email']); // от кого отправляется почта
-                $m->To('leon@topisrael.ru'); // кому адресованно
-                $m->Cc('boris@briker.biz');
-                $m->Subject('Групповой заказ TopIsrael.ru');
-                $m->Body($html_mail, "html");
-                $m->Priority(3);
-                $m->Send();
-
-
-                if ($result === true) {
-                    $this->redirect('/group_bookings?susses=true');
-                }
-            } else {
-//                $this->redirect('/group_bookings?err_cap=1');
-                $content->err_cap = 1;
-                $content->post = $_POST;
-            }
-        }
 
         $this->SeoShowPage(array('Групповые заказы на отдых, развлечения и покупки в Израиле', ''),
             array('Эксклюзивные скидки для группы, на отдых и развлечения в Израиле. Более 500 мест.',''),

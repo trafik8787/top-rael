@@ -74,9 +74,159 @@ $(document).ready(function(){
                 required: "Это поле обязательно для заполнения"
             }
 
+        },
+
+        submitHandler: function(form){
+
+
+            var btn = $('.w-button-contact-submit');
+
+            $.ajax({ // описываем наш запрос
+                type: "POST", // будем передавать данные через POST
+                dataType: "JSON", // указываем, что нам вернется JSON
+                url: '/sendcontact',
+                data: $(form).serialize(), // передаем данные из формы
+                beforeSend: function() {
+                    btn.button('loading');
+                },
+                complete: function() {
+                    btn.button('reset');
+                },
+                success: function(response) { // когда получаем ответ
+
+                    if (response.err_cap != undefined) {
+                        $('#captcha-error').text(response.err_cap).show();
+                    }
+
+                    if (response.susses != undefined) {
+                        $('#w-form-contact').empty();
+                        $('.w-contact-sysses').show();
+                    }
+
+                }
+            });
+
+            return false;
+
         }
 
     });
+
+
+
+
+
+
+
+
+    $("#w-form-group-bookings").validate({
+
+        rules:{
+
+            fullname:{
+                required: true,
+                minlength: 4
+            },
+
+            city:{
+                required: true
+            },
+
+            email:{
+                required: true,
+                email: true
+            },
+
+            tel:{
+                required: true,
+                number: true
+            },
+
+            desc:{
+                required: true
+            },
+
+            captcha: {
+                required: true
+            }
+        },
+
+        messages:{
+
+            fullname:{
+                required: "Это поле обязательно для заполнения",
+                minlength: "Имя должно быть минимум 4 символа"
+            },
+
+            city:{
+                required: "Это поле обязательно для заполнения"
+            },
+
+            email:{
+                required: "Это поле обязательно для заполнения",
+                email: "Неправильный формат email"
+            },
+
+            tel:{
+                required: "Это поле обязательно для заполнения",
+                number: 'Поле должно содержать только цыфры'
+            },
+
+            desc:{
+                required: "Это поле обязательно для заполнения"
+            },
+
+            captcha: {
+                required: "Это поле обязательно для заполнения"
+            }
+
+        },
+
+        submitHandler: function(form){
+
+
+            var btn = $('.w-button-contact-submit');
+
+            $.ajax({ // описываем наш запрос
+                type: "POST", // будем передавать данные через POST
+                dataType: "JSON", // указываем, что нам вернется JSON
+                url: '/sendgroupbookings',
+                data: $(form).serialize(), // передаем данные из формы
+                beforeSend: function() {
+                    btn.button('loading');
+                },
+                complete: function() {
+                    btn.button('reset');
+                },
+                success: function(response) { // когда получаем ответ
+
+                    if (response.err_cap != undefined) {
+                        $('#captcha-error').text(response.err_cap).show();
+                    }
+
+                    if (response.susses != undefined) {
+                        $('#w-form-group-bookings').empty();
+                        $('.w-contact-sysses').show();
+                    }
+
+                }
+            });
+
+            return false;
+
+        }
+
+    });
+
+
+
+
+
+
+
+
+
+
 
 
     $(".w-form-registration").validate({

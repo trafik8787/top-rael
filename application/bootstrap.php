@@ -403,6 +403,25 @@ Route::set('Contacts', 'contacts')
         'controller' => 'Contacts',
         'action'     => 'index',
     ));
+
+
+//send contacts
+Route::set('sendContact', 'sendcontact')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'sendContact',
+    ));
+
+//send group_bookings
+Route::set('sendGroupBookins', 'sendgroupbookings')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'sendGroupBookins',
+    ));
+
+
 //подписка
 Route::set('Subscribe', 'subscribe')
     ->defaults(array(
