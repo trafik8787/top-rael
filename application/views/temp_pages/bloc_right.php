@@ -8,14 +8,12 @@
 ?>
 
 <div class="col-md-4">
-    <div id="sidebar">
-        <?if (!empty($data_bloc)):?>
-            <?foreach ($data_bloc as $row_bloc):?>
+    <?if (!empty($data_bloc)):?>
+        <?foreach ($data_bloc as $row_bloc):?>
 
-                <?=$row_bloc?>
+            <?=$row_bloc?>
 
-            <?endforeach?>
-        <?endif?>
-    </div>
+        <?endforeach?>
+    <?endif?>
 </div>
 

@@ -10710,7 +10710,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   background: url("../images/logo-futer.png");
   background-repeat: no-repeat;
   background-size: 231px;
-  width: 237px;
+  width: 190px;
   height: 64px;
   margin-bottom: 10px;
 }
@@ -10833,6 +10833,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 .pin .fa.fa-star,
 .pin .glyphicon.fa-star {
   font-size: 18px;
+  color: #F8B732;
 }
 /* line 68, ../.sass/pin.scss */
 .pin .fa.fa-thumb-tack,
@@ -11189,6 +11190,10 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   line-height: 1.25;
   float: left;
   margin-right: 15px;
+  text-decoration: underline;
+}
+.panel .panel-heading .panel-title:hover {
+  text-decoration: none;
 }
 /* line 48, ../.sass/panel.scss */
 .panel .panel-heading .panel-title + .panel-buttons-group, .panel .panel-heading .panel-title + .panel-links {
@@ -12179,7 +12184,6 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 }
 /* line 117, ../.sass/header.scss */
 #header .header-profile .header-profile-shape a {
-  display: block;
   vertical-align: top;
 }
 @media (min-width: 768px) {
@@ -12603,6 +12607,7 @@ footer {
 /* line 93, ../.sass/sidebar.scss */
 .sidebar-lottery {
   margin-bottom: 20px;
+  background: rgb(238,238,238);
 }
 /* line 101, ../.sass/sidebar.scss */
 .sidebar-lottery a {
@@ -12793,17 +12798,14 @@ footer {
 }
 /* line 35, ../.sass/top.scss */
 .top .top-image .top-image-text {
-  width: 50%;
-  padding: 0px 15px 11px 15px;
-  background: rgba(0, 0, 0, 0.5);
-  position: absolute;
-  left: 0;
-  bottom: 0;
+  width: 100%;
+  padding: 11px 15px 11px 15px;
+  background: #9E9E9E;
   color: #fff;
 }
 
 .top .top-image .top-image-text h2 {
-  margin-top: 11px;
+  margin-top: 0px;
 }
 
 /* line 49, ../.sass/top.scss */
@@ -13475,6 +13477,12 @@ footer {
   font-size: 32px;
   line-height: 1.25;
 }
+@media (max-width: 767px) {
+  .page-profile .profile-title {
+    font-size: 24px;
+    margin: 10px 0px 0px 0px;
+  }
+}
 /* line 72, ../.sass/page.scss */
 .page-profile .profile-link {
   font-size: 18px;
@@ -13521,6 +13529,8 @@ footer {
     display: block;
     padding: 0;
     margin-bottom: 10px;
+    width: 100px;
+    float: left;
   }
 }
 /* line 119, ../.sass/page.scss */
@@ -14763,6 +14773,8 @@ footer {
 
 .w-bloc-right {
   margin-bottom: 50px!important;
+  padding: 15px;
+  border: 1px solid rgb(238, 238, 238);
 }
 
 
@@ -15239,7 +15251,7 @@ html, body, #wrapper {
 /* line 330, ../.sass/common.scss */
 .short-description {
   margin-bottom: 20px;
-  font-size: 34px;
+  font-size: 26px;
   line-height: 1.1;
   color: #8a8787;
 }
@@ -15460,5 +15472,34 @@ html, body, #wrapper {
   padding-top: 35px;
 }
 
+@media (max-width: 768px) {
+    .article-in-account{
 
-
+    }
+    .article-in-account > .media-left{
+      display: block;
+      text-align: center;
+    }
+    .article-in-account > .media-body > .media-heading{
+      margin: 20px 0px 10px 0px;
+    }
+    .w-delete-article-favor{
+        position: absolute;
+    }
+    /* ----- */
+    .description-content h1{
+        font-size: 24px;
+    }
+    .description-content h2{
+        font-size: 20px;
+    }
+    .description-content h3{
+        font-size: 18px;
+    }
+    .description-content p{
+        font-size: 14px;
+    }
+    .short-description-body{
+        font-size: 20px;
+    }
+}

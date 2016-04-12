@@ -46,6 +46,128 @@
             </div>
         </div>
 
+        <div class="panel panel-micronews gallery w-bloc-micronews">
+
+            <div class="panel-heading">
+
+                <div class="panel-title">Новости</div>
+                
+            </div>
+
+            <div class="panel-body">
+                <div class="owl-carousel w-micronews-carusel">
+
+                        <div class="micronews-layer">
+                            <div class="micronews micronews-small">
+                                <div class="micronews-body">
+
+                                    <div class="micronews-content">
+
+                                        <div class="micronews-title">Заголовок 1</div>
+                                        <div class="micronews-text">В каждом городе, даже самом большом, есть заветные уголки, не отмеченные на туристических картах, которые известны даже не всем его жителям</div>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="micronews-layer">
+                            <div class="micronews micronews-small">
+                                <div class="coupon-body">
+
+                                    <div class="coupon-content">
+
+                                        <div>Заголовок 2</div>
+                                        <div>Шопинг – своего рода охота или рыбалка. Вопрос – насколько она удачна и с какими «трофеями» или «уловом» вы вернетесь домой. Кто осведомлен, тот вооружен.м</div>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="micronews-layer">
+                            <div class="micronews micronews-small">
+                                <div class="coupon-body">
+
+                                    <div class="coupon-content">
+
+                                        <div>Заголовок 3</div>
+                                        <div>В Bamboo Village на пляже Полег в пяти минутах езды от Нетании действует эксклюзивный серфинг-клуб: опытные профессиональные инструкторы дают уроки…</div>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="micronews-layer">
+                            <div class="micronews micronews-small">
+                                <div class="coupon-body">
+
+                                    <div class="coupon-content">
+
+                                        <div>Заголовок 4</div>
+                                        <div>У посетителей ресторана-бистро Olivery в Тель-Авиве возникает ощущение, что ненадолго они перенеслись на Сицилию. Это не удивительно: рецепт идеальной…</div>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="micronews-layer">
+                            <div class="micronews micronews-small">
+                                <div class="coupon-body">
+
+                                    <div class="coupon-content">
+
+                                        <div>Заголовок 5</div>
+                                        <div>Галерея Shomroni - одна из старейших в Яффо, она существует уже более тридцати лет и имеет лицензию Министерства туризма и Управления древностей, что…</div>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="micronews-layer">
+                            <div class="micronews micronews-small">
+                                <div class="coupon-body">
+
+                                    <div class="coupon-content">
+
+                                        <div>Заголовок 6</div>
+                                        <div>Sea Village SPA Если вы устали, душа просит отдыха, а до отпуска еще далеко, всегда можно взять небольшой тайм-аут и отправиться на денек в уютное…</div>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="micronews-layer">
+                            <div class="micronews micronews-small">
+                                <div class="coupon-body">
+
+                                    <div class="coupon-content">
+
+                                        <div>Заголовок 7</div>
+                                        <div>Если вас завораживают марсианские пейзажи Иудейской пустыни и лазурное Мертвое море, если вы влюблены и мечтаете отдохнуть в романтической атмосфере…</div>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <br/>        
 
         <div class="panel panel-coupons gallery w-bloc-coupons">
 
@@ -144,7 +266,6 @@
 
         </div>
 
-
         <br/>
 
         <div class="row">
@@ -165,7 +286,7 @@
                                     <i class="fa fa-bars"></i>
                                 </a>
 
-                                <div class="panel-title"><?=$rowsdata['category'][0]['name']?></div>
+                                <a class="panel-title" href="/section/<?=$rowsdata['category'][0]['url']?>"><?=$rowsdata['category'][0]['name']?></a>
 
                                 <div class="panel-buttons-group">
 
@@ -247,6 +368,40 @@
 
             <!-- Bloc Right -->
             <?=isset($bloc_right)? $bloc_right : ''?>
+        </div>
+        
+        <br/>
+        
+        <div class="panel panel-partners gallery w-bloc-partners">
+
+            <div class="panel-heading">
+
+                <div class="panel-title">Наши партнеры</div>
+                
+            </div>
+
+            <div class="panel-body">
+                <div class="owl-carousel w-partners-carusel">
+
+                        <div class="partners-layer">
+                            <div class="partners partners-small">
+                                <div class="partners-body">
+
+                                    <div class="partners-content">
+                                        
+                                        <div class="partners"><img src="/public/images/logo-new.png"></div>
+
+                                        <div class="partners-title">Партнер 1</div>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+
         </div>
 
     </div>

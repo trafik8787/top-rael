@@ -16,7 +16,7 @@
             <!-- Context -->
             <div class="col-md-8">
 
-                <div id="context" class="full-text">
+                <div id="context" class="full-text description-content">
 
                     <img src="<?=$data['ArticImg']?>" width="800" height="600" class="img-responsive" alt="<?=$data['ArticName']?>"/>
 

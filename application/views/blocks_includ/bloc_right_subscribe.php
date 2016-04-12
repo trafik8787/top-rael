@@ -34,6 +34,5 @@
     </form>
 
 </div>
-<hr>
 <div class="clearfix"></div>
 

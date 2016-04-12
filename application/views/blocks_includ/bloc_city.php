@@ -5,9 +5,8 @@
  * Date: 17.01.2016
  * Time: 23:37
  */
-
 ?>
-
+<!--
 <style>
 
     .w-bloc-right td {
@@ -21,9 +20,11 @@
     .w-bloc-right .table>tbody>tr>td {
         border: none;
     }
+
 </style>
 
 <hr>
+
 <div class="w-bloc-right">
     <h2>По городам</h2>
     <table class="table" style="margin-bottom: 6px;">
@@ -37,7 +38,7 @@
 
     <? endforeach ?>
     </table>
-    <!-- Single button -->
+
     <div class="btn-group" style="margin-top: 10px">
 
         <a href="#"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Другие города <span class="caret"></span> </a>
@@ -59,4 +60,5 @@
     </div>
 
 </div>
-<hr>
+<hr>?>
+-->

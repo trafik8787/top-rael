@@ -514,7 +514,7 @@
                 </div>
 
 
-
+                <!-- articles -->
                 <div class="panel panel-thumbnails tab-pane fade" id="articles">
                     <div class="panel-body">
                         <div class="col-md-12">
@@ -524,12 +524,12 @@
                                         <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_data_artic['id']?>" class="pin w-delete-article-favor">
                                             <i class="fa fa-trash"></i>
                                         </a>
-                                        <div class="media">
+                                        <div class="media article-in-account">
 
                                             <div class="media-left">
 
                                                 <a href="/article/<?=$rows_data_artic['url']?>">
-                                                    <img src="/uploads/img_articles/thumbs/<?=basename($rows_data_artic['images_article'])?>" width="260" height="190" class="media-object" alt="<?=$rows_data_artic['name']?>"/>
+                                                    <img src="/uploads/img_articles/thumbs/<?=basename($rows_data_artic['images_article'])?>" width="260" height="190" alt="<?=$rows_data_artic['name']?>"/>
                                                 </a>
 
                                             </div>

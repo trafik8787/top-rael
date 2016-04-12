@@ -58,7 +58,10 @@
                         <div class="header-profile-shape">
 
                             <a href="/account#izbran"><i class="fa fa-star"></i>Избранные места <span class="badge w-count-bussines"><?=Controller_BaseController::$count_bussines?></span></a>
-                            <a href="/account#coupons"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge w-count-coupon"><?=Controller_BaseController::$count_coupon?></span></a>
+                            <div class="clearfix"></div>
+                            <a href="/coupons">Купоны, </a> 
+                            <a href="/places">места, </a> 
+                            <a href="/articles">обзоры</a>
                         </div>
                         <?if (!empty($user->photo)):?>
                             <img src="<?=$user->photo?>" width="60" height="60" alt="" class="img-circle"/>
@@ -100,9 +103,28 @@
                 <div id="header-top">
                     <nav>
                         <ul class="header-nav">
+                            
                             <?foreach ($top_meny as $name=>$url):?>
                                 <li><a href="<?=$url?>"><?=$name?></a></li>
                             <?endforeach?>
+                            
+                                <li>
+                                    <a href="#"  class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">По городам <span class="caret"></span></a>
+                                    <div class="dropdown-menu" style="width: 330px;">
+                                        <table class="table">
+                                        <? foreach (array_chunk($data['all'], 3) as $row_all): ?>
+
+                                            <tr>
+                                                <td><a class="w-city-general" href="/city/<?=isset($row_all[0]['cityUrl']) ? $row_all[0]['cityUrl'] : '' ?>"><?=isset($row_all[0]['cityName']) ? $row_all[0]['cityName'] : '' ?></a></td>
+                                                <td><a class="w-city-general" href="/city/<?=isset($row_all[1]['cityUrl']) ? $row_all[1]['cityUrl'] : '' ?>"><?=isset($row_all[1]['cityName']) ? $row_all[1]['cityName'] : '' ?></a></td>
+                                                <td><a class="w-city-general" href="/city/<?=isset($row_all[2]['cityUrl']) ? $row_all[2]['cityUrl'] : '' ?>"><?=isset($row_all[2]['cityName']) ? $row_all[2]['cityName'] : '' ?></a></td>
+                                            </tr>
+
+                                        <? endforeach ?>
+                                        </table>
+                                    </div>
+                                </li>
+                            
                         </ul>
                     </nav>
                 </div>

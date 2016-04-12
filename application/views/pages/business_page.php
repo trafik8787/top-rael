@@ -10,10 +10,6 @@
 ?>
 
 <script>
-
-
-
-
     $(document).ready(function(){
         var gallery = verticalGallery();
 
@@ -157,9 +153,6 @@
             </div>
         <?endif?>
 
-
-
-
         <div class="page-profile">
 
             <?if (!empty($data['BusLogo'])):?>
@@ -168,13 +161,14 @@
                 </div>
 
             <?endif?>
+            <div class="profile-title visible-xs"><?=$data['BusName']?></div>
             <div class="profile-body">
 
                 <div class="profile-content">
 
                     <div class="profile-context">
 
-                        <div class="profile-title"><?=$data['BusName']?></div>
+                        <div class="profile-title hidden-xs"><?=$data['BusName']?></div>
 
                         <div class="profile-link">
                             <?if(!empty($data['BusWebsite'])):?>
@@ -274,7 +268,7 @@
             <!-- Context -->
             <div class="col-md-8">
                 <div id="context" class="full-text border clearfix">
-                    <div class="col-md-12">
+                    <div class="col-md-12 description-content">
 
                         <?=$data['BusInfo']?>
 
@@ -289,7 +283,7 @@
                                         <div class="panel-links">
                                             <span class="tabs__caption_galery">
                                                 <?foreach ($data['GalryArr'] as $key => $rows_galery_name):?>
-                                                    <a href="#" title="<?=!empty($data['GalryDesk']) ? $data['GalryDesk'] : ''?>" <?if ($key == 0){?>class="active"<?}?>><?=$rows_galery_name['GalryName']?></a>
+                                                    <a href="#" onclick="return false;" title="<?=!empty($data['GalryDesk']) ? $data['GalryDesk'] : ''?>" <?if ($key == 0){?>class="active"<?}?>><?=$rows_galery_name['GalryName']?></a>
                                                     <?if (next($data['GalryArr'])):?>
                                                     &nbsp;|&nbsp;
                                                     <?endif?>
@@ -565,9 +559,6 @@
         </div>
 
     </div>
-
-
-
 
 </content>
 

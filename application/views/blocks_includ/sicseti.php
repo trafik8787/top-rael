@@ -7,8 +7,6 @@
  */
 ?>
 
-<hr>
-
 <div class="w-bloc-right">
      
 <p>    
@@ -17,10 +15,6 @@
   </p>
 
 </div>
-
-
-
-<hr>
 
 <div class="sidebar-socials w-bloc-right">
 
