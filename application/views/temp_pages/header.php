@@ -109,7 +109,18 @@
                             <?endforeach?>
                             
                                 <li>
-                                    <a href="#"  class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">По городам <span class="caret"></span></a>
+                                    
+                                    <div class="dropdown">
+                                        <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+                                            По городам <span class="caret"></span>
+                                        </a>
+
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                            <? foreach ($city_list as $row_list_city): ?>
+                                                <li><a href="/city/<?=!empty($row_list_city['cityUrl']) ? $row_list_city['cityUrl'] : '' ?>"><?=$row_list_city['cityName'] ?></a></li>
+                                            <? endforeach ?>
+                                        </ul>
+                                    </div>
                                 </li>
                             
                         </ul>

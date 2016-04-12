@@ -82,6 +82,8 @@ abstract class Controller_BaseController extends Controller_Template {
             self::$general_meny = Cache::instance()->get('general_meny');
         }
 
+        $this->header->city_list = $this->listCity('', true);
+
         $this->header->general_meny = self::$general_meny;
         $this->footer->general_meny = self::$general_meny;
 
@@ -308,8 +310,12 @@ abstract class Controller_BaseController extends Controller_Template {
      */
     public function blocCity (){
         $content = View::factory('blocks_includ/bloc_city');
-        $content->data = Model::factory('BussinesModel')->getCityListBlocRight();
+        $content->data = $this->listCity();
         return $content;
+    }
+
+    public function listCity ($limit = 9, $all_city = false) {
+        return Model::factory('BussinesModel')->getCityListBlocRight($limit, $all_city);
     }
 
     public function blocTags (){

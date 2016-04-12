@@ -1398,7 +1398,7 @@ class Model_BussinesModel extends Model_BaseModel {
      * @return array
      * todo получаем список городов для блока с права по заполнености
      */
-    public function getCityListBlocRight($limit = 9){
+    public function getCityListBlocRight($limit = 9, $all_city = false){
 
         $query = DB::select(array(DB::expr('COUNT(city.id)'), 'total'),
             array('city.id', 'cityId'),
@@ -1414,17 +1414,20 @@ class Model_BussinesModel extends Model_BaseModel {
             ->cached()
             ->execute()->as_array();
 
-        $result = array();
-        if (count($query) > $limit) {
-            $general = array_slice($query, 0, $limit);
-            $result =  array_slice($query, $limit);
+        if ($all_city === false) {
+            $result = array();
+            if (count($query) > $limit) {
+                $general = array_slice($query, 0, $limit);
+                $result = array_slice($query, $limit);
 
+            } else {
+                $general = $query;
+            }
+
+            return array('general' => $general, 'all' => $result);
         } else {
-            $general = $query;
+            return $query;
         }
-
-        return array('general' => $general, 'all' => $result);
-
     }
 
 
