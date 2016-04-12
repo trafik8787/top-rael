@@ -55,9 +55,9 @@ abstract class Controller_BaseController extends Controller_Template {
         $this->top_meny = array(
             'Обзоры' => '/articles',
             'Купоны' => '/coupons',
-            'LUX - Люкс' => '/tags/luxury',
+            'LUX' => '/tags/luxury',
             'Праздники' => '/tags/celebration',
-            'Детский мир' => '/tags/for_children'
+            //'Детский мир' => '/tags/for_children'
         );
 
         $this->header = View::factory('/temp_pages/header');

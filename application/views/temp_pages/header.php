@@ -110,19 +110,6 @@
                             
                                 <li>
                                     <a href="#"  class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">По городам <span class="caret"></span></a>
-                                    <div class="dropdown-menu" style="width: 330px;">
-                                        <table class="table">
-                                        <? foreach (array_chunk($data['all'], 3) as $row_all): ?>
-
-                                            <tr>
-                                                <td><a class="w-city-general" href="/city/<?=isset($row_all[0]['cityUrl']) ? $row_all[0]['cityUrl'] : '' ?>"><?=isset($row_all[0]['cityName']) ? $row_all[0]['cityName'] : '' ?></a></td>
-                                                <td><a class="w-city-general" href="/city/<?=isset($row_all[1]['cityUrl']) ? $row_all[1]['cityUrl'] : '' ?>"><?=isset($row_all[1]['cityName']) ? $row_all[1]['cityName'] : '' ?></a></td>
-                                                <td><a class="w-city-general" href="/city/<?=isset($row_all[2]['cityUrl']) ? $row_all[2]['cityUrl'] : '' ?>"><?=isset($row_all[2]['cityName']) ? $row_all[2]['cityName'] : '' ?></a></td>
-                                            </tr>
-
-                                        <? endforeach ?>
-                                        </table>
-                                    </div>
                                 </li>
                             
                         </ul>
