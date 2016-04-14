@@ -27,7 +27,7 @@
             "serverSide": true,
             "pageLength": 25,
             "sLengthSelect": "form-control",
-            "sDom": '<"top"l<?=$table_propery['activ_operation']['search']?><?=$table_propery['activ_operation']['enable_export']?>>rt<"bottom"ip><"clear">',//<"clear">
+            "sDom": '<"row"<"col-md-2"l><"col-md-2"i><"col-md-5"p><"col-md-3"<?=$table_propery['activ_operation']['search']?>><?=$table_propery['activ_operation']['enable_export']?>>rt<"bottom"ip><"clear">',//<"clear">
 
             /*
              l - Показать  записей

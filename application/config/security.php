@@ -23,6 +23,8 @@ return array(
         'locat'           => array('admin'),
         'banners'           => array('admin'),
         'about'           => array('admin'),
+        'news'           => array('admin'),
+
 
         'welcome'           => array('admin', 'redactor', 'manager'),
         'logs'           => array('admin'),

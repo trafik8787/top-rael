@@ -72,6 +72,7 @@ class Cruds extends Controller_Core_Main {
 
     public static $adon_form = null;
     public static $post = null;
+    public static $get = null;
     public static $files = null;
 
     public static $adon_top_form = null; //верхняя форма
@@ -341,7 +342,6 @@ class Cruds extends Controller_Core_Main {
         $count = Model::factory('All')->count_table($this->table, $this->set_where);
 
 
-
         //если колонка с чекбоксами то добавляем в первый елемент масива первый столбик дублируем 0 и 1 одинаковы
         if ($this->enable_delete_group) {
             $column[0] = $this->name_colums_ajax[0]['COLUMN_NAME'];
@@ -353,7 +353,7 @@ class Cruds extends Controller_Core_Main {
             $column[] = $rows_column['COLUMN_NAME'];
         }
 
-
+        //HTML::x($this->name_colums_ajax);
         //поле для сортировки
 
         $order_column = $column[$get['order'][0]['column']];
@@ -386,8 +386,9 @@ class Cruds extends Controller_Core_Main {
 
         //абсолютный путь к корню удаляется последний символ слеш
         $path_absolute = substr(DOCROOT, 0, strlen(DOCROOT)-1);
-
+        //HTML::x($query['query']);
         foreach ($query['query'] as $rows) {
+
             //редактировать
             if ($this->remove_edit !== true) {
 
@@ -549,6 +550,7 @@ class Cruds extends Controller_Core_Main {
             $tmp_array[] = $htm_show_views.$htm_edit.$htm_action.$htm_delete;
             $dataQuery[] = $tmp_array;
         }
+       // HTML::x($dataQuery);
         //die('fgh');
         //количество записей после поиска
         if ($search_like != '')  {
@@ -834,7 +836,7 @@ class Cruds extends Controller_Core_Main {
      * формируем масив
      */
     public static function parse_name_column ($arr) {
-
+        //HTML::x($arr, true);
         $data = array();
         $tmp = '';
         foreach ($arr as $name_count => $rows) {

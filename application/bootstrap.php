@@ -488,6 +488,14 @@ Route::set('Articles', 'articles(/<page>)', array('page' => '[0-9]+'))
         'action'     => 'index',
     ));
 
+//новости
+Route::set('News', 'news(/<page>)', array('page' => '[0-9]+'))
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'News',
+        'action'     => 'index',
+    ));
+
 Route::set('ArticlesSection', 'articles(/<url_section>(/<page>))', array('page' => '[0-9]+'))
     ->defaults(array(
         'directory' => 'Pages',

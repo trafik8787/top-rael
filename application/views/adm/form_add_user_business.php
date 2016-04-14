@@ -41,15 +41,8 @@
                         </div>
 
                         <div class="form-inline" style="margin-top: 10px;">
-                            <select class="form-control" data-toggle="tooltip"  data-original-title="Выбрать пол" name="sex" data-placeholder="Пол">
-                                <option <?if (!empty($sex) and $sex == 'm'):?> selected <?endif?> value="m">Мужчина</option>
-                                <option <?if (!empty($sex) and $sex == 'j'):?> selected <?endif?> value="j">Женщина</option>
-                            </select>
-                            <div class="input-group date col-md-5 form_date">
-                                <input class="form-control" type="text" value="<?=isset($age) ? $age: ''?>" data-toggle="tooltip" data-original-title="Возраст" name="age">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                            </div>
-                            <input type="text" data-toggle="tooltip" data-original-title="Телефон" name="telephone" class="form-control"  value="<?=isset($telephone) ? $telephone: ''?>"/>
+
+                            <input type="text" data-toggle="tooltip" placeholder="Телефон" data-original-title="Телефон" name="telephone" class="form-control"  value="<?=isset($telephone) ? $telephone: ''?>"/>
 
                         </div>
                         <div class="form-inline" style="margin-top: 10px;">

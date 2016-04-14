@@ -148,7 +148,7 @@
         <?
         $bus_id = Session::instance()->get('busines_id_adon');
 
-        if (!empty($bus_id) and $name_fied == 'business_id') {
+        if (!empty($bus_id) and $name_fied == 'business_id' and !empty(Cruds::$get['id_addon_redirect'])) {
             $origin_value_fild = $bus_id;
         }
 
@@ -178,7 +178,7 @@
 
 
         <?
-        if ($name_fied == 'business_id') {
+        if ($name_fied == 'business_id' OR $name_fied == 'bussines_id') {
             Session::instance()->delete('busines_id_adon');
         }
         ?>

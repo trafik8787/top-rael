@@ -53,6 +53,7 @@ abstract class Controller_Core_Main extends Controller_Template {
             'Галереи' => array('metod' => 'galery', 'url'=> 'galery', 'icon'=>'glyphicon-picture'),
             'Банеры' => array('metod' => 'banners', 'url' => 'banners', 'icon' => 'glyphicon-cloud-download'),
             'Обзоры' => array('metod' => 'articles', 'url' => 'articles', 'icon' => 'glyphicon-th'),
+            'Новости' => array('metod' => 'news', 'url' => 'news', 'icon' => 'glyphicon-th'),
             'Лотерея' => array('metod' => 'lotarey', 'url' => 'lotarey', 'icon' => 'glyphicon-bell'),
             'Письма' => array('metod' => 'contacts', 'url'=> 'contacts', 'icon'=>'glyphicon-globe'),
             'Подписчики' => array('metod' => 'subscription', 'url'=> 'subscription', 'icon'=>'glyphicon-envelope'),

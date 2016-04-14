@@ -166,9 +166,9 @@ class Controller_Administrator extends Controller_Core_Main {
     public function action_category(){
 
         if (!empty($_GET['section'])) {
-            Session::instance()->set('customer_id', $_GET['section']);
+            Session::instance()->set('customer_id_section', $_GET['section']);
         } else {
-            Session::instance()->set('customer_id', null);
+            Session::instance()->set('customer_id_section', null);
         }
 
         $filtr = View::factory('adm/filtr_admin_section');
@@ -242,10 +242,10 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
 
-        Session::instance()->set('customer_id', $busssines);
+        Session::instance()->set('customer_id_bussines', $busssines);
 
         if (empty($_GET['section']) and empty($_GET['city'])) {
-            Session::instance()->set('customer_id', null);
+            Session::instance()->set('customer_id_bussines', null);
         }
 
         Controller_Core_Main::$title_page = 'Бизнесы '.$name;
@@ -256,9 +256,9 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public function action_articles (){
         if (!empty($_GET['section'])) {
-            Session::instance()->set('customer_id', $_GET['section']);
+            Session::instance()->set('customer_id_articles', $_GET['section']);
         } else {
-            Session::instance()->set('customer_id', null);
+            Session::instance()->set('customer_id_articles', null);
         }
 
         $filtr = View::factory('adm/filtr_admin_section');
@@ -268,6 +268,13 @@ class Controller_Administrator extends Controller_Core_Main {
         Controller_Core_Main::$title_page = 'Обзоры';
         $this->response->body(self::adminArticles()->render());
     }
+
+
+    public function action_news () {
+        Controller_Core_Main::$title_page = 'Новости';
+        $this->response->body(self::adminNews()->render());
+    }
+
 
     public function action_coupons (){
 
@@ -298,7 +305,7 @@ class Controller_Administrator extends Controller_Core_Main {
             $_GET['section'] = 1;
         }
 
-        Session::instance()->set('customer_id', $_GET['section']);
+        Session::instance()->set('customer_id_users', $_GET['section']);
 
         switch ($_GET['section']) {
             case 1:
@@ -415,7 +422,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->disable_search();
 
         if (Session::instance()->get('customer_id') != null) {
-            $crud->set_where('parent_id', '=', Session::instance()->get('customer_id'));
+            $crud->set_where('parent_id', '=', Session::instance()->get('customer_id_section'));
         } else {
             $crud->set_where('parent_id', '<>', 0);
         }
@@ -488,18 +495,20 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('status', 'radio', array('1' => 'Ожидает', '2' => 'Идет', '3' => 'Завершен'));
         $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
         $crud->set_field_type('img', array('file', 'uploads/img_lotarey', 'lot_', '', 'img'),'', '');
-        $crud->show_columns('id', 'secondname', 'date_start', 'date_end', 'status');
+        $crud->show_columns('id', 'secondname', 'date_start', 'date_end','status');
 
         $crud->edit_fields('secondname','description','img','business_id','date_start','date_end','status');
         $crud->add_field('secondname','description','img','business_id','date_start','date_end','status');
+        $crud->disable_editor('description');
+
 
         $crud->callback_befor_show_edit('call_bef_show_edit_lotery');
         $crud->rows_color_where(4, '==', 3, ' #cccccc');
 
-        $crud->show_name_column(array('name' => 'Название',
+        $crud->show_name_column(array(
             'secondname' => 'Заголовок',
             'description' => 'Описание',
-            'img' => 'Картинка',
+            'img' => 'Картинка - 300х300 px',
             'business_id'=> 'Бизнес',
             'date_start'=> 'Дата начала',
             'date_end' => 'Дата конца',
@@ -530,8 +539,8 @@ class Controller_Administrator extends Controller_Core_Main {
         //номер поля по порядку с лева начинается с нуля
         $crud->load_table('business', array('0', 'DESC'));
         $crud->set_lang('ru');
-        if (Session::instance()->get('customer_id') != null) {
-            $crud->set_where('id', 'IN', Session::instance()->get('customer_id'));
+        if (Session::instance()->get('customer_id_bussines') != null) {
+            $crud->set_where('id', 'IN', Session::instance()->get('customer_id_bussines'));
         }
         $crud->disable_editor('description');
         $crud->disable_editor('keywords');
@@ -707,8 +716,8 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud = new Cruds();
         $crud->load_table('articles', array('0', 'DESC'));
-        if (Session::instance()->get('customer_id') != null) {
-            $crud->set_where('id_section', '=', Session::instance()->get('customer_id'));
+        if (Session::instance()->get('customer_id_articles') != null) {
+            $crud->set_where('id_section', '=', Session::instance()->get('customer_id_articles'));
         }
 
         $crud->disable_editor('description');
@@ -803,7 +812,7 @@ class Controller_Administrator extends Controller_Core_Main {
             'id_section' => 'Раздел',
             'coupon' => 'Купон',
             'content' => 'Текст статьи',
-            'images_article' => 'Главное фото',
+            'images_article' => 'Главное фото - 750х562 px',
             'bussines_id' => 'Бизнес',
             'id_category' => 'Категория',
             'tags' => 'Теги',
@@ -815,6 +824,37 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->callback_before_edit('call_bef_edit_articles');
         $crud->callback_after_insert('call_after_insert_articles');
         $crud->callback_before_delete('call_bef_del_articles');
+
+        return $crud;
+    }
+
+
+
+    public static function adminNews () {
+
+        $recurs_cat = Model::factory('CategoryModel')->recurs_catalog();
+
+        $crud = new Cruds();
+        $crud->load_table('news', array('0', 'DESC'));
+        $crud->set_lang('ru');
+        $crud->disable_editor('text');
+
+        $crud->set_field_type('id_section', 'select', '', '', '', array('category', 'name','id', array('parent_id','=','0')));
+        $crud->set_field_type('id_category', 'select', $recurs_cat, '', '', '');
+        $crud->set_field_type('bussines_id', 'select', '', '', '', array('business', 'name','id'));
+        $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
+
+        $crud->set_field_type('tags', 'checkbox', '', 'multiple', '', array('tags', 'name_tags','id'));
+        $crud->set_one_to_many('tags_relation_news', 'tags', 'id_tags', 'id_news');
+
+        $crud->show_name_column(array('text' => 'Текст',
+            'city' => 'Город',
+            'id_section' => 'Раздел',
+            'bussines_id' => 'Бизнес',
+            'id_category' => 'Категория',
+            'tags' => 'Теги',
+            'date' => 'Дата создания'
+        ));
 
         return $crud;
     }
@@ -891,7 +931,7 @@ class Controller_Administrator extends Controller_Core_Main {
             'secondname' => 'Подзаголовок',
             'info' => 'Иврит',
             'url' => 'URL',
-            'img_coupon' => 'Фото купона',
+            'img_coupon' => 'Фото купона - 440х365 px',
             'id_section' => 'Раздел',
             'business_id' => 'Бизнес',
             'city' => 'Город',
@@ -1012,8 +1052,8 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->load_table('users');
         $crud->set_lang('ru');
 
-        if (Session::instance()->get('customer_id') == 1 OR Session::instance()->get('customer_id') == 5) {
-            $crud->set_where('id_role', '=', Session::instance()->get('customer_id'));
+        if (Session::instance()->get('customer_id_users') == 1 OR Session::instance()->get('customer_id_users') == 5) {
+            $crud->set_where('id_role', '=', Session::instance()->get('customer_id_users'));
         } else {
             $crud->set_where('id_role', 'NOT IN', '(1, 5)');
         }
@@ -1027,7 +1067,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
 
-        if (Session::instance()->get('customer_id') == 1) {
+        if (Session::instance()->get('customer_id_users') == 1) {
 
             //если это обычные пользователи
             $crud->remove_add();
@@ -1038,7 +1078,7 @@ class Controller_Administrator extends Controller_Core_Main {
             $crud->callback_befor_show_edit('call_bef_show_edit_users');
 
 
-        } elseif (Session::instance()->get('customer_id') == 5) {
+        } elseif (Session::instance()->get('customer_id_users') == 5) {
 
             $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
             $crud->edit_fields('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel', 'business_id','date_registration');
@@ -1315,8 +1355,6 @@ class Controller_Administrator extends Controller_Core_Main {
                                                     Cruds::$post['nameses'],
                                                     Cruds::$post['secondname_user'],
                                                     Cruds::$post['email_user'],
-                                                    Cruds::$post['age'],
-                                                    Cruds::$post['sex'],
                                                     Cruds::$post['telephone'],
                                                     Cruds::$post['password'],
                                                     Cruds::$post['id']);
@@ -1372,10 +1410,12 @@ class Controller_Administrator extends Controller_Core_Main {
 
         if (!empty(Cruds::$post['name_user']) and !empty(Cruds::$post['email_user'])
             and !empty($key_array['id']) and !empty(Cruds::$post['password'])) {
+
             Model::factory('Adm')->add_busines_user(Cruds::$post['name_user'],
                                                     Cruds::$post['nameses'],
                                                     Cruds::$post['secondname_user'],
                                                     Cruds::$post['email_user'],
+                                                    Cruds::$post['telephone'],
                                                     Cruds::$post['password'],
                                                     $key_array['id']);
         }

@@ -129,6 +129,8 @@ class Controller_Core_Crud extends Controller_Core_Main {
             $re = unserialize(base64_decode($get['obj']));
         }
 
+        Cruds::$get = $_GET;
+
         $retw = call_user_func(array($re['callback_functions_array']['class'],
             $re['callback_functions_array']['function']));
 
@@ -601,6 +603,8 @@ class Controller_Core_Crud extends Controller_Core_Main {
         } else {
             $re = unserialize(base64_decode($_GET['obj']));
         }
+
+        Cruds::$get = $_GET;
 
         $retw = call_user_func(array($re['callback_functions_array']['class'],
             $re['callback_functions_array']['function']));

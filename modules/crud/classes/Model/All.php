@@ -448,7 +448,7 @@ class Model_All extends Model
 
             $query = DB::query(Database::SELECT,
                 'SELECT '.$joins_string['asCoun'].' FROM '.$table.' '.$joins_string['q'].' '.$sele_where.' '.$likeSql.' '.
-                'ORDER BY '. $order_column.' '.$order_by.'
+                'ORDER BY '.$order_column.' '.$order_by.'
             LIMIT '.$ofset.','.$limit)
                 ->execute()
                 ->as_array();
@@ -520,7 +520,9 @@ class Model_All extends Model
             $str .= ' INNER JOIN '.$joins[1].' ON '.$table.'.'.$joins[0].'='.$joins[1].'.'.$joins[2].' ';
         }
 
+
         $str_as = implode(', ', array_flip($array_counts['table']));
+
         foreach ($array_counts['join'] as $name_table => $row_join) {
 
             foreach ($row_join as $name_column => $row_coun) {
