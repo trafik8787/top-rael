@@ -57,9 +57,9 @@ abstract class Controller_BaseController extends Controller_Template {
             'Купоны' => '/coupons',
             'LUX' => '/tags/luxury',
             'Праздники' => '/tags/celebration',
-            //'Детский мир' => '/tags/for_children'
+            'Детский мир' => '/tags/for_children'
         );
-
+        
         $this->header = View::factory('/temp_pages/header');
         $this->footer = View::factory('/temp_pages/footer');
         //теги лакшери

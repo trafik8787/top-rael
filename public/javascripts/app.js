@@ -731,6 +731,32 @@ $(document).ready(function(){
         dots: false
     });
 
+    //слайдер новостей
+    var owl2 = $('.panel-micronews.gallery .owl-carousel');
+
+    owl2.owlCarousel({
+        loop: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            992: {
+                items: 2
+            },
+            1170: {
+                items: 3
+            }
+        },
+        nav: true,
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 10000
+    });
+
 
 
 

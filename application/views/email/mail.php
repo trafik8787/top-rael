@@ -52,17 +52,6 @@
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td valign="bottom" align="right" style="padding:0 10px;">
-                                                    <table cellpadding="0" cellspacing="0" width="100%"
-                                                           style="max-width:109px;">
-                                                        <tr>
-                                                            <td>
-                                                                <img src="cid:2.png" width="109" height="108"
-                                                                     style="width:100%; height: auto" alt="plane"/>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
                                             </tr>
                                         </table>
                                     </td>

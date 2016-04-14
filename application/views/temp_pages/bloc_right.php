@@ -8,6 +8,7 @@
 ?>
 
 <div class="col-md-4">
+    <div>
     <?if (!empty($data_bloc)):?>
         <?foreach ($data_bloc as $row_bloc):?>
 
@@ -15,5 +16,6 @@
 
         <?endforeach?>
     <?endif?>
+    </div>
 </div>
 

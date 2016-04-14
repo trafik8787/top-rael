@@ -63,8 +63,8 @@
 
                                     <div class="micronews-content">
 
-                                        <div class="micronews-title">Заголовок 1</div>
-                                        <div class="micronews-text">В каждом городе, даже самом большом, есть заветные уголки, не отмеченные на туристических картах, которые известны даже не всем его жителям</div>
+                                        <div class="micronews-title">RZR на Мертвом море</div>
+                                        <div class="micronews-text">RZR на Мертвом море: остались последние места для самостоятельной семейной прогулки на квадроциклах в дни Песаха. Поспешите записаться по телефону: 054-4980941. Условие: наличие водительских прав.</div>
 
                                     </div>
                                     
@@ -74,27 +74,12 @@
 
                         <div class="micronews-layer">
                             <div class="micronews micronews-small">
-                                <div class="coupon-body">
+                                <div class="micronews-body">
 
-                                    <div class="coupon-content">
-
-                                        <div>Заголовок 2</div>
-                                        <div>Шопинг – своего рода охота или рыбалка. Вопрос – насколько она удачна и с какими «трофеями» или «уловом» вы вернетесь домой. Кто осведомлен, тот вооружен.м</div>
-
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="micronews-layer">
-                            <div class="micronews micronews-small">
-                                <div class="coupon-body">
-
-                                    <div class="coupon-content">
-
-                                        <div>Заголовок 3</div>
-                                        <div>В Bamboo Village на пляже Полег в пяти минутах езды от Нетании действует эксклюзивный серфинг-клуб: опытные профессиональные инструкторы дают уроки…</div>
+                                    <div class="micronews-content">
+                                        
+                                        <div class="micronews-title">Monic kids - в продаже </div>
+                                        <div class="micronews-text">Monic kids - в продаже новая коллекция детской одежды к весенне-летнему сезону зарубежного производства. Телефон: 03-5182145. </div>
 
                                     </div>
                                     
@@ -104,27 +89,12 @@
 
                         <div class="micronews-layer">
                             <div class="micronews micronews-small">
-                                <div class="coupon-body">
+                                <div class="micronews-body">
 
-                                    <div class="coupon-content">
+                                    <div class="micronews-content">
 
-                                        <div>Заголовок 4</div>
-                                        <div>У посетителей ресторана-бистро Olivery в Тель-Авиве возникает ощущение, что ненадолго они перенеслись на Сицилию. Это не удивительно: рецепт идеальной…</div>
-
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="micronews-layer">
-                            <div class="micronews micronews-small">
-                                <div class="coupon-body">
-
-                                    <div class="coupon-content">
-
-                                        <div>Заголовок 5</div>
-                                        <div>Галерея Shomroni - одна из старейших в Яффо, она существует уже более тридцати лет и имеет лицензию Министерства туризма и Управления древностей, что…</div>
+                                        <div class="micronews-title">В магазине рабочей одежды </div>
+                                        <div class="micronews-text">В магазине рабочей одежды и молодежной моды Carhartt - сезонная распродажа зимних курток с большими скидками! Телефон: 04-6767640.</div>
 
                                     </div>
                                     
@@ -134,12 +104,12 @@
 
                         <div class="micronews-layer">
                             <div class="micronews micronews-small">
-                                <div class="coupon-body">
+                                <div class="micronews-body">
 
-                                    <div class="coupon-content">
+                                    <div class="micronews-content">
 
-                                        <div>Заголовок 6</div>
-                                        <div>Sea Village SPA Если вы устали, душа просит отдыха, а до отпуска еще далеко, всегда можно взять небольшой тайм-аут и отправиться на денек в уютное…</div>
+                                        <div class="micronews-title">Магазин велосипедов Pinky</div>
+                                        <div class="micronews-text">Магазин велосипедов Pinky Park - электровелосипеды к летнему сезону по выгодным ценам. Телефон: 03-5059520.</div>
 
                                     </div>
                                     
@@ -149,12 +119,42 @@
 
                         <div class="micronews-layer">
                             <div class="micronews micronews-small">
-                                <div class="coupon-body">
+                                <div class="micronews-body">
 
-                                    <div class="coupon-content">
+                                    <div class="micronews-content">
 
-                                        <div>Заголовок 7</div>
-                                        <div>Если вас завораживают марсианские пейзажи Иудейской пустыни и лазурное Мертвое море, если вы влюблены и мечтаете отдохнуть в романтической атмосфере…</div>
+                                        <div class="micronews-title">City boutique - распродажа </div>
+                                        <div class="micronews-text"> City boutique - распродажа платьев, одежды, обуви, сумок  и аксессуаров по цене не выше 99 шекелей. Телефон: 03-5606061.</div>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="micronews-layer">
+                            <div class="micronews micronews-small">
+                                <div class="micronews-body">
+
+                                    <div class="micronews-content">
+
+                                        <div class="micronews-title">Qumran - скидки на</div>
+                                        <div class="micronews-text">Qumran - скидки на косметические препараты REVIVAL, AHAVA, PREMIER, AROMA, DEAD SEA, EDOM. Телефон: 02-9936330.</div>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="micronews-layer">
+                            <div class="micronews micronews-small">
+                                <div class="micronews-body">
+
+                                    <div class="micronews-content">
+
+                                        <div class="micronews-title">avkat - самые дешевые</div>
+                                        <div class="micronews-text">Ravkat - самые дешевые цены в Израиле на товары для малышей - tax free: полный комплект для роженицы и новорожденного, коляски BUGABOO BEE,  BABYZEN YO-YO, BUGABOO PLUS, MIMA, PEG-PEREGO, детские кресла саль-каль для машины, постельные комплекты HELLO KITTY, одежда и обувь для мальчиков и девочек.</div>
 
                                     </div>
                                     
@@ -165,9 +165,7 @@
                 </div>
             </div>
 
-        </div>
-
-        <br/>        
+        </div>  
 
         <div class="panel panel-coupons gallery w-bloc-coupons">
 
@@ -178,7 +176,7 @@
                     <i class="fa fa-bars"></i>
                 </a>
 
-                <div class="panel-title">Купоны</div>
+                <a class="panel-title" href="/coupons">Купоны</a>
 
                 <div class="collapse" id="coupons-gallery-navigation">
 
@@ -204,11 +202,11 @@
 
                                 <?if (!empty($rows_coupon['coupon_favorit']))://если купон добавлен в избранное?>
                                     <a href="#" data-toggle="tooltip" data-placement="left" title="Купон уже в Избранном" class="pin">
-                                        <i class="fa fa-thumb-tack" style="color: #E44F44"></i>
+                                        <i class="fa fa-star" style="color: #E44F44"></i>
                                     </a>
                                 <?else:?>
                                     <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupon['id']?>" title="Добавить в Личный кабинет" class="pin w-add-coupon-favor">
-                                        <i class="fa fa-thumb-tack"></i>
+                                        <i class="fa fa-star"></i>
                                     </a>
                                 <?endif?>
 
@@ -248,7 +246,8 @@
 
                                                     <div class="coupon-object-bottom">
 
-                                                        <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_coupon['dateoff']), 'j %MONTH% Y'); ?></small>
+                                                        <!--<small class="coupon-date">до <?=Date::rusdate(strtotime($rows_coupon['dateoff']), 'j %MONTH% Y'); ?></small>-->
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -370,9 +369,7 @@
             <?=isset($bloc_right)? $bloc_right : ''?>
         </div>
         
-        <br/>
-        
-        <div class="panel panel-partners gallery w-bloc-partners">
+        <div class="panel panel-partners w-bloc-partners">
 
             <div class="panel-heading">
 
@@ -381,25 +378,51 @@
             </div>
 
             <div class="panel-body">
-                <div class="owl-carousel w-partners-carusel">
 
-                        <div class="partners-layer">
-                            <div class="partners partners-small">
-                                <div class="partners-body">
-
-                                    <div class="partners-content">
+                <div class="partners-content">
                                         
-                                        <div class="partners"><img src="/public/images/logo-new.png"></div>
-
-                                        <div class="partners-title">Партнер 1</div>
-
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
+                    <div class="partners-img"><img src="/public/images/logo-new.png"></div>
+                    <div class="partners-line"></div>
+                    <div class="partners-title">ТОПизраиль</div>
 
                 </div>
+                
+                <div class="partners-content">
+                                        
+                    <div class="partners-img"><img src="https://tpc.googlesyndication.com/simgad/2172393764281850819"></div>
+                    <div class="partners-line"></div>
+                    <div class="partners-title">Интернет магазин</div>
+
+                </div>
+
+                <div class="partners-content">
+                                        
+                    <div class="partners-img">
+                        <img src="http://4.bp.blogspot.com/-FY2aK-Z2tdA/TWcI4_z5jUI/AAAAAAAAACs/yPR1Hm6ITmE/s1600/ebay+logo.png">
+                    </div>
+                    <div class="partners-line"></div>
+                    <div class="partners-title">Что то еще</div>
+
+                </div>
+
+                <div class="partners-content">
+                                        
+                    <div class="partners-img"><img src="/public/images/logo-new.png"></div>
+                    <div class="partners-line"></div>
+                    <div class="partners-title">ТОПизраиль</div>
+
+                </div>
+
+                <div class="partners-content">
+                                        
+                    <div class="partners-img">
+                        <img src="http://4.bp.blogspot.com/-FY2aK-Z2tdA/TWcI4_z5jUI/AAAAAAAAACs/yPR1Hm6ITmE/s1600/ebay+logo.png">
+                    </div>
+                    <div class="partners-line"></div>
+                    <div class="partners-title">Что то еще</div>
+
+                </div>
+                
             </div>
 
         </div>

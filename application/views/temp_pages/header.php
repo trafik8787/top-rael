@@ -57,11 +57,12 @@
 
                         <div class="header-profile-shape">
 
-                            <a href="/account#izbran"><i class="fa fa-star"></i>Избранные места <span class="badge w-count-bussines"><?=Controller_BaseController::$count_bussines?></span></a>
+                            <span class="your-chose"><i class="fa fa-star"></i> Ваше избранное</span>
                             <div class="clearfix"></div>
-                            <a href="/coupons">Купоны, </a> 
-                            <a href="/places">места, </a> 
-                            <a href="/articles">обзоры</a>
+                            <a href="/account#coupons">Купоны <span class="badge w-count-coupon"><?=Controller_BaseController::$count_coupon?></span></a> 
+                            <a href="/account#izbran">Места <span class="badge w-count-bussines"><?=Controller_BaseController::$count_bussines?></span></a> 
+                            <a href="/account#coupons">Обзоры <span class="badge w-count-bussines"><?=Controller_BaseController::$count_bussines?></span></a>
+                            
                         </div>
                         <?if (!empty($user->photo)):?>
                             <img src="<?=$user->photo?>" width="60" height="60" alt="" class="img-circle"/>
@@ -83,8 +84,12 @@
 
                         <div class="header-profile-shape">
 
-                            <a href="/account#izbran"><i class="fa fa-star"></i>Избранные места <span class="badge w-count-bussines"><?=Controller_BaseController::$count_bussines?></span></a>
-                            <a href="/account#coupons"><i class="fa fa-thumb-tack"></i>Мои купоны <span class="badge w-count-coupon"><?=Controller_BaseController::$count_coupon?></span></a>
+                            <span class="your-chose"><i class="fa fa-star"></i> Ваше избранное</span>
+                            <div class="clearfix"></div>
+                            <a href="/account#coupons">Купоны <span class="badge w-count-coupon"><?=Controller_BaseController::$count_coupon?></span></a> 
+                            <a href="/account#izbran">Места <span class="badge w-count-bussines"><?=Controller_BaseController::$count_bussines?></span></a> 
+                            <a href="/account#coupons">Обзоры <span class="badge w-count-bussines"><?=Controller_BaseController::$count_bussines?></span></a>
+                            
                         </div>
 
                         <img src="/public/uploade/no_avatar.jpg" width="60" height="60" alt="" class="img-circle"/>
@@ -102,25 +107,25 @@
 
                 <div id="header-top">
                     <nav>
-                        <ul class="header-nav">
+                        <ul class="header-nav header-small">
                             
                             <?foreach ($top_meny as $name=>$url):?>
                                 <li><a href="<?=$url?>"><?=$name?></a></li>
                             <?endforeach?>
                             
-                                <li>
+                                <li class="dropdown">
                                     
-                                    <div class="dropdown">
                                         <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
                                             По городам <span class="caret"></span>
                                         </a>
 
                                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                            <li><a href="/maps"><b>Смотреть на карте</b></a></li>
+                                            <li class="divider"></li>
                                             <? foreach ($city_list as $row_list_city): ?>
                                                 <li><a href="/city/<?=!empty($row_list_city['cityUrl']) ? $row_list_city['cityUrl'] : '' ?>"><?=$row_list_city['cityName'] ?></a></li>
                                             <? endforeach ?>
                                         </ul>
-                                    </div>
                                 </li>
                             
                         </ul>

@@ -180,11 +180,11 @@
 
                                                 <?if (!empty($rows_coupons[0]['coupon_favorit']))://если купон добавлен в избранное?>
                                                     <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin">
-                                                        <i class="fa fa-thumb-tack" style="color: #E44F44"></i>
+                                                        <i class="fa fa-star" style="color: #E44F44"></i>
                                                     </a>
                                                 <?else:?>
                                                     <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons[0]['id']?>" title="Добавить в Личный кабинет" class="pin w-add-coupon-favor">
-                                                        <i class="fa fa-thumb-tack"></i>
+                                                        <i class="fa fa-star"></i>
                                                     </a>
                                                 <?endif?>
 
@@ -240,11 +240,11 @@
 
                                                     <?if (!empty($rows_coupons[1]['coupon_favorit']))://если купон добавлен в избранное?>
                                                         <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin">
-                                                            <i class="fa fa-thumb-tack" style="color: #E44F44"></i>
+                                                            <i class="fa fa-star" style="color: #E44F44"></i>
                                                         </a>
                                                     <?else:?>
                                                         <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons[1]['id']?>" title="Добавить в Личный кабинет" class="pin w-add-coupon-favor">
-                                                            <i class="fa fa-thumb-tack"></i>
+                                                            <i class="fa fa-star"></i>
                                                         </a>
                                                     <?endif?>
 
@@ -301,11 +301,11 @@
 
                                                     <?if (!empty($rows_coupons[2]['coupon_favorit']))://если купон добавлен в избранное?>
                                                         <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin">
-                                                            <i class="fa fa-thumb-tack" style="color: #E44F44"></i>
+                                                            <i class="fa fa-star" style="color: #E44F44"></i>
                                                         </a>
                                                     <?else:?>
                                                         <a href="#" data-toggle="tooltip" data-placement="left" data-id="<?=$rows_coupons[2]['id']?>" title="Добавить в Личный кабинет" class="pin w-add-coupon-favor">
-                                                            <i class="fa fa-thumb-tack"></i>
+                                                            <i class="fa fa-star"></i>
                                                         </a>
                                                     <?endif?>
 
@@ -484,6 +484,29 @@
 
             <!-- Bloc Right -->
             <?=isset($bloc_right)? $bloc_right : ''?>
+            
+            <div class="col-md-4">
+                <div class="w-bloc-right">
+                    <h2>Новости</h2>
+                    <hr>
+                    <div class="title-micronews">Заголовок 1</div>
+                    <p class="description-micronews">В каждом городе, даже самом большом, есть заветные уголки, не отмеченные на туристических картах, которые известны даже не всем его жителям</p>
+                    <hr>
+                    <div class="title-micronews">Заголовок 2</div>
+                    <p class="description-micronews">Шопинг – своего рода охота или рыбалка. Вопрос – насколько она удачна и с какими «трофеями» или «уловом» вы вернетесь домой. Кто осведомлен, тот вооружен.м</p>
+                    <hr>
+                    <div class="title-micronews">Заголовок 3</div>
+                    <p class="description-micronews">В Bamboo Village на пляже Полег в пяти минутах езды от Нетании действует эксклюзивный серфинг-клуб: опытные профессиональные инструкторы дают уроки…</p>
+                    <hr>
+                    <div class="title-micronews">Заголовок 4</div>
+                    <p class="description-micronews">Галерея Shomroni - одна из старейших в Яффо, она существует уже более тридцати лет и имеет лицензию Министерства туризма и Управления древностей, что…</p>
+                    <hr>
+                    <div class="title-micronews">Заголовок 5</div>
+                    <p class="description-micronews">Sea Village SPA Если вы устали, душа просит отдыха, а до отпуска еще далеко, всегда можно взять небольшой тайм-аут и отправиться на денек в уютное…</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            
         </div>
 
     </div>

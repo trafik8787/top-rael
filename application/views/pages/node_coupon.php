@@ -192,14 +192,14 @@
                                     <?if (empty($data[0]['coupon_favorit'])):?>
                                         <div class="div-cell">
                                             <a href="#" class="btn btn-primary btn-lg btn-block pin-aria w-add-coupon-favor-modal" data-id="<?=$data[0]['id']?>">
-                                                <span class="pin"><i class="fa fa-thumb-tack"></i></span>
+                                                <span class="pin"><i class="fa fa-star"></i></span>
                                                 <strong><i class="w-text-button-coupon-modal-save">Сохранить</i></strong>
                                             </a>
                                         </div>
                                     <?else:?>
                                         <div class="div-cell">
                                             <a href="#" class="btn btn-primary btn-lg btn-block pin-aria" disabled="disabled">
-                                                <span class="pin"><i class="fa fa-thumb-tack"></i></span>
+                                                <span class="pin"><i class="fa fa-star"></i></span>
                                                 <strong><i class="w-text-button-coupon-modal-save">В избранном</i></strong>
                                             </a>
                                         </div>

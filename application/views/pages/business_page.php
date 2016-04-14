@@ -266,7 +266,7 @@
         <div class="row">
 
             <!-- Context -->
-            <div class="col-md-8">
+            <div class="col-md-8 slidebar-next">
                 <div id="context" class="full-text border clearfix">
                     <div class="col-md-12 description-content">
 
@@ -281,9 +281,9 @@
                                         <div class="panel-title">Фотогалерея</div>
 
                                         <div class="panel-links">
-                                            <span class="tabs__caption_galery">
+                                            <span class="tabs__caption_galery caption_no_link">
                                                 <?foreach ($data['GalryArr'] as $key => $rows_galery_name):?>
-                                                    <a href="#" onclick="return false;" title="<?=!empty($data['GalryDesk']) ? $data['GalryDesk'] : ''?>" <?if ($key == 0){?>class="active"<?}?>><?=$rows_galery_name['GalryName']?></a>
+                                                    <?=$rows_galery_name['GalryName']?>
                                                     <?if (next($data['GalryArr'])):?>
                                                     &nbsp;|&nbsp;
                                                     <?endif?>
@@ -509,6 +509,11 @@
 
             <!-- Side Bar -->
             <?=isset($bloc_right)? $bloc_right : ''?>
+            <!-- ВОТ ЭТОТ БЛОК ДОЛЖЕН БЫТЬ ТОЛЬКО В РЕСТОРАНАХ  -->
+            <div class="col-md-4 text-center">
+                <button value="1" type="submit" class="btn btn-primary w-subskrip-buton order-party">Заказ торжества</button>
+            </div>
+            
         </div>
 
         <hr/>

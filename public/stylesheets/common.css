@@ -10710,7 +10710,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   background: url("../images/logo-futer.png");
   background-repeat: no-repeat;
   background-size: 231px;
-  width: 190px;
+  width: 235px;
   height: 64px;
   margin-bottom: 10px;
 }
@@ -10830,6 +10830,10 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   text-align: center;
 }
 /* line 64, ../.sass/pin.scss */
+.fa.fa-star{
+  color: #F8B732;
+  text-shadow: 0px 1px 0px #cccccc;
+}
 .pin .fa.fa-star,
 .pin .glyphicon.fa-star {
   font-size: 18px;
@@ -11192,6 +11196,9 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   margin-right: 15px;
   text-decoration: underline;
 }
+div.panel-title, div.panel-title:hover{
+  text-decoration: none !important;
+}
 .panel .panel-heading .panel-title:hover {
   text-decoration: none;
 }
@@ -11429,6 +11436,7 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
 .panel.panel-coupons.gallery {
   padding: 20px;
   border: 1px solid #d8d8d8;
+  margin-top: 35px;
 }
 /* line 249, ../.sass/panel.scss */
 .panel.panel-coupons.gallery .panel-heading {
@@ -12191,6 +12199,8 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
   #header .header-profile .header-profile-shape a {
     font-size: 13px;
     line-height: 18px;
+    top: -1px;
+    position: relative;
   }
 }
 /* line 127, ../.sass/header.scss */
@@ -12204,11 +12214,13 @@ button.close, .modal.modal-subscribe .modal-header button.close, .modal.modal-co
     padding: 3px;
     font-size: 10px;
     line-height: 1;
+    margin-top: -5px;
   }
 }
 /* line 140, ../.sass/header.scss */
-#header .header-profile .header-profile-shape .fa {
-  margin-right: 5px;
+#header .header-profile .header-profile-shape .fa {    
+  margin-right: 3px;
+  top: -2px;
   position: relative;
 }
 /* line 145, ../.sass/header.scss */
@@ -12800,7 +12812,7 @@ footer {
 .top .top-image .top-image-text {
   width: 100%;
   padding: 11px 15px 11px 15px;
-  background: #9E9E9E;
+  background: #666666;
   color: #fff;
 }
 
@@ -13529,6 +13541,7 @@ footer {
     display: block;
     padding: 0;
     margin-bottom: 10px;
+    margin-right: 10px;
     width: 100px;
     float: left;
   }
@@ -14772,9 +14785,12 @@ footer {
 
 
 .w-bloc-right {
-  margin-bottom: 50px!important;
+  margin-bottom: 30px!important;
   padding: 15px;
-  border: 1px solid rgb(238, 238, 238);
+  border: 1px solid rgb(216, 216, 216);
+}
+.w-bloc-right h2 {
+    margin-top: 0px;
 }
 
 
@@ -15472,6 +15488,11 @@ html, body, #wrapper {
   padding-top: 35px;
 }
 
+.article-in-account > .media-body > .media-heading > small{
+  display: block;
+  margin-top: 5px;
+  line-height: 1.25;
+}
 @media (max-width: 768px) {
     .article-in-account{
 
@@ -15497,9 +15518,167 @@ html, body, #wrapper {
         font-size: 18px;
     }
     .description-content p{
-        font-size: 14px;
+        font-size: 15px;
     }
     .short-description-body{
         font-size: 20px;
     }
+}
+
+/* --------------------------------------- */
+
+.panel.panel-micronews.gallery {
+  padding: 20px;
+  border: 1px solid #d8d8d8;
+  margin-top: 35px;
+}
+
+.panel.panel-micronews.gallery .panel-heading {
+  margin-bottom: 10px;
+}
+
+.panel.panel-micronews.gallery .panel-body {
+  position: relative;
+  padding: 0 40px;
+  margin-bottom: 0px;
+}
+
+.panel.panel-micronews.gallery .panel-body .micronews-layer {
+  padding: 10px;
+}
+
+.panel.panel-micronews.gallery .panel-body .micronews-layer .micronews {
+  margin-bottom: 0;
+}
+
+.panel.panel-micronews.gallery .panel-body .owl-carousel {
+  min-height: 152px;
+}
+
+.panel.panel-micronews.gallery .panel-body .owl-nav .owl-prev,
+.panel.panel-micronews.gallery .panel-body .owl-nav .owl-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  font-size: 50px;
+  color: #007898;
+}
+
+.panel.panel-micronews.gallery .panel-body .owl-nav .owl-prev .fa,
+.panel.panel-micronews.gallery .panel-body .owl-nav .owl-next .fa {
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+}
+
+.panel.panel-micronews.gallery .panel-body .owl-nav .owl-prev {
+  right: 100%;
+  margin-left: -10px;
+}
+
+.panel.panel-micronews.gallery .panel-body .owl-nav .owl-next {
+  left: 100%;
+  margin-left: 10px;
+}
+.panel.panel-micronews.gallery .panel-body .owl-carousel .micronews-title{
+    font-size: 20px;
+    font-weight: bold;
+}
+.panel.panel-micronews.gallery .panel-body .owl-carousel .micronews-text{
+    font-size: 15px;
+}
+
+/* --------------------------------------- */
+
+.panel.panel-partners {
+  padding: 20px;
+  border: 1px solid #d8d8d8;
+  margin-top: 35px;
+}
+
+.panel.panel-partners .panel-heading {
+  margin-bottom: 10px;
+}
+
+.panel.panel-partners .panel-body {
+  position: relative;
+  padding: 0 40px;
+  margin-bottom: 0px;
+}
+
+.panel.panel-partners .panel-body .partners-content {
+  width: 18%;
+  margin-right: 2%;
+  display: table;
+  float: left;
+  padding-top: 10px;
+}
+.panel.panel-partners .panel-body .partners-content:last-child {
+  margin-right: 0%;
+}
+@media (max-width: 768px) {
+    .panel.panel-partners .panel-body .partners-content {
+      width: 100%;
+      margin-right: 0%;
+    }
+}
+.panel.panel-partners .panel-body .partners-content .partners-img {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100px;
+  text-align: center;
+}
+.panel.panel-partners .panel-body .partners-content .partners-img > img{
+  max-width: 100%;
+  max-height: 100px;
+}
+.panel.panel-partners .panel-body .partners-content .partners-line{
+  height: 15px;
+  width: 100%;
+  display: table-row;
+}
+.panel.panel-partners .panel-body .partners-content .partners-title{
+  font-size: 18px;
+  text-align: center;
+  display: table-row;
+  color: #039CC2;
+  font-weight: bold;
+}
+
+.title-micronews {
+  font-size: 20px;
+  color: #079EC3;
+}
+
+.order-party{
+  font-size: 18px;
+  margin-top: 30px;
+}
+.caption_no_link{
+  color: #000;
+  font-weight: bold;
+}
+.header-small > li > a{
+  padding: 0px 10px !important;   
+}
+.description-content h2{
+  line-height: 1.25;
+}
+.description-content h3{
+  line-height: 1.25;
+}
+
+.slidebar-next + .col-md-4 > div{
+   border: 1px solid #e7e7e7;
+   padding-left: 15px;
+   padding-right: 15px;
+}
+.your-chose{
+  font-size: 13px;
 }

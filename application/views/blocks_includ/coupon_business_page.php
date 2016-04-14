@@ -21,7 +21,7 @@
 
                 <div class="coupon coupon-big">
 
-                    <a href="#" class="pin"><i class="fa fa-thumb-tack"></i></a>
+                    <a href="#" class="pin"><i class="fa fa-star"></i></a>
 
                     <?if (!empty($row['coupon_favorit']))://если купон добавлен в избранное?>
                         <a href="#" data-toggle="tooltip" data-placement="left" title="Этот купон уже добавлен в Избранное" class="pin">
