@@ -509,10 +509,6 @@
 
             <!-- Side Bar -->
             <?=isset($bloc_right)? $bloc_right : ''?>
-            <!-- ВОТ ЭТОТ БЛОК ДОЛЖЕН БЫТЬ ТОЛЬКО В РЕСТОРАНАХ  -->
-            <div class="col-md-4 text-center">
-                <button value="1" type="submit" class="btn btn-primary w-subskrip-buton order-party">Заказ торжества</button>
-            </div>
             
         </div>
 

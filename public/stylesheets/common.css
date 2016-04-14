@@ -15658,7 +15658,8 @@ html, body, #wrapper {
 
 .order-party{
   font-size: 18px;
-  margin-top: 30px;
+  margin: 0px auto 30px auto;
+  display: block;
 }
 .caption_no_link{
   color: #000;
