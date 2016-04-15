@@ -12300,7 +12300,7 @@ div.panel-title, div.panel-title:hover{
   clear: both;
   display: block;
 }
-@media (min-width: 768px) and (max-width: 1169px) {
+@media (min-width: 768px) and (max-width: 1199px) {
   /* line 218, ../.sass/header.scss */
   #header #header-top {
     padding: 0;
@@ -12319,7 +12319,7 @@ div.panel-title, div.panel-title:hover{
     margin-right: -15px;
   }
 }
-@media (min-width: 1170px) {
+@media (min-width: 1200px) {
   /* line 218, ../.sass/header.scss */
   #header #header-top {
     text-align: center;
@@ -12333,7 +12333,7 @@ div.panel-title, div.panel-title:hover{
   clear: both;
   display: block;
 }
-@media (min-width: 1170px) {
+@media (min-width: 1200px) {
   /* line 242, ../.sass/header.scss */
   #header #header-top .header-nav {
     display: inline-block;
@@ -15666,7 +15666,7 @@ html, body, #wrapper {
   font-weight: bold;
 }
 .header-small > li > a{
-  padding: 0px 10px !important;   
+  padding: 0px 9px !important;   
 }
 .description-content h2{
   line-height: 1.25;
