@@ -844,10 +844,17 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('bussines_id', 'select', '', '', '', array('business', 'name','id'));
         $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
 
+        $crud->set_field_type('img', array('file', 'uploads/img_news', 'news_', '', 'img'),'', '');
+
         $crud->set_field_type('tags', 'checkbox', '', 'multiple', '', array('tags', 'name_tags','id'));
         $crud->set_one_to_many('tags_relation_news', 'tags', 'id_tags', 'id_news');
 
-        $crud->show_name_column(array('text' => 'Текст',
+        $crud->show_columns('id', 'name', 'text', 'date');
+
+
+        $crud->show_name_column(array('name' => 'Название',
+            'text' => 'Текст',
+            'img' => 'Картинка',
             'city' => 'Город',
             'id_section' => 'Раздел',
             'bussines_id' => 'Бизнес',
@@ -855,6 +862,8 @@ class Controller_Administrator extends Controller_Core_Main {
             'tags' => 'Теги',
             'date' => 'Дата создания'
         ));
+
+        $crud->callback_after_insert('call_after_insert_news');
 
         return $crud;
     }
@@ -1574,6 +1583,13 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function call_bef_del_articles ($key_array = null){
         Model::factory('Adm')->log_add('статью', $key_array['name'], 'del');
         Rediset::getInstance()->del_articles($key_array['id']);
+    }
+
+
+    public static function call_after_insert_news ($key_array) {
+        if (!empty($key_array['img'])) {
+            self::create_images($key_array['img'], '/uploads/img_news/thumbs/', 260, 190);
+        }
     }
 
 

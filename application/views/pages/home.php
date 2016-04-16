@@ -63,8 +63,8 @@
 
                                     <div class="micronews-content">
 
-                                        <div class="micronews-title">RZR на Мертвом море</div>
-                                        <div class="micronews-text">RZR на Мертвом море: остались последние места для самостоятельной семейной прогулки на квадроциклах в дни Песаха. Поспешите записаться по телефону: 054-4980941. Условие: наличие водительских прав.</div>
+                                        <div class="micronews-title"><a href="/business/RZR_extrim_dead_sea">RZR на Мертвом море</a></div>
+                                        <div class="micronews-text">Остались последние места для самостоятельной семейной прогулки на квадроциклах в дни Песаха. Поспешите записаться по телефону: 054-4980941. Условие: наличие водительских прав.</div>
 
                                     </div>
                                     
@@ -78,8 +78,8 @@
 
                                     <div class="micronews-content">
                                         
-                                        <div class="micronews-title">Monic kids - в продаже </div>
-                                        <div class="micronews-text">Monic kids - в продаже новая коллекция детской одежды к весенне-летнему сезону зарубежного производства. Телефон: 03-5182145. </div>
+                                        <div class="micronews-title">Monic kids - новая коллекция детской одежды </div>
+                                        <div class="micronews-text">Новая коллекция к весенне-летнему сезону зарубежного производства. Телефон: 03-5182145. </div>
 
                                     </div>
                                     
@@ -93,8 +93,8 @@
 
                                     <div class="micronews-content">
 
-                                        <div class="micronews-title">В магазине рабочей одежды </div>
-                                        <div class="micronews-text">В магазине рабочей одежды и молодежной моды Carhartt - сезонная распродажа зимних курток с большими скидками! Телефон: 04-6767640.</div>
+                                        <div class="micronews-title">В магазине  одежды Carhartt</div>
+                                        <div class="micronews-text">Сезонная распродажа зимних курток с большими скидками! Телефон: 04-6767640.</div>
 
                                     </div>
                                     
@@ -108,8 +108,8 @@
 
                                     <div class="micronews-content">
 
-                                        <div class="micronews-title">Магазин велосипедов Pinky</div>
-                                        <div class="micronews-text">Магазин велосипедов Pinky Park - электровелосипеды к летнему сезону по выгодным ценам. Телефон: 03-5059520.</div>
+                                        <div class="micronews-title">Магазин велосипедов Pinky Park </div>
+                                        <div class="micronews-text">Электровелосипеды к летнему сезону по выгодным ценам. Телефон: 03-5059520.</div>
 
                                     </div>
                                     
@@ -123,8 +123,8 @@
 
                                     <div class="micronews-content">
 
-                                        <div class="micronews-title">City boutique - распродажа </div>
-                                        <div class="micronews-text"> City boutique - распродажа платьев, одежды, обуви, сумок  и аксессуаров по цене не выше 99 шекелей. Телефон: 03-5606061.</div>
+                                        <div class="micronews-title">City boutique - распродажа - 99 шекелей</div>
+                                        <div class="micronews-text"> Платьев, одежды, обуви, сумок  и аксессуаров по цене не выше 99 шекелей. Телефон: 03-5606061.</div>
 
                                     </div>
                                     
@@ -138,8 +138,8 @@
 
                                     <div class="micronews-content">
 
-                                        <div class="micronews-title">Qumran - скидки на</div>
-                                        <div class="micronews-text">Qumran - скидки на косметические препараты REVIVAL, AHAVA, PREMIER, AROMA, DEAD SEA, EDOM. Телефон: 02-9936330.</div>
+                                        <div class="micronews-title">Qumran - скидки на косметические препараты</div>
+                                        <div class="micronews-text">REVIVAL, AHAVA, PREMIER, AROMA, DEAD SEA, EDOM. Телефон: 02-9936330.</div>
 
                                     </div>
                                     
@@ -153,8 +153,8 @@
 
                                     <div class="micronews-content">
 
-                                        <div class="micronews-title">avkat - самые дешевые</div>
-                                        <div class="micronews-text">Ravkat - самые дешевые цены в Израиле на товары для малышей - tax free: полный комплект для роженицы и новорожденного, коляски BUGABOO BEE,  BABYZEN YO-YO, BUGABOO PLUS, MIMA, PEG-PEREGO, детские кресла саль-каль для машины, постельные комплекты HELLO KITTY, одежда и обувь для мальчиков и девочек.</div>
+                                        <div class="micronews-title">Ravkat - самые дешевые цены в Израиле на товары для малышей</div>
+                                        <div class="micronews-text"> - tax free: полный комплект для роженицы и новорожденного, коляски лучших фирм детские кресла саль-каль для машины, постельные комплекты HELLO KITTY, одежда и обувь для мальчиков и девочек.</div>
 
                                     </div>
                                     
@@ -369,6 +369,10 @@
             <?=isset($bloc_right)? $bloc_right : ''?>
         </div>
         
+        
+          <!-- partners 
+      
+        
         <div class="panel panel-partners w-bloc-partners">
 
             <div class="panel-heading">
@@ -423,9 +427,16 @@
 
                 </div>
                 
+                
+                
             </div>
+            
+            
 
         </div>
+        
+                    --->
+
 
     </div>
 </content>

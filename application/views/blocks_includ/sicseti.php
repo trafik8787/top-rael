@@ -16,6 +16,11 @@
 
 </div>
 
+
+
+
+<!--
+
 <div class="sidebar-socials w-bloc-right">
 
     <div class="sidebar-socials-heading">
@@ -58,7 +63,7 @@
         <div role="tabpanel" class="tab-pane" id="tab-vk">
         <script type="text/javascript" src="//vk.com/js/api/openapi.js?121"></script>
 
-<!-- VK Widget -->
+
 <div id="vk_groups"></div>
 <script type="text/javascript">
 VK.Widgets.Group("vk_groups", {mode: 0, width: "330", height: "200", color1: 'FFFFFF', color2: '2B587A', color3: '4772A0'}, 115393097);
@@ -67,3 +72,5 @@ VK.Widgets.Group("vk_groups", {mode: 0, width: "330", height: "200", color1: 'FF
 
     </div>
 </div>
+
+--->
