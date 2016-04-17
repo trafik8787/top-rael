@@ -24,6 +24,7 @@ return array(
         'banners'           => array('admin'),
         'about'           => array('admin'),
         'news'           => array('admin'),
+        'statistik'           => array('admin'),
 
 
         'welcome'           => array('admin', 'redactor', 'manager'),

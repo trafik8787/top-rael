@@ -49,23 +49,34 @@ abstract class Controller_Core_Main extends Controller_Template {
 
         return array(
             'Бизнесы' => array('metod' => 'bussines', 'url' => 'bussines', 'icon' => 'glyphicon-th'),
-            'Купоны' => array('metod' => 'coupons', 'url' => 'coupons', 'icon' => 'glyphicon-tags'),
             'Галереи' => array('metod' => 'galery', 'url'=> 'galery', 'icon'=>'glyphicon-picture'),
-            'Банеры' => array('metod' => 'banners', 'url' => 'banners', 'icon' => 'glyphicon-cloud-download'),
             'Обзоры' => array('metod' => 'articles', 'url' => 'articles', 'icon' => 'glyphicon-th'),
             'Новости' => array('metod' => 'news', 'url' => 'news', 'icon' => 'glyphicon-th'),
+            'Купоны' => array('metod' => 'coupons', 'url' => 'coupons', 'icon' => 'glyphicon-tags'),
+            'Банеры' => array('metod' => 'banners', 'url' => 'banners', 'icon' => 'glyphicon-cloud-download'),
             'Лотерея' => array('metod' => 'lotarey', 'url' => 'lotarey', 'icon' => 'glyphicon-bell'),
-            'Письма' => array('metod' => 'contacts', 'url'=> 'contacts', 'icon'=>'glyphicon-globe'),
-            'Подписчики' => array('metod' => 'subscription', 'url'=> 'subscription', 'icon'=>'glyphicon-envelope'),
-            'Пользователи' => array('metod' => 'users', 'url'=>'users?section=1', 'icon'=>'glyphicon-user'),
+            'Печатный журнал' => array('metod' => 'jornal', 'url' => 'jornal', 'icon' => 'glyphicon-list-alt'),
+
+            '1' => array(),
+            'Статистика' => array('metod' => 'statistik', 'url' => 'statistik', 'icon' => 'glyphicon-list-alt'),
+            '2' => array(),
+
+            'Локации' => array('metod' => 'locat', 'url' => 'locat', 'icon' => 'glyphicon-flag'),
             'Разделы' => array('metod' => 'sections', 'url' => 'sections', 'icon' => 'glyphicon-th-list'),
             'Категории' => array('metod' => 'category', 'url' => 'category', 'icon' => 'glyphicon-list-alt'),
             'Теги' => array('metod' => 'tags', 'url' => 'tags', 'icon' => 'glyphicon-tags'),
-            'Локации' => array('metod' => 'locat', 'url' => 'locat', 'icon' => 'glyphicon-flag'),
-            'О проекте' => array('metod' => 'about', 'url' => 'about', 'icon' => 'glyphicon-star'),
             'Главная' => array('metod' => 'index', 'url' => '', 'icon' => 'glyphicon-home'),
-            'Журнал' => array('metod' => 'logs', 'url' => 'logs', 'icon' => 'glyphicon-list-alt'),
-            'Печатный журнал' => array('metod' => 'jornal', 'url' => 'jornal', 'icon' => 'glyphicon-list-alt')
+            'О проекте' => array('metod' => 'about', 'url' => 'about', 'icon' => 'glyphicon-star'),
+
+            '3' => array(),
+
+            'Пользователи' => array('metod' => 'users', 'url'=>'users?section=1', 'icon'=>'glyphicon-user'),
+            'Подписчики' => array('metod' => 'subscription', 'url'=> 'subscription', 'icon'=>'glyphicon-envelope'),
+            'Обратная связь' => array('metod' => 'contacts', 'url'=> 'contacts', 'icon'=>'glyphicon-globe'),
+            '4' => array(),
+
+            'Протокол' => array('metod' => 'logs', 'url' => 'logs', 'icon' => 'glyphicon-list-alt')
+
 
             );
     }

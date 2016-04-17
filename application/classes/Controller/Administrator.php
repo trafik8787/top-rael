@@ -276,6 +276,11 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
 
+    public function action_statistik () {
+        Controller_Core_Main::$title_page = 'Статистика';
+        $this->response->body('statistic');
+    }
+
     public function action_coupons (){
 
         Controller_Core_Main::$title_page = 'Купоны';
