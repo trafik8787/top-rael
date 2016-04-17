@@ -485,6 +485,9 @@
             <!-- Bloc Right -->
             <?=isset($bloc_right)? $bloc_right : ''?>
             
+            
+            
+            <!--
             <div class="col-md-4">
                 <div class="w-bloc-right">
                     <h2>Новости</h2>
@@ -506,6 +509,10 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
+            
+            -->
+            
+            
             
         </div>
 
