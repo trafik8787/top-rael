@@ -80,7 +80,7 @@
 
         var hrefmap = $('.w-baselink-maps').val();
 
-        $('.tabs__caption').on('click', 'a:not(.active)', function() {
+        $('.tabs__caption').on('click', 'span:not(.active)', function() {
 
             $('.w-link-maps').attr('href', hrefmap+'&mapx='+$(this).data('item'));
 
@@ -92,7 +92,7 @@
 
 
 
-        $('.tabs__caption_galery').on('click', 'a:not(.active)', function() {
+        $('.tabs__caption_galery').on('click', 'span:not(.active)', function() {
 
             $(this).addClass('active').siblings().removeClass('active')
                 .closest('.tabs_galery').find('.tabs__content_galery')
@@ -131,10 +131,15 @@
         display: block; /* по умолчанию показываем нужный блок */
     }
 
-    .tabs_galery a.active {
+    .tabs_galery span {
+        cursor: pointer;
+        color: #007898;
+    }
+    .tabs_galery span.active {
         font-weight: bold;
         color: #000000;
         text-decoration: none;
+        cursor: default;
     }
 
 </style>
@@ -281,9 +286,9 @@
                                         <div class="panel-title">Фотогалерея</div>
 
                                         <div class="panel-links">
-                                            <span class="tabs__caption_galery caption_no_link">
+                                            <span class="tabs__caption_galery">
                                                 <?foreach ($data['GalryArr'] as $key => $rows_galery_name):?>
-                                                    <?=$rows_galery_name['GalryName']?>
+                                                    <span title="<?=!empty($data['GalryDesk']) ? $data['GalryDesk'] : ''?>" <?if ($key == 0){?>class="active"<?}?>><?=$rows_galery_name['GalryName']?></span>
                                                     <?if (next($data['GalryArr'])):?>
                                                     &nbsp;|&nbsp;
                                                     <?endif?>
