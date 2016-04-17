@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?>
 
 
-<textarea <?=$attr?> class="form-control <?if ($disable_editor_class != '') echo $disable_editor_class //добавляем клас если полю не отключен редактор?>"
+<textarea <?=$attr?> rows="3" class="form-control <?if ($disable_editor_class != '') echo $disable_editor_class //добавляем клас если полю не отключен редактор?>"
          data-toggle="tooltip"
          data-placement="bottom"
          title="<?=isset($title) ? $title : ''?>"

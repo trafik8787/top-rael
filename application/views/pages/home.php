@@ -34,33 +34,33 @@
                         <div class="media-body">
                             <h2 class="media-heading"><a href="/article/<?=$rows_articles['url']?>"><strong><?=$rows_articles['name']?></strong></a></h2>
 
-                            <p class="hidden-xs"><?=$rows_articles['short_previev']?></p>                        
+                            <p class="hidden-xs"><?=$rows_articles['short_previev']?></p>
+
                         </div>
-                        
                     </div>
                 <?endforeach?>
                 
                 
                 
-                <!-- четвертый анонс, показывать только на 1200  --> 
-                <div class="media-left hidden-xs">
-                <br>
+                <!-- 4 блок только для 1200 -->
+                 <div class="media hidden-xs">
+                        <div class="media-left">
                             <a href="/article/telaviv_big_trip">
-                                <img src="/uploads/img_articles/thumbs/artic_570408dddc6a9.jpg" width="120" height="85" class="media-object" alt="<?=$rows_articles['name']?>"/>
+                                <img src="/uploads/img_articles/thumbs/artic_570408dddc6a9.jpg" width="120" height="85" class="media-object" alt=""/>
                             </a>
                         </div>
-                        <div class="media-body hidden-xs">
-                        <br>
+                        <div class="media-body">
                             <h2 class="media-heading"><a href="/article/telaviv_big_trip"><strong>Большой Тель-Авив – не только шопинг</strong></a></h2>
 
-                            <p class="hidden-xs">В каждом городе, даже самом большом, есть заветные уголки, не отмеченные на туристических картах, которые известны даже не всем его жителям, не говоря уже о приезжих и туристах.</p>                        
+                            <p class="hidden-xs">В каждом городе, даже самом большом, есть заветные уголки, не отмеченные на туристических картах, которые известны даже не всем его жителям, не говоря уже о приезжих и туристах.</p>
+
                         </div>
-                        
-                      
-                        
-                        
-                        
-                        
+                    </div>
+                
+
+
+
+
 
                 <div class="text-center media">
                     <a href="/articles" class="btn open-all" role="button">Открыть все</a>

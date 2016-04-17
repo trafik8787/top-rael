@@ -325,6 +325,12 @@ abstract class Controller_BaseController extends Controller_Template {
     }
 
 
+    public function blocNewsSlider ($count_news){
+
+        $content = View::factory('blocks_includ/bloc_news_slider_home');
+        $content->data = Model::factory('NewsModel')->getBigBlocNews($count_news);
+        return $content;
+    }
 
 
 }

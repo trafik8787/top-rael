@@ -71,7 +71,11 @@
                     <div class="media">
                         <div class="media-left media-top">
                             <a href="/business/<?=$data['BusUrl']?>">
-                                <img src="<?=$data['img']?>" width="88" height="88" class="media-object"/>
+                                <?if (!empty($data['img'])):?>
+                                    <img src="<?=$data['img']?>" width="88" height="88" class="media-object"/>
+                                <?else:?>
+                                    <img src="<?=$data['BusLogo']?>" width="88" height="88" class="media-object"/>
+                                <?endif?>
                             </a>
                         </div>
                         <div class="media-body">
