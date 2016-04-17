@@ -12619,7 +12619,7 @@ footer {
 /* line 93, ../.sass/sidebar.scss */
 .sidebar-lottery {
   margin-bottom: 20px;
-  background: rgb(238,238,238);
+  background: rgb(245, 245, 245);
 }
 /* line 101, ../.sass/sidebar.scss */
 .sidebar-lottery a {
@@ -12649,7 +12649,7 @@ footer {
 }
 /* line 125, ../.sass/sidebar.scss */
 .sidebar-lottery .input-group .form-control {
-  background: #ececec;
+  background: #D8D8D8 !important;
   border-color: transparent;
 }
 /* line 131, ../.sass/sidebar.scss */
@@ -12659,7 +12659,7 @@ footer {
 /* line 136, ../.sass/sidebar.scss */
 .sidebar-lottery .input-group .input-group-addon {
   padding: 0;
-  background: #ececec;
+  background: #D8D8D8 !important;
   border-color: transparent;
 }
 /* line 142, ../.sass/sidebar.scss */
