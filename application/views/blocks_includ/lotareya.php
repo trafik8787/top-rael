@@ -5,7 +5,7 @@
  * Date: 09.08.2015
  * Time: 18:02
  */
-HTML::x($data);
+//HTML::x($data);
 ?>
 <style>
     .popover.bottom > .arrow.errors-email:after {
