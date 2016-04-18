@@ -132,11 +132,12 @@
                                         </strong>
                                     </div>
 
-                                    <p>
-                                        <?$web_url = parse_url($data['BusWebsite'])?>
-                                        <a href="<?=$data['BusWebsite']?>">http://<?=$web_url['host']?></a>
-                                    </p>
-
+                                    <?if (!empty($data['BusWebsite'])):?>
+                                        <p>
+                                            <?$web_url = parse_url($data['BusWebsite'])?>
+                                            <a href="<?=$data['BusWebsite']?>">http://<?=!empty($web_url['host']) ? $web_url['host'] : $data['BusWebsite']?></a>
+                                        </p>
+                                    <?endif?>
                                     <a href="/business/<?=$data['BusUrl']?>" class="btn btn-primary btn-lg btn-angle-left">דף האישי בקטלוג </a>
                                 </div>
 

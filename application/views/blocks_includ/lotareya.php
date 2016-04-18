@@ -5,7 +5,7 @@
  * Date: 09.08.2015
  * Time: 18:02
  */
-//HTML::x($data);
+HTML::x($data);
 ?>
 <style>
     .popover.bottom > .arrow.errors-email:after {
@@ -72,19 +72,22 @@
                         <div class="media-left media-top">
                             <a href="/business/<?=$data['BusUrl']?>">
                                 <?if (!empty($data['img'])):?>
-                                    <img src="<?=$data['img']?>" width="88" height="88" class="media-object"/>
+                                    <img src="<?=$data['img']?>" width="150" height="150" class="media-object"/>
                                 <?else:?>
-                                    <img src="<?=$data['BusLogo']?>" width="88" height="88" class="media-object"/>
+                                    <img src="<?=$data['BusLogo']?>" width="150" height="150" class="media-object"/>
                                 <?endif?>
                             </a>
                         </div>
                         <div class="media-body">
-                            <div class="media-heading prize-title"><?=$data['secondname']?></div>
-                            <p><?=$data['description']?></p>
+                            <div class="media-heading prize-title">
+                                Спонсор <br>
+                                <a href="/business/<?=$data['BusUrl']?>"><?=$data['BusName'] ?></a>
+                                <?=$data['secondname']?>
+                            </div>
+<!--                            <p>--><?//=$data['description']?><!--</p>-->
                             <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span>  <?=Date::diffDay('', $data['date_end'])?> дней до розыгрыша</p>
                         </div>
                     </div>
-
 
                 </div>
             </div>

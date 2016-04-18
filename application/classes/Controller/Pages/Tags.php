@@ -77,7 +77,7 @@ class Controller_Pages_Tags extends Controller_BaseController {
         $content->section =  Model::factory('ArticlesModel')->getSectionArticlesTag($this->request->param('url_tags'));
         $content->section_coupons = Model::factory('CouponsModel')->CouponsSectionCountCouponTags($this->request->param('url_tags'));
 
-
+        $content->data_tag = $tags[0];
         $content->data = $resultArr;
         $content->tags_url = $this->request->param('url_tags');
         $this->template->content = $content;

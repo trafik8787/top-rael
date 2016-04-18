@@ -1098,6 +1098,8 @@ class Controller_Administrator extends Controller_Core_Main {
             $crud->edit_fields('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel', 'business_id','date_registration');
             $crud->add_field('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel',  'business_id','date_registration');
             $crud->callback_after_insert('call_after_insert_userBusines');
+            //изминение пароля бизнеса
+            $crud->callback_before_edit('call_befor_edit_userAdmin');
 
         } else {
 

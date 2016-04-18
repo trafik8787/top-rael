@@ -5,7 +5,7 @@
  * Date: 11.08.2015
  * Time: 16:55
  */
-//HTML::x($data);
+//HTML::x($data_tag);
 ?>
 <content>
     <div id="content">
@@ -15,6 +15,8 @@
             <div class="col-md-8">
                 <div id="context">
                     <input type="hidden" class="w-tags-url" value="<?=$tags_url?>"/>
+
+                    <h1><?=$data_tag['name_tags'] ?></h1>
 
                     <?foreach($data as $key => $rowsdata):?>
 

@@ -10,7 +10,10 @@ class Model_LotareyModel extends Model_BaseModel {
 
     public function getLotareya (){
 
-        return DB::select('lotarey.*', array('business.url', 'BusUrl'), array('business.logo', 'BusLogo'))
+        return DB::select('lotarey.*', array('business.url', 'BusUrl'),
+            array('business.logo', 'BusLogo'),
+            array('business.name', 'BusName')
+        )
             ->from('lotarey')
             ->join('business')
             ->on('lotarey.business_id', '=', 'business.id')

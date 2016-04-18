@@ -5,7 +5,7 @@
  * Date: 12.08.2015
  * Time: 14:14
  */
-//HTML::x($_SERVER);
+//HTML::x($data_city);
 //[REMOTE_ADDR] => 178.94.172.183
 ?>
 
@@ -18,6 +18,9 @@
 
                 <div id="context">
                     <input type="hidden" class="w-city-id" value="<?=$city_id?>"/>
+
+                    <h1><?=$data_city['name'] ?></h1>
+
                     <?foreach($data as $key => $rowsdata):?>
                         <?if (!empty($rowsdata['data'])):?>
                             <div class="panel panel-thumbnails w-bloc-section">

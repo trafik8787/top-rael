@@ -68,6 +68,7 @@ class Controller_Pages_City extends Controller_BaseController {
             $this->blocTags()
         ));
 
+        $content->data_city = $city_data[0];
         $content->data = $resultArr;
         $content->city_id = $city_id;
         $this->template->content = $content;
