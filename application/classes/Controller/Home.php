@@ -100,6 +100,8 @@ class Controller_Home extends Controller_BaseController {
             //View::factory('blocks_includ/baners_right'),
         ));
 
+        $content->bloc_news = $this->blocNewsSlider(10);
+
         $this->SeoShowPage(array($seo_home[0]['title'],''),
             array($seo_home[0]['keywords'],''),array($seo_home[0]['description'],''));
 

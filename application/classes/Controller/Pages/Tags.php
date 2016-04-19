@@ -58,7 +58,8 @@ class Controller_Pages_Tags extends Controller_BaseController {
             $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
             $this->blocCity(),
-            $this->blocTags()
+            $this->blocTags(),
+            $this->blocNews($this->request->param('url_tags'), 'tags')
         ));
 
         //SEO

@@ -64,6 +64,8 @@ class Controller_Pages_Sections extends Controller_BaseController {
             //по урлу категории получаем анонсы статей
             $data_articles = Model::factory('ArticlesModel')->getArticlesCategoryUrl($this->request->param('url_category'));
 
+            $bloc_news = $this->blocNews($this->request->param('url_category'), 'category');
+
             //вызов метода банеров получаем в параметрах parent::$top_baners и parent::$right_baners
             $this->getBaners($this->request->param('url_category'), 'category', $city_id);
 
@@ -84,6 +86,9 @@ class Controller_Pages_Sections extends Controller_BaseController {
 
             $this->getBaners($this->request->param('url_section'), 'section', $city_id);
 
+
+            $bloc_news = $this->blocNews($this->request->param('url_section'), 'section');
+
             //передаем URL текущей категории для кнопки на карте
             $bussines_section->curent_section = $this->request->param('url_section');
         }
@@ -100,7 +105,8 @@ class Controller_Pages_Sections extends Controller_BaseController {
             $this->blocCity(),
             $this->blocTags(),
             parent::$right_baners,
-            View::factory('blocks_includ/articles_category_bloc', array('content' => $data_articles))
+            View::factory('blocks_includ/articles_category_bloc', array('content' => $data_articles)),
+            $bloc_news
         ));
 
         //преобразование масива бизнесов для вюхи

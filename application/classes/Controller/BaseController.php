@@ -324,7 +324,7 @@ abstract class Controller_BaseController extends Controller_Template {
         return $content;
     }
 
-
+    //блок слайдер новостей на главной
     public function blocNewsSlider ($count_news){
 
         $content = View::factory('blocks_includ/bloc_news_slider_home');
@@ -332,5 +332,37 @@ abstract class Controller_BaseController extends Controller_Template {
         return $content;
     }
 
+
+    /**
+     * @param null $url
+     * @param $flag
+     * @param null $count
+     * @return View
+     *  //правий блок новостей в категория обхорах городах и тегах
+     */
+    public function blocNews ($url=null, $flag = null){
+
+        $content = View::factory('blocks_includ/bloc_right_news');
+
+        switch ($flag) {
+
+            case 'section':
+                $content->data = Model::factory('NewsModel')->getSectionNews($url);
+                break;
+            case 'category':
+                $content->data = Model::factory('NewsModel')->getCategoryNews($url);
+                break;
+            case 'tags':
+                $content->data = Model::factory('NewsModel')->getTagsNews($url);
+                break;
+            case 'city':
+                $content->data = Model::factory('NewsModel')->getCityNews($url);
+                break;
+            default:
+                $content->data = Model::factory('NewsModel')->getBigBlocNews(5);
+        }
+
+        return $content;
+    }
 
 }

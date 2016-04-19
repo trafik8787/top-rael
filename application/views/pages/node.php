@@ -484,34 +484,7 @@
 
             <!-- Bloc Right -->
             <?=isset($bloc_right)? $bloc_right : ''?>
-            
-            
-            
-            <!--
-            <div class="col-md-4">
-                <div class="w-bloc-right">
-                    <h2>Новости</h2>
-                    <hr>
-                    <div class="title-micronews">Заголовок 1</div>
-                    <p class="description-micronews">В каждом городе, даже самом большом, есть заветные уголки, не отмеченные на туристических картах, которые известны даже не всем его жителям</p>
-                    <hr>
-                    <div class="title-micronews">Заголовок 2</div>
-                    <p class="description-micronews">Шопинг – своего рода охота или рыбалка. Вопрос – насколько она удачна и с какими «трофеями» или «уловом» вы вернетесь домой. Кто осведомлен, тот вооружен.м</p>
-                    <hr>
-                    <div class="title-micronews">Заголовок 3</div>
-                    <p class="description-micronews">В Bamboo Village на пляже Полег в пяти минутах езды от Нетании действует эксклюзивный серфинг-клуб: опытные профессиональные инструкторы дают уроки…</p>
-                    <hr>
-                    <div class="title-micronews">Заголовок 4</div>
-                    <p class="description-micronews">Галерея Shomroni - одна из старейших в Яффо, она существует уже более тридцати лет и имеет лицензию Министерства туризма и Управления древностей, что…</p>
-                    <hr>
-                    <div class="title-micronews">Заголовок 5</div>
-                    <p class="description-micronews">Sea Village SPA Если вы устали, душа просит отдыха, а до отпуска еще далеко, всегда можно взять небольшой тайм-аут и отправиться на денек в уютное…</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            
-            -->
-            
+
             
             
         </div>

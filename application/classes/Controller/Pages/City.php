@@ -65,7 +65,8 @@ class Controller_Pages_City extends Controller_BaseController {
             $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
             $this->blocCity(),
-            $this->blocTags()
+            $this->blocTags(),
+            $this->blocNews($this->request->param('url_city'), 'city')
         ));
 
         $content->data_city = $city_data[0];

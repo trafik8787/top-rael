@@ -22,11 +22,15 @@ class Model_NewsModel extends Model_BaseModel {
             $ofset = 0;
         }
 
-        $result = DB::select()
+        $result = DB::select('news.*', array('business.url', 'BusUrl'))
             ->from('news')
+
+            ->join('business')
+            ->on('news.bussines_id','=','business.id')
+
             ->limit($limit)
             ->offset($ofset)
-            ->order_by('id', 'DESC')
+            ->order_by('news.id', 'DESC')
             ->cached()
             ->execute()->as_array();
 
@@ -42,10 +46,14 @@ class Model_NewsModel extends Model_BaseModel {
      */
     public function getBigBlocNews ($count_news) {
 
-        $query = DB::select()
+        $query = DB::select('news.*', array('business.url', 'BusUrl'))
             ->from('news')
+
+            ->join('business')
+            ->on('news.bussines_id','=','business.id')
+
             ->limit($count_news)
-            ->order_by('id', 'DESC')
+            ->order_by('news.id', 'DESC')
             ->cached()
             ->execute()->as_array();
 
@@ -61,14 +69,19 @@ class Model_NewsModel extends Model_BaseModel {
      */
     public function getSectionNews ($url_section, $count_news = 5) {
 
-        $query = DB::select()
+        $query = DB::select('news.*', array('business.url', 'BusUrl'))
             ->from('news')
+
+            ->join('business')
+            ->on('news.bussines_id','=','business.id')
+
             ->join('category')
-            ->on('news.id_category', '=', 'category.id')
+            ->on('news.id_section', '=', 'category.id')
+
             ->where('category.url', '=', $url_section)
             ->and_where('news.id_category', '=', 0)
             ->limit($count_news)
-            ->order_by('id', 'DESC')
+            ->order_by('news.id', 'DESC')
             ->cached()
             ->execute()->as_array();
 
@@ -84,22 +97,46 @@ class Model_NewsModel extends Model_BaseModel {
      */
     public function getCategoryNews ($url_category, $count_news = 5) {
 
-        $query = DB::select()
+        $query = DB::select('news.*', array('business.url', 'BusUrl'))
             ->from('news')
+
+            ->join('business')
+            ->on('news.bussines_id','=','business.id')
+
             ->join('category')
             ->on('news.id_category', '=', 'category.id')
+
             ->where('category.url', '=', $url_category)
             ->limit($count_news)
-            ->order_by('id', 'DESC')
+            ->order_by('news.id', 'DESC')
             ->cached()
             ->execute()->as_array();
 
         return $query;
     }
 
+    /**
+     * @param $url_city
+     * @return mixed
+     * todo получить список новостей по городу
+     */
+    public function getCityNews ($url_city, $count_news = 5){
+        $query = DB::select('news.*', array('business.url', 'BusUrl'))
+            ->from('news')
 
-    public function getCityNews ($url_city){
+            ->join('business')
+            ->on('news.bussines_id','=','business.id')
 
+            ->join('city')
+            ->on('news.city', '=', 'city.id')
+
+            ->where('city.url', '=', $url_city)
+            ->limit($count_news)
+            ->order_by('news.id', 'DESC')
+            ->cached()
+            ->execute()->as_array();
+
+        return  $query;
     }
 
     /**
@@ -107,13 +144,13 @@ class Model_NewsModel extends Model_BaseModel {
      * @return mixed
      * todo получаем список новостей для страниц тегов
      */
-    public function getTagsNews ($url_tags){
+    public function getTagsNews ($url_tags, $count_news = 5){
 
-        $query = DB::select('new.*',
-            array('cat.id', 'CatId'),
-            array('cat.name', 'CatName'),
-            array('cat.url', 'CatUrl'))
+        $query = DB::select('new.*', array('business.url', 'BusUrl'))
             ->from(array('news', 'new'))
+
+            ->join('business')
+            ->on('new.bussines_id','=','business.id')
 
             ->join(array('category', 'cat'))
             ->on('new.id_section', '=', 'cat.id')
@@ -125,7 +162,7 @@ class Model_NewsModel extends Model_BaseModel {
             ->on('tag.id', '=', 'tagrelanews.id_tags')
 
             ->where('tag.url_tags', '=', $url_tags)
-
+            ->limit($count_news)
             ->order_by('new.id', 'DESC')
             ->cached()
             ->execute()->as_array();

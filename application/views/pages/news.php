@@ -15,7 +15,13 @@
                 <div id="context" >
                     <?if (!empty($data)):?>
                         <?foreach ($data as $row):?>
-                            <div class="well well-lg"><?=$row['text'] ?></div>
+                            <div class="well well-lg">
+                                <a href="/business/<?=$row['BusUrl']?>">
+                                    <p><?=$row['name'] ?></p>
+                                </a>
+
+                                <?=$row['text'] ?>
+                            </div>
                         <?endforeach?>
 
                     <?else:?>
