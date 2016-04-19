@@ -42,7 +42,7 @@ class Controller_Home extends Controller_BaseController {
                 $category[0]['childs'] = array_slice($category[0]['childs'], 0, 5);
 
                 $city_id = null;
-                $data = Model::factory('BussinesModel')->getBussinesSectionUrl($row_section['url'], 3, 0, $city_id, null, true);
+                $data = Model::factory('BussinesModel')->getBussinesSectionUrl($row_section['url'], 3, 0, $city_id, false, true);
 
 
                 $resultArr[] = array('category' => $category, 'data' => $data['data'], 'city' => $data['city']);
