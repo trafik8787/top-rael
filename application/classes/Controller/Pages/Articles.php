@@ -52,6 +52,7 @@ class Controller_Pages_Articles extends Controller_BaseController {
             $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
             View::factory('blocks_includ/baners_right'),
+            $this->blocNews()
         ));
 
 
