@@ -398,17 +398,29 @@
                                             <div class="list-item">
                                                 <div class="media">
 
-                                                    <div class="media-left">
-                                                        <a href="/article/<?=$rows_artic['ArticUrl']?>">
-                                                            <img src="/uploads/img_articles/thumbs/<?=basename($rows_artic['ArticImage'])?>" width="260" height="190"
-                                                                 class="media-object"/>
-                                                        </a>
-                                                    </div>
+                                                    <? if (!empty($rows_artic['ArticImage'])): ?>
+
+                                                        <div class="media-left">
+                                                            <? if (!empty($rows_artic['ArticUrl'])): ?>
+                                                                <a href="/article/<?=$rows_artic['ArticUrl']?>">
+                                                                    <img src="/uploads/img_articles/thumbs/<?=basename($rows_artic['ArticImage'])?>" width="260" height="190"
+                                                                         class="media-object"/>
+                                                                </a>
+                                                            <?else:?>
+                                                                <img src="/uploads/img_articles/thumbs/<?=basename($rows_artic['ArticImage'])?>" width="260" height="190"
+                                                                     class="media-object"/>
+                                                            <?endif?>
+                                                        </div>
+                                                    <? endif ?>
 
                                                     <div class="media-body">
 
                                                         <h2 class="media-heading">
-                                                            <a href="/article/<?=$rows_artic['ArticUrl']?>"><strong><?=$rows_artic['ArticName']?></strong></a>
+                                                            <? if (!empty($rows_artic['ArticUrl'])): ?>
+                                                                <a href="/article/<?=$rows_artic['ArticUrl']?>"><strong><?=$rows_artic['ArticName']?></strong></a>
+                                                            <?else:?>
+                                                                <strong><?=$rows_artic['ArticName']?></strong>
+                                                            <?endif?>
                                                             <small><?=$rows_artic['ArticSecondName']?></small>
                                                         </h2>
 

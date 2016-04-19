@@ -277,6 +277,13 @@ class Model_BussinesModel extends Model_BaseModel {
                 array('artic.url', 'ArticUrl'),
                 array('artic.images_article', 'ArticImage'),
                 array('artic.content', 'ArticContent'),
+                array('artic.datecreate', 'ArticDatecreate'),
+
+                array('new.id', 'NewsId'),
+                array('new.name', 'NewsName'),
+                array('new.text', 'NewsText'),
+                array('new.date', 'NewsDate'),
+                array('new.img', 'NewsImg'),
 
                 array('cat.name', 'CatName'),
                 array('cat.id', 'CatId'),
@@ -333,7 +340,9 @@ class Model_BussinesModel extends Model_BaseModel {
                 //город
                 ->join(array('city', 'cit'), 'LEFT')
                 ->on('bus.city', '=', 'cit.id')
-
+                //новости
+                ->join(array('news', 'new'), 'LEFT')
+                ->on('bus.id', '=', 'new.bussines_id')
                 //теги
                 ->join(array('tags_relation_business', 'tagrelbus'), 'LEFT')
                 ->on('bus.id', '=', 'tagrelbus.id_business' )
@@ -403,6 +412,7 @@ class Model_BussinesModel extends Model_BaseModel {
             $GalryTmp = array();
             $FileTmp = array();
             $ArticTmp = array();
+            $NewsTmp = array();
             $TagsTmp = array();
 
             $end_result['BusId'] = $result[0]['BusId'];
@@ -544,11 +554,30 @@ class Model_BussinesModel extends Model_BaseModel {
                             'ArticSecondName' => $row['ArticSecondName'],
                             'ArticUrl' => $row['ArticUrl'],
                             'ArticImage' => $row['ArticImage'],
-                            'ArticContent' => $row['ArticContent']);
+                            'ArticContent' => $row['ArticContent'],
+                            'ArticDatecreate' => $row['ArticDatecreate']);
 
                     }
                 } else {
                     $end_result['ArticArr'] = array();
+                }
+
+
+                //новости скрещиваем с статьями они будут отображатся в одном списке
+                if (!empty($row['NewsId'])) {
+                    if (!array_key_exists($row['NewsId'], $NewsTmp)) {
+                        $NewsTmp[$row['NewsId']] = $row['NewsId'];
+                        $end_result['NewsArr'][] = array('ArticId' => $row['NewsId'],
+                            'ArticName' => $row['NewsName'],
+                            'ArticContent' => $row['NewsText'],
+                            'ArticUrl' => '',
+                            'ArticSecondName' => '',
+                            'ArticDatecreate' => $row['NewsDate'],
+                            'ArticImage' => $row['NewsImg']);
+
+                    }
+                } else {
+                    $end_result['NewsArr'] = array();
                 }
 
 
@@ -573,7 +602,6 @@ class Model_BussinesModel extends Model_BaseModel {
         } else {
             return false;
         }
-
 
         return $end_result;
     }

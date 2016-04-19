@@ -72,21 +72,21 @@
                         <div class="media-left media-top">
                             <a href="/business/<?=$data['BusUrl']?>">
                                 <?if (!empty($data['img'])):?>
-                                    <img src="<?=$data['img']?>" width="150" height="150" class="media-object"/>
+                                    <img src="<?=$data['img']?>" width="120" height="120" class="media-object"/>
                                 <?else:?>
-                                    <img src="<?=$data['BusLogo']?>" width="150" height="150" class="media-object"/>
+                                    <img src="<?=$data['BusLogo']?>" width="120" height="120" class="media-object"/>
                                 <?endif?>
                             </a>
                         </div>
                         <div class="media-body">
                             <div class="media-heading prize-title">
-                                Спонсор <br>
-                                <a href="/business/<?=$data['BusUrl']?>"><?=$data['BusName'] ?></a>
                                 <?=$data['secondname']?>
                             </div>
-<!--                            <p>--><?//=$data['description']?><!--</p>-->
+                            <p><?=$data['description']?></p>
                             <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span>  <?=Date::diffDay('', $data['date_end'])?> дней до розыгрыша</p>
                         </div>
+                        Спонсор <br>
+                        <a href="/business/<?=$data['BusUrl']?>"><?=$data['BusName'] ?></a>
                     </div>
 
                 </div>
