@@ -10,36 +10,6 @@ class Controller_Home extends Controller_BaseController {
 
 
 	public function action_index(){
-      //  HTML::x($_SERVER);
-       //HTML::x(Model::factory('BussinesModel')->getCouponsUser());
-        //echo  Auth::instance()->hash('qweqweqwe');
-      // phpinfo();
-        //Rediset::getInstance()->flushDB();
-//        Rediset::getInstance()->set_coupon(62);
-        //$data_redis = Rediset::getInstance()->get_coupon(69);
-           // HTML::x($_SERVER);
-       // Model::factory('CouponsModel')->UpdateFavoritCookie('users_relation_favorites_coup', 1, 'coupon_id');
-           // Model::factory('BaseModel')->logo();
-//        $er = json_encode(array('qwe' => 'sdfsdfsdfsdfsdf', 'asd'=> 'asdasdasd'));
-//        Cookie::set('__count', $er);
-//        $redis = new Redis();
-//        $redis->connect('127.0.0.1', 6379);
-//       // $redis->flushDB();
-//        $key = 'linus torvalds';
-//        //$redis->hmset($key,'age', 45);
-//        $redis->hmset($key, [
-//            'age' => 87,
-//            'country' => 'finland',
-//            'occupation' => 'software engineer',
-//            'reknown' => 'linux kernel',
-//        ]);
-//        $data_redis = $redis->hgetall($key);
-     //   $redis->save();
-//
-        //$we = json_decode(Cookie::get('__count'));
-        //HTML::x(json_decode(Cookie::get('coup-41')));
-       // die(phpinfo());
-       // HTML::x( Model::factory('BussinesModel')->getBannersUser());
 
         //Model::factory('CouponsModel')->getInformersCouponsId();
        // Model::factory('ArticlesModel')->getInformersArticlesId();
@@ -51,7 +21,7 @@ class Controller_Home extends Controller_BaseController {
         $articles = Model::factory('ArticlesModel')->getArticlesInHome();
 
         //проверяем наличие кеша
-       // if (Cache::instance()->get('home_busines') == null) {
+        if (Cache::instance()->get('home_busines') == null) {
 
             foreach ($section as $row_section) {
 
@@ -72,18 +42,18 @@ class Controller_Home extends Controller_BaseController {
                 $category[0]['childs'] = array_slice($category[0]['childs'], 0, 5);
 
                 $city_id = null;
-                $data = Model::factory('BussinesModel')->getBussinesSectionUrl($row_section['url'], 3, 0, $city_id);
+                $data = Model::factory('BussinesModel')->getBussinesSectionUrl($row_section['url'], 3, 0, $city_id, null, true);
 
 
                 $resultArr[] = array('category' => $category, 'data' => $data['data'], 'city' => $data['city']);
             }
 
 //            //кешируем
-//            Cache::instance()->set('home_busines', $resultArr);
+            Cache::instance()->set('home_busines', $resultArr);
 //
-//        } else {
-//            $resultArr = Cache::instance()->get('home_busines');
-//        }
+        } else {
+            $resultArr = Cache::instance()->get('home_busines');
+        }
 
 
         $coupon = Model::factory('CouponsModel')->getCouponsSectionUrl(null, 6, 0, null);

@@ -120,7 +120,7 @@ class Model_BussinesModel extends Model_BaseModel {
      * $adm - переключатель для фильтра по разделам в админке( только для админки ) отключает сортировку по статусу и дате
      * todo получаем все бизнесы из раздела
      */
-    public function getBussinesSectionUrl($url_section = null, $limit = null, $num_page = null, $id_city = null, $adm = false){
+    public function getBussinesSectionUrl($url_section = null, $limit = null, $num_page = null, $id_city = null, $adm = false, $home = false){
 
         if ($num_page != null) {
             $ofset = $limit * ($num_page - 1);
@@ -199,7 +199,9 @@ class Model_BussinesModel extends Model_BaseModel {
             $query_data->offset($ofset);
         }
         $query_data->group_by('business.id');
-        $query_data->order_by('business.client_status', 'DESC');
+        if ($home === false) {
+            $query_data->order_by('business.client_status', 'DESC');
+        }
         $query_data->order_by('business.date_create', 'DESC');
         $query_data->cached();
 

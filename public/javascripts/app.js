@@ -525,6 +525,11 @@ $(document).ready(function(){
         thises.addClass('w-cat-active');
         addClasLi.addClass('active');
 
+
+        var href_cat = $(this).attr('href');
+        $(this).parents('.w-bloc-section').find('.w-open-all').attr('href', href_cat);
+
+
         var city_id = '';
         if ($('.w-city-id').val() != undefined) {
             city_id = $('.w-city-id').val();
