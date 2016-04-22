@@ -222,15 +222,17 @@ abstract class Controller_BaseController extends Controller_Template {
      * @return mixed
      * блок розыграша
      */
-    public function lotarey(){
+    public function lotarey($bussines_id = null){
         $content = View::factory('blocks_includ/lotareya');
-        $data = Model::factory('LotareyModel')->getLotareya();
+        $data = Model::factory('LotareyModel')->getLotareya($bussines_id);
 
         if (!empty($data)) {
             $content->data = $data[0];
             $content->data_user = Model::factory('LotareyModel')->getUserLotarey(4);
         } else {
-            $content = $this->show_bloc_right_subscribe();
+            if ($bussines_id === null) {
+                $content = $this->show_bloc_right_subscribe();
+            }
         }
         return $content;
     }

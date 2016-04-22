@@ -8,14 +8,22 @@
 ?>
 
 <div class="col-md-4">
-    <div>
     <?if (!empty($data_bloc)):?>
-        <?foreach ($data_bloc as $row_bloc):?>
 
-            <?=$row_bloc?>
+        <?if (!empty($data_bloc['lotery'])):?>
+            <?=$data_bloc['lotery']?>
+        <?endif?>
+        <div>
+            <?foreach ($data_bloc as $key => $row_bloc):?>
 
-        <?endforeach?>
+                <? if ($key !== 'lotery'): ?>
+
+                    <?=$row_bloc?>
+                <? endif ?>
+
+            <?endforeach?>
+
+        </div>
     <?endif?>
-    </div>
 </div>
 

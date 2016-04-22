@@ -8,18 +8,26 @@
 
 class Model_LotareyModel extends Model_BaseModel {
 
-    public function getLotareya (){
+    public function getLotareya ($bussines_id = null){
 
-        return DB::select('lotarey.*', array('business.url', 'BusUrl'),
+        $query = DB::select('lotarey.*', array('business.url', 'BusUrl'),
             array('business.logo', 'BusLogo'),
             array('business.name', 'BusName')
-        )
-            ->from('lotarey')
-            ->join('business')
-            ->on('lotarey.business_id', '=', 'business.id')
-            ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('lotarey.date_start AND lotarey.date_end'))
-            ->limit(1)
-            ->cached()->execute()->as_array();
+        );
+
+        $query->from('lotarey');
+        $query->join('business');
+        $query->on('lotarey.business_id', '=', 'business.id');
+
+        $query->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('lotarey.date_start AND lotarey.date_end'));
+
+        if ($bussines_id != null) {
+
+            $query->and_where('lotarey.business_id', '=', $bussines_id);
+        }
+        $query->limit(1);
+        $result =  $query->cached()->execute()->as_array();
+        return $result;
 
     }
 

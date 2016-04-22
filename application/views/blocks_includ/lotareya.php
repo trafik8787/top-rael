@@ -77,6 +77,11 @@
                                     <img src="<?=$data['BusLogo']?>" width="120" height="120" class="media-object"/>
                                 <?endif?>
                             </a>
+                            
+                            
+                            <p align="center" style="margin-top:7px;">Спонсор <br>
+                        <a href="/business/<?=$data['BusUrl']?>"><?=$data['BusName'] ?></a></p>
+                            
                         </div>
                         <div class="media-body">
                             <div class="media-heading prize-title">
@@ -85,8 +90,7 @@
                             <p><?=$data['description']?></p>
                             <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span>  <?=Date::diffDay('', $data['date_end'])?> дней до розыгрыша</p>
                         </div>
-                        Спонсор <br>
-                        <a href="/business/<?=$data['BusUrl']?>"><?=$data['BusName'] ?></a>
+                        
                     </div>
 
                 </div>

@@ -1262,10 +1262,10 @@ $(document).ready(function(){
             success: function(response) { // когда получаем ответ
 
                 if (response.susses != undefined) {
-                    $('.modal-subscribe .modal-body').html('<h3 style="color: #009900">'+response.susses+'</h3>');
+                    $('.modal-subscribe .modal-body').html('<h3 style="color: #009900">'+response.susses+'</h3><br><button type="button" class="text-center" data-dismiss="modal" aria-label="Close" class="btn-lg btn-success">Закрыть</button>');
                     setTimeout(function () {
                         $('.modal-subscribe').modal('hide');
-                    }, 3000);
+                    }, 7000);
                 }
 
                 if (response.dublicate_email != undefined) {
