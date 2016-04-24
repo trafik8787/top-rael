@@ -508,6 +508,9 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
         $crud->callback_befor_show_edit('call_bef_show_edit_lotery');
+        $crud->callback_before_insert('call_bef_insert_lotery');
+        $crud->callback_before_edit('call_bef_edit_lotery');
+
         $crud->rows_color_where(4, '==', 3, ' #cccccc');
 
         $crud->show_name_column(array(
@@ -827,7 +830,9 @@ class Controller_Administrator extends Controller_Core_Main {
         ));
 
         $crud->callback_before_edit('call_bef_edit_articles');
+        $crud->callback_befor_show_edit('call_bef_show_edit_articles');
         $crud->callback_after_insert('call_after_insert_articles');
+        $crud->callback_before_insert('call_bef_insert_articles');
         $crud->callback_before_delete('call_bef_del_articles');
 
         return $crud;
@@ -869,6 +874,9 @@ class Controller_Administrator extends Controller_Core_Main {
         ));
 
         $crud->callback_after_insert('call_after_insert_news');
+        $crud->callback_befor_show_edit('call_bef_show_edit_news');
+        $crud->callback_before_insert('call_bef_insert_news');
+        $crud->callback_before_edit('call_bef_edit_news');
 
         return $crud;
     }
@@ -956,6 +964,8 @@ class Controller_Administrator extends Controller_Core_Main {
         ));
 
         $crud->callback_before_edit('call_bef_edit_coupons');
+        $crud->callback_before_insert('call_bef_insert_coupons');
+        $crud->callback_befor_show_edit('call_bef_show_edit_coupons');
         $crud->callback_after_insert('call_after_insert_coupons');
         $crud->callback_before_delete('call_befor_del_coupons');
 
@@ -1033,8 +1043,15 @@ class Controller_Administrator extends Controller_Core_Main {
             'img' => 'Фото',
             'date'=>'Дата выпуска'));
 
+
+
+        $crud->callback_befor_show_edit('call_bef_show_edit_jornal');
+        $crud->callback_before_insert('call_bef_insert_jornal');
+        $crud->callback_before_edit('call_bef_edit_jornal');
+
         return $crud;
     }
+
 
     public static function adminSubscription (){
 
@@ -1153,6 +1170,7 @@ class Controller_Administrator extends Controller_Core_Main {
             array('required' => 'Это поле обязательно для заполнения', 'minlength' => 'Минимальное количество символов 6'));
 
         $crud->callback_before_insert('call_bef_insert_user');
+        $crud->callback_before_edit('call_bef_edit_user');
         $crud->callback_befor_show_edit('call_bef_show_user');
 
         return $crud;
@@ -1227,6 +1245,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->callback_before_insert('call_bef_add_banners');
 
 
+
         $crud->callback_befor_show_edit('call_bef_show_edit_baners');
 
         return $crud;
@@ -1264,6 +1283,7 @@ class Controller_Administrator extends Controller_Core_Main {
      */
 
     public static function call_bef_show_edit_baners($key_array = null){
+
         $static = View::factory('adm/statistic_baners');
 
         if ($key_array['type_baners'] == 2) {
@@ -1273,6 +1293,11 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $static->data = Rediset::getInstance()->get_baner_date($key_array['id'], $key_array['date_start'], $key_array['date_end']);
         Cruds::$adon_top_form[] = $static;
+
+
+        $key_array['date_start'] = date('d/m/Y', strtotime($key_array['date_start']));
+        $key_array['date_end'] = date('d/m/Y', strtotime($key_array['date_end']));
+
         return $key_array;
     }
 
@@ -1296,6 +1321,9 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_bef_edit_banners ($key_array = null,  $old_array = null){
 
+        $key_array['date_start'] = self::convert_Date($key_array['date_start']);
+        $key_array['date_end'] = self::convert_Date($key_array['date_end']);
+
         Model::factory('Adm')->log_add('банер', $key_array['name'], 'edit');
 
         if ($key_array['type_baners'] == 2) {
@@ -1318,14 +1346,21 @@ class Controller_Administrator extends Controller_Core_Main {
             $data['logo'] = $data_business[0]['logo'];
             $baner->data = $data;
             $key_array['images'] = serialize(array('html' => htmlspecialchars($baner->render()), 'images' =>  $key_array['images']));
-            return $key_array;
+
         }
+
+        return $key_array;
     }
 
 
 
 
     public static function call_bef_add_banners($key_array = null) {
+
+        $key_array['date_start'] = self::convert_Date($key_array['date_start']);
+        $key_array['date_end'] = self::convert_Date($key_array['date_end']);
+
+
         if ($key_array['type_baners'] == 2) {
 
             if ($key_array['position'] == 1) {
@@ -1341,14 +1376,20 @@ class Controller_Administrator extends Controller_Core_Main {
             $data['logo'] = $data_business[0]['logo'];
             $baner->data = $data;
             $key_array['images'] = serialize(array('html' => htmlspecialchars($baner->render()), 'images' =>  $key_array['images']));
-            return $key_array;
+
         }
+        return $key_array;
     }
 
 
 
 
     public static function call_bef_edit_business ($new_array = null, $old_array = null) {
+
+
+        //преобразование дат
+        $new_array['date_create'] = self::convert_Date($new_array['date_create']);
+        $new_array['date_end'] = self::convert_Date($new_array['date_end']);
 
         Model::factory('Adm')->log_add('бизнес', $old_array['name'], 'edit', $old_array['id']);
 
@@ -1400,6 +1441,10 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_bef_insert_business ($new_array){
 
+        //преобразование дат
+        $new_array['date_create'] = self::convert_Date($new_array['date_create']);
+        $new_array['date_end'] = self::convert_Date($new_array['date_end']);
+
         if (!empty(Cruds::$post['dop_sity']) and !empty(Cruds::$post['dop_addres'])) {
 
             foreach (Cruds::$post['dop_sity'] as $key => $dop_sity) {
@@ -1412,8 +1457,8 @@ class Controller_Administrator extends Controller_Core_Main {
             }
             $arr_add_city = serialize($arr_add_city);
             $new_array['dop_address'] = $arr_add_city;
-            return $new_array;
         }
+        return $new_array;
 
     }
 
@@ -1442,6 +1487,11 @@ class Controller_Administrator extends Controller_Core_Main {
 
     //хук перед открытием страницы редактирования
     public static function call_bef_show_edit_bus ($new_array){
+
+        //преобразование дат
+        $new_array['date_create'] = date('d/m/Y', strtotime($new_array['date_create']));
+        $new_array['date_end'] = date('d/m/Y', strtotime($new_array['date_end']));
+
 
         Session::instance()->set('busines_id_adon', $new_array['id']);
 
@@ -1532,6 +1582,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         Cruds::$adon_form[] = array('page' => 'tags', 'view' => $cont);
         //die(HTML::x($articles));
+        return $new_array;
     }
 
 
@@ -1558,10 +1609,24 @@ class Controller_Administrator extends Controller_Core_Main {
 
     //articles
 
+    public static function call_bef_insert_articles ($new_array){
+        $new_array['datecreate'] = self::convert_Date($new_array['datecreate']);
+        return $new_array;
+    }
+
+
+    public static function call_bef_show_edit_articles ($new_array){
+
+        //преобразование дат
+        $new_array['datecreate'] = date('d/m/Y', strtotime($new_array['datecreate']));
+        return $new_array;
+    }
+
 
     public static function call_bef_edit_articles ($new_array = null, $old_array = null){
 
-        //die(HTML::x($new_array));
+        //преобразование дат
+        $new_array['datecreate'] = self::convert_Date($new_array['datecreate']);
 
         Model::factory('Adm')->log_add('статью', $old_array['name'], 'edit');
 
@@ -1575,6 +1640,8 @@ class Controller_Administrator extends Controller_Core_Main {
                // unlink($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($old_array['images_article']));
             }
         }
+
+        return $new_array;
 
     }
 
@@ -1599,10 +1666,33 @@ class Controller_Administrator extends Controller_Core_Main {
         }
     }
 
+    public static function call_bef_show_edit_news ($new_array) {
+
+        $new_array['date'] = date('d/m/Y', strtotime($new_array['date']));
+        return $new_array;
+    }
+
+    public static function call_bef_insert_news ($new_array) {
+        $new_array['date'] = self::convert_Date($new_array['date']);
+        return $new_array;
+    }
+
+    public static function call_bef_edit_news ($new_array) {
+        $new_array['date'] = self::convert_Date($new_array['date']);
+        return $new_array;
+    }
+
+
+
 
     //coupons
 
     public static function call_bef_edit_coupons ($new_array = null, $old_array = null){
+
+
+        $new_array['datecreate'] = self::convert_Date($new_array['datecreate']);
+        $new_array['datestart'] = self::convert_Date($new_array['datestart']);
+        $new_array['dateoff'] = self::convert_Date($new_array['dateoff']);
 
         Model::factory('Adm')->log_add('купон', $old_array['name'], 'edit');
 
@@ -1614,7 +1704,24 @@ class Controller_Administrator extends Controller_Core_Main {
                 unlink($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_coupons/thumbs/' . basename($old_array['img_coupon']));
             }
         }
+        return $new_array;
     }
+
+    public static function call_bef_insert_coupons ($new_array){
+        $new_array['datecreate'] = self::convert_Date($new_array['datecreate']);
+        $new_array['datestart'] = self::convert_Date($new_array['datestart']);
+        $new_array['dateoff'] = self::convert_Date($new_array['dateoff']);
+        return $new_array;
+    }
+
+    public static function call_bef_show_edit_coupons ($new_array){
+        $new_array['datecreate'] = date('d/m/Y', strtotime($new_array['datecreate']));
+        $new_array['datestart'] = date('d/m/Y', strtotime($new_array['datestart']));
+        $new_array['dateoff'] = date('d/m/Y', strtotime($new_array['dateoff']));
+
+        return $new_array;
+    }
+
 
 
     public static function call_after_insert_coupons ($key_array = null){
@@ -1776,9 +1883,17 @@ class Controller_Administrator extends Controller_Core_Main {
 
     //добавление пользователя из админки
     public static function call_bef_insert_user ($new_array = null){
-        //die(HTML::x($new_array));
+
+        $new_array['bdate'] = self::convert_Date($new_array['bdate']);
         //если не пустой значит добавляется бизнес пользователь
         $new_array['password'] = Auth::instance()->hash($new_array['password']);
+        return $new_array;
+    }
+
+
+    public static function call_bef_edit_user ($new_array){
+
+        $new_array['bdate'] = self::convert_Date($new_array['bdate']);
         return $new_array;
     }
 
@@ -1840,8 +1955,11 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
 
-    public static  function call_bef_show_edit_lotery ($new_array)
-    {
+    public static  function call_bef_show_edit_lotery ($new_array){
+
+        $new_array['date_start'] = date('d/m/Y', strtotime($new_array['date_start']));
+        $new_array['date_end'] = date('d/m/Y', strtotime($new_array['date_end']));
+
         Session::instance()->set('customer_id', 1);
         $cont = View::factory('adm/adon_links_user_for_lotery');
         $data = Model::factory('LotareyModel')->getUserLotarey(null, array('lotarey.id', '=', $new_array['id']));
@@ -1849,16 +1967,58 @@ class Controller_Administrator extends Controller_Core_Main {
             $cont->data = $data;
             Cruds::$adon_top_form[] = $cont;
         }
+
+        return $new_array;
     }
 
-    public static function call_bef_show_user($new_array)
-    {
+    public static function  call_bef_insert_lotery ($new_array){
+
+        $new_array['date_start'] = self::convert_Date($new_array['date_start']);
+        $new_array['date_end'] = self::convert_Date($new_array['date_end']);
+
+        return $new_array;
+    }
+
+    public static function  call_bef_edit_lotery ($new_array, $old_array){
+
+        $new_array['date_start'] = self::convert_Date($new_array['date_start']);
+        $new_array['date_end'] = self::convert_Date($new_array['date_end']);
+
+        return $new_array;
+    }
+
+
+    public static function  call_bef_show_edit_jornal ($new_array){
+
+        $new_array['date'] = date('d/m/Y', strtotime($new_array['date']));
+        return $new_array;
+    }
+
+    public static function call_bef_insert_jornal ($new_array){
+
+        $new_array['date'] = self::convert_Date($new_array['date']);
+        return $new_array;
+    }
+
+    public static function call_bef_edit_jornal ($new_array){
+
+        $new_array['date'] = self::convert_Date($new_array['date']);
+        return $new_array;
+    }
+
+
+    public static function call_bef_show_user($new_array){
+
+        $new_array['bdate'] = date('d/m/Y', strtotime($new_array['bdate']));
+
         $cont = View::factory('adm/adon_lotery_for_users');
         $data = Model::factory('LotareyModel')->getUserLotarey(null, array('users.id', '=', $new_array['id']));
         if (!empty($data)) {
             $cont->data = $data;
             Cruds::$adon_top_form[] = $cont;
         }
+
+        return $new_array;
     }
 
 
@@ -1933,5 +2093,16 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
 
+    public static function convert_Date ($date){
+
+        $date_array = explode("/",trim($date));
+
+        $var_day = $date_array[0]; //day seqment
+        $var_month = $date_array[1]; //month segment
+        $var_year = $date_array[2]; //year segment
+        $new_date_format = "$var_year-$var_month-$var_day";
+
+        return $new_date_format;
+    }
 
 }

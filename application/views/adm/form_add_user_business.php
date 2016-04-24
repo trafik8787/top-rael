@@ -7,12 +7,12 @@
  */
 ?>
 <script type="text/javascript">
-    $(function () {
-        $('.form_date').datetimepicker({
-            locale: 'ru',
-            format: 'YYYY-MM-DD'
-        });
-    });
+//    $(function () {
+//        $('.form_date').datetimepicker({
+//            locale: 'ru',
+//            format: 'YYYY-MM-DD'
+//        });
+//    });
 </script>
 
 <div class="form-group has-feedback">

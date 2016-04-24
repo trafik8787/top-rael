@@ -84,8 +84,10 @@
                     $(function () {
                         $('.form_date').datetimepicker({
                             locale: 'ru',
-                            format: 'YYYY-MM-DD',
+                            //format: 'YYYY-MM-DD',
+                            format: 'DD/MM/YYYY',
                             defaultDate: 'moment'
+
                         });
                     });
                 </script>
