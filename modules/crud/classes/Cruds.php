@@ -53,6 +53,8 @@ class Cruds extends Controller_Core_Main {
     public $callback_befor_show_edit = null; //перед открытием редактирования
     public $callback_befor_show_add = null; //перед открытием добавления
 
+    public $callback_list_table = null;
+
     public $set_one_to_many = null; //один ко многим
     public $set_many_to_many = null; //многие ко многим
     public $select_multiselect = null; //изменяет поле select
@@ -277,7 +279,9 @@ class Cruds extends Controller_Core_Main {
     public function select_table () {
         //возвращает названия полей таблицы
         $this->name_colums_table = Model::factory('All')->name_count($this->table, $this->join_table);
-        //die(print_r($this->name_colums_table));
+
+        //HTML::x($this->name_colums_table);
+        //$this->name_colums_table[] = array('COLUMN_NAME' => 'qwe');
         //определяем какие поля будут выводится
         if ($this->column_array != null) {
             // print_r($this->name_colums_table);
@@ -341,7 +345,7 @@ class Cruds extends Controller_Core_Main {
 
         $count = Model::factory('All')->count_table($this->table, $this->set_where);
 
-
+        //HTML::x($this->name_colums_ajax);
         //если колонка с чекбоксами то добавляем в первый елемент масива первый столбик дублируем 0 и 1 одинаковы
         if ($this->enable_delete_group) {
             $column[0] = $this->name_colums_ajax[0]['COLUMN_NAME'];
@@ -382,12 +386,17 @@ class Cruds extends Controller_Core_Main {
         //меняем названия поля и номера по порядку местами
         $array_flip_column = array_flip($column);
 
-        //die(print_r($query['query']));
 
         //абсолютный путь к корню удаляется последний символ слеш
         $path_absolute = substr(DOCROOT, 0, strlen(DOCROOT)-1);
         //HTML::x($query['query']);
         foreach ($query['query'] as $rows) {
+
+            //HTML::x($rows);
+            //хук для каждой записы в таблице вызов функции
+            if ($this->callback_list_table != null) {
+                $rows = call_user_func_array(array($this->class_metod['class'], $this->callback_list_table['name_function']), array($rows));
+            }
 
             //редактировать
             if ($this->remove_edit !== true) {
@@ -565,6 +574,7 @@ class Cruds extends Controller_Core_Main {
             $dataQuery = '';
         }
 
+        //HTML::x($dataQuery);
 
         $re = array('draw' => $get['draw'],
             'recordsTotal' => $count[0]['COUNT(*)'], //всего записей в таблице
@@ -693,6 +703,11 @@ class Cruds extends Controller_Core_Main {
 
     public function callback_befor_show_add ($name_function){
         $this->callback_befor_show_add = array('name_function' => $name_function);
+    }
+
+
+    public function callback_list_table ($name_function){
+        $this->callback_list_table = array('name_function' => $name_function);
     }
 
     //отображение полей при добавлении

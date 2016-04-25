@@ -14,12 +14,13 @@
     <div class="w-logs panel-body">
 
         <?foreach ($data as $rows):?>
+            <?$date = date('d/m/Y H:m:s', strtotime($rows['date']))?>
             <?if ($rows['status'] == 1):?>
-                 <span class="bg-success"><?=$rows['date'].' - '.$rows['text']?></span><br/>
+                 <span class="bg-success"><?=$date.' - '.$rows['text']?></span><br/>
               <?elseif ($rows['status'] == 2):?>
-                 <span class="bg-warning"><?=$rows['date'].' - '.$rows['text']?></span><br/>
+                 <span class="bg-warning"><?=$date.' - '.$rows['text']?></span><br/>
                <?elseif ($rows['status'] == 3):?>
-                <span class="bg-danger"><?=$rows['date'].' - '.$rows['text']?></span><br/>
+                <span class="bg-danger"><?=$date.' - '.$rows['text']?></span><br/>
             <?endif?>
         <?endforeach?>
     </div>

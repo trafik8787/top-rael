@@ -510,6 +510,8 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->callback_befor_show_edit('call_bef_show_edit_lotery');
         $crud->callback_before_insert('call_bef_insert_lotery');
         $crud->callback_before_edit('call_bef_edit_lotery');
+        $crud->callback_list_table('call_list_table_lotery');
+
 
         $crud->rows_color_where(4, '==', 3, ' #cccccc');
 
@@ -524,7 +526,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->disable_search();
         return $crud;
     }
-    
+
 
     /**
      * @return Cruds
@@ -878,6 +880,9 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->callback_before_insert('call_bef_insert_news');
         $crud->callback_before_edit('call_bef_edit_news');
 
+        $crud->callback_list_table('call_list_table_news');
+
+
         return $crud;
     }
 
@@ -969,6 +974,8 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->callback_after_insert('call_after_insert_coupons');
         $crud->callback_before_delete('call_befor_del_coupons');
 
+        $crud->callback_list_table('call_list_table_coupons');
+
         return $crud;
     }
 
@@ -1022,6 +1029,7 @@ class Controller_Administrator extends Controller_Core_Main {
             'date_create' => 'Дата',
             'description' => 'Сообщение'));
 
+        $crud->callback_list_table('call_list_table_contact');
 
         return $crud;
     }
@@ -1048,6 +1056,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->callback_befor_show_edit('call_bef_show_edit_jornal');
         $crud->callback_before_insert('call_bef_insert_jornal');
         $crud->callback_before_edit('call_bef_edit_jornal');
+        $crud->callback_list_table('call_list_table_jornal');
 
         return $crud;
     }
@@ -1072,6 +1081,8 @@ class Controller_Administrator extends Controller_Core_Main {
         $status['position'][1] = array('class' =>'btn-success', 'text' => 'ON');
 
         $crud->add_action('StatusSubscribers', 'ON', 'ban/actionAdd', '', $status);
+
+        $crud->callback_list_table('call_list_table_subscription');
 
         return $crud;
     }
@@ -1172,6 +1183,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->callback_before_insert('call_bef_insert_user');
         $crud->callback_before_edit('call_bef_edit_user');
         $crud->callback_befor_show_edit('call_bef_show_user');
+        $crud->callback_list_table('call_list_table_user');
 
         return $crud;
     }
@@ -1244,12 +1256,13 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->callback_before_edit('call_bef_edit_banners');
         $crud->callback_before_insert('call_bef_add_banners');
 
-
+        $crud->callback_list_table('call_list_table_banners');
 
         $crud->callback_befor_show_edit('call_bef_show_edit_baners');
 
         return $crud;
     }
+
 
 
 
@@ -1310,6 +1323,12 @@ class Controller_Administrator extends Controller_Core_Main {
         Rediset::getInstance()->del_baner($key_array['id']);
     }
 
+
+    public static  function call_list_table_banners ($new_array){
+        $new_array['date_start'] =  date('d/m/Y', strtotime($new_array['date_start']));
+        $new_array['date_end'] =  date('d/m/Y', strtotime($new_array['date_end']));
+        return $new_array;
+    }
 
 
     public static function call_after_insert_banners($key_array = null){
@@ -1586,6 +1605,11 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
 
+    public static  function call_list_table_coupons ($new_array){
+        $new_array['dateoff'] =  date('d/m/Y', strtotime($new_array['dateoff']));
+        return $new_array;
+    }
+
 
     public static function call_bef_show_insert_bus ($new_array){
 
@@ -1664,6 +1688,12 @@ class Controller_Administrator extends Controller_Core_Main {
         if (!empty($key_array['img'])) {
             self::create_images($key_array['img'], '/uploads/img_news/thumbs/', 260, 190);
         }
+    }
+
+    public static function call_list_table_news ($new_array){
+
+        $new_array['date'] =  date('d/m/Y', strtotime($new_array['date']));
+        return $new_array;
     }
 
     public static function call_bef_show_edit_news ($new_array) {
@@ -1971,6 +2001,12 @@ class Controller_Administrator extends Controller_Core_Main {
         return $new_array;
     }
 
+    public static  function call_list_table_lotery ($new_array){
+        $new_array['date_start'] =  date('d/m/Y', strtotime($new_array['date_start']));
+        $new_array['date_end'] =  date('d/m/Y', strtotime($new_array['date_end']));
+        return $new_array;
+    }
+
     public static function  call_bef_insert_lotery ($new_array){
 
         $new_array['date_start'] = self::convert_Date($new_array['date_start']);
@@ -1994,6 +2030,11 @@ class Controller_Administrator extends Controller_Core_Main {
         return $new_array;
     }
 
+    public static  function call_list_table_jornal ($new_array){
+        $new_array['date'] =  date('d/m/Y', strtotime($new_array['date']));
+        return $new_array;
+    }
+
     public static function call_bef_insert_jornal ($new_array){
 
         $new_array['date'] = self::convert_Date($new_array['date']);
@@ -2006,6 +2047,11 @@ class Controller_Administrator extends Controller_Core_Main {
         return $new_array;
     }
 
+
+    public static  function call_list_table_user ($new_array){
+        $new_array['date_registration'] =  date('d/m/Y H:m:s', strtotime($new_array['date_registration']));
+        return $new_array;
+    }
 
     public static function call_bef_show_user($new_array){
 
@@ -2022,8 +2068,15 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
 
+    public static  function call_list_table_subscription ($new_array){
+        $new_array['date'] =  date('d/m/Y H:m:s', strtotime($new_array['date']));
+        return $new_array;
+    }
 
-
+    public static  function call_list_table_contact ($new_array){
+        $new_array['date_create'] =  date('d/m/Y H:m:s', strtotime($new_array['date_create']));
+        return $new_array;
+    }
 
 
 
