@@ -575,7 +575,8 @@ class Model_BussinesModel extends Model_BaseModel {
                             'ArticUrl' => '',
                             'ArticSecondName' => '',
                             'ArticDatecreate' => $row['NewsDate'],
-                            'ArticImage' => $row['NewsImg']);
+                            'ArticImage' => $row['NewsImg'],
+                            'news' => 1);
 
                     }
                 } else {

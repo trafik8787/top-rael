@@ -392,7 +392,6 @@
 
                                     <div class="list list-media">
 
-
                                         <?foreach ($data['ArticArr'] as $rows_artic):?>
 
                                             <div class="list-item">
@@ -401,13 +400,23 @@
                                                     <? if (!empty($rows_artic['ArticImage'])): ?>
 
                                                         <div class="media-left">
+
+                                                            <?
+                                                            if (!empty($rows_artic['news'])){
+                                                                $img_src = $rows_artic['ArticImage'];
+                                                            } else {
+                                                                $img_src = '/uploads/img_articles/thumbs/'.basename($rows_artic['ArticImage']);
+                                                            }
+
+                                                            ?>
+
                                                             <? if (!empty($rows_artic['ArticUrl'])): ?>
                                                                 <a href="/article/<?=$rows_artic['ArticUrl']?>">
-                                                                    <img src="/uploads/img_articles/thumbs/<?=basename($rows_artic['ArticImage'])?>" width="260" height="190"
+                                                                    <img src="<?=$img_src?>" width="260" height="190"
                                                                          class="media-object"/>
                                                                 </a>
                                                             <?else:?>
-                                                                <img src="/uploads/img_articles/thumbs/<?=basename($rows_artic['ArticImage'])?>" width="260" height="190"
+                                                                <img src="<?=$img_src?>" width="260" height="190"
                                                                      class="media-object"/>
                                                             <?endif?>
                                                         </div>
