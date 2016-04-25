@@ -404,7 +404,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function adminSections (){
         $crud = new Cruds();
-        $crud->load_table('category');
+        $crud->load_table('category', array('0', 'DESC'));
         $crud->set_lang('ru');
         $crud->disable_search();
         $crud->show_columns('id', 'name', 'url');
@@ -422,7 +422,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function adminCategory (){
         $crud = new Cruds();
-        $crud->load_table('category');
+        $crud->load_table('category', array('0', 'DESC'));
         $crud->set_lang('ru');
         $crud->disable_search();
 
@@ -457,7 +457,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function adminTags (){
         $crud = new Cruds();
-        $crud->load_table('tags');
+        $crud->load_table('tags', array('0', 'DESC'));
         $crud->set_lang('ru');
         $crud->disable_search();
         $crud->disable_editor('description');
@@ -473,7 +473,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function adminLocat (){
         $crud = new Cruds();
-        $crud->load_table('city');
+        $crud->load_table('city', array('0', 'DESC'));
         $crud->set_lang('ru');
         $crud->disable_search();
         $crud->remove_delete();
@@ -495,7 +495,7 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function adminLotarey (){
 
         $crud = new Cruds();
-        $crud->load_table('lotarey');
+        $crud->load_table('lotarey', array('0', 'DESC'));
         $crud->set_lang('ru');
         $crud->set_field_type('status', 'radio', array('1' => 'Ожидает', '2' => 'Идет', '3' => 'Завершен'));
         $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
@@ -1014,7 +1014,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function adminContacts (){
         $crud = new Cruds();
-        $crud->load_table('contacts');
+        $crud->load_table('contacts', array('0', 'DESC'));
         $crud->set_lang('ru');
         $crud->disable_search();
         $crud->remove_add();
@@ -1037,7 +1037,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function adminJornal () {
         $crud = new Cruds();
-        $crud->load_table('jornal');
+        $crud->load_table('jornal', array('0', 'DESC'));
         $crud->set_lang('ru');
         $crud->disable_search();
         $crud->show_columns('id', 'info', 'date');
@@ -1065,7 +1065,7 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function adminSubscription (){
 
         $crud = new Cruds();
-        $crud->load_table('subscription');
+        $crud->load_table('subscription', array('0', 'DESC'));
         $crud->set_lang('ru');
         $crud->remove_edit();
         $crud->remove_add();
@@ -1091,7 +1091,7 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function adminUsers (){
 
         $crud = new Cruds();
-        $crud->load_table('users');
+        $crud->load_table('users', array('0', 'DESC'));
         $crud->set_lang('ru');
 
         if (Session::instance()->get('customer_id_users') == 1 OR Session::instance()->get('customer_id_users') == 5) {
@@ -1198,7 +1198,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $recurs_cat = Model::factory('CategoryModel')->recurs_catalog();
 
         $crud = new Cruds();
-        $crud->load_table('banners');
+        $crud->load_table('banners', array('0', 'DESC'));
         $crud->set_lang('ru');
         $crud->select_multiselect('category');
         $crud->select_multiselect('section');

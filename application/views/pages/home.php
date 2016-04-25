@@ -87,12 +87,13 @@
 
                     <ul class="nav nav-pills panel-navigation">
 
-                        <li class="active"><a class="w-coupon-section" href="#">Новые</a></li>
+                        <li class="active"><a class="w-coupon-section" href="/coupons">Новые</a></li>
                         <?foreach ($section_coupons as $row_section):?>
                             <li><a href="/coupons/<?=$row_section['url']?>" class="w-coupon-section" data-sectcop="<?=$row_section['url']?>"><?=$row_section['name']?></a></li>
                         <?endforeach?>
 
                     </ul>
+
                 </div>
             </div>
 
@@ -164,7 +165,9 @@
 
                     <?endforeach?>
 
-
+                </div>
+                <div class="text-center">
+                    <a href="/coupons/" class="btn text-center open-all w-open-coupons-all" role="button">Открыть все</a>
                 </div>
             </div>
 

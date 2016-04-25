@@ -56,7 +56,7 @@ class Controller_Home extends Controller_BaseController {
         }
 
 
-        $coupon = Model::factory('CouponsModel')->getCouponsSectionUrl(null, 6, 0, null);
+        $coupon = Model::factory('CouponsModel')->getCouponsSectionUrl(null, 10, 0, null);
         $seo_home = Model::factory('BaseModel')->getHome();
 
         //Cache::instance()->delete('home_busines');

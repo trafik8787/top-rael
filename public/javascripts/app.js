@@ -663,6 +663,10 @@ $(document).ready(function(){
         var addClasLi = $(this).parent();
         var remClassLi = $(this).parents('.w-bloc-coupons').find('li.active');
 
+
+        var href_cat = $(this).attr('href');
+        $(this).parents('.w-bloc-coupons').find('.w-open-coupons-all').attr('href', href_cat);
+
         remClassLi.removeClass('active');
         addClasLi.addClass('active');
         //деструктор слайдера

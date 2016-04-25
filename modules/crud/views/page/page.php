@@ -25,7 +25,7 @@
             <?endif?>
             "processing": true,
             "serverSide": true,
-            "pageLength": 25,
+            "pageLength": 50,
             "sLengthSelect": "form-control",
             "sDom": '<"row"<"col-md-2"l><"col-md-2"i><"col-md-8"<?=$table_propery['activ_operation']['search']?>><"row"<"col-md-12"p>><?=$table_propery['activ_operation']['enable_export']?>>rt<"bottom"ip><"clear">',//<"clear">
 
