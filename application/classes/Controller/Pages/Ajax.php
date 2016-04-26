@@ -486,7 +486,7 @@ class Controller_Pages_Ajax extends Controller {
             $m = Email::factory();
             $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
             $m->To($lotery['user']['email']); // кому адресованно
-            $m->Bcc('beliar87@mail.ru');
+            $m->Bcc('boris@briker.biz');
             $m->Subject('Поздравляем Вас! Вы выиграли в Лотерее Topisrael');
             $m->Body($html_mail, "html");
             $m->Priority(3);
