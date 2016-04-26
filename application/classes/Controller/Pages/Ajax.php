@@ -408,10 +408,11 @@ class Controller_Pages_Ajax extends Controller {
         }
 
         //запуск рассылки
-       $this->SendEmailSubscribe($flag);
+       //$this->SendEmailSubscribe($flag);
 
         //лотарея
         $this->LotareyCron();
+        die('sdf');
         //включение отключение уведомление по банерам
         $this->subskribeBaners();
         //включение отключение уведомление по купонам
@@ -479,7 +480,7 @@ class Controller_Pages_Ajax extends Controller {
 
             $html_mail = View::factory('email/mail_lotery');
             $html_mail->email = $lotery['user']['email'];
-            $html_mail->name = $lotery['lotery']['name'];
+            $html_mail->name = $lotery['lotery']['secondname'];
 
 
             $m = Email::factory();
