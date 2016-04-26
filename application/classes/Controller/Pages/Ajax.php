@@ -408,11 +408,11 @@ class Controller_Pages_Ajax extends Controller {
         }
 
         //запуск рассылки
-       //$this->SendEmailSubscribe($flag);
+       $this->SendEmailSubscribe($flag);
 
         //лотарея
         $this->LotareyCron();
-        die('sdf');
+
         //включение отключение уведомление по банерам
         $this->subskribeBaners();
         //включение отключение уведомление по купонам
@@ -486,7 +486,7 @@ class Controller_Pages_Ajax extends Controller {
             $m = Email::factory();
             $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
             $m->To($lotery['user']['email']); // кому адресованно
-            $m->Bcc('boris@briker.biz');
+            $m->Bcc('beliar87@mail.ru');
             $m->Subject('Поздравляем Вас! Вы выиграли в Лотерее Topisrael');
             $m->Body($html_mail, "html");
             $m->Priority(3);
