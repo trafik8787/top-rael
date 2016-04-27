@@ -23,7 +23,7 @@
 <script type="text/javascript" src="/public_a/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="/public_a/js/jquery.validate.min.js"></script>
 
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
 
 
 
@@ -94,7 +94,15 @@
 
         <div class="col-md-10 col-md-offset-1" style="margin-top: 2%; left: 7%">
            <h2 class="page-header"><?=$title_page?></h2>
-            <?=isset($filtr)? $filtr : ''?>
+
+            <?if (isset($filtr)):?>
+
+                <? foreach ($filtr as $row): ?>
+                    <?=$row?>
+                <? endforeach ?>
+
+            <?endif?>
+
 
             <div class="row placeholders">
                             <?=@$render;?>

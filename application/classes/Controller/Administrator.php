@@ -173,7 +173,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $filtr = View::factory('adm/filtr_admin_section');
         $filtr->data = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
-        Controller_Core_Main::$filtr = $filtr;
+        Controller_Core_Main::$filtr[] = $filtr;
 
         Controller_Core_Main::$title_page = 'Категории';
         $this->response->body(self::adminCategory()->render());
@@ -190,6 +190,27 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
     public function action_banners (){
+
+
+        if (!empty($_GET['activ'])) {
+
+            if ($_GET['activ'] == 3) {
+                Session::instance()->set('baners_activ', null);
+            } elseif ($_GET['activ'] == 2){
+                Session::instance()->set('baners_activ', 0);
+            } elseif ($_GET['activ'] == 1){
+                Session::instance()->set('baners_activ', 1);
+            }
+
+
+        } else {
+            Session::instance()->set('baners_activ', null);
+        }
+
+        $form_activ = View::factory('adm/filtr_activ');
+
+        Controller_Core_Main::$filtr[] = $form_activ;
+
         Controller_Core_Main::$title_page = 'Банеры';
         $this->response->body(self::adminBanners()->render());
     }
@@ -202,7 +223,6 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public function action_bussines (){
 
-        //die(HTML::x(Model::factory('CategoryModel')->recurs_catalog()));
 
         $city_id = null;
 
@@ -217,7 +237,6 @@ class Controller_Administrator extends Controller_Core_Main {
             $data =  Model::factory('BussinesModel')->getBussinesSectionUrl($category[0]['url'], null ,null, $city_id, true);
 
 
-           //HTML::x( $city, true);
 
             $name = $category[0]['name'];
         } else {
@@ -238,9 +257,30 @@ class Controller_Administrator extends Controller_Core_Main {
         $filtr = View::factory('adm/filtr_admin_section');
         $filtr->data = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
         $filtr->city = $city;
-        Controller_Core_Main::$filtr = $filtr;
 
 
+        $form_activ = View::factory('adm/filtr_activ');
+        $form_activ->form = '#w-form-filtr-adm';
+
+        $filtr->activ = $form_activ;
+
+        Controller_Core_Main::$filtr[] = $filtr;
+
+
+        if (!empty($_GET['activ'])) {
+
+            if ($_GET['activ'] == 3) {
+                Session::instance()->set('bussines_activ', null);
+            } elseif ($_GET['activ'] == 2){
+                Session::instance()->set('bussines_activ', 0);
+            } elseif ($_GET['activ'] == 1){
+                Session::instance()->set('bussines_activ', 1);
+            }
+
+
+        } else {
+            Session::instance()->set('bussines_activ', null);
+        }
 
         Session::instance()->set('customer_id_bussines', $busssines);
 
@@ -249,7 +289,7 @@ class Controller_Administrator extends Controller_Core_Main {
         }
 
         Controller_Core_Main::$title_page = 'Бизнесы '.$name;
-        $this->response->body(self::adminBussines()->render());
+        $this->response->body(self::adminBussines($_GET)->render());
 
     }
 
@@ -263,7 +303,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $filtr = View::factory('adm/filtr_admin_section');
         $filtr->data = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
-        Controller_Core_Main::$filtr = $filtr;
+        Controller_Core_Main::$filtr[] = $filtr;
 
         Controller_Core_Main::$title_page = 'Обзоры';
         $this->response->body(self::adminArticles()->render());
@@ -282,6 +322,25 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
     public function action_coupons (){
+
+        if (!empty($_GET['activ'])) {
+
+            if ($_GET['activ'] == 3) {
+                Session::instance()->set('coupons_activ', null);
+            } elseif ($_GET['activ'] == 2){
+                Session::instance()->set('coupons_activ', 0);
+            } elseif ($_GET['activ'] == 1){
+                Session::instance()->set('coupons_activ', 1);
+            }
+
+
+        } else {
+            Session::instance()->set('coupons_activ', null);
+        }
+
+
+        $form_activ = View::factory('adm/filtr_activ');
+        Controller_Core_Main::$filtr[] = $form_activ;
 
         Controller_Core_Main::$title_page = 'Купоны';
         $this->response->body(self::adminCoupons()->render());
@@ -333,7 +392,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $filtr = View::factory('adm/filtr_admin_section');
         $filtr->data = $users;
-        Controller_Core_Main::$filtr = $filtr;
+        Controller_Core_Main::$filtr[] = $filtr;
 
         Controller_Core_Main::$title_page = $title_page;
         $this->response->body(self::adminUsers()->render());
@@ -532,11 +591,11 @@ class Controller_Administrator extends Controller_Core_Main {
      * @return Cruds
      * Форма бизнесов
      */
-    public static function adminBussines (){
+    public static function adminBussines ($get=null){
 
         $query = DB::select('user_id')->from('roles_users')->where('role_id','IN', array(4,3,2))->execute()->as_array();
         $arr_user = array();
-       // die(HTML::x($query));
+
         if (!empty($query)) {
             foreach ($query as $row_user) {
                 $arr_user[] = $row_user['user_id'];
@@ -549,9 +608,25 @@ class Controller_Administrator extends Controller_Core_Main {
         //номер поля по порядку с лева начинается с нуля
         $crud->load_table('business', array('0', 'DESC'));
         $crud->set_lang('ru');
+
+
+        $activ_bussines = '';
+
         if (Session::instance()->get('customer_id_bussines') != null) {
-            $crud->set_where('id', 'IN', Session::instance()->get('customer_id_bussines'));
+            //$crud->set_where('id', 'IN', Session::instance()->get('customer_id_bussines')); Session::instance()->get('bussines_activ')
+            if (Session::instance()->get('bussines_activ') !== null) {
+                $activ_bussines = ' AND status = '.Session::instance()->get('bussines_activ');
+            }
+            $crud->set_where(' WHERE id IN '.Session::instance()->get('customer_id_bussines').$activ_bussines);
+        } else {
+
+            if (Session::instance()->get('bussines_activ') !== null) {
+                $activ_bussines = ' WHERE status = '.Session::instance()->get('bussines_activ');
+                $crud->set_where($activ_bussines);
+            }
+
         }
+
         $crud->disable_editor('description');
         $crud->disable_editor('keywords');
         $crud->disable_editor('address');
@@ -562,7 +637,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud->disable_editor('title');
         $crud->select_multiselect('cat_id');
-        $crud->show_columns('id', 'name', 'url', 'status');
+        $crud->show_columns('id', 'name', 'show_bussines', 'date_end', 'status');
 
         $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
         $crud->set_field_type('dop_address', 'hidden', '', '', '', '');
@@ -594,7 +669,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
         $crud->links('name', '/business/', 'url');
-        $crud->rows_color_where(3, '==', 0, ' #cccccc');
+        $crud->rows_color_where(4, '==', 0, ' #cccccc');
 
 
         $crud->edit_fields('redactor_user',
@@ -653,6 +728,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud->show_name_column(array('name' => 'Название',
             'url' => 'URL',
+            'show_bussines' => 'Просмотры',
             'description' => 'SEO Description',
             'title' => 'SEO Title',
             'keywords' => 'SEO Keywords',
@@ -702,15 +778,15 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->validation('top_slider', array('required' => true),
             array('required' => 'Это поле обязательно для заполнения'));
 
-
         $crud->callback_before_edit('call_bef_edit_business');
         $crud->callback_after_insert('call_after_insert_business');
         $crud->callback_before_insert('call_bef_insert_business');
 
         $crud->callback_befor_show_edit('call_bef_show_edit_bus');
         $crud->callback_befor_show_add('call_bef_show_insert_bus');
-
         $crud->callback_before_delete('call_befor_del_business');
+
+        $crud->callback_list_table('call_list_table_bussines');
 
         return $crud;
     }
@@ -895,6 +971,17 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud = new Cruds();
         $crud->load_table('coupon', array('0', 'DESC'));
+
+        if (Session::instance()->get('coupons_activ') !== null) {
+
+            if (Session::instance()->get('coupons_activ') == 1) {
+                $crud->set_where('dateoff', '>', DB::expr('DATE(NOW())'));
+            } elseif (Session::instance()->get('coupons_activ') == 0){
+                $crud->set_where('dateoff', '<', DB::expr('DATE(NOW())'));
+            }
+
+        }
+
         $crud->set_lang('ru');
         $crud->show_columns('id', 'name', 'business_id', 'dateoff');
         $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
@@ -924,7 +1011,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->show_name_old_table('business_id', 'business', 'name', 'id');
         $crud->disable_editor('info');
 
-        $crud->rows_color_where(3, '<', date('Y-m-d'), ' #cccccc');
+        $crud->rows_color_where(3, '<', date('Y-m-d'), ' #cccccc', 'date');
 
         $crud->edit_fields('name',
             'secondname',
@@ -1199,6 +1286,17 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud = new Cruds();
         $crud->load_table('banners', array('0', 'DESC'));
+
+        if (Session::instance()->get('baners_activ') !== null) {
+
+            if (Session::instance()->get('baners_activ') == 1) {
+                $crud->set_where('date_end', '>', DB::expr('DATE(NOW())'));
+            } elseif (Session::instance()->get('baners_activ') == 0){
+                $crud->set_where('date_end', '<', DB::expr('DATE(NOW())'));
+            }
+
+        }
+
         $crud->set_lang('ru');
         $crud->select_multiselect('category');
         $crud->select_multiselect('section');
@@ -1222,7 +1320,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->edit_fields('name', 'section', 'category', 'city_banners', 'business_id', 'website', 'type_baners', 'images', 'position', 'text_banners', 'date_start', 'date_end');
         $crud->add_field('name','section', 'category', 'city_banners', 'business_id', 'website', 'type_baners', 'images', 'position',  'text_banners', 'date_start', 'date_end');
 
-        $crud->rows_color_where(3, '<', date('Y-m-d'), ' #cccccc');
+        $crud->rows_color_where(3, '<', date('Y-m-d'), ' #cccccc', 'date');
 
 
         $crud->toptip_fields(array('text_banners' => '50 символов'));
@@ -1479,6 +1577,13 @@ class Controller_Administrator extends Controller_Core_Main {
         }
         return $new_array;
 
+    }
+
+
+    public static function call_list_table_bussines ($new_array){
+        $new_array['date_end'] =  date('d/m/Y', strtotime($new_array['date_end']));
+        $new_array['show_bussines'] = Rediset::getInstance()->get_business_all($new_array['id']);
+        return $new_array;
     }
 
 

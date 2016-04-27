@@ -15,6 +15,8 @@ if (!empty($_GET['city'])) {
     $citys = $_GET['city'];
 }
 
+
+
 ?>
 <script>
     $(document).ready(function(){
@@ -26,6 +28,7 @@ if (!empty($_GET['city'])) {
         $(document).on('change', '#filtr_city_adm', function(){
             $('#w-form-filtr-adm').submit();
         });
+
     });
 </script>
 <form role="form" action="" id="w-form-filtr-adm">
@@ -44,4 +47,7 @@ if (!empty($_GET['city'])) {
             <?endforeach?>
         </select>
     <?endif?>
+
+    <?=isset($activ) ? $activ : '' ?>
+
 </form>

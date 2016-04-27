@@ -113,24 +113,33 @@
 
             <?if ($table_propery['rows_color_where'] != null):?>
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                var $data;
+                if ('<?=$table_propery['rows_color_where'][4]?>' == 'date') {
 
+                    now = moment(aData[<?=$table_propery['rows_color_where'][0]?>], 'D/M/YYYY');
+                    $data = now.format('YYYY-MM-DD');
+
+                } else {
+                    $data = aData[<?=$table_propery['rows_color_where'][0]?>];
+                }
+                console.log($data);
                 if ("<?=$table_propery['rows_color_where'][1]?>" == '==') {
 
-                    if (aData[<?=$table_propery['rows_color_where'][0]?>] == <?=$table_propery['rows_color_where'][2]?>) {
+                    if ($data == <?=$table_propery['rows_color_where'][2]?>) {
                         $('td', nRow).css('background-color', '<?=$table_propery['rows_color_where'][3]?>');
                     }
                 }
 
                 if ("<?=$table_propery['rows_color_where'][1]?>" == '<') {
 
-                    if (aData[<?=$table_propery['rows_color_where'][0]?>] < '<?=$table_propery['rows_color_where'][2]?>') {
+                    if ($data < '<?=$table_propery['rows_color_where'][2]?>') {
                         $('td', nRow).css('background-color', '<?=$table_propery['rows_color_where'][3]?>');
                     }
                 }
 
                 if ("<?=$table_propery['rows_color_where'][1]?>" == '>') {
 
-                    if (aData[<?=$table_propery['rows_color_where'][0]?>] > '<?=$table_propery['rows_color_where'][2]?>') {
+                    if ($data > '<?=$table_propery['rows_color_where'][2]?>') {
                         $('td', nRow).css('background-color', '<?=$table_propery['rows_color_where'][3]?>');
                     }
                 }

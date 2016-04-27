@@ -146,10 +146,14 @@ class Cruds extends Controller_Core_Main {
         $this->icon_delete = $icon_class;
     }
 
-    public function set_where ($colum, $operation, $value) {
-        $this->set_where = array('colum' => $colum,
-            'operation' =>  $operation,
-            'value' => $value);
+    public function set_where ($colum, $operation=null, $value=null) {
+        if ($operation == null AND $value == null) {
+            $this->set_where = $colum;
+        } else {
+            $this->set_where = array('colum' => $colum,
+                'operation' => $operation,
+                'value' => $value);
+        }
     }
 
     public function edit_render ($id) {
@@ -910,8 +914,8 @@ class Cruds extends Controller_Core_Main {
     /**
      * для задания цвета строке таблицы по условию
      */
-    public function rows_color_where($rows, $operand, $str, $bagraut_color){
-        $this->rows_color_where = array($rows, $operand, $str, $bagraut_color);
+    public function rows_color_where($rows, $operand, $str, $bagraut_color, $type = null){
+        $this->rows_color_where = array($rows, $operand, $str, $bagraut_color, $type);
     }
 
 }
