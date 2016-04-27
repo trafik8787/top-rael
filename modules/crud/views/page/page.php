@@ -122,7 +122,7 @@
                 } else {
                     $data = aData[<?=$table_propery['rows_color_where'][0]?>];
                 }
-                console.log($data);
+
                 if ("<?=$table_propery['rows_color_where'][1]?>" == '==') {
 
                     if ($data == <?=$table_propery['rows_color_where'][2]?>) {

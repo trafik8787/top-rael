@@ -23,7 +23,7 @@
 <script type="text/javascript" src="/public_a/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="/public_a/js/jquery.validate.min.js"></script>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
+<script src="/public_a/js/moment.min.js" type="text/javascript"></script>
 
 
 
