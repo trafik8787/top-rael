@@ -198,10 +198,12 @@ function previewCss(id, params) {
     var style = document.createElement('style');
     style.type = "text/css";
     style.text = String()
+        + "#topIsraelInformerBusiness.ti-container .ti-item .ti-image, #topIsraelInformerReviews.ti-container .ti-item .ti-image{float:none !important; width:100% !important;}"
+        + "#topIsraelInformerBusiness.ti-container .ti-item .ti-context, #topIsraelInformerReviews.ti-container .ti-item .ti-context{margin-top: -10px !important;}"
         + "#" + id + ".ti-container{font-family:  Arial, 'Helvetica Neue', Helvetica, sans-serif; color: " + params['font']['color']['text'] + "; background: " + params['layout']['background'] + "; border:1px solid #C7C6C6; width: " + params['layout']['width'] + "px;}"
         + "#" + id + ".ti-container .ti-header{ font-size: 20px; line-height: 1.25; margin: 5px 0; padding:5px 10px 10px; border-bottom:1px solid #ECECEC; display: block;}"
         + "#" + id + ".ti-container .ti-footer{ font-size: 20px; line-height: 1.25; margin: 5px 0; padding:10px 10px 5px 10px; border-top:1px solid #ECECEC; display: block;}"
-        + "#" + id + ".ti-container .ti-item{display:block; text-decoration:none; margin:10px;}"
+        + "#" + id + ".ti-container .ti-item{display:block; text-decoration:none; margin: 10px 10px 15px 10px;}"
         + "#" + id + ".ti-container .ti-item .ti-image{float:left; margin:0 10px 0 0; width:70px; background:#F2F2F2;}"
         + "#" + id + ".ti-container .ti-item .ti-image img{display:block; width:100%; height:auto;}"
         + "#" + id + ".ti-container .ti-item .ti-context{display:block; position:relative; overflow:hidden;}"

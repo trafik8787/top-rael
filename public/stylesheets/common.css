@@ -11366,7 +11366,7 @@ div.panel-title, div.panel-title:hover{
   position: absolute;
   top: -10px;
   right: -10px;
-  z-index: 1003;
+  z-index: 100;
 }
 /* line 180, ../.sass/panel.scss */
 .panel.panel-thumbnails .panel-body .thumbnail .thumbnail-image {
@@ -12634,10 +12634,10 @@ footer {
   text-decoration: none;
 }
 /* line 107, ../.sass/sidebar.scss */
-.sidebar-lottery .form-control {
+/*.sidebar-lottery .form-control {
   border-color: transparent;
   background: #ececec;
-}
+}*/
 /* line 113, ../.sass/sidebar.scss */
 .sidebar-lottery .checkbox .form-control {
   color: #d9534f;
@@ -15266,7 +15266,8 @@ html, body, #wrapper {
 
 /* line 330, ../.sass/common.scss */
 .short-description {
-  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 40px;
   font-size: 26px;
   line-height: 1.1;
   color: #8a8787;
@@ -15682,4 +15683,7 @@ html, body, #wrapper {
 }
 .your-chose{
   font-size: 13px;
+}
+.tag-business{
+    
 }

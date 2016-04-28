@@ -131,11 +131,11 @@
         display: block; /* по умолчанию показываем нужный блок */
     }
 
-    .tabs_galery span {
+    .tabs_galery span, .tabs__caption  span{
         cursor: pointer;
         color: #007898;
     }
-    .tabs_galery span.active {
+    .tabs_galery span.active, .tabs__caption  span.active{
         font-weight: bold;
         color: #000000;
         text-decoration: none;
@@ -189,7 +189,7 @@
 
                             <?if (!empty($data['TagArr'])):?>
                                 <?foreach ($data['TagArr'] as $tags):?>
-                                    <li><a href="/tags/<?=$tags['TagUrl']?>" class="button"><span><?=$tags['TagName']?></span></a></li>
+                                    <li><a href="/tags/<?=$tags['TagUrl']?>" class="tag-business"><span><?=$tags['TagName']?></span></a></li>
                                 <?endforeach?>
                             <?endif?>
                         </ul>
@@ -200,12 +200,12 @@
 
                         <span class="tabs">
                             <p class="tabs__caption">
-                                <a href="#" data-item="<?=$data['BusMapsX']?>" class="active"><?=$data['BusCity']?></a>
+                                <span href="#" data-item="<?=$data['BusMapsX']?>" class="active"><?=$data['BusCity']?></span>
                                 <?if (!empty($data['BusDopAddress'])):?>
                                     <?foreach ($data['BusDopAddress'] as $key => $dop_adress_city):?>
                                         <?if ($dop_adress_city['name'] != ''):?>
                                             &nbsp; &nbsp; | &nbsp; &nbsp;
-                                            <a href="#" data-item="<?=$dop_adress_city['maps_x']?>"><?=$dop_adress_city['name']?></a>
+                                            <span href="#" data-item="<?=$dop_adress_city['maps_x']?>"><?=$dop_adress_city['name']?></span>
                                         <?endif?>
                                     <?endforeach?>
                                 <?endif?>

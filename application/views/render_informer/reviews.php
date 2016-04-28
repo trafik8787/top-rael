@@ -4,6 +4,7 @@
  * User: Vitalik
  * Date: 22.02.2016
  * Time: 14:15
+ НА СЛЕДУЮЩУЕЙ СТРОКЕ ПОСЛЕ 31, ПРИ НЕОБХОДИМОСТИ МОЖНО ДОБАВИТЬ ОПИСАНИЕ: + "     <span class=\"ti-text\">" + params['description'] + "</span>\n"
  */
 ?>
 
@@ -24,11 +25,10 @@ var $template = function (params, $defaults) {
 return String()
 + "<a href=\"<?=HTML::HostSite()?>/article/"+params['url']+"\" class=\"ti-item\">\n"
     + " <span class=\"ti-image\">\n"
-            + "     <img src=\"<?=HTML::HostSite()?>" + params['image']['url'] + "\" width=\"50\" height=\"50\" alt=\"\" title=\"\"/>\n"
+            + "     <img src=\"<?=HTML::HostSite()?>" + params['image']['url'] + "\" alt=\"\" title=\"\"/>\n"
             + " </span>"
     + " <span class=\"ti-context\">"
             + "     <span class=\"ti-title\">" + params['title'] + "</span>\n"
-            + "     <span class=\"ti-text\">" + params['description'] + "</span>\n"
             + " </span>\n"
     + " <span class=\"ti-clear\"></span>\n"
     + "</a>";

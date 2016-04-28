@@ -24,7 +24,7 @@ var $template = function (params, $defaults) {
 return String()
 + "<a href=\"<?=HTML::HostSite()?>/business/"+params['url']+"\" class=\"ti-item\">\n"
     + " <span class=\"ti-image\">\n"
-            + "     <img src=\"<?=HTML::HostSite()?>"+ params['image']['url'] + "\" width=\"50\" alt=\"\" title=\"\"/>\n"
+            + "     <img src=\"<?=HTML::HostSite()?>"+ params['image']['url'] + "\" alt=\"\" title=\"\"/>\n"
             + " </span>"
     + " <span class=\"ti-context\">"
             + "     <span class=\"ti-title\">" + params['title'] + "</span>\n"

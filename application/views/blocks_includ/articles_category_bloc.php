@@ -10,7 +10,7 @@
 <?if (!empty($content)):?>
 
     <!-- Reviews -->
-    <div class="sidebar-reviews">
+    <div class="sidebar-reviews w-bloc-right">
 
         <div class="sidebar-reviews-heading">
             <div class="sidebar-reviews-title">Обзоры</div>

@@ -42,7 +42,6 @@
                     <h1><?=$data['ArticName']?></h1>
 
 
-                    <br/>
                     <?if (!empty($data['ArticShortPreviev'])):?>
                         <div class="short-description">
                             <i class="fa fa-quote-left"></i>
@@ -53,7 +52,6 @@
                             </div>
                         </div>
                     <?endif?>
-                    <br/>
 
                     <span class="w-node-article">
                         <p><?=$data['ArticContent']?></p>

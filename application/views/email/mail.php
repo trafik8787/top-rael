@@ -69,7 +69,7 @@
 
                         <table cellpadding="0" cellspacing="0" width="100%">
                             <tr>
-                                <td style="padding:0 20px 15px 20px;">
+                                <td style="padding:0 20px 15px 20px;text-align:right;">
                                     <span style="font-size:12px; color: #a9a9a9;">Рассылка за <?=Date::rusdate(strtotime(date('Y-m-d')), 'j %MONTH% Y'); ?></span>
                                 </td>
                             </tr>
@@ -104,7 +104,7 @@
                                         <table cellpadding="0" cellspacing="0" width="100%" style="padding:20px;">
                                             <?foreach ($articless as $artic):?>
                                                 <tr>
-                                                    <td>
+                                                    <td style="padding-bottom: 20px;">
 
                                                         <table cellpadding="0" cellspacing="0" width="100%" align="left"
                                                                style="max-width:165px;">
@@ -118,7 +118,7 @@
                                                             </tr>
                                                         </table>
 
-                                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['url']?>" style="font-size: 18px; color:#000; text-decoration: none;">
+                                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['url']?>" style="font-size: 20px; color:#000;">
                                                             <strong>
                                                                 <?=$artic['name']?>
                                                             </strong>
@@ -214,7 +214,7 @@
 
                                                         <td style="width: 50%">
 
-                                                            <div style="padding: 10px; width: 288px;">
+                                                            <div style="padding: 10px;">
 
                                                                 <div style="height: 400px;position: relative;border: 1px solid #d8d8d8;box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;" >
                                                                     <div style="font-size: 25px;line-height: 1.1;color: #e02929;">
@@ -244,7 +244,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div style="position: absolute;bottom: 2px;display: block;width: 100%;">
+                                                                                    <div style="position: absolute;margin-top: 2px;display: block;width: 100%;">
 
                                                                                         <div style="vertical-align: bottom;">
 
@@ -265,7 +265,10 @@
 
                                                 </tr>
                                             <? endforeach ?>
-
+                                        
+                                        <? endif ?>
+                                    </table>
+                                    <table cellpadding="0" cellspacing="0" width="100%" style="">
                                             <tr>
                                                 <td style="text-align: right!important;">
                                                     <strong> <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupons"
@@ -273,7 +276,6 @@
                                                             все</a></strong>
                                                 </td>
                                             </tr>
-                                        <? endif ?>
                                     </table>
 
 
@@ -379,69 +381,6 @@
                                         <? endforeach ?>
 
                                     <?endif?>
-
-                                    <? if (!empty($lotarey)): ?>
-
-
-                                        <table cellpadding="0" cellspacing="0" width="100%" style="margin-top: 20px;">
-                                            <tr>
-                                                <td><span><h3 style="margin: 0;padding: 0 0 10px 7px;">Еженедельная лотерея</h3></span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p style="margin-bottom: 2px;"><strong>Приз</strong></p>
-                                                    <hr style="background-color: #007797; height: 2px; color: #007797; margin-top: 0;">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <table cellpadding="0" cellspacing="0" width="100%" style="margin: 36px;">
-                                                        <tr>
-                                                            <td>
-                                                                <span style="text-align: right"><img src="cid:<?=basename($lotarey[0]['img'])?>" width="88" height="88" alt=""></span>
-                                                            </td>
-                                                            <td>
-                                                                <span style="font-size: 26px;color: #007797;font-weight: bold;"><?=$lotarey[0]['secondname'] ?></span>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <p style="margin-bottom: 2px;"><strong>Победители прошлого розыгрыша</strong></p>
-                                                    <hr style="background-color: #007797; height: 2px; color: #007797; margin-top: 0;">
-                                                </td>
-                                            </tr>
-                                            <? if (!empty($users)): ?>
-                                                <? foreach ($users as $row_users): ?>
-                                                    <tr>
-                                                        <td>
-                                                            <table cellpadding="0" cellspacing="0" width="100%" style="margin: 5px 0 10px 40px;">
-                                                                <tr>
-                                                                    <td>
-                                                                        <? if (!empty($row_users['usersPhoto'])): ?>
-                                                                            <img src="cid:<?=basename($row_users['usersPhoto']) ?>" width="60" height="60" style="border-radius: 50%;" alt="">
-                                                                        <?else:?>
-                                                                            <img src="cid:no_avatar.jpg" width="60" height="60" style="border-radius: 50%;" alt="">
-                                                                        <?endif?>
-
-                                                                    </td>
-                                                                    <td>
-                                                                        <strong><?=$row_users['usersName'] ?> <?=$row_users['usersSecondname'] ?></strong>
-                                                                        <p><?=$row_users['loteryDate'] ?> <?=$row_users['loteryName'] ?></p>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                <? endforeach ?>
-                                            <? endif ?>
-
-                                        </table>
-
-                                    <? endif ?>
 
                                 </td>
                             </tr>
