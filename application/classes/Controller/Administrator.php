@@ -2028,7 +2028,9 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_bef_edit_user ($new_array){
 
-        $new_array['bdate'] = self::convert_Date($new_array['bdate']);
+        if (!empty($new_array['bdate'])) {
+            $new_array['bdate'] = self::convert_Date($new_array['bdate']);
+        }
         return $new_array;
     }
 
@@ -2160,7 +2162,9 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_bef_show_user($new_array){
 
-        $new_array['bdate'] = date('d/m/Y', strtotime($new_array['bdate']));
+        if (!empty($new_array['bdate'])) {
+            $new_array['bdate'] = date('d/m/Y', strtotime($new_array['bdate']));
+        }
 
         $cont = View::factory('adm/adon_lotery_for_users');
         $data = Model::factory('LotareyModel')->getUserLotarey(null, array('users.id', '=', $new_array['id']));
