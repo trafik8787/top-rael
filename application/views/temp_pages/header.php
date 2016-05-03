@@ -61,7 +61,7 @@
                             <div class="clearfix"></div>
                             <a href="/account#coupons">Купоны <span class="badge w-count-coupon"><?=Controller_BaseController::$count_coupon?></span></a> 
                             <a href="/account#izbran">Места <span class="badge w-count-bussines"><?=Controller_BaseController::$count_bussines?></span></a> 
-                            <a href="/account#articles">Обзоры <span class="badge w-count-articles">0</span></a>
+                            <a href="/account#articles">Обзоры <span class="badge w-count-articles"><?=Controller_BaseController::$count_articles?></span></a>
                             
                         </div>
                         <?if (!empty($user->photo)):?>

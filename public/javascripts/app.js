@@ -802,6 +802,11 @@ $(document).ready(function(){
         $(this).find('.w-text-artic-page').text('В избранном');
         pin.attr('data-original-title', 'Обзор добавлен в Избранное').tooltip('show');
         pin.find('i').css('color', '#E44F44');
+
+        var count_articles = $('.w-count-articles').text();
+        count_articles = parseInt(count_articles) + 1;
+        $('.w-count-articles').text(count_articles);
+
         $('[data-toggle="tooltip"]').tooltip();
 
         return false;
@@ -817,9 +822,13 @@ $(document).ready(function(){
             data: 'id_articles='+$(this).data('id'),
             success: function(response) { // когда получаем ответ
 
-
             }
         });
+
+
+        var count_articles = $('.w-count-articles').text();
+        count_articles = parseInt(count_articles) - 1;
+        $('.w-count-articles').text(count_articles);
 
         $(this).parents('.list-item').hide();
 

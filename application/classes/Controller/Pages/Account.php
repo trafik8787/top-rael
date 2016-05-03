@@ -463,6 +463,7 @@ class Controller_Pages_Account extends Controller_BaseController {
                 Cookie::update_Arr_set_json('favoritartic', $favoritartic);
                 //получаем избранные статьи
                 $data_vievs->favorits_articles = Model::factory('ArticlesModel')->getArticlesId($favoritartic);
+                parent::$count_articles = count($favoritartic);
             }
         } else {
             Model::factory('BaseModel')->UpdateFavoritCookie($table, Auth::instance()->get_user()->id, $field, parent::$favorits_articles, $table_object, $cooki_name);

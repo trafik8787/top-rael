@@ -17,6 +17,7 @@ abstract class Controller_BaseController extends Controller_Template {
     public $footer;
     public static $count_coupon = 0;
     public static $count_bussines = 0;
+    public static $count_articles = 0;
     public static $favorits_coupon = null;
     public static $favorits_bussines = null;
     public static $favorits_articles = null;
@@ -186,6 +187,7 @@ abstract class Controller_BaseController extends Controller_Template {
 
         if (Cookie::get('favoritartic') != '') {
             self::$favorits_articles = json_decode(Cookie::get('favoritartic'));
+            self::$count_articles = count(self::$favorits_articles);
         }
     }
 
