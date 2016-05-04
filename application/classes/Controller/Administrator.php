@@ -48,7 +48,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $this->adm = View::factory('/adm/auth_admin');
 
 
-        if ($this->auth->logged_in('admin') !== false OR $this->auth->logged_in('manager') !== false OR $this->auth->logged_in('redactor') !== false) {
+        if ($this->auth->logged_in('admin') !== false OR $this->auth->logged_in('manager') !== false OR $this->auth->logged_in('redactor') !== false OR $this->auth->logged_in('control') !== false) {
 
             $this->user = $this->auth->get_user();
            $this->user_roles = $this->user->roles->find_all()->as_array(NULL,'name');
@@ -63,7 +63,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public function after () {
 
-        if ($this->auth->logged_in('admin') !== false OR $this->auth->logged_in('manager') !== false OR $this->auth->logged_in('redactor') !== false) {
+        if ($this->auth->logged_in('admin') !== false OR $this->auth->logged_in('manager') !== false OR $this->auth->logged_in('redactor') !== false OR $this->auth->logged_in('control') !== false) {
 
             $this->_check_permission();
         } else {
@@ -1205,6 +1205,7 @@ class Controller_Administrator extends Controller_Core_Main {
             $crud->add_field('email', 'username', 'date_registration');
 
             $crud->callback_befor_show_edit('call_bef_show_edit_users');
+            $crud->callback_before_edit('call_bef_edit_user');
 
 
         } elseif (Session::instance()->get('customer_id_users') == 5) {
@@ -1268,7 +1269,7 @@ class Controller_Administrator extends Controller_Core_Main {
             array('required' => 'Это поле обязательно для заполнения', 'minlength' => 'Минимальное количество символов 6'));
 
         $crud->callback_before_insert('call_bef_insert_user');
-        $crud->callback_before_edit('call_bef_edit_user');
+
         $crud->callback_befor_show_edit('call_bef_show_user');
         $crud->callback_list_table('call_list_table_user');
 
@@ -2026,7 +2027,7 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
 
-    public static function call_bef_edit_user ($new_array){
+    public static function call_bef_edit_user ($new_array, $old_array){
 
         if (!empty($new_array['bdate'])) {
             $new_array['bdate'] = self::convert_Date($new_array['bdate']);
@@ -2045,7 +2046,15 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
     public static function call_befor_edit_userAdmin ($new_array = null, $old_array = null){
-        $new_array['password'] = Auth::instance()->hash($new_array['password']);
+
+
+        if (!empty($new_array['bdate'])) {
+            $new_array['bdate'] = self::convert_Date($new_array['bdate']);
+        }
+        if ($old_array['password'] != $new_array['password']) {
+            $new_array['password'] = Auth::instance()->hash($new_array['password']);
+        }
+
         return $new_array;
     }
 

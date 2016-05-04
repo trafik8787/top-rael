@@ -8,30 +8,34 @@
 
 return array(
     # Order
-    'Controller_Administrator' => array(
-        'bussines'           => array('admin', 'manager'),
-        'coupons'           => array('admin', 'manager'),
-        'galery'           => array('admin', 'manager'),
-        'articles'           => array('admin', 'redactor', 'manager'),
-        'lotarey'           => array('admin', 'manager'),
-        'contacts'           => array('admin', 'manager'),
-        'subscription'           => array('admin'),
-        'users'           => array('admin'),
-        'sections'           => array('admin'),
-        'category'           => array('admin'),
-        'tags'           => array('admin'),
-        'locat'           => array('admin'),
-        'banners'           => array('admin'),
-        'about'           => array('admin'),
-        'news'           => array('admin', 'manager', 'redactor'),
-        'statistik'           => array('admin'),
 
 
-        'welcome'           => array('admin', 'redactor', 'manager'),
-        'logs'           => array('admin'),
-        'jornal'           => array('admin'),
-        'index'           => array('admin'),
-        'login'           => array('admin', 'redactor', 'manager'),
-        'logout'           => array('admin', 'redactor', 'manager'),
+     'Controller_Administrator' => array(
+        'bussines'           => array('admin', 'redactor', 'manager', 'control'),
+        'coupons'           => array('admin', 'redactor', 'manager', 'control'),
+        'galery'           => array('admin', 'redactor', 'manager', 'control'),
+        'articles'           => array('admin', 'redactor', 'manager', 'control'),
+        'lotarey'           => array('admin', 'redactor', 'manager'),
+        'contacts'           => array('admin', 'manager', 'control'),
+        'subscription'           => array('admin', 'manager', 'control'),
+        'users'           => array('admin', 'control'),
+        'sections'           => array('admin', 'manager'),
+        'category'           => array('admin', 'manager'),
+        'tags'           => array('admin', 'manager'),
+        'locat'           => array('admin', 'manager'),
+        'banners'           => array('admin', 'redactor', 'manager'),
+        'about'           => array('admin', 'manager'),
+        'news'           => array('admin', 'redactor', 'manager', 'control'),
+        'statistik'           => array('admin', 'redactor', 'manager', 'control'),
+
+
+        'welcome'           => array('admin', 'redactor', 'manager', 'control'),
+        'logs'           => array('admin', 'manager', 'control'),
+        'jornal'           => array('admin', 'redactor', 'manager'),
+        'index'           => array('admin', 'redactor', 'manager', 'control'),
+        'login'           => array('admin', 'redactor', 'manager', 'control'),
+        'logout'           => array('admin', 'redactor', 'manager', 'control'),
     )
+
+
 );
