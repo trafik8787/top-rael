@@ -136,6 +136,27 @@ final class Rediset {
         return self::$redis->get('bus@'.$id_business.'@'.$data);
     }
 
+
+    /**
+     * @param $id_business
+     * @param $data_start
+     * @param $data_end
+     * @return array
+     * todo получить бизнесы по диапазону дат
+     */
+    public function get_business_date_diapazon ($id_business, $data_start, $data_end) {
+
+        $arr_date = Date::diapDate($data_start, $data_end);
+        $result = array();
+        foreach ($arr_date as $row) {
+            if (self::$redis->exists('bus@'.$id_business.'@'.$row)) {
+                $result[$row] = self::$redis->get('bus@'.$id_business.'@'.$row);
+            }
+        }
+        return $result;
+    }
+
+
     /**
      * @param $id_business
      * @return mixed
@@ -179,7 +200,7 @@ final class Rediset {
 
     /**
      * @param $id_business
-     * todo получить количество добавленого бизнеса в избранное
+     * todo удалить добавленого бизнеса в избранное
      */
     public function del_business_favor ($id_business){
         if (self::$redis->exists('busfavor-'.$id_business)) {

@@ -317,8 +317,20 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
     public function action_statistik () {
+
+        if ($this->request->post('import_static')) {
+           Model::factory('StatisticModel')->import_bussines();
+        }
+
+
+        $data_bus = Model::factory('StatisticModel')->show_bussines();
+
         Controller_Core_Main::$title_page = 'Статистика';
-        $this->response->body('statistic');
+        $form = View::factory('adm/statistik_page');
+
+        $form->data_bus = $data_bus;
+        $this->template->render = $form;
+        $this->response->body($this->template);
     }
 
     public function action_coupons (){
@@ -786,7 +798,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->callback_befor_show_add('call_bef_show_insert_bus');
         $crud->callback_before_delete('call_befor_del_business');
 
-        $crud->callback_list_table('call_list_table_bussines');
+        //$crud->callback_list_table('call_list_table_bussines');
 
         return $crud;
     }
