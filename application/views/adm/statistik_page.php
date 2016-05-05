@@ -63,40 +63,55 @@
                         <button type="submit" name="filtr_bussines" value="1" class="btn btn-primary">Фильтровать</button>
                     </form>
 
-
                 </div>
 
-                <table id="table-bus" class="display" cellspacing="0" width="100%">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Название</th>
-                        <th>Просмотры</th>
-                        <th>В избранном</th>
+                <div class="row">
 
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                        <th>ID</th>
-                        <th>Название</th>
-                        <th>Просмотры</th>
-                        <th>В избранном</th>
-                    </tr>
-                    </tfoot>
-                    <tbody>
+                    <div class="col-md-4 col-md-offset-3">
+                        <?if (!empty($daterange_bus)):?>
+                            <strong class="text-center">Отфильтровано с <?=$daterange_bus?></strong>
+                        <?endif?>
+                    </div>
+                </div>
 
-                        <? foreach ($data_bus as $row): ?>
+
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <table id="table-bus" class="display" cellspacing="0" width="100%">
+                            <thead>
                             <tr>
-                                <td><?=$row['id'] ?></td>
-                                <td><?= $row['name']?></td>
-                                <td><?= $row['count_vievs']?></td>
-                                <td><?= $row['count_favor']?></td>
-                            </tr>
-                        <? endforeach ?>
+                                <th>ID</th>
+                                <th>Название</th>
+                                <th>Просмотры</th>
+                                <th>В избранном</th>
 
-                    </tbody>
-                </table>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Название</th>
+                                <th>Просмотры</th>
+                                <th>В избранном</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+
+                                <? foreach ($data_bus as $row): ?>
+                                    <tr>
+                                        <td><?=$row['id'] ?></td>
+                                        <td><?= $row['name']?></td>
+                                        <td><?= $row['count_vievs']?></td>
+                                        <td><?= $row['count_favor']?></td>
+                                    </tr>
+                                <? endforeach ?>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
             </div>
 
