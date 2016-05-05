@@ -26,8 +26,13 @@
     <div class="col-md-12">
         <form action="" method="post">
             <input type="hidden" name="import_static" value="1">
-            <button type="submit" class="btn btn-primary" style="margin-bottom: 10px;">Обновить</button>
+            <button type="submit" class="btn btn-danger" style="margin-bottom: 10px;">Upgrade</button>
         </form>
+
+        <div class="alert alert-warning fade in">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <strong>Кпопку выше Не нажимать!</strong> Кнопка для импорта данных. Служебная!
+        </div>
     </div>
 </div>
 <!-- Nav tabs -->
@@ -49,12 +54,14 @@
 
                 <div class="row">
 
+                    <form action="" method="post">
+                        <div class="col-md-4 col-md-offset-3 demo">
+                            <input type='text' name="daterange" class="form-control" value="" />
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
 
-                    <div class="col-md-4 col-md-offset-3 demo">
-                        <input type='text' name="daterange" class="form-control" value="" />
-                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                    </div>
-
+                        </div>
+                        <button type="submit" name="filtr_bussines" value="1" class="btn btn-primary">Фильтровать</button>
+                    </form>
 
 
                 </div>

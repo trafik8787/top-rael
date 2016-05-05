@@ -162,4 +162,16 @@ class Date extends Kohana_Date {
     }
 
 
+    public static function convert_Date ($date){
+
+        $date_array = explode("/",trim($date));
+
+        $var_day = $date_array[0]; //day seqment
+        $var_month = $date_array[1]; //month segment
+        $var_year = $date_array[2]; //year segment
+        $new_date_format = "$var_year-$var_month-$var_day";
+
+        return $new_date_format;
+    }
+
 }

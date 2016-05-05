@@ -318,15 +318,34 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public function action_statistik () {
 
+        $form = View::factory('adm/statistik_page');
+        //обновление таблицы mysql
         if ($this->request->post('import_static')) {
            Model::factory('StatisticModel')->import_bussines();
+
         }
 
 
-        $data_bus = Model::factory('StatisticModel')->show_bussines();
+        if ($this->request->post('filtr_bussines')) {
+
+            $date = explode(' - ', $this->request->post('daterange'));
+
+            $form->daterange_bus = $this->request->post('daterange');
+
+            $date_start = Date::convert_Date($date[0]);
+            $date_end = Date::convert_Date($date[1]);
+
+            $data_bus = Model::factory('StatisticModel')->show_bussines($date_start, $date_end);
+
+        } else {
+            $data_bus = Model::factory('StatisticModel')->show_bussines();
+        }
+
+
+        //HTML::x(Model::factory('StatisticModel')->show_bussines('2016-01-20', '2016-05-05'));
 
         Controller_Core_Main::$title_page = 'Статистика';
-        $form = View::factory('adm/statistik_page');
+
 
         $form->data_bus = $data_bus;
         $this->template->render = $form;
@@ -1451,8 +1470,8 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_bef_edit_banners ($key_array = null,  $old_array = null){
 
-        $key_array['date_start'] = self::convert_Date($key_array['date_start']);
-        $key_array['date_end'] = self::convert_Date($key_array['date_end']);
+        $key_array['date_start'] = Date::convert_Date($key_array['date_start']);
+        $key_array['date_end'] = Date::convert_Date($key_array['date_end']);
 
         Model::factory('Adm')->log_add('банер', $key_array['name'], 'edit');
 
@@ -1487,8 +1506,8 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_bef_add_banners($key_array = null) {
 
-        $key_array['date_start'] = self::convert_Date($key_array['date_start']);
-        $key_array['date_end'] = self::convert_Date($key_array['date_end']);
+        $key_array['date_start'] = Date::convert_Date($key_array['date_start']);
+        $key_array['date_end'] = Date::convert_Date($key_array['date_end']);
 
 
         if ($key_array['type_baners'] == 2) {
@@ -1518,8 +1537,8 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
         //преобразование дат
-        $new_array['date_create'] = self::convert_Date($new_array['date_create']);
-        $new_array['date_end'] = self::convert_Date($new_array['date_end']);
+        $new_array['date_create'] = Date::convert_Date($new_array['date_create']);
+        $new_array['date_end'] = Date::convert_Date($new_array['date_end']);
 
         Model::factory('Adm')->log_add('бизнес', $old_array['name'], 'edit', $old_array['id']);
 
@@ -1572,8 +1591,8 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function call_bef_insert_business ($new_array){
 
         //преобразование дат
-        $new_array['date_create'] = self::convert_Date($new_array['date_create']);
-        $new_array['date_end'] = self::convert_Date($new_array['date_end']);
+        $new_array['date_create'] = Date::convert_Date($new_array['date_create']);
+        $new_array['date_end'] = Date::convert_Date($new_array['date_end']);
 
         if (!empty(Cruds::$post['dop_sity']) and !empty(Cruds::$post['dop_addres'])) {
 
@@ -1752,7 +1771,7 @@ class Controller_Administrator extends Controller_Core_Main {
     //articles
 
     public static function call_bef_insert_articles ($new_array){
-        $new_array['datecreate'] = self::convert_Date($new_array['datecreate']);
+        $new_array['datecreate'] = Date::convert_Date($new_array['datecreate']);
         return $new_array;
     }
 
@@ -1768,7 +1787,7 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function call_bef_edit_articles ($new_array = null, $old_array = null){
 
         //преобразование дат
-        $new_array['datecreate'] = self::convert_Date($new_array['datecreate']);
+        $new_array['datecreate'] = Date::convert_Date($new_array['datecreate']);
 
         Model::factory('Adm')->log_add('статью', $old_array['name'], 'edit');
 
@@ -1821,12 +1840,12 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
     public static function call_bef_insert_news ($new_array) {
-        $new_array['date'] = self::convert_Date($new_array['date']);
+        $new_array['date'] = Date::convert_Date($new_array['date']);
         return $new_array;
     }
 
     public static function call_bef_edit_news ($new_array) {
-        $new_array['date'] = self::convert_Date($new_array['date']);
+        $new_array['date'] = Date::convert_Date($new_array['date']);
         return $new_array;
     }
 
@@ -1838,9 +1857,9 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function call_bef_edit_coupons ($new_array = null, $old_array = null){
 
 
-        $new_array['datecreate'] = self::convert_Date($new_array['datecreate']);
-        $new_array['datestart'] = self::convert_Date($new_array['datestart']);
-        $new_array['dateoff'] = self::convert_Date($new_array['dateoff']);
+        $new_array['datecreate'] = Date::convert_Date($new_array['datecreate']);
+        $new_array['datestart'] = Date::convert_Date($new_array['datestart']);
+        $new_array['dateoff'] = Date::convert_Date($new_array['dateoff']);
 
         Model::factory('Adm')->log_add('купон', $old_array['name'], 'edit');
 
@@ -1856,9 +1875,9 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
     public static function call_bef_insert_coupons ($new_array){
-        $new_array['datecreate'] = self::convert_Date($new_array['datecreate']);
-        $new_array['datestart'] = self::convert_Date($new_array['datestart']);
-        $new_array['dateoff'] = self::convert_Date($new_array['dateoff']);
+        $new_array['datecreate'] = Date::convert_Date($new_array['datecreate']);
+        $new_array['datestart'] = Date::convert_Date($new_array['datestart']);
+        $new_array['dateoff'] = Date::convert_Date($new_array['dateoff']);
         return $new_array;
     }
 
@@ -2032,7 +2051,7 @@ class Controller_Administrator extends Controller_Core_Main {
     //добавление пользователя из админки
     public static function call_bef_insert_user ($new_array = null){
 
-        $new_array['bdate'] = self::convert_Date($new_array['bdate']);
+        $new_array['bdate'] = Date::convert_Date($new_array['bdate']);
         //если не пустой значит добавляется бизнес пользователь
         $new_array['password'] = Auth::instance()->hash($new_array['password']);
         return $new_array;
@@ -2042,7 +2061,7 @@ class Controller_Administrator extends Controller_Core_Main {
     public static function call_bef_edit_user ($new_array, $old_array){
 
         if (!empty($new_array['bdate'])) {
-            $new_array['bdate'] = self::convert_Date($new_array['bdate']);
+            $new_array['bdate'] = Date::convert_Date($new_array['bdate']);
         }
         return $new_array;
     }
@@ -2061,7 +2080,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
         if (!empty($new_array['bdate'])) {
-            $new_array['bdate'] = self::convert_Date($new_array['bdate']);
+            $new_array['bdate'] = Date::convert_Date($new_array['bdate']);
         }
         if ($old_array['password'] != $new_array['password']) {
             $new_array['password'] = Auth::instance()->hash($new_array['password']);
@@ -2137,16 +2156,16 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function  call_bef_insert_lotery ($new_array){
 
-        $new_array['date_start'] = self::convert_Date($new_array['date_start']);
-        $new_array['date_end'] = self::convert_Date($new_array['date_end']);
+        $new_array['date_start'] = Date::convert_Date($new_array['date_start']);
+        $new_array['date_end'] = Date::convert_Date($new_array['date_end']);
 
         return $new_array;
     }
 
     public static function  call_bef_edit_lotery ($new_array, $old_array){
 
-        $new_array['date_start'] = self::convert_Date($new_array['date_start']);
-        $new_array['date_end'] = self::convert_Date($new_array['date_end']);
+        $new_array['date_start'] = Date::convert_Date($new_array['date_start']);
+        $new_array['date_end'] = Date::convert_Date($new_array['date_end']);
 
         return $new_array;
     }
@@ -2165,13 +2184,13 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_bef_insert_jornal ($new_array){
 
-        $new_array['date'] = self::convert_Date($new_array['date']);
+        $new_array['date'] = Date::convert_Date($new_array['date']);
         return $new_array;
     }
 
     public static function call_bef_edit_jornal ($new_array){
 
-        $new_array['date'] = self::convert_Date($new_array['date']);
+        $new_array['date'] = Date::convert_Date($new_array['date']);
         return $new_array;
     }
 
@@ -2275,17 +2294,5 @@ class Controller_Administrator extends Controller_Core_Main {
         }
     }
 
-
-    public static function convert_Date ($date){
-
-        $date_array = explode("/",trim($date));
-
-        $var_day = $date_array[0]; //day seqment
-        $var_month = $date_array[1]; //month segment
-        $var_year = $date_array[2]; //year segment
-        $new_date_format = "$var_year-$var_month-$var_day";
-
-        return $new_date_format;
-    }
 
 }

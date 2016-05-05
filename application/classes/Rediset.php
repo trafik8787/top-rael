@@ -142,15 +142,15 @@ final class Rediset {
      * @param $data_start
      * @param $data_end
      * @return array
-     * todo получить бизнесы по диапазону дат
+     * todo получить просмотры бизнесов по диапазону дат
      */
-    public function get_business_date_diapazon ($id_business, $data_start, $data_end) {
+    public function get_business_date_diapazon_views ($id_business, $data_start, $data_end) {
 
         $arr_date = Date::diapDate($data_start, $data_end);
-        $result = array();
+        $result = 0;
         foreach ($arr_date as $row) {
             if (self::$redis->exists('bus@'.$id_business.'@'.$row)) {
-                $result[$row] = self::$redis->get('bus@'.$id_business.'@'.$row);
+                $result += self::$redis->get('bus@'.$id_business.'@'.$row);
             }
         }
         return $result;
@@ -176,6 +176,29 @@ final class Rediset {
         return self::$redis->get('busfavor-'.$id_business);
     }
 
+
+    /**
+     * @param $id_business
+     * @param $data_start
+     * @param $data_end
+     * @return int
+     * todo получить количество добавленных в избранное бизнесов по диапазону дат
+     */
+    public function get_business_favor_date_diapazon ($id_business, $data_start, $data_end){
+
+        $arr_date = Date::diapDate($data_start, $data_end);
+        $result = 0;
+        foreach ($arr_date as $row) {
+            if (self::$redis->exists('busfavor@'.$id_business.'@'.$row)) {
+                $result += self::$redis->get('busfavor@'.$id_business.'@'.$row);
+            }
+        }
+        return $result;
+    }
+
+
+
+
     /**
      * @param $id_articles
      * @return mixed
@@ -200,7 +223,7 @@ final class Rediset {
 
     /**
      * @param $id_business
-     * todo удалить добавленого бизнеса в избранное
+     * todo удалить добавленого бизнеса из избранного
      */
     public function del_business_favor ($id_business){
         if (self::$redis->exists('busfavor-'.$id_business)) {
@@ -250,7 +273,7 @@ final class Rediset {
 
     /**
      * @param $id_coupon
-     * todo количество добавление купона в избранное
+     * todo добавление купона в избранное
      */
     public function set_coupon($id_coupon){
 
@@ -258,7 +281,12 @@ final class Rediset {
             self::$redis->set("coupon-".$id_coupon, 0);
         }
 
+        if (!self::$redis->exists('coupon@'.$id_coupon.'@'.date('Y-m-d'))) {
+            self::$redis->set('coupon@'.$id_coupon.'@'.date('Y-m-d'), 0);
+        }
+
         self::$redis->incr('coupon-'.$id_coupon);
+        self::$redis->incr('coupon@'.$id_coupon.'@'.date('Y-m-d'));
 
     }
 
@@ -297,6 +325,8 @@ final class Rediset {
     }
 
 
+
+
     /**
      * @param $id_business
      * todo количество добавления бизнеса в избранное
@@ -307,7 +337,12 @@ final class Rediset {
             self::$redis->set('busfavor-'.$id_business, 0);
         }
 
+        if (!self::$redis->exists('busfavor@'.$id_business.'@'.date('Y-m-d'))) {
+            self::$redis->set('busfavor@'.$id_business.'@'.date('Y-m-d'), 0);
+        }
+
         self::$redis->incr('busfavor-'.$id_business);
+        self::$redis->incr('busfavor@'.$id_business.'@'.date('Y-m-d'));
     }
 
 
@@ -321,7 +356,12 @@ final class Rediset {
             self::$redis->set('article-'.$id_article, 0);
         }
 
+        if (!self::$redis->exists('article@'.$id_article.'@'.date('Y-m-d'))) {
+            self::$redis->set('article@'.$id_article.'@'.date('Y-m-d'), 0);
+        }
+
         self::$redis->incr('article-'.$id_article);
+        self::$redis->incr('article@'.$id_article.'@'.date('Y-m-d'));
     }
 
     /**
