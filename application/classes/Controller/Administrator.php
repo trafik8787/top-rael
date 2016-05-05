@@ -681,7 +681,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
         $crud->links('name', '/business/', 'url');
-        $crud->rows_color_where(4, '==', 0, ' #cccccc');
+        $crud->rows_color_where(3, '==', 0, ' #cccccc');
 
 
         $crud->edit_fields('redactor_user',
