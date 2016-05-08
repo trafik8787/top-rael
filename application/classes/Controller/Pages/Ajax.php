@@ -325,7 +325,6 @@ class Controller_Pages_Ajax extends Controller {
                     $m->reloadTo();
                     $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
                     $m->To($user_rows['email']); // кому адресованно
-                    $m->Bcc('boris@briker.biz');
                     $m->Subject('Новые обзоры, купоны и места отдыха и развлечений');
                     $m->Body($data, "html");
                     $m->Priority(3);

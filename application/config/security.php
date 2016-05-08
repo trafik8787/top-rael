@@ -32,7 +32,7 @@ return array(
         'welcome'           => array('admin', 'redactor', 'manager', 'control'),
         'logs'           => array('admin', 'manager', 'control'),
         'jornal'           => array('admin', 'redactor', 'manager'),
-        'index'           => array('admin', 'redactor', 'manager', 'control'),
+        'index'           => array('admin', 'manager', 'control'),
         'login'           => array('admin', 'redactor', 'manager', 'control'),
         'logout'           => array('admin', 'redactor', 'manager', 'control'),
     )

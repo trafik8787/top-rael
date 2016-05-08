@@ -5,417 +5,203 @@
  * Date: 15.09.2015
  * Time: 12:05
  */
-
+header('Content-Type: text/html; charset=utf-8');
 ?>
 
+<html>
 
+<head>
 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
+</head>
 
+<body>
 
-
-
-
-<meta charset="UTF-8">
-<meta name=viewport content="width=device-width, initial-scale=1">
-
-<div style="border:1px solid #e3e1e1; max-width: 600px; margin: 0 auto; width:100%;">
+<div style="border:1px solid #e3e1e1;max-width: 600px;margin: 0 auto;width:100%;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;">
     <div style="border:1px solid #d4d2d2">
-        <div style="border:1px solid #bfbdbd; background:#ffffff;">
+        <div style="border:1px solid #bfbdbd;background:#ffffff;padding:15px 25px;">
+            <div style="display: table;width:100%;">
+                <div style="display: table-cell;width:50%;">
+                    <img src="cid:logo-new.png" width="250" alt="logo">
+                </div>
+                <div style="display: table-cell;width:50%;font-size:12px;color: #a9a9a9;text-align: right;vertical-align: middle;">
+                    Рассылка за <?=Date::rusdate(strtotime(date('Y-m-d')), 'j %MONTH% Y'); ?>
+                </div>
+            </div>
+            <?if (!empty($article_shift)):?>
+                <h3 style="margin: 20px 0px 10px 0px;padding: 0px;font-size: 22px;">Обзоры</h3>
 
-            <!-- Email Content -->
-            <table cellspacing="0" cellpadding="0" width="100%"
-                   style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px;">
+                <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$article_shift['url']?>" target="_blank" rel="noopener" style="width: 100%;padding:0px;margin:0px;border:0px;">
+                    <img src="cid:<?=basename($article_shift['images_article'])?>" style="width: 100%;padding:0px;margin:0px;border:0px;"/>
+                </a>
+                <div style="background: #E6E6E6;padding: 15px 10px;">
+                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$article_shift['url']?>" style="color:#000;font-size:28px;font-weight: bold;" target="_blank" rel="noopener"><?=$article_shift['name']?></a>
+                    <p style="font-size:14px;margin:10px 0px 0px 0px;"> <?=Text::limit_chars(strip_tags($article_shift['content']), 150, null, true)?></p>
+                </div>
+            <?endif?>
 
-                <thead>
-                <tr>
-                    <td>
-                        <div style="background-color:#ffffff;">
 
-                            <table height="120" width="100%" cellpadding="0" cellspacing="0" border="0">
-                                <tr>
-                                    <td valign="top" align="left" style="padding:0 10px;">
-
-                                        <!-- Header -->
-                                        <table cellpadding="0" cellspacing="0" align="left" width="100%" height="120">
-                                            <tr>
-                                                <td valign="bottom" align="left" style="padding: 0 10px 28px 8px;">
-                                                    <table cellpadding="0" cellspacing="0" width="100%"
-                                                           style="max-width:250px;">
-                                                        <tr>
-                                                            <td>
-                                                                <a href="http://<?=$_SERVER['HTTP_HOST']?>" target="_blank" style="display: block;">
-                                                                    <img src="cid:logo-new.png" width="250"
-                                                                         style="width:100%; height:auto;" alt="logo"/>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
+            <?if (!empty($articless)):?>
+                <?foreach ($articless as $artic):?>
+                    <div style="width:100%;margin-top: 30px;">
+                        <div style="float:left;margin: 0px 15px 5px 0px;">
+                            <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['url']?>" target="_blank" rel="noopener">
+                                <img src="cid:<?=basename($artic['images_article'])?>" width="164" height="115">
+                            </a>
                         </div>
-                    </td>
-                </tr>
-                </thead>
+                        <div style="">
+                            <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['url']?>" style="font-size: 20px;color:#000;" target="_blank" rel="noopener">
+                                <strong><?=$artic['name']?></strong>
+                            </a>
+                            <p style="margin:10px 0;font-size:14px;">
+                                <strong></strong>
+                            </p>
+                            <p style="margin:10px 0;font-size:14px;">
+                                <?=Text::limit_chars(strip_tags($artic['content']), 150, null, true)?>
+                            </p>
+                        </div>
+                    </div>
+                <?endforeach;?>
 
-                <tbody>
 
-                <tr>
-                    <td>
+                <div style="text-align: center !important;margin: 20px 0px 0px 0px;">
+                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/articles" style="font-size: 14px;padding: 2px 10px;color: #007898 !important;text-decoration: none !important;border: 1px solid #007898;display: inline-block;margin-bottom: 0;font-weight: normal;text-align: center;vertical-align: middle;touch-action: manipulation;cursor: pointer;background-image: none;white-space: nowrap;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;border-radius: 4px;" target="_blank" rel="noopener">Открыть все</a>
+                </div>
 
-                        <table cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="padding:0 20px 15px 20px;text-align:right;">
-                                    <span style="font-size:12px; color: #a9a9a9;">Рассылка за <?=Date::rusdate(strtotime(date('Y-m-d')), 'j %MONTH% Y'); ?></span>
-                                </td>
-                            </tr>
-                            <?if (!empty($article_shift)):?>
-                                <tr>
-                                    <td><span><h3 style="margin: 0;padding: 0 0 10px 7px;">Обзоры</h3></span></td>
-                                </tr>
+            <?endif?>
 
-                                <tr>
-                                    <td>
-                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$article_shift['url']?>">
-                                        <img src="cid:<?=basename($article_shift['images_article'])?>" width="600" height="420"
-                                             style="width: 100%; height:auto"/></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding:10px 20px;" bgcolor="#E6E6E6">
-                                        <span style="font-size:30px">
-                                            <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$article_shift['url']?>" style="color:#000;"><?=$article_shift['name']?></a>
-                                        </span>
+            <? if (!empty($coupons)): ?>
 
-                                        <p style="font-size:14px; margin:5px 0;">
-                                            <?=Text::limit_chars(strip_tags($article_shift['content']), 150, null, true)?>
-                                        </p>
-                                    </td>
-                                </tr>
+                <h3 style="margin: 30px 0px 0px 0px;padding: 0px;display:block;font-size: 22px;">Купоны</h3>
+
+
+                <? foreach ($coupons as $row_coupons): ?>
+
+                    <div style="display: table;width:100%;margin: 0px 0px 0px 0px;">
+
+                        <div style="display: table-cell;width:50%;padding-top:20px;">
+                            <div style="height: 400px;border: 1px solid #d8d8d8;box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;margin-right: 7.5px;">
+                                <div style="font-size: 25px;line-height: 1.1;color: #e02929;">
+                                    <div style="height: 50px;color: #fff;font-size: 80%;background: rgba(0, 0, 0, 0.5);padding: 5px 10px;">
+                                        <?=$row_coupons[0]['BusName']?>
+                                    </div>
+                                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[0]['url']?>" target="_blank" rel="noopener">
+                                        <img src="cid:<?=basename($row_coupons[0]['img_coupon'])?>" title="Посмотреть полный купон" style="width:100%;height:auto;">
+                                    </a>
+                                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[0]['url']?>" style="text-decoration: none;width: 100%;color: #e02929;display:block;" title="Посмотреть полный купон" target="_blank" rel="noopener">
+                                        <div style="font-size: 16px;text-align: center;">
+                                            <div style="margin-top: 10px;"><?=$row_coupons[0]['name']?></div>
+                                            <div style="margin-top: 5px;"><?=$row_coupons[0]['secondname']?> </div>
+                                            <div style="margin-top: 10px;">до <?=Date::rusdate(strtotime($row_coupons[0]['dateoff']), 'j %MONTH% Y'); ?></div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <? if (!empty($row_coupons[1])): ?>
+                            <div style="display: table-cell;width:50%;padding-top:20px;">
+                                <div style="height: 400px;border: 1px solid #d8d8d8;box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;margin-left: 7.5px;">
+                                    <div style="font-size: 25px;line-height: 1.1;color: #e02929;">
+                                        <div style="height: 50px;color: #fff;font-size: 80%;background: rgba(0, 0, 0, 0.5);padding: 5px 10px;">
+                                            <?=$row_coupons[1]['BusName']?>
+                                        </div>
+                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[1]['url']?>" target="_blank" rel="noopener">
+                                            <img src="cid:<?=basename($row_coupons[1]['img_coupon'])?>" title="Посмотреть полный купон" style="width:100%;height:auto;">
+                                        </a>
+                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[1]['url']?>" style="text-decoration: none;width: 100%;color: #e02929;display:block;" title="Посмотреть полный купон" target="_blank" rel="noopener">
+                                            <div style="font-size: 16px;text-align: center;">
+                                                <div style="margin-top: 10px;"><?=$row_coupons[1]['name']?></div>
+                                                <div style="margin-top: 5px;"><?=$row_coupons[1]['secondname']?></div>
+                                                <div style="margin-top: 10px;">до <?=Date::rusdate(strtotime($row_coupons[1]['dateoff']), 'j %MONTH% Y'); ?></div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?endif?>
+
+                    </div>
+
+                <?endforeach?>
+
+
+
+                <div style="text-align: center !important;margin: 20px 0px 0px 0px;">
+                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupons" style="font-size: 14px;padding: 2px 10px;color: #007898 !important;text-decoration: none !important;border: 1px solid #007898;display: inline-block;margin-bottom: 0;font-weight: normal;text-align: center;vertical-align: middle;touch-action: manipulation;cursor: pointer;background-image: none;white-space: nowrap;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;border-radius: 4px;" target="_blank" rel="noopener">Открыть все</a>
+                </div>
+
+            <?endif?>
+
+
+            <?if (!empty($business)):?>
+
+                <? foreach ($business as $row_bus): ?>
+
+                    <h3 style="margin: 30px 0px 10px 0px;padding: 0px;font-size: 22px;"><?=$row_bus['CatName']?></h3>
+
+                    <?foreach (Controller_BaseController::convertArrayVievData($row_bus['BusArr']) as $bus_rows):?>
+
+                        <div style="display: table;width:100%;margin: 20px 0px 0px 0px;">
+                            <div style="display: table-cell;width:50%;">
+                                <div style="height: 380px;margin-right: 7.5px;">
+                                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows[0]['url']?>" style="display:block;overflow: hidden;" target="_blank" rel="noopener">
+                                        <img src="cid:<?=basename($bus_rows[0]['home_busines_foto'])?>" style="width:100%;height:auto;">
+                                    </a>
+                                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows[0]['url']?>" style="font-size:18px;color:#000;text-decoration: underline;margin-top: 10px;display:block;" target="_blank" rel="noopener">
+                                        <strong><?=$bus_rows[0]['name']?></strong>
+                                    </a>
+                                    <div style="font-size:14px;color:#000;margin-top: 10px;" >
+                                        <strong><?=$bus_rows[0]['CityName']?>. <?=$bus_rows[0]['address']?></strong>
+                                    </div>
+                                    <div style="font-size:14px;color:#000;margin-top: 10px;" >
+                                        <?=Text::limit_chars(strip_tags($bus_rows[0]['info']), 150, null, true)?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <?if (!empty($bus_rows[1])):?>
+                                <div style="display: table-cell;width:50%;">
+                                    <div style="height: 380px;margin-left: 7.5px;">
+                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows[1]['url']?>" style="display:block;overflow: hidden;" target="_blank" rel="noopener">
+                                            <img src="cid:<?=basename($bus_rows[1]['home_busines_foto'])?>" style="width:100%;height:auto;">
+                                        </a>
+                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows[1]['url']?>" style="font-size:18px;color:#000;text-decoration: underline;margin-top: 10px;display:block;" target="_blank" rel="noopener">
+                                            <strong><?=$bus_rows[1]['name']?></strong>
+                                        </a>
+                                        <div style="font-size:14px;color:#000;margin-top: 10px;" >
+                                            <strong><?=$bus_rows[1]['CityName']?>. <?=$bus_rows[1]['address']?></strong>
+                                        </div>
+                                        <div style="font-size:14px;color:#000;margin-top: 10px;" >
+                                            <?=Text::limit_chars(strip_tags($bus_rows[0]['info']), 150, null, true)?>
+                                        </div>
+                                    </div>
+                                </div>
                             <?endif?>
-                            <tr>
-                                <td style="padding: 10px 10px 0 10px;">
-                                    <!-- Content -->
-                                    <?if (!empty($articless)):?>
-                                        <table cellpadding="0" cellspacing="0" width="100%" style="padding:20px;">
-                                            <?foreach ($articless as $artic):?>
-                                                <tr>
-                                                    <td style="padding-bottom: 20px;">
+                        </div>
+                    <?endforeach?>
+                <?endforeach?>
 
-                                                        <table cellpadding="0" cellspacing="0" width="100%" align="left"
-                                                               style="max-width:165px;">
-                                                            <tr>
-                                                                <td style="padding:0 20px 5px 0">
-                                                                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['url']?>" style="display:block;">
-                                                                        <img src="cid:<?=basename($artic['images_article'])?>" width="164" height="115"
-                                                                             style="width:100%; height:auto;"/>
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
+                <div style="text-align: center !important;margin: 20px 0px 30px 0px;">
+                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/restaurants" style="font-size: 14px;padding: 2px 10px;color: #007898 !important;text-decoration: none !important;border: 1px solid #007898;display: inline-block;margin-bottom: 0;font-weight: normal;text-align: center;vertical-align: middle;touch-action: manipulation;cursor: pointer;background-image: none;white-space: nowrap;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;border-radius: 4px;" target="_blank" rel="noopener">Открыть все</a>
+                </div>
 
-                                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['url']?>" style="font-size: 20px; color:#000;">
-                                                            <strong>
-                                                                <?=$artic['name']?>
-                                                            </strong>
-                                                        </a>
+            <?endif?>
 
-                                                        <p style="margin:10px 0; font-size:14px;">
-                                                            <strong><?=$artic['secondname']?></strong>
-                                                        </p>
-
-                                                        <p style="margin:10px 0; font-size:14px;">
-                                                            <?=Text::limit_chars(strip_tags($artic['content']), 150, null, true)?>
-                                                        </p>
-
-                                                    </td>
-                                                </tr>
-                                            <?endforeach?>
-                                            <tr>
-                                                <td style="text-align: right!important;">
-                                                    <strong> <a href="http://<?=$_SERVER['HTTP_HOST']?>/articles"
-                                                                style="font-size:12px; text-decoration: none; color:#007898;">Открыть
-                                                            все</a></strong>
-                                                </td>
-                                            </tr>
-
-                                        </table>
-                                    <?endif?>
-
-
-
-
-                                    <table cellpadding="0" cellspacing="0" width="100%" style="margin-top: 20px;">
-
-                                        <? if (!empty($coupons)): ?>
-                                            <tr>
-                                                <td><span><h3 style="margin: 0;padding: 0 0 10px 7px;">Купоны</h3></span></td>
-                                            </tr>
-
-                                            <? foreach ($coupons as $row_coupons): ?>
-
-                                                <tr style="width: 100%">
-                                                    <td style="width: 50%">
-                                                        <div style="padding: 10px; ">
-                                                            <div style="height: 400px;position: relative; border: 1px solid #d8d8d8;box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;">
-                                                                <div style="font-size: 25px;line-height: 1.1;color: #e02929;">
-                                                                    <div>
-                                                                        <div style="height: 54px; color: #fff;font-size: 80%;background: rgba(0, 0, 0, 0.5);padding: 5px 10px;">
-                                                                            <?=$row_coupons[0]['BusName']?>
-                                                                        </div>
-                                                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[0]['url']?>">
-                                                                            <img src="cid:<?=basename($row_coupons[0]['img_coupon'])?>" title="Посмотреть полный купон" style="width:100%; height:auto;"/>
-                                                                        </a>
-                                                                    </div>
-                                                                    <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[0]['url']?>"  style="text-decoration: none;width: 100%;color: #e02929;" title="Посмотреть полный купон">
-                                                                        <div style="padding-left: 5px;padding-right: 5px;">
-                                                                            <div style="font-size: 17px;text-align: center;">
-                                                                                <div>
-                                                                                    <div>
-                                                                                        <div style="margin-top: 10px;">
-                                                                                            <?=$row_coupons[0]['name']?>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div>
-                                                                                    <div>
-
-                                                                                        <div>
-                                                                                            <?=$row_coupons[0]['secondname']?>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div style="position: absolute;bottom: 2px;display: block;width: 100%;">
-
-                                                                                    <div style="vertical-align: bottom;">
-
-                                                                                        <span style="display: block;text-align: center;padding: 5px 0;">до <?=Date::rusdate(strtotime($row_coupons[0]['dateoff']), 'j %MONTH% Y'); ?></span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-
-                                                    </td>
-
-
-                                                    <? if (!empty($row_coupons[1])): ?>
-
-
-                                                        <td style="width: 50%">
-
-                                                            <div style="padding: 10px;">
-
-                                                                <div style="height: 400px;position: relative;border: 1px solid #d8d8d8;box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;" >
-                                                                    <div style="font-size: 25px;line-height: 1.1;color: #e02929;">
-                                                                        <div>
-                                                                            <div style="height: 54px; color: #fff;font-size: 80%;background: rgba(0, 0, 0, 0.5);padding: 5px 10px;">
-                                                                                <?=$row_coupons[1]['BusName']?>
-                                                                            </div>
-                                                                            <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[1]['url']?>">
-                                                                                <img src="cid:<?=basename($row_coupons[1]['img_coupon'])?>" title="Посмотреть полный купон" style="width:100%; height:auto;"/>
-                                                                            </a>
-                                                                        </div>
-                                                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[1]['url']?>"  style="text-decoration: none;width: 100%;color: #e02929;" title="Посмотреть полный купон">
-                                                                            <div style="padding-left: 5px;padding-right: 5px;">
-                                                                                <div style="font-size: 17px;text-align: center;">
-                                                                                    <div>
-                                                                                        <div>
-                                                                                            <div style="margin-top: 10px;">
-                                                                                                <?=$row_coupons[1]['name']?>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        <div>
-
-                                                                                            <div>
-                                                                                                <?=$row_coupons[1]['secondname']?>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div style="position: absolute;margin-top: 2px;display: block;width: 100%;">
-
-                                                                                        <div style="vertical-align: bottom;">
-
-                                                                                            <span style="display: block;text-align: center;padding: 5px 0;">до <?=Date::rusdate(strtotime($row_coupons[1]['dateoff']), 'j %MONTH% Y'); ?></span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </td>
-                                                    <? endif ?>
-
-
-                                                </tr>
-                                            <? endforeach ?>
-                                        
-                                        <? endif ?>
-                                    </table>
-                                    <table cellpadding="0" cellspacing="0" width="100%" style="">
-                                            <tr>
-                                                <td style="text-align: right!important;">
-                                                    <strong> <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupons"
-                                                                style="font-size:12px; text-decoration: none; color:#007898;">Открыть
-                                                            все</a></strong>
-                                                </td>
-                                            </tr>
-                                    </table>
-
-
-
-
-
-                                    <?if (!empty($business)):?>
-
-                                        <? foreach ($business as $row_bus): ?>
-
-                                            <table cellpadding="0" cellspacing="0" width="100%" style="margin-top: 20px;">
-                                                <tr>
-                                                    <td><span><h3 style="margin: 0;padding: 0 0 10px 7px;"><?=$row_bus['CatName']?></h3></span></td>
-                                                </tr>
-                                                <?foreach (Controller_BaseController::convertArrayVievData($row_bus['BusArr']) as $bus_rows):?>
-                                                    <tr style="width: 100%">
-                                                        <td style="vertical-align: top;">
-
-                                                            <table cellpadding="0" cellspacing="0" style="min-width:250px; max-width:288px;" align="left">
-                                                                <tr>
-                                                                    <td style="padding:5px 10px;">
-                                                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows[0]['url']?>" style="display:block; overflow: hidden;">
-                                                                            <img src="cid:<?=basename($bus_rows[0]['home_busines_foto'])?>"
-                                                                                 style="width:100%; height:auto;"/>
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="padding:5px 10px;">
-                                                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows[0]['url']?>"
-                                                                           style="font-size:18px; color:#000; text-decoration: underline">
-                                                                            <strong>
-                                                                                <?=$bus_rows[0]['name']?>
-
-                                                                            </strong>
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <td style="padding:5px 10px; font-size:14px;">
-                                                                        <strong>
-                                                                            <?=$bus_rows[0]['CityName']?>. <?=$bus_rows[0]['address']?>
-                                                                        </strong>
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <td style="padding:5px 10px 20px 10px; font-size:14px;">
-                                                                        <?=Text::limit_chars(strip_tags($bus_rows[0]['info']), 150, null, true)?>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-
-                                                        </td>
-
-                                                        <?if (!empty($bus_rows[1])):?>
-                                                            <td style="vertical-align: top;">
-
-                                                                <table cellpadding="0" cellspacing="0" style="min-width:250px; max-width:288px;" align="left">
-                                                                    <tr>
-                                                                        <td style="padding:5px 10px;">
-                                                                            <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows[1]['url']?>" style="display:block; overflow: hidden;">
-                                                                                <img src="cid:<?=basename($bus_rows[1]['home_busines_foto'])?>"
-                                                                                     style="width:100%; height:auto;"/>
-                                                                            </a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="padding:5px 10px;">
-                                                                            <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows[1]['url']?>"
-                                                                               style="font-size:18px; color:#000; text-decoration: underline">
-                                                                                <strong>
-                                                                                    <?=$bus_rows[1]['name']?>
-
-                                                                                </strong>
-                                                                            </a>
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td style="padding:5px 10px; font-size:14px;">
-                                                                            <strong>
-                                                                                <?=$bus_rows[1]['CityName']?>. <?=$bus_rows[1]['address']?>
-                                                                            </strong>
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td style="padding:5px 10px 20px 10px; font-size:14px;">
-                                                                            <?=Text::limit_chars(strip_tags($bus_rows[1]['info']), 150, null, true)?>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-
-                                                            </td>
-                                                        <?endif?>
-
-                                                    </tr>
-                                                <?endforeach?>
-                                            </table>
-
-                                        <? endforeach ?>
-
-                                    <?endif?>
-
-                                </td>
-                            </tr>
-                        </table>
-
-                    </td>
-                </tr>
-
-
-                <tr style="background-color: #0389ae;">
-                    <td>
-                        <table cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="padding: 60px;">
-                                    <span style="font-size: 18px;text-decoration: underline;">
-                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/unsubscribe" style="color: #ffffff;">Отписаться от рассылки</a>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span style="font-size: 18px;text-decoration: underline;">
-                                        <a href="http://<?=$_SERVER['HTTP_HOST']?>/contacts" style="color: #ffffff;">Связаться с нами</a>
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-
-                </tr>
-
-                </tbody>
-            </table>
+            <div style="margin: 10px -25px -15px -25px">
+                <div style="background: #0389ae;padding:30px 25px;font-size: 12px;color: #fff;text-align: center">
+                    Вы получили это письмо, потому что выразили свое согласие получать новости TopIsrael.ru. Если вы не хотите получать рассылку, <a href="http://<?=$_SERVER['HTTP_HOST']?>/unsubscribe" style="color: #ffffff;" target="_blank" rel="noopener">можете отписаться.</a>
+                    <br><br>
+                    Это автоматическое письмо, пожалуйста, не отвечайте на него. Если у вас есть вопросы или пожелания, <a href="http://<?=$_SERVER['HTTP_HOST']?>/contacts" style="color: #ffffff;text-decoration: underline;" target="_blank" rel="noopener">пишите или звоните нам.</a>
+                </div>
+            </div>
 
         </div>
     </div>
 </div>
 
+</body>
 
+</html>
 
