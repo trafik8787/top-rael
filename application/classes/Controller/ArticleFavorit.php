@@ -10,15 +10,23 @@
 class Controller_ArticleFavorit extends Controller {
 
     public function action_saveArticleFavorit () {
-        if (Auth::instance()->get_user()) {
-            $data = Model::factory('ArticlesModel')->saveArticlesFavoritesUser(Auth::instance()->get_user()->id, $this->request->post('id_articles'));
-            //пишем в куки
-            Cookie::update_and_set_json('favoritartic', $this->request->post('id_articles'));
 
-        } else {
-            //если не авторизован
-            Cookie::update_and_set_json('favoritartic', $this->request->post('id_articles'));
+        if (Request::initial()->is_ajax()) {
+
+            //todo Rediset
+            Rediset::getInstance()->set_articles_favor($this->request->post('id_articles'));
+
+            if (Auth::instance()->get_user()) {
+                $data = Model::factory('ArticlesModel')->saveArticlesFavoritesUser(Auth::instance()->get_user()->id, $this->request->post('id_articles'));
+                //пишем в куки
+                Cookie::update_and_set_json('favoritartic', $this->request->post('id_articles'));
+
+            } else {
+                //если не авторизован
+                Cookie::update_and_set_json('favoritartic', $this->request->post('id_articles'));
+            }
         }
+
     }
 
 

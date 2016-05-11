@@ -326,20 +326,81 @@ class Controller_Administrator extends Controller_Core_Main {
         }
 
 
-        if ($this->request->post('filtr_bussines')) {
+        $data_bus = array();
+        $data_articles = array();
+        $data_coupons = array();
+        $data_baners = array();
 
-            $date = explode(' - ', $this->request->post('daterange'));
+        if ($_GET['tab'] == 'bus') {
+            //фильтр по бизнесам
+            if ($this->request->post('filtr_bussines')) {
 
-            $form->daterange_bus = $this->request->post('daterange');
+                $date = explode(' - ', $this->request->post('daterange'));
 
-            $date_start = Date::convert_Date($date[0]);
-            $date_end = Date::convert_Date($date[1]);
+                $form->daterange_bus = $this->request->post('daterange');
 
-            $data_bus = Model::factory('StatisticModel')->show_bussines($date_start, $date_end);
+                $date_start = Date::convert_Date($date[0]);
+                $date_end = Date::convert_Date($date[1]);
 
-        } else {
-            $data_bus = Model::factory('StatisticModel')->show_bussines();
+                $data_bus = Model::factory('StatisticModel')->show_bussines($date_start, $date_end);
+
+            } else {
+                $data_bus = Model::factory('StatisticModel')->show_bussines();
+            }
         }
+
+        if ($_GET['tab'] == 'articles') {
+            //фильтр по статьям
+            if ($this->request->post('filtr_articles')) {
+
+                $date = explode(' - ', $this->request->post('daterange_article'));
+                $form->daterange_article = $this->request->post('daterange_article');
+
+                $date_start = Date::convert_Date($date[0]);
+                $date_end = Date::convert_Date($date[1]);
+
+                $data_articles = Model::factory('StatisticModel')->show_articles($date_start, $date_end);
+            } else {
+                $data_articles = Model::factory('StatisticModel')->show_articles();
+            }
+        }
+
+
+        if ($_GET['tab'] == 'coupons') {
+            //фильтр по купонам
+            if ($this->request->post('filtr_coupons')) {
+
+                $date = explode(' - ', $this->request->post('daterange_coupons'));
+                $form->daterange_coupons = $this->request->post('daterange_coupons');
+
+                $date_start = Date::convert_Date($date[0]);
+                $date_end = Date::convert_Date($date[1]);
+
+                $data_coupons = Model::factory('StatisticModel')->show_coupons($date_start, $date_end);
+            } else {
+                $data_coupons = Model::factory('StatisticModel')->show_coupons();
+            }
+        }
+
+
+        if ($_GET['tab'] == 'baners') {
+
+
+            if ($this->request->post('filtr_baners')) {
+
+                $date = explode(' - ', $this->request->post('daterange_baners'));
+                $form->daterange_baners = $this->request->post('daterange_baners');
+
+                $date_start = Date::convert_Date($date[0]);
+                $date_end = Date::convert_Date($date[1]);
+
+                $data_baners = Model::factory('StatisticModel')->show_baners($date_start, $date_end);
+            } else {
+                $data_baners = Model::factory('StatisticModel')->show_baners();
+            }
+
+        }
+
 
 
         //HTML::x(Model::factory('StatisticModel')->show_bussines('2016-01-20', '2016-05-05'));
@@ -348,6 +409,10 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
         $form->data_bus = $data_bus;
+        $form->data_articles = $data_articles;
+        $form->data_coupons = $data_coupons;
+        $form->data_baners = $data_baners;
+
         $this->template->render = $form;
         $this->response->body($this->template);
     }

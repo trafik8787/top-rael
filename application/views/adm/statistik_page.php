@@ -41,23 +41,28 @@
     <div class="col-md-12">
 
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#bus" data-toggle="tab">Бизнесы</a></li>
-            <li><a href="#article" data-toggle="tab">Обзоры</a></li>
-            <li><a href="#coupons" data-toggle="tab">Купоны</a></li>
-            <li><a href="#baners" data-toggle="tab">Баннеры</a></li>
+<!--            <li class="active"><a href="#bus" data-toggle="tab">Бизнесы</a></li>-->
+<!--            <li><a href="#article" data-toggle="tab">Обзоры</a></li>-->
+<!--            <li><a href="#coupons" data-toggle="tab">Купоны</a></li>-->
+<!--            <li><a href="#baners" data-toggle="tab">Баннеры</a></li>-->
+
+            <li class="<? if ($_GET['tab'] == 'bus'):?>active <?endif?>"><a href="?tab=bus">Бизнесы</a></li>
+            <li class="<? if ($_GET['tab'] == 'articles'):?>active <?endif?>"><a href="?tab=articles">Обзоры</a></li>
+            <li class="<? if ($_GET['tab'] == 'coupons'):?>active <?endif?>"><a href="?tab=coupons">Купоны</a></li>
+            <li class="<? if ($_GET['tab'] == 'baners'):?>active <?endif?>"><a href="?tab=baners">Баннеры</a></li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
 
-            <div class="tab-pane fade in active" id="bus">
+            <div class="tab-pane fade in <? if ($_GET['tab'] == 'bus'):?>active <?endif?>" id="bus">
 
                 <div class="row">
 
                     <form action="" method="post">
                         <div class="col-md-4 col-md-offset-3 demo">
                             <input type='text' name="daterange" class="form-control" value="" />
-                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar w-calendar-bus"></i>
 
                         </div>
                         <button type="submit" name="filtr_bussines" value="1" class="btn btn-primary">Фильтровать</button>
@@ -81,13 +86,13 @@
                     <div class="col-md-12">
                         <table id="table-bus" class="display" cellspacing="0" width="100%">
                             <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Название</th>
-                                <th>Просмотры</th>
-                                <th>В избранном</th>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Название</th>
+                                    <th>Просмотры</th>
+                                    <th>В избранном</th>
 
-                            </tr>
+                                </tr>
                             </thead>
                             <tfoot>
                             <tr>
@@ -117,132 +122,72 @@
 
 
 
-
-            <div class="tab-pane fade" id="article">
-
-
-                <table id="table-article" class="display" cellspacing="0" width="100%">
-                    <thead>
-                    <tr>
-                        <th>Name1</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                    </tfoot>
-                    <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011/07/25</td>
-                        <td>$170,750</td>
-                    </tr>
-                    <tr>
-                        <td>Ashton Cox</td>
-                        <td>Junior Technical Author</td>
-                        <td>San Francisco</td>
-                        <td>66</td>
-                        <td>2009/01/12</td>
-                        <td>$86,000</td>
-                    </tr>
-                    <tr>
-                        <td>Cedric Kelly</td>
-                        <td>Senior Javascript Developer</td>
-                        <td>Edinburgh</td>
-                        <td>22</td>
-                        <td>2012/03/29</td>
-                        <td>$433,060</td>
-                    </tr>
-                    <tr>
-                        <td>Airi Satou</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>33</td>
-                        <td>2008/11/28</td>
-                        <td>$162,700</td>
-                    </tr>
-                    <tr>
-                        <td>Brielle Williamson</td>
-                        <td>Integration Specialist</td>
-                        <td>New York</td>
-                        <td>61</td>
-                        <td>2012/12/02</td>
-                        <td>$372,000</td>
-                    </tr>
-                    <tr>
-                        <td>Martena Mccray</td>
-                        <td>Post-Sales support</td>
-                        <td>Edinburgh</td>
-                        <td>46</td>
-                        <td>2011/03/09</td>
-                        <td>$324,050</td>
-                    </tr>
-                    <tr>
-                        <td>Unity Butler</td>
-                        <td>Marketing Designer</td>
-                        <td>San Francisco</td>
-                        <td>47</td>
-                        <td>2009/12/09</td>
-                        <td>$85,675</td>
-                    </tr>
-                    <tr>
-                        <td>Howard Hatfield</td>
-                        <td>Office Manager</td>
-                        <td>San Francisco</td>
-                        <td>51</td>
-                        <td>2008/12/16</td>
-                        <td>$164,500</td>
-                    </tr>
-                    <tr>
-                        <td>Hope Fuentes</td>
-                        <td>Secretary</td>
-                        <td>San Francisco</td>
-                        <td>41</td>
-                        <td>2010/02/12</td>
-                        <td>$109,850</td>
-                    </tr>
-                    <tr>
-                        <td>Vivian Harrell</td>
-                        <td>Financial Controller</td>
-                        <td>San Francisco</td>
-                        <td>62</td>
-                        <td>2009/02/14</td>
-                        <td>$452,500</td>
-                    </tr>
-                    <tr>
-                        <td>Timothy Mooney</td>
-                        <td>Office Manager</td>
-                        <td>London</td>
-                        <td>37</td>
-                        <td>2008/12/11</td>
-                        <td>$136,200</td>
-                    </tr>
+<!--            articles-->
+            <div class="tab-pane fade in <? if ($_GET['tab'] == 'articles'):?>active<?endif?>" id="article">
 
 
-                    </tbody>
-                </table>
+                <div class="row">
+
+                    <form action="" method="post">
+                        <div class="col-md-4 col-md-offset-3 demo">
+                            <input type='text' name="daterange_article" class="form-control" value="" />
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar w-calendar-article"></i>
+
+                        </div>
+                        <button type="submit" name="filtr_articles" value="1" class="btn btn-primary">Фильтровать</button>
+                    </form>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4 col-md-offset-3">
+                        <?if (!empty($daterange_article)):?>
+                            <strong class="text-center">Отфильтровано с <?=$daterange_article?></strong>
+                        <?endif?>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <table id="table-article" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Название</th>
+                                    <th>Просмотры</th>
+                                    <th>В избранном</th>
+
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Название</th>
+                                    <th>Просмотры</th>
+                                    <th>В избранном</th>
+
+                                </tr>
+                            </tfoot>
+                            <tbody>
+
+
+                                <? foreach ($data_articles as $row): ?>
+                                    <tr>
+                                        <td><?=$row['id'] ?></td>
+                                        <td><?= $row['name']?></td>
+                                        <td><?= $row['count_vievs']?></td>
+                                        <td><?= $row['count_favor']?></td>
+                                    </tr>
+                                <? endforeach ?>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
 
 
             </div>
@@ -250,9 +195,141 @@
 
 
 
+            <div class="tab-pane fade in <? if ($_GET['tab'] == 'coupons'):?>active<?endif?>" id="coupons">
 
-            <div class="tab-pane fade" id="coupons">dfghdfghd </div>
-            <div class="tab-pane fade" id="baners">dgfhdfsghfsdgh</div>
+
+                <div class="row">
+
+                    <form action="" method="post">
+                        <div class="col-md-4 col-md-offset-3 demo">
+                            <input type='text' name="daterange_coupons" class="form-control" value="" />
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar w-calendar-coupons"></i>
+
+                        </div>
+                        <button type="submit" name="filtr_coupons" value="1" class="btn btn-primary">Фильтровать</button>
+                    </form>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4 col-md-offset-3">
+                        <?if (!empty($daterange_coupons)):?>
+                            <strong class="text-center">Отфильтровано с <?=$daterange_coupons?></strong>
+                        <?endif?>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <table id="table-coupons" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Название</th>
+                                <th>Просмотры</th>
+                                <th>В избранном</th>
+
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Название</th>
+                                <th>Просмотры</th>
+                                <th>В избранном</th>
+
+                            </tr>
+                            </tfoot>
+                            <tbody>
+
+
+                            <? foreach ($data_coupons as $row): ?>
+                                <tr>
+                                    <td><?=$row['id'] ?></td>
+                                    <td><?= $row['name']?></td>
+                                    <td><?= $row['count_vievs']?></td>
+                                    <td><?= $row['count_favor']?></td>
+                                </tr>
+                            <? endforeach ?>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+            <div class="tab-pane fade in <? if ($_GET['tab'] == 'baners'):?>active<?endif?>" id="baners">
+
+
+                <div class="row">
+
+                    <form action="" method="post">
+                        <div class="col-md-4 col-md-offset-3 demo">
+                            <input type='text' name="daterange_baners" class="form-control" value="" />
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar w-calendar-baners"></i>
+
+                        </div>
+                        <button type="submit" name="filtr_baners" value="1" class="btn btn-primary">Фильтровать</button>
+                    </form>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4 col-md-offset-3">
+                        <?if (!empty($daterange_baners)):?>
+                            <strong class="text-center">Отфильтровано с <?=$daterange_baners?></strong>
+                        <?endif?>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <table id="table-baners" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Название</th>
+                                <th>Клики</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Название</th>
+                                <th>Клики</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+
+
+                            <? foreach ($data_baners as $row): ?>
+                                <tr>
+                                    <td><?=$row['id'] ?></td>
+                                    <td><?= $row['name']?></td>
+                                    <td><?= $row['count_vievs']?></td>
+                                </tr>
+                            <? endforeach ?>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+
+
+            </div>
         </div>
 
     </div>
@@ -291,9 +368,24 @@
 
     $(document).ready(function() {
 
-        $(document).on('click', '.demo .fa-calendar', function(){
+        $(document).on('click', '.demo .w-calendar-bus', function(){
             $('input[name="daterange"]').trigger('click');
         });
+
+        $(document).on('click', '.demo .w-calendar-article', function(){
+            $('input[name="daterange_article"]').trigger('click');
+        });
+
+
+        $(document).on('click', '.demo .w-calendar-coupons', function(){
+            $('input[name="daterange_coupons"]').trigger('click');
+        });
+
+
+        $(document).on('click', '.demo .w-calendar-baners', function(){
+            $('input[name="daterange_baners"]').trigger('click');
+        });
+
 
 
 
@@ -312,10 +404,54 @@
 
 
 
+        $('input[name="daterange_article"]').daterangepicker({
+            //"timePickerIncrement": 43200,
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
+            "alwaysShowCalendars": true,
+            "startDate": get_date(null, 30),
+            "endDate": formatDate()
+        }, function(start, end, label) {
+//                console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+        });
+
+
+        $('input[name="daterange_coupons"]').daterangepicker({
+            //"timePickerIncrement": 43200,
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
+            "alwaysShowCalendars": true,
+            "startDate": get_date(null, 30),
+            "endDate": formatDate()
+        }, function(start, end, label) {
+//                console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+        });
+
+
+        $('input[name="daterange_baners"]').daterangepicker({
+            //"timePickerIncrement": 43200,
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
+            "alwaysShowCalendars": true,
+            "startDate": get_date(null, 30),
+            "endDate": formatDate()
+        }, function(start, end, label) {
+//                console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+        });
 
 
 
-        $('#table-bus, #table-article').DataTable({
+
+
+
+
+
+
+
+        $('#table-bus, #table-article, #table-coupons, #table-baners').DataTable({
             "pagingType": "full_numbers",
 
             "order": [[ 2, "desc" ]],

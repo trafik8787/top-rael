@@ -58,7 +58,7 @@ abstract class Controller_Core_Main extends Controller_Template {
             'Печатный журнал' => array('metod' => 'jornal', 'url' => 'jornal', 'icon' => 'glyphicon-list-alt'),
 
             '1' => array(),
-            'Статистика' => array('metod' => 'statistik', 'url' => 'statistik', 'icon' => 'glyphicon-list-alt'),
+            'Статистика' => array('metod' => 'statistik', 'url' => 'statistik?tab=bus', 'icon' => 'glyphicon-list-alt'),
             '2' => array(),
 
             'Локации' => array('metod' => 'locat', 'url' => 'locat', 'icon' => 'glyphicon-flag'),
