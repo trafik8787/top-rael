@@ -17,15 +17,31 @@ class Model_SubscribeModel extends Model_BaseModel {
     public function addSubskribeLodatey ($email, $action = 0, $uid){
 
         if ($action == 0) {
-            try {
-                $query = DB::insert('subscription', array('email', 'action', 'uid'))
-                    ->values(array($email, $action, $uid))->execute();
 
-                return array('susses'=>'На вашу почту '.$email.' было отправлено письмо для подтверждения подписки');
+            $query = DB::select()
+                ->from('subscription')
+                ->where('email', '=', $email)
+                ->and_where('action', '=', 0)
+                ->execute()->as_array();
 
-            } catch (Exception $x) {
-                return  array('dublicate_email'=>'Такой Email уже существует');
+            if (!empty($query)) {
+
+                 return array('susses'=>'На вашу почту '.$email.' было отправлено письмо для подтверждения подписки', 'uid' => $query[0]['uid']);
+
+            } else {
+
+                 try {
+                     $query = DB::insert('subscription', array('email', 'action', 'uid'))
+                         ->values(array($email, $action, $uid))->execute();
+
+                     return array('susses'=>'На вашу почту '.$email.' было отправлено письмо для подтверждения подписки');
+
+                 } catch (Exception $x) {
+                     return  array('dublicate_email'=>'Такой Email уже существует');
+                 }
+
             }
+
         } else {
             DB::update('subscription')->set(array('action' => 1, 'ip' => $_SERVER['REMOTE_ADDR'], 'date_active' => date('Y-m-d')))
                 ->where('email', '=', $email)

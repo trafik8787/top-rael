@@ -21,21 +21,30 @@ class Controller_Pages_Ajax extends Controller {
             $uniqid = uniqid();
             $query = Model::factory('SubscribeModel')->addSubskribeLodatey($this->request->post('email'), 0, $uniqid);
 
-            $html_mail = View::factory('email/mail_subskribe_enable');
-            $html_mail->email = $this->request->post('email');
-            $html_mail->message = '<strong><a href="http://'.$_SERVER['HTTP_HOST'].'/susses_subscribe?qid='.$uniqid.'&email='.$this->request->post('email').'">Нажмите на эту ссылку, чтобы подтвердить и получать рассылку</a></strong>';
 
-            $m = Email::factory();
-            $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
-            $m->To($this->request->post('email')); // кому адресованно
-            $m->Bcc('boris@briker.biz');
-            $m->Subject('Подтвердите подписку на рассылку новинок Topisrael');
-            $m->Body($html_mail, "html");
-            $m->Priority(3);
-            $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new.png", "", "image/png");
-            $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
-            //$m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/3.jpg", "", "image/jpeg");
-            $m->Send();
+            if (empty($query['dublicate_email'])) {
+
+                //проверяем есть ли этот емейл в неактивированых если есть то берем его код их таблицы
+                if (!empty($query['uid'])) {
+                    $uniqid = $query['uid'];
+                }
+
+                $html_mail = View::factory('email/mail_subskribe_enable');
+                $html_mail->email = $this->request->post('email');
+                $html_mail->message = '<strong><a href="http://' . $_SERVER['HTTP_HOST'] . '/susses_subscribe?qid=' . $uniqid . '&email=' . $this->request->post('email') . '">Нажмите на эту ссылку, чтобы подтвердить и получать рассылку</a></strong>';
+
+                $m = Email::factory();
+                $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
+                $m->To($this->request->post('email')); // кому адресованно
+                $m->Bcc('boris@briker.biz');
+                $m->Subject('Подтвердите подписку на рассылку новинок Topisrael');
+                $m->Body($html_mail, "html");
+                $m->Priority(3);
+                $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/images/logo-new.png", "", "image/png");
+                $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/2.png", "", "image/png");
+                //$m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/3.jpg", "", "image/jpeg");
+                $m->Send();
+            }
             echo json_encode($query);
         }
 	}
