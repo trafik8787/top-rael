@@ -14,12 +14,12 @@ class Model_SubscribeModel extends Model_BaseModel {
      * @return array
      * todo добавляем подписчика
      */
-    public function addSubskribeLodatey ($email, $action = 0){
+    public function addSubskribeLodatey ($email, $action = 0, $uid){
 
         if ($action == 0) {
             try {
-                $query = DB::insert('subscription', array('email', 'action'))
-                    ->values(array($email, $action))->execute();
+                $query = DB::insert('subscription', array('email', 'action', 'uid'))
+                    ->values(array($email, $action, $uid))->execute();
 
                 return array('susses'=>'На вашу почту '.$email.' было отправлено письмо для подтверждения подписки');
 
@@ -27,10 +27,37 @@ class Model_SubscribeModel extends Model_BaseModel {
                 return  array('dublicate_email'=>'Такой Email уже существует');
             }
         } else {
-            DB::update('subscription')->set(array('action' => 1))->where('email', '=', $email)->execute();
+            DB::update('subscription')->set(array('action' => 1, 'ip' => $_SERVER['REMOTE_ADDR'], 'date_active' => date('Y-m-d')))
+                ->where('email', '=', $email)
+                ->and_where('uid', '=', $uid)
+                ->execute();
         }
 
     }
+
+
+    /**
+     * @param $email
+     * @param $uid
+     * @return bool
+     * todo проверить
+     */
+    public function getActiveSelect ($email, $uid){
+
+        $query = DB::select()
+            ->from('subscription')
+            ->where('email', '=', $email)
+            ->and_where('uid', '=', $uid)
+            ->and_where('action', '=', 0)
+            ->execute()->as_array();
+
+        if (!empty($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
     //управление подпиской из профиля
@@ -372,6 +399,11 @@ class Model_SubscribeModel extends Model_BaseModel {
     }
 
 
+    /**
+     * @param $email
+     * @return object
+     * todo отписатся от рассылки
+     */
     public function Unsubscribe ($email) {
 
         return DB::update('subscription')

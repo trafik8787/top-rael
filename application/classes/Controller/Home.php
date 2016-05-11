@@ -11,9 +11,7 @@ class Controller_Home extends Controller_BaseController {
 
 	public function action_index(){
 
-        //Model::factory('CouponsModel')->getInformersCouponsId();
-       // Model::factory('ArticlesModel')->getInformersArticlesId();
-        //Model::factory('BussinesModel')->getInformersBussinesId();
+       // HTML::x($_SERVER['REMOTE_ADDR']);
 
         $resultArr = array();
         $content = View::factory('pages/home');

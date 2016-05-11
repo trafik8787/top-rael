@@ -21,10 +21,11 @@ class Controller_Pages_Subscribe extends Controller_BaseController {
         ));
 
         if (!empty($_GET['qid'])) {
-            if ($_GET['qid'] == Session::instance()->get('uniqid')) {
-                Model::factory('SubscribeModel')->addSubskribeLodatey($_GET['email'], 1);
-                Session::instance()->delete('uniqid');
+            if (Model::factory('SubscribeModel')->getActiveSelect($_GET['email'], $_GET['qid'])) {
+
+                Model::factory('SubscribeModel')->addSubskribeLodatey($_GET['email'], 1, $_GET['qid']);
                 $content->data = 'Спасибо что подписались на нашу рассылку!';
+
             } else {
                 $content->data = 'Ошибка';
             }

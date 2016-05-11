@@ -1252,11 +1252,13 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_lang('ru');
         $crud->remove_edit();
         $crud->remove_add();
-        $crud->show_columns('id','email', 'date');
+        $crud->show_columns('id','email',  'date', 'ip', 'date_active');
 
         $crud->show_name_column(array(
             'email' => 'Email',
-            'date' => 'Дата подписки'
+            'date' => 'Дата подписки',
+            'ip' => 'IP',
+            'date_active' => 'Дата активации'
             ));
 
         $status['page'] = 'action';

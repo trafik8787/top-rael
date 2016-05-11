@@ -17,12 +17,13 @@ class Controller_Pages_Ajax extends Controller {
 	{
         if (Request::initial()->is_ajax()) {
 
-            $query = Model::factory('SubscribeModel')->addSubskribeLodatey($this->request->post('email'));
-            Session::instance()->set('uniqid', uniqid());
+
+            $uniqid = uniqid();
+            $query = Model::factory('SubscribeModel')->addSubskribeLodatey($this->request->post('email'), 0, $uniqid);
 
             $html_mail = View::factory('email/mail_subskribe_enable');
             $html_mail->email = $this->request->post('email');
-            $html_mail->message = '<strong><a href="http://'.$_SERVER['HTTP_HOST'].'/susses_subscribe?qid='.Session::instance()->get('uniqid').'&email='.$this->request->post('email').'">Нажмите на эту ссылку, чтобы подтвердить и получать рассылку</a></strong>';
+            $html_mail->message = '<strong><a href="http://'.$_SERVER['HTTP_HOST'].'/susses_subscribe?qid='.$uniqid.'&email='.$this->request->post('email').'">Нажмите на эту ссылку, чтобы подтвердить и получать рассылку</a></strong>';
 
             $m = Email::factory();
             $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
