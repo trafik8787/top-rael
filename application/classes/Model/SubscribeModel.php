@@ -12,12 +12,14 @@ class Model_SubscribeModel extends Model_BaseModel {
     /**
      * @param $email
      * @return array
-     * todo добавляем подписчика
+     * todo добавляем подписчика для полной рассылки
      */
     public function addSubskribeLodatey ($email, $action = 0, $uid){
 
+        //флаг изминения если не 0 то это подтверждение подписки
         if ($action == 0) {
 
+            //проверяем прошел ли подтверждение о подписке даный емейл
             $query = DB::select()
                 ->from('subscription')
                 ->where('email', '=', $email)
@@ -26,13 +28,24 @@ class Model_SubscribeModel extends Model_BaseModel {
 
             if (!empty($query)) {
 
-                 return array('susses'=>'На вашу почту '.$email.' было отправлено письмо для подтверждения подписки', 'uid' => $query[0]['uid']);
+                if ($query[0]['uid'] == '') {
+                    //переписываем uid
+                    DB::update('subscription')->set(array('uid' => $uid))
+                        ->where('email', '=', $email)
+                        ->and_where('action', '=', 0)
+                        ->execute();
+                    $quid = $uid;
+                } else {
+                    $quid = $query[0]['uid'];
+                }
+
+                 return array('susses'=>'На вашу почту '.$email.' было отправлено письмо для подтверждения подписки', 'uid' => $quid);
 
             } else {
 
                  try {
-                     $query = DB::insert('subscription', array('email', 'action', 'uid'))
-                         ->values(array($email, $action, $uid))->execute();
+                     $query = DB::insert('subscription', array('email', 'action', 'all_subscribe', 'uid'))
+                         ->values(array($email, $action, 1, $uid))->execute();
 
                      return array('susses'=>'На вашу почту '.$email.' было отправлено письмо для подтверждения подписки');
 
@@ -43,13 +56,114 @@ class Model_SubscribeModel extends Model_BaseModel {
             }
 
         } else {
-            DB::update('subscription')->set(array('action' => 1, 'ip' => $_SERVER['REMOTE_ADDR'], 'date_active' => date('Y-m-d')))
+            //подтверждение подписки
+            DB::update('subscription')->set(array('action' => 1,
+                                                    'ip' => $_SERVER['REMOTE_ADDR'],
+                                                    'date_active' => date('Y-m-d')))
                 ->where('email', '=', $email)
                 ->and_where('uid', '=', $uid)
                 ->execute();
         }
 
     }
+
+
+    /**
+     * @param $email
+     * @param null $bussines_id
+     * @param int $action
+     * @param null $uid
+     * @return array
+     * @throws Kohana_Exception
+     * todo подписка на конкретный бизнес
+     */
+    public function addSubskribeBussines ($email, $bussines_id = null, $action = 0, $uid = null){
+
+        //подписка пользователя на бизнес
+        if ($action == 0) {
+
+            //существует ли емейл в таблице подпищиков
+            $query = DB::select()
+                ->from('subscription')
+                ->where('email', '=', $email)
+                ->execute()->as_array();
+
+            //если подпищик существует
+            if (!empty($query)) {
+
+                //проверяем подтвердил ли он свою подписку
+                if ($query[0]['action'] == 1) {
+
+                    //смотрим подписывался ли пользователь на этот бизнес
+                    $query2 = DB::select()
+                        ->from('subscription_relation_bussines')
+                        ->where('subscription_id', '=', $query[0]['id'])
+                        ->and_where('bussines_id', '=', $bussines_id)
+                        ->execute()->as_array();
+
+                    //если пользователь подписывался на этот бизнес
+                    if (!empty($query2)) {
+
+                        return  array('dublicate_email'=>'Вы уже подписаны на рассылку из этого завидения');
+
+                        //если не подписывался
+                    } else {
+
+                        $query_relat = DB::insert('subscription_relation_bussines', array('bussines_id', 'action', 'subscription_id', 'ip', 'uid'))
+                            ->values(array($bussines_id, 1, $query[0]['id'], $_SERVER['REMOTE_ADDR'], $uid))->execute();
+
+                        return array('susses_message'=>'Спасибо за подписку на это завидение', 'no_mail' => 1);
+                    }
+
+                //если не подтвердил подписку
+                } else {
+
+                    $query_relat = DB::insert('subscription_relation_bussines', array('bussines_id', 'action', 'subscription_id', 'uid'))
+                        ->values(array($bussines_id, 1, $query[0]['id'], $uid))->execute();
+
+                    return array('susses'=>'На вашу почту '.$email.' было отправлено письмо для подтверждения подписки', 'uid' => $uid, 'bussines_id' => $bussines_id);
+
+                }
+
+
+
+            //если подпищика не существует то создаем
+            } else {
+
+                //вписываем подпищика со статусом не подтвержден и с флагом
+                $query_subs = DB::insert('subscription', array('email', 'action', 'uid'))
+                    ->values(array($email, 0, $uid))->execute();
+
+                //вписываем подпищика на бизнес
+                $query_relat = DB::insert('subscription_relation_bussines', array('bussines_id', 'action', 'subscription_id', 'ip', 'uid'))
+                    ->values(array($bussines_id, 1, $query_subs[0], $_SERVER['REMOTE_ADDR'], $uid))->execute();
+
+                return array('susses'=>'На вашу почту '.$email.' было отправлено письмо для подтверждения подписки', 'uid' => $uid, 'bussines_id' => $bussines_id);
+            }
+
+
+
+        //подтверждение подписки на бизнес
+        } else {
+
+            //подтверждение подписки
+            DB::update('subscription')->set(array('action' => 1,
+                'ip' => $_SERVER['REMOTE_ADDR'],
+                'date_active' => date('Y-m-d')))
+                ->where('email', '=', $email)
+                ->and_where('uid', '=', $uid)
+                ->execute();
+
+            DB::update('subscription_relation_bussines')->set(array('action' => 1, 'ip' => $_SERVER['REMOTE_ADDR']))
+                ->where('uid', '=', $uid)
+                ->and_where('bussines_id', '=', $bussines_id)
+                ->execute();
+
+
+        }
+
+    }
+
 
 
     /**
@@ -264,8 +378,167 @@ class Model_SubscribeModel extends Model_BaseModel {
             ->from('subscription')
             ->where('action','=', 1)
             ->and_where('enable_all','=',1)
+            ->and_where('all_subscribe','=', 1)
             ->execute()->as_array();
     }
+
+
+    /**
+     * @return mixed
+     * todo рассылка конкретно по бизнесам
+     */
+    public function getSubskribeBussinesUsers(){
+
+
+        $query =  DB::select(
+            array('subscription.id', 'SubscID'),
+            array('subscription.email', 'SubscEmail'),
+            array('subscription_relation_bussines.bussines_id', 'SubsRelBusID'),
+
+            array('articles.id', 'ArticID'),
+            array('articles.name', 'ArticName'),
+            array('articles.url', 'ArticUrl'),
+            array('articles.content', 'ArticContent'),
+            array('articles.images_article', 'ArticImg'),
+            array('articles.status_subscribe_bussines', 'ArticStatusSubs'),
+
+            array('coupon.id', 'CoupId'),
+            array('coupon.url', 'CoupUrl'),
+            array('coupon.name', 'CoupName'),
+            array('coupon.secondname', 'CoupSecondname'),
+            array('coupon.img_coupon', 'CoupImg'),
+            array('coupon.dateoff', 'CoupDateoff'),
+            array('coupon.status_subscribe_bussines', 'CoupStatusSubs'),
+
+
+            array('news.id', 'NewsId'),
+            array('news.name', 'NewsName'),
+            array('news.text', 'NewsText'),
+            array('news.status_subscribe_bussines', 'NewsStatusSubs'),
+
+
+            array('business.id', 'BusId'),
+            array('business.name', 'BusName'),
+            array('business.url', 'BusUrl')
+
+
+        )
+            ->from('subscription')
+            ->join('subscription_relation_bussines')
+
+            ->on('subscription.id', '=', 'subscription_relation_bussines.subscription_id')
+
+            //articles
+            ->join('articles_relation_business', 'LEFT')
+            ->on('subscription_relation_bussines.bussines_id', '=', 'articles_relation_business.id_business')
+
+            ->join('articles',  'LEFT')
+            ->on('articles.id', '=', 'articles_relation_business.id_articles')
+
+
+            //coupons
+            ->join('coupon', 'LEFT')
+            ->on('coupon.business_id', '=', 'subscription_relation_bussines.bussines_id')
+
+            //bussines
+            ->join('business')
+            ->on('coupon.business_id', '=', 'business.id')
+
+
+            //news
+            ->join('news', 'LEFT')
+            ->on('news.bussines_id', '=', 'subscription_relation_bussines.bussines_id')
+
+            ->where('subscription.action','=', 1)
+            ->and_where('subscription.enable_all','=',1)
+            ->and_where('subscription.all_subscribe','=', 0)
+            ->and_where('subscription_relation_bussines.action','=', 1)
+
+            ->execute()->as_array();
+
+
+        $end_result = array();
+
+        foreach ($query as $item) {
+
+            $CoupTmp = array();
+            $ArticTmp = array();
+            $NewsTmp = array();
+            $BusTmp = array();
+
+            if (!array_key_exists($item['SubscID'], $end_result)) {
+
+
+
+                foreach ($query as $rows) {
+
+                   if ($item['SubscID'] == $rows['SubscID']) {
+
+                       if (!empty($rows['CoupId'])) {
+                           //coupons
+                           if (!array_key_exists($rows['CoupId'], $CoupTmp) AND ($rows['CoupStatusSubs'] == 0)) {
+                               $CoupTmp[$rows['CoupId']] = array('CoupId' => $rows['CoupId'],
+                                                                    'CoupUrl' => $rows['CoupUrl'],
+                                                                    'CoupName' => $rows['CoupName'],
+                                                                    'CoupSecondname' => $rows['CoupSecondname'],
+                                                                    'CoupImg' => $rows['CoupImg'],
+                                                                    'CoupDateoff' => $rows['CoupDateoff'],
+                                                                    'BusName' => $rows['BusName'],
+                                                                    'BusUrl' => $rows['BusUrl']);
+                           }
+                       }
+
+                       if (!empty($rows['ArticID'])) {
+                           //articles
+                           if (!array_key_exists($rows['ArticID'], $ArticTmp) AND ($rows['ArticStatusSubs'] == 0)) {
+                               $ArticTmp[$rows['ArticID']] = array('ArticID' => $rows['ArticID'],
+                                                                    'ArticContent' => $rows['ArticContent'],
+                                                                    'ArticImg' => $rows['ArticImg'],
+                                                                    'ArticUrl' => $rows['ArticUrl'],
+                                                                    'ArticName' => $rows['ArticName']);
+                           }
+                       }
+
+
+                       if (!empty($rows['NewsId'])) {
+                           //news
+                           if (!array_key_exists($rows['NewsId'], $NewsTmp) AND ($rows['NewsStatusSubs'] == 0)) {
+                               $NewsTmp[$rows['NewsId']] = array('NewsId' => $rows['NewsId'],
+                                                                    'NewsName' => $rows['NewsName'],
+                                                                    'NewsText' => $rows['NewsText']);
+                           }
+                       }
+
+
+                       if (!empty($rows['SubsRelBusID'])) {
+                           //bussines id
+                           if (!array_key_exists($rows['SubsRelBusID'], $BusTmp)) {
+                               $BusTmp[$rows['SubsRelBusID']] = $rows['SubsRelBusID'];
+                           }
+                       }
+
+                    }
+
+
+                }
+
+
+                $end_result[$item['SubscID']] = array('email' => $item['SubscEmail'],
+                    'CoupArr' => $CoupTmp,
+                    'ArticArr' => $ArticTmp,
+                    'NewsArr' => $NewsTmp,
+                    'BusArr' => $BusTmp
+                );
+            }
+
+
+        }
+
+        return  $end_result;
+
+    }
+
+
 
 
     /**
@@ -426,6 +699,18 @@ class Model_SubscribeModel extends Model_BaseModel {
             ->set(array('enable_all' => 0))
             ->where('email', '=', $email)
             ->execute();
+    }
+
+    /**
+     * @param $bussines_id
+     * @param $uid
+     * @return object
+     * todo удалить подписку на конкретный бизнес
+     */
+    public function UnsubscribeBussines ($bussines_id, $uid) {
+        return DB::delete('subscription_relation_bussines')
+            ->where('bussines_id', '=', $bussines_id)
+            ->and_where('uid', '=', $uid)->execute();
     }
 
 }

@@ -245,6 +245,17 @@ abstract class Controller_BaseController extends Controller_Template {
     }
 
 
+
+    /*
+     * блок форма подписки на конкретный бизнес
+     */
+    public function showBlocBussinesSubscribe($bussines_id){
+        $data = View::factory('blocks_includ/bloc_right_bussines_subscribe');
+        $data->bussines_id = $bussines_id;
+        return  $data;
+    }
+
+
     public function google_adssens (){
         $content = View::factory('blocks_includ/google_adssens');
 

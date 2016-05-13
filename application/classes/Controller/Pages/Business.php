@@ -37,6 +37,7 @@ class Controller_Pages_Business extends Controller_BaseController {
         //echo View::factory('profiler/stats');
         $content->bloc_right = parent::RightBloc(array(
             'lotery' => $this->lotarey($data['BusId']),
+            $this->showBlocBussinesSubscribe($data['BusId']),
             View::factory('blocks_includ/coupon_business_page', array('content' => $data['CoupArr'], 'BusName' => $data['BusName'])),
             View::factory('blocks_includ/business_uslugi', array('data' => $data['BusServicesArr'])),
             View::factory('blocks_includ/business_meny', array('data' => $data['BusFileMeny']))

@@ -23,12 +23,21 @@ class Controller_Pages_Subscribe extends Controller_BaseController {
         if (!empty($_GET['qid'])) {
             if (Model::factory('SubscribeModel')->getActiveSelect($_GET['email'], $_GET['qid'])) {
 
-                Model::factory('SubscribeModel')->addSubskribeLodatey($_GET['email'], 1, $_GET['qid']);
+
+                //подтверждение подписки на бизнес
+                if (!empty($_GET['bus'])) {
+                    Model::factory('SubscribeModel')->addSubskribeBussines($_GET['email'], $_GET['bus'], 1, $_GET['qid']);
+                } else {
+                    Model::factory('SubscribeModel')->addSubskribeLodatey($_GET['email'], 1, $_GET['qid']);
+                }
+
                 $content->data = 'Спасибо что подписались на нашу рассылку!';
 
             } else {
                 $content->data = 'Ошибка';
             }
+
+
         }
 
         $this->template->content = $content;

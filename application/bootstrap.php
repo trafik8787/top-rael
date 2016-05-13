@@ -266,6 +266,15 @@ Route::set('BussinesDisableEmailSevenDays', 'sendbusiness')
     ));
 
 
+//запускается по крону и запускает рассылку по конкретным бизнесам
+Route::set('mail_subscribe_bussines', 'sendbusiness_bussines')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'MailSubscribeBussines'
+    ));
+
+
 Route::set('Partners', 'partners')
     ->defaults(array(
         'directory' => 'Pages',

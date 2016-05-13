@@ -11,27 +11,39 @@ class Controller_Pages_Ajax extends Controller {
 
 
     /**
-     * добавляем подписчика
+     * добавляем подписчика по Ajax
      */
 	public function action_index()
 	{
         if (Request::initial()->is_ajax()) {
 
-
             $uniqid = uniqid();
-            $query = Model::factory('SubscribeModel')->addSubskribeLodatey($this->request->post('email'), 0, $uniqid);
+
+            //разделяем обычную подписку и подписку на бизнес
+            if (!empty($this->request->post('subscribe_bussines'))) {
+                //подписка на конкретный бизнес
+                $query = Model::factory('SubscribeModel')->addSubskribeBussines($this->request->post('email'), $this->request->post('subscribe_bussines'), 0, $uniqid);
+            } else {
+                $query = Model::factory('SubscribeModel')->addSubskribeLodatey($this->request->post('email'), 0, $uniqid);
+            }
 
 
-            if (empty($query['dublicate_email'])) {
-
+            if (empty($query['dublicate_email']) AND empty($query['no_mail']) ) {
                 //проверяем есть ли этот емейл в неактивированых если есть то берем его код их таблицы
                 if (!empty($query['uid'])) {
                     $uniqid = $query['uid'];
                 }
 
+                $bus_url = '';
+                //проверяем является ли это подпиской на бизнес
+                if (!empty($query['bussines_id'])) {
+                    $bus_url = '&bus='.$query['bussines_id'];
+                }
+
+
                 $html_mail = View::factory('email/mail_subskribe_enable');
                 $html_mail->email = $this->request->post('email');
-                $html_mail->message = '<strong><a href="http://' . $_SERVER['HTTP_HOST'] . '/susses_subscribe?qid=' . $uniqid . '&email=' . $this->request->post('email') . '">Нажмите на эту ссылку, чтобы подтвердить и получать рассылку</a></strong>';
+                $html_mail->message = '<strong><a href="http://' . $_SERVER['HTTP_HOST'] . '/susses_subscribe?qid=' . $uniqid . '&email=' . $this->request->post('email') . $bus_url.'">Нажмите на эту ссылку, чтобы подтвердить и получать рассылку</a></strong>';
 
                 $m = Email::factory();
                 $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
@@ -475,6 +487,73 @@ class Controller_Pages_Ajax extends Controller {
         }
 
     }
+
+
+
+
+
+
+    //рассылка по бизнесам запускаетя по крону url - sendbusiness_bussines
+    public function action_MailSubscribeBussines (){
+
+        $views = View::factory('email/mail_subscribe_bussines');
+
+        $data = Model::factory('SubscribeModel')->getSubskribeBussinesUsers();
+
+        $m = Email::factory();
+
+        if (!empty($data)) {
+
+            foreach ($data as $item) {
+
+                //$views->data = $item;
+
+                $article_shift = array_shift($item['ArticArr']);
+                $views->article_shift = $article_shift;
+                $views->articless = $item['ArticArr'];
+                $views->news = $item['NewsArr'];
+                $views->coupons = Controller_BaseController::convertArrayVievData($item['CoupArr']);
+
+                $m->reloadTo();
+                $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
+                $m->To($item['email']); // кому адресованно
+                $m->Subject('Новые обзоры, купоны и места отдыха и развлечений');
+                $m->Body($views, "html");
+                $m->Priority(3);
+
+                if (!empty($article_shift)) {
+                    $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/' . basename($article_shift['ArticImg']), "", "");
+                }
+
+                if (!empty($item['ArticArr'])) {
+                    foreach ($item['ArticArr'] as $artic) {
+                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($artic['ArticImg']), "", "");
+                    }
+                }
+
+                if (!empty($item['CoupArr'])) {
+                    foreach ($item['CoupArr'] as $row_coupon) {
+                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_coupons/' . basename($row_coupon['CoupImg']), "", "");
+                    }
+                }
+
+
+                $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/images/logo-new.png", "", "image/png");
+                $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/2.png", "", "image/png");
+                $m->Send();
+
+            }
+
+
+        }
+
+
+        HTML::x($data);
+    }
+
+
+
+
 
 
     /*
