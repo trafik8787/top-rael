@@ -548,7 +548,7 @@ class Controller_Pages_Ajax extends Controller {
         }
 
 
-        HTML::x($data);
+       //HTML::x($data);
     }
 
 

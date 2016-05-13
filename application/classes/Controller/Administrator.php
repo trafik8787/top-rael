@@ -1252,12 +1252,13 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_lang('ru');
         $crud->remove_edit();
         $crud->remove_add();
-        $crud->show_columns('id','email',  'date', 'ip', 'date_active');
+        $crud->show_columns('id','email',  'date', 'ip', 'all_subscribe', 'date_active');
 
         $crud->show_name_column(array(
             'email' => 'Email',
             'date' => 'Дата подписки',
             'ip' => 'IP',
+            'all_subscribe' => 'Тип подписки',
             'date_active' => 'Дата активации'
             ));
 
@@ -2286,6 +2287,14 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static  function call_list_table_subscription ($new_array){
         $new_array['date'] =  date('d/m/Y H:m:s', strtotime($new_array['date']));
+
+        if ($new_array['all_subscribe'] == 1) {
+            $new_array['all_subscribe'] = '[все]';
+        } else {
+            $new_array['all_subscribe'] = '[биз]';
+        }
+
+
         return $new_array;
     }
 

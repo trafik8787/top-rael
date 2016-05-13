@@ -451,7 +451,6 @@ class Model_SubscribeModel extends Model_BaseModel {
 
             ->where('subscription.action','=', 1)
             ->and_where('subscription.enable_all','=',1)
-            ->and_where('subscription.all_subscribe','=', 0)
             ->and_where('subscription_relation_bussines.action','=', 1)
 
             ->execute()->as_array();
