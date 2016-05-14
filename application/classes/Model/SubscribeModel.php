@@ -700,6 +700,68 @@ class Model_SubscribeModel extends Model_BaseModel {
             ->execute();
     }
 
+
+    /**
+     * todo обновление статуса после рассылки по бизнесам
+     */
+    public function UpdateStatusSubscribeBussines (){
+
+        $artic = DB::select()
+            ->from('articles')
+            ->where('status_subscribe_bussines', '=', 0)
+            ->execute();
+
+        $data_artic = array();
+
+        if (!empty($artic)) {
+            foreach ($artic as $row_artic) {
+                $data_artic[] = $row_artic['id'];
+            }
+        }
+
+        if (!empty($data_artic)) {
+            DB::update('articles')->set(array('status_subscribe_bussines' => 1))->where('id', 'IN', $data_artic)->execute();
+        }
+
+
+        $coup = DB::select()
+            ->from('coupon')
+            ->where('status_subscribe_bussines', '=', 0)
+            ->execute();
+
+        $data_coupon = array();
+
+        if (!empty($coup)) {
+            foreach ($coup as $row_coup) {
+                $data_coupon[] = $row_coup['id'];
+            }
+        }
+
+        if (!empty($data_coupon)) {
+            DB::update('coupon')->set(array('status_subscribe_bussines' => 1))->where('id', 'IN', $data_coupon)->execute();
+        }
+
+
+        $news = DB::select()
+            ->from('news')
+            ->where('status_subscribe_bussines', '=', 0)
+            ->execute();
+
+        $data_news = array();
+
+        if (!empty($news)) {
+            foreach ($news as $row_news) {
+                $data_news[] = $row_news['id'];
+            }
+        }
+
+        if (!empty($data_news)) {
+            DB::update('news')->set(array('status_subscribe_bussines' => 1))->where('id', 'IN', $data_news)->execute();
+        }
+
+    }
+
+
     /**
      * @param $bussines_id
      * @param $uid

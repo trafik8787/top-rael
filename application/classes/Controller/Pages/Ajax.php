@@ -367,19 +367,19 @@ class Controller_Pages_Ajax extends Controller {
                         }
                     }
 
-                    if (!empty($lotery)) {
-                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . $lotery[0]['img'], "", "");
-                    }
-
-                    if (!empty($users_lotery)) {
-                        foreach ($users_lotery as $item_lotery) {
-                            if (!empty($item_lotery['usersPhoto'])) {
-                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . $item_lotery['usersPhoto'], "", "");
-                            } else {
-                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/public/uploade/no_avatar.jpg', "", "");
-                            }
-                        }
-                    }
+//                    if (!empty($lotery)) {
+//                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . $lotery[0]['img'], "", "");
+//                    }
+//
+//                    if (!empty($users_lotery)) {
+//                        foreach ($users_lotery as $item_lotery) {
+//                            if (!empty($item_lotery['usersPhoto'])) {
+//                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . $item_lotery['usersPhoto'], "", "");
+//                            } else {
+//                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/public/uploade/no_avatar.jpg', "", "");
+//                            }
+//                        }
+//                    }
 
                     foreach ($business as $bus) {
 
@@ -393,7 +393,7 @@ class Controller_Pages_Ajax extends Controller {
 
 
                     $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/images/logo-new.png", "", "image/png");
-                    $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/2.png", "", "image/png");
+//                    $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/2.png", "", "image/png");
                     $m->Send();
 
                 }
@@ -493,7 +493,10 @@ class Controller_Pages_Ajax extends Controller {
 
 
 
-    //рассылка по бизнесам запускаетя по крону url - sendbusiness_bussines
+
+    /**
+     * todo рассылка по бизнесам запускаетя по крону url - sendbusiness_bussines
+     */
     public function action_MailSubscribeBussines (){
 
         $views = View::factory('email/mail_subscribe_bussines');
@@ -505,8 +508,6 @@ class Controller_Pages_Ajax extends Controller {
         if (!empty($data)) {
 
             foreach ($data as $item) {
-
-                //$views->data = $item;
 
                 $article_shift = array_shift($item['ArticArr']);
                 $views->article_shift = $article_shift;
@@ -538,18 +539,20 @@ class Controller_Pages_Ajax extends Controller {
                 }
 
 
-                $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/images/logo-new.png", "", "image/png");
-                $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/2.png", "", "image/png");
+                $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/images/logo-new.png", "", "");
+                //$m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/2.png", "", "");
                 $m->Send();
 
             }
 
 
+            Model::factory('SubscribeModel')->UpdateStatusSubscribeBussines();
+
         }
 
-
-       //HTML::x($data);
     }
+
+
 
 
 

@@ -256,6 +256,15 @@ class Model_Adm extends Model {
 
 
     }
-    
-    
+
+
+    /*
+     * todo обновление поля состояния бизнеса время последнего обновления
+     */
+    public function setUpdateBussinesChange($bussines_id){
+        DB::update('business')->set(array('date_update_bussines' => date('Y-m-d')))
+            ->where('id', '=', $bussines_id)
+            ->execute();
+    }
+
 }
