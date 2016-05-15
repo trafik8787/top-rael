@@ -458,79 +458,81 @@ class Model_SubscribeModel extends Model_BaseModel {
 
         $end_result = array();
 
-        foreach ($query as $item) {
+        if (!empty($query)) {
 
-            $CoupTmp = array();
-            $ArticTmp = array();
-            $NewsTmp = array();
-            $BusTmp = array();
+            foreach ($query as $item) {
 
-            if (!array_key_exists($item['SubscID'], $end_result)) {
+                $CoupTmp = array();
+                $ArticTmp = array();
+                $NewsTmp = array();
+                $BusTmp = array();
 
-
-
-                foreach ($query as $rows) {
-
-                   if ($item['SubscID'] == $rows['SubscID']) {
-
-                       if (!empty($rows['CoupId'])) {
-                           //coupons
-                           if (!array_key_exists($rows['CoupId'], $CoupTmp) AND ($rows['CoupStatusSubs'] == 0)) {
-                               $CoupTmp[$rows['CoupId']] = array('CoupId' => $rows['CoupId'],
-                                                                    'CoupUrl' => $rows['CoupUrl'],
-                                                                    'CoupName' => $rows['CoupName'],
-                                                                    'CoupSecondname' => $rows['CoupSecondname'],
-                                                                    'CoupImg' => $rows['CoupImg'],
-                                                                    'CoupDateoff' => $rows['CoupDateoff'],
-                                                                    'BusName' => $rows['BusName'],
-                                                                    'BusUrl' => $rows['BusUrl']);
-                           }
-                       }
-
-                       if (!empty($rows['ArticID'])) {
-                           //articles
-                           if (!array_key_exists($rows['ArticID'], $ArticTmp) AND ($rows['ArticStatusSubs'] == 0)) {
-                               $ArticTmp[$rows['ArticID']] = array('ArticID' => $rows['ArticID'],
-                                                                    'ArticContent' => $rows['ArticContent'],
-                                                                    'ArticImg' => $rows['ArticImg'],
-                                                                    'ArticUrl' => $rows['ArticUrl'],
-                                                                    'ArticName' => $rows['ArticName']);
-                           }
-                       }
+                if (!array_key_exists($item['SubscID'], $end_result)) {
 
 
-                       if (!empty($rows['NewsId'])) {
-                           //news
-                           if (!array_key_exists($rows['NewsId'], $NewsTmp) AND ($rows['NewsStatusSubs'] == 0)) {
-                               $NewsTmp[$rows['NewsId']] = array('NewsId' => $rows['NewsId'],
-                                                                    'NewsName' => $rows['NewsName'],
-                                                                    'NewsText' => $rows['NewsText']);
-                           }
-                       }
+                    foreach ($query as $rows) {
+
+                        if ($item['SubscID'] == $rows['SubscID']) {
+
+                            if (!empty($rows['CoupId'])) {
+                                //coupons
+                                if (!array_key_exists($rows['CoupId'], $CoupTmp) AND ($rows['CoupStatusSubs'] == 0)) {
+                                    $CoupTmp[$rows['CoupId']] = array('CoupId' => $rows['CoupId'],
+                                        'CoupUrl' => $rows['CoupUrl'],
+                                        'CoupName' => $rows['CoupName'],
+                                        'CoupSecondname' => $rows['CoupSecondname'],
+                                        'CoupImg' => $rows['CoupImg'],
+                                        'CoupDateoff' => $rows['CoupDateoff'],
+                                        'BusName' => $rows['BusName'],
+                                        'BusUrl' => $rows['BusUrl']);
+                                }
+                            }
+
+                            if (!empty($rows['ArticID'])) {
+                                //articles
+                                if (!array_key_exists($rows['ArticID'], $ArticTmp) AND ($rows['ArticStatusSubs'] == 0)) {
+                                    $ArticTmp[$rows['ArticID']] = array('ArticID' => $rows['ArticID'],
+                                        'ArticContent' => $rows['ArticContent'],
+                                        'ArticImg' => $rows['ArticImg'],
+                                        'ArticUrl' => $rows['ArticUrl'],
+                                        'ArticName' => $rows['ArticName']);
+                                }
+                            }
 
 
-                       if (!empty($rows['SubsRelBusID'])) {
-                           //bussines id
-                           if (!array_key_exists($rows['SubsRelBusID'], $BusTmp)) {
-                               $BusTmp[$rows['SubsRelBusID']] = $rows['SubsRelBusID'];
-                           }
-                       }
+                            if (!empty($rows['NewsId'])) {
+                                //news
+                                if (!array_key_exists($rows['NewsId'], $NewsTmp) AND ($rows['NewsStatusSubs'] == 0)) {
+                                    $NewsTmp[$rows['NewsId']] = array('NewsId' => $rows['NewsId'],
+                                        'NewsName' => $rows['NewsName'],
+                                        'NewsText' => $rows['NewsText']);
+                                }
+                            }
+
+
+                            if (!empty($rows['SubsRelBusID'])) {
+                                //bussines id
+                                if (!array_key_exists($rows['SubsRelBusID'], $BusTmp)) {
+                                    $BusTmp[$rows['SubsRelBusID']] = $rows['SubsRelBusID'];
+                                }
+                            }
+
+                        }
+
 
                     }
 
 
+                    $end_result[$item['SubscID']] = array('email' => $item['SubscEmail'],
+                        'CoupArr' => $CoupTmp,
+                        'ArticArr' => $ArticTmp,
+                        'NewsArr' => $NewsTmp,
+                        'BusArr' => $BusTmp
+                    );
                 }
 
 
-                $end_result[$item['SubscID']] = array('email' => $item['SubscEmail'],
-                    'CoupArr' => $CoupTmp,
-                    'ArticArr' => $ArticTmp,
-                    'NewsArr' => $NewsTmp,
-                    'BusArr' => $BusTmp
-                );
             }
-
-
         }
 
         return  $end_result;
