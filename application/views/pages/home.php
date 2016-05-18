@@ -152,7 +152,9 @@
 
                                                     <div class="coupon-object-bottom">
 
-                                                        <!--<small class="coupon-date">до <?=Date::rusdate(strtotime($rows_coupon['dateoff']), 'j %MONTH% Y'); ?></small>-->
+                                                        <!--<small class="coupon-date">
+                                                        до <?=Date::rusdate(strtotime($rows_coupon['dateoff']), 'j %MONTH% Y'); ?></small>
+                                                        -->
                                                         
                                                     </div>
                                                 </div>
@@ -166,10 +168,13 @@
                     <?endforeach?>
 
                 </div>
-                <div class="text-center">
+               
+            </div>
+
+
+ <div class="text-center">
                     <a href="/coupons/" class="btn text-center open-all w-open-coupons-all" role="button">Открыть все</a>
                 </div>
-            </div>
 
         </div>
 
@@ -278,7 +283,7 @@
         </div>
         
         
-          <!-- partners 
+          <!-- partners -->
       
         
         <div class="panel panel-partners w-bloc-partners">
@@ -293,45 +298,37 @@
 
                 <div class="partners-content">
                                         
-                    <div class="partners-img"><img src="/public/images/logo-new.png"></div>
+                    <a href="http://www.ozrothagalil.org.il/" class="partners-img"><img src="/public/images/partners/ozrot_logo_heb.jpg"></a>
                     <div class="partners-line"></div>
-                    <div class="partners-title">ТОПизраиль</div>
+                    <div class="partners-title"><a href="http://www.ozrothagalil.org.il/">OzrotHagalil.org.il</a></div>
 
                 </div>
                 
                 <div class="partners-content">
                                         
-                    <div class="partners-img"><img src="https://tpc.googlesyndication.com/simgad/2172393764281850819"></div>
+                    <a href="http://pogoda.co.il/" class="partners-img"><img src="/public/images/partners/pogoda.png"></a>
                     <div class="partners-line"></div>
-                    <div class="partners-title">Интернет магазин</div>
+                    <div class="partners-title"><a href="http://pogoda.co.il/">Погода в Израиле</a></div>
 
                 </div>
 
                 <div class="partners-content">
                                         
-                    <div class="partners-img">
-                        <img src="http://4.bp.blogspot.com/-FY2aK-Z2tdA/TWcI4_z5jUI/AAAAAAAAACs/yPR1Hm6ITmE/s1600/ebay+logo.png">
-                    </div>
+                    <a href="http://tourism.goisrael.ru/" class="partners-img">
+                        <img src="/public/images/partners/goisrael.jpg">
+                    </a>
                     <div class="partners-line"></div>
-                    <div class="partners-title">Что то еще</div>
+                    <div class="partners-title"> <a href="http://tourism.goisrael.ru/">GoIsrael</a></div>
 
                 </div>
 
-                <div class="partners-content">
+           <div class="partners-content">
                                         
-                    <div class="partners-img"><img src="/public/images/logo-new.png"></div>
+                    <a href="http://www.emalon.co.il/ru" class="partners-img">
+                        <img src="/public/images/partners/emalon.png">
+                    </a>
                     <div class="partners-line"></div>
-                    <div class="partners-title">ТОПизраиль</div>
-
-                </div>
-
-                <div class="partners-content">
-                                        
-                    <div class="partners-img">
-                        <img src="http://4.bp.blogspot.com/-FY2aK-Z2tdA/TWcI4_z5jUI/AAAAAAAAACs/yPR1Hm6ITmE/s1600/ebay+logo.png">
-                    </div>
-                    <div class="partners-line"></div>
-                    <div class="partners-title">Что то еще</div>
+                    <div class="partners-title"> <a href="http://www.emalon.co.il/ru">Emalon</a></div>
 
                 </div>
                 
@@ -343,7 +340,7 @@
 
         </div>
         
-                    --->
+                   
 
 
     </div>

@@ -122,6 +122,9 @@ header('Content-Type: text/html; charset=utf-8');
                                     </div>
                                 </div>
                             </div>
+                        <?else:?>
+                            <div style="display: table-cell;width:50%;padding-top:20px;">
+                            </div>
                         <?endif?>
 
                     </div>
