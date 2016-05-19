@@ -326,7 +326,7 @@ class Controller_Administrator extends Controller_Core_Main {
         }
 
         //обновление информеров
-        if ($this->request->post('import_static')) {
+        if ($this->request->post('update_informer')) {
             Model::factory('BussinesModel')->getInformersBussinesId();
             Model::factory('CouponsModel')->getInformersCouponsId();
             Model::factory('ArticlesModel')->getInformersArticlesId();
