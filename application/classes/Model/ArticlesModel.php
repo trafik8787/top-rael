@@ -648,22 +648,25 @@ class Model_ArticlesModel extends Model_BaseModel {
 
 
         $arr_in_json = array();
-        foreach ($query as $rows) {
+        if (!empty($query)) {
+            foreach ($query as $rows) {
 
-            $arr_in_json[] = array('category' => array('value' => $rows['CatId'], 'label' => $rows['CatName']),
-                'city' => array('value' => $rows['CityId'], 'label' => $rows['CityName']),
-                'url' => $rows['ArticUrl'],
-                'image' => array('url' => $rows['ArticImg']),
-                'title' => $rows['ArticName'],
-                'description' => Text::limit_chars(strip_tags($rows['ArticContent']), 150, null, true),
-                'adress' => ''
+                $arr_in_json[] = array('category' => array('value' => $rows['CatId'], 'label' => $rows['CatName']),
+                    'city' => array('value' => $rows['CityId'], 'label' => $rows['CityName']),
+                    'url' => $rows['ArticUrl'],
+                    'image' => array('url' => $rows['ArticImg']),
+                    'title' => $rows['ArticName'],
+                    'description' => Text::limit_chars(strip_tags($rows['ArticContent']), 150, null, true),
+                    'adress' => ''
 
-            );
+                );
+            }
         }
 
         $artic = View::factory('render_informer/reviews');
-        $artic->json = json_encode($arr_in_json);
-
+        if (!empty($arr_in_json)) {
+            $artic->json = json_encode($arr_in_json);
+        }
         if (file_exists($_SERVER['DOCUMENT_ROOT'].'/public/javascripts/data/reviews.js')) {
             unlink($_SERVER['DOCUMENT_ROOT'].'/public/javascripts/data/reviews.js');
         }

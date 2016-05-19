@@ -74,7 +74,7 @@ $container.innerHTML += '<span class=\"ti-footer\"><img src="<?=HTML::HostSite()
 
 function data() {
 
-return <?=$json;?>
+return <?=!empty($json) ? $json : ''?>;
 
 }
 

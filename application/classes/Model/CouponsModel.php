@@ -449,23 +449,28 @@ class Model_CouponsModel extends Model_BaseModel {
             //HTML::x($query);
 
             $arr_in_json = array();
-            foreach ($query as $rows) {
 
-                $arr_in_json[] = array('category' => array('value' => $rows['CatId'], 'label' => $rows['CatName']),
-                    'city' => array('value' => $rows['CityId'], 'label' => $rows['CityName']),
-                    'url' => $rows['CoupUrl'],
-                    'image' => array('url' => $rows['CoupImg']),
-                    'title' => $rows['CoupName'],
-                    'secondname' => $rows['CoupSecondname'],
-                    'description' => '',
-                    'adress' => $rows['BusName']
+            if (!empty($query)) {
 
-                );
+                foreach ($query as $rows) {
+
+                    $arr_in_json[] = array('category' => array('value' => $rows['CatId'], 'label' => $rows['CatName']),
+                        'city' => array('value' => $rows['CityId'], 'label' => $rows['CityName']),
+                        'url' => $rows['CoupUrl'],
+                        'image' => array('url' => $rows['CoupImg']),
+                        'title' => $rows['CoupName'],
+                        'secondname' => $rows['CoupSecondname'],
+                        'description' => '',
+                        'adress' => $rows['BusName']
+
+                    );
+                }
             }
 
         $coup = View::factory('render_informer/coupons');
-        $coup->json = json_encode($arr_in_json);
-
+        if (!empty($arr_in_json)) {
+            $coup->json = json_encode($arr_in_json);
+        }
         if (file_exists($_SERVER['DOCUMENT_ROOT'].'/public/javascripts/data/coupon.js')) {
             unlink($_SERVER['DOCUMENT_ROOT'].'/public/javascripts/data/coupon.js');
         }

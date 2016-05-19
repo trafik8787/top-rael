@@ -1523,35 +1523,40 @@ class Model_BussinesModel extends Model_BaseModel {
         $arr_in_json = array();
 
 
-        foreach ($result_all as $item) {
-            $arr_in_json[] = array('category' => array('value' => 0, 'label' => $item['CatName']),
-                'city' => array('value' => $item['CityId'], 'label' => $item['CityName']),
-                'url' => $item['BusUrl'],
-                'image' => array('url' => $item['BusImage']),
-                'title' => $item['BusName'],
-                'description' => Text::limit_chars(strip_tags($item['BusInfo']), 150, null, true),
-                'adress' => $item['CityName'] .', '. $item['BusAdress']
+        if (!empty($result_all)) {
+            foreach ($result_all as $item) {
+                $arr_in_json[] = array('category' => array('value' => 0, 'label' => $item['CatName']),
+                    'city' => array('value' => $item['CityId'], 'label' => $item['CityName']),
+                    'url' => $item['BusUrl'],
+                    'image' => array('url' => $item['BusImage']),
+                    'title' => $item['BusName'],
+                    'description' => Text::limit_chars(strip_tags($item['BusInfo']), 150, null, true),
+                    'adress' => $item['CityName'] . ', ' . $item['BusAdress']
 
-            );
+                );
+            }
         }
 
+        if (!empty($result)) {
+            foreach ($result as $rows) {
 
-        foreach ($result as $rows) {
+                $arr_in_json[] = array('category' => array('value' => $rows['CatId'], 'label' => $rows['CatName']),
+                    'city' => array('value' => $rows['CityId'], 'label' => $rows['CityName']),
+                    'url' => $rows['BusUrl'],
+                    'image' => array('url' => $rows['BusImage']),
+                    'title' => $rows['BusName'],
+                    'description' => Text::limit_chars(strip_tags($rows['BusInfo']), 150, null, true),
+                    'adress' => $rows['CityName'] . ', ' . $rows['BusAdress']
 
-            $arr_in_json[] = array('category' => array('value' => $rows['CatId'], 'label' => $rows['CatName']),
-                'city' => array('value' => $rows['CityId'], 'label' => $rows['CityName']),
-                'url' => $rows['BusUrl'],
-                'image' => array('url' => $rows['BusImage']),
-                'title' => $rows['BusName'],
-                'description' => Text::limit_chars(strip_tags($rows['BusInfo']), 150, null, true),
-                'adress' => $rows['CityName'] .', '. $rows['BusAdress']
-
-            );
+                );
+            }
         }
 
 
         $bus = View::factory('render_informer/bus');
-        $bus->json = json_encode($arr_in_json);
+        if (!empty($arr_in_json)) {
+            $bus->json = json_encode($arr_in_json);
+        }
 
 
         if (file_exists($_SERVER['DOCUMENT_ROOT'].'/public/javascripts/data/business.js')) {
