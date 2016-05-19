@@ -325,6 +325,12 @@ class Controller_Administrator extends Controller_Core_Main {
 
         }
 
+        //обновление информеров
+        if ($this->request->post('import_static')) {
+            Model::factory('BussinesModel')->getInformersBussinesId();
+            Model::factory('CouponsModel')->getInformersCouponsId();
+            Model::factory('ArticlesModel')->getInformersArticlesId();
+        }
 
         $data_bus = array();
         $data_articles = array();

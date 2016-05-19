@@ -25,9 +25,12 @@
 <div class="row">
     <div class="col-md-12">
         <form action="" method="post">
-            <input type="hidden" name="import_static" value="1">
-            <button type="submit" class="btn btn-danger" style="margin-bottom: 10px;">Upgrade</button>
+            <button type="submit" name="import_static" value="1" class="btn btn-danger" style="margin-bottom: 10px;">Upgrade</button>
+            <button type="submit" name="update_informer" value="1" class="btn btn-danger" style="margin-bottom: 10px;">Upgrade Informders</button>
         </form>
+
+
+
 
         <div class="alert alert-warning fade in">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -41,10 +44,6 @@
     <div class="col-md-12">
 
         <ul class="nav nav-tabs">
-<!--            <li class="active"><a href="#bus" data-toggle="tab">Бизнесы</a></li>-->
-<!--            <li><a href="#article" data-toggle="tab">Обзоры</a></li>-->
-<!--            <li><a href="#coupons" data-toggle="tab">Купоны</a></li>-->
-<!--            <li><a href="#baners" data-toggle="tab">Баннеры</a></li>-->
 
             <li class="<? if ($_GET['tab'] == 'bus'):?>active <?endif?>"><a href="?tab=bus">Бизнесы</a></li>
             <li class="<? if ($_GET['tab'] == 'articles'):?>active <?endif?>"><a href="?tab=articles">Обзоры</a></li>

@@ -241,12 +241,12 @@
 
                                     <div class="div-row">
                                         <div class="div-cell">בצפיות בקופון:</div>
-                                        <div class="div-cell"><strong><?=Rediset::getInstance()->get_coupon_show($data['CoupArr'][0]['CoupId'])?></strong></div>
+                                        <div class="div-cell"><strong><?=!empty($data['CoupArr'][0]['CoupId']) ? Rediset::getInstance()->get_coupon_show($data['CoupArr'][0]['CoupId']) : ''?></strong></div>
                                     </div>
 
                                     <div class="div-row">
                                         <div class="div-cell">הוסיפו למועדפים:</div>
-                                        <div class="div-cell"><strong><?=Rediset::getInstance()->get_coupon($data['CoupArr'][0]['CoupId'])?></strong></div>
+                                        <div class="div-cell"><strong><?=!empty($data['CoupArr'][0]['CoupId']) ? Rediset::getInstance()->get_coupon($data['CoupArr'][0]['CoupId']) : ''?></strong></div>
                                     </div>
                                 </div>
                             </div>
