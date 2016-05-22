@@ -18,25 +18,23 @@ Subject for mail:
 
 
 <p>
-    שלום!
+<!--name-->,
+שלום רב!
 </p>
 
 <p>
-פרסום העסק באתר TopIsrael החל.
+עמוד בית העסק שלך עלה לאתר TopIsrael.ru.
 
 </p>
 
 <p>
-    תקופת הפרסום היא בין
-    <?=date('d/m/Y', strtotime($data['date_create'])) ?>
-    ל-
+משך הפרסום: מיום    <?=date('d/m/Y', strtotime($data['date_create'])) ?>
+   ועד ליום 
     <?=date('d/m/Y', strtotime($data['date_end']))?></p>
 
 <p>
-    את כרטיס העסק שלך ניתן לראות בכתובת הבאה:
-</p>
-
-<p><strong><a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$data['url'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$data['url'] ?></a></strong></p>
+   לצפייה בעמוד העסק:
+   <strong><a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$data['url'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$data['url'] ?></a></strong></p>
 
 
 
@@ -44,12 +42,16 @@ Subject for mail:
 
 
     <p>
-        לשאלות ובקשות פנה באמצעות הדוא"ל, לכתובת: top@topisrael.ru או חייג: 03-5604505
+לשינויים ועדכונים ניתן לפנות באמצעות הדוא"ל: top@topisrael.ru או בטלפון: 
+<nobr>
+03-5604505
+</nobr>
 
     </p>
 
 <p>
-בכבוד רב,<br>
+בברכה,
+<br>
 קבוצת מדיה טופ ישראל
  </p>
 </span>

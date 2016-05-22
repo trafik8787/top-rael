@@ -23,7 +23,7 @@
         </div>
         
         
-        <button value="1" type="submit" class="btn btn-primary w-subskrip-buton order-party">Заказ торжества</button>
+        <!--button value="1" type="submit" class="btn btn-primary w-subskrip-buton order-party">Заказ торжества</button-->
 
     </div>
 <?endif?>

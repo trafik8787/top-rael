@@ -312,16 +312,7 @@
 
                 </div>
 
-                <div class="partners-content">
-                                        
-                    <a href="http://tourism.goisrael.ru/" class="partners-img">
-                        <img src="/public/images/partners/goisrael.jpg">
-                    </a>
-                    <div class="partners-line"></div>
-                    <div class="partners-title"> <a href="http://tourism.goisrael.ru/">GoIsrael</a></div>
-
-                </div>
-
+               
            <div class="partners-content">
                                         
                     <a href="http://www.emalon.co.il/ru" class="partners-img">
@@ -329,6 +320,17 @@
                     </a>
                     <div class="partners-line"></div>
                     <div class="partners-title"> <a href="http://www.emalon.co.il/ru">Emalon</a></div>
+
+                </div>
+                
+                
+                  <div class="partners-content">
+                                        
+                    <a href="http://www.goisrael.ru/Rus/Pages/default.aspx" class="partners-img">
+                        <img src="/public/images/goisrael_logo.png" title="Министерство туризма Израиля">
+                    </a>
+                    <div class="partners-line"></div>
+                    <div class="partners-title"> <a href="http://www.goisrael.ru/Rus/Pages/default.aspx">Министерство туризма Израиля</a></div>
 
                 </div>
                 

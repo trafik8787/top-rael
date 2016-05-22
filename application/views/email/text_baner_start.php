@@ -18,35 +18,39 @@ subject for mail:
 
 
 <p>
-שלום,
+<!--name-->,
+שלום רב!
 </p>
 
 <p>
-החל פרסום הבאנר באתר TopIsrael.
+הבאנר עלה לאתר TopIsrael.ru.
 </p>
 
 <p>
- משך הפרסום: החל מ <?=date('d/m/Y', strtotime($data['BanersDateStart']))?>
+ משך הפרסום: מיום <?=date('d/m/Y', strtotime($data['BanersDateStart']))?>
 
- ועד <?=date('d/m/Y', strtotime($data['BanersDateEnd']))?>
+ ועד ליום  <?=date('d/m/Y', strtotime($data['BanersDateEnd']))?>
  
  </p>
 
 <p> 
-ניתן לצפות בבאנר בקטגוריות:
-</p>
+למעבר לצפייה בבאנר:
+
 
 <? if (!empty($data['SECTION'])): ?>
     <? foreach ($data['SECTION'] as $row_s): ?>
-        <a href="http://<?=$_SERVER['HTTP_HOST']?>/section/<?=$row_s['sectionUrl'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/section/<?=$row_s['sectionUrl'] ?></a><br>
+    <br>
+        <a href="http://<?=$_SERVER['HTTP_HOST']?>/section/<?=$row_s['sectionUrl'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/section/<?=$row_s['sectionUrl'] ?></a>
     <? endforeach ?>
 <? endif ?>
 
 <? if (!empty($data['CATEGORY'])): ?>
     <? foreach ($data['CATEGORY'] as $row_с): ?>
-        <a href="http://<?=$_SERVER['HTTP_HOST']?>/section/<?=$row_с['categoryUrl'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/section/<?=$row_с['categoryUrl'] ?></a><br>
+    <br>
+        <a href="http://<?=$_SERVER['HTTP_HOST']?>/section/<?=$row_с['categoryUrl'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/section/<?=$row_с['categoryUrl'] ?></a>
     <? endforeach ?>
 <? endif ?>
+</p>
 
 <p>
 <hr>
@@ -54,13 +58,17 @@ subject for mail:
 
 <p>
 
-לשאלות ובקשות פנה באמצעות הדוא"ל, לכתובת: top@topisrael.ru או חייג: 03-5604505
+לשאלות ובקשות ניתן לפנות באמצעות הדוא"ל: top@topisrael.ru או בטלפון: 
+<nobr>
+03-5604505
+</nobr>
 
 </p>
 
 
 <p>
-בכבוד רב,<br>
+בברכה,
+<br>
 קבוצת מדיה טופ ישראל
  </p>
 </span>

@@ -17,25 +17,31 @@ subject for mail:
 
 
 
-<p> 
-שלום,
+<p>
+<!--name-->,
+שלום רב!
 </p>
 
 <p>
-פרסום הקופון באתר TopIsrael החל.
+הקופון עלה לאתר TopIsrael.ru.
 </p>
 
 <p>
-משך הפרסום: החל מ 
+משך הפרסום: מיום
  <?=date('d/m/Y', strtotime($data['CouponsDateStart']))?> 
-  ועד
+ועד ליום
   <?=date('d/m/Y', strtotime($data['CouponsDateEnd']))?></p>
 
 <p>
-למעבר לצפייה בקופון לחץ על הקישור:
+למעבר לצפייה בקופון: 
+<a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$data['CouponsUrl'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$data['CouponsUrl'] ?></a>
 </p>
 
-<p><strong><a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$data['CouponsUrl'] ?>">http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$data['CouponsUrl'] ?></a></strong></p>
+<p><strong>חשוב מאוד:
+</strong>
+<br>
+יש ליידע את הצוות בנוגע לקופון!
+</p>
 
 
 <p>
@@ -44,12 +50,16 @@ subject for mail:
 
 
 <p>
-לשאלות ובקשות פנה באמצעות הדוא"ל, לכתובת: top@topisrael.ru או חייג: 03-5604505
+לשינוי או עדכון הקופון ניתן לפנות באמצעות הדוא"ל: top@topisrael.ru או בטלפון: 
+<nobr>
+03-5604505
+</nobr>
     </p>
 
 
 <p>
-בכבוד רב,<br>
+בברכה,
+<br>
 קבוצת מדיה טופ ישראל
  </p>
 
