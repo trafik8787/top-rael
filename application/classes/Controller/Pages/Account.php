@@ -408,6 +408,23 @@ class Controller_Pages_Account extends Controller_BaseController {
     }
 
 
+    public function action_profile_he(){
+
+        $content = View::factory('pages/profile_he');
+
+        $content->bloc_right = parent::RightBloc(array(
+            $this->lotarey(),
+            View::factory('blocks_includ/sicseti'),
+        ));
+
+        $this->SeoShowPage(array('profile_he', ''),
+            array('profile_he', ''),
+            array('profile_he', ''));
+
+        $this->template->content = $content;
+
+    }
+
 
 
     public static function FavoritsCouponMetod($table, $field, $table_object, $cooki_name, $data_vievs){

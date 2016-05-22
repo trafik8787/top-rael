@@ -26,10 +26,11 @@
     <div class="col-md-12">
         <form action="" method="post">
             <button type="submit" name="import_static" value="1" class="btn btn-danger" style="margin-bottom: 10px;">Upgrade</button>
-            <button type="submit" name="update_informer" value="1" class="btn btn-danger" style="margin-bottom: 10px;">Upgrade Informders</button>
         </form>
 
-
+        <form action="" method="post">
+            <button type="submit" name="update_informer" value="1" class="btn btn-danger" style="margin-bottom: 10px;">Upgrade Informders</button>
+        </form>
 
 
         <div class="alert alert-warning fade in">

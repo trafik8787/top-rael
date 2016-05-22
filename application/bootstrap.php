@@ -406,6 +406,14 @@ Route::set('Account', 'account(/<action>)')
         'action'     => 'index',
     ));
 
+
+Route::set('profile_he', 'profile_he')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Account',
+        'action'     => 'profile_he',
+    ));
+
 Route::set('Contacts', 'contacts')
     ->defaults(array(
         'directory' => 'Pages',
