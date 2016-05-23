@@ -464,7 +464,7 @@ class Model_ArticlesModel extends Model_BaseModel {
             ->from('articles')
             ->where('in_home','=', 1)
             ->order_by('id', 'DESC')
-            ->limit(4)
+            ->limit(5)
             ->cached()
             ->execute()->as_array();
     }

@@ -24,8 +24,9 @@
 
             <div class="top-list">
 
-                <?foreach($articles['articles'] as $rows_articles):?>
-                    <div class="media">
+                <?foreach($articles['articles'] as $key => $rows_articles):?>
+                    <!-- 4 блок только для 1200 -->
+                    <div class="media <?if ($key == 3){ echo 'hidden-xs';}?>">
                         <div class="media-left">
                             <a href="/article/<?=$rows_articles['url']?>">
                                 <img src="/uploads/img_articles/thumbs/<?=basename($rows_articles['images_article'])?>" width="120" height="85" class="media-object" alt="<?=$rows_articles['name']?>"/>
@@ -40,26 +41,6 @@
                     </div>
                 <?endforeach?>
                 
-                
-                
-                <!-- 4 блок только для 1200 -->
-                 <div class="media hidden-xs">
-                        <div class="media-left">
-                            <a href="/article/telaviv_big_trip">
-                                <img src="/uploads/img_articles/thumbs/artic_570408dddc6a9.jpg" width="120" height="85" class="media-object" alt=""/>
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h2 class="media-heading"><a href="/article/telaviv_big_trip"><strong>Большой Тель-Авив – не только шопинг</strong></a></h2>
-
-                            <p class="hidden-xs">В каждом городе, даже самом большом, есть заветные уголки, не отмеченные на туристических картах, которые известны даже не всем его жителям, не говоря уже о приезжих и туристах.</p>
-
-                        </div>
-                    </div>
-                
-
-
-
 
 
                 <div class="text-center media">

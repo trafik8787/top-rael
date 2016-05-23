@@ -42,16 +42,33 @@
         </div>
     </div>
 <?else:?>
-    <div class="discount" style="text-align: center;">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- Адаптивный -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-6089615049498543"
-             data-ad-slot="5552405714"
-             data-ad-format="auto"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+
+    <div class="discount text-center">
+
+
+        <span class="visible-lg">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- 970x250 -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:970px;height:250px" data-ad-client="ca-pub-6089615049498543" data-ad-slot="5517620115"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+        </span>
+
+
+         <span class="hidden-lg">
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Адаптивный -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-6089615049498543"
+                 data-ad-slot="5552405714"
+                 data-ad-format="auto"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+
+        </span>
+
     </div>
 <?endif?>
