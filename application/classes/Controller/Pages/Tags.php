@@ -52,14 +52,16 @@ class Controller_Pages_Tags extends Controller_BaseController {
             $resultArr[] = array('category' => $category, 'data' => $data['data']);
         }
 
-
+        //реклама в правом блоке
+        $this->getBanersGoogle();
 
         $content->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
             $this->blocCity(),
             $this->blocTags(),
-            $this->blocNews($this->request->param('url_tags'), 'tags')
+            $this->blocNews($this->request->param('url_tags'), 'tags'),
+            parent::$right_baners
         ));
 
         //SEO

@@ -59,14 +59,16 @@ class Controller_Pages_City extends Controller_BaseController {
             $resultArr = Cache::instance()->get($this->request->param('url_city'));
         }
 
-        //Cache::instance()->delete($this->request->param('url_city'));
+        //реклама в правом блоке
+        $this->getBanersGoogle();
 
         $content->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
             $this->blocCity(),
             $this->blocTags(),
-            $this->blocNews($this->request->param('url_city'), 'city')
+            $this->blocNews($this->request->param('url_city'), 'city'),
+            parent::$right_baners
         ));
 
         $content->data_city = $city_data[0];

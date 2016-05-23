@@ -295,6 +295,22 @@ abstract class Controller_BaseController extends Controller_Template {
     }
 
 
+    /**
+     * только гугловская реклама
+     */
+    public function getBanersGoogle(){
+
+        $top_content = View::factory('blocks_includ/top_banners');
+        $right_content =  View::factory('blocks_includ/baners_right');
+
+        //верхний банер
+        self::$top_baners = $top_content;
+        //парвый банер
+        self::$right_baners = $right_content;
+
+    }
+
+
     public function SeoShowPage(array $title_seo, array $keywords_seo, array $description_seo){
 
         if ($title_seo[0] == '') {
