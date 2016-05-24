@@ -62,6 +62,9 @@ class Controller_Pages_City extends Controller_BaseController {
         //реклама в правом блоке
         $this->getBanersGoogle();
 
+        //верхний банер
+        $content->top_baners = parent::$top_baners;
+
         $content->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
             View::factory('blocks_includ/sicseti'),

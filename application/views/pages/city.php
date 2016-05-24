@@ -11,7 +11,7 @@
 
 <content>
     <div id="content">
-
+        <?=isset($top_baners) ? $top_baners: ''?>
         <div class="row">
             <!-- Context -->
             <div class="col-md-8">
