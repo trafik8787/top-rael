@@ -706,6 +706,37 @@ class Model_BussinesModel extends Model_BaseModel {
     }
 
 
+    /**
+     * @return mixed
+     * todo получить все включенные активные бизнесы
+     */
+    public function getBusinessAll(){
+        return DB::select(
+            array('business.id', 'BusId'),
+            array('business.name', 'BusName'),
+            array('business.url', 'BusUrl'),
+            array('business.date_update_bussines', 'BusDateUpdate'),
+            array('users.email', 'RedactorEmail')
+        )
+            ->from('business')
+            ->join('users')
+            ->on('business.redactor_user', '=', 'users.id')
+            ->where('business.status', '=', 1)
+            ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
+            ->order_by('business.id', 'DESC')
+            ->cached()
+            ->execute()->as_array();
+    }
+
+
+    /*
+     * todo обновление поля состояния бизнеса время последнего обновления
+     */
+    public function setUpdateBussinesChange($bussines_id){
+        DB::update('business')->set(array('date_update_bussines' => date('Y-m-d')))
+            ->where('id', 'IN', $bussines_id)
+            ->execute();
+    }
 
 
     /**

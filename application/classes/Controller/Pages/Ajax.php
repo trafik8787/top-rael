@@ -489,7 +489,75 @@ class Controller_Pages_Ajax extends Controller {
     }
 
 
+    /**
+     * todo рассылка отвецтвенному по бизнесам кототорые не обновлялись больше 60 дней url - sendbusiness_warning
+     */
+    public function action_MailSubscribeBusWarting (){
 
+
+        //HTML::x(date_diff(new DateTime(),new DateTime(date('Y-m-d', strtotime('2016-05-20 20:23:23'))))->days);
+
+        $bussines = Model::factory('BussinesModel')->getBusinessAll();
+
+
+        $bus_id = array();
+
+        $bussines_result = array();
+        $bussines_result2 = array();
+
+
+        foreach ($bussines as $bussine_row) {
+
+            if ($bussine_row['BusDateUpdate'] == '0000-00-00 00:00:00' ) {
+                $bus_id[] = $bussine_row['BusId'];
+            } else {
+                //получаем бизнесы дата обновления которых превысила 60 дней
+                if (date_diff(new DateTime(), new DateTime(date('Y-m-d', strtotime($bussine_row['BusDateUpdate']))))->days >= 60) {
+                    $bussines_result[] = $bussine_row;
+                }
+            }
+
+        }
+
+        //если 0000-00-00 00:00:00 то присваиваем текущую дату
+        if (!empty($bus_id)) {
+            Model::factory('BussinesModel')->setUpdateBussinesChange($bus_id);
+        }
+
+        
+        if (!empty($bussines_result)) {
+            //сортируем бизнесы по отвецтвенным
+            foreach ($bussines_result as $item) {
+                $bussines_result2[$item['RedactorEmail']][] = $item;
+            }
+        }
+
+
+        if (!empty($bussines_result2)) {
+
+            $bus_id = array();
+
+            foreach ($bussines_result2 as $key_email => $item_users) {
+
+                $message = '<p>Данные бизнесы не обновлялись более 60 дней</p>';
+
+                foreach ($item_users as $item_bus) {
+                    $message .= '<a href="'.HTML::HostSite('/business/'.$item_bus['BusUrl']).'" target="_blank">'.$item_bus['BusName'].'</a><br>';
+                    $bus_id[] = $item_bus['BusId'];
+                }
+
+               $this->template_mail_bussines_warning($key_email, null, 'Бизнесы которые не обновлялись более 60 дней', $message);
+
+            }
+
+            if (!empty($bus_id)) {
+                Model::factory('BussinesModel')->setUpdateBussinesChange($bus_id);
+            }
+        }
+
+
+
+    }
 
 
 
@@ -602,7 +670,36 @@ class Controller_Pages_Ajax extends Controller {
         $m = Email::factory();
         $m->From("TopIsrael;top@topisrael.ru"); // от кого отправляется почта
         $m->To($to); // кому адресованно
-        $m->Bcc(array($cc ,'boris@briker.biz'));
+        if ($cc != null) {
+            $m->Bcc(array($cc ,'boris@briker.biz'));
+        } else {
+            $m->Bcc(array('boris@briker.biz'));
+        }
+
+        $m->Subject($subject);
+        $m->Body($html_mail, "html");
+        $m->Priority(3);
+        $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new-h.png", "", "image/png");
+        $m->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
+        $m->Send();
+
+    }
+
+
+    public function template_mail_bussines_warning ($to, $cc = null, $subject, $message){
+
+        $html_mail = View::factory('email/mail_business_warning');
+        $html_mail->content = $message;
+
+        $m = Email::factory();
+        $m->From("TopIsrael;top@topisrael.ru"); // от кого отправляется почта
+        $m->To($to); // кому адресованно
+        if ($cc != null) {
+            $m->Bcc(array($cc ,'boris@briker.biz'));
+        } else {
+            $m->Bcc(array('boris@briker.biz'));
+        }
+
         $m->Subject($subject);
         $m->Body($html_mail, "html");
         $m->Priority(3);

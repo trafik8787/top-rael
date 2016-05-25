@@ -1536,6 +1536,11 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
     public static function call_after_insert_banners($key_array = null){
+
+        if (!empty($key_array['business_id'])) {
+            Model::factory('BussinesModel')->setUpdateBussinesChange(array($key_array['business_id']));
+        }
+
         Model::factory('Adm')->log_add('банер', $key_array['name'], 'add');
     }
 
@@ -1543,6 +1548,11 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
     public static function call_bef_edit_banners ($key_array = null,  $old_array = null){
+
+
+        if (!empty($key_array['business_id'])) {
+            Model::factory('BussinesModel')->setUpdateBussinesChange(array($key_array['business_id']));
+        }
 
         $key_array['date_start'] = Date::convert_Date($key_array['date_start']);
         $key_array['date_end'] = Date::convert_Date($key_array['date_end']);
@@ -1860,6 +1870,12 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_bef_edit_articles ($new_array = null, $old_array = null){
 
+
+        if (!empty($new_array['bussines_id'])) {
+            Model::factory('BussinesModel')->setUpdateBussinesChange($new_array['bussines_id']);
+        }
+
+
         //преобразование дат
         $new_array['datecreate'] = Date::convert_Date($new_array['datecreate']);
 
@@ -1882,6 +1898,11 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_after_insert_articles ($key_array = null){
 
+        //меняем статус бизнеса
+        if (!empty(Cruds::$post['bussines_id'])) {
+            Model::factory('BussinesModel')->setUpdateBussinesChange(Cruds::$post['bussines_id']);
+        }
+
         Model::factory('Adm')->log_add('статью', $key_array['name'], 'add');
 
         if (!empty($key_array['images_article'])) {
@@ -1896,6 +1917,11 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
     public static function call_after_insert_news ($key_array) {
+
+        if (!empty($key_array['bussines_id'])) {
+            Model::factory('BussinesModel')->setUpdateBussinesChange(array($key_array['bussines_id']));
+        }
+
         if (!empty($key_array['img'])) {
             self::create_images($key_array['img'], '/uploads/img_news/thumbs/', 260, 190);
         }
@@ -1919,6 +1945,11 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
     public static function call_bef_edit_news ($new_array) {
+
+        if (!empty($new_array['bussines_id'])) {
+            Model::factory('BussinesModel')->setUpdateBussinesChange(array($new_array['bussines_id']));
+        }
+
         $new_array['date'] = Date::convert_Date($new_array['date']);
         return $new_array;
     }
@@ -1930,6 +1961,10 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_bef_edit_coupons ($new_array = null, $old_array = null){
 
+
+        if (!empty($new_array['business_id'])) {
+            Model::factory('BussinesModel')->setUpdateBussinesChange(array($new_array['business_id']));
+        }
 
         $new_array['datecreate'] = Date::convert_Date($new_array['datecreate']);
         $new_array['datestart'] = Date::convert_Date($new_array['datestart']);
@@ -1967,6 +2002,10 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_after_insert_coupons ($key_array = null){
 
+        if (!empty($key_array['business_id'])) {
+            Model::factory('BussinesModel')->setUpdateBussinesChange(array($key_array['business_id']));
+        }
+
         Model::factory('Adm')->log_add('купон', $key_array['name'], 'add');
 
         if (!empty($key_array['img_coupon'])) {
@@ -1999,6 +2038,12 @@ class Controller_Administrator extends Controller_Core_Main {
 
     //реализация добавления удаления редактирования фото в галереи в форме редактирования
     public static function call_bef_edit_galery ($new_array = null, $old_array = null){
+
+
+        if (!empty($new_array['bussines_id'])) {
+            Model::factory('BussinesModel')->setUpdateBussinesChange(array($new_array['business_id']));
+        }
+
         //определяем отностельные и абсолютные пути
         $thumbs = '/uploads/img_galery/thumbs/';
         $img_galery = '/uploads/img_galery/';
@@ -2088,6 +2133,11 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
     public static function call_after_insert_galery ($key_array = null){
+
+
+        if (!empty($new_array['bussines_id'])) {
+            Model::factory('BussinesModel')->setUpdateBussinesChange(array($new_array['business_id']));
+        }
 
         //определяем отностельные и абсолютные пути
         $thumbs = '/uploads/img_galery/thumbs/';

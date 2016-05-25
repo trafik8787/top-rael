@@ -274,6 +274,14 @@ Route::set('mail_subscribe_bussines', 'sendbusiness_bussines')
         'action'     => 'MailSubscribeBussines'
     ));
 
+//запускается по крону и запускает рассылку уведомлений отвецтвенному по бизнесам которые не обновлялись более 60 дней
+Route::set('mail_subscribe_warning', 'sendbusiness_warning')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'MailSubscribeBusWarting'
+    ));
+
 
 Route::set('Partners', 'partners')
     ->defaults(array(
