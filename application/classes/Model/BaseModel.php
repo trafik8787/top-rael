@@ -76,6 +76,45 @@ class Model_BaseModel extends Model {
         }
     }
 
+
+
+    public function addOrderCelebration ($PostArr){
+
+        $post = Validation::factory($PostArr);
+        $post->rule('last_name', 'not_empty')
+            ->rule('city', 'not_empty')
+            ->rule('email', 'email')
+            ->rule('tel', 'not_empty')
+            ->rule('event', 'not_empty')
+            ->rule('count_human', 'not_empty')
+            ->rule('count_human',  'min_length', array(':value', 1))
+            ->rule('date_event', 'not_empty')
+            ->rule('bussines_name', 'not_empty')
+            ->rule('bussines_url', 'not_empty');
+
+        if ($post->check()) {
+
+            $query = DB::insert('order_celebrations', array('last_name', 'city', 'tel', 'email', 'event', 'count_human', 'date_event', 'discription', 'bussines_name', 'bussines_link'))
+                ->values(array($PostArr['last_name'],
+                    $PostArr['city'],
+                    $PostArr['tel'],
+                    $PostArr['email'],
+                    $PostArr['event'],
+                    $PostArr['count_human'],
+                    $PostArr['date_event'],
+                    $PostArr['desk'],
+                    $PostArr['bussines_name'],
+                    $PostArr['bussines_url']
+                ))->execute();
+
+            return true;
+        } else {
+            return $post->errors();
+        }
+
+    }
+
+
     /**
      * @return mixed
      * todo получаем текст для страницы О проекте

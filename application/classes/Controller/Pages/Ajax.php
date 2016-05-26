@@ -106,6 +106,50 @@ class Controller_Pages_Ajax extends Controller {
 
     }
 
+    /**
+     * @return string
+     * todo Заказ торжеств
+     */
+    public function action_sendOrderCelebration () {
+
+        if (Request::initial()->is_ajax()) {
+
+            $result = Model::factory('BaseModel')->addOrderCelebration($this->request->post());
+
+            $html_mail = 'Имя: '.$_POST['last_name'].'<br>'.
+                'Страна: '.$_POST['city'].'<br>'.
+                'Email: '.$_POST['email'].'<br>'.
+                'Телефон: '.$_POST['tel'].'<br>'.
+                'Событие: '.$_POST['event'].'<br>'.
+                'Количество человек: '.$_POST['count_human'].'<br>'.
+                'Дата события: '.$_POST['date_event'].'<br>'.
+                'Дополнительное сообщение: '.$_POST['desk'].'<br>'.
+                'Отправлено со страницы: <a href="'.HTML::HostSite('/business/'. $_POST['bussines_url']).'">'.$_POST['bussines_name'].'</a>';
+
+            $m = Email::factory();
+            $m->From($_POST['email']); // от кого отправляется почта
+            $m->To('leon@topisrael.ru'); // кому адресованно
+            $m->Cc('boris@briker.biz');
+            $m->Subject('Письмо от пользователя TopIsrael');
+            $m->Body($html_mail, "html");
+            $m->Priority(3);
+            $m->Send();
+
+
+            if ($result === true) {
+                $data = array('susses' => 'Ваш заказ отправлен. Спасибо.');
+            } else {
+                $data = array('error' => 'Произошла непредвиденная ошибка закройте окно и попробуйте с нова.');
+            }
+
+            echo json_encode($data);
+
+        } else {
+            die('No direct script access.');
+        }
+
+    }
+
 
     /**
      * груповые заказы

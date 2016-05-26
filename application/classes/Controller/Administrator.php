@@ -456,8 +456,14 @@ class Controller_Administrator extends Controller_Core_Main {
     }
 
     public function action_contacts (){
-        Controller_Core_Main::$title_page = 'Письма';
+        Controller_Core_Main::$title_page = 'Обратная связь';
         $this->response->body(self::adminContacts()->render());
+    }
+
+
+    public function action_order_celebrations (){
+        Controller_Core_Main::$title_page = 'Заказ торжеств';
+        $this->response->body(self::adminOrderCelebrations()->render());
     }
 
     public function action_subscription (){
@@ -1220,6 +1226,34 @@ class Controller_Administrator extends Controller_Core_Main {
 
         $crud->callback_list_table('call_list_table_contact');
 
+        return $crud;
+    }
+
+
+    public static function adminOrderCelebrations (){
+        $crud = new Cruds();
+        $crud->load_table('order_celebrations', array('0', 'DESC'));
+        $crud->set_lang('ru');
+        $crud->remove_add();
+        $crud->remove_edit();
+        $crud->show_views('glyphicon-list-alt');
+
+        $crud->links('bussines_name', '/business/', 'bussines_link');
+
+        $crud->show_columns('id', 'last_name', 'city', 'tel', 'email', 'event', 'count_human', 'date_event', 'discription', 'bussines_name', 'date');
+
+        $crud->show_name_column(array(
+            'last_name' => 'Имя',
+            'city'=> 'Город',
+            'tel' => 'Телефон',
+            'email'=>'Email',
+            'event' => 'Событие',
+            'count_human' => 'Количество человек',
+            'date_event' => 'Дата события',
+            'discription' => 'Сообщение',
+            'bussines_name' => 'Страница бизнеса',
+            'date' => 'Дата создания'
+        ));
         return $crud;
     }
 

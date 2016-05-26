@@ -114,6 +114,131 @@ $(document).ready(function(){
 
 
 
+    $('.w-date-event').datetimepicker({
+        locale: 'ru',
+        widgetPositioning: {
+            horizontal: 'left',
+            vertical:'bottom'
+        },
+        collapse: false,
+        sideBySide: true,
+        format: 'DD/MM/YYYY HH:mm',
+        //defaultDate: 'moment'
+    });
+
+
+    $("#w-form-order-calebration").validate({
+
+        rules:{
+
+            last_name:{
+                required: true,
+                minlength: 4
+            },
+
+            city:{
+                required: true
+            },
+
+            email:{
+                required: true,
+                email: true
+            },
+
+            tel:{
+                required: true,
+                number: true
+            },
+
+            event:{
+                required: true
+            },
+
+            count_human:{
+                required: true,
+                minlength: 1,
+                number: true
+
+            },
+
+            date_event:{
+                required: true
+            }
+
+        },
+
+        messages:{
+
+            last_name:{
+                required: "Это поле обязательно для заполнения",
+                minlength: "Имя должно быть минимум 4 символа"
+            },
+
+            city:{
+                required: "Это поле обязательно для заполнения"
+            },
+
+            email:{
+                required: "Это поле обязательно для заполнения",
+                email: "Неправильный формат email"
+            },
+
+            tel:{
+                required: "Это поле обязательно для заполнения",
+                number: 'Поле должно содержать только цыфры'
+            },
+
+            event:{
+                required: "Выберете событие"
+            },
+
+            count_human:{
+                required: "Это поле обязательно для заполнения",
+                minlength: "Минимум 1 человек",
+                number: "Только цыфра"
+            },
+
+            date_event:{
+                required: "Это поле обязательно для заполнения"
+            }
+
+        },
+
+        submitHandler: function(form){
+
+
+            var btn = $('#w-button-order-celebration');
+
+            $.ajax({ // описываем наш запрос
+                type: "POST", // будем передавать данные через POST
+                dataType: "JSON", // указываем, что нам вернется JSON
+                url: '/send_order_celebration',
+                data: $(form).serialize(), // передаем данные из формы
+                beforeSend: function() {
+                    btn.button('loading');
+                },
+                complete: function() {
+                    btn.button('reset');
+                },
+                success: function(response) { // когда получаем ответ
+
+                    $('#w-form-order-calebration .modal-body, #w-form-order-calebration .modal-footer').empty();
+                    $('#w-form-order-calebration .modal-footer').html('<button type="button" class="btn btn-default" data-dismiss="modal" style="text-align: center;">Закрыть</button>');
+
+                    if (response.susses != undefined) {
+                        $('#w-form-order-calebration .modal-body').html('<h1 style="text-align: center; color: green;">' + response.susses + '</h1>');
+                    } else if(response.error) {
+                        $('#w-form-order-calebration .modal-body').html('<h1 style="text-align: center; color: green;">' + response.error + '</h1>');
+                    }
+
+                }
+            });
+
+            return false;
+
+        }
+
+    });
 
 
 

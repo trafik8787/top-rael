@@ -437,6 +437,13 @@ Route::set('sendContact', 'sendcontact')
         'controller' => 'Ajax',
         'action'     => 'sendContact',
     ));
+//заказы торжеств
+Route::set('sendOrderCelebration', 'send_order_celebration')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'sendOrderCelebration',
+    ));
 
 //send group_bookings
 Route::set('sendGroupBookins', 'sendgroupbookings')
