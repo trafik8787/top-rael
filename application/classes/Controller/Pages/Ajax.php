@@ -130,7 +130,7 @@ class Controller_Pages_Ajax extends Controller {
             $m->From($_POST['email']); // от кого отправляется почта
             $m->To('leon@topisrael.ru'); // кому адресованно
             $m->Cc('boris@briker.biz');
-            $m->Subject('Письмо от пользователя TopIsrael');
+            $m->Subject('Заказ торжества - '.$_POST['bussines_name']);
             $m->Body($html_mail, "html");
             $m->Priority(3);
             $m->Send();

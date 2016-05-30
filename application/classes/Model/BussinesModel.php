@@ -470,7 +470,7 @@ class Model_BussinesModel extends Model_BaseModel {
                         }
                     }
 
-                    $end_result['CatArr'][] = array('CatId' => $row['CatId'], 'CatName' => $row['CatName'], 'CatUrl' => $row['CatUrl'], 'CatUrl2' => $row['CatUrl2']);
+                    $end_result['CatArr'][] = array('CatId' => $row['CatId'], 'CatName' => $row['CatName'], 'CatUrl' => $row['CatUrl'], 'CatUrl2' => $row['CatUrl2'], 'CatParentId' => $row['CatParentId']);
 
                 }
 

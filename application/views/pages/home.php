@@ -26,7 +26,7 @@
 
                 <?foreach($articles['articles'] as $key => $rows_articles):?>
                     <!-- 4 блок только для 1200 -->
-                    <div class="media <?if ($key == 3){ echo 'hidden-xs';}?>">
+                    <div class="media <?if ($key == 3){ echo 'visible-lg';}?>">
                         <div class="media-left">
                             <a href="/article/<?=$rows_articles['url']?>">
                                 <img src="/uploads/img_articles/thumbs/<?=basename($rows_articles['images_article'])?>" width="120" height="85" class="media-object" alt="<?=$rows_articles['name']?>"/>
@@ -276,6 +276,17 @@
             </div>
 
             <div class="panel-body">
+            
+            
+                     <div class="partners-content">
+                                        
+                    <a href="http://www.goisrael.ru/Rus/Pages/default.aspx" class="partners-img">
+                        <img src="/public/images/goisrael_logo.png" title="Министерство туризма Израиля">
+                    </a>
+                    <div class="partners-line"></div>
+                    <div class="partners-title"> <a href="http://www.goisrael.ru/Rus/Pages/default.aspx">Министерство туризма Израиля</a></div>
+
+                </div>
 
                 <div class="partners-content">
                                         
@@ -297,7 +308,7 @@
            <div class="partners-content">
                                         
                     <a href="http://www.emalon.co.il/ru" class="partners-img">
-                        <img src="/public/images/partners/emalon.png">
+                        <img src="/public/images/partners/emalon.png" style="margin:0px 15px;">
                     </a>
                     <div class="partners-line"></div>
                     <div class="partners-title"> <a href="http://www.emalon.co.il/ru">Emalon</a></div>
@@ -307,11 +318,11 @@
                 
                   <div class="partners-content">
                                         
-                    <a href="http://www.goisrael.ru/Rus/Pages/default.aspx" class="partners-img">
-                        <img src="/public/images/goisrael_logo.png" title="Министерство туризма Израиля">
+                    <a href="http://www.travellux.com" class="partners-img">
+                        <img src="/public/images/partners/travellux.gif" title="TRAVELLUX">
                     </a>
                     <div class="partners-line"></div>
-                    <div class="partners-title"> <a href="http://www.goisrael.ru/Rus/Pages/default.aspx">Министерство туризма Израиля</a></div>
+                    <div class="partners-title"> <a href="http://www.travellux.com">TRAVELLUX</a></div>
 
                 </div>
                 
