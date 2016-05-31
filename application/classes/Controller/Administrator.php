@@ -1378,11 +1378,13 @@ class Controller_Administrator extends Controller_Core_Main {
             $crud->add_field('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel',  'email_manager', 'email_bugalter', 'business_id', 'file_zacaz', 'file_brif', 'file_cvitanciy', 'date_registration');
             $crud->callback_after_insert('call_after_insert_userBusines');
 
-            $crud->set_field_type('file_zacaz', array('file', 'uploads/file_zacaz', 'meny_', '', 'others'),'', '');
-            $crud->set_field_type('file_brif', array('file', 'uploads/file_brif', 'meny_', '', 'others'),'', '');
+            $crud->set_field_type('file_zacaz', array('file', 'uploads/file_zacaz', 'zacaz_', '', 'others'),'', 'multiple');
+            $crud->set_one_to_many('users_relation_zacaz', 'file_zacaz','path', 'user_id');
 
+            $crud->set_field_type('file_brif', array('file', 'uploads/file_brif', 'brif_', '', 'others'),'', 'multiple');
+            $crud->set_one_to_many('users_relation_brif', 'file_brif','path', 'user_id');
 
-            $crud->set_field_type('file_cvitanciy', array('file', 'uploads/file_cvitanciy', 'zacaz_', '', 'others'),'', 'multiple');
+            $crud->set_field_type('file_cvitanciy', array('file', 'uploads/file_cvitanciy', 'cvitanc_', '', 'others'),'', 'multiple');
             $crud->set_one_to_many('users_relation_kvitanciy', 'file_cvitanciy','path', 'user_id');
             //изминение пароля бизнеса
             $crud->callback_before_edit('call_befor_edit_userAdmin');
