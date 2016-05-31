@@ -1551,11 +1551,57 @@ class Model_BussinesModel extends Model_BaseModel {
             $result_all[] = $query_bus[0];
         }
 
+
+
+        $query_all = DB::select(
+            array('business.id', 'BusId'),
+            array('business.name', 'BusName'),
+            array('business.url', 'BusUrl'),
+            array('business.info', 'BusInfo'),
+            array('business.address', 'BusAdress'),
+            array('business.home_busines_foto', 'BusImage'),
+            array('city.id', 'CityId'),
+            array('city.name', 'CityName'),
+            array('cat2.id', 'CatId'),
+            array('cat2.name', 'CatName')
+
+        )
+            ->distinct(TRUE)
+            ->from('business')
+
+            ->join(array('businesscategory', 'buscat'))
+            ->on('buscat.business_id', '=', 'business.id')
+
+            ->join(array('category', 'cat'))
+            ->on('buscat.category_id', '=', 'cat.id')
+
+            ->join(array('category', 'cat2'))
+            ->on('cat.parent_id', '=', 'cat2.id')
+
+            ->join('city', 'LEFT')
+            ->on('business.city','=','city.id')
+
+            ->where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
+            ->and_where('business.status', '=', 1)
+            ->and_where('business.name', '<>', '')
+            ->and_where('business.city', '<>', '')
+            ->and_where('business.address', '<>', '')
+            ->and_where('business.tel', '<>', '')
+            ->and_where('business.home_busines_foto', '<>', '')
+            ->and_where('business.logo', '<>', '')
+            ->and_where('business.info', '<>', '')
+            ->order_by('business.id', 'DESC')
+            ->execute()->as_array();
+
+
+
+
+
         $arr_in_json = array();
 
 
-        if (!empty($result)) {
-            foreach ($result as $item) {
+        if (!empty($query_all)) {
+            foreach ($query_all as $item) {
                 $arr_in_json[] = array('category' => array('value' => 0, 'label' => $item['CatName']),
                     'city' => array('value' => $item['CityId'], 'label' => $item['CityName']),
                     'url' => $item['BusUrl'],
