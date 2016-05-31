@@ -191,6 +191,11 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public function action_banners (){
 
+        $city_id = null;
+
+        if (!empty($_GET['city']) and $_GET['city'] != '') {
+            $city_id = $_GET['city'];
+        }
 
         if (!empty($_GET['activ'])) {
 
@@ -207,12 +212,34 @@ class Controller_Administrator extends Controller_Core_Main {
             Session::instance()->set('baners_activ', null);
         }
 
-        $form_activ = View::factory('adm/filtr_activ');
 
-        Controller_Core_Main::$filtr[] = $form_activ;
+        if (!empty($_GET['section'])) {
+
+            $category = Model::factory('CategoryModel')->recurs_catalog($_GET['section']);
+            $data = Model::factory('BaseModel')->getBanersAdminFiltr($category[0]['url'], $_GET['section'], $city_id);
+
+        } else {
+            $data = Model::factory('BaseModel')->getBanersAdminFiltr(null, null, $city_id);
+        }
+
+        Session::instance()->set('customer_id_baners', $data['arrIdbaners']);
+
+        //HTML::x($data);
+
+        $filtr = View::factory('adm/filtr_admin_section');
+        $filtr->data = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
+        $filtr->city = $data['city'];
+
+
+        $form_activ = View::factory('adm/filtr_activ');
+        $form_activ->form = '#w-form-filtr-adm';
+
+        $filtr->activ = $form_activ;
+
+        Controller_Core_Main::$filtr[] = $filtr;
 
         Controller_Core_Main::$title_page = 'Банеры';
-        $this->response->body(self::adminBanners()->render());
+        $this->response->body(self::adminBanners($_GET)->render());
     }
     
     public function action_lotarey (){
@@ -231,14 +258,11 @@ class Controller_Administrator extends Controller_Core_Main {
         }
 
         if (!empty($_GET['section'])) {
+
             $category = Model::factory('CategoryModel')->recurs_catalog($_GET['section']);
-
-
             $data =  Model::factory('BussinesModel')->getBussinesSectionUrl($category[0]['url'], null ,null, $city_id, true);
-
-
-
             $name = $category[0]['name'];
+
         } else {
             $busssines = null;
             $name = '';
@@ -1420,22 +1444,34 @@ class Controller_Administrator extends Controller_Core_Main {
      * @return Cruds
      * Банеры
      */
-    public static function adminBanners (){
+    public static function adminBanners ($get=null){
 
         $recurs_cat = Model::factory('CategoryModel')->recurs_catalog();
 
         $crud = new Cruds();
         $crud->load_table('banners', array('0', 'DESC'));
 
-        if (Session::instance()->get('baners_activ') !== null) {
+//        HTML::x(Session::instance()->get('customer_id_baners'));
+        $id_baners = '';
+        if (Session::instance()->get('customer_id_baners') != null) {
 
-            if (Session::instance()->get('baners_activ') == 1) {
-                $crud->set_where('date_end', '>', DB::expr('DATE(NOW())'));
-            } elseif (Session::instance()->get('baners_activ') == 0){
-                $crud->set_where('date_end', '<', DB::expr('DATE(NOW())'));
+            $id_baners = ' AND id IN '.Session::instance()->get('customer_id_baners');
+
+            if (Session::instance()->get('baners_activ') !== null) {
+
+                if (Session::instance()->get('baners_activ') == 1) {
+                    $crud->set_where('date_end', '>', DB::expr('DATE(NOW())').$id_baners);
+                } elseif (Session::instance()->get('baners_activ') == 0){
+                    $crud->set_where('date_end', '<', DB::expr('DATE(NOW())').$id_baners);
+                }
+
+            } else {
+                $crud->set_where('id', 'IN', Session::instance()->get('customer_id_baners'));
             }
-
         }
+
+
+
 
         $crud->set_lang('ru');
         $crud->select_multiselect('category');

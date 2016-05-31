@@ -167,8 +167,10 @@ class Model_BaseModel extends Model {
                 $query->on('banrel.section_id', '=', 'cat.id');
             }
 
+        if ($url != null) {
+            $query->where('cat.url', '=', $url);
+        }
 
-        $query->where('cat.url', '=', $url);
         if ($city_id != ''){
             $query->and_where('ban.city_banners','=', $city_id);
         }
@@ -204,8 +206,94 @@ class Model_BaseModel extends Model {
     }
 
 
+    /**
+     * @param null $url
+     * @param null $city_id
+     * @return Database_Query_Builder_Select
+     * todo выборка банеров для фильтра админки
+     */
+    public function getBanersAdminFiltr ($url_section = null, $section_id = null, $city_id = null){
 
 
+        $query = DB::select('ban.*');
+        $query->from(array('banners', 'ban'));
+
+        $query->join(array('banners_relation_section', 'banrel'));
+        $query->on('banrel.banners_id', '=', 'ban.id');
+
+        $query->join(array('category','cat'));
+        $query->on('banrel.section_id', '=', 'cat.id');
+
+        if ($url_section != null AND $city_id != null) {
+            $query->where('cat.url', '=', $url_section);
+            $query->and_where('ban.city_banners','=', $city_id);
+        }
+
+        if ($url_section == null AND $city_id != null){
+            $query->where('ban.city_banners','=', $city_id);
+        }
+
+        if ($url_section != null AND $city_id == null){
+            $query->where('cat.url', '=', $url_section);
+        }
+        $query->group_by('ban.id');
+        $query->cached();
+        $query = $query->execute()->as_array();
+
+        $arrCity = $this->getCityBaners($section_id);
+
+        $arrIdBaners = array();
+        foreach ($query as $row_cat) {
+            $arrIdBaners[] = $row_cat['id'];
+        }
+
+        $arrIdBaners = '('.implode(",", $arrIdBaners).')';
+
+        return array('arrIdbaners' => $arrIdBaners, 'city' => $arrCity);
+    }
+
+
+    /**
+     * @param null $section_id
+     * @return array
+     * todo получить список городов по id раздела
+     */
+    public function getCityBaners ($section_id = null){
+
+        $query_data = DB::select('banners.*', array('city.name', 'CityName'));
+        $query_data->from('category');
+        $query_data->join('banners_relation_section');
+        $query_data->on('category.id', '=', 'banners_relation_section.section_id');
+        $query_data->join('banners');
+        $query_data->on('banners_relation_section.banners_id', '=', 'banners.id');
+        $query_data->join('city', 'LEFT');
+        $query_data->on('banners.city_banners', '=', 'city.id');
+
+        if ($section_id != null) {
+            $query_data->where('banners_relation_section.section_id', '=', $section_id);
+            $query_data->and_where('banners.city_banners', '<>', 0);
+        }
+
+
+        $query_data->group_by('banners.id');
+        $query_data->order_by('banners.id', 'DESC');
+        $query_data->cached();
+
+
+        $result1 = $query_data->execute()->as_array();
+
+        //HTML::x($result1, true);
+
+        $city_arr = array();
+        foreach ($result1 as $row_city) {
+            if ($row_city['city_banners'] != '') {
+                $city_arr[$row_city['city_banners']] = $row_city['CityName'];
+            }
+        }
+
+        return $city_arr;
+
+    }
 
 
 
