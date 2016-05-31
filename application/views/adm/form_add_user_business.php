@@ -34,19 +34,21 @@
                         <div class="form-inline">
 
                             <input type="text" data-toggle="tooltip" data-original-title="Логин" name="name_user" class="form-control" placeholder="Логин пользователя" value="<?=isset($name_user) ? $name_user : ''?>"/>
-                            <input type="text" data-toggle="tooltip" data-original-title="Имя" name="nameses" class="form-control" placeholder="Имя пользователя" value="<?=isset($nameses) ? $nameses : ''?>"/>
-                            <input type="text" data-toggle="tooltip" data-original-title="Фамилия пользователя" name="secondname_user" class="form-control" placeholder="Фамилия пользователя" value="<?=isset($secondname_user) ? $secondname_user : ''?>"/>
-                            <input type="email" data-toggle="tooltip" data-original-title="Email" name="email_user" class="form-control" placeholder="Email" value="<?=isset($email_user)? $email_user: ''?>"/>
+                            <input type="password" data-toggle="tooltip" data-original-title="Пароль" name="password" class="form-control" placeholder="Пароль" value=""/>
+
 
                         </div>
 
                         <div class="form-inline" style="margin-top: 10px;">
-
+                            <input type="text" data-toggle="tooltip" data-original-title="Имя" name="nameses" class="form-control" placeholder="Имя пользователя" value="<?=isset($nameses) ? $nameses : ''?>"/>
+                            <input type="text" data-toggle="tooltip" data-original-title="Фамилия пользователя" name="secondname_user" class="form-control" placeholder="Фамилия пользователя" value="<?=isset($secondname_user) ? $secondname_user : ''?>"/>
+                            <input type="email" data-toggle="tooltip" data-original-title="Email" name="email_user" class="form-control" placeholder="Email" value="<?=isset($email_user)? $email_user: ''?>"/>
                             <input type="text" data-toggle="tooltip" placeholder="Телефон" data-original-title="Телефон" name="telephone" class="form-control"  value="<?=isset($telephone) ? $telephone: ''?>"/>
 
                         </div>
                         <div class="form-inline" style="margin-top: 10px;">
-                            <input type="password" data-toggle="tooltip" data-original-title="Пароль" name="password" class="form-control" placeholder="Пароль" value=""/>
+                            <input type="email" data-toggle="tooltip" data-original-title="Email отвецтвенного за информацию" name="email_manager" class="form-control" placeholder="Email отвецтвенного за информацию" value="<?=isset($email_manager) ? $email_manager : ''?>"/>
+                            <input type="email" data-toggle="tooltip" data-original-title="Email бугалтерии" name="email_bugalter" class="form-control" placeholder="Email бугалтерии" value="<?=isset($email_bugalter) ? $email_bugalter : ''?>"/>
                         </div>
                     </div>
                 </div>

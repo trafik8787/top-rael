@@ -43,6 +43,10 @@
                                 <td>Количество добавленно в избранное:</td>
                                 <td><?=isset($business_favorit) ? $business_favorit : ''?></td>
                             </tr>
+                            <tr>
+                                <td>Подписчики</td>
+                                <td><?=isset($bussines_subscribe) ? $bussines_subscribe : ''?></td>
+                            </tr>
                         </table>
                     </div>
                 </div>

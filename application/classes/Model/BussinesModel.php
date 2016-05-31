@@ -272,6 +272,7 @@ class Model_BussinesModel extends Model_BaseModel {
                 array('bus.info', 'BusInfo'),
                 array('bus.file_meny', 'BusFileMeny'),
                 array('bus.status_subscribe', 'BusStatSubscribe'),
+                array('bus.client_status', 'BusClientStatus'),
 
                 array('artic.id', 'ArticId'),
                 array('artic.name', 'ArticName'),
@@ -435,6 +436,7 @@ class Model_BussinesModel extends Model_BaseModel {
             $end_result['BusMapsY'] = $result[0]['BusMapsY'];
             $end_result['BusCity'] = $result[0]['BusCity'];
             $end_result['BusStatSubscribe'] = $result[0]['BusStatSubscribe'];
+            $end_result['BusClientStatus'] = $result[0]['BusClientStatus'];
 
 
             $category = Model::factory('CategoryModel')->get_section('category');
@@ -950,6 +952,7 @@ class Model_BussinesModel extends Model_BaseModel {
             ->join('business')
             ->on('users.business_id','=','business.id')
             ->where('business.status', '=', 1)
+            ->and_where('client_status', '<>', 4)
             ->execute()->as_array();
 
         $query2 = DB::select()

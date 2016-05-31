@@ -500,8 +500,10 @@ class Controller_Pages_Ajax extends Controller {
 
         foreach ($data as $rows) {
 
-            //эжемесячная рассылка по числу создания бизнеса
-            $this->sendBussinesMount($rows);
+            //эжемесячная рассылка по числу создания бизнеса исключает определенные типы реклами базовый и бесплатно
+            if ($rows['client_status'] != 3) {
+                $this->sendBussinesMount($rows);
+            }
 
             $d = new DateTime($rows['date_end']);
             $ert = $d->modify('-7 days')->format("Y-m-d");

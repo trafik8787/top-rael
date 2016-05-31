@@ -34,7 +34,14 @@ class Controller_Pages_Business extends Controller_BaseController {
                 array_multisort($volume, SORT_DESC, $edition, SORT_ASC, $data['ArticArr']);
             }
         }
-        //HTML::x($data);
+
+        //«Тип рекламы» - Бесплатно. Такому не посылать никаких писем-уведомлений и на странице выводить справа баннер Google.
+        $bloc_reclam = null;
+        if ($data['BusClientStatus'] == 4) {
+            $this->getBanersGoogle();
+            $bloc_reclam = parent::$right_baners;
+        }
+
         $content->bloc_right = parent::RightBloc(array(
             'lotery' => $this->lotarey($data['BusId']),
             $this->showBlocBussinesSubscribe($data['BusId']),
@@ -43,7 +50,8 @@ class Controller_Pages_Business extends Controller_BaseController {
                 'bussines_name' => $data['BusName'],
                 'bussines_url' => $data['BusUrl'],
                 'section_id' => $data['CatArr'][0]['CatParentId'])),
-            View::factory('blocks_includ/business_meny', array('data' => $data['BusFileMeny']))
+            View::factory('blocks_includ/business_meny', array('data' => $data['BusFileMeny'])),
+            $bloc_reclam
         ));
 
 

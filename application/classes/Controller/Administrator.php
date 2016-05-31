@@ -774,7 +774,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_field_type('city', 'select', '', '', '', array('city', 'name','id', array('parent_id','<>','0')));
         $crud->set_field_type('dop_address', 'hidden', '', '', '', '');
 
-        $crud->set_field_type('client_status', 'radio', array(1 => 'Стандарт', 2 => 'Топ'), '', array('style' => 'margin-top: 10px; margin-bottom: 12px'), '');
+        $crud->set_field_type('client_status', 'radio', array(1 => 'Стандарт', 2 => 'Топ', 3 => 'Базовый', 4 => 'Бесплатно'), '', array('style' => 'margin-top: 10px; margin-bottom: 12px'), '');
 
 
         $crud->set_field_type('redactor_user', 'select', '', '', '', array('users', 'username', 'id', array('id', 'IN', $arr_user)));
@@ -1374,9 +1374,16 @@ class Controller_Administrator extends Controller_Core_Main {
         } elseif (Session::instance()->get('customer_id_users') == 5) {
 
             $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
-            $crud->edit_fields('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel', 'business_id','date_registration');
-            $crud->add_field('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel',  'business_id','date_registration');
+            $crud->edit_fields('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel', 'email_manager', 'email_bugalter', 'business_id', 'file_zacaz', 'file_brif', 'file_cvitanciy', 'date_registration');
+            $crud->add_field('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel',  'email_manager', 'email_bugalter', 'business_id', 'file_zacaz', 'file_brif', 'file_cvitanciy', 'date_registration');
             $crud->callback_after_insert('call_after_insert_userBusines');
+
+            $crud->set_field_type('file_zacaz', array('file', 'uploads/file_zacaz', 'meny_', '', 'others'),'', '');
+            $crud->set_field_type('file_brif', array('file', 'uploads/file_brif', 'meny_', '', 'others'),'', '');
+
+
+            $crud->set_field_type('file_cvitanciy', array('file', 'uploads/file_cvitanciy', 'zacaz_', '', 'others'),'', 'multiple');
+            $crud->set_one_to_many('users_relation_kvitanciy', 'file_cvitanciy','path', 'user_id');
             //изминение пароля бизнеса
             $crud->callback_before_edit('call_befor_edit_userAdmin');
 
@@ -1419,10 +1426,21 @@ class Controller_Administrator extends Controller_Core_Main {
             'password' => 'Пароль',
             'id_role' => 'Группа',
             'business_id' => 'Бизнес',
+            'file_zacaz' => 'Заказ',
+            'file_brif' => 'Бриф',
+            'file_cvitanciy' => 'Квитанции',
+            'email_manager' => 'Email ответственный за информацию',
+            'email_bugalter' => 'Email бегалтерия',
             'date_registration' => 'Дата регистрации'
             ));
 
         $crud->validation('email', array('required' => true, 'email' => true),
+            array('required' => 'Это поле обязательно для заполнения', 'email' => 'Неверный формат'));
+
+        $crud->validation('email_manager', array('required' => true, 'email' => true),
+            array('required' => 'Это поле обязательно для заполнения', 'email' => 'Неверный формат'));
+
+        $crud->validation('email_bugalter', array('required' => true, 'email' => true),
             array('required' => 'Это поле обязательно для заполнения', 'email' => 'Неверный формат'));
 
         $crud->validation('username', array('required' => true, 'minlength' => 3),
@@ -1716,6 +1734,8 @@ class Controller_Administrator extends Controller_Core_Main {
                                                     Cruds::$post['secondname_user'],
                                                     Cruds::$post['email_user'],
                                                     Cruds::$post['telephone'],
+                                                    Cruds::$post['email_manager'],
+                                                    Cruds::$post['email_bugalter'],
                                                     Cruds::$post['password'],
                                                     Cruds::$post['id']);
         }
@@ -1787,6 +1807,8 @@ class Controller_Administrator extends Controller_Core_Main {
                                                     Cruds::$post['secondname_user'],
                                                     Cruds::$post['email_user'],
                                                     Cruds::$post['telephone'],
+                                                    Cruds::$post['email_manager'],
+                                                    Cruds::$post['email_bugalter'],
                                                     Cruds::$post['password'],
                                                     $key_array['id']);
         }
@@ -1832,6 +1854,8 @@ class Controller_Administrator extends Controller_Core_Main {
         $static = View::factory('adm/statistic_business');
         $static->business_favorit = Rediset::getInstance()->get_business_favor($new_array['id']);
         $static->business_show = Rediset::getInstance()->get_business_all($new_array['id']);
+        $static->bussines_subscribe = Model::factory('BaseModel')->table_count('subscription_relation_bussines', 'id', array('bussines_id','=', $new_array['id']));
+
         //получаем купоны бизнеса если они есть
         $coupon_business = Model::factory('CouponsModel')->getCouponsInBusinessId($new_array['id']);
 
@@ -1870,6 +1894,8 @@ class Controller_Administrator extends Controller_Core_Main {
             $user->age = $orm_user['age'];
             $user->sex = $orm_user['sex'];
             $user->telephone = $orm_user['tel'];
+            $user->email_manager = $orm_user['email_manager'];
+            $user->email_bugalter = $orm_user['email_bugalter'];
             $user->name_user = $orm_user['username'];
             $user->nameses = $orm_user['name'];
             $user->secondname_user = $orm_user['secondname'];
