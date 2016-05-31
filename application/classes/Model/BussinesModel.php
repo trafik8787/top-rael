@@ -1554,8 +1554,8 @@ class Model_BussinesModel extends Model_BaseModel {
         $arr_in_json = array();
 
 
-        if (!empty($result_all)) {
-            foreach ($result_all as $item) {
+        if (!empty($result)) {
+            foreach ($result as $item) {
                 $arr_in_json[] = array('category' => array('value' => 0, 'label' => $item['CatName']),
                     'city' => array('value' => $item['CityId'], 'label' => $item['CityName']),
                     'url' => $item['BusUrl'],
