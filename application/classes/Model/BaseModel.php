@@ -218,10 +218,10 @@ class Model_BaseModel extends Model {
         $query = DB::select('ban.*');
         $query->from(array('banners', 'ban'));
 
-        $query->join(array('banners_relation_section', 'banrel'));
-        $query->on('banrel.banners_id', '=', 'ban.id');
+        $query->join(array('banners_relation_section', 'banrel'), 'LEFT');
+        $query->on('ban.id', '=', 'banrel.banners_id');
 
-        $query->join(array('category','cat'));
+        $query->join(array('category','cat'), 'LEFT');
         $query->on('banrel.section_id', '=', 'cat.id');
 
         if ($url_section != null AND $city_id != null) {
