@@ -617,7 +617,7 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud->set_lang('ru');
         $crud->disable_search();
 
-        if (Session::instance()->get('customer_id') != null) {
+        if (Session::instance()->get('customer_id_section') != null) {
             $crud->set_where('parent_id', '=', Session::instance()->get('customer_id_section'));
         } else {
             $crud->set_where('parent_id', '<>', 0);
