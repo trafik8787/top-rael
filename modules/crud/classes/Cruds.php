@@ -397,10 +397,7 @@ class Cruds extends Controller_Core_Main {
         foreach ($query['query'] as $rows) {
 
             //HTML::x($rows);
-            //хук для каждой записы в таблице вызов функции
-            if ($this->callback_list_table != null) {
-                $rows = call_user_func_array(array($this->class_metod['class'], $this->callback_list_table['name_function']), array($rows));
-            }
+
 
             //редактировать
             if ($this->remove_edit !== true) {
@@ -505,6 +502,11 @@ class Cruds extends Controller_Core_Main {
 
                 $rows[$this->links[0]] = '<a target="_blank" href="'.$this->links[1].$rows[$this->links[2]].'" >'.$rows[$this->links[0]].'</a>';
 
+            }
+
+            //хук для каждой записы в таблице вызов функции
+            if ($this->callback_list_table != null) {
+                $rows = call_user_func_array(array($this->class_metod['class'], $this->callback_list_table['name_function']), array($rows));
             }
 
 

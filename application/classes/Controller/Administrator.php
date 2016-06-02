@@ -18,6 +18,8 @@ class Controller_Administrator extends Controller_Core_Main {
     public $user;
     public $user_roles;
 
+    //масив победителей в лотареи
+    private static $lotery_users_prizer;
 
 
     public function before (){
@@ -685,13 +687,16 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function adminLotarey (){
 
+        self::$lotery_users_prizer = Model::factory('LotareyModel')->getUserLotarey(null, null, true);
+        //HTML::x(self::$lotery_users_prizer);
+
         $crud = new Cruds();
         $crud->load_table('lotarey', array('0', 'DESC'));
         $crud->set_lang('ru');
         $crud->set_field_type('status', 'radio', array('1' => 'Ожидает', '2' => 'Идет', '3' => 'Завершен'));
         $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
         $crud->set_field_type('img', array('file', 'uploads/img_lotarey', 'lot_', '', 'img'),'', '');
-        $crud->show_columns('id', 'secondname', 'date_start', 'date_end','status');
+        $crud->show_columns('id', 'secondname', 'date_start', 'date_end', 'dop_field_lotery_user',  'status');
 
         $crud->edit_fields('secondname','description','img','business_id','date_start','date_end','status');
         $crud->add_field('secondname','description','img','business_id','date_start','date_end','status');
@@ -713,6 +718,7 @@ class Controller_Administrator extends Controller_Core_Main {
             'business_id'=> 'Бизнес',
             'date_start'=> 'Дата начала',
             'date_end' => 'Дата конца',
+            'dop_field_lotery_user' => 'Победители',
             'status' => 'Статус'));
         $crud->disable_search();
         return $crud;
@@ -2373,6 +2379,20 @@ class Controller_Administrator extends Controller_Core_Main {
     public static  function call_list_table_lotery ($new_array){
         $new_array['date_start'] =  date('d/m/Y', strtotime($new_array['date_start']));
         $new_array['date_end'] =  date('d/m/Y', strtotime($new_array['date_end']));
+
+        foreach (self::$lotery_users_prizer as $rows) {
+            if ($rows['loteryId'] == $new_array['id']) {
+
+                //если пользователь зарегестированый то на email вешаем ссылку
+                if (!empty($rows['usersEmail'])) {
+                    $new_array['dop_field_lotery_user'] = '<a href="/admin/edit?obj=YToyOntzOjU6InRhYmxlIjtzOjU6InVzZXJzIjtzOjI0OiJjYWxsYmFja19mdW5jdGlvbnNfYXJyYXkiO2E6Mzp7czo4OiJmdW5jdGlvbiI7czoxMDoiYWRtaW5Vc2VycyI7czo1OiJjbGFzcyI7czoyNDoiQ29udHJvbGxlcl9BZG1pbmlzdHJhdG9yIjtzOjIyOiJjYWxsYmFja19mdW5jdGlvbl9uYW1lIjtzOjEwOiJsb2FkX3RhYmxlIjt9fQ%3D%3D&id='.$rows['usersId'].'">'.$rows['usersEmail'].'</a>';
+                } else {
+                    $new_array['dop_field_lotery_user'] = $rows['subscriptionEmail'];
+                }
+
+            }
+        }
+
         return $new_array;
     }
 

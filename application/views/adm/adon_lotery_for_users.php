@@ -12,7 +12,7 @@
         <label for="URL" class="col-sm-2 control-label">Победитель лотареи</label>
         <div class="col-sm-10">
             <div class="well well-lg">
-                <?=$data[0]['loteryDate']?> - <?=$data[0]['loteryName'] ?>
+                <?=$data[0]['loteryDate']?> - <?=$data[0]['loterySecondname'] ?>
 
             </div>
         </div>

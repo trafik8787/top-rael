@@ -99,14 +99,17 @@ class Model_LotareyModel extends Model_BaseModel {
     /**
      * @return mixed
      * todo получаем список победителей лотареи или победителя по id лотареи
+     * $flag - если true то выводит всех побидителей лотарей зарегестрированых и не зарегестрированых
      */
-    public function getUserLotarey($limit = null, $id = null){
+    public function getUserLotarey($limit = null, $id = null, $flag = false){
 
         $query = DB::select(
             array('users.name', 'usersName'),
             array('users.secondname', 'usersSecondname'),
             array('lotarey.date_end', 'loteryDate'),
+            array('lotarey.id', 'loteryId'),
             array('lotarey.name', 'loteryName'),
+            array('lotarey.secondname', 'loterySecondname'),
             array('business.name', 'busName'),
             array('business.url', 'busUrl'),
             array('users.photo', 'usersPhoto'),
@@ -121,17 +124,26 @@ class Model_LotareyModel extends Model_BaseModel {
         $query->on('lotarey.business_id', '=', 'business.id');
 
         if ($id === null) {
-            $query->join('users');
+            if ($flag === false) {
+                $query->join('users');
+            } else {
+                $query->join('users', 'LEFT');
+            }
         } else {
             $query->join('users', 'LEFT');
         }
 
         $query->on('subscription.email', '=', 'users.email');
-        if ($id === null) {
-            $query->where('users.suses_lotery', '<>', 0);
-        } else {
-            $query->where($id[0], $id[1], $id[2]);
+
+        if ($flag === false) {
+
+            if ($id === null) {
+                $query->where('users.suses_lotery', '<>', 0);
+            } else {
+                $query->where($id[0], $id[1], $id[2]);
+            }
         }
+
         $query->order_by('lotarey.id', 'DESC');
         if ($limit != null) {
             $query->limit($limit);
