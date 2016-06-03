@@ -196,6 +196,7 @@ class Controller_Core_Crud extends Controller_Core_Main {
                        //проверяем является ли масивом
                        if (is_array($_FILES[$name_count_rows['COLUMN_NAME']]['name'])) {
 
+                           $file_update = array();
                            foreach ($_FILES[$name_count_rows['COLUMN_NAME']]['name'] as $key => $rows_name) {
                                //проверка на наличие отправляемого файла
 
@@ -214,6 +215,9 @@ class Controller_Core_Crud extends Controller_Core_Main {
                                }
                            }
 
+                           //HTML::x($_FILES);
+
+
                            //hide поля с относительными путями к файлам
                            $colum_file = 'editfile-'.$name_count_rows['COLUMN_NAME'];
                            //проверяем не является ли масив с новыми файлами пустым
@@ -228,6 +232,10 @@ class Controller_Core_Crud extends Controller_Core_Main {
                            } elseif (empty($file_update) and empty($_POST[$colum_file])) { //если поле file  и скрытые поля пусты
                                $file_update = '';
                            }
+
+                           HTML::x($file_update);
+
+
 
                            //если определен метод 1-n
                            if ($retw->set_one_to_many) {
@@ -271,7 +279,7 @@ class Controller_Core_Crud extends Controller_Core_Main {
 
             }
 
-           // die('dsf');
+            //die('dsf');
 
             if ($retw->callback_after_edit != null) {
                 //получаем масив строку таблицы которая должна быть редактирована

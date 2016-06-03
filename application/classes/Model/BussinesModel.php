@@ -273,6 +273,8 @@ class Model_BussinesModel extends Model_BaseModel {
                 array('bus.file_meny', 'BusFileMeny'),
                 array('bus.status_subscribe', 'BusStatSubscribe'),
                 array('bus.client_status', 'BusClientStatus'),
+                array('bus.date_create', 'BusDateCreate'),
+                array('bus.date_end', 'BusDateEnd'),
 
                 array('artic.id', 'ArticId'),
                 array('artic.name', 'ArticName'),
@@ -437,6 +439,8 @@ class Model_BussinesModel extends Model_BaseModel {
             $end_result['BusCity'] = $result[0]['BusCity'];
             $end_result['BusStatSubscribe'] = $result[0]['BusStatSubscribe'];
             $end_result['BusClientStatus'] = $result[0]['BusClientStatus'];
+            $end_result['BusDateCreate'] = $result[0]['BusDateCreate'];
+            $end_result['BusDateEnd'] = $result[0]['BusDateEnd'];
 
 
             $category = Model::factory('CategoryModel')->get_section('category');

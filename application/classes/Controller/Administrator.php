@@ -135,7 +135,7 @@ class Controller_Administrator extends Controller_Core_Main {
 
 
     public function action_welcome (){
-        $this->template->title_page = 'Приветствуем '. $this->user->secondname;
+        $this->template->title_page = 'Приветствуем '. isset($this->user->secondname) ? $this->user->secondname : '';
 
         $welcome = View::factory('adm/welcome');
         $this->template->render = $welcome;
@@ -1384,14 +1384,15 @@ class Controller_Administrator extends Controller_Core_Main {
             $crud->add_field('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel',  'email_manager', 'email_bugalter', 'business_id', 'file_zacaz', 'file_brif', 'file_cvitanciy', 'date_registration');
             $crud->callback_after_insert('call_after_insert_userBusines');
 
+
             $crud->set_field_type('file_zacaz', array('file', 'uploads/file_zacaz', 'zacaz_', '', 'others'),'', 'multiple');
-            $crud->set_one_to_many('users_relation_zacaz', 'file_zacaz','path', 'user_id');
-
             $crud->set_field_type('file_brif', array('file', 'uploads/file_brif', 'brif_', '', 'others'),'', 'multiple');
-            $crud->set_one_to_many('users_relation_brif', 'file_brif','path', 'user_id');
-
             $crud->set_field_type('file_cvitanciy', array('file', 'uploads/file_cvitanciy', 'cvitanc_', '', 'others'),'', 'multiple');
+
+            $crud->set_one_to_many('users_relation_zacaz', 'file_zacaz','path', 'user_id');
+            $crud->set_one_to_many('users_relation_brif', 'file_brif','path', 'user_id');
             $crud->set_one_to_many('users_relation_kvitanciy', 'file_cvitanciy','path', 'user_id');
+
             //изминение пароля бизнеса
             $crud->callback_before_edit('call_befor_edit_userAdmin');
 
@@ -1438,18 +1439,18 @@ class Controller_Administrator extends Controller_Core_Main {
             'file_brif' => 'Бриф',
             'file_cvitanciy' => 'Квитанции',
             'email_manager' => 'Email ответственный за информацию',
-            'email_bugalter' => 'Email бегалтерия',
+            'email_bugalter' => 'Email бугалтерия',
             'date_registration' => 'Дата регистрации'
             ));
 
         $crud->validation('email', array('required' => true, 'email' => true),
             array('required' => 'Это поле обязательно для заполнения', 'email' => 'Неверный формат'));
 
-        $crud->validation('email_manager', array('required' => true, 'email' => true),
-            array('required' => 'Это поле обязательно для заполнения', 'email' => 'Неверный формат'));
+        $crud->validation('email_manager', array('email' => true),
+            array('email' => 'Неверный формат'));
 
-        $crud->validation('email_bugalter', array('required' => true, 'email' => true),
-            array('required' => 'Это поле обязательно для заполнения', 'email' => 'Неверный формат'));
+        $crud->validation('email_bugalter', array('email' => true),
+            array('email' => 'Неверный формат'));
 
         $crud->validation('username', array('required' => true, 'minlength' => 3),
             array('required' => 'Это поле обязательно для заполнения', 'minlength' => 'Минимальное количество символов 3'));

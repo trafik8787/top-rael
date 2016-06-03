@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?>
 
-<?//print_r(unserialize($value_fild))?>
+<?//HTML::x(unserialize($value_fild), true)?>
 <?
     if ($type_field_upload == 'img') {
 
@@ -52,27 +52,74 @@
         }
 
     } elseif ($type_field_upload == 'others') {?>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>File</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-                <tbody>
+
+
+        <? if (!empty($value_fild)) {
+
+            try {
+
+                $value_fild = unserialize($value_fild); ?>
+
+
                 <?if (!empty($value_fild)):?>
-                     <tr class="w-tr-hover-file-del">
-                         <td>
 
-                             <a class="w-download" href="<?=URL::site(substr($value_fild, 1), 'http')?>"><?=basename($value_fild)?></a>
-                             <input type="hidden" name="editfile-<?=$name_fied?>" value="<?=$value_fild?>">
-                         </td>
 
-                         <td><a class="w-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
-                     </tr>
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <? foreach ($value_fild as $row): ?>
+                                <tr class="w-tr-hover-file-del">
+                                    <td>
+
+                                        <a class="w-download" href="<?=URL::site(substr($row, 1), 'http')?>"><?=basename($row)?></a>
+                                        <input type="hidden" name="editfile-<?=$name_fied?>" value="<?=$row?>">
+                                    </td>
+
+                                    <td><a class="w-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
+                                </tr>
+                            <?endforeach;?>
+                        </tbody>
+                    </table>
+
+
+
                 <?endif?>
-                </tbody>
-        </table>
+
+            <? } catch (Exception $e) { ?>
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>File</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?if (!empty($value_fild)):?>
+                        <tr class="w-tr-hover-file-del">
+                            <td>
+
+                                <a class="w-download" href="<?=URL::site(substr($value_fild, 1), 'http')?>"><?=basename($value_fild)?></a>
+                                <input type="hidden" name="editfile-<?=$name_fied?>" value="<?=$value_fild?>">
+                            </td>
+
+                            <td><a class="w-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
+                        </tr>
+                    <?endif?>
+                    </tbody>
+                </table>
+
+            <? } ?>
+
+
+        <? }?>
+
 
     <?}?>
 

@@ -440,4 +440,58 @@ class Model_BaseModel extends Model {
         return $query;
     }
 
+
+
+
+
+    public function getUserBusinesDock($id_user){
+
+        $query_zacaz = DB::select('users_relation_zacaz.*')
+            ->from('users')
+
+            ->join('users_relation_zacaz')
+            ->on('users_relation_zacaz.user_id', '=', 'users.id')
+
+            ->where('users.id', '=', $id_user)
+            ->cached()
+            ->execute()->as_array();
+
+        $query_brif = DB::select('users_relation_brif.*')
+            ->from('users')
+
+            ->join('users_relation_brif')
+            ->on('users_relation_brif.user_id', '=', 'users.id')
+
+            ->where('users.id', '=', $id_user)
+            ->cached()
+            ->execute()->as_array();
+
+        $query_kvitanciy = DB::select('users_relation_kvitanciy.*')
+            ->from('users')
+
+            ->join('users_relation_kvitanciy')
+            ->on('users_relation_kvitanciy.user_id', '=', 'users.id')
+
+            ->where('users.id', '=', $id_user)
+            ->cached()
+            ->execute()->as_array();
+
+
+        return array('zacaz' => $query_zacaz, 'brif' => $query_brif, 'kvitanciy' => $query_kvitanciy);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
