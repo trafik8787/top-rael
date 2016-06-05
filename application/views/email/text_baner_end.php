@@ -6,6 +6,7 @@
  * Time: 19:27
  */
 
+
 ?>
 
 
@@ -16,7 +17,7 @@ subject for mail:
 </p-->
 
 <p>
-<!--name-->,
+    <?=$data['BusName'] ?>,
 שלום רב!
 </p>
 

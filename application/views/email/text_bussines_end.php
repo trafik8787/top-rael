@@ -22,7 +22,7 @@ subject for mail:
 
 
 <p>
-<!--name-->,
+    <?=$data['name'] ?>,
 שלום רב!
 </p>
 

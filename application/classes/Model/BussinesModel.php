@@ -1319,7 +1319,9 @@ class Model_BussinesModel extends Model_BaseModel {
             array('banners.id', 'BanersId'),
             array('banners.date_start', 'BanersDateStart'),
             array('banners.date_end', 'BanersDateEnd'),
-            array('business.redactor_user', 'BusIdRedactor')
+            array('business.redactor_user', 'BusIdRedactor'),
+            array('business.name', 'BusName')
+
         )
             ->from('banners')
 
@@ -1429,7 +1431,8 @@ class Model_BussinesModel extends Model_BaseModel {
             array('coupon.datestart', 'CouponsDateStart'),
             array('coupon.dateoff', 'CouponsDateEnd'),
             array('coupon.url', 'CouponsUrl'),
-            array('business.redactor_user', 'BusIdRedactor')
+            array('business.redactor_user', 'BusIdRedactor'),
+            array('business.name', 'BusName')
         )
             ->from('coupon')
 

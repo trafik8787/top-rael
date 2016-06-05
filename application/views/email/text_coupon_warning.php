@@ -17,7 +17,7 @@ subject for mail:
 
 
 <p>
-<!--name-->,
+    <?=$data['BusName'] ?>,
 שלום רב!
 </p>
 
