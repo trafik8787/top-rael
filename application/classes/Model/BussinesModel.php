@@ -76,12 +76,14 @@ class Model_BussinesModel extends Model_BaseModel {
         $query_data->and_where('business.status', '=', 1);
         $query_data->limit($limit);
         $query_data->offset($ofset);
-        $query_data->order_by('business.client_status', 'DESC');
+        //$query_data->order_by('business.client_status', 'DESC');
         $query_data->order_by('business.date_create', 'DESC');
         $query_data->cached();
 
         $result = $query_data->execute()->as_array();
 
+        //сортировка по полю тип рекламы
+        $result = HTML::multisort($result, 'client_status', 2);
 
 
         if (!empty($result)) {
@@ -198,14 +200,20 @@ class Model_BussinesModel extends Model_BaseModel {
         if ($num_page != null) {
             $query_data->offset($ofset);
         }
+
         $query_data->group_by('business.id');
-        if ($home === false) {
-            $query_data->order_by('business.client_status', 'DESC');
-        }
+
+
         $query_data->order_by('business.date_create', 'DESC');
         $query_data->cached();
 
         $result = $query_data->execute()->as_array();
+
+        //сортировка по полю тип рекламы
+        if ($home === false) {
+            $result = HTML::multisort($result, 'client_status', 2);
+        }
+
 
         if ($url_section != null) {
             $city_arr = $this->getCityInSection($arrChild);

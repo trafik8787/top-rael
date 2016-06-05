@@ -71,4 +71,21 @@ class HTML extends Kohana_HTML {
     }
 
 
+    //сортировка многомерного масива
+    public static function multisort ($array, $page, $where) {
+
+        $array_start = array();
+        $array_end = array();
+        foreach ($array as $item) {
+            if ($item[$page] == $where) {
+                $array_start[] = $item;
+            } else {
+                $array_end[] = $item;
+            }
+        }
+
+        return array_merge($array_start, $array_end);
+    }
+
+
 }
