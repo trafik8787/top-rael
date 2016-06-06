@@ -218,6 +218,7 @@ class Controller_Administrator extends Controller_Core_Main {
         if (!empty($_GET['section'])) {
 
             $category = Model::factory('CategoryModel')->recurs_catalog($_GET['section']);
+            HTML::x($category );
             $data = Model::factory('BaseModel')->getBanersAdminFiltr($category[0]['url'], $_GET['section'], $city_id);
 
         } else {
@@ -1088,6 +1089,29 @@ class Controller_Administrator extends Controller_Core_Main {
             'tags' => 'Теги',
             'date' => 'Дата создания'
         ));
+
+
+        $crud->edit_fields('name',
+            'text',
+            'img',
+            'city',
+            'id_section',
+            'bussines_id',
+            'id_category',
+            'tags',
+            'date'
+        );
+
+        $crud->add_field('name',
+            'text',
+            'img',
+            'city',
+            'id_section',
+            'bussines_id',
+            'id_category',
+            'tags',
+            'date'
+        );
 
         $crud->callback_after_insert('call_after_insert_news');
         $crud->callback_befor_show_edit('call_bef_show_edit_news');
@@ -2407,8 +2431,10 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function  call_bef_edit_lotery ($new_array, $old_array){
 
-        $new_array['date_start'] = Date::convert_Date($new_array['date_start']);
-        $new_array['date_end'] = Date::convert_Date($new_array['date_end']);
+        if (!empty($new_array['date_start']) AND !empty($new_array['date_end'])) {
+            $new_array['date_start'] = Date::convert_Date($new_array['date_start']);
+            $new_array['date_end'] = Date::convert_Date($new_array['date_end']);
+        }
 
         return $new_array;
     }

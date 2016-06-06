@@ -536,6 +536,17 @@ class Controller_Pages_Ajax extends Controller {
 
 
     /**
+     * todo запускается по крону увидомление пользователей бизнеса об боновлениях относящихся к бизнесу статьи новости лотареи
+     * URL - send_user_bussines
+     */
+    public function action_UserBusinessSend() {
+
+        Model::factory('BaseModel')->getArticleNewsBussines();
+
+    }
+
+
+    /**
      * todo рассылка отвецтвенному по бизнесам кототорые не обновлялись больше 60 дней url - sendbusiness_warning
      */
     public function action_MailSubscribeBusWarting (){

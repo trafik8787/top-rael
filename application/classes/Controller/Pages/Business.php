@@ -51,7 +51,7 @@ class Controller_Pages_Business extends Controller_BaseController {
                 'bussines_url' => $data['BusUrl'],
                 'section_id' => $data['CatArr'][0]['CatParentId'])),
             View::factory('blocks_includ/business_meny', array('data' => $data['BusFileMeny'])),
-            $bloc_reclam
+            'bloc_reclam' => $bloc_reclam
         ));
 
 

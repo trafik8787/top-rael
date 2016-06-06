@@ -441,9 +441,11 @@ class Model_BaseModel extends Model {
     }
 
 
-
-
-
+    /**
+     * @param $id_user
+     * @return array
+     * todo плучить документы пользователей бизнеса
+     */
     public function getUserBusinesDock($id_user){
 
         $query_zacaz = DB::select('users_relation_zacaz.*')
@@ -481,6 +483,97 @@ class Model_BaseModel extends Model {
     }
 
 
+    /**
+     * todo получаем данные из таблиц для отсылки бизнес пользователям что появилось нового
+     */
+    public function getArticleNewsBussines (){
+
+        $query_article = DB::select(
+            array('users.email', 'UsersEmail'),
+            array('users.email_manager', 'UsersEmailManager'),
+            array('business.id', 'BusId'),
+            array('business.name', 'BusName'),
+            array('articles.id', 'ArticId'),
+            array('articles.url', 'ArticUrl'),
+            array('articles.status_bussines_user', 'ArticStatBusUser'),
+            array('news.id', 'NewsId'),
+            array('news.name', 'NewsName'),
+            array('news.status_bussines_user', 'NewsStatBusUser'),
+            array('lotarey.id', 'LotareyId'),
+            array('lotarey.secondname', 'LotareySecond'),
+            array('lotarey.status_bussines_user', 'LotareyStatBusUser')
+
+        )
+            ->from('users')
+            ->join('business')
+            ->on('users.business_id','=','business.id')
+
+            ->join('articles_relation_business', 'LEFT')
+            ->on('business.id', '=', 'articles_relation_business.id_business')
+
+            ->join('articles', 'LEFT')
+            ->on('articles.id', '=', 'articles_relation_business.id_articles')
+
+            ->join('news', 'LEFT')
+            ->on('business.id' , '=', 'news.bussines_id')
+
+            ->join('lotarey', 'LEFT')
+            ->on('business.id', '=', 'lotarey.business_id')
+
+            ->where('business.status', '=', 1)
+            ->and_where('business.client_status', '<>', 4)
+            ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
+            ->execute()->as_array();
+
+        //HTML::x($query_article, true);
+
+        $tmp_article = array();
+        $tmp_news = array();
+        $tmp_lotery = array();
+        $end_result = array();
+
+        foreach ($query_article as $item) {
+
+            if (!array_key_exists($item['BusId'], $end_result)) {
+
+                foreach ($query_article as $item2) {
+
+                    if ($item['BusId'] == $item2['BusId']) {
+
+                        if ($item2['ArticId'] != null AND $item2['ArticStatBusUser'] == 0) {
+                            $tmp_article[$item2['ArticId']] = $item2['ArticUrl'];
+                        }
+
+                        if ($item2['NewsId'] != null AND $item2['NewsStatBusUser'] == 0) {
+                            $tmp_news[$item2['NewsId']] = $item2['NewsName'];
+                        }
+
+                        if ($item2['LotareyId'] != null AND $item2['LotareyStatBusUser'] == 0) {
+                            $tmp_lotery[$item2['LotareyId']] = $item2['LotareySecond'];
+                        }
+                    }
+
+                }
+
+                if (!empty($item['ArticId']) OR !empty($item['NewsId'])) {
+                    $end_result[$item['BusId']] = array('BusName' => $item['BusName'],
+                        'UsersEmail' => $item['UsersEmail'],
+                        'UsersEmailManager' => $item['UsersEmailManager'],
+                        'ArrArticle' => $tmp_article, 'ArrNews' => $tmp_news, 'ArrLotery' => $tmp_lotery);
+                }
+            } else {
+                $tmp_article = array();
+                $tmp_news = array();
+                $tmp_lotery = array();
+            }
+
+        }
+
+
+
+        //HTML::x($end_result);
+
+    }
 
 
 
