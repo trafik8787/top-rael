@@ -212,38 +212,56 @@ class Model_BaseModel extends Model {
      * @return Database_Query_Builder_Select
      * todo выборка банеров для фильтра админки
      */
-    public function getBanersAdminFiltr ($url_section = null, $section_id = null, $city_id = null){
+    public function getBanersAdminFiltr ($caregory = null,  $city_id = null, $activ = null){
 
+        $section_id = null;
 
-        $query = DB::select('ban.*');
-        $query->from(array('banners', 'ban'));
+        $arrChild = null;
+        if ($caregory != null) {
 
-        $query->join(array('banners_relation_section', 'banrel'), 'LEFT');
-        $query->on('ban.id', '=', 'banrel.banners_id');
+            $section_id = $caregory[0]['id'];
 
-        $query->join(array('category','cat'), 'LEFT');
-        $query->on('banrel.section_id', '=', 'cat.id');
-
-        if ($url_section != null AND $city_id != null) {
-            $query->where('cat.url', '=', $url_section);
-            $query->and_where('ban.city_banners','=', $city_id);
+            foreach ($caregory[0]['childs'] as $row_cat) {
+                $arrChild[] = $row_cat['id'];
+            }
         }
 
-        if ($url_section == null AND $city_id != null){
-            $query->where('ban.city_banners','=', $city_id);
+
+        $query_cat = DB::select('banners.*');
+        $query_cat->from('banners');
+
+        $query_cat->join('banners_relation', 'LEFT');
+        $query_cat->on('banners.id', '=', 'banners_relation.banners_id');
+
+        $query_cat->join('banners_relation_section', 'LEFT');
+        $query_cat->on('banners.id', '=', 'banners_relation_section.banners_id');
+
+        if ($caregory != null) {
+            $query_cat->where('banners_relation.category_id', 'IN', $arrChild);
+            $query_cat->or_where('banners_relation_section.section_id', '=', $section_id);
+
         }
 
-        if ($url_section != null AND $city_id == null){
-            $query->where('cat.url', '=', $url_section);
+        if ($city_id != null) {
+            $query_cat->and_where('banners.city_banners','=', $city_id);
         }
-        $query->group_by('ban.id');
-        $query->cached();
-        $query = $query->execute()->as_array();
 
-        $arrCity = $this->getCityBaners($section_id);
+        if ($activ != null) {
+            if ($activ == 1) {
+                $query_cat->and_where('banners.date_end', '>', DB::expr('DATE(NOW())'));
+            } elseif ($activ == 2) {
+                $query_cat->and_where('banners.date_end', '<', DB::expr('DATE(NOW())'));
+            }
+        }
+
+        $query_cat->group_by('banners.id');
+        $query_cat = $query_cat->execute()->as_array();
+
+        $arrCity = $this->getCityBaners($section_id, $arrChild, $activ);
+
 
         $arrIdBaners = array();
-        foreach ($query as $row_cat) {
+        foreach ($query_cat as $row_cat) {
             $arrIdBaners[] = $row_cat['id'];
         }
 
@@ -258,22 +276,36 @@ class Model_BaseModel extends Model {
      * @return array
      * todo получить список городов по id раздела
      */
-    public function getCityBaners ($section_id = null){
+    public function getCityBaners ($section_id = null, $arrChild = null, $activ = null){
 
         $query_data = DB::select('banners.*', array('city.name', 'CityName'));
         $query_data->from('category');
-        $query_data->join('banners_relation_section');
+
+        $query_data->join('banners_relation_section', 'LEFT');
         $query_data->on('category.id', '=', 'banners_relation_section.section_id');
+
+        $query_data->join('banners_relation', 'LEFT');
+        $query_data->on('category.id', '=', 'banners_relation.category_id');
+
         $query_data->join('banners');
         $query_data->on('banners_relation_section.banners_id', '=', 'banners.id');
+
         $query_data->join('city', 'LEFT');
         $query_data->on('banners.city_banners', '=', 'city.id');
 
-        if ($section_id != null) {
-            $query_data->where('banners_relation_section.section_id', '=', $section_id);
-            $query_data->and_where('banners.city_banners', '<>', 0);
+        if ($section_id != null and $arrChild != null) {
+            $query_data->where('banners_relation.category_id', 'IN', $arrChild);
+            $query_data->or_where('banners_relation_section.section_id', '=', $section_id);
+
         }
 
+        if ($activ != null) {
+            if ($activ == 1) {
+                $query_data->and_where('banners.date_end', '>', DB::expr('DATE(NOW())'));
+            } elseif ($activ == 2) {
+                $query_data->and_where('banners.date_end', '<', DB::expr('DATE(NOW())'));
+            }
+        }
 
         $query_data->group_by('banners.id');
         $query_data->order_by('banners.id', 'DESC');

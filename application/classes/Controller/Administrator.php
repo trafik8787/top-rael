@@ -201,28 +201,21 @@ class Controller_Administrator extends Controller_Core_Main {
 
         if (!empty($_GET['activ'])) {
 
-            if ($_GET['activ'] == 3) {
-                Session::instance()->set('baners_activ', null);
-            } elseif ($_GET['activ'] == 2){
-                Session::instance()->set('baners_activ', 0);
-            } elseif ($_GET['activ'] == 1){
-                Session::instance()->set('baners_activ', 1);
-            }
-
+            $get_activ = $_GET['activ'];
 
         } else {
-            Session::instance()->set('baners_activ', null);
+            $get_activ = 3;
         }
 
 
         if (!empty($_GET['section'])) {
 
             $category = Model::factory('CategoryModel')->recurs_catalog($_GET['section']);
-
-            $data = Model::factory('BaseModel')->getBanersAdminFiltr($category[0]['url'], $_GET['section'], $city_id);
+            //HTML::x($category);
+            $data = Model::factory('BaseModel')->getBanersAdminFiltr($category, $city_id, $get_activ);
 
         } else {
-            $data = Model::factory('BaseModel')->getBanersAdminFiltr(null, null, $city_id);
+            $data = Model::factory('BaseModel')->getBanersAdminFiltr(null, $city_id, $get_activ);
         }
 
         Session::instance()->set('customer_id_baners', $data['arrIdbaners']);
@@ -1502,27 +1495,11 @@ class Controller_Administrator extends Controller_Core_Main {
         $crud = new Cruds();
         $crud->load_table('banners', array('0', 'DESC'));
 
-//        HTML::x(Session::instance()->get('customer_id_baners'));
-        $id_baners = '';
         if (Session::instance()->get('customer_id_baners') != null) {
 
-            $id_baners = ' AND id IN '.Session::instance()->get('customer_id_baners');
+            $crud->set_where('id', 'IN', Session::instance()->get('customer_id_baners'));
 
-            if (Session::instance()->get('baners_activ') !== null) {
-
-                if (Session::instance()->get('baners_activ') == 1) {
-                    $crud->set_where('date_end', '>', DB::expr('DATE(NOW())').$id_baners);
-                } elseif (Session::instance()->get('baners_activ') == 0){
-                    $crud->set_where('date_end', '<', DB::expr('DATE(NOW())').$id_baners);
-                }
-
-            } else {
-                $crud->set_where('id', 'IN', Session::instance()->get('customer_id_baners'));
-            }
         }
-
-
-
 
         $crud->set_lang('ru');
         $crud->select_multiselect('category');
