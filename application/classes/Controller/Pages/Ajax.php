@@ -473,21 +473,21 @@ class Controller_Pages_Ajax extends Controller {
         }
 
         //запуск рассылки
-  //     $this->SendEmailSubscribe($flag);
+       $this->SendEmailSubscribe($flag);
 
         //лотарея
-//        $this->LotareyCron();
+        $this->LotareyCron();
 
         //включение отключение уведомление по банерам
-//        $this->subskribeBaners();
+        $this->subskribeBaners();
         //включение отключение уведомление по купонам
- //       $this->subskribeCoupons();
+        $this->subskribeCoupons();
 
         //сохраняем базу редис один рас в сутки
         Rediset::getInstance()->save();
 
         //каждый день генерируем фаллы json для информеров
- //       $this->generateFileInformer();
+        $this->generateFileInformer();
 
         $obj = new Model_BussinesModel();
         //пользователи и бизнесы
