@@ -17,7 +17,7 @@ subject for mail:
 </p-->
 
 <p>
-    <?=$data['name'] ?>,
+    <?=!empty($data['name']) ? $data['name'] : '' ?>,
 שלום רב!
 </p>
 

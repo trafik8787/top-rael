@@ -473,21 +473,21 @@ class Controller_Pages_Ajax extends Controller {
         }
 
         //запуск рассылки
-       $this->SendEmailSubscribe($flag);
+  //     $this->SendEmailSubscribe($flag);
 
         //лотарея
-        $this->LotareyCron();
+//        $this->LotareyCron();
 
         //включение отключение уведомление по банерам
-        $this->subskribeBaners();
+//        $this->subskribeBaners();
         //включение отключение уведомление по купонам
-        $this->subskribeCoupons();
+ //       $this->subskribeCoupons();
 
         //сохраняем базу редис один рас в сутки
         Rediset::getInstance()->save();
 
         //каждый день генерируем фаллы json для информеров
-        $this->generateFileInformer();
+ //       $this->generateFileInformer();
 
         $obj = new Model_BussinesModel();
         //пользователи и бизнесы
@@ -495,13 +495,13 @@ class Controller_Pages_Ajax extends Controller {
         //получаем бизнесы для смены статуса
         $business_data = $obj->getBusinesDateDisable();
 
-        //HTML::x($business_data, true);
+
         $curent_date = date('Y-m-d');
 
         foreach ($data as $rows) {
 
             //эжемесячная рассылка по числу создания бизнеса исключает определенные типы реклами базовый и бесплатно
-            if ($rows['client_status'] != 3) {
+            if ($rows['client_status'] != 3 and $rows['client_status'] != 4) {
                 $this->sendBussinesMount($rows);
             }
 
@@ -853,12 +853,14 @@ class Controller_Pages_Ajax extends Controller {
 
             DB::update('business')->set(array('date_subscribe_mount' => date('Y-m-d')))->where('id', '=', $data_business['id'])->execute();
             $message = View::factory('email/text_reminders');
+            $message->data = $data_business;
             $this->template_mail_message($data_business['email'], $data_business['EmailRedactor'], 'ספר על עצמך יותר באתר טופ ישראל', $message);
         } else {
 
             if (($date_subs_mount < $date_curent_mount) and (date('d', strtotime($data_business['date_create'])) == date('d'))) {
                 DB::update('business')->set(array('date_subscribe_mount' => date('Y-m-d')))->where('id', '=', $data_business['id'])->execute();
                 $message = View::factory('email/text_reminders');
+                $message->data = $data_business;
                 $this->template_mail_message($data_business['email'], $data_business['EmailRedactor'], 'ספר על עצמך יותר באתר טופ ישראל', $message);
 
             }
