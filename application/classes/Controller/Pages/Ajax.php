@@ -478,6 +478,10 @@ class Controller_Pages_Ajax extends Controller {
         //лотарея
         $this->LotareyCron();
 
+        //включение отключение уведомление по банерам
+        $this->subskribeBaners();
+        //включение отключение уведомление по купонам
+        $this->subskribeCoupons();
 
         //сохраняем базу редис один рас в сутки
         Rediset::getInstance()->save();
@@ -545,10 +549,6 @@ class Controller_Pages_Ajax extends Controller {
      */
     public function action_UserBusinessSend() {
 
-        //включение отключение уведомление по банерам
-        $this->subskribeBaners();
-        //включение отключение уведомление по купонам
-        $this->subskribeCoupons();
 
         $data = Model::factory('BaseModel')->getArticleNewsBussines();
         ///HTML::x($data);
