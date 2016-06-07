@@ -976,6 +976,8 @@ class Model_BussinesModel extends Model_BaseModel {
             foreach ($query2 as $rows2) {
                 if ($rows2['id'] == $rows['redactor_user']) {
                     $rows['EmailRedactor'] =  $rows2['email'];
+                    $rows['UsersEmailManager'] =  $rows2['email_manager'];
+                    $rows['UsersEmailBugalter'] =  $rows2['email_bugalter'];
                 }
             }
             $result[] = $rows;
@@ -1316,6 +1318,8 @@ class Model_BussinesModel extends Model_BaseModel {
     public function getBannersUser (){
 
         $query = DB::select(array('users.email', 'UserEmail'),
+            array('users.email_manager', 'UsersEmailManager'),
+            array('users.email_bugalter', 'UsersEmailBugalter'),
             array('banners.id', 'BanersId'),
             array('banners.date_start', 'BanersDateStart'),
             array('banners.date_end', 'BanersDateEnd'),
@@ -1428,6 +1432,8 @@ class Model_BussinesModel extends Model_BaseModel {
     public function getCouponsUser (){
 
         $query = DB::select(array('users.email', 'UserEmail'),
+            array('users.email_manager', 'UsersEmailManager'),
+            array('users.email_bugalter', 'UsersEmailBugalter'),
             array('coupon.datestart', 'CouponsDateStart'),
             array('coupon.dateoff', 'CouponsDateEnd'),
             array('coupon.url', 'CouponsUrl'),

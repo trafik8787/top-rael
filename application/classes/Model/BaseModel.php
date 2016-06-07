@@ -488,9 +488,10 @@ class Model_BaseModel extends Model {
      */
     public function getArticleNewsBussines (){
 
-        $query_article = DB::select(
+        $query = DB::select(
             array('users.email', 'UsersEmail'),
             array('users.email_manager', 'UsersEmailManager'),
+            array('users.email_bugalter', 'UsersEmailBugalter'),
             array('business.id', 'BusId'),
             array('business.name', 'BusName'),
             array('articles.id', 'ArticId'),
@@ -501,7 +502,18 @@ class Model_BaseModel extends Model {
             array('news.status_bussines_user', 'NewsStatBusUser'),
             array('lotarey.id', 'LotareyId'),
             array('lotarey.secondname', 'LotareySecond'),
-            array('lotarey.status_bussines_user', 'LotareyStatBusUser')
+            array('lotarey.status_bussines_user', 'LotareyStatBusUser'),
+
+            //docum
+            array('users_relation_brif.id', 'UserRelBrifId'),
+            array('users_relation_brif.status_bussines_user', 'UserRelBrifStatBusUser'),
+
+            array('users_relation_kvitanciy.id', 'UserRelKvitanciyId'),
+            array('users_relation_kvitanciy.status_bussines_user', 'UserRelKvitanciyStatBusUser'),
+
+            array('users_relation_zacaz.id', 'UserRelZacazId'),
+            array('users_relation_zacaz.status_bussines_user', 'UserRelZacazStatBusUser')
+
 
         )
             ->from('users')
@@ -520,6 +532,15 @@ class Model_BaseModel extends Model {
             ->join('lotarey', 'LEFT')
             ->on('business.id', '=', 'lotarey.business_id')
 
+            ->join('users_relation_brif', 'LEFT')
+            ->on('users.id', '=', 'users_relation_brif.user_id')
+
+            ->join('users_relation_kvitanciy', 'LEFT')
+            ->on('users.id', '=', 'users_relation_kvitanciy.user_id')
+
+            ->join('users_relation_zacaz', 'LEFT')
+            ->on('users.id', '=', 'users_relation_zacaz.user_id')
+
             ->where('business.status', '=', 1)
             ->and_where('business.client_status', '<>', 4)
             ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
@@ -530,13 +551,16 @@ class Model_BaseModel extends Model {
         $tmp_article = array();
         $tmp_news = array();
         $tmp_lotery = array();
+        $tmp_breif = array();
+        $tmp_kvitanciy = array();
+        $tmp_zacaz = array();
         $end_result = array();
 
-        foreach ($query_article as $item) {
+        foreach ($query as $item) {
 
             if (!array_key_exists($item['BusId'], $end_result)) {
 
-                foreach ($query_article as $item2) {
+                foreach ($query as $item2) {
 
                     if ($item['BusId'] == $item2['BusId']) {
 
@@ -551,27 +575,59 @@ class Model_BaseModel extends Model {
                         if ($item2['LotareyId'] != null AND $item2['LotareyStatBusUser'] == 0) {
                             $tmp_lotery[$item2['LotareyId']] = $item2['LotareySecond'];
                         }
+
+                        if ($item2['UserRelBrifId'] != null AND $item2['UserRelBrifStatBusUser'] == 0) {
+                            $tmp_breif[$item2['UserRelBrifId']] = $item2['UserRelBrifId'];
+                        }
+
+                        if ($item2['UserRelKvitanciyId'] != null AND $item2['UserRelKvitanciyStatBusUser'] == 0) {
+                            $tmp_kvitanciy[$item2['UserRelKvitanciyId']] = $item2['UserRelKvitanciyId'];
+                        }
+
+                        if ($item2['UserRelZacazId'] != null AND $item2['UserRelZacazStatBusUser'] == 0) {
+                            $tmp_zacaz[$item2['UserRelZacazId']] = $item2['UserRelZacazId'];
+                        }
+
                     }
 
                 }
 
-                if (!empty($item['ArticId']) OR !empty($item['NewsId'])) {
+                if (!empty($tmp_article) OR !empty($tmp_news)
+                    OR !empty($tmp_lotery)
+                    OR !empty($tmp_breif)
+                    OR !empty($tmp_kvitanciy)
+                    OR !empty($tmp_zacaz)) {
+
                     $end_result[$item['BusId']] = array('BusName' => $item['BusName'],
                         'UsersEmail' => $item['UsersEmail'],
                         'UsersEmailManager' => $item['UsersEmailManager'],
-                        'ArrArticle' => $tmp_article, 'ArrNews' => $tmp_news, 'ArrLotery' => $tmp_lotery);
+                        'UsersEmailBugalter' => $item['UsersEmailBugalter'],
+                        'ArrArticle' => $tmp_article,
+                            'ArrNews' => $tmp_news,
+                            'ArrLotery' => $tmp_lotery,
+                            'ArrBrif' => $tmp_breif,
+                            'ArrKvitanciy' => $tmp_kvitanciy,
+                            'ArrZacaz' => $tmp_zacaz);
                 }
             } else {
                 $tmp_article = array();
                 $tmp_news = array();
+                $tmp_breif = array();
+                $tmp_kvitanciy = array();
+                $tmp_zacaz = array();
                 $tmp_lotery = array();
             }
 
         }
+//
+//        DB::update('articles')->set(array('status_bussines_user' => 0))->execute();
+//        DB::update('news')->set(array('status_bussines_user' => 0))->execute();
+//        DB::update('lotarey')->set(array('status_bussines_user' => 0))->execute();
+//        DB::update('users_relation_brif')->set(array('status_bussines_user' => 0))->execute();
+//        DB::update('users_relation_kvitanciy')->set(array('status_bussines_user' => 0))->execute();
+//        DB::update('users_relation_zacaz')->set(array('status_bussines_user' => 0))->execute();
 
-
-
-        //HTML::x($end_result);
+        return $end_result;
 
     }
 

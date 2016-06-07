@@ -218,7 +218,7 @@ class Controller_Administrator extends Controller_Core_Main {
         if (!empty($_GET['section'])) {
 
             $category = Model::factory('CategoryModel')->recurs_catalog($_GET['section']);
-            HTML::x($category );
+
             $data = Model::factory('BaseModel')->getBanersAdminFiltr($category[0]['url'], $_GET['section'], $city_id);
 
         } else {

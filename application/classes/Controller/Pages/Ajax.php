@@ -478,10 +478,6 @@ class Controller_Pages_Ajax extends Controller {
         //лотарея
         $this->LotareyCron();
 
-        //включение отключение уведомление по банерам
-        $this->subskribeBaners();
-        //включение отключение уведомление по купонам
-        $this->subskribeCoupons();
 
         //сохраняем базу редис один рас в сутки
         Rediset::getInstance()->save();
@@ -507,23 +503,31 @@ class Controller_Pages_Ajax extends Controller {
 
             $d = new DateTime($rows['date_end']);
             $ert = $d->modify('-7 days')->format("Y-m-d");
+
+
+            $ToEmail = $rows['email'];
+
+            if (!empty($rows['UsersEmailManager'])) {
+                $ToEmail = array($rows['email'], $rows['UsersEmailManager']);
+            }
+
             //за 7 дней перед отключением
             if ($curent_date == $ert) {
                 $message = View::factory('email/text_bussines_warning');
                 $message->data = $rows;
-                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'התראה לסיום פרסום באתר טופ ישראל', $message);
+                $this->template_mail_message($ToEmail , $rows['EmailRedactor'], 'התראה לסיום פרסום באתר טופ ישראל', $message);
             }
 
             if ($curent_date == $rows['date_end']) {
                 $message = View::factory('email/text_bussines_end');
                 $message->data = $rows;
-                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'הפסקת פרסום', $message);
+                $this->template_mail_message($ToEmail, $rows['EmailRedactor'], 'הפסקת פרסום', $message);
             }
 
             if ($curent_date == $rows['date_create']) {
                 $message = View::factory('email/text_bussines_start');
                 $message->data = $rows;
-                $this->template_mail_message($rows['email'], $rows['EmailRedactor'], 'החלת פרסום באתר טופ ישראל', $message);
+                $this->template_mail_message($ToEmail, $rows['EmailRedactor'], 'החלת פרסום באתר טופ ישראל', $message);
             }
 
         }
@@ -541,7 +545,37 @@ class Controller_Pages_Ajax extends Controller {
      */
     public function action_UserBusinessSend() {
 
-        Model::factory('BaseModel')->getArticleNewsBussines();
+        //включение отключение уведомление по банерам
+        $this->subskribeBaners();
+        //включение отключение уведомление по купонам
+        $this->subskribeCoupons();
+
+        $data = Model::factory('BaseModel')->getArticleNewsBussines();
+        ///HTML::x($data);
+        if (!empty($data)) {
+
+            foreach ($data as $item) {
+
+                $message = View::factory('mail_user_bussines/mail_general');
+                $message->data = $item;
+                $this->template_mail_message($item['UsersEmail'], null, 'Увидомление Topisrael.ru', $message);
+
+                if (!empty($item['UsersEmailManager'])) {
+                    $message = View::factory('mail_user_bussines/mail_manager');
+                    $message->data = $item;
+                    $this->template_mail_message($item['UsersEmailManager'], null, 'Увидомление Topisrael.ru', $message);
+                }
+
+                //для бугалтеров
+                if (!empty($item['UsersEmailBugalter'])) {
+                    $message = View::factory('mail_user_bussines/mail_bugalter');
+                    $message->data = $item;
+                    $this->template_mail_message($item['UsersEmailBugalter'], null, 'Увидомление Topisrael.ru', $message);
+                }
+
+            }
+
+        }
 
     }
 
@@ -780,23 +814,30 @@ class Controller_Pages_Ajax extends Controller {
             $d = new DateTime($rows['BanersDateEnd']);
             $ert = $d->modify('-7 days')->format("Y-m-d");
 
+
+            $ToEmail = $rows['UserEmail'];
+
+            if (!empty($rows['UsersEmailManager'])) {
+                $ToEmail = array($rows['UserEmail'], $rows['UsersEmailManager']);
+            }
+
             //за 7 дней перед отключением
             if ($curent_date == $ert) {
                 $message = View::factory('email/text_baner_warning');
                 $message->data = $rows;
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'התראה לסיום פרסום באנר', $message);
+                $this->template_mail_message($ToEmail, $rows['EmailRedactor'], 'התראה לסיום פרסום באנר', $message);
             }
 
             if ($curent_date == $rows['BanersDateEnd']) {
                 $message = View::factory('email/text_baner_end');
                 $message->data = $rows;
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], ' הפסקת באנר', $message);
+                $this->template_mail_message($ToEmail, $rows['EmailRedactor'], ' הפסקת באנר', $message);
             }
 
             if ($curent_date == $rows['BanersDateStart']) {
                 $message = View::factory('email/text_baner_start');
                 $message->data = $rows;
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'הפעלת הבאנר באתר טופ ישראל', $message);
+                $this->template_mail_message($ToEmail, $rows['EmailRedactor'], 'הפעלת הבאנר באתר טופ ישראל', $message);
             }
 
         }
@@ -816,23 +857,30 @@ class Controller_Pages_Ajax extends Controller {
             $d = new DateTime($rows['CouponsDateEnd']);
             $ert = $d->modify('-7 days')->format("Y-m-d");
 
+
+            $ToEmail = $rows['UserEmail'];
+
+            if (!empty($rows['UsersEmailManager'])) {
+                $ToEmail = array($rows['UserEmail'], $rows['UsersEmailManager']);
+            }
+
             //за 7 дней перед отключением
             if ($curent_date == $ert) {
                 $message = View::factory('email/text_coupon_warning');
                 $message->data = $rows;
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'התראה לסיום פרסום הקופון', $message);
+                $this->template_mail_message($ToEmail, $rows['EmailRedactor'], 'התראה לסיום פרסום הקופון', $message);
             }
 
             if ($curent_date == $rows['CouponsDateEnd']) {
                 $message = View::factory('email/text_coupon_end');
                 $message->data = $rows;
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'ניתוק קופון ', $message);
+                $this->template_mail_message($ToEmail, $rows['EmailRedactor'], 'ניתוק קופון ', $message);
             }
 
             if ($curent_date == $rows['CouponsDateStart']) {
                 $message = View::factory('email/text_coupon_start');
                 $message->data = $rows;
-                $this->template_mail_message($rows['UserEmail'], $rows['EmailRedactor'], 'הפעלת קופון באתר טופ ישראל', $message);
+                $this->template_mail_message($ToEmail, $rows['EmailRedactor'], 'הפעלת קופון באתר טופ ישראל', $message);
             }
 
         }
