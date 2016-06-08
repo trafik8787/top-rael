@@ -19,7 +19,6 @@
 
 
 
-<!--
 
 <div class="sidebar-socials w-bloc-right">
 
@@ -73,4 +72,3 @@ VK.Widgets.Group("vk_groups", {mode: 0, width: "330", height: "200", color1: 'FF
     </div>
 </div>
 
---->

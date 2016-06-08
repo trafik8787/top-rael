@@ -288,13 +288,7 @@
 
                 </div>
 
-                <div class="partners-content">
-                                        
-                    <a href="http://www.ozrothagalil.org.il/" class="partners-img"><img src="/public/images/partners/ozrot_logo_heb.jpg"></a>
-                    <div class="partners-line"></div>
-                    <div class="partners-title"><a href="http://www.ozrothagalil.org.il/">OzrotHagalil.org.il</a></div>
-
-                </div>
+          
                 
                 <div class="partners-content">
                                         
@@ -307,11 +301,11 @@
                
            <div class="partners-content">
                                         
-                    <a href="http://www.emalon.co.il/ru" class="partners-img">
-                        <img src="/public/images/partners/emalon.png" style="margin:0px 15px;">
+                    <a href="http://orbita.co.il/" class="partners-img">
+                        <img src="/public/images/orbita.gif" style="margin:0px 15px;">
                     </a>
                     <div class="partners-line"></div>
-                    <div class="partners-title"> <a href="http://www.emalon.co.il/ru">Emalon</a></div>
+                    <div class="partners-title"> <a href="http://orbita.co.il/">Orbita</a></div>
 
                 </div>
                 
@@ -326,6 +320,14 @@
 
                 </div>
                 
+                
+                      <div class="partners-content">
+                                        
+                    <a href="http://www.ozrothagalil.org.il/" class="partners-img"><img src="/public/images/partners/ozrot_logo_heb.jpg"></a>
+                    <div class="partners-line"></div>
+                    <div class="partners-title"><a href="http://www.ozrothagalil.org.il/">OzrotHagalil.org.il</a></div>
+
+                </div>
                 
                 
             </div>

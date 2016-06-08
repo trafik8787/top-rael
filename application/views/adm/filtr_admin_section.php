@@ -41,7 +41,7 @@ if (!empty($_GET['city'])) {
     </select>
     <?if (!empty($city)):?>
         <select name="city" class="form-control chosen-select" data-placeholder="Выбрать город" id="filtr_city_adm">
-            <option value="">Все</option>
+            <option value="">Выбрать город</option>
             <?foreach ($city as $key => $row_city):?>
                 <option  value="<?=$key?>" <?if ($key == $citys) {echo 'selected="selected"';}?>><?=$row_city?></option>
             <?endforeach?>

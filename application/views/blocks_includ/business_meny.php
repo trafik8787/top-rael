@@ -9,7 +9,7 @@
 ?>
 <?if (!empty($data)):?>
     <a href="<?=$data?>" target="_blank">
-        <img src="/public/uploade/restaurant-sidebar.jpg" width="360" height="230" alt="" title=""
+        <img src="/public/uploade/restaurant-sidebar.jpg" width="360" height="230" alt="" title="Меню израильского ресторана на русском"
              class="img-responsive sidebar-images"/>
     </a>
 <?endif?>

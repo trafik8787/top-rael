@@ -59,10 +59,13 @@
                     <div class="col-sm-4">
                         <nav>
                             <ul>
+                             <li style="margin-left:-20px;"><a href="/group_bookings" title="Групповые заказы с скидкой на развлечения и отдых в израиле"><span class="glyphicon glyphicon-flag" aria-hidden="true" ></span> Групповые заказы</a></li>
                                 <?foreach ($top_meny as $name=>$url):?>
                                     <li><a href="<?=$url?>"><?=$name?></a></li>
                                 <?endforeach?>
-                                <li><a href="/maps">На карте</a></li>
+                                <li><a href="/maps" title="Развлечения, еда и шопинг израиля на карте">На карте</a></li>
+                            
+
                             </ul>
                         </nav>
                     </div>
@@ -70,16 +73,18 @@
                     <div class="col-sm-4">
                         <nav>
                             <ul>
-                                <li><a href="/contacts">Связь с нами</a></li>
-                                <li><a href="/about">О проекте</a></li>
-                                <li><a href="/group_bookings">Групповые заказы</a></li>
+                              
                                 <li style="margin-left:-20px;"><a href="/informers"><span class="glyphicon glyphicon-th-large" aria-hidden="true" ></span> Информеры</a></li>
                                 <li><a href="/rss">RSS лента</a></li>
                                 <li><a href="/map">Карта сайта</a></li>
+                                  <li><a href="/contacts">Связь с нами</a></li>
+                                <li><a href="/about">О проекте</a></li>
                             </ul>
 
                             <ul>
-                                <!--                                    <li><a href="/contacts">צור קשר</a></li>-->
+                                <li><a href="/profile_he" title="טופ ישראל">
+                                פרופיל
+                                </a></li>
                                 <li><a href="/account_business">כניסה למפרסם</a></li>
                             </ul>
                         </nav>

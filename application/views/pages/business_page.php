@@ -162,7 +162,7 @@
 
             <?if (!empty($data['BusLogo'])):?>
                 <div class="profile-media">
-                    <div class="profile-avatar"><img src="<?=$data['BusLogo']?>" width="235" height="128" alt="<?=$data['BusName']?>"/></div>
+                    <div class="profile-avatar"><img src="<?=$data['BusLogo']?>" width="235" height="" alt="<?=$data['BusName']?>"/></div>
                 </div>
 
             <?endif?>

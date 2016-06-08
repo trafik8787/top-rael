@@ -10,7 +10,7 @@
 
 <?if (!empty($content)):?>
 
-
+<hr>
     <div class="sidebar-coupons w-bussines-coupons">
 
         <div class="sidebar-coupons-heading">
