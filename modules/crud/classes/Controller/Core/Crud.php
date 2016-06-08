@@ -233,9 +233,6 @@ class Controller_Core_Crud extends Controller_Core_Main {
                                $file_update = '';
                            }
 
-                           HTML::x($file_update);
-
-
 
                            //если определен метод 1-n
                            if ($retw->set_one_to_many) {
