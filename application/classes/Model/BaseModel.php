@@ -236,9 +236,26 @@ class Model_BaseModel extends Model {
         $query_cat->join('banners_relation_section', 'LEFT');
         $query_cat->on('banners.id', '=', 'banners_relation_section.banners_id');
 
+        if ($activ != 3 or $caregory != null or $city_id != null) {
+
+            $query_cat->where_open();
+        }
+
+        if ($activ != null) {
+
+            if ($activ == 1) {
+                $query_cat->where('banners.date_end', '>', DB::expr('DATE(NOW())'));
+            } elseif ($activ == 2) {
+                $query_cat->where('banners.date_end', '<', DB::expr('DATE(NOW())'));
+            }
+
+        }
+
         if ($caregory != null) {
-            $query_cat->where('banners_relation.category_id', 'IN', $arrChild);
+            $query_cat->and_where_open();
+            $query_cat->and_where('banners_relation.category_id', 'IN', $arrChild);
             $query_cat->or_where('banners_relation_section.section_id', '=', $section_id);
+            $query_cat->and_where_close();
 
         }
 
@@ -246,12 +263,8 @@ class Model_BaseModel extends Model {
             $query_cat->and_where('banners.city_banners','=', $city_id);
         }
 
-        if ($activ != null) {
-            if ($activ == 1) {
-                $query_cat->and_where('banners.date_end', '>', DB::expr('DATE(NOW())'));
-            } elseif ($activ == 2) {
-                $query_cat->and_where('banners.date_end', '<', DB::expr('DATE(NOW())'));
-            }
+        if ($activ != 3 or $caregory != null or $city_id != null) {
+            $query_cat->where_close();
         }
 
         $query_cat->group_by('banners.id');
@@ -259,13 +272,13 @@ class Model_BaseModel extends Model {
 
         $arrCity = $this->getCityBaners($section_id, $arrChild, $activ);
 
-
         $arrIdBaners = array();
+
         foreach ($query_cat as $row_cat) {
             $arrIdBaners[] = $row_cat['id'];
         }
 
-        $arrIdBaners = '('.implode(",", $arrIdBaners).')';
+        $arrIdBaners = '(' . implode(",", $arrIdBaners) . ')';
 
         return array('arrIdbaners' => $arrIdBaners, 'city' => $arrCity);
     }
