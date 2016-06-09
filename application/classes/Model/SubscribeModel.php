@@ -43,15 +43,41 @@ class Model_SubscribeModel extends Model_BaseModel {
 
             } else {
 
-                 try {
-                     $query = DB::insert('subscription', array('email', 'action', 'all_subscribe', 'uid'))
-                         ->values(array($email, $action, 1, $uid))->execute();
 
-                     return array('susses'=>'На вашу почту '.$email.' было отправлено письмо для подтверждения подписки');
+                try {
 
-                 } catch (Exception $x) {
-                     return  array('dublicate_email'=>'Такой Email уже существует');
-                 }
+                    $query = DB::select()
+                        ->from('subscription')
+                        ->where('email', '=', $email)
+                        ->and_where('action', '=', 1)
+                        ->execute()->as_array();
+
+                    if (!empty($query)) {
+
+
+                        if ($query[0]['all_subscribe'] == 0) {
+                            // 2 - что пользователь подписан и на общую рассылку и на бизнесы отдельно
+                            DB::update('subscription')->set(array('all_subscribe' => 2))
+                                ->where('email', '=', $email)
+                                ->execute();
+
+                            return array('susses_message'=>'Спасибо за подписку', 'no_mail' => 1);
+
+                        } elseif ($query[0]['all_subscribe'] == 2) {
+                            return  array('dublicate_email'=>'Такой Email уже существует');
+                        }
+
+                    } else {
+                        $query = DB::insert('subscription', array('email', 'action', 'all_subscribe', 'uid'))
+                            ->values(array($email, $action, 1, $uid))->execute();
+
+                        return array('susses'=>'На вашу почту '.$email.' было отправлено письмо для подтверждения подписки');
+                    }
+
+
+                } catch (Exception $x) {
+                    return  array('dublicate_email'=>'Такой Email уже существует');
+                }
 
             }
 
@@ -109,6 +135,11 @@ class Model_SubscribeModel extends Model_BaseModel {
                         //если не подписывался
                     } else {
 
+                        // 2 - что пользователь подписан и на общую рассылку и на бизнесы отдельно
+                        DB::update('subscription')->set(array('all_subscribe' => 2))
+                            ->where('email', '=', $email)
+                            ->execute();
+
                         $query_relat = DB::insert('subscription_relation_bussines', array('bussines_id', 'action', 'subscription_id', 'ip', 'uid'))
                             ->values(array($bussines_id, 1, $query[0]['id'], $_SERVER['REMOTE_ADDR'], $uid))->execute();
 
@@ -117,6 +148,10 @@ class Model_SubscribeModel extends Model_BaseModel {
 
                 //если не подтвердил подписку
                 } else {
+
+                    DB::update('subscription')->set(array('all_subscribe' => 2))
+                        ->where('email', '=', $email)
+                        ->execute();
 
                     $query_relat = DB::insert('subscription_relation_bussines', array('bussines_id', 'action', 'subscription_id', 'uid'))
                         ->values(array($bussines_id, 1, $query[0]['id'], $uid))->execute();
@@ -378,7 +413,7 @@ class Model_SubscribeModel extends Model_BaseModel {
             ->from('subscription')
             ->where('action','=', 1)
             ->and_where('enable_all','=',1)
-            ->and_where('all_subscribe','=', 1)
+            ->and_where('all_subscribe','IN', array(1,2))
             ->execute()->as_array();
     }
 

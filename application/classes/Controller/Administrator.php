@@ -2466,12 +2466,17 @@ class Controller_Administrator extends Controller_Core_Main {
     public static  function call_list_table_subscription ($new_array){
         $new_array['date'] =  date('d/m/Y H:m:s', strtotime($new_array['date']));
 
-        if ($new_array['all_subscribe'] == 1) {
-            $new_array['all_subscribe'] = '[все]';
-        } else {
-            $new_array['all_subscribe'] = '[биз]';
+        switch ($new_array['all_subscribe']) {
+            case 1:
+                $new_array['all_subscribe'] = '[все]';
+                break;
+            case 0:
+                $new_array['all_subscribe'] = '[биз]';
+                break;
+            case 2:
+                $new_array['all_subscribe'] = '[все][биз]';
+                break;
         }
-
 
         return $new_array;
     }

@@ -1206,6 +1206,20 @@ $(document).ready(function(){
                        $('.popover.bottom>.arrow').addClass('susses-email');
                    }
 
+                   if (response.susses_message != undefined) {
+                       input_email.popover({
+                           placement: 'bottom',
+                           content: response.susses_message,
+                           delay: { show: 100, hide: 500 }
+                       });
+                       input_email.popover('show');
+                       $('.popover.fade.bottom.in').css('background-color','greenyellow');
+                       $('.popover.bottom>.arrow').addClass('susses-email');
+                       setTimeout(function () {
+                           input_email.popover('destroy');
+                       }, 2000);
+                   }
+
                    if (response.dublicate_email != undefined) {
 
                        input_email.popover({
@@ -1362,6 +1376,20 @@ $(document).ready(function(){
                         input_email.popover({
                             placement: 'bottom',
                             content: response.susses,
+                            delay: { show: 100, hide: 500 }
+                        });
+                        input_email.popover('show');
+                        $('.popover.fade.bottom.in').css('background-color','greenyellow');
+                        $('.popover.bottom>.arrow').addClass('susses-email');
+                        setTimeout(function () {
+                            input_email.popover('destroy');
+                        }, 2000);
+                    }
+
+                    if (response.susses_message != undefined) {
+                        input_email.popover({
+                            placement: 'bottom',
+                            content: response.susses_message,
                             delay: { show: 100, hide: 500 }
                         });
                         input_email.popover('show');
