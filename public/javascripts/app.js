@@ -1429,6 +1429,61 @@ $(document).ready(function(){
 
 
 
+    $('.w-form-bussines-changepass').validate({
+
+        rules:{
+
+            oldpassword:{
+                required: true
+            },
+
+            newpassword:{
+                required: true
+            }
+
+        },
+
+        messages:{
+
+            oldpassword:{
+                required: "Это поле обязательно для заполнения"
+
+            },
+
+            newpassword:{
+                required: "Это поле обязательно для заполнения"
+
+            }
+
+        },
+
+        submitHandler: function(form){
+
+            $.ajax({ // описываем наш запрос
+                type: "POST", // будем передавать данные через POST
+                dataType: "JSON", // указываем, что нам вернется JSON
+                url: '/account/changepass',
+                data: $(form).serialize(),
+                success: function(response) { // когда получаем ответ
+
+                    if (response.changeok != undefined) {
+                        $('#modalChangepass .modal-body').html('<h3 style="color: #009900">'+response.changeok+'</h3><br><button type="button" class="text-center" data-dismiss="modal" aria-label="Close" class="btn-lg btn-success">Закрыть</button>');
+                    }
+
+                    if (response.changefalse != undefined) {
+                        $('#modalChangepass .modal-body').html('<h3 style="color: red">'+response.changefalse+'</h3><br><button type="button" class="text-center" data-dismiss="modal" aria-label="Close" class="btn-lg btn-success">Закрыть</button>');
+                    }
+                }
+            });
+
+            return false;
+
+        }
+    });
+
+
+
+
 
 
     $('.w-modal-subscribe').submit(function(){

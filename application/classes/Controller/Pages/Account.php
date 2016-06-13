@@ -9,8 +9,6 @@
 class Controller_Pages_Account extends Controller_BaseController {
 
 
-
-
     /**
      * @throws Kohana_Exception
      * просмотр профиля или авторизация через соц.сеть
@@ -299,25 +297,35 @@ class Controller_Pages_Account extends Controller_BaseController {
 
         $object = Validation::factory($this->request->post());  // проверяем новый пароль на корректность заполнения
         $object->rule('newpassword', 'not_empty')
-                ->rule('newpassword', 'min_length', array(':value', '5'));
+            ->rule('newpassword', 'min_length', array(':value', '5'));
         if ($object->check())  // если новый пароль удовлетворяет требованиям
         {
             $realoldpass = Auth::instance()->get_user()->password; // берем хэш текущего пароль пользователя
             $oldpass = Auth::instance()->hash($this->request->post('oldpassword')); // сравниваем с тем, что ввел пользователь
-            if ($realoldpass===$oldpass)  // если они совпадают
+            if ($realoldpass === $oldpass)  // если они совпадают
             {
                 DB::update('users')->set(array('password' => Auth::instance()->hash($this->request->post('newpassword'))))->where('id', '=', Auth::instance()->get_user()->id)->execute();
-                HTTP::redirect('/account/?changeok');  // меняем пароль и редиректим на страницу с поздравлением
+
+                if ($this->request->is_ajax()) {
+                    echo json_encode(array('changeok' => 'Пароль успешно изменен'));
+                } else {
+                    HTTP::redirect('/account/?changeok');  // меняем пароль и редиректим на страницу с поздравлением
+                }
+            } else {
+                if ($this->request->is_ajax()) {
+                    echo json_encode(array('changefalse' => 'Возникла непредвиденная ошибка при попытке изминения пароля.'));
+                } else {
+                    HTTP::redirect('/account/?changefalse');  // если нет - сообщаем об ошибке
+                }
             }
-            else
-            {
-                HTTP::redirect('/account/?changefalse');  // если нет - сообщаем об ошибке
+        } else {
+            if ($this->request->is_ajax()) {
+                echo json_encode(array('changefalse' => 'Возникла непредвиденная ошибка при попытке изминения пароля.'));
+            } else {
+                HTTP::redirect('/account/?changefalse'); // если нет - сообщаем об ошибке
             }
         }
-        else
-        {
-            HTTP::redirect('/account/?changefalse'); // если нет - сообщаем об ошибке
-        }
+
     }
 
 

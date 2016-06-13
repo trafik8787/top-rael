@@ -694,7 +694,7 @@
                 <h4 class="modal-title" id="myModalLabel">Смена пароля</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form" action="/account/changepass" method="post">
+                <form class="form-horizontal w-form-bussines-changepass" role="form" action="/account/changepass" method="post">
                     <h3>Смена пароля</h3>
                     <div class="form-group">
                         <label for="inputSpas" class="col-sm-2 control-label">Старый пароль</label>
