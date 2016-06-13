@@ -142,7 +142,7 @@
 
                         <div class="panel-heading">
                             <div class="panel-title rtl pull-left">
-                                <p><?=$user->name ?></p>
+                                <p><?=$user->name ?> <?=$user->secondname ?></p>
                                 <p><a href="#" data-toggle="modal" data-target="#modalChangepass">Поменять пароль</a></p>
                                 <strong>
                                     דף אישי

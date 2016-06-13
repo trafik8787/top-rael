@@ -218,6 +218,7 @@ class Controller_Administrator extends Controller_Core_Main {
             $data = Model::factory('BaseModel')->getBanersAdminFiltr(null, $city_id, $get_activ);
         }
 
+
         Session::instance()->set('customer_id_baners', $data['arrIdbaners']);
 
         //HTML::x($data);
@@ -1455,8 +1456,8 @@ class Controller_Administrator extends Controller_Core_Main {
             'file_zacaz' => 'Заказ',
             'file_brif' => 'Бриф',
             'file_cvitanciy' => 'Квитанции',
-            'email_manager' => 'Email ответственный за информацию',
-            'email_bugalter' => 'Email бугалтерия',
+            'email_manager' => 'Email PR отдела',
+            'email_bugalter' => 'Email бухгалтерия',
             'date_registration' => 'Дата регистрации'
             ));
 

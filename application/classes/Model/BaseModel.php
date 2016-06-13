@@ -274,8 +274,12 @@ class Model_BaseModel extends Model {
 
         $arrIdBaners = array();
 
-        foreach ($query_cat as $row_cat) {
-            $arrIdBaners[] = $row_cat['id'];
+        if (!empty($query_cat)) {
+            foreach ($query_cat as $row_cat) {
+                $arrIdBaners[] = $row_cat['id'];
+            }
+        } else {
+            $arrIdBaners[] = 0;
         }
 
         $arrIdBaners = '(' . implode(",", $arrIdBaners) . ')';
