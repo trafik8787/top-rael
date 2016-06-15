@@ -539,6 +539,8 @@ class Model_BaseModel extends Model {
 
         $query = DB::select(
             array('users.email', 'UsersEmail'),
+            array('users.name', 'UsersName'),
+            array('users.secondname', 'UsersSecondname'),
             array('users.email_manager', 'UsersEmailManager'),
             array('users.email_bugalter', 'UsersEmailBugalter'),
             array('business.id', 'BusId'),

@@ -11,7 +11,7 @@
 
 
 <!doctype html>
-<html lang="en">
+<html lang="he">
 <head>
     <meta charset="UTF-8">
     <title><?= isset($seo_title) ? $seo_title : '' ?></title>
@@ -25,18 +25,15 @@
         <link rel="stylesheet" href="<?= URL::base(); ?><?= $row_style ?>">
     <? endforeach ?>
 
-    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin,cyrillic'
-          rel='stylesheet' type='text/css'>
+
 
     <? foreach ($script as $row_script): ?>
         <script src="<?= URL::base(); ?><?= $row_script ?>"></script>
     <? endforeach ?>
 
-    <? if (!empty($scripts_map)): //скрипт для карты?>
-        <script src="<?= URL::base(); ?><?= $scripts_map ?>"></script>
-    <? endif ?>
-    <!--    <link rel="shortcut icon" href="../../public/img/favicon.ico" type="image/x-icon">-->
-    <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="windows-1251"></script>
+ 
+    
+   
 
 
     <script>
@@ -79,16 +76,21 @@
     <header>
         <div id="header">
 
-            <a class="menu-toggle" role="button" data-toggle="collapse" href="#nav-header" aria-controls="nav-header">
+            <!--a class="menu-toggle" role="button" data-toggle="collapse" href="#nav-header" aria-controls="nav-header">
                 <i class="fa fa-bars"></i>
-            </a>
+            </a-->
 
-            <a href="/" class="icons logo">TopIsrael</a>
+            <a href="/" class="logo"><img src="http://topisrael.ru/public/images/logo-new-h.png" style="width:250px;"></a>
 
             <div class="collapse" id="nav-header">
 
-                <div class="header-profile">
-                    <a href="/account/logout">Logout</a>
+                <div class="header-profile" style="text-align:center;">
+                <h2>
+      !שלום
+                
+                <?=$user->name ?> <?=$user->secondname ?>
+              </h2>
+                   
                 </div>
 
             </div>
@@ -100,11 +102,29 @@
     <div id="content" class="rtl">
 
 
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#general" data-toggle="tab">Основные</a></li>
-            <li><a href="#docum" data-toggle="tab">Документация</a></li>
-            <li><a href="#statistic" data-toggle="tab">Статистика</a></li>
+        <ul class="nav nav-tabs"  style="float:right;">
+            <li><a href="#docum" data-toggle="tab">מסמכים</a></li>
+            <li><a href="#statistic" data-toggle="tab">סטטיסטיקה</a></li>
+           <li class="active"><a href="#general" data-toggle="tab">ראשי</a></li>
+
         </ul>
+         <div style="float:left;padding:10px 0;margin:10px 0;">
+                    <small>
+                    <a href="#" data-toggle="modal" data-target="#modalChangepass">
+                    לשנות את הסיסמה שלך
+                <i class="fa fa-key" aria-hidden="true"></i>    
+                    </a>        
+                   &nbsp;&nbsp;&nbsp;  
+
+                    <a href="/account/logout">
+                    
+                    התנתק
+                      <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    </small>
+                    </div>
+           
+<br style="clear:both;">
+      
 
 
         <div class="tab-content">
@@ -116,35 +136,37 @@
                     <div class="panel panel-page-profile">
 
 
-                        <div class="well well-sm">
-
-                            <strong>Дата начала:</strong> <?=date('d/m/Y', strtotime($data['BusDateCreate']))?>
-                            <br>
-                            <strong>Дата конца:</strong> <?=date('d/m/Y', strtotime($data['BusDateEnd']))?>
-                            <br>
-                            <strong>Тип рекламы:</strong>
+                   
+<strong>חבילת פרסום:
                             <? switch ($data['BusClientStatus']) {
                                 case 1:
-                                    echo 'Стандарт';
+                                    echo 'סטנדרט';
                                     break;
                                 case 2:
-                                    echo 'Топ';
+                                    echo 'TOP';
                                     break;
                                 case 3:
-                                    echo 'Базовый';
+                                    echo 'בסיסי';
                                     break;
                                 case 4:
-                                    echo 'Бесплатно';
+                                    echo 'חינם';
                                     break;
                             }?>
-                        </div>
+                            </strong>
+                            
+<br>
+                     תאריך ההתחלה:  <?=date('d/m/Y', strtotime($data['BusDateCreate']))?>
+                            <br>
+                            תאריך סיום: 
+                            <?=date('d/m/Y', strtotime($data['BusDateEnd']))?>
+                            <br>
+                            
+                  <hr style="border:1px dashed #ccc;">
 
 
                         <div class="panel-heading">
                             <div class="panel-title rtl pull-left">
-                                <p><?=$user->name ?> <?=$user->secondname ?></p>
-                                <p><a href="#" data-toggle="modal" data-target="#modalChangepass">Поменять пароль</a></p>
-                                <strong>
+                                
                                     דף אישי
                                 </strong>
                             </div>
@@ -226,6 +248,14 @@
                 </div>
 
 
+
+
+
+
+
+
+
+<!--
                 <hr/>
 
                 <div class="panel panel-page-profile">
@@ -293,6 +323,14 @@
                         </div>
                     </div>
                 </div>
+-->
+
+
+
+
+
+
+
 
                 <hr/>
 
@@ -592,16 +630,16 @@
 
             <div class="tab-pane fade" id="docum">
 
-                <table class="table">
+                <table class="table" style="width:400px">
                     <thead>
                         <tr>
-                            <th>Типы</th>
-                            <th>Документы</th>
+                            <th>סוגים</th>
+                            <th>מסמכים</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Заказ</td>
+                            <td>הזמנה</td>
                             <td>
                                 <? foreach ($dock['zacaz'] as $row): ?>
                                     <a href="<?=$row['path'] ?>"><?=date('d/m/Y', strtotime($row['date'])) ?></a><br>
@@ -609,7 +647,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Бриф</td>
+                            <td>הבריף</td>
                             <td>
                                 <? foreach ($dock['brif'] as $row): ?>
                                     <a href="<?=$row['path'] ?>"><?=date('d/m/Y', strtotime($row['date'])) ?></a><br>
@@ -617,7 +655,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Хешбониты</td>
+                            <td>קבלה</td>
                             <td>
                                 <? foreach ($dock['kvitanciy'] as $row): ?>
                                     <a href="<?=$row['path'] ?>"><?=date('d/m/Y', strtotime($row['date'])) ?></a><br>
@@ -630,13 +668,13 @@
             </div>
 
             <div class="tab-pane fade" id="statistic">
-                <table class="table">
+                <table class="table" style="width:400px">
                     <tr>
-                        <td>Просмотров бизнес страницы:</td>
+                        <td>ביקורים בדף:</td>
                         <td><?=isset($business_show) ? $business_show : 0?></td>
                     </tr>
                     <tr>
-                        <td>Просмотр купонов бизнеса:</td>
+                        <td>בצפיות בקופון:</td>
                         <td><?=isset($coupons_show) ? $coupons_show : 0?></td>
                     </tr>
                     <tr>
@@ -648,7 +686,7 @@
                         <td>1</td>
                     </tr>
                     <tr>
-                        <td>Количество добавленно в избранное:</td>
+                        <td>הוסיפו למועדפים:</td>
                         <td><?=isset($business_favorit) ? $business_favorit : 0?></td>
                     </tr>
                     <tr>
@@ -669,10 +707,19 @@
             <div class="panel-heading">
 
                 <div class="col-md-7 col-sm-6">
-                    <span class="icons logo white">TopIsrael</span>
+                   <a href="/" class="logo"><img src="http://topisrael.ru/public/images/logo-new-h.png" style="width:200px;"></a>
                 </div>
 
-
+<div class="col-md-4 col-sm-4 rtl">
+                   לשליחת מידע ובירורים 
+ <br>                  
+                  
+                     top@topisrael.ru
+               :הדוא"ל
+    <br>               
+                    או לחייג: 
+                    03-5604505
+                </div>
 
             </div>
 
@@ -682,29 +729,27 @@
         </div>
     </footer>
 </div>
-<div id="fb-root"></div>
 
 
 <!-- Modal -->
-<div class="modal fade" id="modalChangepass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="modalChangepass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="direction:rtl;">
+    <div class="modal-dialog" style="width:350px;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Смена пароля</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="float:left;">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">שנה סיסמה</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal w-form-bussines-changepass" role="form" action="/account/changepass" method="post">
-                    <h3>Смена пароля</h3>
                     <div class="form-group">
-                        <label for="inputSpas" class="col-sm-2 control-label">Старый пароль</label>
+                        <label for="inputSpas" class="col-sm-4 control-label" style="float:right">סיסמה ישנה</label>
                         <div class="col-md-5">
                             <input name="oldpassword" id="inputSpas"  class="form-control" value="" type="password">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputPas" class="col-sm-2 control-label">Новый пароль</label>
+                        <label for="inputPas" class="col-sm-4 control-label" style="float:right">סיסמא חדשה</label>
                         <div class="col-md-5">
                             <input name="newpassword" id="inputPas"  class="form-control" value="" type="password">
                         </div>
@@ -713,7 +758,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-5">
-                            <button type="submit" class="btn btn-primary">Изменить пароль</button>
+                            <button type="submit" class="btn btn-primary">שנה את הסיסמה שלך</button>
                         </div>
                     </div>
 

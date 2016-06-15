@@ -23,8 +23,7 @@
         <link rel="stylesheet" href="<?=URL::base();?><?=$row_style?>">
     <?endforeach?>
 
-    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin,cyrillic'
-          rel='stylesheet' type='text/css'>
+
 
     <?foreach ($script as $row_script):?>
         <script src="<?=URL::base();?><?=$row_script?>"></script>
@@ -33,8 +32,11 @@
     <?if (!empty($scripts_map)): //скрипт для карты?>
         <script src="<?=URL::base();?><?=$scripts_map?>"></script>
     <?endif?>
-<!--    <link rel="shortcut icon" href="../../public/img/favicon.ico" type="image/x-icon">-->
-    <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="UTF-8"></script>
+
+
+    <!--script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="UTF-8"></script-->
+    
+    
     <link href="<?=HTML::HostSite('/favicon.ico')?>" type="image/x-icon" rel="shortcut icon" />
     <link href="<?=HTML::HostSite('/iconmob.png')?>" rel="apple-touch-icon" />
     <link rel="stylesheet" href="/public/stylesheets/print.css" media="print">

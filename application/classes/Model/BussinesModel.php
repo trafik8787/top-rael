@@ -978,6 +978,8 @@ class Model_BussinesModel extends Model_BaseModel {
                     $rows['EmailRedactor'] =  $rows2['email'];
                     $rows['UsersEmailManager'] =  $rows2['email_manager'];
                     $rows['UsersEmailBugalter'] =  $rows2['email_bugalter'];
+                    $rows['UsersName'] =  $rows2['name'];
+                    $rows['UsersSecondname'] =  $rows2['secondname'];
                 }
             }
             $result[] = $rows;
@@ -1320,6 +1322,8 @@ class Model_BussinesModel extends Model_BaseModel {
         $query = DB::select(array('users.email', 'UserEmail'),
             array('users.email_manager', 'UsersEmailManager'),
             array('users.email_bugalter', 'UsersEmailBugalter'),
+            array('users.name', 'UsersName'),
+            array('users.secondname', 'UsersSecondname'),
             array('banners.id', 'BanersId'),
             array('banners.date_start', 'BanersDateStart'),
             array('banners.date_end', 'BanersDateEnd'),

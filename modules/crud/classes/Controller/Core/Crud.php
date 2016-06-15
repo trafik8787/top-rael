@@ -276,8 +276,6 @@ class Controller_Core_Crud extends Controller_Core_Main {
 
             }
 
-            //die('dsf');
-
             if ($retw->callback_after_edit != null) {
                 //получаем масив строку таблицы которая должна быть редактирована
                 $query_array_edit_after = Model::factory('All')->select_all_where($retw->table, $this->id, $retw->join_table);
@@ -319,7 +317,7 @@ class Controller_Core_Crud extends Controller_Core_Main {
                 }
             } else {
 
-                   // die(print_r($update));
+
                 //если обявлен метод 1-n
                 if ($retw->set_one_to_many) {
                     //делаем копию массива

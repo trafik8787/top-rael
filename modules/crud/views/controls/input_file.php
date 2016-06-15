@@ -78,7 +78,7 @@
                                     <td>
 
                                         <a class="w-download" href="<?=URL::site(substr($row, 1), 'http')?>"><?=basename($row)?></a>
-                                        <input type="hidden" name="editfile-<?=$name_fied?>" value="<?=$row?>">
+                                        <input type="hidden" name="editfile-<?=$name_fied?>[]" value="<?=$row?>">
                                     </td>
 
                                     <td><a class="w-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
