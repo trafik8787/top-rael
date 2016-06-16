@@ -671,12 +671,12 @@ class Model_BaseModel extends Model {
 
         }
 //
-        DB::update('articles')->set(array('status_bussines_user' => 0))->execute();
-        DB::update('news')->set(array('status_bussines_user' => 0))->execute();
-        DB::update('lotarey')->set(array('status_bussines_user' => 0))->execute();
-        DB::update('users_relation_brif')->set(array('status_bussines_user' => 0))->execute();
-        DB::update('users_relation_kvitanciy')->set(array('status_bussines_user' => 0))->execute();
-        DB::update('users_relation_zacaz')->set(array('status_bussines_user' => 0))->execute();
+        DB::update('articles')->set(array('status_bussines_user' => 1))->execute();
+        DB::update('news')->set(array('status_bussines_user' => 1))->execute();
+        DB::update('lotarey')->set(array('status_bussines_user' => 1))->execute();
+        DB::update('users_relation_brif')->set(array('status_bussines_user' => 1))->execute();
+        DB::update('users_relation_kvitanciy')->set(array('status_bussines_user' => 1))->execute();
+        DB::update('users_relation_zacaz')->set(array('status_bussines_user' => 1))->execute();
 
         return $end_result;
 
