@@ -551,7 +551,7 @@ class Controller_Pages_Ajax extends Controller {
 
 
         $data = Model::factory('BaseModel')->getArticleNewsBussines();
-        //HTML::x($data);
+        HTML::x($data);
         if (!empty($data)) {
 
             foreach ($data as $item) {

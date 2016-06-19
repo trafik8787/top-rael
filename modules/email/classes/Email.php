@@ -2,10 +2,16 @@
 
 class Email {
 
+    private static $instance = null;
+
+
 	public static function factory () {
 
-		require Kohana::find_file('vendor', 'libmail');
-		return new Mail;
+        if (self::$instance === null) {
+            require Kohana::find_file('vendor', 'libmail');
+            self::$instance = new Mail;
+        }
+        return self::$instance;
 
 	}
 
