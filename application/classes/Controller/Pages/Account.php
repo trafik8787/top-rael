@@ -420,16 +420,16 @@ class Controller_Pages_Account extends Controller_BaseController {
 
         $content = View::factory('pages/profile_he');
 
+        $local_thit = $this->template;
+
         $content->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
             View::factory('blocks_includ/sicseti'),
         ));
 
-        $this->SeoShowPage(array('profile_he', ''),
-            array('profile_he', ''),
-            array('profile_he', ''));
-
-        $this->template->content = $content;
+        $content->style = $local_thit->style;
+        $content->script = $local_thit->script;
+        $this->response->body($content);
 
     }
 

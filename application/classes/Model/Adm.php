@@ -262,4 +262,26 @@ class Model_Adm extends Model {
     }
 
 
+
+
+    public function insert_docum_users ($table, $filename, $user_id) {
+        DB::insert($table, array('path', 'user_id'))
+            ->values(array($filename,  $user_id))->execute();
+    }
+
+
+    public function delete_docum_users($table, $id){
+        DB::delete($table)
+            ->where('id', 'IN', $id)->execute();
+    }
+
+
+    public function update_docum_users ($table, $filename, $id) {
+
+        DB::update('files')
+            ->set(array('path' => $filename))
+            ->where('id', '=', $id)->execute();
+
+    }
+
 }

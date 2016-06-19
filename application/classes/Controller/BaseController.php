@@ -36,7 +36,7 @@ abstract class Controller_BaseController extends Controller_Template {
         parent::before();
 
         //проверяем если запрос Ajax то отменяем рендеринг главного шаблона
-        if ($this->request->is_ajax() AND in_array($this->request->action(), array('changepass'))) {
+        if (in_array($this->request->action(), array('changepass', 'profile_he'))) {
             $this->auto_render = FALSE;
         }
 

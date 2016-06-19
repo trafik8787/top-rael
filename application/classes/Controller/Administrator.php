@@ -1398,18 +1398,18 @@ class Controller_Administrator extends Controller_Core_Main {
         } elseif (Session::instance()->get('customer_id_users') == 5) {
 
             $crud->set_field_type('business_id', 'select', '', '', '', array('business', 'name','id'));
-            $crud->edit_fields('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel', 'email_manager', 'email_bugalter', 'business_id', 'file_zacaz', 'file_brif', 'file_cvitanciy', 'date_registration');
-            $crud->add_field('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel',  'email_manager', 'email_bugalter', 'business_id', 'file_zacaz', 'file_brif', 'file_cvitanciy', 'date_registration');
+            $crud->edit_fields('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel', 'email_manager', 'email_bugalter', 'business_id', 'date_registration');
+            $crud->add_field('email', 'password', 'username', 'name', 'secondname', 'sex', 'bdate', 'tel',  'email_manager', 'email_bugalter', 'business_id', 'date_registration');
             $crud->callback_after_insert('call_after_insert_userBusines');
 
 
-            $crud->set_field_type('file_zacaz', array('file', 'uploads/file_zacaz', 'zacaz_', '', 'others'),'', 'multiple');
-            $crud->set_field_type('file_brif', array('file', 'uploads/file_brif', 'brif_', '', 'others'),'', 'multiple');
-            $crud->set_field_type('file_cvitanciy', array('file', 'uploads/file_cvitanciy', 'cvitanc_', '', 'others'),'', 'multiple');
-
-            $crud->set_one_to_many('users_relation_zacaz', 'file_zacaz','path', 'user_id');
-            $crud->set_one_to_many('users_relation_brif', 'file_brif','path', 'user_id');
-            $crud->set_one_to_many('users_relation_kvitanciy', 'file_cvitanciy','path', 'user_id');
+//            $crud->set_field_type('file_zacaz', array('file', 'uploads/file_zacaz', 'zacaz_', '', 'others'),'', 'multiple');
+//            $crud->set_field_type('file_brif', array('file', 'uploads/file_brif', 'brif_', '', 'others'),'', 'multiple');
+//            $crud->set_field_type('file_cvitanciy', array('file', 'uploads/file_cvitanciy', 'cvitanc_', '', 'others'),'', 'multiple');
+//
+//            $crud->set_one_to_many('users_relation_zacaz', 'file_zacaz','path', 'user_id');
+//            $crud->set_one_to_many('users_relation_brif', 'file_brif','path', 'user_id');
+//            $crud->set_one_to_many('users_relation_kvitanciy', 'file_cvitanciy','path', 'user_id');
 
             //изминение пароля бизнеса
             $crud->callback_before_edit('call_befor_edit_userAdmin');
@@ -1483,7 +1483,6 @@ class Controller_Administrator extends Controller_Core_Main {
 
         return $crud;
     }
-
 
     /**
      * @return Cruds
@@ -2309,7 +2308,6 @@ class Controller_Administrator extends Controller_Core_Main {
 
     public static function call_befor_edit_userAdmin ($new_array = null, $old_array = null){
 
-
         if (!empty($new_array['bdate'])) {
             $new_array['bdate'] = Date::convert_Date($new_array['bdate']);
         }
@@ -2317,8 +2315,90 @@ class Controller_Administrator extends Controller_Core_Main {
             $new_array['password'] = Auth::instance()->hash($new_array['password']);
         }
 
+
+        self::upload_doc_file_users('users_relation_zacaz', '/uploads/file_zacaz/', 'filename_zacaz');
+        self::upload_doc_file_users('users_relation_brif', '/uploads/file_brif/', 'filename_brif');
+        self::upload_doc_file_users('users_relation_kvitanciy', '/uploads/file_cvitanciy/', 'filename_cvitanciy');
+
+
         return $new_array;
     }
+
+
+    private static function upload_doc_file_users ($table, $path, $field) {
+
+
+        $file_path_zacaz = $_SERVER['DOCUMENT_ROOT'] . $path;
+        //получаем первоначальный список картинок
+        $file_start = Model::factory('Adm')->get_table($table, array('user_id', '=', Cruds::$post['id']));
+
+
+        //формируем масив для сравнения
+        $file_result_filename_zacaz = array();
+        foreach ($file_start as $key => $row_value) {
+            $file_result_filename_zacaz[$row_value['id']] = $row_value['path'];
+        }
+
+
+
+        if (!empty(Cruds::$post[$field])) {
+            //вычисляем расхождение масивов для удаление
+            $diferen = array_diff($file_result_filename_zacaz, Cruds::$post[$field]);
+        } else {
+            $diferen = $file_result_filename_zacaz;
+        }
+        //если не пустой значит некоторые файлы были удалены
+        if (!empty($diferen)) {
+            $del = array();
+            foreach ($diferen as $key =>$dif) {
+                $del[] = $key;
+                //self::unlink_file($dif, $file_zacaz);
+            }
+            //удаляем
+            Model::factory('Adm')->delete_docum_users($table, $del);
+        }
+
+
+
+        if (!empty(Cruds::$post[$field])) {
+            //редактирование картинки
+            foreach (Cruds::$post[$field] as $key => $rows_filename) {
+                //редактирование картинки
+                if (!empty(Cruds::$files[$field]['tmp_name'][$key])) {
+                    //формируем имя файла с раширением
+                    $type_file = '.' . strtolower(pathinfo(Cruds::$files[$field]['name'][$key], PATHINFO_EXTENSION));
+                    $name_file = uniqid() . $type_file;
+
+                    Model::factory('Adm')->update_docum_users($table, $path . $name_file, $key);
+                    self::save_img(Cruds::$files[$field]['tmp_name'][$key], $name_file, $file_path_zacaz);
+
+                    //удаление старых катинок
+                    //self::unlink_file($rows_filename, $file_zacaz);
+
+                }
+            }
+        }
+
+
+        if (!empty(Cruds::$files[$field]['tmp_name'])) {
+            //новые добавления файлов
+            foreach (Cruds::$files[$field]['tmp_name'] as $key => $tmp_name) {
+
+                if (empty(Cruds::$post[$field][$key])) {
+                    $type_file = '.' . strtolower(pathinfo(Cruds::$files[$field]['name'][$key], PATHINFO_EXTENSION));
+                    $name_file = uniqid() . $type_file;
+                    Model::factory('Adm')->insert_docum_users($table, $path . $name_file, Cruds::$post['id']);
+                    self::save_img($tmp_name, $name_file, $file_path_zacaz);
+                }
+
+            }
+        }
+
+
+    }
+
+
+
 
     public static function call_after_edit_userAdmin ($new_array = null, $old_array = null){
         DB::insert('roles_users', array('user_id', 'role_id'))->values(array($new_array['id'], 1))->execute();
@@ -2459,6 +2539,14 @@ class Controller_Administrator extends Controller_Core_Main {
             $cont->data = $data;
             Cruds::$adon_top_form[] = $cont;
         }
+
+
+        $data = View::factory('adm/adon_form_users');
+        $data->list_zacaz = Model::factory('Adm')->get_table('users_relation_zacaz', array('user_id', '=', $new_array['id']));
+        $data->list_brif = Model::factory('Adm')->get_table('users_relation_brif', array('user_id', '=', $new_array['id']));
+        $data->list_cvitanciy = Model::factory('Adm')->get_table('users_relation_kvitanciy', array('user_id', '=', $new_array['id']));
+
+        Cruds::$adon_form[] = array('page' => 'date_registration', 'view' => $data);
 
         return $new_array;
     }
