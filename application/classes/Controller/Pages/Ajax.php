@@ -759,6 +759,7 @@ class Controller_Pages_Ajax extends Controller {
         $html_mail->content = $message;
 
         $m = Email::factory();
+        $m->reloadTo();
         $m->From("TopIsrael;top@topisrael.ru"); // от кого отправляется почта
         $m->To($to); // кому адресованно
         if ($cc != null) {
