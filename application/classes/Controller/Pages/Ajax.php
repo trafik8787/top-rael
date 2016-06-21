@@ -7,7 +7,7 @@
  */
 class Controller_Pages_Ajax extends Controller {
 
-
+    private $obj_mail_user_bussines = null;
 
 
     /**
@@ -552,30 +552,55 @@ class Controller_Pages_Ajax extends Controller {
 
         $data = Model::factory('BaseModel')->getArticleNewsBussines();
         HTML::x($data);
+        $this->obj_mail_user_bussines = Email::factory();
         if (!empty($data)) {
 
             foreach ($data as $item) {
 
                 $message = View::factory('mail_user_bussines/mail_general');
                 $message->data = $item;
-                $this->template_mail_message($item['UsersEmail'], null, 'Увидомление Topisrael.ru', $message);
+                $this->message_user_bussines($item['UsersEmail'], null, 'Увидомление Topisrael.ru', $message);
 
-                if (!empty($item['UsersEmailManager'])) {
-                    $message = View::factory('mail_user_bussines/mail_manager');
-                    $message->data = $item;
-                    $this->template_mail_message($item['UsersEmailManager'], null, 'Увидомление Topisrael.ru', $message);
+                if (!empty($item['UsersEmailManager']) AND (!empty($item['ArrLotery']) OR !empty($item['ArrNews']) OR !empty($item['ArrArticle'])) ) {
+                    $message_manager = View::factory('mail_user_bussines/mail_manager');
+                    $message_manager->data = $item;
+                    $this->message_user_bussines($item['UsersEmailManager'], null, 'Увидомление Topisrael.ru', $message_manager);
                 }
 
                 //для бугалтеров
-                if (!empty($item['UsersEmailBugalter'])) {
-                    $message = View::factory('mail_user_bussines/mail_bugalter');
-                    $message->data = $item;
-                    $this->template_mail_message($item['UsersEmailBugalter'], null, 'Увидомление Topisrael.ru', $message);
+                if (!empty($item['UsersEmailBugalter']) AND (!empty($item['ArrBrif']) OR !empty($item['ArrKvitanciy']) OR !empty($item['ArrZacaz'])))  {
+                    $message_bugalter = View::factory('mail_user_bussines/mail_bugalter');
+                    $message_bugalter->data = $item;
+                    $this->message_user_bussines($item['UsersEmailBugalter'], null, 'Увидомление Topisrael.ru', $message_bugalter);
                 }
 
             }
 
         }
+
+    }
+
+
+    public function message_user_bussines ($to, $cc = null, $subject, $message){
+
+        $html_mail = View::factory('email/mail_business');
+        $html_mail->content = $message;
+
+        $this->obj_mail_user_bussines->reloadTo();
+        $this->obj_mail_user_bussines->From("TopIsrael;top@topisrael.ru"); // от кого отправляется почта
+        $this->obj_mail_user_bussines->To($to); // кому адресованно
+        if ($cc != null) {
+            $this->obj_mail_user_bussines->Bcc(array($cc ,'boris@briker.biz'));
+        } else {
+            $this->obj_mail_user_bussines->Bcc(array('boris@briker.biz'));
+        }
+
+        $this->obj_mail_user_bussines->Subject($subject);
+        $this->obj_mail_user_bussines->Body($html_mail, "html");
+        $this->obj_mail_user_bussines->Priority(3);
+        $this->obj_mail_user_bussines->Attach( $_SERVER['DOCUMENT_ROOT']."/public/images/logo-new-h.png", "", "image/png");
+        $this->obj_mail_user_bussines->Attach( $_SERVER['DOCUMENT_ROOT']."/public/mail/images/2.png", "", "image/png");
+        $this->obj_mail_user_bussines->Send();
 
     }
 
@@ -759,7 +784,6 @@ class Controller_Pages_Ajax extends Controller {
         $html_mail->content = $message;
 
         $m = Email::factory();
-        $m->reloadTo();
         $m->From("TopIsrael;top@topisrael.ru"); // от кого отправляется почта
         $m->To($to); // кому адресованно
         if ($cc != null) {
