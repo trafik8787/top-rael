@@ -551,7 +551,7 @@ class Controller_Pages_Ajax extends Controller {
 
 
         $data = Model::factory('BaseModel')->getArticleNewsBussines();
-        HTML::x($data);
+
         $this->obj_mail_user_bussines = Email::factory();
         if (!empty($data)) {
 
