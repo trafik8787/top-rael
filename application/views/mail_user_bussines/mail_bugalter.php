@@ -9,18 +9,32 @@
 ?>
 
 
+<div style="direction:rtl">
+
+
+שלום!
+
+
+<p title="docs">
+אנחנו העלנו מסמכים חדשים לעמוד האישי שלך
+</p>
+
+
 <span>
 
      <? if (!empty($data['ArrBrif'])): ?>
-         <p>загружен документ: Бриф</p>
+         <p>בריף</p>
      <? endif ?>
 
     <? if (!empty($data['ArrKvitanciy'])): ?>
-        <p>загружен документ: Хешбонит</p>
+        <p>חשבונית מס\קבלה 
+</p>
     <? endif ?>
 
     <? if (!empty($data['ArrZacaz'])): ?>
-        <p>загружен документ: Заказ</p>
+        <p>הזמנה</p>
     <? endif ?>
 
 </span>
+
+</div>

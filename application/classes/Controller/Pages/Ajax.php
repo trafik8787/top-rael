@@ -559,19 +559,19 @@ class Controller_Pages_Ajax extends Controller {
 
                 $message = View::factory('mail_user_bussines/mail_general');
                 $message->data = $item;
-                $this->message_user_bussines($item['UsersEmail'], null, 'Увидомление Topisrael.ru', $message);
+                $this->message_user_bussines($item['UsersEmail'], null, 'ההודעה של האתר Topisrael.ru', $message);
 
                 if (!empty($item['UsersEmailManager']) AND (!empty($item['ArrLotery']) OR !empty($item['ArrNews']) OR !empty($item['ArrArticle'])) ) {
                     $message_manager = View::factory('mail_user_bussines/mail_manager');
                     $message_manager->data = $item;
-                    $this->message_user_bussines($item['UsersEmailManager'], null, 'Увидомление Topisrael.ru', $message_manager);
+                    $this->message_user_bussines($item['UsersEmailManager'], null, 'ההודעה של האתר Topisrael.ru', $message_manager);
                 }
 
                 //для бугалтеров
                 if (!empty($item['UsersEmailBugalter']) AND (!empty($item['ArrBrif']) OR !empty($item['ArrKvitanciy']) OR !empty($item['ArrZacaz'])))  {
                     $message_bugalter = View::factory('mail_user_bussines/mail_bugalter');
                     $message_bugalter->data = $item;
-                    $this->message_user_bussines($item['UsersEmailBugalter'], null, 'Увидомление Topisrael.ru', $message_bugalter);
+                    $this->message_user_bussines($item['UsersEmailBugalter'], null, 'ההודעה של האתר Topisrael.ru', $message_bugalter);
                 }
 
             }

@@ -9,10 +9,20 @@
 ?>
 
 
+<div style="direction:rtl">
+
+
+שלום!
+
+<p title="news">
+באתר שלנו עלה תוכן חדש הקשור לעסק שלך.
+</p>
+
 <span>
 
     <? if (!empty($data['ArrArticle'])): ?>
-        <p>Новыe обзоры:</p>
+        <p>פורסמה סקירה 
+</p>
         <? foreach ($data['ArrArticle'] as $row): ?>
             <p><a href="<?=HTML::HostSite('/article/'.$row) ?>"><?=HTML::HostSite('/article/'.$row) ?></a></p>
         <? endforeach ?>
@@ -20,11 +30,15 @@
     <? endif ?>
 
     <? if (!empty($data['ArrNews'])): ?>
-        <p>Oпубликована новость</p>
+        <p>פורסמה ידיעה 
+</p>
     <? endif ?>
 
     <? if (!empty($data['ArrLotery'])): ?>
-        <p>Oпубликована лотерея с призом</p>
+        <p>החלה הגרלה בה העסק שלך הוא נותן חסות ראשי 
+</p>
     <? endif ?>
 
 </span>
+
+</div>
