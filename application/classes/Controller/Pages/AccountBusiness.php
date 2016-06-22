@@ -10,6 +10,7 @@
 class Controller_Pages_AccountBusiness extends Controller_CommonAuthorized {
 
     public function action_index (){
+
         $local_thit = $this->template;
         $this->template = View::factory('auth/account_business');
         $url_business = Model::factory('Adm')->get_table('business', array('id','=', Auth::instance()->get_user()->business_id));
@@ -51,6 +52,9 @@ class Controller_Pages_AccountBusiness extends Controller_CommonAuthorized {
             $this->template->article_show = $article_count_show;
         }
 
+
+
+        $this->template->count_subscribe = Model::factory('BaseModel')->table_count('business', 'id', array('status_subscribe', '<>', 0), array('id', '=', $data['BusId']));
 
 
         $this->template->user = $user;

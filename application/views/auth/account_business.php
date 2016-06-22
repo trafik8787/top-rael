@@ -683,7 +683,7 @@
                     </tr>
                     <tr>
                         <td>Количество выпусков рассылки</td>
-                        <td>1</td>
+                        <td><?=!empty($count_subscribe) ? $count_subscribe : 0 ?></td>
                     </tr>
                     <tr>
                         <td>הוסיפו למועדפים:</td>

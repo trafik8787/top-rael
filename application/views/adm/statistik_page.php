@@ -20,25 +20,13 @@
         top: auto;
         cursor: pointer;
     }
+
+    .dataTable tr td {
+        height: 44px;
+    }
 </style>
 
-<div class="row">
-    <div class="col-md-12">
-        <form action="" method="post">
-            <button type="submit" name="import_static" value="1" class="btn btn-danger" style="margin-bottom: 10px;">Upgrade</button>
-        </form>
 
-        <form action="" method="post">
-            <button type="submit" name="update_informer" value="1" class="btn btn-danger" style="margin-bottom: 10px;">Upgrade Informders</button>
-        </form>
-
-
-        <div class="alert alert-warning fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <strong>Кпопку выше Не нажимать!</strong> Кнопка для импорта данных. Служебная!
-        </div>
-    </div>
-</div>
 <!-- Nav tabs -->
 
 <div class="row">
@@ -334,6 +322,25 @@
 
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form action="" method="post">
+            <button type="submit" name="import_static" value="1" class="btn btn-danger" style="margin-bottom: 10px;">Upgrade</button>
+        </form>
+
+        <form action="" method="post">
+            <button type="submit" name="update_informer" value="1" class="btn btn-danger" style="margin-bottom: 10px;">Upgrade Informders</button>
+        </form>
+
+
+        <div class="alert alert-warning fade in">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <strong>Кпопку выше Не нажимать!</strong> Кнопка для импорта данных. Служебная!
+        </div>
+    </div>
+</div>
+
 <script>
 
     function get_date(data = null, day)
