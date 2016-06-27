@@ -39,10 +39,17 @@
     <script src="/public/javascripts/jquery.validate.min.js"></script>
     <script src="/public/javascripts/common.js"></script>
     <script src="/public/javascripts/jquery.print.js"></script>
-    <script src="/public/javascripts/markerclusterer_compiled.js"></script>
-    <script src="/public/javascripts/infobox.js"></script>
-    <script src="/public/javascripts/app.js"></script>
+<!--    <script src="/public/javascripts/app.js"></script>-->
     <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="UTF-8"></script>
+
+    <script>
+        $(document).on('click', '.w-button-print', function(){
+            $(".w-print-coupon").print({
+                globalStyles: true,
+                stylesheet: '/public/stylesheets/print.css'
+            });
+        });
+    </script>
 
     <style>
         @media print {
