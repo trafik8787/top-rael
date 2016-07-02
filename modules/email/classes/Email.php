@@ -4,7 +4,7 @@ class Email {
 
     public static function factory () {
 
-        require Kohana::find_file('vendor', 'libmail');
+        require_once Kohana::find_file('vendor', 'libmail');
         return new Mail;
 
     }
