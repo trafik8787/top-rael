@@ -331,19 +331,23 @@
 
 <div class="row">
     <div class="col-md-12">
-        <form action="" method="post">
-            <button type="submit" name="import_static" value="1" class="btn btn-danger" style="margin-bottom: 10px;">Upgrade</button>
-        </form>
+        <div class="row" style="margin-top: 20px">
+            <div class="col-md-3">
+                <form action="" method="post">
+                    <button type="submit" name="import_static" value="1" class="btn btn-danger" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-refresh"></span></button>
+                    Обновить статистику бизнесов.
+                </form>
 
-        <form action="" method="post">
-            <button type="submit" name="update_informer" value="1" class="btn btn-danger" style="margin-bottom: 10px;">Upgrade Informders</button>
-        </form>
+            </div>
+            <div class="col-md-4">
+                <form action="" method="post">
+                    <button type="submit" name="update_informer" value="1" class="btn btn-danger" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-refresh"></span></button>
+                    Обновление информеров.
+                </form>
 
-
-        <div class="alert alert-warning fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <strong>Кпопку выше Не нажимать!</strong> Кнопка для импорта данных. Служебная!
+            </div>
         </div>
+
     </div>
 </div>
 
