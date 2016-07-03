@@ -275,7 +275,7 @@ Route::set('UserBusinessSend', 'send_user_bussines')
     ));
 
 //запускается по крону и запускает рассылку по конкретным бизнесам
-Route::set('mail_subscribe_bussines', 'SendUserBussines')
+Route::set('mail_subscribe_bussines', 'sendbusiness_bussines')
     ->defaults(array(
         'directory' => 'Pages',
         'controller' => 'Ajax',
