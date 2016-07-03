@@ -1,4 +1,2 @@
 User-agent: *
-Crawl-delay: 5
-Host: topisrael.ru
-Sitemap: http://topisrael.ru/sitemap.xml
+Disallow: /

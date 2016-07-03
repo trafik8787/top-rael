@@ -4,3 +4,5 @@ uploads
 application/config/database.php
 application/cache
 application/logs
+application/views/temp_pages/footer.php
+robots.txt
