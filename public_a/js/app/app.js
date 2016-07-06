@@ -27,9 +27,19 @@ $(document).ready(function(){
             "insertdatetime media table contextmenu paste jbimages"
         ],
         toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
-        relative_urls: false
+        relative_urls: false,
+        //init_instance_callback :function(inst) {
+        //    alert("Editor: " + inst.editorId + " is now initialized.");
+        //}
+        setup : function(ed) {
+            ed.on('change', function(e) {
+                tinyMCE.activeEditor.dom.removeAllAttribs(tinymce.activeEditor.dom.select('h1,h2,h3,p,span,div,strong,div'));
+            });
+
+        }
 
     });
+
 
     $('[data-toggle="tooltip"]').tooltip();
 //    input file

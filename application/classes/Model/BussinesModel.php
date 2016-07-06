@@ -976,6 +976,9 @@ class Model_BussinesModel extends Model_BaseModel {
             foreach ($query2 as $rows2) {
                 if ($rows2['id'] == $rows['redactor_user']) {
                     $rows['EmailRedactor'] =  $rows2['email'];
+
+                }
+                if ($rows['id'] == $rows2['business_id']) {
                     $rows['UsersEmailManager'] =  $rows2['email_manager'];
                     $rows['UsersEmailBugalter'] =  $rows2['email_bugalter'];
                     $rows['UsersName'] =  $rows2['name'];

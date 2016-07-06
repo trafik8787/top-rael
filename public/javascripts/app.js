@@ -3,14 +3,15 @@
  */
 $(document).ready(function(){
 
+
+    $('.w-node-article img').removeAttr('height');
+
     $('[data-toggle="tooltip"]').tooltip();
 
     $(document).on('change', '.w-select-city', function(){
         $('#w-form-city').submit();
 
     });
-
-
 
 
     $("#w-form-contact").validate({
