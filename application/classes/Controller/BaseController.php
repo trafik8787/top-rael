@@ -314,6 +314,46 @@ abstract class Controller_BaseController extends Controller_Template {
     }
 
 
+    /**
+     * @param null $name
+     * @param null $secondname
+     * @param null $info
+     * @param null $busname
+     * @param null $city_name
+     * @param null $img
+     * @param null $url
+     * @param null $type флаг определяет на какой странице отображаются кнопки
+     * @return View
+     * todo метод вставки шаред кнопок
+     */
+    public static function getViewsSharedButtonsCoupon ($name = null, $secondname = null, $info = null, $busname = null, $city_name = null, $img = null, $url = null, $type = null) {
+
+
+
+        $data = View::factory('blocks_includ/shared_buttons_coupon');
+        $data->name = strip_tags($name);
+        $data->secondname = strip_tags($secondname);
+        $data->info = Text::limit_chars(strip_tags($info), 150, null, true);
+        $data->busname = $busname;
+        $data->city_name = $city_name;
+        $data->img = HTML::HostSite($img);
+
+        $urls = Request::full_current_url();
+
+        $data->type = $type;
+
+
+        if ($url != null) {
+            $urls = HTML::HostSite('/coupon/'.$url);
+        }
+
+        $data->url = $urls;
+
+        return $data;
+
+    }
+
+
     public function SeoShowPage(array $title_seo, array $keywords_seo, array $description_seo){
 
         if ($title_seo[0] == '') {

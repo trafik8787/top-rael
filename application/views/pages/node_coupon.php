@@ -17,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Действительно до <?=Date::rusdate(strtotime($data[0]['dateoff']), 'j %MONTH% Y'); ?>. Скидки и подарки только при предъявлении купона TopIsrael.ru">
-
+    <meta property="og:title" content="<?=strip_tags($data[0]['name'])?> <?=strip_tags($data[0]['secondname'])?>. <?=$data[0]['BusName']?>, <?=$data[0]['CityName']?>" />
 
 
     <link rel="stylesheet" href="/public/stylesheets/jquery.ui/all.css">
@@ -40,7 +40,7 @@
     <script src="/public/javascripts/common.js"></script>
     <script src="/public/javascripts/jquery.print.js"></script>
 <!--    <script src="/public/javascripts/app.js"></script>-->
-    <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="UTF-8"></script>
+<!--    <script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="UTF-8"></script>-->
 
     <script>
         $(document).on('click', '.w-button-print', function(){
@@ -233,60 +233,8 @@
 
                                         <span>Отправьте ссылку на этот купон</span><br>
 
-                                        <a class="w-icon-mail" href="mailto:?Subject=Купон <?=strip_tags($data[0]['name'])?> <?=strip_tags($data[0]['secondname'])?>. <?=$data[0]['BusName']?>, <?=$data[0]['CityName']?>&body=<?=HTML::HostSite('/'.Request::detect_uri())?> <?=strip_tags($data[0]['name'])?> <?=strip_tags($data[0]['secondname'])?>. <?=$data[0]['BusName']?>, <?=$data[0]['CityName']?>">
-                                            <span></span>
-                                        </a>
+                                        <?=Controller_BaseController::getViewsSharedButtonsCoupon($data[0]['name'],$data[0]['secondname'],$data[0]['info'],$data[0]['BusName'],$data[0]['CityName'],$data[0]['img_coupon'], null, 'Купон')?>
 
-
-                                        <?php
-                                        $image_url = 'http://'.$_SERVER['HTTP_HOST'].$data[0]['img_coupon']; // URL изображения
-                                        ?>
-                                        <a href="http://www.facebook.com/sharer.php?s=100&p[url]=<?= urlencode(  Request::full_current_url() ); ?>&p[title]=<?=$data[0]['name'] ?>&p[summary]=<?=Text::limit_chars(strip_tags($data[0]['info']), 150, null, true)?>&p[images][0]=<?=$image_url ?>" onclick="window.open(this.href, this.title, 'toolbar=0, status=0, width=548, height=325'); return false" class="social facebook" title="Поделиться ссылкой на Фейсбук" target="_parent"><i class="fa fa-facebook"></i></a>
-
-
-                                        <script type="text/javascript">
-                                            document.write(VK.Share.button({
-                                                url: '<?=Request::full_current_url()?>',
-                                                title: '<?=$data[0]['name']?>',
-                                                description: '<?=Text::limit_chars(strip_tags($data[0]['info']), 120, null, true)?>',
-                                                image: 'http://<?=$_SERVER['HTTP_HOST']?><?=$data[0]['img_coupon']?>',
-                                                noparse: true
-                                            }, {
-                                                type: 'custom',
-                                                text: '<span class="social vk"><i class="fa fa-vk"></i></span>'
-                                            }));
-                                        </script>
-
-
-
-                                        <div id="ok_shareWidget" style="display: inline-block;position: relative;top: 19px"></div>
-                                        <script>
-                                            !function (d, id, did, st) {
-                                                var js = d.createElement("script");
-                                                js.src = "https://connect.ok.ru/connect.js";
-                                                js.onload = js.onreadystatechange = function () {
-                                                    if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
-                                                        if (!this.executed) {
-                                                            this.executed = true;
-                                                            setTimeout(function () {
-                                                                OK.CONNECT.insertShareWidget(id,did,st);
-                                                            }, 0);
-                                                        }
-                                                    }};
-                                                d.documentElement.appendChild(js);
-                                            }(document,"ok_shareWidget","http://<?=$_SERVER['HTTP_HOST']?>/","{width:40,height:40,st:'straight',sz:45,nt:1,nc:1}");
-                                        </script>
-
-
-
-
-                                        <a style="top: 1px;position: relative;" href="https://plus.google.com/share?url=<?=HTML::HostSite($_SERVER['REQUEST_URI'])?>" onclick="javascript:window.open(this.href,
-                                                        '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img
-                                                src="../../../public/images/google_icon.png" width="45" alt="Share on Google+"/></a>
-
-                                        <a href="https://twitter.com/intent/tweet?text=<?=Text::limit_chars(strip_tags($data[0]['info']), 100, null, true).' '.Request::full_current_url()?>" class="social twitter">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
 
 
                                     </div>
