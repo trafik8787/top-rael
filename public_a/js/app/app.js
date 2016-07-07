@@ -28,9 +28,9 @@ $(document).ready(function(){
         ],
         toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
         relative_urls: false,
-        //init_instance_callback :function(inst) {
-        //    alert("Editor: " + inst.editorId + " is now initialized.");
-        //}
+        init_instance_callback :function(inst) {
+            tinyMCE.activeEditor.dom.removeAllAttribs(tinymce.activeEditor.dom.select('h1,h2,h3,p,span,div,strong,div'));
+        },
         setup : function(ed) {
             ed.on('change', function(e) {
                 tinyMCE.activeEditor.dom.removeAllAttribs(tinymce.activeEditor.dom.select('h1,h2,h3,p,span,div,strong,div'));
