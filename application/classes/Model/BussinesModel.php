@@ -85,10 +85,9 @@ class Model_BussinesModel extends Model_BaseModel {
         //сортировка по полю тип рекламы
         $result = HTML::multisort($result, 'client_status', 2);
 
+        $city_arr = $this->getCityInCategory($url_category);
 
         if (!empty($result)) {
-
-            $city_arr = $this->getCityInCategory($url_category);
             
             $result = $this->SortArrayBusiness($result);
 
@@ -111,7 +110,7 @@ class Model_BussinesModel extends Model_BaseModel {
             return array('data' => $result, 'count' => count($result1), 'city' => $city_arr);
 
         } else {
-            return false;
+            return array('data' => false, 'count' => false, 'city' => $city_arr);
         }
     }
 

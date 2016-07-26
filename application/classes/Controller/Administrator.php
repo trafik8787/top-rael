@@ -2281,7 +2281,9 @@ class Controller_Administrator extends Controller_Core_Main {
     //добавление пользователя из админки
     public static function call_bef_insert_user ($new_array = null){
 
-        $new_array['bdate'] = Date::convert_Date($new_array['bdate']);
+        if (!empty($new_array['bdate'])) {
+            $new_array['bdate'] = Date::convert_Date($new_array['bdate']);
+        }
         //если не пустой значит добавляется бизнес пользователь
         $new_array['password'] = Auth::instance()->hash($new_array['password']);
         return $new_array;

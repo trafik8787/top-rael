@@ -203,8 +203,11 @@ abstract class Controller_BaseController extends Controller_Template {
      * преобразование масиива для вывода бизнесов например в две колонки
      */
     public static function convertArrayVievData($data, $count = 2){
-
-        return array_chunk($data, $count);
+        if (!empty($data)) {
+            return array_chunk($data, $count);
+        } else {
+            return false;
+        }
     }
 
 

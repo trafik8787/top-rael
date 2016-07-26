@@ -54,9 +54,10 @@ class Controller_Pages_Sections extends Controller_BaseController {
             $data = Model::factory('BussinesModel')->getBussinesCategoryUrl($this->request->param('url_category'), 10 ,$number_page, $city_id);
 
             //смотрим есть ли такая категория если нет то 404
-            if ($data === false) {
-                throw new HTTP_Exception_404;
-            }
+//            if ($data === false) {
+//                HTML::x($data, true);
+//                throw new HTTP_Exception_404;
+//            }
 
             $this->SeoShowPage(array($data['data'][0]['CatTitle'], ''),
                 array($data['data'][0]['CatKeywords'],''),
@@ -97,7 +98,9 @@ class Controller_Pages_Sections extends Controller_BaseController {
         //верхний банер
         $bussines_section->top_baners = parent::$top_baners;
 
-        $bussines_section->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
+        if ($data['count'] != false) {
+            $bussines_section->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
+        }
         //подключаем правый блок
         $bussines_section->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
@@ -111,12 +114,13 @@ class Controller_Pages_Sections extends Controller_BaseController {
 
         //преобразование масива бизнесов для вюхи
         $result_data = parent::convertArrayVievData($data['data']);
-
+        
         $bussines_section->data = $result_data;
         $bussines_section->city = $data['city'];
 
         //передаем параметр значения выбраного города для селекта
         $bussines_section->city_id = $city_id;
+        $bussines_section->city_id_get = !empty($city_id) ? '?city='.$city_id : '';
 
         //передаем номер страницы
         if ($this->request->param('page') != '') {
