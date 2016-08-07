@@ -1,4 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
+# Временно до перехода продакшена на php7
 
 uploads
 application/config/database.php
@@ -6,7 +7,7 @@ application/cache
 application/logs
 robots.txt
 
-# Временно до перехода продакшена на php7
+
 system/classes/Kohana/Kohana/Exception.php
 modules/pagination/classes/Kohana/Pagination.php
 application/classes/Model/CategoryModel.php

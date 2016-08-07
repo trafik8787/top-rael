@@ -9,6 +9,7 @@
 class Controller_Home extends Controller_BaseController {
 
 
+    //asdasd
 	public function action_index(){
 
        // HTML::x($_SERVER['REMOTE_ADDR']);

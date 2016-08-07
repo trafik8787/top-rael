@@ -154,7 +154,7 @@ class Model_CategoryModel extends Model_BaseModel {
                 //считаем количество бизнесов в категории
 
                 if (!empty($row['BusCatId'])) {
-                    $tmpArr[$row['id']] = $row['BusCatId'];
+                    $tmpArr[$row['id']][] = $row['BusCatId'];
                    // HTML::x($tmpArr);
                 }
 
