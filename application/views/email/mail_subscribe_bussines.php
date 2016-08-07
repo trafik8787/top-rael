@@ -25,7 +25,7 @@ header('Content-Type: text/html; charset=utf-8');
         <div style="border:1px solid #bfbdbd;background:#ffffff;padding:15px 25px;">
             <div style="display: table;width:100%;">
                 <div style="display: table-cell;width:50%;">
-                    <img src="cid:logo-new.png" width="250" alt="logo">
+                    <img src="cid:logo-new.png" width="250" style="width:250px;" alt="logo">
                 </div>
                 <div style="display: table-cell;width:50%;font-size:12px;color: #a9a9a9;text-align: right;vertical-align: middle;">
                     Рассылка за <?=Date::rusdate(strtotime(date('Y-m-d')), 'j %MONTH% Y'); ?>
@@ -49,7 +49,7 @@ header('Content-Type: text/html; charset=utf-8');
                     <div style="width:100%;margin-top: 30px;">
                         <div style="float:left;margin: 0px 15px 5px 0px;">
                             <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['ArticUrl']?>" target="_blank" rel="noopener">
-                                <img src="cid:<?=basename($artic['ArticImg'])?>" width="164" height="115">
+                                <img src="cid:<?=basename($artic['ArticImg'])?>" width="164" height="115" style="width:164px;height:115px;">
                             </a>
                         </div>
                         <div style="">
@@ -85,7 +85,7 @@ header('Content-Type: text/html; charset=utf-8');
                         <div style="display: table-cell;width:50%;padding-top:20px;">
                             <div style="height: 400px;border: 1px solid #d8d8d8;box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;margin-right: 7.5px;">
                                 <div style="font-size: 25px;line-height: 1.1;color: #e02929;">
-                                    <div style="height: 50px;color: #fff;font-size: 80%;background: rgba(0, 0, 0, 0.5);padding: 5px 10px;">
+                                    <div style="height: 50px;color: #fff;font-size: 100%;background: rgba(0, 0, 0, 0.5);padding: 5px 10px;">
                                         <?=$row_coupons[0]['BusName']?>
                                     </div>
                                     <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[0]['CoupUrl']?>" target="_blank" rel="noopener">

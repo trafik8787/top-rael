@@ -84,7 +84,7 @@ header('Content-Type: text/html; charset=utf-8');
 
                         <div style="padding-top:20px;width:280px;display: inline-block;vertical-align: top;">
                             <div style="height: 400px;border: 1px solid #d8d8d8;box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;margin: 0px 7.5px;">
-                                <div style="height: 50px;color: #fff;font-size: 80%;background: rgba(0, 0, 0, 0.5);padding: 5px 10px;">
+                                <div style="height: 50px;color: #fff;font-size: 100%;background: rgba(0, 0, 0, 0.5);padding: 5px 10px;">
                                     <?=$row_coupons[0]['BusName']?>
                                 </div>
                                 <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[0]['url']?>" target="_blank" rel="noopener">

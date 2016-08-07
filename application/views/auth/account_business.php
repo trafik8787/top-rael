@@ -67,6 +67,10 @@
         }
 
     </style>
+    <style>
+.table td {text-align:right}
+.table th {text-align:right}
+</style>
 </head>
 <body>
 
@@ -667,30 +671,31 @@
 
             </div>
 
+
             <div class="tab-pane fade" id="statistic">
-                <table class="table" style="width:400px">
+                <table class="table" style="width:400px;">
                     <tr>
-                        <td>ביקורים בדף:</td>
+                        <td>צפיות של עמוד העסק:</td>
                         <td><?=isset($business_show) ? $business_show : 0?></td>
                     </tr>
                     <tr>
-                        <td>בצפיות בקופון:</td>
+                        <td>צפיות הקופונים של העסק:</td>
                         <td><?=isset($coupons_show) ? $coupons_show : 0?></td>
                     </tr>
                     <tr>
-                        <td>Просмотр статей бизнеса:</td>
+                        <td>צפיות החדשות של העסק:</td>
                         <td><?=isset($article_show) ? $article_show : 0?></td>
                     </tr>
                     <tr>
-                        <td>Количество выпусков рассылки</td>
+                        <td>כמות הדיוורים בהם הוזכר העסק:</td>
                         <td><?=!empty($count_subscribe) ? $count_subscribe : 0 ?></td>
                     </tr>
                     <tr>
-                        <td>הוסיפו למועדפים:</td>
+                        <td>כמות האנשים ששמרו את הקישור לעמוד העסק:</td>
                         <td><?=isset($business_favorit) ? $business_favorit : 0?></td>
                     </tr>
                     <tr>
-                        <td>Подписчики</td>
+                        <td>כמות האנשים שנרשמו לקבלת חדשות העסק:</td>
                         <td><?=isset($bussines_subscribe) ? $bussines_subscribe : 0?></td>
                     </tr>
                 </table>

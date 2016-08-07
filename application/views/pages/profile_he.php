@@ -11,11 +11,11 @@
 <html lang="he">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>טופ ישראל - קבוצת המדיה בשפה הרוסית</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name=viewport content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
+    <meta name="keywords" content="טופ ישראל top israel">
+    <meta name="description" content="טופ ישראל מכסה את זירת הפנאי הישראלית בזווית רחבה ביותר, על ידי סקירות, ראיונות, כתבות, המלצות ומתן כל מידע שימושי אחר לקהל דוברי הרוסית.">
 
 
     <? foreach ($style as $row_style): ?>
@@ -33,6 +33,13 @@
 <body>
 
     <div id="wrapper" class="container">
+    
+    
+            <a href="/" class=""><img src="http://topisrael.ru/public/images/logo-new-h.png" style="width:250px;float:right;margin:30px 0px;" title="top israel" alt="טופ ישראל"></a>
+            
+            <p style="clear:both;border:1px solid #ccc;"></p>
+            
+            
 
         <content>
             <div id="content">
@@ -78,8 +85,7 @@
                             <p>
                                 בשנים האחרונות חל גידול במספר העולים דוברי-רוסית (מ-6500 ב-2013 לקצב נוכחי של
                                 <a href="http://www.jewishagency.org/he/aliyah-process/content/43011">
-                                    כ- 15,000 עולים בשנה
-                                </a>).
+                                    כ- 15,000 עולים בשנה</a>).
                             </p>
                             <p>
                                 לפלח שוק זה העדפה ברורה לצריכת מידע בשפה הרוסית. טופ ישראל ממלאת עבורו את המחסור במידע זה,
@@ -152,6 +158,36 @@
             </div>
 
         </content>
+        
+        
+         <footer>
+        <div class="panel panel-footer">
+
+            <div class="panel-heading">
+
+                <div class="col-md-7 col-sm-6">
+                   <a href="/" class="logo"><img src="http://topisrael.ru/public/images/logo-new-h.png" style="width:200px;" title="top israel" alt="טופ ישראל"></a>
+                </div>
+
+<div class="col-md-4 col-sm-4">
+                   לשליחת מידע ובירורים 
+ <br>                  
+               
+&#032;&#032;&#116;&#111;&#112;&#064;&#116;&#111;&#112;&#105;&#115;&#114;&#097;&#101;&#108;&#046;&#114;&#117;
+               :הדוא"ל
+    <br>               
+                    או לחייג: 
+                    03-5604505
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </footer>
+
 
 
     </div>

@@ -39,8 +39,7 @@
 
 
 
-            <a href="/" class="icons logo">TopIsrael</a>
-
+<a href="/" class="icons logo w-logo">TopIsrael</a>
 
         </div>
     </header>

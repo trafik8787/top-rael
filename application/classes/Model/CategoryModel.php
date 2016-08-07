@@ -135,12 +135,16 @@ class Model_CategoryModel extends Model_BaseModel {
 
         $tmpArr = array();
         $out = array();
+
         if (!isset($rs[$parent])) {
 
             return $out;
         }
 
-        foreach ($rs[$parent] as $key => $row) {
+
+        foreach ($rs[$parent] as $key => &$row) {
+
+
             $chidls = $this->build_tree($rs, $row['id']);
 
             if ($chidls) {
@@ -150,8 +154,10 @@ class Model_CategoryModel extends Model_BaseModel {
                 //считаем количество бизнесов в категории
 
                 if (!empty($row['BusCatId'])) {
-                    $tmpArr[$row['id']][] = $row['BusCatId'];
+                    $tmpArr[$row['id']] = $row['BusCatId'];
+                   // HTML::x($tmpArr);
                 }
+
                 if (!empty($tmpArr[$row['id']])) {
                     $row['COUNT'] = count($tmpArr[$row['id']]);
                 }
