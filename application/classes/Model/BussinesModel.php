@@ -1466,6 +1466,8 @@ class Model_BussinesModel extends Model_BaseModel {
             foreach ($query2 as $rows2) {
                 if ($rows2['id'] == $rows['BusIdRedactor']) {
                     $rows['EmailRedactor'] =  $rows2['email'];
+                    $rows['UsersName'] =  $rows2['name'];
+                    $rows['UsersSecondname'] =  $rows2['secondname'];
                 }
             }
             $result[] = $rows;
