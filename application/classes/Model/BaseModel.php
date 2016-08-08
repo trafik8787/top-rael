@@ -597,7 +597,7 @@ class Model_BaseModel extends Model {
             ->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('business.date_create AND business.date_end'))
             ->execute()->as_array();
 
-        //HTML::x($query_article, true);
+       // HTML::x($query);
 
         $tmp_article = array();
         $tmp_news = array();
@@ -610,6 +610,13 @@ class Model_BaseModel extends Model {
         foreach ($query as $item) {
 
             if (!array_key_exists($item['BusId'], $end_result)) {
+
+                $tmp_article = array();
+                $tmp_news = array();
+                $tmp_breif = array();
+                $tmp_kvitanciy = array();
+                $tmp_zacaz = array();
+                $tmp_lotery = array();
 
                 foreach ($query as $item2) {
 
