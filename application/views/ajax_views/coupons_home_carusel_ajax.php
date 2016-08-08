@@ -59,7 +59,7 @@
 
                                     <div class="coupon-object-bottom">
 
-                                        <small class="coupon-date">до <?=Date::rusdate(strtotime($rows_coupon['dateoff']), 'j %MONTH% Y'); ?></small>
+<!--                                        <small class="coupon-date">до --><?//=Date::rusdate(strtotime($rows_coupon['dateoff']), 'j %MONTH% Y'); ?><!--</small>-->
                                     </div>
                                 </div>
                             </div>
