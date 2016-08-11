@@ -6,8 +6,3 @@ application/config/database.php
 application/cache
 application/logs
 robots.txt
-
-
-system/classes/Kohana/Kohana/Exception.php
-modules/pagination/classes/Kohana/Pagination.php
-application/classes/Model/CategoryModel.php
