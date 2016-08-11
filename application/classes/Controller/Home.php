@@ -12,7 +12,7 @@ class Controller_Home extends Controller_BaseController {
     //asdasd
 	public function action_index(){
 
-       // HTML::x($_SERVER['REMOTE_ADDR']);
+        //HTML::x(Model::factory('BussinesModel')->getBannersUser());
 
         $resultArr = array();
         $content = View::factory('pages/home');

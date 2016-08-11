@@ -1435,10 +1435,13 @@ class Model_BussinesModel extends Model_BaseModel {
         $query = DB::select(array('users.email', 'UserEmail'),
             array('users.email_manager', 'UsersEmailManager'),
             array('users.email_bugalter', 'UsersEmailBugalter'),
+            array('users.name', 'UsersName'),
+            array('users.secondname', 'UsersSecondname'),
             array('coupon.datestart', 'CouponsDateStart'),
             array('coupon.dateoff', 'CouponsDateEnd'),
             array('coupon.url', 'CouponsUrl'),
             array('business.redactor_user', 'BusIdRedactor'),
+            array('business.id', 'BusId'),
             array('business.name', 'BusName')
         )
             ->from('coupon')
@@ -1452,6 +1455,8 @@ class Model_BussinesModel extends Model_BaseModel {
             ->where('business.status', '=', 1)
             ->execute()->as_array();
 
+
+
         $query2 = DB::select()
             ->from('users')
             ->execute()->as_array();
@@ -1461,12 +1466,11 @@ class Model_BussinesModel extends Model_BaseModel {
             foreach ($query2 as $rows2) {
                 if ($rows2['id'] == $rows['BusIdRedactor']) {
                     $rows['EmailRedactor'] =  $rows2['email'];
-                    $rows['UsersName'] =  $rows2['name'];
-                    $rows['UsersSecondname'] =  $rows2['secondname'];
                 }
             }
             $result[] = $rows;
         }
+
         return $result;
     }
 
