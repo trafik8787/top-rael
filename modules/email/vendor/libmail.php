@@ -794,16 +794,19 @@ class Mail
 
             if (count($temp_mass) == 2) // если удалось разбить на два элемента
             {
-
+                $this->sendto[$resource] = array();
                 $this->sendto[$resource][] = $temp_mass[1];
+                $this->smtpsendto[$resource] = array();
                 $this->smtpsendto[$resource][$temp_mass[1]] = $temp_mass[1]; // ключи и значения одинаковые, чтобы исключить дубли адресов
                 $this->names_email[$resource]['To'][$temp_mass[1]] = $temp_mass[0]; // имя первая часть
             }
             else // и если имя не определено
             {
+                $this->sendto[$resource] = array();
                 $this->sendto[$resource][] = $to;
+                $this->smtpsendto[$resource] = array();
                 $this->smtpsendto[$resource][$to] = $to; // ключи и значения одинаковые, чтобы исключить дубли адресов
-
+                $this->names_email[$resource] = array();
                 $this->names_email[$resource]['To'][$to] = ''; // имя первая часть
             }
         }

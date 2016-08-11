@@ -690,7 +690,7 @@ class Controller_Pages_Ajax extends Controller {
         $views = View::factory('email/mail_subscribe_bussines');
 
         $data = Model::factory('SubscribeModel')->getSubskribeBussinesUsers();
-
+        //HTML::x($data);
         $m = Email::factory();
 
         if (!empty($data)) {
@@ -734,7 +734,7 @@ class Controller_Pages_Ajax extends Controller {
             }
 
 
-            Model::factory('SubscribeModel')->UpdateStatusSubscribeBussines();
+            //Model::factory('SubscribeModel')->UpdateStatusSubscribeBussines();
 
         }
 

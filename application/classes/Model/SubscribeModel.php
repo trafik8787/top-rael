@@ -557,13 +557,14 @@ class Model_SubscribeModel extends Model_BaseModel {
 
                     }
 
-
-                    $end_result[$item['SubscID']] = array('email' => $item['SubscEmail'],
-                        'CoupArr' => $CoupTmp,
-                        'ArticArr' => $ArticTmp,
-                        'NewsArr' => $NewsTmp,
-                        'BusArr' => $BusTmp
-                    );
+                    if (!empty($CoupTmp) OR !empty($ArticTmp) OR !empty($NewsTmp)) {
+                        $end_result[$item['SubscID']] = array('email' => $item['SubscEmail'],
+                            'CoupArr' => $CoupTmp,
+                            'ArticArr' => $ArticTmp,
+                            'NewsArr' => $NewsTmp,
+                            'BusArr' => $BusTmp
+                        );
+                    }
                 }
 
 
