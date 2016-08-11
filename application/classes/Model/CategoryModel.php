@@ -167,7 +167,7 @@ class Model_CategoryModel extends Model_BaseModel {
                     $out[$row['id']] = $row;
                     $tmpArr = '';
                 } else {
-                    $row['COUNT'] = $row['COUNT'] +1;
+                    $row['COUNT'] += 1;
                     $out[$row['id']] = $row;
                 }
 

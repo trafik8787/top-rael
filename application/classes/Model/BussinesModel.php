@@ -16,11 +16,9 @@ class Model_BussinesModel extends Model_BaseModel {
      */
     public function getBussinesCategoryUrl($url_category = null, $limit = null, $num_page = null, $id_city = null){
 
-
+        $ofset = 0;
         if ($num_page != null) {
             $ofset = $limit * ($num_page - 1);
-        } else {
-            $ofset = 0;
         }
 
 
@@ -123,10 +121,9 @@ class Model_BussinesModel extends Model_BaseModel {
      */
     public function getBussinesSectionUrl($url_section = null, $limit = null, $num_page = null, $id_city = null, $adm = false, $home = false){
 
+        $ofset = 0;
         if ($num_page != null) {
             $ofset = $limit * ($num_page - 1);
-        } else {
-            $ofset = 0;
         }
 
         if ($url_section != null) {
@@ -213,12 +210,11 @@ class Model_BussinesModel extends Model_BaseModel {
             $result = HTML::multisort($result, 'client_status', 2);
         }
 
-
+        $city_arr = array();
         if ($url_section != null) {
             $city_arr = $this->getCityInSection($arrChild);
-        } else {
-            $city_arr = array();
         }
+
         $result = $this->SortArrayBusiness($result);
 
         //вызываем метод получения данных из куки
@@ -503,7 +499,7 @@ class Model_BussinesModel extends Model_BaseModel {
 
                     if (!array_key_exists($row['CoupId'], $CoupTmp)) {
 
-                        if ($row['DateOff'] > date('Y-m-d') and $row['DateStart'] <= date('Y-m-d')) {
+                        if ($row['DateOff'] > date('Y-m-d') && $row['DateStart'] <= date('Y-m-d')) {
 
                             $CoupTmp[$row['CoupId']] = $row['CoupId'];
                             $end_result['CoupArr'][] = array('CoupId' => $row['CoupId'],
@@ -544,7 +540,7 @@ class Model_BussinesModel extends Model_BaseModel {
                     if (!array_key_exists($row['GalryId'], $GalryTmp)) {
 
                         foreach ($result as $row_file) {
-                            if (!array_key_exists($row_file['FileId'], $FileTmp) and ($row['GalryId'] == $row_file['FileGaleryId'])) {
+                            if (!array_key_exists($row_file['FileId'], $FileTmp) && ($row['GalryId'] == $row_file['FileGaleryId'])) {
                                 $FileTmp[$row_file['FileId']] = $row_file['FileId'];
                                 $FileArr[] = array('FileFilename' => $row_file['FileFilename'], 'FileTitle' => $row_file['FileTitle'], 'FileId' => $row_file['FileId']);
 
@@ -789,7 +785,7 @@ class Model_BussinesModel extends Model_BaseModel {
      */
     public function deleteBussinesFavoritesUser ($id_bussines){
         $id_user = Auth::instance()->get_user()->id;
-        $query = DB::delete('users_relation_favorites_bus')
+        DB::delete('users_relation_favorites_bus')
             ->where('user_id', '=', $id_user)
             ->and_where('business_id', '=', $id_bussines)
             ->execute();
@@ -895,7 +891,7 @@ class Model_BussinesModel extends Model_BaseModel {
      * @return array
      * todo ПОЛУЧАЕМ БИЗНЕСЫ ГРУППЫ ЛАКШЕРИ (СОРТИРОВКА ПО ТЕГАМ И РАЗДЕЛАМ)
      */
-    public function getBussinesSectionTagsUrl ($url_section, $url_tags, $limit = null){
+    public function getBussinesSectionTagsUrl ($url_section, $url_tags){
 
         $category = Model::factory('CategoryModel')->getCategoryInSectionUrl($url_section);
 
@@ -1114,7 +1110,6 @@ class Model_BussinesModel extends Model_BaseModel {
         $end_result = array();
         $CatTmp = array();
         $CoupTmp = array();
-        $TagsTmp = array();
         $end_result_new = array();
         $BusTmp = array();
 
@@ -1265,12 +1260,12 @@ class Model_BussinesModel extends Model_BaseModel {
     public function disableBusines($id_business){
 
         if (is_array($id_business)) {
-            $sub_update = DB::update('business')
+            DB::update('business')
                 ->set(array('status' => 0))
                 ->where('id', 'IN', $id_business)
                 ->execute();
         } else {
-            $sub_update = DB::update('business')
+            DB::update('business')
                 ->set(array('status' => 0))
                 ->where('id', '=', $id_business)
                 ->execute();
@@ -1533,7 +1528,6 @@ class Model_BussinesModel extends Model_BaseModel {
 
         $section = Model::factory('CategoryModel')->get_section('category', array('parent_id', '=', '0'));
         $result = array();
-        $result_all = array();
         foreach ($section as $row_section) {
 
 
@@ -1580,7 +1574,7 @@ class Model_BussinesModel extends Model_BaseModel {
 
             $result = array_merge($result, $query_bus);
 
-            $result_all[] = $query_bus[0];
+
         }
 
 

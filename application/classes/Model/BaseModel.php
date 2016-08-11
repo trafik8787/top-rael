@@ -66,7 +66,7 @@ class Model_BaseModel extends Model {
             $desc = Arr::get($PostArr, 'desc');
 
 
-            $query = DB::insert('contacts', array('name', 'city', 'tel', 'email', 'description'))
+            DB::insert('contacts', array('name', 'city', 'tel', 'email', 'description'))
                 ->values(array($fullname, $city, $tel, $email, $desc))->execute();
 
             return true;
@@ -94,7 +94,7 @@ class Model_BaseModel extends Model {
 
         if ($post->check()) {
 
-            $query = DB::insert('order_celebrations', array('last_name', 'city', 'tel', 'email', 'event', 'count_human', 'date_event', 'discription', 'bussines_name', 'bussines_link'))
+            DB::insert('order_celebrations', array('last_name', 'city', 'tel', 'email', 'event', 'count_human', 'date_event', 'discription', 'bussines_name', 'bussines_link'))
                 ->values(array($PostArr['last_name'],
                     $PostArr['city'],
                     $PostArr['tel'],
@@ -212,7 +212,7 @@ class Model_BaseModel extends Model {
      * @return Database_Query_Builder_Select
      * todo выборка банеров для фильтра админки
      */
-    public function getBanersAdminFiltr ($caregory = null,  $city_id = null, $activ = null){
+    public function getBanersAdminFiltr ($caregory = null,  $city_id = null, $activ = null) {
 
         $section_id = null;
 
@@ -368,7 +368,7 @@ class Model_BaseModel extends Model {
 
         $arr_favorits = array_intersect($arra_id, $arr_favorits);
         $arr_favorits = array_values($arr_favorits);
-        $query2 = DB::delete($table)
+        DB::delete($table)
             ->where('user_id', '=', $user_id)->execute();
 
         if (!empty($arr_favorits)) {
@@ -385,7 +385,7 @@ class Model_BaseModel extends Model {
                 $val .= ' '.$coma.'('.$user_id.', '.$row_id.')';
             }
 
-            $query3 = DB::query(Database::INSERT, 'INSERT INTO '.$table.' (user_id, '.$field.') VALUES '.$val.' ')->execute();
+            DB::query(Database::INSERT, 'INSERT INTO '.$table.' (user_id, '.$field.') VALUES '.$val.' ')->execute();
         }
 
     }
@@ -548,9 +548,11 @@ class Model_BaseModel extends Model {
             array('articles.id', 'ArticId'),
             array('articles.url', 'ArticUrl'),
             array('articles.status_bussines_user', 'ArticStatBusUser'),
+
             array('news.id', 'NewsId'),
             array('news.name', 'NewsName'),
             array('news.status_bussines_user', 'NewsStatBusUser'),
+
             array('lotarey.id', 'LotareyId'),
             array('lotarey.secondname', 'LotareySecond'),
             array('lotarey.status_bussines_user', 'LotareyStatBusUser'),
@@ -599,12 +601,7 @@ class Model_BaseModel extends Model {
 
        // HTML::x($query);
 
-        $tmp_article = array();
-        $tmp_news = array();
-        $tmp_lotery = array();
-        $tmp_breif = array();
-        $tmp_kvitanciy = array();
-        $tmp_zacaz = array();
+
         $end_result = array();
 
         foreach ($query as $item) {
@@ -667,17 +664,10 @@ class Model_BaseModel extends Model {
                             'ArrKvitanciy' => $tmp_kvitanciy,
                             'ArrZacaz' => $tmp_zacaz);
                 }
-            } else {
-                $tmp_article = array();
-                $tmp_news = array();
-                $tmp_breif = array();
-                $tmp_kvitanciy = array();
-                $tmp_zacaz = array();
-                $tmp_lotery = array();
             }
 
         }
-//
+
         DB::update('articles')->set(array('status_bussines_user' => 1))->execute();
         DB::update('news')->set(array('status_bussines_user' => 1))->execute();
         DB::update('lotarey')->set(array('status_bussines_user' => 1))->execute();

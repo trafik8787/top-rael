@@ -37,11 +37,11 @@ class Model_Adm extends Model {
      */
     public function update_galery ($filename = null, $title, $id) {
         if ($filename == null) {
-            $query = DB::update('files')
+            DB::update('files')
                 ->set(array('title' => $title))
                 ->where('id', '=', $id)->execute();
         } else {
-            $query = DB::update('files')
+            DB::update('files')
                 ->set(array('filename' => $filename,
                     'title' => $title
                 ))
@@ -58,7 +58,7 @@ class Model_Adm extends Model {
      * todo Добавление в галерею из админки
      */
     public function insert_galery ($filename, $title, $gallery_id){
-        $query = DB::insert('files', array('filename', 'title', 'gallery'))
+        DB::insert('files', array('filename', 'title', 'gallery'))
             ->values(array($filename, $title, $gallery_id))->execute();
     }
 
@@ -67,7 +67,7 @@ class Model_Adm extends Model {
      * todo удаление из галереи
      */
     public function delete_galery ($id){
-        $query = DB::delete('files')
+        DB::delete('files')
             ->where('id', 'IN', $id)->execute();
     }
 
@@ -163,10 +163,9 @@ class Model_Adm extends Model {
      */
     public function get_log ($limit = null, $num_page = null){
 
+        $ofset = 0;
         if ($num_page != null) {
             $ofset = $limit * ($num_page - 1);
-        } else {
-            $ofset = 0;
         }
 
         $query = DB::select()

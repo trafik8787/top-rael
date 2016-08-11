@@ -17,10 +17,9 @@ class Model_ArticlesModel extends Model_BaseModel {
      */
     public function getArticlesSectionUrl ($url_section = null, $limit = null, $num_page = null, $id_city = null){
 
+        $ofset = 0;
         if ($num_page != null) {
             $ofset = $limit * ($num_page - 1);
-        } else {
-            $ofset = 0;
         }
 
         if ($url_section != null) {
@@ -154,7 +153,7 @@ class Model_ArticlesModel extends Model_BaseModel {
      */
     public function deleteArticlesFavoritesUser ($id_article){
         $id_user = Auth::instance()->get_user()->id;
-        $query = DB::delete('users_relation_favorites_article')
+        DB::delete('users_relation_favorites_article')
             ->where('user_id', '=', $id_user)
             ->and_where('article_id', '=', $id_article)
             ->execute();
@@ -283,13 +282,12 @@ class Model_ArticlesModel extends Model_BaseModel {
                 ->cached()
                 ->execute()->as_array();
 
-           // die(HTML::x($query));
+
+            $end_result = false;
 
             if (!empty($query)) {
                 $end_result = $this->CreateArrayArticle($query);
 
-            } else {
-                $end_result = false;
             }
 
             Cache::instance()->set($url_article, $end_result);
@@ -527,7 +525,7 @@ class Model_ArticlesModel extends Model_BaseModel {
      * @return mixed
      * todo ПОЛУЧИТЬ СТАТЬИ ГРУППЫ ЛАКШЕРИ (ТЕГИ)
      */
-    public function getArticlesSectionTagsUrl($url_section = null, $url_tags, $limit = null){
+    public function getArticlesSectionTagsUrl($url_section = null, $url_tags){
 
         if ($url_section != null) {
 
