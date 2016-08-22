@@ -15069,10 +15069,16 @@ i {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 768px) and (max-width: 1000px) {
   .w-node-article img {
     width: 100%;
   }
+}
+
+@media (max-width: 1200px) {
+    .w-node-article img {
+        width: 100%;
+    }
 }
 
 /* line 139, ../.sass/common.scss */
