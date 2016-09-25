@@ -733,7 +733,7 @@ class Model_SubscribeModel extends Model_BaseModel {
     public function Unsubscribe ($email) {
 
         return DB::update('subscription')
-            ->set(array('enable_all' => 0))
+            ->set(array('enable_all' => 0, 'action' => 0))
             ->where('email', '=', $email)
             ->execute();
     }

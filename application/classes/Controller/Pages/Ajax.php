@@ -734,7 +734,7 @@ class Controller_Pages_Ajax extends Controller {
             }
 
 
-            //Model::factory('SubscribeModel')->UpdateStatusSubscribeBussines();
+            Model::factory('SubscribeModel')->UpdateStatusSubscribeBussines();
 
         }
 
