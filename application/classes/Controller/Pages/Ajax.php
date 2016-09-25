@@ -48,7 +48,6 @@ class Controller_Pages_Ajax extends Controller {
                 $m = Email::factory();
                 $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
                 $m->To($this->request->post('email')); // кому адресованно
-                $m->Bcc('boris@briker.biz');
                 $m->Subject('Подтвердите подписку на рассылку новинок Topisrael');
                 $m->Body($html_mail, "html");
                 $m->Priority(3);
@@ -85,7 +84,6 @@ class Controller_Pages_Ajax extends Controller {
                 $m = Email::factory();
                 $m->From($_POST['email']); // от кого отправляется почта
                 $m->To('leon@topisrael.ru'); // кому адресованно
-                $m->Cc('boris@briker.biz');
                 $m->Subject('Письмо от пользователя TopIsrael');
                 $m->Body($html_mail, "html");
                 $m->Priority(3);
@@ -129,7 +127,6 @@ class Controller_Pages_Ajax extends Controller {
             $m = Email::factory();
             $m->From($_POST['email']); // от кого отправляется почта
             $m->To('leon@topisrael.ru'); // кому адресованно
-            $m->Cc('boris@briker.biz');
             $m->Subject('Заказ торжества - '.$_POST['bussines_name']);
             $m->Body($html_mail, "html");
             $m->Priority(3);
@@ -174,7 +171,6 @@ class Controller_Pages_Ajax extends Controller {
                 $m = Email::factory();
                 $m->From($_POST['fullname'].";".$_POST['email']); // от кого отправляется почта
                 $m->To('leon@topisrael.ru'); // кому адресованно
-                $m->Cc('boris@briker.biz');
                 $m->Subject('Групповой заказ TopIsrael.ru');
                 $m->Body($html_mail, "html");
                 $m->Priority(3);
@@ -594,9 +590,7 @@ class Controller_Pages_Ajax extends Controller {
         $this->obj_mail_user_bussines->From("TopIsrael;top@topisrael.ru"); // от кого отправляется почта
         $this->obj_mail_user_bussines->To($to); // кому адресованно
         if ($cc != null) {
-            $this->obj_mail_user_bussines->Bcc(array($cc ,'boris@briker.biz'));
-        } else {
-            $this->obj_mail_user_bussines->Bcc(array('boris@briker.biz'));
+            $this->obj_mail_user_bussines->Bcc(array($cc));
         }
 
         $this->obj_mail_user_bussines->Subject($subject);
@@ -765,7 +759,6 @@ class Controller_Pages_Ajax extends Controller {
             $m = Email::factory();
             $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
             $m->To($lotery['user']['email']); // кому адресованно
-            $m->Bcc('boris@briker.biz');
             $m->Subject('Поздравляем Вас! Вы выиграли в Лотерее Topisrael');
             $m->Body($html_mail, "html");
             $m->Priority(3);
@@ -791,9 +784,7 @@ class Controller_Pages_Ajax extends Controller {
         $m->From("TopIsrael;top@topisrael.ru"); // от кого отправляется почта
         $m->To($to); // кому адресованно
         if ($cc != null) {
-            $m->Bcc(array($cc ,'boris@briker.biz'));
-        } else {
-            $m->Bcc(array('boris@briker.biz'));
+            $m->Bcc(array($cc));
         }
 
         $m->Subject($subject);
@@ -815,9 +806,7 @@ class Controller_Pages_Ajax extends Controller {
         $m->From("TopIsrael;top@topisrael.ru"); // от кого отправляется почта
         $m->To($to); // кому адресованно
         if ($cc != null) {
-            $m->Bcc(array($cc ,'boris@briker.biz'));
-        } else {
-            $m->Bcc(array('boris@briker.biz'));
+            $m->Bcc(array($cc));
         }
 
         $m->Subject($subject);
