@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-ini_set("memory_limit", "200M");
-set_time_limit(300);
+ini_set("memory_limit", "300M");
+set_time_limit(600);
 /**
  * Created by PhpStorm.
  * User: Vitalik
