@@ -1,4 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
+ini_set("memory_limit", "200M");
+set_time_limit(300);
 /**
  * Created by PhpStorm.
  * User: Vitalik
@@ -355,7 +357,7 @@ class Controller_Pages_Ajax extends Controller {
 
         //каждый четверг
         if (date('l') == 'Thursday' or $flag !== null) {
-            set_time_limit(300);
+
             //получаем бизнесы которые еще не попадали в рассылку
             $SubscribeModel = new Model_SubscribeModel();
 //
