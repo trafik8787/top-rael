@@ -355,10 +355,10 @@ class Controller_Pages_Ajax extends Controller {
 
         //каждый четверг
         if (date('l') == 'Thursday' or $flag !== null) {
-
+            set_time_limit(300);
             //получаем бизнесы которые еще не попадали в рассылку
             $SubscribeModel = new Model_SubscribeModel();
-
+//
             $business = $SubscribeModel->getSubskribeBusiness();
             $articless = $SubscribeModel->getSubskribeArticless();
             $coupons = $SubscribeModel->getSubskribeCoupons();
@@ -368,6 +368,7 @@ class Controller_Pages_Ajax extends Controller {
 
             $users = $SubscribeModel->getSubskribeUsers();
 
+            $i = 0;
             if (!empty($business) OR !empty($articless) OR !empty($coupons)) {
 
                 $data = View::factory('email/mail');
@@ -382,7 +383,8 @@ class Controller_Pages_Ajax extends Controller {
                 $data->articless = $articless;
 
                 $m = Email::factory();
-                foreach ($users as $user_rows) {
+                foreach ($users as $key_num => $user_rows) {
+
 
                     $m->reloadTo();
                     $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
@@ -435,6 +437,13 @@ class Controller_Pages_Ajax extends Controller {
                     $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/images/logo-new.png", "", "image/png");
 //                    $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/2.png", "", "image/png");
                     $m->Send();
+
+
+                    if ($i++ == 100) {
+                        sleep(15);
+                        $i = 0;
+                    }
+
 
                 }
             }
