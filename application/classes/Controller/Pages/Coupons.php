@@ -36,7 +36,7 @@ class Controller_Pages_Coupons extends Controller_BaseController {
             $data = Model::factory('CouponsModel')->getCouponsSectionUrl($this->request->param('url_section'), 12, $number_page, $city_id);
         }
 
-        $content->pagination = Pagination::factory(array('total_items' => $data['count'])); //блок пагинации
+        $content->pagination = Pagination::factory(array('total_items' => $data['count'], 'items_per_page' => 12)); //блок пагинации
 
         $content->bloc_right = parent::RightBloc(array(
             $this->lotarey(),
