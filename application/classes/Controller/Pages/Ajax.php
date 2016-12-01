@@ -369,7 +369,7 @@ class Controller_Pages_Ajax extends Controller {
 
             $users = $SubscribeModel->getSubskribeUsers();
 
-            //$i = 0;
+            $i = 0;
             if (!empty($business) OR !empty($articless) OR !empty($coupons)) {
 
                 $data = View::factory('email/mail');
@@ -440,11 +440,11 @@ class Controller_Pages_Ajax extends Controller {
                         $m->Send();
 
                         HTML::x($user_rows['email']);
-                        usleep(400000);
-//                    if ($i++ == 100) {
-//                        sleep(15);
-//                        $i = 0;
-//                    }
+                        //usleep(400000);
+                    if ($i++ == 100) {
+                        sleep(10);
+                        $i = 0;
+                    }
 
 
                 }
