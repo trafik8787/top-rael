@@ -1,5 +1,4 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-ini_set("memory_limit", "-1");
 set_time_limit(600);
 /**
  * Created by PhpStorm.
@@ -370,7 +369,7 @@ class Controller_Pages_Ajax extends Controller {
 
             $users = $SubscribeModel->getSubskribeUsers();
 
-            $i = 0;
+            //$i = 0;
             if (!empty($business) OR !empty($articless) OR !empty($coupons)) {
 
                 $data = View::factory('email/mail');
@@ -441,10 +440,10 @@ class Controller_Pages_Ajax extends Controller {
                     $m->Send();
 
 
-                    if ($i++ == 100) {
-                        sleep(15);
-                        $i = 0;
-                    }
+//                    if ($i++ == 100) {
+//                        sleep(15);
+//                        $i = 0;
+//                    }
 
 
                 }
