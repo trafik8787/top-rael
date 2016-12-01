@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-set_time_limit(600);
+set_time_limit(800);
 /**
  * Created by PhpStorm.
  * User: Vitalik
@@ -386,29 +386,29 @@ class Controller_Pages_Ajax extends Controller {
                 $m = Email::factory();
                 foreach ($users as $key_num => $user_rows) {
 
+                    if ($user_rows['email'] == 'beliar87@mail.ru' or $user_rows['email'] == 'trafik8787@gmail.com') {
+                        $m->reloadTo();
+                        $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
+                        $m->To($user_rows['email']); // кому адресованно
+                        $m->Subject('Новые обзоры, купоны и места отдыха и развлечений');
+                        $m->Body($data, "html");
+                        $m->Priority(3);
 
-                    $m->reloadTo();
-                    $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
-                    $m->To($user_rows['email']); // кому адресованно
-                    $m->Subject('Новые обзоры, купоны и места отдыха и развлечений');
-                    $m->Body($data, "html");
-                    $m->Priority(3);
-
-                    if (!empty($article_shift)) {
-                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/' . basename($article_shift['images_article']), "", "");
-                    }
-
-                    if (!empty($articless)) {
-                        foreach ($articless as $artic) {
-                            $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($artic['images_article']), "", "");
+                        if (!empty($article_shift)) {
+                            $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/' . basename($article_shift['images_article']), "", "");
                         }
-                    }
 
-                    if (!empty($coupons)) {
-                        foreach ($coupons as $row_coupon) {
-                            $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_coupons/' . basename($row_coupon['img_coupon']), "", "");
+                        if (!empty($articless)) {
+                            foreach ($articless as $artic) {
+                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($artic['images_article']), "", "");
+                            }
                         }
-                    }
+
+                        if (!empty($coupons)) {
+                            foreach ($coupons as $row_coupon) {
+                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_coupons/' . basename($row_coupon['img_coupon']), "", "");
+                            }
+                        }
 
 //                    if (!empty($lotery)) {
 //                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . $lotery[0]['img'], "", "");
@@ -424,28 +424,29 @@ class Controller_Pages_Ajax extends Controller {
 //                        }
 //                    }
 
-                    foreach ($business as $bus) {
+                        foreach ($business as $bus) {
 
-                        if (!empty($bus['BusArr'])){
+                            if (!empty($bus['BusArr'])) {
 
-                            foreach ($bus['BusArr'] as $bus_item) {
-                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_business/thumbs/' . basename($bus_item['home_busines_foto']), "", "");
+                                foreach ($bus['BusArr'] as $bus_item) {
+                                    $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_business/thumbs/' . basename($bus_item['home_busines_foto']), "", "");
+                                }
                             }
                         }
-                    }
 
 
-                    $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/images/logo-new.png", "", "image/png");
+                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/images/logo-new.png", "", "image/png");
 //                    $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/2.png", "", "image/png");
-                    $m->Send();
+                        $m->Send();
 
-
+                        HTML::x($user_rows['email']);
+                        usleep(400000);
 //                    if ($i++ == 100) {
 //                        sleep(15);
 //                        $i = 0;
 //                    }
 
-
+                    }
                 }
             }
         }
