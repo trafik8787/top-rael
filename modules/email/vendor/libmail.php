@@ -825,8 +825,7 @@ class Mail
         $this->sendto[$resource] = '';
         $this->smtpsendto[$resource] = '';
         $this->names_email[$resource]['To'] = '';
-        //$this->SubBody[$resource]['body'] = '';
-        $this->count_body = 0;
+        $this->SubBody[$resource]['body'] = '';
     }
 
     /**
