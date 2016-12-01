@@ -386,7 +386,7 @@ class Controller_Pages_Ajax extends Controller {
                 $m = Email::factory();
                 foreach ($users as $key_num => $user_rows) {
 
-                    if ($user_rows['email'] == 'beliar87@mail.ru' or $user_rows['email'] == 'trafik8787@gmail.com') {
+
                         $m->reloadTo();
                         $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
                         $m->To($user_rows['email']); // кому адресованно
@@ -446,7 +446,7 @@ class Controller_Pages_Ajax extends Controller {
 //                        $i = 0;
 //                    }
 
-                    }
+
                 }
             }
         }
