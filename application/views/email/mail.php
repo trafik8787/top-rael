@@ -23,7 +23,7 @@ header('Content-Type: text/html; charset=utf-8');
         <div style="background:#ffffff;padding:15px 0px 0px 0px;">
             <div style="margin: 0px 25px;">
                 <div style="display: inline-block;vertical-align: middle;width: 70%;margin-bottom: 10px;">
-                    <img src="cid:logo-new.png" style="width: 250px;" alt="logo">
+                    <img src="http://topisrael.ru/public/images/logo-new.png" style="width: 250px;" alt="logo">
                 </div>
                 <div style="display: inline-block;font-size:12px;color: #a9a9a9;text-align: right;vertical-align: middle;margin-bottom: 10px;">
                     Рассылка за <?=Date::rusdate(strtotime(date('Y-m-d')), 'j %MONTH% Y'); ?>
@@ -33,7 +33,7 @@ header('Content-Type: text/html; charset=utf-8');
                 <h3 style="margin: 10px 25px 10px 25px;padding: 0px;font-size: 22px;">Обзоры</h3>
 
                 <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$article_shift['url']?>" target="_blank" rel="noopener" style="display: block;padding:0px;margin:0px 25px;border:0px;">
-                    <img src="cid:<?=basename($article_shift['images_article'])?>" style="width: 100%;padding:0px;margin:0px;border:0px;"/>
+                    <img src="http://topisrael.ru<?=$article_shift['images_article']?>" style="width: 100%;padding:0px;margin:0px;border:0px;"/>
                 </a>
                 <div style="background: #666666;padding: 15px 10px;margin: 0px 25px 0px 25px;">
                     <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$article_shift['url']?>" style="color:#fff;font-size:24px;font-weight: bold;" target="_blank" rel="noopener"><?=$article_shift['name']?></a>
@@ -47,7 +47,7 @@ header('Content-Type: text/html; charset=utf-8');
                     <div style="margin: 30px 25px 0px 25px;">
                         <div style="float:left;margin: 0px 15px 5px 0px;">
                             <a href="http://<?=$_SERVER['HTTP_HOST']?>/article/<?=$artic['url']?>" target="_blank" rel="noopener">
-                                <img src="cid:<?=basename($artic['images_article'])?>" style="width: 164px;height: 115px;">
+                                <img src="http://topisrael.ru<?=$artic['images_article']?>" style="width: 164px;height: 115px;">
                             </a>
                         </div>
                         <div style="">
@@ -88,7 +88,7 @@ header('Content-Type: text/html; charset=utf-8');
                                     <?=$row_coupons[0]['BusName']?>
                                 </div>
                                 <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[0]['url']?>" target="_blank" rel="noopener">
-                                    <img src="cid:<?=basename($row_coupons[0]['img_coupon'])?>" title="Посмотреть полный купон" style="width:100%;height:auto;">
+                                    <img src="http://topisrael.ru<?=$row_coupons[0]['img_coupon']?>" title="Посмотреть полный купон" style="width:100%;height:auto;">
                                 </a>
                                 <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[0]['url']?>" style="text-decoration: none;width: 100%;color: #e02929;display:block;" title="Посмотреть полный купон" target="_blank" rel="noopener">
                                     <div style="font-size: 16px;text-align: center;">
@@ -109,7 +109,7 @@ header('Content-Type: text/html; charset=utf-8');
                                         <?=$row_coupons[1]['BusName']?>
                                     </div>
                                     <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[1]['url']?>" target="_blank" rel="noopener">
-                                        <img src="cid:<?=basename($row_coupons[1]['img_coupon'])?>" title="Посмотреть полный купон" style="width:100%;height:auto;">
+                                        <img src="http://topisrael.ru<?=$row_coupons[1]['img_coupon']?>" title="Посмотреть полный купон" style="width:100%;height:auto;">
                                     </a>
                                     <a href="http://<?=$_SERVER['HTTP_HOST']?>/coupon/<?=$row_coupons[1]['url']?>" style="text-decoration: none;width: 100%;color: #e02929;display:block;" title="Посмотреть полный купон" target="_blank" rel="noopener">
                                         <div style="font-size: 16px;text-align: center;">
@@ -151,7 +151,7 @@ header('Content-Type: text/html; charset=utf-8');
                             <div style="padding-top:20px;width:280px;display: inline-block;text-align: left;vertical-align: top;">
                                 <div style="height: 380px;margin: 0px 7.5px;">
                                     <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows[0]['url']?>" style="display:block;overflow: hidden;" target="_blank" rel="noopener">
-                                        <img src="cid:<?=basename($bus_rows[0]['home_busines_foto'])?>" style="width:100%;height:auto;">
+                                        <img src="http://topisrael.ru<?=$bus_rows[0]['home_busines_foto']?>" style="width:100%;height:auto;">
                                     </a>
                                     <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows[0]['url']?>" style="font-size:18px;color:#000;text-decoration: underline;margin-top: 10px;display:block;" target="_blank" rel="noopener">
                                         <strong><?=$bus_rows[0]['name']?></strong>
@@ -169,7 +169,7 @@ header('Content-Type: text/html; charset=utf-8');
                                 <div style="padding-top:20px;width:280px;display: inline-block;text-align: left;vertical-align: top;">
                                     <div style="height: 380px;margin: 0px 7.5px;">
                                         <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows[1]['url']?>" style="display:block;overflow: hidden;" target="_blank" rel="noopener">
-                                            <img src="cid:<?=basename($bus_rows[1]['home_busines_foto'])?>" style="width:100%;height:auto;">
+                                            <img src="http://topisrael.ru<?=$bus_rows[1]['home_busines_foto']?>" style="width:100%;height:auto;">
                                         </a>
                                         <a href="http://<?=$_SERVER['HTTP_HOST']?>/business/<?=$bus_rows[1]['url']?>" style="font-size:18px;color:#000;text-decoration: underline;margin-top: 10px;display:block;" target="_blank" rel="noopener">
                                             <strong><?=$bus_rows[1]['name']?></strong>
