@@ -442,7 +442,7 @@ class Controller_Pages_Ajax extends Controller {
                         HTML::x($user_rows['email']);
                         //usleep(400000);
                     if ($i++ == 100) {
-                        sleep(10);
+                        sleep(3);
                         $i = 0;
                     }
 
