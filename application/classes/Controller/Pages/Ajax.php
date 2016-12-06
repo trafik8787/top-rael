@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-set_time_limit(800);
+set_time_limit(5000);
 /**
  * Created by PhpStorm.
  * User: Vitalik
@@ -368,7 +368,7 @@ class Controller_Pages_Ajax extends Controller {
             $SubscribeModel = new Model_SubscribeModel();
 
             $users = $SubscribeModel->getSubskribeUsers();
-
+            HTML::x($users, true);
             $business = $SubscribeModel->getSubskribeBusiness();
             $articless = $SubscribeModel->getSubskribeArticless();
             $coupons = $SubscribeModel->getSubskribeCoupons();
@@ -404,10 +404,11 @@ class Controller_Pages_Ajax extends Controller {
 
                     HTML::x($user_rows['email']);
                     //usleep(400000);
-                    if ($i++ == 100) {
-                        sleep(3);
-                        $i = 0;
-                    }
+                    sleep(1);
+//                    if ($i++ == 100) {
+//                        sleep(3);
+//                        $i = 0;
+//                    }
 
                 }
             }
