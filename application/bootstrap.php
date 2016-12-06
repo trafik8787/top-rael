@@ -266,6 +266,13 @@ Route::set('BussinesDisableEmailSevenDays', 'sendbusiness')
         'action'     => 'BussinesDisableEmailSevenDays',
     ));
 
+Route::set('SendEmailSubscribe', 'subskribe_mail_all')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Ajax',
+        'action'     => 'SendEmailSubscribe',
+    ));
+
 //запускается по крону увидомление пользователей бизнеса об боновлениях относящихся к бизнесу статьи новости лотареи
 Route::set('UserBusinessSend', 'send_user_bussines')
     ->defaults(array(

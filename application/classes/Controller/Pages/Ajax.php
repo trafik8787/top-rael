@@ -349,25 +349,32 @@ class Controller_Pages_Ajax extends Controller {
 
     /**
      * РАССЫЛКА ДЛЯ ПОДПИЩИКОВ
+     * /subskribe_mail_all
      */
-    public function SendEmailSubscribe($flag = null){
+
+    public function action_SendEmailSubscribe() {
 
 
+        if (isset($_GET['flag'])) {
+            $flag = $_GET['flag'];
+        } else {
+            $flag = null;
+        }
 
         //каждый четверг
         if (date('l') == 'Thursday' or $flag !== null) {
 
             //получаем бизнесы которые еще не попадали в рассылку
             $SubscribeModel = new Model_SubscribeModel();
-//
+
+            $users = $SubscribeModel->getSubskribeUsers();
+
             $business = $SubscribeModel->getSubskribeBusiness();
             $articless = $SubscribeModel->getSubskribeArticless();
             $coupons = $SubscribeModel->getSubskribeCoupons();
             $lotery = Model::factory('LotareyModel')->getLotareya();
             $users_lotery =  Model::factory('LotareyModel')->getUserLotarey(3);
 
-
-            $users = $SubscribeModel->getSubskribeUsers();
 
             $i = 0;
             if (!empty($business) OR !empty($articless) OR !empty($coupons)) {
@@ -386,66 +393,21 @@ class Controller_Pages_Ajax extends Controller {
                 $m = Email::factory();
                 foreach ($users as $key_num => $user_rows) {
 
+                    $m->reloadTo();
+                    $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
+                    $m->To($user_rows['email']); // кому адресованно
+                    $m->Subject('Новые обзоры, купоны и места отдыха и развлечений');
+                    $m->Body($data, "html");
+                    $m->Priority(3);
 
-                        $m->reloadTo();
-                        $m->From("TopIsrael;noreplay@topisrael.ru"); // от кого отправляется почта
-                        $m->To($user_rows['email']); // кому адресованно
-                        $m->Subject('Новые обзоры, купоны и места отдыха и развлечений');
-                        $m->Body($data, "html");
-                        $m->Priority(3);
+                    $m->Send();
 
-//                        if (!empty($article_shift)) {
-//                            $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/' . basename($article_shift['images_article']), "", "");
-//                        }
-//
-//                        if (!empty($articless)) {
-//                            foreach ($articless as $artic) {
-//                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_articles/thumbs/' . basename($artic['images_article']), "", "");
-//                            }
-//                        }
-//
-//                        if (!empty($coupons)) {
-//                            foreach ($coupons as $row_coupon) {
-//                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_coupons/' . basename($row_coupon['img_coupon']), "", "");
-//                            }
-//                        }
-
-//                    if (!empty($lotery)) {
-//                        $m->Attach($_SERVER['DOCUMENT_ROOT'] . $lotery[0]['img'], "", "");
-//                    }
-//
-//                    if (!empty($users_lotery)) {
-//                        foreach ($users_lotery as $item_lotery) {
-//                            if (!empty($item_lotery['usersPhoto'])) {
-//                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . $item_lotery['usersPhoto'], "", "");
-//                            } else {
-//                                $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/public/uploade/no_avatar.jpg', "", "");
-//                            }
-//                        }
-//                    }
-
-//                        foreach ($business as $bus) {
-//
-//                            if (!empty($bus['BusArr'])) {
-//
-//                                foreach ($bus['BusArr'] as $bus_item) {
-//                                    $m->Attach($_SERVER['DOCUMENT_ROOT'] . '/uploads/img_business/thumbs/' . basename($bus_item['home_busines_foto']), "", "");
-//                                }
-//                            }
-//                        }
-
-
-                       // $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/images/logo-new.png", "", "image/png");
-//                    $m->Attach($_SERVER['DOCUMENT_ROOT'] . "/public/mail/images/2.png", "", "image/png");
-                        $m->Send();
-
-                        HTML::x($user_rows['email']);
-                        //usleep(400000);
+                    HTML::x($user_rows['email']);
+                    //usleep(400000);
                     if ($i++ == 100) {
                         sleep(3);
                         $i = 0;
                     }
-
 
                 }
             }
@@ -473,14 +435,6 @@ class Controller_Pages_Ajax extends Controller {
         //сохраняем в таблицу банеров количество кликов
         Model::factory('Adm')->saveMySQLclickBaners();
 
-        if (isset($_GET['flag'])) {
-            $flag = $_GET['flag'];
-        } else {
-            $flag = null;
-        }
-
-        //запуск рассылки
-       $this->SendEmailSubscribe($flag);
 
         //лотарея
         $this->LotareyCron();
