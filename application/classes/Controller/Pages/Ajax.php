@@ -368,7 +368,7 @@ class Controller_Pages_Ajax extends Controller {
             $SubscribeModel = new Model_SubscribeModel();
 
             $users = $SubscribeModel->getSubskribeUsers();
-            HTML::x($users, true);
+
             $business = $SubscribeModel->getSubskribeBusiness();
             $articless = $SubscribeModel->getSubskribeArticless();
             $coupons = $SubscribeModel->getSubskribeCoupons();
