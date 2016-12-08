@@ -414,6 +414,7 @@ class Model_SubscribeModel extends Model_BaseModel {
             ->where('action','=', 1)
             ->and_where('enable_all','=',1)
             ->and_where('all_subscribe','IN', array(1,2))
+            ->order_by('id', 'DESC')
             ->execute()->as_array();
     }
 
