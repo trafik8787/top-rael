@@ -420,6 +420,11 @@ class Controller_Pages_Account extends Controller_BaseController {
 
         $content = View::factory('pages/profile_he');
 
+        $data = Model::factory('Adm')->get_table('profile_he');
+
+        $content->name = $data[0]['name'];
+        $content->description = $data[0]['description'];
+
         $local_thit = $this->template;
 
         $content->bloc_right = parent::RightBloc(array(
@@ -433,6 +438,19 @@ class Controller_Pages_Account extends Controller_BaseController {
 
     }
 
+    public function action_info () {
+        $content = View::factory('pages/profile_he');
+
+        $data = Model::factory('Adm')->get_table('profile_he', array('id', '=', 2));
+
+        $content->name = $data[0]['name'];
+        $content->description = $data[0]['description'];
+
+        $local_thit = $this->template;
+        $content->style = $local_thit->style;
+        $content->script = $local_thit->script;
+        $this->response->body($content);
+    }
 
 
     public static function FavoritsCouponMetod($table, $field, $table_object, $cooki_name, $data_vievs){

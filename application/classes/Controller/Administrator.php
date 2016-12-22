@@ -165,6 +165,16 @@ class Controller_Administrator extends Controller_Core_Main {
         $this->response->body(self::adminSections()->render());
     }
 
+    public function action_profile_he () {
+        Controller_Core_Main::$title_page = 'Profile HE';
+        $this->response->body(self::adminProfileHe()->edit_render(1));
+    }
+
+    public function action_info () {
+        Controller_Core_Main::$title_page = 'Info';
+        $this->response->body(self::adminInfo()->edit_render(2));
+    }
+
     public function action_category(){
 
         if (!empty($_GET['section'])) {
@@ -1361,6 +1371,31 @@ class Controller_Administrator extends Controller_Core_Main {
         return $crud;
     }
 
+
+    public static function adminProfileHe () {
+        $crud = new Cruds();
+        $crud->load_table('profile_he');
+        $crud->set_lang('ru');
+
+        $crud->show_name_column(array(
+            'name' => 'Название',
+            'description' => 'Текст'
+        ));
+        return $crud;
+    }
+
+
+    public static function adminInfo () {
+        $crud = new Cruds();
+        $crud->load_table('profile_he');
+        $crud->set_lang('ru');
+
+        $crud->show_name_column(array(
+            'name' => 'Название',
+            'description' => 'Текст'
+        ));
+        return $crud;
+    }
 
     public static function adminUsers (){
 

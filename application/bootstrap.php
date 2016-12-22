@@ -437,6 +437,14 @@ Route::set('profile_he', 'profile_he')
         'action'     => 'profile_he',
     ));
 
+// /info страница
+Route::set('Info', 'info')
+    ->defaults(array(
+        'directory' => 'Pages',
+        'controller' => 'Account',
+        'action'     => 'info',
+    ));
+
 Route::set('Contacts', 'contacts')
     ->defaults(array(
         'directory' => 'Pages',

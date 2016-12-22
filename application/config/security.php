@@ -18,6 +18,8 @@ return array(
         'lotarey'           => array('admin', 'redactor', 'manager'),
         'contacts'           => array('admin', 'manager', 'control'),
         'order_celebrations'           => array('admin', 'manager', 'control'),
+        'profile_he'           => array('admin', 'manager', 'control'),
+        'info'           => array('admin', 'manager', 'control'),
         'subscription'           => array('admin', 'manager', 'control'),
         'users'           => array('admin', 'control'),
         'sections'           => array('admin', 'manager'),

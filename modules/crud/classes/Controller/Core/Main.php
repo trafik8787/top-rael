@@ -75,7 +75,8 @@ abstract class Controller_Core_Main extends Controller_Template {
             'Обратная связь' => array('metod' => 'contacts', 'url'=> 'contacts', 'icon'=>'glyphicon-globe'),
             'Заказ торжеств' => array('metod' => 'order_celebrations', 'url'=> 'order_celebrations', 'icon'=>'glyphicon-globe'),
             '4' => array(),
-
+            'Profile He' => array('metod' => 'profile_he', 'url' => 'profile_he', 'icon'=>'glyphicon-pushpin'),
+            'Info' => array('metod' => 'info', 'url' => 'info', 'icon'=>'glyphicon-pushpin'),
             'Протокол' => array('metod' => 'logs', 'url' => 'logs', 'icon' => 'glyphicon-list-alt')
 
 

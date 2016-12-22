@@ -36,10 +36,9 @@ abstract class Controller_BaseController extends Controller_Template {
         parent::before();
 
         //проверяем если запрос Ajax то отменяем рендеринг главного шаблона
-        if (in_array($this->request->action(), array('changepass', 'profile_he'))) {
+        if (in_array($this->request->action(), array('changepass', 'profile_he','info'))) {
             $this->auto_render = FALSE;
         }
-
 //        if ($_SERVER['REMOTE_ADDR'] != '178.94.172.183') {
 //            die('Сайт временно закрыт ведутся работы');
 //        }
