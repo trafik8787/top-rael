@@ -28,7 +28,11 @@
         <script src="<?= URL::base(); ?><?= $row_script ?>"></script>
     <? endforeach ?>
 
-
+    <style>
+        img {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
