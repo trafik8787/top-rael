@@ -32,6 +32,9 @@
         img {
             width: 100%;
         }
+        #wrapper {
+            padding-bottom: 130px!important;
+        }
     </style>
 </head>
 <body>
