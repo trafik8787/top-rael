@@ -8,9 +8,9 @@
 
 ?>
 <script>
-   $(document).ready(function(){
-       $('.modal-subscribe').modal('show');
-   });
+    $(document).ready(function(){
+        $('.modal-subscribe').modal('show');
+    });
 </script>
 <div class="modal fade in modal-subscribe" tabindex="-1" role="dialog" >
     <div class="modal-dialog" role="document">
@@ -20,7 +20,7 @@
             <div class="modal-header clearfix">
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        class="lnr lnr-cross"></span></button>
+                            class="lnr lnr-cross"></span></button>
 
                 <a href="#" class="icons w-logo md">TopIsrael</a>
             </div>
@@ -33,13 +33,13 @@
 
                     <div>
 
-                        Подпишитесь на рассылку и выиграйте приз!
+                        Подпишитесь на рассылку!
                     </div>
                 </div>
 
                 <p>
                     <i>
-                         Подписываясь на рассылку, Вы станете участником лотереи с ценными призами. Читайте обзоры, купоны и новинки TopIsrael.ru и выигрывайте!
+                        Мы пишем для Вас интересные обзоры об отдыхе, развлечениях и покупках в Израиле. А еще присылаем горячие купоны с скидками!
                     </i>
                 </p>
 

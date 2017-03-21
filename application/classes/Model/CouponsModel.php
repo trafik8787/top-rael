@@ -103,7 +103,7 @@ class Model_CouponsModel extends Model_BaseModel {
                 $query->and_where('coup.city', '=', $id_city);
             }
             $query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'));
-            $query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'));
+            //$query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'));
 
             $query->limit($limit);
             $query->offset($ofset);
@@ -131,7 +131,7 @@ class Model_CouponsModel extends Model_BaseModel {
                 $count_query->and_where('coup.city', '=', $id_city);
             }
             $count_query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('coup.datestart AND coup.dateoff'));
-            $count_query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'));
+            //$count_query->and_where(DB::expr('DATE(NOW())'), 'BETWEEN', DB::expr('bus.date_create AND bus.date_end'));
 
             $count_query->order_by('coup.id', 'DESC');
             $count_query->cached();

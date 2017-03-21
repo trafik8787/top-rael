@@ -35,23 +35,27 @@
 
 
     <!--script type="text/javascript" src="http://vk.com/js/api/share.js?90" charset="UTF-8"></script-->
-    
-    
+
+
     <link href="<?=HTML::HostSite('/favicon.ico')?>" type="image/x-icon" rel="shortcut icon" />
     <link href="<?=HTML::HostSite('/iconmob.png')?>" rel="apple-touch-icon" />
     <link rel="stylesheet" href="/public/stylesheets/print.css" media="print">
     <link href="/public/stylesheets/informers.css" rel="stylesheet" type="text/css"/>
+
+
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TXF5Q3"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TXF5Q3');</script>
+    <!-- End Google Tag Manager -->
+
 </head>
 <body>
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TXF5Q3"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TXF5Q3');</script>
-<!-- End Google Tag Manager -->
+
 <?=$header;?>
 <?=$content; ?>
 <?=$footer;?>

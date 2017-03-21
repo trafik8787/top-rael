@@ -40,7 +40,7 @@
                         </div>
                     </div>
                 <?endforeach?>
-                
+
 
 
                 <div class="text-center media">
@@ -133,10 +133,10 @@
 
                                                     <div class="coupon-object-bottom">
 
-                                                        <!--<small class="coupon-date">
-                                                        до <?=Date::rusdate(strtotime($rows_coupon['dateoff']), 'j %MONTH% Y'); ?></small>
-                                                        -->
-                                                        
+
+                                                        <small class="coupon-date"><!-- до <?=Date::rusdate(strtotime($rows_coupon['dateoff']), 'j %MONTH% Y'); ?>  --></small>
+
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -149,13 +149,13 @@
                     <?endforeach?>
 
                 </div>
-               
+
             </div>
 
 
- <div class="text-center">
-                    <a href="/coupons/" class="btn text-center open-all w-open-coupons-all" role="button">Открыть все</a>
-                </div>
+            <div class="text-center">
+                <a href="/coupons/" class="btn text-center open-all w-open-coupons-all" role="button">Открыть все</a>
+            </div>
 
         </div>
 
@@ -246,7 +246,7 @@
                             </div>
 
                             <div class="panel-footer text-center">
-                                
+
                                 <a href="/section/<?=$rowsdata['category'][0]['url']?>" class="btn open-all w-open-all" role="button">Открыть все</a>
                             </div>
 
@@ -262,24 +262,24 @@
             <!-- Bloc Right -->
             <?=isset($bloc_right)? $bloc_right : ''?>
         </div>
-        
-        
-          <!-- partners -->
-      
-        
+
+
+        <!-- partners -->
+
+
         <div class="panel panel-partners w-bloc-partners">
 
             <div class="panel-heading">
 
                 <div class="panel-title">Наши партнеры</div>
-                
+
             </div>
 
             <div class="panel-body">
-            
-            
-                     <div class="partners-content">
-                                        
+
+
+                <div class="partners-content">
+
                     <a href="http://www.goisrael.ru/Rus/Pages/default.aspx" class="partners-img">
                         <img src="/public/images/goisrael_logo.png" title="Министерство туризма Израиля">
                     </a>
@@ -288,19 +288,19 @@
 
                 </div>
 
-          
-                
+
+
                 <div class="partners-content">
-                                        
+
                     <a href="http://pogoda.co.il/" class="partners-img"><img src="/public/images/partners/pogoda.png"></a>
                     <div class="partners-line"></div>
                     <div class="partners-title"><a href="http://pogoda.co.il/">Погода в Израиле</a></div>
 
                 </div>
 
-               
-           <div class="partners-content">
-                                        
+
+                <div class="partners-content">
+
                     <a href="http://orbita.co.il/" class="partners-img">
                         <img src="/public/images/orbita.gif" style="margin:0px 15px;">
                     </a>
@@ -308,10 +308,10 @@
                     <div class="partners-title"> <a href="http://orbita.co.il/">Orbita</a></div>
 
                 </div>
-                
-                
-                  <div class="partners-content">
-                                        
+
+
+                <div class="partners-content">
+
                     <a href="http://www.travellux.com" class="partners-img">
                         <img src="/public/images/partners/travellux.gif" title="TRAVELLUX">
                     </a>
@@ -319,24 +319,24 @@
                     <div class="partners-title"> <a href="http://www.travellux.com">TRAVELLUX</a></div>
 
                 </div>
-                
-                
-                      <div class="partners-content">
-                                        
+
+
+                <div class="partners-content">
+
                     <a href="http://www.ozrothagalil.org.il/" class="partners-img"><img src="/public/images/partners/ozrot_logo_heb.jpg"></a>
                     <div class="partners-line"></div>
                     <div class="partners-title"><a href="http://www.ozrothagalil.org.il/">OzrotHagalil.org.il</a></div>
 
                 </div>
-                
-                
+
+
             </div>
-            
-            
+
+
 
         </div>
-        
-                   
+
+
 
 
     </div>
