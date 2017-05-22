@@ -56,10 +56,9 @@ class Controller_Pages_Maps extends Controller_BaseController {
 
         }
 
-        $result = Model::factory('BussinesModel')->getBusinessAll_Maps($url_category, $url_section);
+        $result = Model::factory('BussinesModel')->getBusinessAll_Maps(null, $url_category, $url_section);
 
-
-//        HTML::x($result);
+        //HTML::x($result);
 
         $content->section = parent::$general_meny;
 
