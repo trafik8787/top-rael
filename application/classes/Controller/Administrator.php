@@ -1773,7 +1773,7 @@ class Controller_Administrator extends Controller_Core_Main {
         }
 
         if (!empty(Cruds::$post['name_user']) and !empty(Cruds::$post['email_user'])
-            and !empty(Cruds::$post['id'])) {
+            and !empty(Cruds::$post['id']) and !empty(Cruds::$post['password'])) {
             Model::factory('Adm')->add_busines_user(Cruds::$post['name_user'],
                                                     Cruds::$post['nameses'],
                                                     Cruds::$post['secondname_user'],
@@ -1845,7 +1845,12 @@ class Controller_Administrator extends Controller_Core_Main {
         }
 
         if (!empty(Cruds::$post['name_user']) and !empty(Cruds::$post['email_user'])
-            and !empty($key_array['id']) and !empty(Cruds::$post['password'])) {
+            and !empty($key_array['id'])) {
+
+            if (empty(Cruds::$post['password'])) {
+                Cruds::$post['password'] = 'topisrael';
+            }
+
 
             Model::factory('Adm')->add_busines_user(Cruds::$post['name_user'],
                                                     Cruds::$post['nameses'],
