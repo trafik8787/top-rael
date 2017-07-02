@@ -423,83 +423,89 @@ class Controller_Pages_Ajax extends Controller {
      */
     public function action_BussinesDisableEmailSevenDays() {
 
-
-        //формируем файл карты сайта в /uploads
-        Sitemap::FileGenerane(array('/coupons',
-            '/articles',
-            '/maps',
-            '/account/login',
-            '/account/registration',
-            '/about', '/rss', '/account#izbran', '/account#coupons', '/newsletter'));
-
-
-        //сохраняем в таблицу банеров количество кликов
-        Model::factory('Adm')->saveMySQLclickBaners();
-
-
-        //лотарея
-        $this->LotareyCron();
-
-        //включение отключение уведомление по банерам
-        $this->subskribeBaners();
-        //включение отключение уведомление по купонам
-        $this->subskribeCoupons();
-
-        //сохраняем базу редис один рас в сутки
-        Rediset::getInstance()->save();
-
-        //каждый день генерируем фаллы json для информеров
-        $this->generateFileInformer();
-
-        $obj = new Model_BussinesModel();
-        //пользователи и бизнесы
-        $data = $obj->getBusinesUserAll();
-        //получаем бизнесы для смены статуса
-        $business_data = $obj->getBusinesDateDisable();
-
-
         $curent_date = date('Y-m-d');
 
-        foreach ($data as $rows) {
+        if (empty(Model::factory('SubscribeModel')->getDateCron($curent_date))) {
 
-            //эжемесячная рассылка по числу создания бизнеса исключает определенные типы реклами базовый и бесплатно
-            if ($rows['client_status'] != 3 and $rows['client_status'] != 4) {
-                $this->sendBussinesMount($rows);
+
+            //формируем файл карты сайта в /uploads
+            Sitemap::FileGenerane(array('/coupons',
+                '/articles',
+                '/maps',
+                '/account/login',
+                '/account/registration',
+                '/about', '/rss', '/account#izbran', '/account#coupons', '/newsletter'));
+
+
+            //сохраняем в таблицу банеров количество кликов
+            Model::factory('Adm')->saveMySQLclickBaners();
+
+
+            //лотарея
+            $this->LotareyCron();
+
+            //включение отключение уведомление по банерам
+            $this->subskribeBaners();
+            //включение отключение уведомление по купонам
+            $this->subskribeCoupons();
+
+            //сохраняем базу редис один рас в сутки
+            Rediset::getInstance()->save();
+
+            //каждый день генерируем фаллы json для информеров
+            $this->generateFileInformer();
+
+            $obj = new Model_BussinesModel();
+            //пользователи и бизнесы
+            $data = $obj->getBusinesUserAll();
+            //получаем бизнесы для смены статуса
+            $business_data = $obj->getBusinesDateDisable();
+
+
+            foreach ($data as $rows) {
+
+                //эжемесячная рассылка по числу создания бизнеса исключает определенные типы реклами базовый и бесплатно
+                if ($rows['client_status'] != 3 and $rows['client_status'] != 4) {
+                    $this->sendBussinesMount($rows);
+                }
+
+                $d = new DateTime($rows['date_end']);
+                $ert = $d->modify('-7 days')->format("Y-m-d");
+
+
+                $ToEmail = $rows['email'];
+
+                if (!empty($rows['UsersEmailManager'])) {
+                    $ToEmail = array($rows['email'], $rows['UsersEmailManager']);
+                }
+
+                //за 7 дней перед отключением
+                if ($curent_date == $ert) {
+                    $message = View::factory('email/text_bussines_warning');
+                    $message->data = $rows;
+                    $this->template_mail_message($ToEmail, $rows['EmailRedactor'], 'התראה לסיום פרסום באתר טופ ישראל', $message);
+                }
+
+                if ($curent_date == $rows['date_end']) {
+                    $message = View::factory('email/text_bussines_end');
+                    $message->data = $rows;
+                    $this->template_mail_message($ToEmail, $rows['EmailRedactor'], 'הפסקת פרסום', $message);
+                }
+
+                if ($curent_date == $rows['date_create']) {
+                    $message = View::factory('email/text_bussines_start');
+                    $message->data = $rows;
+                    $this->template_mail_message($ToEmail, $rows['EmailRedactor'], 'החלת פרסום באתר טופ ישראל', $message);
+                }
+
             }
 
-            $d = new DateTime($rows['date_end']);
-            $ert = $d->modify('-7 days')->format("Y-m-d");
-
-
-            $ToEmail = $rows['email'];
-
-            if (!empty($rows['UsersEmailManager'])) {
-                $ToEmail = array($rows['email'], $rows['UsersEmailManager']);
+            if (!empty($business_data)) {
+                $obj->disableBusines($business_data);
             }
 
-            //за 7 дней перед отключением
-            if ($curent_date == $ert) {
-                $message = View::factory('email/text_bussines_warning');
-                $message->data = $rows;
-                $this->template_mail_message($ToEmail , $rows['EmailRedactor'], 'התראה לסיום פרסום באתר טופ ישראל', $message);
-            }
+            Model::factory('SubscribeModel')->insertDateCron($curent_date);
 
-            if ($curent_date == $rows['date_end']) {
-                $message = View::factory('email/text_bussines_end');
-                $message->data = $rows;
-                $this->template_mail_message($ToEmail, $rows['EmailRedactor'], 'הפסקת פרסום', $message);
-            }
-
-            if ($curent_date == $rows['date_create']) {
-                $message = View::factory('email/text_bussines_start');
-                $message->data = $rows;
-                $this->template_mail_message($ToEmail, $rows['EmailRedactor'], 'החלת פרסום באתר טופ ישראל', $message);
-            }
-
-        }
-
-        if (!empty($business_data)) {
-            $obj->disableBusines($business_data);
         }
 
     }

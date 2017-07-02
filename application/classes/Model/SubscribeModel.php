@@ -420,6 +420,30 @@ class Model_SubscribeModel extends Model_BaseModel {
 
 
     /**
+     * @param $date
+     * @return mixed
+     * todo Метод проверки даты был ли запуск скрипта
+     */
+    public function getDateCron($date){
+        return DB::select()
+            ->from('cron_data')
+            ->where('date','=', $date)
+            ->execute()->as_array();
+    }
+
+
+    /**
+     * @param $date
+     * @return object
+     */
+    public function insertDateCron ($date) {
+        $query = DB::insert('cron_data', array('date'))
+            ->values(array($date))
+            ->execute();
+        return $query;
+    }
+
+    /**
      * @return mixed
      * todo рассылка конкретно по бизнесам
      */
