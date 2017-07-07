@@ -427,8 +427,6 @@ class Controller_Pages_Ajax extends Controller {
 
         if (empty(Model::factory('SubscribeModel')->getDateCron($curent_date))) {
 
-            Model::factory('SubscribeModel')->insertDateCron($curent_date);
-            die('dfg');
             //формируем файл карты сайта в /uploads
             Sitemap::FileGenerane(array('/coupons',
                 '/articles',
@@ -505,9 +503,8 @@ class Controller_Pages_Ajax extends Controller {
                 $obj->disableBusines($business_data);
             }
 
+            Model::factory('SubscribeModel')->insertDateCron($curent_date);
 
-        } else {
-            HTML::x('sssssssssss');
         }
 
     }
